@@ -1,0 +1,22 @@
+{
+  "navigation": {
+    "home": "Startseite",
+    "about": "Über"
+  },
+  "page": {
+    "home": {
+      "heroSection": {
+        "title": "Gegen Ziganismus vorgehen ",
+        "description": "Bitte melden Sie rassistische Vorfälle, um eine respektvolle Gemeinschaft zu fördern und Diskriminierung zu bekämpfen",
+        "buttonText": "Vorfall melden"
+      }
+    },
+    "about": {
+      "title": "Über uns",
+      "description": "Dies ist die About-Seite"
+    },
+    "footer": {
+      "datenschutz": "Datenschutz"
+    }
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "navigation": {
+    "home": "Home",
+    "about": "About"
+  },
+  "page": {
+    "home": {
+      "heroSection": {
+        "title": "Countering Ziganism",
+        "description": "Please report racist incidents to promote a respectful community and combat discrimination",
+        "buttonText": "Report incident"
+      }
+    },
+    "about": {
+      "title": "About Us",
+      "description": "This is the about page"
+    },
+    "footer": {
+      "datenschutz": "Data protection"
+    }
+  }
+}
