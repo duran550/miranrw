@@ -6,9 +6,9 @@
   "page": {
     "home": {
       "heroSection": {
-        "title": "Countering Ziganism",
-        "description": "Please report racist incidents to promote a respectful community and combat discrimination",
-        "buttonText": "Report incident"
+        "title": "Report Incident",
+        "description": "Click here to go to the report form to report something queer-hostile",
+        "buttonText": "Report Incident"
       }
     },
     "about": {

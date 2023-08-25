@@ -1,66 +1,41 @@
-import React from 'react';
-import HeroImage from '../../../../public/images/bgImage.png';
-import Image from 'next/image';
-import { Button } from '../button/Button';
-import Carousel from '../carousel/Carousel';
+import React from 'react'
+import Image from 'next/image'
+import graphic  from "../../../../public/images/people-working-together-online.svg"; 
 
-type valuesHeror = {
-  title: string;
-  description: string;
-  buttonText: string;
-};
+type heroSectionPropsValuesType = {
+    title: string,
+    description: string,
+    buttonText: string,
+}
 
-type HersoSectionProps = {
-  heroContent: valuesHeror;
-};
+type heroSectionPropsType = {
+    content: heroSectionPropsValuesType
+}
 
-const firstSlide = (title: string, description: string, buttonText: string) => {
+const HeroSection:React.FC<heroSectionPropsType> = ({content}) => {
   return (
     <>
-      <Image
-        src={HeroImage}
-        className={` object-cover absolute left-0 right-0 bottom-0 h-screen -z-10 md:relative md:object-none`}
-        alt="Hero Image"
-      />
-      <div className="flex md:mx-[250px] justify-center relative pt-48 md:pt-0  md:absolute md:top-48 z-10 mx-8 md:mx-8 text-white flex-col">
-        <div
-          className="font-bold text-4xl
-     md:text-6xl"
-        >
-          {title}
+    <div className='px-8   md:px-12 my-20 h-[80vh] md:h-full   '>
+        {/* text-content */}
+        <div className='flex justify-between w-full  items-center'>
+
+      
+        <div >
+        <h2 className='font-bold text-lg md:text-2xl lg:text-5xl'>MIQ</h2>
+            <div className='py-2'>
+            <h1  className='font-bold text-3xl  md:text-4xl lg:text-6xl'>{content.title} </h1>
+            <p className='font-bold  w-fit max-w-sm'>{content.description}</p>
+            </div>
+        <button className=' px-8 py-4 w-full sm:w-fit bg-primaryColor text-white font-bold rounded-full text-lg'>{content.buttonText}</button>
         </div>
-        <div className="mt-8 md:text-xl md:max-w-md md:mt-8">{description}</div>
-        <Button className="w-48 md:w-48" variant="outline">
-          {buttonText}
-        </Button>
-      </div>
-    </>
-  );
-};
+        
+        <Image src={graphic} className='md:w-[300px] lg:w-[600px] hidden md:block' alt='graphic' />
+   </div>
 
-const HeroSection: React.FC<HersoSectionProps> = ({ heroContent }) => {
-  const first = firstSlide(
-    heroContent.title,
-    heroContent.description,
-    heroContent.buttonText
-  );
-  const second = firstSlide(
-    heroContent.title,
-    heroContent.description,
-    heroContent.buttonText
-  );
-  const third = firstSlide(
-    heroContent.title,
-    heroContent.description,
-    heroContent.buttonText
-  );
-
-  const data = [first, second, third];
-  return (
-    <div className="absolute z-0 md:relative top-0 h-screen md:h-16">
-      <Carousel content={data} />
     </div>
-  );
-};
+    </>
+  )
+}
+
 
 export default HeroSection;
