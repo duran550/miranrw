@@ -15,7 +15,7 @@ type heroSectionPropsType = {
 const HeroSection:React.FC<heroSectionPropsType> = ({content}) => {
   return (
     <>
-    <div className='px-8   md:px-12 my-20 h-[80vh] md:h-full   '>
+    <div className='px-8   md:px-12 my-20 h-[58vh]    '>
         {/* text-content */}
         <div className='flex justify-between w-full  items-center'>
 

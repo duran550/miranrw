@@ -14,7 +14,7 @@ type FooterProps = {
 
 const Footer: React.FC<FooterProps> = ({ footer }) => {
   return (
-    <div className="flex flex-col md:flex-row justify-start md:justify-between lg:absolute bottom-0 w-full h-full  md:items-end h d border-t-2 bg-secondaryColorSlate py-5 px-12 ">
+    <div className="flex flex-col md:flex-row justify-start md:justify-between   md:items-end h d border-t-2 bg-secondaryColorSlate py-5 px-12 ">
       <div className="flex flex-col space-y-2">
       <Link href={'/'} className="w-fit block">
           <Image className="w-40" src={Logo} alt="Logo" />
