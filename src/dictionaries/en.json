@@ -11,6 +11,19 @@
         "buttonText": "Report Incident"
       }
     },
+    "melden": {
+      "stepper": {
+        "firstStep": "General information",
+        "secondStep": "Information on the incident",
+        "thirdStep": "Send enquiry"
+      },
+      "formFields": {},
+      "button": {
+        "next": "Continue to the incident",
+        "prev": "Back",
+        "submit": "Send"
+      }
+    },
     "about": {
       "title": "About Us",
       "description": "This is the about page"

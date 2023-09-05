@@ -11,6 +11,19 @@
         "buttonText": "Vorfall melden"
       }
     },
+    "melden": {
+      "stepper": {
+        "firstStep": "Allgemeine informationen",
+        "secondStep": "Informationen zum Vorfall",
+        "thirdStep": "Anfrage absschicken"
+      },
+      "formFields": {},
+      "button": {
+        "next": "Weiter zum Vorfall",
+        "prev": "Zurück",
+        "submit": "Abschicken"
+      }
+    },
     "about": {
       "title": "Über uns",
       "description": "Dies ist die About-Seite"

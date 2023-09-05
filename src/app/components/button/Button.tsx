@@ -16,13 +16,13 @@ interface ButtonProps
 }
 
 const buttonVariants = cva(
-  'w-full  text-white font-medium py-2 flex justify-center px-4 mt-10 rounded focus:outline-none focus:shadow-outline',
+  'w-full py-4 text-white font-medium  flex justify-center px-4 mt-10 rounded focus:outline-none focus:shadow-outline',
 
   {
     variants: {
       variant: {
-        default: 'bg-black w-full text-white hover:bg-slate-800',
-        primary: 'bg-primaryColor hover:bg-indigo-900',
+        default: 'bg-blue-600 w-full text-white hover:opacity-90',
+        primary: 'bg-blue-600 hover:opacity-90',
         danger: 'bg-red-500 w-full text-white hover:bg-red-600',
         outline:
           'w-full text-white border border-slate-300 hover:bg-primaryColor hover:text-white hover:border-primaryColor',
