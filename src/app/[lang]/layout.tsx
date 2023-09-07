@@ -4,10 +4,11 @@ import type { Metadata } from 'next';
 import { Poppins } from 'next/font/google';
 import Header from '../components/header/header';
 import Head from 'next/head';
+import { FormProvider } from '../context/FormContext';
 
 const poppins = Poppins({
   subsets: ['latin'],
-  weight: '300',
+  weight: '500',
 });
 
 export const metadata: Metadata = {
@@ -34,7 +35,7 @@ export default function RootLayout({
 
       <body className={`${poppins.className}`}>
         {/* <Header lang={params.lang} /> */}
-        {children}
+        <FormProvider>{children}</FormProvider>
       </body>
     </html>
   );

@@ -26,7 +26,7 @@ const TextArea: React.FC<TextAreaProps> = ({
         rows={4}
         name={name}
         {...props}
-        className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-md border border-gray-300 focus:ring-blue-500 focus:border-blue-500  dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+        className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-md border  focus:ring-blue-500 focus:border   focus:border-primaryColor  border-primaryColor  dark:text-white "
         placeholder={placeholder}
       ></textarea>
     </>

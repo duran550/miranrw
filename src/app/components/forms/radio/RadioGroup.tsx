@@ -17,11 +17,11 @@ const RadioGroup: React.FC<RadioGroupProps> = ({ options, title }) => {
               type="radio"
               value={radioElement.value}
               name={radioElement.name}
-              className="w-4 h-4 text-blue-600 bg-gray-100 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700"
+              className="w-6 h-6 text-primaryColor bg-gray-100 focus:ring-PrimaryColor  dark:ring-offset-gray-800 focus:ring-2 "
             />
             <label
               htmlFor={radioElement.id}
-              className="w-full py-4 ml-2 text-sm font-medium text-gray-900 "
+              className="w-full py-3 ml-2 text-sm font-medium text-gray-900 "
             >
               {radioElement.label}
             </label>

@@ -12,12 +12,12 @@ export default async function melden({
   const { page } = await getDictionary(lang);
 
   return (
-    <div className="h-full md:mx-12 mx-6">
+    <div className="h-screen ">
       <Header lang={lang} />
-      <div className="md:mt-16 mt-4 px-2 sm:px-[40px] xl:px-[450px]  ">
+      <div className="md:mt-16 mt-16 px-8 sm:px-[40px] xl:px-[450px]  ">
         <MultiStepForm formTranslation={page.melden} />
       </div>
-      <div className="mt-96 relative">
+      <div className="mt-32 relative">
         <Footer footer={page.footer} />
       </div>
     </div>

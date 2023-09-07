@@ -6,7 +6,6 @@ import Carousel from '../components/carousel/Carousel';
 import HeroSection from '../components/hero-section/HeroSection';
 import Footer from '../components/footer/Footer';
 
-
 export default async function Home({
   params: { lang },
 }: {
@@ -15,11 +14,10 @@ export default async function Home({
   const { page } = await getDictionary(lang);
 
   return (
-  <>
-  <Header lang={lang} />
-  <HeroSection content={page.home.heroSection} />
-  <Footer footer={page.footer} />
-  </>
-  
+    <>
+      <Header lang={lang} />
+      <HeroSection content={page.home.heroSection} />
+      <Footer footer={page.footer} />
+    </>
   );
 }
