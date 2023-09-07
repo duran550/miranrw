@@ -59,7 +59,6 @@ const Button: FC<ButtonProps> = ({
         ) : (
           <Link
             href={href}
-            target="_blank"
             className={cn(buttonVariants({ variant, className }))}
           >
             {children}

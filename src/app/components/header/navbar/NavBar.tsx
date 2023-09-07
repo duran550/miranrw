@@ -17,15 +17,15 @@ const NavBar: React.FC<NavBarProps> = ({ navigation, lang }) => {
 
   return (
     <nav className="w-full relative z-20">
-      <div className="w-full relative px-4 mx-auto md:items-center flex items-center bg-secondaryColorSlate md:flex md:px-8">
+      <div className="w-full relative pb-16 justify-between px-4 mx-auto md:items-center flex items-center bg-secondaryColorSlate md:flex md:px-8">
         <div
           className={`${
-            navbar ? 'bg-primaryColor  shadow  ' : ''
-          } flex rounded-[8px] flex-col w-full   md:mt-0`}
+            navbar
+              ? 'bg-primaryColor absolute pt-2 top-0 px-2 right-0 left-0 shadow  '
+              : ''
+          } flex absolute md:relative top-0  px-2 left-0 right-0  flex-col md:mt-0`}
         >
-          <div
-            className={`flex px-4 w-full z-10 items-center justify-between py-3 `}
-          >
+          <div className={`flex px-4 z-10 items-center justify-between py-3 `}>
             <Link href="/">
               <Image width="200" src={Logo} alt="Logo" />
             </Link>
@@ -72,7 +72,7 @@ const NavBar: React.FC<NavBarProps> = ({ navigation, lang }) => {
           <nav
             className={`container z-10 ${
               navbar ? 'block' : 'hidden'
-            } flex px-3 text-white items-center justify-between `}
+            } flex px-4 text-white items-center justify-between `}
           >
             <ul className="flex flex-col mb-8 gap-x-8">
               <li className="mt-4">
@@ -82,9 +82,10 @@ const NavBar: React.FC<NavBarProps> = ({ navigation, lang }) => {
                 <Link href={`/${lang}/about`}>{navigation.about}</Link>
               </li>
             </ul>
+            <LocaleSwitcher />
           </nav>
         </div>
-        <div className=" items-center hidden md:flex">
+        <div className="md:justify-between items-center w-full max-w-lg hidden md:flex">
           {/* Horizontal or desktop navigation */}
           <nav
             className={`container opacity-0 md:opacity-100 md:block flex  items-center justify-between  `}

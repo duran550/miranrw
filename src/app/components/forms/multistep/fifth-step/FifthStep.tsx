@@ -1,16 +1,23 @@
 import React from 'react';
 import Checkbox from '../../checkbox/Checkbox';
 import FormHeader from '../header/header';
-import { choices } from './FifthStepData';
 
-const FifthStep = () => {
+type FifthStepProps = {
+  fifthStepTranslation: {
+    title: string;
+    description: string;
+    choices: Array<{ iD: number; id: string; value: string; label: string }>;
+  };
+};
+
+const FifthStep: React.FC<FifthStepProps> = ({ fifthStepTranslation }) => {
   return (
     <div>
       <FormHeader
-        title="Auf was bezog sich die Diskriminierung deiner Meinung nach ?"
-        subTitle="Mehrfachnennung möglich"
+        title={fifthStepTranslation?.title}
+        subTitle={fifthStepTranslation?.description}
       />
-      {choices.map((choice: any) => (
+      {fifthStepTranslation?.choices?.map((choice: any) => (
         <Checkbox
           key={choice.iD}
           props={''}

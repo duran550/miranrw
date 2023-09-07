@@ -2,12 +2,16 @@ import React from 'react';
 import TextArea from '../../text-area/TextArea';
 import FormHeader from '../header/header';
 
-const ThirdStep = () => {
+type ThirdStepProps = {
+  thirdStepTranslation: { title: string; description: string };
+};
+
+const ThirdStep: React.FC<ThirdStepProps> = ({ thirdStepTranslation }) => {
   return (
     <div className="h-full">
       <FormHeader
-        title="Vorfallbeschreibung"
-        subTitle="Was genau ist passiert ?"
+        title={thirdStepTranslation?.title}
+        subTitle={thirdStepTranslation?.description}
       />
       <TextArea name="vorfall" props={''} title="" placeholder="" />
     </div>

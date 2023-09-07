@@ -11,9 +11,10 @@ type heroSectionPropsValuesType = {
 
 type heroSectionPropsType = {
   content: heroSectionPropsValuesType;
+  lang: string;
 };
 
-const HeroSection: React.FC<heroSectionPropsType> = ({ content }) => {
+const HeroSection: React.FC<heroSectionPropsType> = ({ lang, content }) => {
   return (
     <>
       <div className="px-8   md:px-12 mt-32 h-[58vh]    ">
@@ -29,7 +30,10 @@ const HeroSection: React.FC<heroSectionPropsType> = ({ content }) => {
                 {content.description}
               </p>
             </div>
-            <Button className=" w-full sm:w-fit bg-primaryColor text-white font-bold rounded-full text-lg">
+            <Button
+              href={`/${lang}/melden`}
+              className=" w-full sm:w-fit bg-primaryColor text-white font-bold rounded-full text-lg"
+            >
               {content.buttonText}
             </Button>
           </div>

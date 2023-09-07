@@ -11,8 +11,13 @@ import FourthStep from './fourth-step/FourthStep';
 import FifthStep from './fifth-step/FifthStep';
 
 type MultiStepFormValuesProps = {
-  stepper: any;
-  formFields: any;
+  stepper: {
+    firstStep: any;
+    secondStep: any;
+    thirdStep: any;
+    fourthStep: any;
+    fifthStep: any;
+  };
   button: any;
 };
 
@@ -34,15 +39,25 @@ const MultiStepForm: React.FC<MultiStepFormProps> = ({ formTranslation }) => {
 
       <div>
         {step == 1 ? (
-          <FirstStep />
+          <FirstStep
+            firstStepTranslation={formTranslation?.stepper?.firstStep}
+          />
         ) : step === 2 ? (
-          <SecondStep />
+          <SecondStep
+            secondStepTranslation={formTranslation?.stepper?.secondStep}
+          />
         ) : step === 3 ? (
-          <ThirdStep />
+          <ThirdStep
+            thirdStepTranslation={formTranslation?.stepper?.thirdStep}
+          />
         ) : step === 4 ? (
-          <FourthStep />
+          <FourthStep
+            fourthStepTranslation={formTranslation?.stepper?.fourthStep}
+          />
         ) : (
-          <FifthStep />
+          <FifthStep
+            fifthStepTranslation={formTranslation?.stepper?.fifthStep}
+          />
         )}
       </div>
 

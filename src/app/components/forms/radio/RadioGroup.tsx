@@ -10,7 +10,7 @@ const RadioGroup: React.FC<RadioGroupProps> = ({ options, title }) => {
     <>
       <div className="mb-3 font-bold">{title}</div>
       <div className="md:flex md:justify-between flex flex-col">
-        {options.map((radioElement) => (
+        {options?.map((radioElement) => (
           <div key={radioElement.id} className="flex items-center pl-4 ">
             <input
               id={`${radioElement?.id}`}

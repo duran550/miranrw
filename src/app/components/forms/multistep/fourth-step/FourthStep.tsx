@@ -4,14 +4,18 @@ import { DateCalendar, LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import dayjs, { Dayjs } from 'dayjs';
 
-const FourthStep = () => {
+type FourthStepProps = {
+  fourthStepTranslation: { title: string; description: string };
+};
+
+const FourthStep: React.FC<FourthStepProps> = ({ fourthStepTranslation }) => {
   const [value, setValue] = React.useState<Dayjs | null>(dayjs('2022-04-17'));
 
   return (
     <div>
       <FormHeader
-        title="Wann fand der Vorfall statt?"
-        subTitle="Bitte wähle ein Datum aus. Falls es sich um einen längeren Zeitraum handelt, kannst du auch diesen auch auswählen"
+        title={fourthStepTranslation?.title}
+        subTitle={fourthStepTranslation?.description}
       />
       <div className="border border-primaryColor rounded-md">
         <LocalizationProvider dateAdapter={AdapterDayjs}>

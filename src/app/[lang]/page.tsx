@@ -16,7 +16,7 @@ export default async function Home({
   return (
     <>
       <Header lang={lang} />
-      <HeroSection content={page.home.heroSection} />
+      <HeroSection lang={lang} content={page.home.heroSection} />
       <Footer footer={page.footer} />
     </>
   );

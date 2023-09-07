@@ -1,17 +1,27 @@
-import { DatePicker } from 'antd';
-import React, { useState } from 'react';
-import InputField from '../../text-field/InputField';
-import SelectField from '../../select-field/SelectField';
-import TextArea from '../../text-area/TextArea';
+import React from 'react';
+
 import RadioGroup from '../../radio/RadioGroup';
 import { identity } from './secondFormData';
 import FormHeader from '../header/header';
 
-const SecondStep = () => {
+type SecondStepProps = {
+  secondStepTranslation: {
+    title: string;
+    description: string;
+    options: Array<{
+      id: string;
+      name: string;
+      label: string;
+      checked: boolean;
+    }>;
+  };
+};
+
+const SecondStep: React.FC<SecondStepProps> = ({ secondStepTranslation }) => {
   return (
     <div className="h-full">
-      <FormHeader title="Wer ist betroffen ?" />
-      <RadioGroup options={identity} title="" />
+      <FormHeader title={secondStepTranslation?.title} />
+      <RadioGroup options={secondStepTranslation?.options} title="" />
     </div>
   );
 };
