@@ -84,7 +84,7 @@ const MultiStepForm: React.FC<MultiStepFormProps> = ({ formTranslation }) => {
               variant="primary"
               onClick={() => dispatch({ type: NEXT_STEP, payload: 'DATA 1' })}
             >
-              Next
+              {formTranslation.button.next}
             </Button>
           )}
         </div>
