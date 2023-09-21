@@ -1,6 +1,5 @@
 'use client';
 
-import { motion } from 'framer-motion';
 import { VariantProps, cva } from 'class-variance-authority';
 import React, { ButtonHTMLAttributes, FC } from 'react';
 import Link from 'next/link';
@@ -16,13 +15,13 @@ interface ButtonProps
 }
 
 const buttonVariants = cva(
-  'w-full  text-white font-medium py-2 flex justify-center px-4 mt-10 rounded focus:outline-none focus:shadow-outline',
+  'w-full py-3 text-white font-medium  flex justify-center px-4 mt-10 rounded focus:outline-none focus:shadow-outline',
 
   {
     variants: {
       variant: {
-        default: 'bg-black w-full text-white hover:bg-slate-800',
-        primary: 'bg-primaryColor hover:bg-indigo-900',
+        default: 'bg-primaryColor w-full text-white hover:opacity-90',
+        primary: 'bg-primaryColor hover:opacity-90',
         danger: 'bg-red-500 w-full text-white hover:bg-red-600',
         outline:
           'w-full text-white border border-slate-300 hover:bg-primaryColor hover:text-white hover:border-primaryColor',
@@ -60,7 +59,6 @@ const Button: FC<ButtonProps> = ({
         ) : (
           <Link
             href={href}
-            target="_blank"
             className={cn(buttonVariants({ variant, className }))}
           >
             {children}

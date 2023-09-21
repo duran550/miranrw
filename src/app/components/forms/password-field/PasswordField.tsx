@@ -10,7 +10,7 @@ const PasswordField: React.FC<PasswordFieldProps> = ({ props }) => {
   return (
     <div className="relative w-full">
       <label
-        className="font-medium block mb-1 mt-6 text-gray-700"
+        className="font-medium block mb-1 mt-6 text-primaryColor"
         htmlFor="password"
       >
         Password

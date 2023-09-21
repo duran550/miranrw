@@ -6,6 +6,7 @@ import NavItem from '../nav-item/NavItem';
 import AnimateClick from '@/app/components/animate-click/AnimateClick';
 import FadinOutAnimation from '@/app/components/fade-in-out-animation/FadeInOutAnimation';
 import { useClickOutside } from '@/app/hooks/useClickOutside';
+import Logo from '../../../../../../../public/logo.svg';
 
 const Profile = () => {
   const [toggle, setToggle] = useState(false);
@@ -21,7 +22,7 @@ const Profile = () => {
       <AnimateClick>
         <Image
           onClick={() => setToggle(!toggle)}
-          src={''}
+          src={Logo} 
           className="shadow-md bg-white p-1 w-10 h-10 rounded-full"
           alt="Profile"
         />

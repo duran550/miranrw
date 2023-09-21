@@ -20,7 +20,7 @@ export default function AdminLayout({
     <AdminProvider>
       <div className="w-full flex">
         <SideBar />
-        <div className="bg-red-300 w-full">
+        <div className="bg-slate-100 w-full">
           <AdminHeader />
           <main className=" p-16">{children}</main>
         </div>

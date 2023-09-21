@@ -6,9 +6,109 @@
   "page": {
     "home": {
       "heroSection": {
-        "title": "Countering Ziganism",
-        "description": "Please report racist incidents to promote a respectful community and combat discrimination",
-        "buttonText": "Report incident"
+        "title": "Report Incident",
+        "description": "Click here to go to the report form to report something queer-hostile",
+        "buttonText": "Report Incident"
+      }
+    },
+    "melden": {
+      "stepper": {
+        "firstStep": {
+          "title": "Information on the report",
+          "description": "Thank you for taking the time and energy to report an incident of queerphobia. In this form, there are a total of 12 questions. The first section is about the incident itself, asking about what happened and how the incident can be categorized. In the second section, we would like to learn more about the person affected. With this information, you help us to more accurately record queerphobic attacks in our statistics. When you are finished, you can submit the form, and we will provide you with information about counseling and support services available."
+        },
+        "secondStep": {
+          "title": "Who is affected ?",
+          "options": [
+            {
+              "id": "age1",
+              "name": "identity",
+              "label": "Myself",
+              "checked": false
+            },
+            {
+              "id": "identity2",
+              "name": "identity",
+              "label": "Another person",
+              "checked": false
+            },
+            {
+              "id": "identity3",
+              "name": "identity",
+              "label": "I am reporting on behalf of the affected person",
+              "checked": false
+            },
+            {
+              "id": "identity4",
+              "name": "identity",
+              "label": "An organization/institution",
+              "checked": false
+            }
+          ]
+        },
+        "thirdStep": {
+          "title": "Description of the incident",
+          "description": "What exactly happened ?"
+        },
+        "fourthStep": {
+          "title": "When did the incident occur?",
+          "description": "Please select a date. If it spans a longer period, you can also choose that."
+        },
+        "fifthStep": {
+          "title": "What, in your opinion, was the discrimination based on ?",
+          "description": " Multiple selections allowed.",
+          "choices": [
+            {
+              "iD": 1,
+              "name": "typeOfDisc",
+              "value": "Geschlechtliche Identität",
+              "id": "identitate",
+              "label": "Gender Identity"
+            },
+
+            {
+              "iD": 2,
+              "name": "typeOfDisc",
+              "value": "Sexuelle Orientierung",
+              "id": "sexuelle",
+              "label": "Sexual Orientation"
+            },
+            {
+              "iD": 3,
+              "name": "typeOfDisc",
+              "value": "Romantische Orientierung",
+              "id": "romantische",
+              "label": "Romantic Orientation"
+            },
+            {
+              "iD": 4,
+              "name": "typeOfDisc",
+              "value": "Geschlechtsausdruck",
+              "id": "geschlecht",
+              "label": "Gender Expression"
+            },
+            {
+              "iD": 5,
+              "name": "typeOfDisc",
+              "value": "Körper",
+              "id": "Körper",
+              "label": "Physical"
+            },
+            {
+              "iD": 6,
+              "name": "typeOfDisc",
+              "value": "Anderes, und zwar",
+              "id": "anderes",
+              "label": "Other, specifically"
+            }
+          ]
+        }
+      },
+      "button": {
+        "start": "Let's start",
+        "next": "Next",
+        "prev": "Back",
+        "submit": "Send"
       }
     },
     "about": {

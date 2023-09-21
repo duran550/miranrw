@@ -6,9 +6,110 @@
   "page": {
     "home": {
       "heroSection": {
-        "title": "Gegen Ziganismus vorgehen ",
-        "description": "Bitte melden Sie rassistische Vorfälle, um eine respektvolle Gemeinschaft zu fördern und Diskriminierung zu bekämpfen",
+        "title": "Vorfall melden ",
+        "description": "Hier kommst du zum Meldeformular, um etwas queerfeindliches zu melden.",
         "buttonText": "Vorfall melden"
+      }
+    },
+    "melden": {
+      "stepper": {
+        "firstStep": {
+          "title": "Informationen zur Meldung",
+          "description": " Vielen Dank, dass Du dir Zeit und Energie nimmst einen queerfeindlichen Vorfall zu melden. In diesem Formular gibt es insgesamt 12 Fragen: Im ersten Abschnitt geht es um den Vorfall selbst. Hier wird danach gefragt, was passiert ist und inwiefern sich der Vorfall einordnen lässt. Im zweiten Abschnitt möchten wir mehr über die betroffene Person erfahren. Mit diesen Angaben hilfst Du uns, queerfeindliche Angriffe in unserer Statistik genauer aufzuführen. Wenn Du fertig bist, schickst Du das Formular ab und wir zeigen dir auf, was für Beratungs- und Informationsangebote es gibt."
+        },
+        "secondStep": {
+          "title": "Wer ist betroffen ?",
+          "options": [
+            {
+              "id": "age1",
+              "name": "identity",
+              "label": "Ich selbst",
+              "checked": false
+            },
+            {
+              "id": "identity2",
+              "name": "identity",
+              "label": "Eine andere Person",
+              "checked": false
+            },
+            {
+              "id": "identity3",
+              "name": "identity",
+              "label": "Ich melde in Vertretung für die betroffene Person",
+              "checked": false
+            },
+            {
+              "id": "identity4",
+              "name": "identity",
+              "label": "Eine Organisation/Institution",
+              "checked": false
+            }
+          ]
+        },
+        "thirdStep": {
+          "title": "Vorfallbeschreibung",
+          "description": " Was genau ist passiert ?"
+        },
+        "fourthStep": {
+          "title": "Wann fand der Vorfall statt?",
+          "description": "Bitte wähle ein Datum aus. Falls es sich um einen längeren Zeitraum handelt, kannst du auch diesen auch auswählen"
+        },
+        "fifthStep": {
+          "title": "Auf was bezog sich die Diskriminierung deiner Meinung nach ?",
+          "description": " Mehrfachnennung möglich",
+          "choices": [
+            {
+              "iD": 1,
+              "name": "typeOfDisc",
+              "value": "Geschlechtliche Identität",
+              "id": "identitate",
+              "label": "Geschlechtliche Identität"
+            },
+
+            {
+              "iD": 2,
+              "name": "typeOfDisc",
+              "value": "Sexuelle Orientierung",
+              "id": "sexuelle",
+              "label": "Sexuelle Orientierung"
+            },
+            {
+              "iD": 3,
+              "name": "typeOfDisc",
+              "value": "Romantische Orientierung",
+              "id": "romantische",
+              "label": "Romantische Orientierung"
+            },
+            {
+              "iD": 4,
+              "name": "typeOfDisc",
+              "value": "Geschlechtsausdruck",
+              "id": "geschlecht",
+              "label": "Geschlechtsausdruck"
+            },
+            {
+              "iD": 5,
+              "name": "typeOfDisc",
+              "value": "Körper",
+              "id": "Körper",
+              "label": "Körper"
+            },
+            {
+              "iD": 6,
+              "name": "typeOfDisc",
+              "value": "Anderes, und zwar",
+              "id": "anderes",
+              "label": "Anderes, und zwar"
+            }
+          ]
+        }
+      },
+      "formFields": {},
+      "button": {
+        "start": "Let's start",
+        "next": "Weiter",
+        "prev": "Zurück",
+        "submit": "Absenden"
       }
     },
     "about": {
