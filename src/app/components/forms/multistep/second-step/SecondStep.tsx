@@ -19,7 +19,7 @@ type SecondStepProps = {
 
 const SecondStep: React.FC<SecondStepProps> = ({ secondStepTranslation }) => {
   return (
-    <div className="h-full">
+    <div className="h-full mb-16">
       <FormHeader title={secondStepTranslation?.title} />
       <RadioGroup options={secondStepTranslation?.options} title="" />
     </div>

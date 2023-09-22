@@ -14,21 +14,18 @@ type FooterProps = {
 
 const Footer: React.FC<FooterProps> = ({ footer }) => {
   return (
-    <div className="flex bottom-0 sleft-0 flex-col md:flex-row justify-start md:justify-between text-white   md:items-end h d border-t-2 bg-primaryColor py-5 px-12 ">
+    <div className="flex relative w-full bottom-0 sleft-0 flex-col md:flex-row justify-start md:justify-between text-white   md:items-end h d border-t-2 bg-primaryColor py-5 px-8 ">
       <div className="flex flex-col space-y-2">
-        <Link href={'/'} className="w-fit block">
-          <Image className="w-40" src={Logo} alt="Logo" />
-        </Link>
         <div className="">
           <ul>
-            <li>Address</li>
+            <li>Addresse</li>
             <li>impressum</li>
             <li>kontakt</li>
-            <li>Datenschtz</li>
+            <li>Datenschutz</li>
           </ul>
         </div>
       </div>
-      <CopyRightSection datenshutz={footer?.datenschutz} />
+      {/* <CopyRightSection datenshutz={footer?.datenschutz} /> */}
     </div>
   );
 };

@@ -8,7 +8,7 @@ type ThirdStepProps = {
 
 const ThirdStep: React.FC<ThirdStepProps> = ({ thirdStepTranslation }) => {
   return (
-    <div className="h-full">
+    <div className="h-full mb-32">
       <FormHeader
         title={thirdStepTranslation?.title}
         subTitle={thirdStepTranslation?.description}

@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import LocaleSwitcher from '../locale-switcher/locale-switcher';
 import Image from 'next/image';
 import Logo from '../../../../../public/logo.svg';
+import { useClickOutside } from '@/app/hooks/useClickOutside';
 
 type NavBarProps = {
   navigation: any;
@@ -15,31 +16,35 @@ const NavBar: React.FC<NavBarProps> = ({ navigation, lang }) => {
 
   /* Container 36 */
 
+  let domNode = useClickOutside(() => {
+    setNavbar(false);
+  });
+
   return (
-    <nav className="w-full relative z-20">
-      <div className="w-full relative pb-16 md:pb-2 justify-between px-4 mx-auto md:items-center flex items-center bg-primaryColor md:flex md:px-8">
+    <nav ref={domNode} className="w-full relative z-20">
+      <div className="w-full items-center relative  py-12 md:pb-2 justify-between px-2 mx-auto md:items-center flex  bg-primaryColor md:flex md:px-8">
         <div
           className={`${
             navbar
-              ? 'bg-primaryColor absolute pt-2 top-0 px-2 right-0 left-0 shadow  '
+              ? 'bg-primaryColor absolute pt-2 top-0 px-0 right-0 left-0 shadow  '
               : ''
-          } flex  absolute md:relative top-0  px-2 left-0 right-0  flex-col md:mt-0`}
+          } flex  h-full justify-center  absolute md:relative top-0 left-0 right-0  flex-col md:mt-0`}
         >
           <div className={`flex px-4 z-10 items-center justify-between py-0 `}>
             <Link className="pt-2.5" href="/">
-              <Image width="300" src={Logo} alt="Logo" />
+              <Image width="220" src={Logo} alt="Logo" />
             </Link>
             <div className="md:hidden flex flex-col">
               <button
-                className="p-2 text-gray-700 rounded-md outline-none focus:border-gray-400 focus:border"
+                className="p-0 text-gray-700 bg-white  outline-none focus:border-gray-400 focus:border-none"
                 onClick={() => setNavbar(!navbar)}
               >
                 {navbar ? (
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
-                    className="w-6 h-6"
+                    className="w-8 h-8"
                     viewBox="0 0 20 20"
-                    fill="#ffffff"
+                    fill="#000000"
                   >
                     <path
                       fillRule="evenodd"
@@ -50,11 +55,11 @@ const NavBar: React.FC<NavBarProps> = ({ navigation, lang }) => {
                 ) : (
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
-                    className="w-10 h-10"
+                    className="w-8 h-8"
                     fill="none"
                     viewBox="0 0 24 24"
                     stroke="#000000"
-                    strokeWidth={2}
+                    strokeWidth={1.5}
                   >
                     <path
                       strokeLinecap="round"
@@ -72,7 +77,7 @@ const NavBar: React.FC<NavBarProps> = ({ navigation, lang }) => {
           <nav
             className={`container z-10 ${
               navbar ? 'block' : 'hidden'
-            } flex px-4 text-white items-center justify-between `}
+            } flex absolute top-24 left-0 bg-primaryColor w-full z-20 px-8 text-white items-center justify-between `}
           >
             <ul className="flex flex-col mb-8 gap-x-8">
               <li className="mt-4">
