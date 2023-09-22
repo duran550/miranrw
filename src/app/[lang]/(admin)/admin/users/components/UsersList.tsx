@@ -15,7 +15,7 @@ const UsersList = () => {
       name: 'JaneDoe',
       email: 'JohnDoe@email.com',
       status: 'active',
-      role: 'Admin',
+      role: 'Cleaner',
     },
     {
       id: 1,
@@ -31,7 +31,7 @@ const UsersList = () => {
         <thead className="text-xs text-gray-900 bg-slate-200 uppercase  ">
           <tr>
             <th scope="col" className="px-6 py-3">
-              User
+              Username
             </th>
             <th scope="col" className="px-6 py-3">
               Role
@@ -40,7 +40,10 @@ const UsersList = () => {
               Status
             </th>
             <th scope="col" className="px-6 py-3">
-              Action
+              Email
+            </th>
+            <th scope="col" className="px-6 py-3">
+              Actions
             </th>
           </tr>
         </thead>
