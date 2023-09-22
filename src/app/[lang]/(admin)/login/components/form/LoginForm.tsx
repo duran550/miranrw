@@ -7,8 +7,8 @@ import React from 'react';
 
 const LoginForm = () => {
   return (
-    <form className="p-8 max-w-md mx-auto bg-white border-t-8 border-indigo-700 mt-10 shadow-lg rounded-md">
-      <h1 className="font-medium text-2xl text-center py-4 text-gray-800">
+    <form className="p-8 max-w-md mx-auto bg-white border-t-8 border-primary mt-10 shadow-lg rounded-md">
+      <h1 className="font-medium text-2xl text-center py-4 text-primaryColor">
         Sign in to Dashboard
       </h1>
       <EmailField />

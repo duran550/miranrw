@@ -18,6 +18,10 @@ const config: Config = {
         primaryColor: '#463980',
         secondaryColorSlate: '#EDEBF6',
       },
+      borderColor: {
+        'primary': '#6E82FE',
+        'secondary': '#EDEBF6',
+      }
     },
   },
   plugins: [],

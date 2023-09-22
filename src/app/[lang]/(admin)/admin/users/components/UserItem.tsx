@@ -1,5 +1,7 @@
 import Link from 'next/link';
 import React from 'react';
+import Profile from '../../components/header/Profile';
+import Actions from './Actions';
 
 type UserItemProps = {
   key: number;
@@ -33,7 +35,13 @@ const UserItem: React.FC<UserItemProps> = ({
               <Link href="/" className="hover:text-indigo-700">
                 {name}
               </Link>
-              <div className="text-sm mt-1 text-gray-600">{email}</div>
+              <div className="text-sm mt-1 text-gray-600">
+                <a
+                  onClick={onClick}
+                  href="#"
+                  className="font-medium text-indigo-600  hover:underline">
+
+                </a></div>
             </div>
           </div>
         </Link>
@@ -41,13 +49,10 @@ const UserItem: React.FC<UserItemProps> = ({
       <td className="px-6 py-4">{role}</td>
       <td className="px-6 py-4">{status}</td>
       <td className="px-6 py-4">
-        <a
-          onClick={onClick}
-          href="#"
-          className="font-medium text-indigo-600  hover:underline"
-        >
-          Edit
-        </a>
+      {email}
+      </td>
+      <td className="px-6 py-4">
+        <Actions/>
       </td>
     </tr>
   );
