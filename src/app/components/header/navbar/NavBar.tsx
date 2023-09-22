@@ -17,7 +17,7 @@ const NavBar: React.FC<NavBarProps> = ({ navigation, lang }) => {
 
   return (
     <nav className="w-full relative z-20">
-      <div className="w-full relative pb-16 md:pb-2 justify-between px-4 mx-auto md:items-center flex items-center bg-secondaryColorSlate md:flex md:px-8">
+      <div className="w-full relative pb-16 md:pb-2 justify-between px-4 mx-auto md:items-center flex items-center bg-primaryColor md:flex md:px-8">
         <div
           className={`${
             navbar
@@ -85,7 +85,7 @@ const NavBar: React.FC<NavBarProps> = ({ navigation, lang }) => {
             <LocaleSwitcher />
           </nav>
         </div>
-        <div className="md:justify-between items-center w-full max-w-lg hidden md:flex">
+        <div className="md:justify-between text-white items-center w-full max-w-lg hidden md:flex">
           {/* Horizontal or desktop navigation */}
           <nav
             className={`container opacity-0 md:opacity-100 md:block flex  items-center justify-between  `}

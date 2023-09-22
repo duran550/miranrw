@@ -11,15 +11,13 @@ type CopyrightProps = {
 
 const CopyRightSection: React.FC<CopyrightProps> = ({ datenshutz }) => {
   return (
-    <div className="flex items-center justify-between md:justify-between">
+    <div className="flex tex items-center text-white justify-between md:justify-between">
       <div className="hidden md:block">
         <LocaleSwitcher />
       </div>
       <div className="flex w-full  text-black md:text-black md:mx-0 justify-between md:justify-center items-start">
-        &copy; 2023 MIQ NRW{' '}
-        {datenshutz}
+        &copy; 2023 MIQ NRW {datenshutz}
       </div>
-  
     </div>
   );
 };
