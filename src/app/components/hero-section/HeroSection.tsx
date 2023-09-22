@@ -37,7 +37,6 @@ const HeroSection: React.FC<heroSectionPropsType> = ({ lang, content }) => {
               {content.buttonText}
             </Button>
           </div>
-
         </div>
       </div>
     </>
