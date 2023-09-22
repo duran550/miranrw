@@ -13,16 +13,16 @@ const Profile = () => {
 
   const wrapperRef = useRef<HTMLInputElement>(null);
 
-  useClickOutside(wrapperRef, () => {
+  let domNode = useClickOutside(() => {
     setToggle(false);
   });
 
   return (
-    <div className="flex  flex-col items-center relative">
+    <div ref={domNode} className="flex  flex-col items-center relative">
       <AnimateClick>
         <Image
           onClick={() => setToggle(!toggle)}
-          src={Logo} 
+          src={Logo}
           className="shadow-md bg-white p-1 w-10 h-10 rounded-full"
           alt="Profile"
         />
