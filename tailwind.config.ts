@@ -15,9 +15,8 @@ const config: Config = {
       },
 
       colors: {
-        primaryColor: '#6E82FE',
-        secondaryColorSlate: "#EDEBF6"
-        
+        primaryColor: '#463980',
+        secondaryColorSlate: '#EDEBF6',
       },
       borderColor: {
         'primary': '#6E82FE',
