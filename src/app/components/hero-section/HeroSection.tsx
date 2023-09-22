@@ -37,12 +37,6 @@ const HeroSection: React.FC<heroSectionPropsType> = ({ lang, content }) => {
               {content.buttonText}
             </Button>
           </div>
-
-          <Image
-            src={graphic}
-            className="md:w-[300px] lg:w-[600px] hidden md:block"
-            alt="graphic"
-          />
         </div>
       </div>
     </>

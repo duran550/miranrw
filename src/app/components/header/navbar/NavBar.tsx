@@ -17,17 +17,17 @@ const NavBar: React.FC<NavBarProps> = ({ navigation, lang }) => {
 
   return (
     <nav className="w-full relative z-20">
-      <div className="w-full relative pb-16 justify-between px-4 mx-auto md:items-center flex items-center bg-secondaryColorSlate md:flex md:px-8">
+      <div className="w-full relative pb-16 md:pb-2 justify-between px-4 mx-auto md:items-center flex items-center bg-secondaryColorSlate md:flex md:px-8">
         <div
           className={`${
             navbar
               ? 'bg-primaryColor absolute pt-2 top-0 px-2 right-0 left-0 shadow  '
               : ''
-          } flex absolute md:relative top-0  px-2 left-0 right-0  flex-col md:mt-0`}
+          } flex  absolute md:relative top-0  px-2 left-0 right-0  flex-col md:mt-0`}
         >
-          <div className={`flex px-4 z-10 items-center justify-between py-3 `}>
-            <Link href="/">
-              <Image width="200" src={Logo} alt="Logo" />
+          <div className={`flex px-4 z-10 items-center justify-between py-0 `}>
+            <Link className="pt-2.5" href="/">
+              <Image width="300" src={Logo} alt="Logo" />
             </Link>
             <div className="md:hidden flex flex-col">
               <button
