@@ -36,7 +36,7 @@ export default async function aboutQueer({
             </div>
             <div>
               <iframe
-                src="https://www.youtube.com/embed/9zWPJR2u01w?si=iUdQY2YiqrJGzSOX"
+                src="https://wwembed/9zWPJR2u01w?si=iUdQY2YiqrJGzSOX"
                 title="YouTube video player"
                 frameBorder="0"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
