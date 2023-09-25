@@ -32,12 +32,11 @@ const FifthStep: React.FC<FifthStepProps> = ({ fifthStepTranslation }) => {
 
   let discForm = watch('formOfDiscrimination');
   let otherForm = watch('otherForm');
-  console.log(discForm, otherForm);
 
   // Triggered when submitting form
   const onSubmit: SubmitHandler<FifthStepValues> = (data) => {};
   return (
-    <div>
+    <div className="lg:w-[28rem]">
       <FormHeader
         title={fifthStepTranslation?.title}
         subTitle={fifthStepTranslation?.description}

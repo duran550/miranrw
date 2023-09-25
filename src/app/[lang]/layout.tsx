@@ -33,7 +33,9 @@ export default function RootLayout({
         <meta name="description">{metadata.description}</meta>
       </Head>
 
-      <body className={`${poppins.className}`}>
+      <body
+        className={`${poppins.className} flex flex-col bg-lightGray min-h-screen`}
+      >
         {/* <Header lang={params.lang} /> */}
         <FormProvider>{children}</FormProvider>
       </body>

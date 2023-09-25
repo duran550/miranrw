@@ -1,7 +1,17 @@
 {
   "navigation": {
     "home": "Startseite",
-    "about": "Über"
+    "reportIncident": "Vorfall melden",
+    "aboutQueer": "Über Queerfeindlichkeit",
+    "aboutUs": {
+      "title": "Über Uns",
+      "referalCounseling": "Verweisberatung",
+      "news": "Aktuelles",
+      "publications": "Publikationen",
+      "team": "Team",
+      "partners": "Verbund & Kooperationen"
+    },
+    "faqs": "FAQs"
   },
   "page": {
     "home": {

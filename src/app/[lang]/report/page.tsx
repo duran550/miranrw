@@ -12,9 +12,9 @@ export default async function report({
   const { page } = await getDictionary(lang);
 
   return (
-    <div className="h-full relative ">
+    <div className="">
       <Header lang={lang} />
-      <div className="md:mt-16 h-full  py-16 px-4 sm:px-[40px] xl:px-[450px]  ">
+      <div className="md:mt-16 h-full  py-16 px-4 sm:px-[40px] lg:px-[250px]  ">
         <MultiStepForm formTranslation={page.melden} />
       </div>
       <div className="mt-0">

@@ -32,12 +32,11 @@ const SixthStep: React.FC<SixthStepProps> = ({ sixthStepTranslation }) => {
 
   let discForm = watch('typeOfDiscrimination');
   let otherForm = watch('otherForm');
-  console.log(discForm, otherForm);
 
   // Triggered when submitting form
   const onSubmit: SubmitHandler<sixthStepValues> = (data) => {};
   return (
-    <div>
+    <div className="lg:w-[28rem]">
       <FormHeader
         title={sixthStepTranslation?.title}
         subTitle={sixthStepTranslation?.description}

@@ -1,7 +1,17 @@
 {
   "navigation": {
     "home": "Homepage",
-    "about": "About"
+    "reportIncident": "Report",
+    "aboutQueer": "About Queerphobia",
+    "aboutUs": {
+      "title": "About us",
+      "referalCounseling": "Referral counseling",
+      "news": "News",
+      "publications": "Publications",
+      "team": "Team",
+      "partners": "Networks and Partners"
+    },
+    "faqs": "FAQs"
   },
   "page": {
     "home": {

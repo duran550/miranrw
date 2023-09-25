@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
 
 type FormHeaderProps = {
+  children?: ReactNode;
   title: string;
   description?: {
     firstParagraph: string;
@@ -15,10 +16,12 @@ const FormHeader: React.FC<FormHeaderProps> = ({
   title,
   subTitle,
   description,
+  children,
 }) => {
   return (
-    <div className="border mb-8 md:mb-16 border-primaryColor rounded-md p-4">
-      <div className=" font-extrabold text-xl">{title}</div>
+    <div className="border lg:bg-white mb-8 md:mb-16 border-primaryColor rounded-md p-4">
+      <div className=" font-extrabold text-xl mb-2">{title}</div>
+      {children}
       {description && (
         <div className="text-sm mt-2">
           <p>{description?.firstParagraph}</p>{' '}

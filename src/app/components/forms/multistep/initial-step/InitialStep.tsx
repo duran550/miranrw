@@ -16,7 +16,7 @@ const InitialStep: React.FC<InitialStepProps> = ({
 }) => {
   const { dispatch } = useFormContext();
   return (
-    <div className="mb-64">
+    <div className="mb-64 lg:mb-[12rem] lg:max-w-lg lg:mx-auto">
       <h1 className="font-bold text-3xl mb-6">MIQ</h1>
       <FormHeader
         title={initialStepTranslation?.title}
