@@ -1,24 +1,46 @@
 {
   "navigation": {
-    "home": "Home",
-    "about": "About"
+    "home": "Homepage",
+    "reportIncident": "Report",
+    "aboutQueer": "About Queerphobia",
+    "aboutUs": {
+      "title": "About us",
+      "referalCounseling": "Referral counseling",
+      "news": "News",
+      "publications": "Publications",
+      "team": "Team",
+      "partners": "Networks and Partners"
+    },
+    "faqs": "FAQs"
   },
   "page": {
     "home": {
       "heroSection": {
-        "title": "Report Incident",
-        "description": "Click here to go to the report form to report something queer-hostile",
-        "buttonText": "Report Incident"
+        "title": "Reporting and Information Center for Queer Hostility",
+        "description": {
+          "firstParagraph": "MIQ stands for 'Reporting and Information Center for Queer Hostility' and is a project that aims to highlight queer hostility in NRW.",
+          "secondParagraph": "You can report a queer-hostile incident on our website. We also serve as an information resource and guide you to further counseling services available in NRW."
+        },
+        "buttonText": "Report an Incident"
       }
     },
     "melden": {
       "stepper": {
+        "initialStep": {
+          "title": "Report an Incident",
+          "description": "Here, you can access the reporting form to report something queer-hostile."
+        },
         "firstStep": {
-          "title": "Information on the report",
-          "description": "Thank you for taking the time and energy to report an incident of queerphobia. In this form, there are a total of 12 questions. The first section is about the incident itself, asking about what happened and how the incident can be categorized. In the second section, we would like to learn more about the person affected. With this information, you help us to more accurately record queerphobic attacks in our statistics. When you are finished, you can submit the form, and we will provide you with information about counseling and support services available."
+          "title": "Information about the Report",
+          "description": {
+            "firstParagraph": "Thank you for taking the time and energy to report a queer-hostile incident.",
+            "secondParagraph": "This form contains a total of 12 questions:",
+            "thirdParagraph": "The first section is about the incident itself, asking what happened and how to categorize the incident. The second section is about the affected person. With this information, you help us list queer-hostile attacks more accurately in our statistics.",
+            "fourthParagraph": "When you're finished, submit the form, and we will show you what counseling and information services are available."
+          }
         },
         "secondStep": {
-          "title": "Who is affected ?",
+          "title": "Who is affected?",
           "options": [
             {
               "id": "age1",
@@ -35,7 +57,7 @@
             {
               "id": "identity3",
               "name": "identity",
-              "label": "I am reporting on behalf of the affected person",
+              "label": "I'm reporting on behalf of the affected person",
               "checked": false
             },
             {
@@ -47,76 +69,152 @@
           ]
         },
         "thirdStep": {
-          "title": "Description of the incident",
-          "description": "What exactly happened ?"
+          "title": "Incident Description",
+          "description": "What exactly happened?"
         },
         "fourthStep": {
           "title": "When did the incident occur?",
-          "description": "Please select a date. If it spans a longer period, you can also choose that."
+          "description": "Please select a date. If it occurred over an extended period, you can select that too."
         },
         "fifthStep": {
-          "title": "What, in your opinion, was the discrimination based on ?",
-          "description": " Multiple selections allowed.",
+          "title": "What did you believe the discrimination was based on?",
+          "description": "Multiple selections possible",
           "choices": [
             {
               "iD": 1,
               "name": "typeOfDisc",
-              "value": "Geschlechtliche Identität",
-              "id": "identitate",
+              "value": "Gender Identity",
+              "id": "gender",
               "label": "Gender Identity"
             },
-
             {
               "iD": 2,
               "name": "typeOfDisc",
-              "value": "Sexuelle Orientierung",
-              "id": "sexuelle",
+              "value": "Sexual Orientation",
+              "id": "sexual",
               "label": "Sexual Orientation"
             },
             {
               "iD": 3,
               "name": "typeOfDisc",
-              "value": "Romantische Orientierung",
-              "id": "romantische",
+              "value": "Romantic Orientation",
+              "id": "romantic",
               "label": "Romantic Orientation"
             },
             {
               "iD": 4,
               "name": "typeOfDisc",
-              "value": "Geschlechtsausdruck",
-              "id": "geschlecht",
+              "value": "Gender Expression",
+              "id": "genderExpression",
               "label": "Gender Expression"
             },
             {
               "iD": 5,
               "name": "typeOfDisc",
-              "value": "Körper",
-              "id": "Körper",
-              "label": "Physical"
+              "value": "Body",
+              "id": "body",
+              "label": "Body"
             },
             {
               "iD": 6,
               "name": "typeOfDisc",
-              "value": "Anderes, und zwar",
-              "id": "anderes",
-              "label": "Other, specifically"
+              "value": "Other, specify",
+              "id": "other",
+              "label": "Other, specify"
+            }
+          ]
+        },
+        "sixthStep": {
+          "title": "What form of queerphobia do you think this is ?",
+          "description": "Multiple selections possible",
+          "choices": [
+            {
+              "iD": 1,
+              "name": "formOfDisc",
+              "value": "Lesbophobia",
+              "id": "lesbophobia",
+              "label": "Lesbophobia"
+            },
+            {
+              "iD": 2,
+              "name": "formOfDisc",
+              "value": "Homophobia",
+              "id": "homophobia",
+              "label": "Homophobia"
+            },
+            {
+              "iD": 3,
+              "name": "formOfDisc",
+              "value": "Bi+feindlichkeit",
+              "id": "bi",
+              "label": "Bisexual discrimination"
+            },
+            {
+              "iD": 4,
+              "name": "formOfDisc",
+              "value": "Transphobia",
+              "id": "trans",
+              "label": "Transphobia"
+            },
+            {
+              "iD": 5,
+              "name": "formOfDisc",
+              "value": "Inter*feindlichkeit",
+              "id": "Inter*feindlichkeit",
+              "label": "Intersex discrimination"
+            },
+            {
+              "iD": 6,
+              "name": "formOfDisc",
+              "value": "Asexual discrimination",
+              "id": "asexual discrimination",
+              "label": "Asexual discrimination"
+            },
+            {
+              "iD": 7,
+              "name": "formOfDisc",
+              "value": "Non-binary discrimination",
+              "id": "non-binary discrimination",
+              "label": "Non-binary discrimination"
+            },
+            {
+              "iD": 8,
+              "name": "formOfDisc",
+              "value": "Agender discrimination",
+              "id": "agender discrimination",
+              "label": "Agender discrimination"
+            },
+            {
+              "iD": 8,
+              "name": "formOfDisc",
+              "value": "General queerphobia",
+              "id": "general queerphobia",
+              "label": "General queerphobia"
+            },
+            {
+              "iD": 9,
+              "name": "formOfDisc",
+              "value": "Other, specify",
+              "id": "other",
+              "label": "Other, specify"
             }
           ]
         }
       },
+      "formFields": {},
       "button": {
         "start": "Let's start",
         "next": "Next",
         "prev": "Back",
-        "submit": "Send"
+        "submit": "Submit"
       }
     },
     "about": {
       "title": "About Us",
-      "description": "This is the about page"
+      "description": "This is the About page."
     },
     "footer": {
-      "datenschutz": "Data protection"
+      "datenschutz": "Privacy Policy"
     }
   }
 }

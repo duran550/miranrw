@@ -34,7 +34,6 @@ const reducer = (initialState: FormType, action: ActionType) => {
       };
 
     case SUBMIT_FORM:
-      console.log(action.payload);
       return {
         ...initialState,
       };

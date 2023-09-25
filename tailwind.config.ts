@@ -17,11 +17,12 @@ const config: Config = {
       colors: {
         primaryColor: '#463980',
         secondaryColorSlate: '#EDEBF6',
+        lightGray: '#EDEBF6',
       },
       borderColor: {
-        'primary': '#6E82FE',
-        'secondary': '#EDEBF6',
-      }
+        primary: '#6E82FE',
+        secondary: '#EDEBF6',
+      },
     },
   },
   plugins: [],

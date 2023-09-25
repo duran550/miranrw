@@ -12,7 +12,7 @@ const FourthStep: React.FC<FourthStepProps> = ({ fourthStepTranslation }) => {
   const [value, setValue] = React.useState<Dayjs | null>(dayjs('2022-04-17'));
 
   return (
-    <div>
+    <div className="lg:w-[28rem]">
       <FormHeader
         title={fourthStepTranslation?.title}
         subTitle={fourthStepTranslation?.description}
