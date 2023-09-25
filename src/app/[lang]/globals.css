@@ -8,3 +8,7 @@ input:checked + div {
 input:checked + div svg {
   @apply block;
 }
+
+.css-qa7bje-MuiButtonBase-root-MuiPickersDay-root.Mui-selected {
+  background-color: #463980 !important;
+}

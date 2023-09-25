@@ -7,10 +7,12 @@ type FirstStepProps = {
 
 const FirstStep: React.FC<FirstStepProps> = ({ firstStepTranslation }) => {
   return (
-    <FormHeader
-      title={firstStepTranslation?.title}
-      description={firstStepTranslation?.description}
-    />
+    <div className="mb-32">
+      <FormHeader
+        title={firstStepTranslation?.title}
+        description={firstStepTranslation?.description}
+      />
+    </div>
   );
 };
 

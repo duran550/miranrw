@@ -114,11 +114,87 @@
               "label": "Anderes, und zwar"
             }
           ]
+        },
+        "sixthStep": {
+          "title": "Um welche Form von Queerfeindlichkeit handelt es sich deiner Meinung nach?",
+          "description": "Mehrfachnennung möglich",
+          "choices": [
+            {
+              "iD": 1,
+              "name": "formOfDisc",
+              "value": "Lesbophobia",
+              "id": "lesbophobia",
+              "label": "Lesbenfeindlichkeit"
+            },
+            {
+              "iD": 2,
+              "name": "formOfDisc",
+              "value": "Homophobia",
+              "id": "homophobia",
+              "label": "Schwulenfeindlichkeit"
+            },
+            {
+              "iD": 3,
+              "name": "formOfDisc",
+              "value": "Bi+feindlichkeit",
+              "id": "bi",
+              "label": "Bi+feindlichkeit"
+            },
+            {
+              "iD": 4,
+              "name": "formOfDisc",
+              "value": "Transphobia",
+              "id": "trans",
+              "label": "Trans*feindlichkeit"
+            },
+            {
+              "iD": 5,
+              "name": "formOfDisc",
+              "value": "Inter*feindlichkeit",
+              "id": "Inter*feindlichkeit",
+              "label": "Inter*feindlichkeit"
+            },
+            {
+              "iD": 6,
+              "name": "formOfDisc",
+              "value": "Asexual discrimination",
+              "id": "asexual discrimination",
+              "label": "Asexuellenfeindlichkeit"
+            },
+            {
+              "iD": 7,
+              "name": "formOfDisc",
+              "value": "Non-binary discrimination",
+              "id": "non-binary discrimination",
+              "label": "Nichtbinärfeindlichkeit"
+            },
+            {
+              "iD": 8,
+              "name": "formOfDisc",
+              "value": "Agender discrimination",
+              "id": "agender discrimination",
+              "label": "Agenderfeindlichkeit"
+            },
+            {
+              "iD": 8,
+              "name": "formOfDisc",
+              "value": "General queerphobia",
+              "id": "general queerphobia",
+              "label": "Queerfeindlichkeit allgemein"
+            },
+            {
+              "iD": 9,
+              "name": "formOfDisc",
+              "value": "Other, specify",
+              "id": "other",
+              "label": "Anderes, und zwar"
+            }
+          ]
         }
       },
       "formFields": {},
       "button": {
-        "start": "Let's start",
+        "start": "Los geht’s",
         "next": "Weiter",
         "prev": "Zurück",
         "submit": "Absenden"

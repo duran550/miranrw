@@ -10,6 +10,7 @@ import { NEXT_STEP, PREV_STEP, SUBMIT_FORM } from '@/app/context/actions';
 import FourthStep from './fourth-step/FourthStep';
 import FifthStep from './fifth-step/FifthStep';
 import InitialStep from './initial-step/InitialStep';
+import SixthStep from './sixth-step/SixthStep';
 
 type MultiStepFormValuesProps = {
   stepper: {
@@ -19,8 +20,9 @@ type MultiStepFormValuesProps = {
     thirdStep: any;
     fourthStep: any;
     fifthStep: any;
+    sixthStep: any;
   };
-  button: any;
+  button: { start: string; next: string; prev: string; submit: string };
 };
 
 type MultiStepFormProps = {
@@ -42,7 +44,15 @@ const MultiStepForm: React.FC<MultiStepFormProps> = ({ formTranslation }) => {
           ) : (
             <Stepper
               progress={
-                step === 3 ? 20 : step === 4 ? 40 : step === 5 ? 80 : 100
+                step === 3
+                  ? 20
+                  : step === 4
+                  ? 30
+                  : step === 5
+                  ? 70
+                  : step === 6
+                  ? 90
+                  : 100
               }
             />
           )}
@@ -64,9 +74,13 @@ const MultiStepForm: React.FC<MultiStepFormProps> = ({ formTranslation }) => {
               <FourthStep
                 fourthStepTranslation={formTranslation?.stepper?.fourthStep}
               />
-            ) : (
+            ) : step === 6 ? (
               <FifthStep
                 fifthStepTranslation={formTranslation?.stepper?.fifthStep}
+              />
+            ) : (
+              <SixthStep
+                sixthStepTranslation={formTranslation?.stepper?.sixthStep}
               />
             )}
           </div>
@@ -80,7 +94,7 @@ const MultiStepForm: React.FC<MultiStepFormProps> = ({ formTranslation }) => {
               >
                 {formTranslation.button.prev}
               </Button>
-              {step === 6 ? (
+              {step === 7 ? (
                 <Button
                   className="w-32 font-bold ml-auto"
                   variant="primary"
@@ -102,6 +116,14 @@ const MultiStepForm: React.FC<MultiStepFormProps> = ({ formTranslation }) => {
                 </Button>
               )}
             </div>
+          ) : step === 2 ? (
+            <Button
+              className="w-32 font-bold ml-auto"
+              variant="primary"
+              onClick={() => dispatch({ type: NEXT_STEP, payload: 'DATA 1' })}
+            >
+              {formTranslation.button.start}
+            </Button>
           ) : (
             <Button
               className="w-32 font-bold ml-auto"

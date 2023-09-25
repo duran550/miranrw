@@ -113,6 +113,82 @@
               "label": "Other, specify"
             }
           ]
+        },
+        "sixthStep": {
+          "title": "What form of queerphobia do you think this is ?",
+          "description": "Multiple selections possible",
+          "choices": [
+            {
+              "iD": 1,
+              "name": "formOfDisc",
+              "value": "Lesbophobia",
+              "id": "lesbophobia",
+              "label": "Lesbophobia"
+            },
+            {
+              "iD": 2,
+              "name": "formOfDisc",
+              "value": "Homophobia",
+              "id": "homophobia",
+              "label": "Homophobia"
+            },
+            {
+              "iD": 3,
+              "name": "formOfDisc",
+              "value": "Bi+feindlichkeit",
+              "id": "bi",
+              "label": "Bisexual discrimination"
+            },
+            {
+              "iD": 4,
+              "name": "formOfDisc",
+              "value": "Transphobia",
+              "id": "trans",
+              "label": "Transphobia"
+            },
+            {
+              "iD": 5,
+              "name": "formOfDisc",
+              "value": "Inter*feindlichkeit",
+              "id": "Inter*feindlichkeit",
+              "label": "Intersex discrimination"
+            },
+            {
+              "iD": 6,
+              "name": "formOfDisc",
+              "value": "Asexual discrimination",
+              "id": "asexual discrimination",
+              "label": "Asexual discrimination"
+            },
+            {
+              "iD": 7,
+              "name": "formOfDisc",
+              "value": "Non-binary discrimination",
+              "id": "non-binary discrimination",
+              "label": "Non-binary discrimination"
+            },
+            {
+              "iD": 8,
+              "name": "formOfDisc",
+              "value": "Agender discrimination",
+              "id": "agender discrimination",
+              "label": "Agender discrimination"
+            },
+            {
+              "iD": 8,
+              "name": "formOfDisc",
+              "value": "General queerphobia",
+              "id": "general queerphobia",
+              "label": "General queerphobia"
+            },
+            {
+              "iD": 9,
+              "name": "formOfDisc",
+              "value": "Other, specify",
+              "id": "other",
+              "label": "Other, specify"
+            }
+          ]
         }
       },
       "formFields": {},

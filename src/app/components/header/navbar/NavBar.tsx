@@ -30,13 +30,13 @@ const NavBar: React.FC<NavBarProps> = ({ navigation, lang }) => {
               : ''
           } flex  h-full justify-center  absolute md:relative top-0 left-0 right-0  flex-col md:mt-0`}
         >
-          <div className={`flex px-4 z-10 items-center justify-between py-0 `}>
+          <div className={`flex px-2 z-10 items-center justify-between py-0 `}>
             <Link className="pt-2.5" href="/">
               <Image width="220" src={Logo} alt="Logo" />
             </Link>
             <div className="md:hidden flex flex-col">
               <button
-                className="p-0 text-gray-700 bg-white  outline-none focus:border-gray-400 focus:border-none"
+                className="p-0 mr-1 text-gray-700 bg-white  outline-none focus:border-gray-400 focus:border-none"
                 onClick={() => setNavbar(!navbar)}
               >
                 {navbar ? (

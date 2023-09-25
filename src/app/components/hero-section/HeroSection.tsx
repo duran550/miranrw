@@ -17,9 +17,9 @@ type heroSectionPropsType = {
 const HeroSection: React.FC<heroSectionPropsType> = ({ lang, content }) => {
   return (
     <>
-      <div className="px-6 md:px-12 mt-12 h-[58vh]    ">
+      <div className="px-6 md:px-12 my-12    ">
         {/* text-content */}
-        <div className="flex justify-between w-full  items-center">
+        <div className="flex flex-col md:flex-row justify-between w-full  items-center">
           <div>
             <h2 className="font-bold text-3xl md:text-2xl lg:text-5xl">MIQ</h2>
             <div className="pt-4">
@@ -40,6 +40,27 @@ const HeroSection: React.FC<heroSectionPropsType> = ({ lang, content }) => {
               {content.buttonText}
             </Button>
           </div>
+
+          <div>
+            <h1 className="font-bold underline text-xl mt-8 mb-4">
+              Über Queerfeindlichkeit
+            </h1>
+            <p>
+              Text text text Text text text Text text text Text text text Text
+              text text Text text text Text text text Text text text Text text
+              text Text text text Text text text Text text text Text text text
+              Text text text Text text text Text text text Text text text
+            </p>
+          </div>
+
+          <iframe
+            src="https://www.youtube.com/embed/9zWPJR2u01w?si=iUdQY2YiqrJGzSOX"
+            title="YouTube video player"
+            frameBorder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            allowFullScreen
+            className="w-full mt-8"
+          ></iframe>
         </div>
       </div>
     </>

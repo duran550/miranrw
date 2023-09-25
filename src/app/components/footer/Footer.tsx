@@ -14,7 +14,7 @@ type FooterProps = {
 
 const Footer: React.FC<FooterProps> = ({ footer }) => {
   return (
-    <div className="flex relative w-full bottom-0 sleft-0 flex-col md:flex-row justify-start md:justify-between text-white   md:items-end h d border-t-2 bg-primaryColor py-5 px-8 ">
+    <div className="flex relative w-full  sleft-0 flex-col md:flex-row justify-start md:justify-between text-white   md:items-end h d border-t-2 bg-primaryColor py-5 px-8 ">
       <div className="flex flex-col space-y-2">
         <div className="">
           <ul>

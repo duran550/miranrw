@@ -6,20 +6,20 @@ import { useFormContext } from '@/app/hooks/useFormContext';
 import { NEXT_STEP } from '@/app/context/actions';
 import InputField from '../../text-field/InputField';
 
-type FifthStepProps = {
-  fifthStepTranslation: {
+type SixthStepProps = {
+  sixthStepTranslation: {
     title: string;
     description: string;
     choices: Array<{ iD: number; id: string; value: string; label: string }>;
   };
 };
 
-type FifthStepValues = {
-  formOfDiscrimination: string[];
+type sixthStepValues = {
+  typeOfDiscrimination: string[];
   otherForm: string;
 };
 
-const FifthStep: React.FC<FifthStepProps> = ({ fifthStepTranslation }) => {
+const SixthStep: React.FC<SixthStepProps> = ({ sixthStepTranslation }) => {
   const { dispatch } = useFormContext();
 
   const {
@@ -28,24 +28,24 @@ const FifthStep: React.FC<FifthStepProps> = ({ fifthStepTranslation }) => {
     watch,
     setValue,
     formState: { errors },
-  } = useForm<FifthStepValues>();
+  } = useForm<sixthStepValues>();
 
-  let discForm = watch('formOfDiscrimination');
+  let discForm = watch('typeOfDiscrimination');
   let otherForm = watch('otherForm');
   console.log(discForm, otherForm);
 
   // Triggered when submitting form
-  const onSubmit: SubmitHandler<FifthStepValues> = (data) => {};
+  const onSubmit: SubmitHandler<sixthStepValues> = (data) => {};
   return (
     <div>
       <FormHeader
-        title={fifthStepTranslation?.title}
-        subTitle={fifthStepTranslation?.description}
+        title={sixthStepTranslation?.title}
+        subTitle={sixthStepTranslation?.description}
       />
-      {fifthStepTranslation?.choices?.map((choice: any) => (
+      {sixthStepTranslation?.choices?.map((choice: any) => (
         <Checkbox
           key={choice.iD}
-          props={register('formOfDiscrimination', { required: true })}
+          props={register('typeOfDiscrimination', { required: true })}
           name={choice.name}
           id={choice.id}
           value={choice.value}
@@ -67,4 +67,4 @@ const FifthStep: React.FC<FifthStepProps> = ({ fifthStepTranslation }) => {
   );
 };
 
-export default FifthStep;
+export default SixthStep;
