@@ -2,15 +2,17 @@ import React from 'react';
 import FormHeader from '../header/header';
 
 type FirstStepProps = {
-  firstStepTranslation: { title: string; description: string };
+  firstStepTranslation: { title: string; description: any };
 };
 
 const FirstStep: React.FC<FirstStepProps> = ({ firstStepTranslation }) => {
   return (
-    <FormHeader
-      title={firstStepTranslation?.title}
-      subTitle={firstStepTranslation?.description}
-    />
+    <div>
+      <FormHeader
+        title={firstStepTranslation?.title}
+        description={firstStepTranslation?.description}
+      />
+    </div>
   );
 };
 

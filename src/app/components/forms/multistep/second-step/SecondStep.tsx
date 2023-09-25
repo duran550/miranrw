@@ -1,7 +1,6 @@
 import React from 'react';
 
 import RadioGroup from '../../radio/RadioGroup';
-import { identity } from './secondFormData';
 import FormHeader from '../header/header';
 
 type SecondStepProps = {
@@ -19,7 +18,7 @@ type SecondStepProps = {
 
 const SecondStep: React.FC<SecondStepProps> = ({ secondStepTranslation }) => {
   return (
-    <div className="h-full">
+    <div className="h-full lg:w-[28rem]">
       <FormHeader title={secondStepTranslation?.title} />
       <RadioGroup options={secondStepTranslation?.options} title="" />
     </div>

@@ -1,9 +1,5 @@
+import Link from 'next/link';
 import React from 'react';
-import LocaleSwitcher from '../header/locale-switcher/locale-switcher';
-import Image from 'next/image';
-import FacebookIcon from '../../../../public/icons/facebook.svg';
-import LinkedIcon from '../../../../public/icons/linkedin.svg';
-import YoutubeIcon from '../../../../public/icons/youtube.svg';
 
 type CopyrightProps = {
   datenshutz: string;
@@ -11,12 +7,15 @@ type CopyrightProps = {
 
 const CopyRightSection: React.FC<CopyrightProps> = ({ datenshutz }) => {
   return (
-    <div className="flex tex items-center text-white justify-between md:justify-between">
-      <div className="hidden md:block">
-        <LocaleSwitcher />
+    <div className="hidden lg:py-6 lg:flex lg:px-12 bg-primaryColor lg:border-t-2 border-white lg:justify-between lg:items-center items-center text-white justify-between">
+      <div className="flex gap-x-6">
+        <div>Logo</div>
+        <div>Logo</div>
+        <div>Logo</div>
       </div>
-      <div className="flex w-full  text-black md:text-black md:mx-0 justify-between md:justify-center items-start">
-        &copy; 2023 MIQ NRW {datenshutz}
+      <div className="flex max-w-lg items-center justify-between gap-x-8">
+        <Link href="/datenschutz">Datenschutz</Link>
+        <Link href="/impressum">Impressum</Link>
       </div>
     </div>
   );
