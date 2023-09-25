@@ -52,7 +52,7 @@ const HeroSection: React.FC<heroSectionPropsType> = ({ lang, content }) => {
           </div>
 
           <iframe
-            src="https:e.com/embed/9zWPJR2u01w?si=iUdQY2YiqrJGzSOX"
+            src="https://wwwcom/embed/9zWPJR2u01w?si=iUdQY2YiqrJGzSOX"
             title="YouTube video player"
             frameBorder="0"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
