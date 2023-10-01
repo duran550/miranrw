@@ -17,7 +17,7 @@ const CopyRightSection: React.FC<CopyrightProps> = ({
   lang,
 }) => {
   return (
-    <div className="lg:py-6 flex flex-col-reverse xl:flex-col lg:flex lg:px-12 bg-menuAndFooterColor lg:border-t-8 border-dividerColor lg:justify-between lg:items-center xl:items-center text-textColor xl:justify-between">
+    <div className="lg:py-6 flex flex-col-reverse xl:flex-row lg:flex lg:px-12 bg-menuAndFooterColor lg:border-t-8 border-dividerColor lg:justify-between lg:items-center xl:items-center text-textColor xl:justify-between">
       <div className="flex mx-4 mt-4 lg:mt-0 lg:mx-0 gap-x-6">
         <div>Logo</div>
         <div>Logo</div>
