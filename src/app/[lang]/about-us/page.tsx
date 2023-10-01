@@ -99,7 +99,7 @@ export default async function aboutUs({
         </SinglePageLayout>
       </div>
       <div className="mt-32 lg:mt-[6rem]">
-        <Footer footer={page.footer} />
+        <Footer lang={lang} footer={page.footer} />
       </div>
     </div>
   );

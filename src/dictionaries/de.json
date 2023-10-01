@@ -14,6 +14,129 @@
     "faqs": "FAQs"
   },
   "page": {
+    "datenschutz": {
+      "title": "Datenschutz",
+      "firstParagraph": "MIQ steht für  “Melde- und Informationsstelle zu Queerfeindlichkeit” und ist ein Projekt, welches Queerfeindlichkeit in NRW aufzeigen möchte. ",
+      "secondParagraph": "Du kannst auf unserer Website einen queerfeindlichen Vorfall melden. Wir sind außerdem eine Informationsstelle und zeigen Dir auf, wo Du weitere Beratung in NRW aufsuchen kannst."
+    },
+    "impressum": {
+      "title": "Impressum",
+      "firstParagraph": "MIQ steht für  “Melde- und Informationsstelle zu Queerfeindlichkeit” und ist ein Projekt, welches Queerfeindlichkeit in NRW aufzeigen möchte. ",
+      "secondParagraph": "Du kannst auf unserer Website einen queerfeindlichen Vorfall melden. Wir sind außerdem eine Informationsstelle und zeigen Dir auf, wo Du weitere Beratung in NRW aufsuchen kannst."
+    },
+    "faqs": {
+      "group1": {
+        "title": "Fragen zum Team/Zusammenarbeit: ",
+        "faqs": [
+          {
+            "id": 1,
+            "question": "Sind eure Mitarbeitenden queer?",
+            "answer": "Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text"
+          },
+          {
+            "id": 2,
+            "question": "Nach welchen Grundsätzen arbeitet ihr?",
+            "answer": "Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text"
+          },
+          {
+            "id": 3,
+            "question": "Mit wem arbeitet ihr zusammen?",
+            "answer": "Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text"
+          }
+        ]
+      },
+      "group2": {
+        "title": "Fragen zum Ablauf: ",
+        "faqs": [
+          {
+            "id": 1,
+            "question": "Was kann ich melden?",
+            "answer": "Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text"
+          },
+
+          {
+            "id": 2,
+            "question": "Auf welchen Sprachen kann ich eine Meldung tätigen? ",
+            "answer": "Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text"
+          },
+          {
+            "id": 3,
+            "question": "Kann ich anonym bleiben?",
+            "answer": "Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text"
+          },
+          {
+            "id": 4,
+            "question": "Wo melde ich eine Mehrfachdiskriminierung?",
+            "answer": "Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text"
+          },
+          {
+            "id": 5,
+            "question": "Was passiert mit meiner Meldung?",
+            "answer": "Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text"
+          },
+          {
+            "id": 6,
+            "question": "Kann ich auch persönlich vorbeikommen?",
+            "answer": "Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text"
+          },
+          {
+            "id": 7,
+            "question": "Ich möchte Anzeige erstatten, wohin muss ich mich wenden? Was bedeutet Queerfeindlichkeit?",
+            "answer": "Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text"
+          },
+          {
+            "id": 8,
+            "question": "Was bedeutet Queerfeindlichkeit?",
+            "answer": "Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text"
+          },
+          {
+            "id": 9,
+            "question": "Wie versteht ihr Gewalt?",
+            "answer": "Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text"
+          },
+          {
+            "id": 10,
+            "question": "Was bedeutet Diskriminierung?",
+            "answer": "Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text"
+          },
+          {
+            "id": 11,
+            "question": "Was bringt es, einen Vorfall zu melden?",
+            "answer": "Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text"
+          },
+          {
+            "id": 12,
+            "question": "Was nutzen die Erkenntnisse, ohne Angabe von Täter*innen?",
+            "answer": "Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text"
+          },
+          {
+            "id": 13,
+            "question": "Wo kann ich einen queerfeindlichen Vorfall melden, der nicht in NRW oder online passiert ist?",
+            "answer": "Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text"
+          }
+        ]
+      },
+      "group3": {
+        "title": "Fragen zum Projekt: ",
+        "faqs": [
+          {
+            "id": 1,
+            "question": "Wie ist die Meldestelle finanziert?",
+            "answer": "Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text"
+          },
+          {
+            "id": 2,
+            "question": "Arbeitet ihr nach wissenschaftlichen Standards?",
+            "answer": "Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text"
+          },
+          {
+            "id": 3,
+            "question": "Wo kann ich einen queerfeindlichen Vorfall melden, der nicht in NRW oder online passiert ist?",
+            "answer": "Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text"
+          }
+        ]
+      }
+    },
     "home": {
       "heroSection": {
         "title": "Melde- und Informationsstelle für Queerfeindlichkeit",
@@ -215,7 +338,11 @@
       "description": "Dies ist die About-Seite"
     },
     "footer": {
-      "datenschutz": "Datenschutz"
+      "datenschutz": "Datenschutz",
+      "impressum": "Impressum",
+      "contact": "Kontakt",
+      "spendenkonto": "Spendenkonto",
+      "socials": "Socials"
     }
   }
 }
