@@ -19,12 +19,23 @@ export default async function faqs({
         <SinglePageLayout buttonTitle={page.home?.heroSection?.buttonText}>
           <h1 className="font-bold text-3xl mb-16">FAQs</h1>
           <div className="w-full lg:max-w-2xl">
-            <Faq />
+            <Faq
+              title={page?.faqs.group1.title}
+              faqs={page?.faqs?.group1.faqs}
+            />
+            <Faq
+              title={page?.faqs.group2.title}
+              faqs={page?.faqs?.group2.faqs}
+            />
+            <Faq
+              title={page?.faqs.group3.title}
+              faqs={page?.faqs?.group3.faqs}
+            />
           </div>
         </SinglePageLayout>
       </div>
       <div className="mt-32 lg:mt-[6rem]">
-        <Footer footer={page.footer} />
+        <Footer lang={lang} footer={page.footer} />
       </div>
     </div>
   );
