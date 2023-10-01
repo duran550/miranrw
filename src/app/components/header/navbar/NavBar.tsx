@@ -39,29 +39,29 @@ const NavBar: React.FC<NavBarProps> = ({ navigation, lang }) => {
 
   return (
     <nav ref={domNode} className="w-full relative z-20">
-      <div className="w-full items-center relative  py-12 lg:py-4 justify-between px-2 mx-auto lg:items-center flex  bg-primaryColor lg:flex lg:px-8">
+      <div className="w-full xl:w-full items-center relative  py-12 xl:py-4 justify-between px-2 mx-auto xl:items-center flex  bg-menuAndFooterColor xl:flex xl:px-8">
         <div
           className={`${
             navbar
-              ? 'bg-primaryColor w-full absolute pt-2 top-0 px-0 right-0 left-0 shadow  '
+              ? 'bg-menuAndFooterColor w-full absolute pt-2 top-0 px-0 right-0 left-0 shadow  '
               : 'w-full'
-          } flex  h-full justify-center  absolute lg:relative top-0 left-0 right-0  flex-col lg:mt-0`}
+          } flex  h-full justify-center  absolute xl:relative top-0 left-0 right-0  flex-col xl:mt-0`}
         >
           <div
             className={`flex px-2 w-full z-10 items-center justify-between py-0 `}
           >
-            <Link className="pt-2.5" href="/">
-              <Image width="220" src={Logo} alt="Logo" />
+            <Link className="pt-1" href="/">
+              <Image className="md:w-96 w-72" src={Logo} alt="Logo" />
             </Link>
-            <div className="lg:hidden flex flex-col">
+            <div className="xl:hidden flex flex-col">
               <button
-                className="p-0 mr-1 text-gray-700 bg-white  outline-none focus:border-gray-400 focus:border-none"
+                className="p-0 mr-1 text-gray-700  outline-none focus:border-gray-400 focus:border-none"
                 onClick={() => setNavbar(!navbar)}
               >
                 {navbar ? (
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
-                    className="w-8 h-8"
+                    className="w-12 h-12"
                     viewBox="0 0 20 20"
                     fill="#000000"
                   >
@@ -74,7 +74,7 @@ const NavBar: React.FC<NavBarProps> = ({ navigation, lang }) => {
                 ) : (
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
-                    className="w-8 h-8"
+                    className="w-12 h-12"
                     fill="none"
                     viewBox="0 0 24 24"
                     stroke="#000000"
@@ -96,7 +96,7 @@ const NavBar: React.FC<NavBarProps> = ({ navigation, lang }) => {
           <nav
             className={`container  z-10 ${
               navbar ? 'block w-full' : 'hidden w-full'
-            } flex absolute lg:hidden right-0 ml-auto top-24 left-0 bg-primaryColor  z-20 px-8  text-white items-center justify-between `}
+            } flex absolute xl:hidden right-0 ml-auto top-24 left-0 bg-menuAndFooterColor  z-20 px-8  text-textColor items-center justify-between `}
           >
             <ul className="flex flex-col gap-y-4 pt-8 mb-8">
               <li>
@@ -120,7 +120,7 @@ const NavBar: React.FC<NavBarProps> = ({ navigation, lang }) => {
                   {navigation.aboutUs?.title}
                 </Link>
                 {toggle && (
-                  <ul className="bg-primaryColor py-3 px-6 -left-6 w-[15rem] flex flex-col shadow-lg absolute top-6">
+                  <ul className="bg-menuAndFooterColor py-3 px-6 -left-6 w-[15rem] flex flex-col shadow-xl absolute top-6">
                     <Link href="/about-us/#referalCounseling">
                       {navigation.aboutUs?.referalCounseling}
                     </Link>
@@ -146,12 +146,12 @@ const NavBar: React.FC<NavBarProps> = ({ navigation, lang }) => {
             <LocaleSwitcher />
           </nav>
         </div>
-        <div className="lg:justify-between  text-white items-center w-full max-w-lg lg:max-w-3xl hidden lg:flex">
+        <div className="xl:justify-between  text-textColor items-center w-full  xl:w-[100rem] hidden xl:flex">
           {/* Horizontal or desktop navigation */}
           <nav
-            className={`container opacity-0 lg:opacity-100 lg:block flex  items-center justify-between  `}
+            className={`container w-full opacity-0 xl:opacity-100 xl:block flex  items-center justify-between  `}
           >
-            <ul className="flex gap-x-8">
+            <ul className="flex w-full gap-x-8">
               <li>
                 <Link
                   className={`${
@@ -192,7 +192,7 @@ const NavBar: React.FC<NavBarProps> = ({ navigation, lang }) => {
                   {navigation.aboutUs?.title}
                 </Link>
                 {toggle && (
-                  <ul className="bg-primaryColor py-3 px-6 -left-6 w-[15rem] flex flex-col shadow-lg absolute top-6">
+                  <ul className=" bg-menuAndFooterColor py-3 px-6 -left-6 w-[15rem] flex flex-col shadow-xl absolute top-16">
                     <Link href="/about-us/#referalCounseling">
                       {navigation.aboutUs?.referalCounseling}
                     </Link>
@@ -212,12 +212,19 @@ const NavBar: React.FC<NavBarProps> = ({ navigation, lang }) => {
                 )}
               </li>
               <li>
-                <Link href={`/${lang}/faqs`}>{navigation?.faqs}</Link>
+                <Link
+                  className={`${
+                    pathname?.split('/')[2] === 'faqs' ? 'font-bold' : ''
+                  }`}
+                  href={`/${lang}/faqs`}
+                >
+                  {navigation?.faqs}
+                </Link>
               </li>
             </ul>
           </nav>
           {/* <LocaleSwitcher /> */}
-          <div className="opacity-0 lg:opacity-100">
+          <div className="opacity-0 xl:opacity-100">
             {/* Language switcher */}
 
             <LocaleSwitcher />

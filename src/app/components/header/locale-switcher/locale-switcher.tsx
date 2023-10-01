@@ -26,7 +26,7 @@ export default function LocaleSwitcher() {
       <div className="flex flex-col relative items-center">
         <AnimateClick>
           <div
-            className="flex justify-between space-x-1 px-2 py-1 rounded-md bg-white "
+            className="flex justify-between space-x-1 px-2 py-1 rounded-full bg-white "
             onClick={() => setToggle(!toggle)}
           >
             <div>

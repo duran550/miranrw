@@ -14,6 +14,128 @@
     "faqs": "FAQs"
   },
   "page": {
+    "datenschutz": {
+      "title": "Data protection",
+      "firstParagraph": "MIQ stands for 'Reporting and Information Center for Queerphobia' and is a project that aims to highlight queerphobia in North Rhine-Westphalia (NRW).",
+      "secondParagraph": "You can report a queerphobic incident on our website. We also serve as an information center and can guide you to additional counseling services in NRW."
+    },
+    "impressum": {
+      "title": "Legal notice",
+      "firstParagraph": "MIQ stands for 'Reporting and Information Center for Queerphobia' and is a project that aims to highlight queerphobia in North Rhine-Westphalia (NRW).",
+      "secondParagraph": "You can report a queerphobic incident on our website. We also serve as an information center and can guide you to additional counseling services in NRW."
+    },
+    "faqs": {
+      "group1": {
+        "title": "Questions about the Team/Cooperation: ",
+        "faqs": [
+          {
+            "id": 1,
+            "question": "Are your employees queer ?",
+            "answer": "Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text"
+          },
+          {
+            "id": 2,
+            "question": "What principles do you work by ?",
+            "answer": "Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text"
+          },
+          {
+            "id": 3,
+            "question": "Who do you work with ?",
+            "answer": "Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text"
+          }
+        ]
+      },
+      "group2": {
+        "title": "Questions about the Process: ",
+        "faqs": [
+          {
+            "id": 1,
+            "question": "What can I report ?",
+            "answer": "Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text"
+          },
+          {
+            "id": 2,
+            "question": "In which languages can I make a report ?",
+            "answer": "Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text"
+          },
+          {
+            "id": 3,
+            "question": "Can I remain anonymous ?",
+            "answer": "Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text"
+          },
+          {
+            "id": 4,
+            "question": "Where do I report multiple discrimination ?",
+            "answer": "Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text"
+          },
+          {
+            "id": 5,
+            "question": "What happens to my report ?",
+            "answer": "Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text"
+          },
+          {
+            "id": 6,
+            "question": "Can I also come in person ?",
+            "answer": "Text text text Text text text Text text text Text text t  ext Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text"
+          },
+          {
+            "id": 7,
+            "question": "I want to file a complaint. Where should I go ? What does queerphobia mean ?",
+            "answer": "Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text"
+          },
+          {
+            "id": 8,
+            "question": "What does queerphobia mean ?",
+            "answer": "Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text"
+          },
+          {
+            "id": 9,
+            "question": "How do you understand violence ?",
+            "answer": "Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text"
+          },
+          {
+            "id": 10,
+            "question": "What does discrimination mean ?",
+            "answer": "Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text"
+          },
+          {
+            "id": 11,
+            "question": "What does it achieve to report an incident ?",
+            "answer": "Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text"
+          },
+          {
+            "id": 12,
+            "question": "What are the benefits of providing information without identifying the perpetrators ?",
+            "answer": "Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text"
+          },
+          {
+            "id": 13,
+            "question": "Where can I report a queerphobic incident that didn't happen in NRW or online ?",
+            "answer": "Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text"
+          }
+        ]
+      },
+      "group3": {
+        "title": "Questions about the Project: ",
+        "faqs": [
+          {
+            "id": 1,
+            "question": "How is the reporting center funded ?",
+            "answer": "Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text"
+          },
+          {
+            "id": 2,
+            "question": "Do you work according to scientific standards ?",
+            "answer": "Text text text Text text text Text text text Text text text Text text text Text text text Text t  ext text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text"
+          },
+          {
+            "id": 3,
+            "question": "Where can I report a queerphobic incident that didn't happen in NRW or online ?",
+            "answer": "Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text"
+          }
+        ]
+      }
+    },
     "home": {
       "heroSection": {
         "title": "Reporting and Information Center for Queer Hostility",
@@ -40,7 +162,7 @@
           }
         },
         "secondStep": {
-          "title": "Who is affected?",
+          "title": "Who is affected ?",
           "options": [
             {
               "id": "age1",
@@ -70,14 +192,14 @@
         },
         "thirdStep": {
           "title": "Incident Description",
-          "description": "What exactly happened?"
+          "description": "What exactly happened ?"
         },
         "fourthStep": {
-          "title": "When did the incident occur?",
+          "title": "When did the incident occur ?",
           "description": "Please select a date. If it occurred over an extended period, you can select that too."
         },
         "fifthStep": {
-          "title": "What did you believe the discrimination was based on?",
+          "title": "What did you believe the discrimination was based on ?",
           "description": "Multiple selections possible",
           "choices": [
             {
@@ -125,7 +247,7 @@
           ]
         },
         "sixthStep": {
-          "title": "What form of queerphobia do you think this is ?",
+          "title": "What form of queerphobia do you think this is  ?",
           "description": "Multiple selections possible",
           "choices": [
             {
@@ -214,7 +336,11 @@
       "description": "This is the About page."
     },
     "footer": {
-      "datenschutz": "Privacy Policy"
+      "datenschutz": "Privacy Policy",
+      "impressum": "Legal notice",
+      "contact": "Contact",
+      "spendenkonto": "Donation account",
+      "socials": "Socials"
     }
   }
 }

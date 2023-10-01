@@ -1,26 +1,19 @@
 import React from 'react';
 import FaqItem from './FaqItem';
 
+type dataType = { id: number; question: string; answer: string };
+
 type FaqProps = {
-  content?: {
-    first: 'Frage';
-    second: 'Frage';
-    third: 'Frage';
-    fourth: 'Frage';
-    fifth: 'Frage';
-  };
+  faqs?: dataType[];
+  title: string;
 };
-const Faq: React.FC<FaqProps> = ({ content }) => {
+const Faq: React.FC<FaqProps> = ({ title, faqs }) => {
   return (
-    <div>
-      <FaqItem title="Frage" content="Lorem ipsum" />
-      <FaqItem title="Frage" content="Lorem ipsum" />
-      <FaqItem title="Frage" content="Lorem ipsum" />
-      <FaqItem title="Frage" content="Lorem ipsum" />
-      <FaqItem title="Frage" content="Lorem ipsum" />
-      <FaqItem title="Frage" content="Lorem ipsum" />
-      <FaqItem title="Frage" content="Lorem ipsum" />
-      <FaqItem title="Frage" content="Lorem ipsum" />
+    <div className="my-12">
+      <h1 className="font-bold text-xl mb-2">{title}</h1>
+      {faqs?.map((faq: dataType) => (
+        <FaqItem key={faq?.id} title={faq?.question} content={faq?.answer} />
+      ))}
     </div>
   );
 };
