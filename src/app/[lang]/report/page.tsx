@@ -18,7 +18,7 @@ export default async function report({
         <MultiStepForm formTranslation={page.melden} />
       </div>
       <div className="mt-0">
-        <Footer footer={page.footer} />
+        <Footer lang={lang} footer={page.footer} />
       </div>
     </div>
   );
