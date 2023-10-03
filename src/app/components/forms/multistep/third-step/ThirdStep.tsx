@@ -51,7 +51,7 @@ const ThirdStep: React.FC<ThirdStepProps> = ({ thirdStepTranslation }) => {
         />
       </div>
 
-      <div className="absolute lg:-top-16 lg:-right-[40rem]">
+      <div className="mt-16 lg:mt-0 lg:absolute lg:-top-16 lg:-right-[40rem]">
         <FormHeader title={'Mögliche relevante Informationen'}>
           <ul className="list-disc pl-8">
             {thirdStepTranslation?.hints.list?.map((element: string) => (

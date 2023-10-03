@@ -40,86 +40,90 @@ const NinethStep: React.FC<NinethStepProps> = ({ ninethStepTranslation }) => {
 
   return (
     <form className="lg:w-[35rem]">
-      <h1 className="font-bold text-3xl mb-4">
-        {ninethStepTranslation?.mainTitle}
-      </h1>
-      <div className="mt-8">
-        <FormHeader
-          title={
-            reportingPerson !== 'myself' && reportingPerson !== 'organization'
-              ? ninethStepTranslation?.firstBlock?.titleOnBehalf
-              : ninethStepTranslation?.firstBlock?.title
-          }
-        />
-        <div className="-mt-8">
-          {ninethStepTranslation?.firstBlock?.data?.map((element: any) => (
-            <Checkbox
-              key={element?.iD}
-              id={element?.id}
-              name={element?.name}
-              props={register('gender')}
-              value={element?.value}
-              label={element?.label}
+      {reportingPerson !== 'organization' && (
+        <>
+          <h1 className="font-bold text-3xl mb-4">
+            {ninethStepTranslation?.mainTitle}
+          </h1>
+          <div className="mt-8">
+            <FormHeader
+              title={
+                reportingPerson !== 'myself'
+                  ? ninethStepTranslation?.firstBlock?.titleOnBehalf
+                  : ninethStepTranslation?.firstBlock?.title
+              }
             />
-          ))}
-          <div className="ml-4">
-            {gender && gender?.includes('Selbstbezeichung:') && (
-              <InputField name="" props={register('genderFreeField')} />
-            )}
-          </div>
-        </div>
-      </div>
-
-      <div className="mt-8">
-        <FormHeader
-          title={
-            reportingPerson !== 'myself' && reportingPerson !== 'organization'
-              ? ninethStepTranslation?.secondBlock?.titleOnBehalf
-              : ninethStepTranslation?.secondBlock?.title
-          }
-        />
-        <div className="-mt-8">
-          {ninethStepTranslation?.secondBlock?.data?.map((element: any) => (
-            <Checkbox
-              key={element?.iD}
-              id={element?.id}
-              name={element?.name}
-              props={register('sexualOrientation')}
-              value={element?.value}
-              label={element?.label}
-            />
-          ))}
-
-          <div className="ml-4">
-            {sexualOrientation &&
-              sexualOrientation?.includes('Selbstbezeichung:') && (
-                <InputField
-                  name=""
-                  props={register('sexualOrientationFreeField')}
+            <div className="-mt-8">
+              {ninethStepTranslation?.firstBlock?.data?.map((element: any) => (
+                <Checkbox
+                  key={element?.iD}
+                  id={element?.id}
+                  name={element?.name}
+                  props={register('gender')}
+                  value={element?.value}
+                  label={element?.label}
                 />
-              )}
+              ))}
+              <div className="ml-4">
+                {gender && gender?.includes('Selbstbezeichung:') && (
+                  <InputField name="" props={register('genderFreeField')} />
+                )}
+              </div>
+            </div>
           </div>
-        </div>
-      </div>
 
-      <div className="mt-8">
-        <FormHeader
-          title={
-            reportingPerson !== 'myself' && reportingPerson !== 'organization'
-              ? ninethStepTranslation?.thirdBlock?.titleOnBehalf
-              : ninethStepTranslation?.thirdBlock?.title
-          }
-        />
-        <div className="-mt-8">
-          {
-            <RadioGroup
-              options={ninethStepTranslation?.thirdBlock?.data}
-              props={register('age')}
-              title=""
+          <div className="mt-8">
+            <FormHeader
+              title={
+                reportingPerson !== 'myself'
+                  ? ninethStepTranslation?.secondBlock?.titleOnBehalf
+                  : ninethStepTranslation?.secondBlock?.title
+              }
             />
-          }
-        </div>
-      </div>
+            <div className="-mt-8">
+              {ninethStepTranslation?.secondBlock?.data?.map((element: any) => (
+                <Checkbox
+                  key={element?.iD}
+                  id={element?.id}
+                  name={element?.name}
+                  props={register('sexualOrientation')}
+                  value={element?.value}
+                  label={element?.label}
+                />
+              ))}
+
+              <div className="ml-4">
+                {sexualOrientation &&
+                  sexualOrientation?.includes('Selbstbezeichung:') && (
+                    <InputField
+                      name=""
+                      props={register('sexualOrientationFreeField')}
+                    />
+                  )}
+              </div>
+            </div>
+          </div>
+
+          <div className="mt-8">
+            <FormHeader
+              title={
+                reportingPerson !== 'myself'
+                  ? ninethStepTranslation?.thirdBlock?.titleOnBehalf
+                  : ninethStepTranslation?.thirdBlock?.title
+              }
+            />
+            <div className="-mt-8">
+              {
+                <RadioGroup
+                  options={ninethStepTranslation?.thirdBlock?.data}
+                  props={register('age')}
+                  title=""
+                />
+              }
+            </div>
+          </div>
+        </>
+      )}
 
       <div className="mt-8">
         <FormHeader title={ninethStepTranslation?.fourthBlock?.title} />
