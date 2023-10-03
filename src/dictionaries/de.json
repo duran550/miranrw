@@ -217,9 +217,99 @@
             ]
           }
         },
+        "thirdStepOrganization": {
+          "title": "Was für eine Organisation/Institution ist betroffen?",
+          "subTitle": "Mehrfachnennung möglich",
+          "data": [
+            {
+              "iD": 1,
+              "name": "organizationType",
+              "value": "Nichtregierungsorganisation (NGO)",
+              "id": "Nichtregierungsorganisation",
+              "label": "Nichtregierungsorganisation (NGO)"
+            },
+
+            {
+              "iD": 2,
+              "name": "organizationType",
+              "value": "Selbstorganisation",
+              "id": "Selbstorganisation",
+              "label": "Selbstorganisation"
+            },
+            {
+              "iD": 3,
+              "name": "organizationType",
+              "value": "Religiöse Einrichtung",
+              "id": "Religiöse",
+              "label": "Religiöse Einrichtung"
+            },
+            {
+              "iD": 4,
+              "name": "organizationType",
+              "value": "Soziale Einrichtung",
+              "id": "Soziale",
+              "label": "Soziale Einrichtung"
+            },
+            {
+              "iD": 5,
+              "name": "organizationType",
+              "value": "Kulturelle Einrichtung",
+              "id": "Kulturelle",
+              "label": "Kulturelle Einrichtung"
+            },
+            {
+              "iD": 6,
+              "name": "organizationType",
+              "value": "Verein",
+              "id": "Kulturelle",
+              "label": "Verein"
+            },
+            {
+              "iD": 7,
+              "name": "organizationType",
+              "value": "Anderes, und zwar",
+              "id": "anderesOrg",
+              "label": "Anderes, und zwar"
+            }
+          ]
+        },
         "fourthStep": {
           "title": "Wann fand der Vorfall statt?",
           "description": "Bitte wähle ein Datum aus. Falls es sich um einen längeren Zeitraum handelt, kannst du auch diesen auch auswählen"
+        },
+        "fourthStepOrganization": {
+          "title": "Wie viele Personen sind in der Organisation/Institution tätig?",
+          "subTitle": "Haupt- oder ehrenamtlich, oder in freier Mitarbeit",
+          "data": [
+            {
+              "iD": 1,
+              "name": "numberOfEmployees",
+              "value": "unter 10",
+              "id": "gender",
+              "label": "unter 10"
+            },
+            {
+              "iD": 2,
+              "name": "numberOfEmployees",
+              "value": "10-49",
+              "id": "sexual",
+              "label": "10-49"
+            },
+            {
+              "iD": 3,
+              "name": "numberOfEmployees",
+              "value": "50-250",
+              "id": "romantic",
+              "label": "50-250"
+            },
+            {
+              "iD": 4,
+              "name": "numberOfEmployees",
+              "value": "Über 250",
+              "id": "genderExpression",
+              "label": "Über 250"
+            }
+          ]
         },
         "fifthStep": {
           "title": "Wo fand der Vorfall statt?*",
