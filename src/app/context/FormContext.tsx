@@ -1,11 +1,20 @@
 'use client';
 
 import React, { Dispatch, createContext, useReducer } from 'react';
-import { NEXT_STEP, PREV_STEP, SUBMIT_FORM } from './actions';
+import {
+  FORM_ERRORS,
+  NEXT_STEP,
+  PREV_STEP,
+  REPORTING_PERSON,
+  SUBMIT_FORM,
+} from './actions';
+import { getFormStep, setFormStep } from '@/cookies/cookies';
 
 type FormType = {
   step: number;
   formData: Array<any>;
+  reportingPerson: 'myself' | 'andere' | 'organization' | 'onBehalf';
+  formErrors: boolean;
 };
 
 type ActionType = {
@@ -14,23 +23,39 @@ type ActionType = {
 };
 
 const initialState: FormType = {
-  step: 1,
+  step: getFormStep(),
   formData: [],
+  reportingPerson: 'myself',
+  formErrors: true,
 };
 
 const reducer = (initialState: FormType, action: ActionType) => {
   switch (action.type) {
     case NEXT_STEP:
+      setFormStep(initialState?.step + 1);
       return {
         ...initialState,
-        step: initialState.step + 1,
+        step: getFormStep(),
         formData: [initialState.formData, ...action.payload],
       };
 
     case PREV_STEP:
+      setFormStep(initialState?.step - 1);
       return {
         ...initialState,
-        step: initialState.step - 1,
+        step: getFormStep(),
+      };
+
+    case FORM_ERRORS:
+      return {
+        ...initialState,
+        formErrors: action?.payload,
+      };
+
+    case REPORTING_PERSON:
+      return {
+        ...initialState,
+        reportingPerson: action?.payload,
       };
 
     case SUBMIT_FORM:

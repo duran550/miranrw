@@ -9,6 +9,25 @@ input:checked + div svg {
   @apply block;
 }
 
+.MuiButtonBase-root
+  .MuiPickersDay-root
+  .Mui-selected
+  .MuiPickersDay-dayWithMargin
+  .css-qa7bje-MuiButtonBase-root-MuiPickersDay-root {
+  background-color: #463980 !important;
+  color: #463980 !important;
+}
+
 .css-qa7bje-MuiButtonBase-root-MuiPickersDay-root.Mui-selected {
+  background-color: #463980 !important;
+}
+
+.MuiButtonBase-root
+  .MuiPickersDay-root
+  .Mui-selected
+  .MuiPickersDay-dayWithMargin
+  .MuiPickersDay-today
+  .css-1jsy6pn-MuiButtonBase-root-MuiPickersDay-root {
+  color: white !important;
   background-color: #463980 !important;
 }

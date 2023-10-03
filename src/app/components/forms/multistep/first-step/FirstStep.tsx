@@ -1,17 +1,27 @@
 import React from 'react';
 import FormHeader from '../header/header';
+import { Button } from '@/app/components/button/Button';
+import { useFormContext } from '@/app/hooks/useFormContext';
+import { NEXT_STEP } from '@/app/context/actions';
 
 type FirstStepProps = {
-  firstStepTranslation: { title: string; description: any };
+  firstStepTranslation: { title: string; description: any; buttonText: string };
 };
 
 const FirstStep: React.FC<FirstStepProps> = ({ firstStepTranslation }) => {
+  const { dispatch } = useFormContext();
   return (
     <div>
       <FormHeader
         title={firstStepTranslation?.title}
         description={firstStepTranslation?.description}
       />
+      <Button
+        onClick={() => dispatch({ type: NEXT_STEP, payload: '' })}
+        className="md:max-w-xs"
+      >
+        {firstStepTranslation?.buttonText}
+      </Button>
     </div>
   );
 };

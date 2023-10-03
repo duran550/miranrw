@@ -16,7 +16,10 @@ export default async function faqs({
     <div className="">
       <Header lang={lang} />
       <div className="md:mt-16 h-full  py-16 px-4 sm:px-4 lg:px-12  ">
-        <SinglePageLayout buttonTitle={page.home?.heroSection?.buttonText}>
+        <SinglePageLayout
+          lang={lang}
+          buttonTitle={page.home?.heroSection?.buttonText}
+        >
           <h1 className="font-bold text-3xl mb-16">FAQs</h1>
           <div className="w-full lg:max-w-2xl">
             <Faq
