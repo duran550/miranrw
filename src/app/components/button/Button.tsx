@@ -22,10 +22,10 @@ const buttonVariants = cva(
       variant: {
         default: 'bg-primaryColor w-full text-white hover:opacity-90',
         primary: 'bg-primaryColor hover:opacity-90',
+        disabled: 'bg-primaryColor opacity-50',
         danger: 'bg-red-500 w-full text-white hover:bg-red-600',
         outline:
           'w-full text-white border border-slate-300 hover:bg-primaryColor hover:text-white hover:border-primaryColor',
-        disabled: 'bg-green-300 w-full text-white',
       },
     },
 

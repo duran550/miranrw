@@ -15,11 +15,14 @@ const InputField: React.FC<InputFieldProps> = ({
 }) => {
   return (
     <>
-      <label className="font-bold block mb-1 mt-6 text-primaryColor" htmlFor={name}>
+      <label
+        className="font-bold block mb-1 mt-6 text-primaryColor"
+        htmlFor={name}
+      >
         {title}
       </label>
       <input
-        className="appearance-none border rounded-md w-full py-3 px-3 leading-tight border-gray-300  focus:outline-none focus:border-primary focus:bg-white text-gray-700 pr-16 font-mono"
+        className="appearance-none border rounded-md w-full py-3 px-3 leading-tight border-gray-300  focus:outline-none focus:border-primaryColor focus:bg-white text-gray-700 pr-16"
         id={name}
         type="text"
         placeholder={placeholder}
