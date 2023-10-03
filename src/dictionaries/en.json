@@ -216,9 +216,98 @@
             ]
           }
         },
+        "thirdStepOrganization": {
+          "title": "What type of organization/institution is affected?",
+          "subTitle": "Multiple selections possible",
+          "data": [
+            {
+              "iD": 1,
+              "name": "organizationType",
+              "value": "Nichtregierungsorganisation (NGO)",
+              "id": "Nichtregierungsorganisation",
+              "label": "Non-Governmental Organization (NGO)"
+            },
+            {
+              "iD": 2,
+              "name": "organizationType",
+              "value": "Selbstorganisation",
+              "id": "Selbstorganisation",
+              "label": "Self-Organization"
+            },
+            {
+              "iD": 3,
+              "name": "organizationType",
+              "value": "Religiöse Einrichtung",
+              "id": "Religiöse",
+              "label": "Religious Institution"
+            },
+            {
+              "iD": 4,
+              "name": "organizationType",
+              "value": "Soziale Einrichtung",
+              "id": "Soziale",
+              "label": "Social Institution"
+            },
+            {
+              "iD": 5,
+              "name": "organizationType",
+              "value": "Kulturelle Einrichtung",
+              "id": "Kulturelle",
+              "label": "Cultural Institution"
+            },
+            {
+              "iD": 6,
+              "name": "organizationType",
+              "value": "Verein",
+              "id": "association",
+              "label": "Association"
+            },
+            {
+              "iD": 7,
+              "name": "organizationType",
+              "value": "Anderes, und zwar",
+              "id": "anderesOrg",
+              "label": "Other"
+            }
+          ]
+        },
         "fourthStep": {
           "title": "When did the incident occur ?",
           "description": "Please select a date. If it occurred over an extended period, you can select that too."
+        },
+        "fourthStepOrganization": {
+          "title": "How many individuals are active in the organization/institution?",
+          "subTitle": "Main or volunteer, or as freelance contributors",
+          "data": [
+            {
+              "iD": 1,
+              "name": "numberOfEmployees",
+              "value": "unter 10",
+              "id": "gender",
+              "label": "under 10"
+            },
+            {
+              "iD": 2,
+              "name": "numberOfEmployees",
+              "value": "10-49",
+              "id": "sexual",
+              "label": "10-49"
+            },
+            {
+              "iD": 3,
+              "name": "numberOfEmployees",
+              "value": "50-250",
+              "id": "romantic",
+              "label": "50-250"
+            },
+            {
+              "iD": 4,
+              "name": "numberOfEmployees",
+              "value": "Über 250",
+              "id": "genderExpression",
+              "label": "Over 250"
+            }
+          ]
         },
         "fifthStep": {
           "title": "Where did the incident occur ?*",
