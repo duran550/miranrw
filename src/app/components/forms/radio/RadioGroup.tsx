@@ -3,9 +3,10 @@ import React from 'react';
 type RadioGroupProps = {
   options: Array<any>;
   title: string;
+  props: any;
 };
 
-const RadioGroup: React.FC<RadioGroupProps> = ({ options, title }) => {
+const RadioGroup: React.FC<RadioGroupProps> = ({ options, title, props }) => {
   return (
     <>
       <div className="mb-3 font-bold">{title}</div>
@@ -13,6 +14,7 @@ const RadioGroup: React.FC<RadioGroupProps> = ({ options, title }) => {
         {options?.map((radioElement) => (
           <div key={radioElement.id} className="flex items-center pl-4 ">
             <input
+              {...props}
               id={`${radioElement?.id}`}
               type="radio"
               value={radioElement.value}

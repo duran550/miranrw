@@ -15,7 +15,10 @@ export default async function aboutQueer({
     <div className="">
       <Header lang={lang} />
       <div className="md:mt-16 h-full  py-16 px-4 sm:px-4 lg:px-12  ">
-        <SinglePageLayout buttonTitle={page.home?.heroSection?.buttonText}>
+        <SinglePageLayout
+          lang={lang}
+          buttonTitle={page.home?.heroSection?.buttonText}
+        >
           <div className="flex lg:gap-x-32 gap-y-8  flex-col lg:flex-row">
             <div className="">
               <h1 className="font-bold text-3xl mb-16">
