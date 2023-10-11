@@ -15,31 +15,33 @@ type heroSectionPropsType = {
 const HeroSection: React.FC<heroSectionPropsType> = ({ lang, content }) => {
   return (
     <>
-      <div className="px-6 lg:px-12 my-12    ">
+      <div className="px-6 lg:px-12 md:my-12 max-sm:my-5">
         {/* text-content */}
-        <div className="flex flex-col lg:flex-row lg:gap-x-10 justify-between w-full lg:items-center pb:8 lg:pb-0">
-          <div className=" lg:max-w-2xl">
-            <h2 className="font-bold text-3xl  lg:text-4xl">MIQ</h2>
-            <div className="pt-4">
-              <h1 className="font-bold text-xl lg:text-4xl">
+        <div className="flex flex-col max-sm:gap-y-5 gap-y-16 lg:flex-row justify-between w-full lg:items-center lg:pb-0">
+          <div className="flex flex-col gap-y-5 sm:gap-y-10 lg:max-w-2xl">
+            <div className="">
+              <h2 className="font-bold text-3xl  sm:text-4xl m-0">MIQ</h2>
+              <h1 className="font-bold text-xl sm:text-3xl m-0">
                 {content.title}{' '}
               </h1>
-              <p className="mt-2 w-fit lg:mt-8 max-w-sm lg:max-w-xl">
+            </div>
+            <div className="grid gap-y-2 text-sm sm:text-xl">
+              <p className=" w-fit max-w-sm md:max-w-xl m-0">
                 {content?.description?.firstParagraph}
               </p>
-              <p className="mt-2 pt-1 w-fit max-w-sm lg:max-w-xl">
+              <p className="w-fit max-w-sm md:max-w-xl m-0">
                 {content?.description?.secondParagraph}
               </p>
             </div>
             <Button
               href={`/${lang}/report`}
-              className=" w-full sm:w-fit lg:w-[20rem] bg-primaryColor text-white font-bold rounded-full text-lg"
+              className="sm:w-2/5 lg:w-[20rem] bg-primaryColor text-white font-bold rounded-full text-sm sm:text-lg m-0"
             >
               {content.buttonText}
             </Button>
           </div>
 
-          <div className="lg:hidden">
+          <div className="hidden">
             <h1 className="font-bold underline text-xl mt-8 mb-4">
               Über Queerfeindlichkeit
             </h1>
@@ -57,7 +59,7 @@ const HeroSection: React.FC<heroSectionPropsType> = ({ lang, content }) => {
             frameBorder="0"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
             allowFullScreen
-            className="w-full lg:max-w-xl lg:mr-24  lg:h-[22rem] mt-8"
+            className="w-full md:w-3/5 md:h-[18rem] lg:max-w-xl lg:mr-24  lg:h-[22rem]"
           ></iframe>
         </div>
       </div>

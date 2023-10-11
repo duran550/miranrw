@@ -24,13 +24,13 @@ const CopyRightSection: React.FC<CopyrightProps> = ({
 }) => {
   return (
     <div className="lg:py-6 lg:space-x-16 flex flex-col-reverse xl:flex-row lg:flex lg:px-12 bg-menuAndFooterColor lg:border-t-8 border-dividerColor lg:justify-between lg:items-center xl:items-center text-textColor xl:justify-between">
-      <div className="flex w-fit flex-col space-y-8 py-4 lg:my-0 lg:flex-row  mx-4 mt-4 lg:mt-0 lg:mx-0 gap-x-8">
-        <Image className="xl:w-48 w-48" src={QNWLogo} alt="QNW Logo" />
-        <Image className="xl:w-48 w-48" src={NGVTLogo} alt="NGVT Logo" />
-        <Image className="xl:w-48 w-48" src={RubikonLogo} alt="Rubikon Logo" />
-        <Image className="xl:w-48 w-48" src={LSVDLogo} alt="LSVD Logo" />
+      <div className="flex w-fit flex-col space-y-4 pb-4 lg:my-0 sm:flex-row  mx-4 mt-4 lg:mt-0 gap-x-8">
+        <Image className="sm:w-16 lg:40 w-32 m-0" src={QNWLogo} alt="QNW Logo" />
+        <Image className="sm:w-16 lg:40 w-32 m-0" src={NGVTLogo} alt="NGVT Logo" />
+        <Image className="sm:w-16 lg:40 w-32 m-0" src={RubikonLogo} alt="Rubikon Logo" />
+        <Image className="sm:w-16 lg:40 w-32 m-0" src={LSVDLogo} alt="LSVD Logo" />
         <Image
-          className="xl:w-96  w-[20rem]"
+          className="sm:w-45  w-[20rem]"
           src={MinisteriumLogo}
           alt="Ministerium Logo"
         />
