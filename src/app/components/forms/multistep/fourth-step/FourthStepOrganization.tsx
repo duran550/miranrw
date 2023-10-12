@@ -1,15 +1,19 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { FourthStepOrganizationProps } from './fourthStepOrganization';
 import FormHeader from '../header/header';
 import RadioGroup from '../../radio/RadioGroup';
 import { FourthStepOrganizationFormValues } from './fourthStepOrganization';
-import { useForm } from 'react-hook-form';
+import { SubmitHandler, useForm } from 'react-hook-form';
 import { useFormContext } from '@/app/hooks/useFormContext';
-import { FORM_ERRORS } from '@/app/context/actions';
+import { FORM_ERRORS, NEXT_STEP } from '@/app/context/actions';
+import { getFormCookies, getFormStep, setFormCookies } from '@/cookies/cookies';
+import { THIRD_FORM } from '@/cookies/cookies.d';
 
 const FourthStepOrganization: React.FC<FourthStepOrganizationProps> = ({
   fourthStepOrganizationTranslation,
 }) => {
+  const [question] = useState<string>(fourthStepOrganizationTranslation?.title);
+
   const { dispatch } = useFormContext();
 
   const {
@@ -20,19 +24,44 @@ const FourthStepOrganization: React.FC<FourthStepOrganizationProps> = ({
     formState: { errors },
   } = useForm<FourthStepOrganizationFormValues>();
 
-  let numberOfEmployes = watch('numberOfEmployees');
+  let numberOfEmployees = watch('numberOfEmployees');
+  // Getting form cookies
+  let formValues: {
+    numberOfEmployees: string;
+    question: string;
+  } = getFormCookies(THIRD_FORM);
 
   useEffect(() => {
     dispatch({ type: FORM_ERRORS, payload: true });
 
-    if (numberOfEmployes) {
+    if (numberOfEmployees) {
+      dispatch({ type: FORM_ERRORS, payload: false });
+    }
+
+    if (formValues) {
+      numberOfEmployees !== formValues?.numberOfEmployees &&
+        setValue('numberOfEmployees', formValues?.numberOfEmployees);
+
       dispatch({ type: FORM_ERRORS, payload: false });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [numberOfEmployes]);
+  }, [formValues?.numberOfEmployees]);
+
+  // Triggered when submitting form
+  const onSubmit: SubmitHandler<FourthStepOrganizationFormValues> = (data) => {
+    let step = getFormStep();
+    let dataWithQuestion = { question, step, ...data };
+    setFormCookies(dataWithQuestion, THIRD_FORM);
+
+    dispatch({ type: NEXT_STEP, payload: 'DATA 1' });
+  };
 
   return (
-    <div className="flex flex-col relative">
+    <form
+      onSubmit={handleSubmit(onSubmit)}
+      id="thirdForm"
+      className="flex flex-col relative"
+    >
       <div className="lg:w-[35rem]">
         <FormHeader
           title={fourthStepOrganizationTranslation?.title}
@@ -47,7 +76,7 @@ const FourthStepOrganization: React.FC<FourthStepOrganizationProps> = ({
         </div>
       </div>
       <div className="mt-4 lg:absolute lg:-right-[40rem]"></div>
-    </div>
+    </form>
   );
 };
 

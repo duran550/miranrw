@@ -1,10 +1,12 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import Checkbox from '../../checkbox/Checkbox';
 import FormHeader from '../header/header';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { useFormContext } from '@/app/hooks/useFormContext';
 import { FORM_ERRORS, NEXT_STEP } from '@/app/context/actions';
 import InputField from '../../text-field/InputField';
+import { getFormCookies, getFormStep, setFormCookies } from '@/cookies/cookies';
+import { FIFTH_FORM } from '@/cookies/cookies.d';
 
 type SixthStepProps = {
   sixthStepTranslation: {
@@ -21,6 +23,7 @@ type SixthStepValues = {
 
 const SixthStep: React.FC<SixthStepProps> = ({ sixthStepTranslation }) => {
   const { dispatch } = useFormContext();
+  const [question] = useState<string>(sixthStepTranslation?.title);
 
   const {
     register,
@@ -30,23 +33,51 @@ const SixthStep: React.FC<SixthStepProps> = ({ sixthStepTranslation }) => {
     formState: { errors },
   } = useForm<SixthStepValues>();
 
-  let discForm = watch('formOfDiscrimination');
+  let formOfDiscrimination = watch('formOfDiscrimination');
   let otherForm = watch('otherForm');
 
+  // Getting form cookies
+
   useEffect(() => {
+    let formValues: {
+      formOfDiscrimination: string[];
+      otherForm: string;
+      question: string;
+    } = getFormCookies(FIFTH_FORM);
+
     dispatch({ type: FORM_ERRORS, payload: true });
 
-    if (discForm?.length !== 0) {
+    if (formOfDiscrimination?.length !== 0) {
       dispatch({ type: FORM_ERRORS, payload: false });
     } else {
       dispatch({ type: FORM_ERRORS, payload: true });
     }
-  }, [discForm]);
+
+    if (formValues) {
+      dispatch({ type: FORM_ERRORS, payload: false });
+      formOfDiscrimination !== formValues?.formOfDiscrimination &&
+        setValue('formOfDiscrimination', formValues?.formOfDiscrimination);
+      otherForm !== formValues?.otherForm &&
+        setValue('otherForm', formValues?.otherForm);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   // Triggered when submitting form
-  const onSubmit: SubmitHandler<SixthStepValues> = (data) => {};
+  const onSubmit: SubmitHandler<SixthStepValues> = (data) => {
+    let step = getFormStep();
+    let dataWithQuestion = { question, step, ...data };
+    setFormCookies(dataWithQuestion, FIFTH_FORM);
+
+    dispatch({ type: NEXT_STEP, payload: 'DATA 1' });
+  };
+
   return (
-    <div className="lg:w-[35rem]">
+    <form
+      id="fifthForm"
+      onSubmit={handleSubmit(onSubmit)}
+      className="lg:w-[35rem]"
+    >
       <FormHeader
         title={sixthStepTranslation?.title}
         subTitle={sixthStepTranslation?.description}
@@ -61,8 +92,10 @@ const SixthStep: React.FC<SixthStepProps> = ({ sixthStepTranslation }) => {
           label={choice.label}
         />
       ))}
-      {(discForm && discForm?.includes('Anderes, und zwar')) ||
-      (discForm && discForm?.includes('Other, specify')) ? (
+      {(formOfDiscrimination &&
+        formOfDiscrimination?.includes('Anderes, und zwar')) ||
+      (formOfDiscrimination &&
+        formOfDiscrimination?.includes('Other, specify')) ? (
         <InputField
           name=""
           placeholder=""
@@ -72,7 +105,7 @@ const SixthStep: React.FC<SixthStepProps> = ({ sixthStepTranslation }) => {
       ) : (
         ''
       )}
-    </div>
+    </form>
   );
 };
 

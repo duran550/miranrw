@@ -16,12 +16,11 @@ const SinglePageLayout: React.FC<SinglePageLayoutProps> = ({
     <div className="relative w-full ">
       <div className="pb-24 lg:pb-0">{children}</div>
 
-      <Button
-        href={`/${lang}/report`}
-        className="absolute rounded-full max-w-md right-0 bottom-0"
-      >
-        {buttonTitle && buttonTitle}
-      </Button>
+      <div className="absolute w-[20rem] right-0 -top-24 mb-auto">
+        <Button className="rounded-full w-full" href={`/${lang}/report`}>
+          {buttonTitle && buttonTitle}
+        </Button>
+      </div>
     </div>
   );
 };

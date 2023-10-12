@@ -1,13 +1,20 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import RadioGroup from '../../radio/RadioGroup';
 import FormHeader from '../header/header';
 import { SecondFormValues, SecondStepProps } from './secondStep';
-import { useForm } from 'react-hook-form';
+import { SubmitHandler, useForm } from 'react-hook-form';
 import { useFormContext } from '@/app/hooks/useFormContext';
-import { FORM_ERRORS, REPORTING_PERSON } from '@/app/context/actions';
+import {
+  FORM_ERRORS,
+  NEXT_STEP,
+  REPORTING_PERSON,
+} from '@/app/context/actions';
+import { getFormCookies, getFormStep, setFormCookies } from '@/cookies/cookies';
+import { FIRST_FORM } from '@/cookies/cookies.d';
 
 const SecondStep: React.FC<SecondStepProps> = ({ secondStepTranslation }) => {
   const { dispatch, reportingPerson } = useFormContext();
+  const [question] = useState<string>(secondStepTranslation?.title);
   const {
     register,
     handleSubmit,
@@ -18,9 +25,13 @@ const SecondStep: React.FC<SecondStepProps> = ({ secondStepTranslation }) => {
 
   let identity: string = watch('identity');
 
+  // Getting form cookies
+  let formValues: { identity: string; question: string } =
+    getFormCookies(FIRST_FORM);
+
   useEffect(() => {
     // Check if field is selected and throw an error if not
-    if (!identity) {
+    if (!identity && !formValues) {
       dispatch({ type: FORM_ERRORS, payload: true });
     } else {
       dispatch({ type: FORM_ERRORS, payload: false });
@@ -35,14 +46,34 @@ const SecondStep: React.FC<SecondStepProps> = ({ secondStepTranslation }) => {
             ? 'onBehalf'
             : 'organization',
       });
+
+      // Setting default values if exists in cookies
+
+      if (formValues && !identity) {
+        identity !== formValues?.identity &&
+          setValue('identity', formValues?.identity);
+      }
     }
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [identity]);
+  }, [identity, formValues?.identity]);
+
+  // Triggered when submitting form
+  const onSubmit: SubmitHandler<SecondFormValues> = (data) => {
+    let step = getFormStep();
+    let dataWithQuestion = { question, step, ...data };
+    setFormCookies(dataWithQuestion, FIRST_FORM);
+
+    dispatch({ type: NEXT_STEP, payload: 'DATA 1' });
+  };
 
   return (
     <div className="relative flex flex-col">
-      <form id="firstForm" className="h-full lg:w-[35rem]">
+      <form
+        onSubmit={handleSubmit(onSubmit)}
+        id="firstForm"
+        className="h-full lg:w-[35rem]"
+      >
         <FormHeader title={secondStepTranslation?.title} />
         <RadioGroup
           props={register('identity', { required: true })}

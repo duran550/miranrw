@@ -146,7 +146,7 @@ const NavBar: React.FC<NavBarProps> = ({ navigation, lang }) => {
             <LocaleSwitcher />
           </nav>
         </div>
-        <div className="xl:justify-between  text-textColor items-center w-full  xl:w-[100rem] hidden xl:flex">
+        <div className="xl:justify-between  text-textColor items-center w-full lg:w-[130rem]  xl:w-[130rem] hidden xl:flex">
           {/* Horizontal or desktop navigation */}
           <nav
             className={`container w-full opacity-0 xl:opacity-100 xl:block flex  items-center justify-between  `}
@@ -182,17 +182,21 @@ const NavBar: React.FC<NavBarProps> = ({ navigation, lang }) => {
                   {navigation?.aboutQueer}
                 </Link>
               </li>
-              <li onClick={() => setToggle(!toggle)} className="relative">
+              <li className="relative">
                 <Link
+                  onMouseOver={() => setToggle(true)}
                   className={`${toggle ? 'font-bold' : ''} ${
                     pathname?.split('/')[2] === 'about-us' ? 'font-bold' : ''
-                  } `}
+                  } hover:`}
                   href={`/${lang}/about-us`}
                 >
                   {navigation.aboutUs?.title}
                 </Link>
                 {toggle && (
-                  <ul className=" bg-menuAndFooterColor py-3 px-6 -left-6 w-[15rem] flex flex-col shadow-xl absolute top-16">
+                  <ul
+                    onMouseLeave={() => setToggle(false)}
+                    className=" bg-menuAndFooterColor py-3 px-6 -left-6 w-[15rem] flex flex-col shadow-xl absolute top-16"
+                  >
                     <Link href="/about-us/#referalCounseling">
                       {navigation.aboutUs?.referalCounseling}
                     </Link>

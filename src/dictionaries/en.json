@@ -166,7 +166,7 @@
           "buttonText": "Let's start"
         },
         "secondStep": {
-          "title": "Who is affected ?",
+          "title": "Who is affected ?*",
           "options": [
             {
               "id": "age1",
@@ -205,6 +205,8 @@
         "thirdStep": {
           "title": "Incident Description*",
           "description": "What exactly happened ?",
+          "placeholder": "Please describe the incident as precisely as possible.",
+          "disclaimer": "For data protection reasons we ask you not to enter names of other persons here.",
           "hints": {
             "title": "Possible Relevant Information",
             "list": [
@@ -272,7 +274,7 @@
           ]
         },
         "fourthStep": {
-          "title": "When did the incident occur ?",
+          "title": "When did the incident occur ?*",
           "description": "Please select a date. If it occurred over an extended period, you can select that too."
         },
         "fourthStepOrganization": {
@@ -311,7 +313,7 @@
         },
         "fifthStep": {
           "title": "Where did the incident occur ?*",
-          "description": "Please select a date. If it spans over a longer period, you can also choose that option.",
+          "description": "",
           "firstOption": {
             "name": "online",
             "id": "online",
@@ -320,7 +322,8 @@
           },
           "secondOption": {
             "name": "online",
-            "id": "place"
+            "id": "place",
+            "value": "freeField"
           }
         },
         "sixthStep": {
@@ -427,9 +430,9 @@
             {
               "iD": 8,
               "name": "formOfDisc",
-              "value": "Agender discrimination",
-              "id": "agender discrimination",
-              "label": "Agender discrimination"
+              "value": "Agendar discrimination",
+              "id": "agendar discrimination",
+              "label": "Agendar discrimination"
             },
             {
               "iD": 8,
@@ -538,8 +541,8 @@
               {
                 "id": "gender",
                 "name": "gender",
-                "label": "agender",
-                "value": "agender",
+                "label": "agendar",
+                "value": "agendar",
                 "checked": false
               },
               {
