@@ -53,7 +53,7 @@ const MultiStepForm: React.FC<MultiStepFormProps> = ({ formTranslation }) => {
           />
         ) : (
           <div>
-            {step === 1 || step == 2 || step === 10 ? (
+            {step === 1 || step === 10 ? (
               ''
             ) : (
               <Stepper
