@@ -1,5 +1,7 @@
 import React from 'react';
 import CopyRightSection from './CopyRightSection';
+import Link from 'next/link';
+import AnimateClick from '../animate-click/AnimateClick';
 
 type FooterValues = {
   datenschutz: string;
@@ -21,9 +23,17 @@ const Footer: React.FC<FooterProps> = ({ footer, lang }) => {
         <div className="flex flex-col space-y-2">
           <div className="flex flex-col lg:block">
             <ul className="flex font-bold flex-col max-w-lg lg:flex-row lg:w-full items-start justify-between gap-x-16 h-24 ">
-              <li>{footer?.contact}</li>
+              <li>
+                <AnimateClick>
+                  <Link href="#">{footer?.contact}</Link>
+                </AnimateClick>
+              </li>
               <div className="w-full mb-2 xl:mb-0 md:w-96 h-[1px] bg-gray-800 xl:hidden"></div>
-              <li className="">{footer?.spendenkonto}</li>
+              <li className="">
+                <AnimateClick>
+                  <Link href="#">{footer?.spendenkonto}</Link>
+                </AnimateClick>
+              </li>
               <div className="w-full mb-2 xl:mb-0 md:w-96 h-[1px] bg-gray-800 xl:hidden"></div>
 
               <li>{footer?.socials}</li>

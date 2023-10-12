@@ -11,6 +11,7 @@ export type FifthStepProps = {
     secondOption: {
       name: string;
       id: string;
+      value: string;
     };
   };
 };

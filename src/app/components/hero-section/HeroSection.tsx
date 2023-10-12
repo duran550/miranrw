@@ -18,7 +18,7 @@ const HeroSection: React.FC<heroSectionPropsType> = ({ lang, content }) => {
       <div className="px-6 lg:px-12 my-12    ">
         {/* text-content */}
         <div className="flex flex-col lg:flex-row lg:gap-x-10 justify-between w-full lg:items-center pb:8 lg:pb-0">
-          <div className=" lg:max-w-2xl">
+          <div className=" lg:max-w-2xl lg:ml-16">
             <h2 className="font-bold text-3xl  lg:text-4xl">MIQ</h2>
             <div className="pt-4">
               <h1 className="font-bold text-xl lg:text-4xl">
@@ -39,25 +39,13 @@ const HeroSection: React.FC<heroSectionPropsType> = ({ lang, content }) => {
             </Button>
           </div>
 
-          <div className="lg:hidden">
-            <h1 className="font-bold underline text-xl mt-8 mb-4">
-              Über Queerfeindlichkeit
-            </h1>
-            <p>
-              Text text text Text text text Text text text Text text text Text
-              text text Text text text Text text text Text text text Text text
-              text Text text text Text text text Text text text Text text text
-              Text text text Text text text Text text text Text text text
-            </p>
-          </div>
-
           <iframe
             src="https://wwwcom/embed/9zWPJR2u01w?si=iUdQY2YiqrJGzSOX"
             title="YouTube video player"
             frameBorder="0"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
             allowFullScreen
-            className="w-full lg:max-w-xl lg:mr-24  lg:h-[22rem] mt-8"
+            className="w-full lg:max-w-4xl lg:mr-0 h-[20rem]  lg:h-[25rem] mt-8"
           ></iframe>
         </div>
       </div>

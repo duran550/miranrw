@@ -31,16 +31,6 @@ export default async function aboutUs({
                 Text text text Text text text Text text text Text text text
               </p>
             </div>
-            <div>
-              <iframe
-                src="https://wwwcom/embed/9zWPJR2u01w?si=iUdQY2YiqrJGzSOX"
-                title="YouTube video player"
-                frameBorder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                allowFullScreen
-                className="w-full lg:w-[40rem] lg:mr-24  lg:h-[20rem] mt-8"
-              ></iframe>
-            </div>
           </div>
           <div className="mt-16" id="referalCounseling">
             <h1 className="font-bold text-3xl mb-16">

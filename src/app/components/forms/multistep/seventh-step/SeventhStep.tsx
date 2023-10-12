@@ -1,10 +1,12 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { useFormContext } from '@/app/hooks/useFormContext';
 import { FORM_ERRORS, NEXT_STEP } from '@/app/context/actions';
 import Checkbox from '../../checkbox/Checkbox';
 import FormHeader from '../header/header';
 import InputField from '../../text-field/InputField';
+import { getFormCookies, getFormStep, setFormCookies } from '@/cookies/cookies';
+import { SIXTH_FORM } from '@/cookies/cookies.d';
 
 type SeventhStepProps = {
   seventhStepTranslation: {
@@ -24,6 +26,8 @@ const SeventhStep: React.FC<SeventhStepProps> = ({
 }) => {
   const { dispatch } = useFormContext();
 
+  const [question] = useState<string>(seventhStepTranslation?.title);
+
   const {
     register,
     handleSubmit,
@@ -36,6 +40,12 @@ const SeventhStep: React.FC<SeventhStepProps> = ({
   let otherForm = watch('otherForm');
 
   useEffect(() => {
+    let formValues: {
+      typeOfDiscrimination: string[];
+      otherForm: string;
+      question: string;
+    } = getFormCookies(SIXTH_FORM);
+
     dispatch({ type: FORM_ERRORS, payload: true });
 
     if (typeOfDiscrimination?.length !== 0) {
@@ -43,12 +53,32 @@ const SeventhStep: React.FC<SeventhStepProps> = ({
     } else {
       dispatch({ type: FORM_ERRORS, payload: true });
     }
-  }, [typeOfDiscrimination]);
+
+    if (formValues) {
+      dispatch({ type: FORM_ERRORS, payload: false });
+      typeOfDiscrimination !== formValues?.typeOfDiscrimination &&
+        setValue('typeOfDiscrimination', formValues?.typeOfDiscrimination);
+      otherForm !== formValues?.otherForm &&
+        setValue('otherForm', formValues?.otherForm);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   // Triggered when submitting form
-  const onSubmit: SubmitHandler<SeventhStepValues> = (data) => {};
+  const onSubmit: SubmitHandler<SeventhStepValues> = (data) => {
+    let step = getFormStep();
+    let dataWithQuestion = { question, step, ...data };
+    setFormCookies(dataWithQuestion, SIXTH_FORM);
+
+    dispatch({ type: NEXT_STEP, payload: 'DATA 1' });
+  };
+
   return (
-    <div className="lg:w-[35rem]">
+    <form
+      onSubmit={handleSubmit(onSubmit)}
+      id="sixthForm"
+      className="lg:w-[35rem]"
+    >
       <FormHeader
         title={seventhStepTranslation?.title}
         subTitle={seventhStepTranslation?.description}
@@ -76,7 +106,7 @@ const SeventhStep: React.FC<SeventhStepProps> = ({
       ) : (
         ''
       )}
-    </div>
+    </form>
   );
 };
 

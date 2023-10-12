@@ -1,15 +1,27 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import FormHeader from '../header/header';
 import { NinethStepProps, NinethFormValues } from './ninethStep.d';
 import RadioGroup from '../../radio/RadioGroup';
-import { useForm } from 'react-hook-form';
+import { SubmitHandler, useForm } from 'react-hook-form';
 import Checkbox from '../../checkbox/Checkbox';
 import { useFormContext } from '@/app/hooks/useFormContext';
-import { FORM_ERRORS } from '@/app/context/actions';
+import { FORM_ERRORS, NEXT_STEP } from '@/app/context/actions';
 import InputField from '../../text-field/InputField';
+import { getFormCookies, getFormStep, setFormCookies } from '@/cookies/cookies';
+import { EIGTH_FORM } from '@/cookies/cookies.d';
 
 const NinethStep: React.FC<NinethStepProps> = ({ ninethStepTranslation }) => {
   const { dispatch, reportingPerson } = useFormContext();
+  const [question1] = useState<string>(
+    ninethStepTranslation?.firstBlock?.title
+  );
+  const [question2] = useState<string>(
+    ninethStepTranslation?.secondBlock?.title
+  );
+  const [question3] = useState<string>(
+    ninethStepTranslation?.thirdBlock?.title
+  );
+
   const {
     register,
     handleSubmit,
@@ -28,6 +40,17 @@ const NinethStep: React.FC<NinethStepProps> = ({ ninethStepTranslation }) => {
   let genderFreeField: string = watch('genderFreeField');
 
   useEffect(() => {
+    // Getting values from cookies
+    let formValues: {
+      gender: string[];
+      sexualOrientation: string[];
+      validation: string;
+      question: string;
+      sexualOrientationFreeField: string[];
+      age: string;
+      genderFreeField: string;
+    } = getFormCookies(EIGTH_FORM);
+
     dispatch({ type: FORM_ERRORS, payload: true });
 
     if (validation?.length !== 0) {
@@ -35,11 +58,43 @@ const NinethStep: React.FC<NinethStepProps> = ({ ninethStepTranslation }) => {
     } else {
       dispatch({ type: FORM_ERRORS, payload: true });
     }
+
+    // Setting default values if the data are available in cookies
+
+    if (formValues) {
+      dispatch({ type: FORM_ERRORS, payload: false });
+      gender !== formValues?.gender && setValue('gender', formValues?.gender);
+      sexualOrientation !== formValues?.sexualOrientation &&
+        setValue('sexualOrientation', formValues?.sexualOrientation);
+      validation !== formValues?.validation &&
+        setValue('validation', formValues?.validation);
+      sexualOrientationFreeField !== formValues?.sexualOrientationFreeField &&
+        setValue(
+          'sexualOrientationFreeField',
+          formValues?.sexualOrientationFreeField
+        );
+      age !== formValues?.age && setValue('age', formValues?.age);
+      genderFreeField !== formValues?.genderFreeField &&
+        setValue('genderFreeField', formValues?.genderFreeField);
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [validation]);
+  }, []);
+
+  // Triggered when submitting form
+  const onSubmit: SubmitHandler<NinethFormValues> = (data) => {
+    let step = getFormStep();
+    let dataWithQuestion = { question1, question2, question3, step, ...data };
+    setFormCookies(dataWithQuestion, EIGTH_FORM);
+
+    dispatch({ type: NEXT_STEP, payload: 'DATA 1' });
+  };
 
   return (
-    <form className="lg:w-[35rem]">
+    <form
+      onSubmit={handleSubmit(onSubmit)}
+      id="eighthForm"
+      className="lg:w-[35rem]"
+    >
       {reportingPerson !== 'organization' && (
         <>
           <h1 className="font-bold text-3xl mb-4">
@@ -52,6 +107,7 @@ const NinethStep: React.FC<NinethStepProps> = ({ ninethStepTranslation }) => {
                   ? ninethStepTranslation?.firstBlock?.titleOnBehalf
                   : ninethStepTranslation?.firstBlock?.title
               }
+              subTitle={ninethStepTranslation?.firstBlock?.description}
             />
             <div className="-mt-8">
               {ninethStepTranslation?.firstBlock?.data?.map((element: any) => (
@@ -79,6 +135,7 @@ const NinethStep: React.FC<NinethStepProps> = ({ ninethStepTranslation }) => {
                   ? ninethStepTranslation?.secondBlock?.titleOnBehalf
                   : ninethStepTranslation?.secondBlock?.title
               }
+              subTitle={ninethStepTranslation?.secondBlock?.description}
             />
             <div className="-mt-8">
               {ninethStepTranslation?.secondBlock?.data?.map((element: any) => (

@@ -1,19 +1,22 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   ThirdStepOrganizationFormValues,
   ThirdStepOrganizationProps,
 } from './thirdStepOrganization';
 import { useFormContext } from '@/app/hooks/useFormContext';
-import { useForm } from 'react-hook-form';
-import { FORM_ERRORS } from '@/app/context/actions';
+import { SubmitHandler, useForm } from 'react-hook-form';
+import { FORM_ERRORS, NEXT_STEP } from '@/app/context/actions';
 import FormHeader from '../header/header';
 import Checkbox from '../../checkbox/Checkbox';
 import InputField from '../../text-field/InputField';
+import { getFormCookies, getFormStep, setFormCookies } from '@/cookies/cookies';
+import { SECOND_FORM } from '@/cookies/cookies.d';
 
 const ThirdStepOrganization: React.FC<ThirdStepOrganizationProps> = ({
   thirdStepOrganizationTranslation,
 }) => {
   const { dispatch } = useFormContext();
+  const [question] = useState<string>(thirdStepOrganizationTranslation?.title);
 
   const {
     register,
@@ -25,20 +28,52 @@ const ThirdStepOrganization: React.FC<ThirdStepOrganizationProps> = ({
 
   let organizationType: string[] = watch('organizationType');
 
+  // Getting form cookies
+  let formValues: {
+    organizationType: string[];
+    organizationTypeFreeField: string;
+    question: string;
+  } = getFormCookies(SECOND_FORM);
+
   useEffect(() => {
     dispatch({ type: FORM_ERRORS, payload: true });
 
     if (organizationType?.length !== 0) {
       dispatch({ type: FORM_ERRORS, payload: false });
     }
+
+    // Setting default values if exists in cookies
+
+    if (formValues && !organizationType) {
+      organizationType !== formValues?.organizationType &&
+        setValue('organizationType', formValues?.organizationType);
+      organizationType !== formValues?.organizationTypeFreeField &&
+        setValue(
+          'organizationTypeFreeField',
+          formValues?.organizationTypeFreeField
+        );
+      dispatch({ type: FORM_ERRORS, payload: false });
+    }
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [organizationType]);
 
-  console.log(organizationType);
+  // Triggered when submitting form
+  const onSubmit: SubmitHandler<ThirdStepOrganizationFormValues> = (data) => {
+    let step = getFormStep();
+    let dataWithQuestion = { question, step, ...data };
+    setFormCookies(dataWithQuestion, SECOND_FORM);
+
+    dispatch({ type: NEXT_STEP, payload: 'DATA 1' });
+  };
 
   return (
     <div className="flex flex-col relative">
-      <div className="lg:w-[35rem]">
+      <form
+        onSubmit={handleSubmit(onSubmit)}
+        id="secondForm"
+        className="lg:w-[35rem]"
+      >
         <FormHeader
           title={thirdStepOrganizationTranslation?.title}
           subTitle={thirdStepOrganizationTranslation?.subTitle}
@@ -64,7 +99,7 @@ const ThirdStepOrganization: React.FC<ThirdStepOrganizationProps> = ({
               )}
           </div>
         </div>
-      </div>
+      </form>
       <div className="mt-4 lg:absolute lg:-right-[40rem]"></div>
     </div>
   );
