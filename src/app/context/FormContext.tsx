@@ -2,7 +2,10 @@
 
 import React, { Dispatch, createContext, useReducer } from 'react';
 import {
+  EDIT_STEP,
   FORM_ERRORS,
+  IS_EDITING,
+  LAST_STEP,
   NEXT_STEP,
   PREV_STEP,
   REPORTING_PERSON,
@@ -13,6 +16,7 @@ import { getFormStep, setFormStep } from '@/cookies/cookies';
 type FormType = {
   step: number;
   formData: Array<any>;
+  isEditing: boolean;
   reportingPerson: 'myself' | 'andere' | 'organization' | 'onBehalf';
   formErrors: boolean;
 };
@@ -26,6 +30,7 @@ const initialState: FormType = {
   step: getFormStep(),
   formData: [],
   reportingPerson: 'myself',
+  isEditing: false,
   formErrors: true,
 };
 
@@ -56,6 +61,28 @@ const reducer = (initialState: FormType, action: ActionType) => {
       return {
         ...initialState,
         reportingPerson: action?.payload,
+      };
+
+    case IS_EDITING:
+      return {
+        ...initialState,
+        isEditing: true,
+      };
+
+    case EDIT_STEP:
+      setFormStep(action?.payload);
+      return {
+        ...initialState,
+        isEditing: true,
+        step: getFormStep(),
+      };
+
+    case LAST_STEP:
+      setFormStep(action?.payload);
+      return {
+        ...initialState,
+        isEditing: true,
+        step: getFormStep(),
       };
 
     case SUBMIT_FORM:

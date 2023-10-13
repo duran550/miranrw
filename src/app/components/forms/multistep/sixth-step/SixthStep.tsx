@@ -3,7 +3,7 @@ import Checkbox from '../../checkbox/Checkbox';
 import FormHeader from '../header/header';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { useFormContext } from '@/app/hooks/useFormContext';
-import { FORM_ERRORS, NEXT_STEP } from '@/app/context/actions';
+import { FORM_ERRORS, LAST_STEP, NEXT_STEP } from '@/app/context/actions';
 import InputField from '../../text-field/InputField';
 import { getFormCookies, getFormStep, setFormCookies } from '@/cookies/cookies';
 import { FIFTH_FORM } from '@/cookies/cookies.d';
@@ -22,7 +22,7 @@ type SixthStepValues = {
 };
 
 const SixthStep: React.FC<SixthStepProps> = ({ sixthStepTranslation }) => {
-  const { dispatch } = useFormContext();
+  const { dispatch, isEditing, reportingPerson } = useFormContext();
   const [question] = useState<string>(sixthStepTranslation?.title);
 
   const {
@@ -69,7 +69,9 @@ const SixthStep: React.FC<SixthStepProps> = ({ sixthStepTranslation }) => {
     let dataWithQuestion = { question, step, ...data };
     setFormCookies(dataWithQuestion, FIFTH_FORM);
 
-    dispatch({ type: NEXT_STEP, payload: 'DATA 1' });
+    isEditing && reportingPerson === 'myself'
+      ? dispatch({ type: LAST_STEP, payload: 10 })
+      : dispatch({ type: NEXT_STEP, payload: 'DATA 1' });
   };
 
   return (

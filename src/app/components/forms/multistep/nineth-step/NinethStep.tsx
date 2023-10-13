@@ -5,13 +5,13 @@ import RadioGroup from '../../radio/RadioGroup';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import Checkbox from '../../checkbox/Checkbox';
 import { useFormContext } from '@/app/hooks/useFormContext';
-import { FORM_ERRORS, NEXT_STEP } from '@/app/context/actions';
+import { FORM_ERRORS, LAST_STEP, NEXT_STEP } from '@/app/context/actions';
 import InputField from '../../text-field/InputField';
 import { getFormCookies, getFormStep, setFormCookies } from '@/cookies/cookies';
 import { EIGTH_FORM } from '@/cookies/cookies.d';
 
 const NinethStep: React.FC<NinethStepProps> = ({ ninethStepTranslation }) => {
-  const { dispatch, reportingPerson } = useFormContext();
+  const { dispatch, reportingPerson, isEditing } = useFormContext();
   const [question1] = useState<string>(
     ninethStepTranslation?.firstBlock?.title
   );
@@ -86,7 +86,9 @@ const NinethStep: React.FC<NinethStepProps> = ({ ninethStepTranslation }) => {
     let dataWithQuestion = { question1, question2, question3, step, ...data };
     setFormCookies(dataWithQuestion, EIGTH_FORM);
 
-    dispatch({ type: NEXT_STEP, payload: 'DATA 1' });
+    isEditing && reportingPerson === 'myself'
+      ? dispatch({ type: LAST_STEP, payload: 10 })
+      : dispatch({ type: NEXT_STEP, payload: 'DATA 1' });
   };
 
   return (
@@ -182,21 +184,23 @@ const NinethStep: React.FC<NinethStepProps> = ({ ninethStepTranslation }) => {
         </>
       )}
 
-      <div className="mt-8">
-        <FormHeader title={ninethStepTranslation?.fourthBlock?.title} />
-        <div className="-mt-8">
-          {ninethStepTranslation?.fourthBlock?.data?.map((element: any) => (
-            <Checkbox
-              key={element?.iD}
-              id={element?.id}
-              name={element?.name}
-              props={register('validation')}
-              value={element?.value}
-              label={element?.label}
-            />
-          ))}
+      {reportingPerson === 'organization' && (
+        <div className="mt-8">
+          <FormHeader title={ninethStepTranslation?.fourthBlock?.title} />
+          <div className="-mt-8">
+            {ninethStepTranslation?.fourthBlock?.data?.map((element: any) => (
+              <Checkbox
+                key={element?.iD}
+                id={element?.id}
+                name={element?.name}
+                props={register('validation')}
+                value={element?.value}
+                label={element?.label}
+              />
+            ))}
+          </div>
         </div>
-      </div>
+      )}
     </form>
   );
 };

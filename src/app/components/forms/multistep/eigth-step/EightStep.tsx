@@ -5,13 +5,13 @@ import RadioGroup from '../../radio/RadioGroup';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import Checkbox from '../../checkbox/Checkbox';
 import { useFormContext } from '@/app/hooks/useFormContext';
-import { FORM_ERRORS, NEXT_STEP } from '@/app/context/actions';
+import { FORM_ERRORS, LAST_STEP, NEXT_STEP } from '@/app/context/actions';
 import InputField from '../../text-field/InputField';
 import { getFormCookies, getFormStep, setFormCookies } from '@/cookies/cookies';
 import { SEVENTH_FORM } from '@/cookies/cookies.d';
 
 const EightStep: React.FC<EightStepProps> = ({ eightStepTranslation }) => {
-  const { dispatch } = useFormContext();
+  const { dispatch, isEditing, reportingPerson } = useFormContext();
   const [question] = useState<string>(eightStepTranslation?.title);
 
   const {
@@ -61,7 +61,9 @@ const EightStep: React.FC<EightStepProps> = ({ eightStepTranslation }) => {
     let dataWithQuestion = { question, step, ...data };
     setFormCookies(dataWithQuestion, SEVENTH_FORM);
 
-    dispatch({ type: NEXT_STEP, payload: 'DATA 1' });
+    isEditing && reportingPerson === 'myself'
+      ? dispatch({ type: LAST_STEP, payload: 10 })
+      : dispatch({ type: NEXT_STEP, payload: 'DATA 1' });
   };
 
   return (

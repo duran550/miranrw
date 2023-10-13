@@ -6,6 +6,7 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 import { useFormContext } from '@/app/hooks/useFormContext';
 import {
   FORM_ERRORS,
+  LAST_STEP,
   NEXT_STEP,
   REPORTING_PERSON,
 } from '@/app/context/actions';
@@ -13,7 +14,7 @@ import { getFormCookies, getFormStep, setFormCookies } from '@/cookies/cookies';
 import { FIRST_FORM } from '@/cookies/cookies.d';
 
 const SecondStep: React.FC<SecondStepProps> = ({ secondStepTranslation }) => {
-  const { dispatch, reportingPerson } = useFormContext();
+  const { dispatch, reportingPerson, isEditing } = useFormContext();
   const [question] = useState<string>(secondStepTranslation?.title);
   const {
     register,
@@ -63,8 +64,9 @@ const SecondStep: React.FC<SecondStepProps> = ({ secondStepTranslation }) => {
     let step = getFormStep();
     let dataWithQuestion = { question, step, ...data };
     setFormCookies(dataWithQuestion, FIRST_FORM);
-
-    dispatch({ type: NEXT_STEP, payload: 'DATA 1' });
+    isEditing && reportingPerson === 'myself'
+      ? dispatch({ type: LAST_STEP, payload: 10 })
+      : dispatch({ type: NEXT_STEP, payload: 'DATA 1' });
   };
 
   return (
