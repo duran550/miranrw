@@ -31,12 +31,13 @@ const FifthStep: React.FC<FifthStepProps> = ({ fifthStepTranslation }) => {
   } = getFormCookies(FOURTH_FORM);
 
   useEffect(() => {
-    if (locationOnline) {
-      locationOnline === fifthStepTranslation?.secondOption.id &&
-        dispatch({ type: FORM_ERRORS, payload: false });
-    } else {
-      dispatch({ type: FORM_ERRORS, payload: true });
-    }
+    dispatch({ type: FORM_ERRORS, payload: false });
+    // if (locationOnline) {
+    //   locationOnline === fifthStepTranslation?.secondOption.id &&
+    //     dispatch({ type: FORM_ERRORS, payload: false });
+    // } else {
+    //   dispatch({ type: FORM_ERRORS, payload: true });
+    // }
 
     if (formValues) {
       dispatch({ type: FORM_ERRORS, payload: false });
