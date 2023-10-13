@@ -7,7 +7,7 @@ export const useFormContext = () => {
   let formData = state.formData;
   let reportingPerson: 'myself' | 'andere' | 'organization' | 'onBehalf' =
     state?.reportingPerson;
-
+  let isEditing: boolean = state?.isEditing;
   let formErrors: boolean = state?.formErrors;
-  return { step, formData, reportingPerson, formErrors, dispatch };
+  return { step, formData, reportingPerson, formErrors, dispatch, isEditing };
 };

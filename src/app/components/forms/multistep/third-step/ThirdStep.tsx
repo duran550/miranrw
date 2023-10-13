@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import TextArea from '../../text-area/TextArea';
 import FormHeader from '../header/header';
 import { useFormContext } from '@/app/hooks/useFormContext';
-import { FORM_ERRORS, NEXT_STEP } from '@/app/context/actions';
+import { FORM_ERRORS, LAST_STEP, NEXT_STEP } from '@/app/context/actions';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { ThirdFormValues } from './thirdStep.d';
 import { getFormCookies, getFormStep, setFormCookies } from '@/cookies/cookies';
@@ -19,7 +19,7 @@ type ThirdStepProps = {
 };
 
 const ThirdStep: React.FC<ThirdStepProps> = ({ thirdStepTranslation }) => {
-  const { dispatch } = useFormContext();
+  const { dispatch, reportingPerson, isEditing } = useFormContext();
   const [question] = useState<string>(thirdStepTranslation?.title);
 
   const {
@@ -59,7 +59,9 @@ const ThirdStep: React.FC<ThirdStepProps> = ({ thirdStepTranslation }) => {
     let dataWithQuestion = { question, step, ...data };
     setFormCookies(dataWithQuestion, SECOND_FORM);
 
-    dispatch({ type: NEXT_STEP, payload: 'DATA 1' });
+    isEditing && reportingPerson === 'myself'
+      ? dispatch({ type: LAST_STEP, payload: 10 })
+      : dispatch({ type: NEXT_STEP, payload: 'DATA 1' });
   };
 
   return (

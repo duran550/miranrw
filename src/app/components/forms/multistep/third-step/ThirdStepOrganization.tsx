@@ -5,7 +5,7 @@ import {
 } from './thirdStepOrganization';
 import { useFormContext } from '@/app/hooks/useFormContext';
 import { SubmitHandler, useForm } from 'react-hook-form';
-import { FORM_ERRORS, NEXT_STEP } from '@/app/context/actions';
+import { FORM_ERRORS, LAST_STEP, NEXT_STEP } from '@/app/context/actions';
 import FormHeader from '../header/header';
 import Checkbox from '../../checkbox/Checkbox';
 import InputField from '../../text-field/InputField';
@@ -15,7 +15,7 @@ import { SECOND_FORM } from '@/cookies/cookies.d';
 const ThirdStepOrganization: React.FC<ThirdStepOrganizationProps> = ({
   thirdStepOrganizationTranslation,
 }) => {
-  const { dispatch } = useFormContext();
+  const { dispatch, isEditing, reportingPerson } = useFormContext();
   const [question] = useState<string>(thirdStepOrganizationTranslation?.title);
 
   const {
@@ -64,7 +64,9 @@ const ThirdStepOrganization: React.FC<ThirdStepOrganizationProps> = ({
     let dataWithQuestion = { question, step, ...data };
     setFormCookies(dataWithQuestion, SECOND_FORM);
 
-    dispatch({ type: NEXT_STEP, payload: 'DATA 1' });
+    isEditing && reportingPerson === 'myself'
+      ? dispatch({ type: LAST_STEP, payload: 10 })
+      : dispatch({ type: NEXT_STEP, payload: 'DATA 1' });
   };
 
   return (

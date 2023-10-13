@@ -5,7 +5,7 @@ import RadioGroup from '../../radio/RadioGroup';
 import { FourthStepOrganizationFormValues } from './fourthStepOrganization';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { useFormContext } from '@/app/hooks/useFormContext';
-import { FORM_ERRORS, NEXT_STEP } from '@/app/context/actions';
+import { FORM_ERRORS, LAST_STEP, NEXT_STEP } from '@/app/context/actions';
 import { getFormCookies, getFormStep, setFormCookies } from '@/cookies/cookies';
 import { THIRD_FORM } from '@/cookies/cookies.d';
 
@@ -14,7 +14,7 @@ const FourthStepOrganization: React.FC<FourthStepOrganizationProps> = ({
 }) => {
   const [question] = useState<string>(fourthStepOrganizationTranslation?.title);
 
-  const { dispatch } = useFormContext();
+  const { dispatch, reportingPerson, isEditing } = useFormContext();
 
   const {
     register,
@@ -53,7 +53,9 @@ const FourthStepOrganization: React.FC<FourthStepOrganizationProps> = ({
     let dataWithQuestion = { question, step, ...data };
     setFormCookies(dataWithQuestion, THIRD_FORM);
 
-    dispatch({ type: NEXT_STEP, payload: 'DATA 1' });
+    isEditing && reportingPerson === 'myself'
+      ? dispatch({ type: LAST_STEP, payload: 10 })
+      : dispatch({ type: NEXT_STEP, payload: 'DATA 1' });
   };
 
   return (
