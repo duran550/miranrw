@@ -1,15 +1,19 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import FormHeader from '../header/header';
 import { EightStepProps, EightFormValues } from './eightStep.d';
 import RadioGroup from '../../radio/RadioGroup';
-import { useForm } from 'react-hook-form';
+import { SubmitHandler, useForm } from 'react-hook-form';
 import Checkbox from '../../checkbox/Checkbox';
 import { useFormContext } from '@/app/hooks/useFormContext';
-import { FORM_ERRORS } from '@/app/context/actions';
+import { FORM_ERRORS, NEXT_STEP } from '@/app/context/actions';
 import InputField from '../../text-field/InputField';
+import { getFormCookies, getFormStep, setFormCookies } from '@/cookies/cookies';
+import { SEVENTH_FORM } from '@/cookies/cookies.d';
 
 const EightStep: React.FC<EightStepProps> = ({ eightStepTranslation }) => {
   const { dispatch } = useFormContext();
+  const [question] = useState<string>(eightStepTranslation?.title);
+
   const {
     register,
     handleSubmit,
@@ -23,6 +27,14 @@ const EightStep: React.FC<EightStepProps> = ({ eightStepTranslation }) => {
   let formOfDiscYesFreeField: string = watch('formOfDiscYesFreeField');
 
   useEffect(() => {
+    // Getting values from the form
+    let formValues: {
+      formOfDisc: string;
+      formOfDiscYes: string[];
+      formOfDiscYesFreeField: string;
+      question: string;
+    } = getFormCookies(SEVENTH_FORM);
+
     dispatch({ type: FORM_ERRORS, payload: true });
 
     if (formOfDisc) {
@@ -30,11 +42,34 @@ const EightStep: React.FC<EightStepProps> = ({ eightStepTranslation }) => {
     } else {
       dispatch({ type: FORM_ERRORS, payload: false });
     }
+
+    if (formValues) {
+      dispatch({ type: FORM_ERRORS, payload: false });
+      formOfDisc !== formValues?.formOfDisc &&
+        setValue('formOfDisc', formValues?.formOfDisc);
+      formOfDiscYes !== formValues?.formOfDiscYes &&
+        setValue('formOfDiscYes', formValues?.formOfDiscYes);
+      formOfDiscYesFreeField !== formValues?.formOfDiscYesFreeField &&
+        setValue('formOfDiscYesFreeField', formValues?.formOfDiscYesFreeField);
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [formOfDisc]);
+  }, []);
+
+  // Triggered when submitting form
+  const onSubmit: SubmitHandler<EightFormValues> = (data) => {
+    let step = getFormStep();
+    let dataWithQuestion = { question, step, ...data };
+    setFormCookies(dataWithQuestion, SEVENTH_FORM);
+
+    dispatch({ type: NEXT_STEP, payload: 'DATA 1' });
+  };
 
   return (
-    <form className="lg:w-[35rem]">
+    <form
+      onSubmit={handleSubmit(onSubmit)}
+      id="seventhForm"
+      className="lg:w-[35rem]"
+    >
       <FormHeader title={eightStepTranslation?.title} />
       <div>
         <RadioGroup

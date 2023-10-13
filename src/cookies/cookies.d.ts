@@ -1,2 +1,11 @@
 export const USER_DATA = 'user_data';
 export const FORM_STEP = 'FORM_STEP';
+export const FIRST_FORM = 'FIRST_FORM';
+export const SECOND_FORM = 'SECOND_FORM';
+export const THIRD_FORM = 'THIRD_FORM';
+export const FOURTH_FORM = 'FOURTH_FORM';
+export const FIFTH_FORM = 'FIFTH_FORM';
+export const SIXTH_FORM = 'SIXTH_FORM';
+export const SEVENTH_FORM = 'SEVENTH_FORM';
+export const EIGTH_FORM = 'EIGTH_FORM';
+export const NINETH_FORM = 'NINETH_FORM';

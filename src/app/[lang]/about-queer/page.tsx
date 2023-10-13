@@ -19,9 +19,9 @@ export default async function aboutQueer({
           lang={lang}
           buttonTitle={page.home?.heroSection?.buttonText}
         >
-          <div className="flex lg:gap-x-32 gap-y-8  flex-col lg:flex-row">
+          <div className="flex lg:gap-x-32 gap-y-8 flex-col lg:flex-row">
             <div className="">
-              <h1 className="font-bold text-3xl mb-16">
+              <h1 className="font-bold text-3xl sm:mb-16 mb-8">
                 {navigation?.aboutQueer}
               </h1>
               <p className="w-full lg:max-w-2xl">
@@ -44,12 +44,12 @@ export default async function aboutQueer({
                 frameBorder="0"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                 allowFullScreen
-                className="w-full lg:w-[40rem] lg:mr-24  lg:h-[20rem] mt-8"
+                className="w-full lg:w-[40rem] lg:mr-24  lg:h-[20rem] mt-8 hidden sm:block"
               ></iframe>
             </div>
           </div>
           <div className="mt-16">
-            <h1 className="font-bold text-3xl mb-16">
+            <h1 className="font-bold text-3xl sm:mb-16 mb-8">
               {navigation?.aboutQueer}
             </h1>
             <p className="w-full lg:max-w-2xl">

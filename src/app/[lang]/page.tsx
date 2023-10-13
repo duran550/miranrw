@@ -1,8 +1,6 @@
 import { Locale } from '@/i18n.config';
 import { getDictionary } from '@/lib/dictionary';
-import { Suspense } from 'react';
 import Header from '../components/header/header';
-import Carousel from '../components/carousel/Carousel';
 import HeroSection from '../components/hero-section/HeroSection';
 import Footer from '../components/footer/Footer';
 

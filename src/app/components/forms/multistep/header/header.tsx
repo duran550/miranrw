@@ -1,3 +1,4 @@
+import AnimateClick from '@/app/components/animate-click/AnimateClick';
 import Link from 'next/link';
 import React, { ReactNode } from 'react';
 
@@ -34,13 +35,19 @@ const FormHeader: React.FC<FormHeaderProps> = ({
           <p>{description?.fourthParagraph}</p>
           <div className="flex my-4 items-center space-x-4 font-bold">
             <p>
-              <Link href="#">{description?.disclaimer}</Link>
+              <AnimateClick>
+                <Link href="/disclaimer">{description?.disclaimer}</Link>
+              </AnimateClick>
             </p>
             <p>
-              <Link href="/datenschutz">{description?.datenschutz}</Link>
+              <AnimateClick>
+                <Link href="/datenschutz">{description?.datenschutz}</Link>
+              </AnimateClick>
             </p>
             <p>
-              <Link href="#">{description?.explanation}</Link>
+              <AnimateClick>
+                <Link href="/statement">{description?.explanation}</Link>
+              </AnimateClick>
             </p>
           </div>
         </div>
