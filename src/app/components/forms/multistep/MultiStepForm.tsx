@@ -42,7 +42,8 @@ type MultiStepFormProps = {
 };
 
 const MultiStepForm: React.FC<MultiStepFormProps> = ({ formTranslation }) => {
-  const { step, dispatch, formErrors, reportingPerson } = useFormContext();
+  const { step, dispatch, formErrors, reportingPerson, isEditing } =
+    useFormContext();
   let stepFromCookies = getFormStep();
   return (
     <div className="lg:flex lg:w-full lg:justify-between">
@@ -169,56 +170,11 @@ const MultiStepForm: React.FC<MultiStepFormProps> = ({ formTranslation }) => {
               /* End of Organization scenario */
             )}
 
-            {step !== 1 ? (
-              <div className="flex  space-x-0 md:space-x-16 justify-between md:flex-row  md:justify-between items-center w-full">
-                {step !== 10 && (
-                  <Button
-                    className="w-32 mr-auto justify-self-start font-bold"
-                    variant="primary"
-                    onClick={() => dispatch({ type: PREV_STEP })}
-                  >
-                    {formTranslation.button.prev}
-                  </Button>
-                )}
-                {step === 9 ? (
-                  <Button
-                    form={`${step === 9 && 'eighthForm'}`}
-                    className="w-full lg:mr-auto lg:w-72 rounded-full py-4 font-bold"
-                    disabled={formErrors && true}
-                    variant={`${formErrors ? 'disabled' : 'primary'}`}
-                  >
-                    {formTranslation.button.submit}
-                  </Button>
-                ) : (
-                  step !== 10 && (
-                    <Button
-                      form={`${
-                        stepFromCookies === 2
-                          ? 'firstForm'
-                          : stepFromCookies === 3
-                          ? 'secondForm'
-                          : stepFromCookies === 4
-                          ? 'thirdForm'
-                          : stepFromCookies === 5
-                          ? 'fourthForm'
-                          : stepFromCookies === 6
-                          ? 'fifthForm'
-                          : stepFromCookies === 7
-                          ? 'sixthForm'
-                          : stepFromCookies === 8
-                          ? 'seventhForm'
-                          : 'eigthForm'
-                      }`}
-                      className="w-32 font-bold ml-auto"
-                      disabled={formErrors && true}
-                      variant={`${formErrors ? 'disabled' : 'primary'}`}
-                    >
-                      {formTranslation.button.next}
-                    </Button>
-                  )
-                )}
-              </div>
-            ) : (
+            {/* Buttons section */}
+
+            {isEditing &&
+            stepFromCookies !== 10 &&
+            reportingPerson === 'myself' ? (
               <Button
                 form={`${
                   stepFromCookies === 2
@@ -235,15 +191,92 @@ const MultiStepForm: React.FC<MultiStepFormProps> = ({ formTranslation }) => {
                     ? 'sixthForm'
                     : stepFromCookies === 8
                     ? 'seventhForm'
-                    : 'eigthForm'
+                    : 'eighthForm'
                 }`}
-                className="w-32 font-bold ml-auto"
-                disabled={formErrors && true}
-                variant={`${formErrors ? 'disabled' : 'primary'}`}
               >
-                {formTranslation.button.next}
+                Save
               </Button>
+            ) : (
+              <>
+                {step !== 1 ? (
+                  <div className="flex  space-x-0 md:space-x-16 justify-between md:flex-row  md:justify-between items-center w-full">
+                    {step !== 10 && (
+                      <Button
+                        className="w-32 mr-auto justify-self-start font-bold"
+                        variant="primary"
+                        onClick={() => dispatch({ type: PREV_STEP })}
+                      >
+                        {formTranslation.button.prev}
+                      </Button>
+                    )}
+                    {step === 10 ? (
+                      <Button
+                        form={`${step === 10 && 'eighthForm'}`}
+                        className="w-full lg:mr-auto lg:w-72 rounded-full py-4 font-bold"
+                        disabled={formErrors && true}
+                        variant={`${formErrors ? 'disabled' : 'primary'}`}
+                      >
+                        {formTranslation.button.submit}
+                      </Button>
+                    ) : (
+                      step !== 10 && (
+                        <Button
+                          form={`${
+                            stepFromCookies === 2
+                              ? 'firstForm'
+                              : stepFromCookies === 3
+                              ? 'secondForm'
+                              : stepFromCookies === 4
+                              ? 'thirdForm'
+                              : stepFromCookies === 5
+                              ? 'fourthForm'
+                              : stepFromCookies === 6
+                              ? 'fifthForm'
+                              : stepFromCookies === 7
+                              ? 'sixthForm'
+                              : stepFromCookies === 8
+                              ? 'seventhForm'
+                              : 'eighthForm'
+                          }`}
+                          className="w-32 font-bold ml-auto"
+                          disabled={formErrors && true}
+                          variant={`${formErrors ? 'disabled' : 'primary'}`}
+                        >
+                          {formTranslation.button.next}
+                        </Button>
+                      )
+                    )}
+                  </div>
+                ) : (
+                  <Button
+                    form={`${
+                      stepFromCookies === 2
+                        ? 'firstForm'
+                        : stepFromCookies === 3
+                        ? 'secondForm'
+                        : stepFromCookies === 4
+                        ? 'thirdForm'
+                        : stepFromCookies === 5
+                        ? 'fourthForm'
+                        : stepFromCookies === 6
+                        ? 'fifthForm'
+                        : stepFromCookies === 7
+                        ? 'sixthForm'
+                        : stepFromCookies === 8
+                        ? 'seventhForm'
+                        : 'eighthForm'
+                    }`}
+                    className="w-32 font-bold ml-auto"
+                    disabled={formErrors && true}
+                    variant={`${formErrors ? 'disabled' : 'primary'}`}
+                  >
+                    {formTranslation.button.next}
+                  </Button>
+                )}
+              </>
             )}
+
+            {/* End of Buttons section */}
           </div>
         )}
       </div>

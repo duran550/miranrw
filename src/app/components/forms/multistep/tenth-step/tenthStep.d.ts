@@ -3,5 +3,13 @@ export type TenthStepProps = {
     title: string;
     description: string;
     buttonText: string;
+    validation: {
+      title: string;
+      data: Array<{ id: string; name: string; label: string; value: string }>;
+    };
   };
+};
+
+export type TenthFormValues = {
+  validation: string;
 };
