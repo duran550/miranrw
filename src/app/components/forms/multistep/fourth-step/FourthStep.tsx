@@ -4,7 +4,7 @@ import { DateCalendar, LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import dayjs, { Dayjs } from 'dayjs';
 import { useFormContext } from '@/app/hooks/useFormContext';
-import { FORM_ERRORS, NEXT_STEP } from '@/app/context/actions';
+import { FORM_ERRORS, LAST_STEP, NEXT_STEP } from '@/app/context/actions';
 import Checkbox from '../../checkbox/Checkbox';
 import InputField from '../../text-field/InputField';
 import { SubmitHandler, useForm } from 'react-hook-form';
@@ -17,7 +17,7 @@ type FourthStepProps = {
 };
 
 const FourthStep: React.FC<FourthStepProps> = ({ fourthStepTranslation }) => {
-  const { dispatch } = useFormContext();
+  const { dispatch, reportingPerson, isEditing } = useFormContext();
   const [valueDate, setValueDate] = React.useState<Dayjs | null>(dayjs());
   const [question] = useState<string>(fourthStepTranslation?.title);
 
@@ -73,7 +73,9 @@ const FourthStep: React.FC<FourthStepProps> = ({ fourthStepTranslation }) => {
     let dataWithQuestion = { question, step, ...dataWithDate };
     setFormCookies(dataWithQuestion, THIRD_FORM);
 
-    dispatch({ type: NEXT_STEP, payload: 'DATA 1' });
+    isEditing && reportingPerson === 'myself'
+      ? dispatch({ type: LAST_STEP, payload: 10 })
+      : dispatch({ type: NEXT_STEP, payload: 'DATA 1' });
   };
 
   return (

@@ -753,7 +753,27 @@
         "tenthStep": {
           "title": "Thank you for your report.",
           "description": "You can access our page with links to counseling here.",
-          "buttonText": "Referral Counseling"
+          "buttonText": "Referral Counseling",
+          "validation": {
+            "title": "Consent",
+            "description": "Multiple choices possible",
+            "data": [
+              {
+                "id": "validate1",
+                "name": "validation",
+                "label": "I consent to sharing my information with the relevant reporting agencies in case of multiple discrimination, in an anonymized form (hyperlink to the list).",
+                "value": "Ich willige ein, dass meine Eingaben im Falle von Mehrfachdiskriminierung anonymisiert mit den zuständigen Meldestellen (Hyperlink zu Auflistung) geteilt werden.",
+                "checked": false
+              },
+              {
+                "id": "validation2",
+                "name": "validation",
+                "label": "I hereby confirm the accuracy of my information, acknowledge the data protection regulations (hyperlink to data protection concept), and consent to the described processing of my personal data.*",
+                "value": "Hiermit bestätige ich die Richtigkeit meiner Angaben, die Kenntnisnahme der Datenschutzbestimmungen (Hyperlink Datenschutzkonzept) und dass ich den darin beschriebenen Verarbeitungen meiner personenbezogenen Daten zustimme.*",
+                "checked": false
+              }
+            ]
+          }
         }
       },
       "formFields": {},

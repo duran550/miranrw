@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { useFormContext } from '@/app/hooks/useFormContext';
-import { FORM_ERRORS, NEXT_STEP } from '@/app/context/actions';
+import { FORM_ERRORS, LAST_STEP, NEXT_STEP } from '@/app/context/actions';
 import Checkbox from '../../checkbox/Checkbox';
 import FormHeader from '../header/header';
 import InputField from '../../text-field/InputField';
@@ -24,7 +24,7 @@ type SeventhStepValues = {
 const SeventhStep: React.FC<SeventhStepProps> = ({
   seventhStepTranslation,
 }) => {
-  const { dispatch } = useFormContext();
+  const { dispatch, isEditing, reportingPerson } = useFormContext();
 
   const [question] = useState<string>(seventhStepTranslation?.title);
 
@@ -70,7 +70,9 @@ const SeventhStep: React.FC<SeventhStepProps> = ({
     let dataWithQuestion = { question, step, ...data };
     setFormCookies(dataWithQuestion, SIXTH_FORM);
 
-    dispatch({ type: NEXT_STEP, payload: 'DATA 1' });
+    isEditing && reportingPerson === 'myself'
+      ? dispatch({ type: LAST_STEP, payload: 10 })
+      : dispatch({ type: NEXT_STEP, payload: 'DATA 1' });
   };
 
   return (

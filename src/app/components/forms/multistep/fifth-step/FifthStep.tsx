@@ -5,12 +5,12 @@ import RadioSingle from '../../radio/RadioSingle';
 import InputField from '../../text-field/InputField';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { useFormContext } from '@/app/hooks/useFormContext';
-import { FORM_ERRORS, NEXT_STEP } from '@/app/context/actions';
+import { FORM_ERRORS, LAST_STEP, NEXT_STEP } from '@/app/context/actions';
 import { getFormCookies, getFormStep, setFormCookies } from '@/cookies/cookies';
 import { FOURTH_FORM } from '@/cookies/cookies.d';
 
 const FifthStep: React.FC<FifthStepProps> = ({ fifthStepTranslation }) => {
-  const { dispatch } = useFormContext();
+  const { dispatch, reportingPerson, isEditing } = useFormContext();
   const [question] = useState<string>(fifthStepTranslation?.title);
 
   const {
@@ -55,7 +55,9 @@ const FifthStep: React.FC<FifthStepProps> = ({ fifthStepTranslation }) => {
     let dataWithQuestion = { question, step, ...data };
     setFormCookies(dataWithQuestion, FOURTH_FORM);
 
-    dispatch({ type: NEXT_STEP, payload: 'DATA 1' });
+    isEditing && reportingPerson === 'myself'
+      ? dispatch({ type: LAST_STEP, payload: 10 })
+      : dispatch({ type: NEXT_STEP, payload: 'DATA 1' });
   };
 
   return (

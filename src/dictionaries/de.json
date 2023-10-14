@@ -754,7 +754,27 @@
         "tenthStep": {
           "title": "Vielen Dank für deine Meldung.",
           "description": "Hier gelangst Du zu unserer Seite mit Links zur Beratung.",
-          "buttonText": "Verweisberatung"
+          "buttonText": "Verweisberatung",
+          "validation": {
+            "title": "Einwilligung",
+            "description": "Mehrfachnennung möglich",
+            "data": [
+              {
+                "id": "validate1",
+                "name": "validation",
+                "label": "Ich willige ein, dass meine Eingaben im Falle von Mehrfachdiskriminierung anonymisiert mit den zuständigen Meldestellen (Hyperlink zu Auflistung) geteilt werden.",
+                "value": "Ich willige ein, dass meine Eingaben im Falle von Mehrfachdiskriminierung anonymisiert mit den zuständigen Meldestellen (Hyperlink zu Auflistung) geteilt werden.",
+                "checked": false
+              },
+              {
+                "id": "validation2",
+                "name": "validation",
+                "label": "Hiermit bestätige ich die Richtigkeit meiner Angaben, die Kenntnisnahme der Datenschutzbestimmungen (Hyperlink Datenschutzkonzept) und dass ich den darin beschriebenen Verarbeitungen meiner personenbezogenen Daten zustimme.*",
+                "value": "Hiermit bestätige ich die Richtigkeit meiner Angaben, die Kenntnisnahme der Datenschutzbestimmungen (Hyperlink Datenschutzkonzept) und dass ich den darin beschriebenen Verarbeitungen meiner personenbezogenen Daten zustimme.*",
+                "checked": false
+              }
+            ]
+          }
         }
       },
       "formFields": {},
