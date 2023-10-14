@@ -121,11 +121,13 @@ const TenthStep: React.FC<TenthStepProps> = ({ tenthStepTranslation }) => {
           question={sixthForm?.question}
           answer={[...sixthForm?.typeOfDiscrimination, sixthForm?.otherForm]}
         />
-        <EditBlock
-          step={seventhForm?.step}
-          question={seventhForm?.question}
-          answer={[...seventhForm?.formOfDiscYes, seventhForm?.formOfDisc]}
-        />
+        {seventhForm && seventhForm?.formOfDiscYes && (
+          <EditBlock
+            step={seventhForm?.step}
+            question={seventhForm?.question}
+            answer={[...seventhForm?.formOfDiscYes, seventhForm?.formOfDisc]}
+          />
+        )}
         {reportingPerson !== 'organization' && (
           <>
             <EditBlock
