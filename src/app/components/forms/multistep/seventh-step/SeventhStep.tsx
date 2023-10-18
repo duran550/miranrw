@@ -24,7 +24,7 @@ type SeventhStepValues = {
 const SeventhStep: React.FC<SeventhStepProps> = ({
   seventhStepTranslation,
 }) => {
-  const { dispatch, isEditing, reportingPerson } = useFormContext();
+  const { dispatch, isEditing, reportingPerson, formErrors } = useFormContext();
 
   const [question] = useState<string>(seventhStepTranslation?.title);
 
@@ -60,9 +60,20 @@ const SeventhStep: React.FC<SeventhStepProps> = ({
         setValue('typeOfDiscrimination', formValues?.typeOfDiscrimination);
       otherForm !== formValues?.otherForm &&
         setValue('otherForm', formValues?.otherForm);
+    } else if (
+      (typeOfDiscrimination &&
+        typeOfDiscrimination?.includes('Anderes, und zwar') &&
+        otherForm.length <= 3) ||
+      (typeOfDiscrimination &&
+        typeOfDiscrimination?.includes('Other, specify') &&
+        otherForm?.length <= 3)
+    ) {
+      dispatch({ type: FORM_ERRORS, payload: true });
+    } else {
+      dispatch({ type: FORM_ERRORS, payload: false });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [typeOfDiscrimination, otherForm]);
 
   // Triggered when submitting form
   const onSubmit: SubmitHandler<SeventhStepValues> = (data) => {
@@ -108,6 +119,13 @@ const SeventhStep: React.FC<SeventhStepProps> = ({
       ) : (
         ''
       )}
+       <div>
+        {formErrors && otherForm?.length !== 0 && (
+          <label className="text-red-500 text-xs">
+            A minimum of 4 Characters is expected
+          </label>
+        )}
+      </div>
     </form>
   );
 };

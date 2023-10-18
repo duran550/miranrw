@@ -22,7 +22,7 @@ type SixthStepValues = {
 };
 
 const SixthStep: React.FC<SixthStepProps> = ({ sixthStepTranslation }) => {
-  const { dispatch, isEditing, reportingPerson } = useFormContext();
+  const { dispatch, isEditing, reportingPerson, formErrors } = useFormContext();
   const [question] = useState<string>(sixthStepTranslation?.title);
 
   const {
@@ -37,7 +37,6 @@ const SixthStep: React.FC<SixthStepProps> = ({ sixthStepTranslation }) => {
   let otherForm = watch('otherForm');
 
   // Getting form cookies
-
   useEffect(() => {
     let formValues: {
       formOfDiscrimination: string[];
@@ -45,23 +44,21 @@ const SixthStep: React.FC<SixthStepProps> = ({ sixthStepTranslation }) => {
       question: string;
     } = getFormCookies(FIFTH_FORM);
 
-    dispatch({ type: FORM_ERRORS, payload: true });
-
-    if (formOfDiscrimination?.length !== 0) {
-      dispatch({ type: FORM_ERRORS, payload: false });
-    } else {
-      dispatch({ type: FORM_ERRORS, payload: true });
-    }
-
+    // dispatch({ type: FORM_ERRORS, payload: false });
     if (formValues) {
       dispatch({ type: FORM_ERRORS, payload: false });
       formOfDiscrimination !== formValues?.formOfDiscrimination &&
         setValue('formOfDiscrimination', formValues?.formOfDiscrimination);
       otherForm !== formValues?.otherForm &&
         setValue('otherForm', formValues?.otherForm);
+    } else if (formOfDiscrimination && formOfDiscrimination?.includes('Anderes, und zwar') && otherForm?.length <= 3 || formOfDiscrimination && formOfDiscrimination?.includes('Other, specify') && otherForm?.length <= 3) {
+      dispatch({ type: FORM_ERRORS, payload: true });
+    } 
+    else {
+      dispatch({ type: FORM_ERRORS, payload: false });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [formOfDiscrimination, otherForm]);
 
   // Triggered when submitting form
   const onSubmit: SubmitHandler<SixthStepValues> = (data) => {
@@ -107,6 +104,13 @@ const SixthStep: React.FC<SixthStepProps> = ({ sixthStepTranslation }) => {
       ) : (
         ''
       )}
+      <div>
+        {formErrors && otherForm?.length !== 0 && (
+          <label className="text-red-500 text-xs">
+            A minimum of 4 Characters is expected
+          </label>
+        )}
+      </div>
     </form>
   );
 };

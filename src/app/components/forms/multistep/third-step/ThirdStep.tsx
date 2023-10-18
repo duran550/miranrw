@@ -19,7 +19,7 @@ type ThirdStepProps = {
 };
 
 const ThirdStep: React.FC<ThirdStepProps> = ({ thirdStepTranslation }) => {
-  const { dispatch, reportingPerson, isEditing } = useFormContext();
+  const { dispatch, reportingPerson, isEditing, formErrors } = useFormContext();
   const [question] = useState<string>(thirdStepTranslation?.title);
 
   const {
@@ -30,6 +30,7 @@ const ThirdStep: React.FC<ThirdStepProps> = ({ thirdStepTranslation }) => {
     formState: { errors },
   } = useForm<ThirdFormValues>();
 
+  // const watchAllFields = watch();
   let description: string = watch('description');
   // Getting form cookies
   let formValues: { description: string; question: string } =
@@ -80,7 +81,13 @@ const ThirdStep: React.FC<ThirdStepProps> = ({ thirdStepTranslation }) => {
           props={register('description')}
           title=""
           placeholder={thirdStepTranslation?.placeholder}
+          type="text"
         />
+        {formErrors && description.length !== 0 && (
+          <label className="text-red-500 text-xs">
+            A minimum of 50 Characters is expected
+          </label>
+        )}
         <p className="flex items-center mt-4 text-sm">
           <span className="text-red-500 mr-2">*</span>
           {thirdStepTranslation?.disclaimer}
