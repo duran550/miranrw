@@ -11,9 +11,10 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 import { FourthFormValues } from './fourthStep';
 import { getFormCookies, getFormStep, setFormCookies } from '@/cookies/cookies';
 import { THIRD_FORM } from '@/cookies/cookies.d';
-import {DatePicker, ConfigProvider} from 'antd';
+import { DatePicker, ConfigProvider } from 'antd';
 import { DatePickerProps } from 'antd/lib';
-
+// Date Picker
+const { RangePicker } = DatePicker;
 type FourthStepProps = {
   fourthStepTranslation: { title: string; description: string };
 };
@@ -43,10 +44,9 @@ const FourthStep: React.FC<FourthStepProps> = ({ fourthStepTranslation }) => {
     dateRangeState: any;
   } = getFormCookies(THIRD_FORM);
 
-
   useEffect(() => {
     dispatch({ type: FORM_ERRORS, payload: false });
-    if (!dateRange && datePeriod ) {
+    if (!dateRange && datePeriod) {
       dispatch({ type: FORM_ERRORS, payload: true });
     } else {
       dispatch({ type: FORM_ERRORS, payload: false });
@@ -58,20 +58,19 @@ const FourthStep: React.FC<FourthStepProps> = ({ fourthStepTranslation }) => {
       datePeriod !== formValues?.datePeriod &&
         setValue('datePeriod', formValues?.datePeriod);
 
-      dateRange !== formValues?.dateRange &&
-        setValue('dateRange', formValues?.dateRange);
-
       formValues?.valueDate && setValueDate(dayjs(formValues?.valueDate));
 
       dispatch({ type: FORM_ERRORS, payload: false });
     }
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [dateRange, datePeriod, formValues?.valueDate, formValues?.dateRange]);
+  }, [datePeriod, formValues?.valueDate]);
 
   // Triggered when submitting form
   const onSubmit: SubmitHandler<FourthFormValues> = (data) => {
-    let dataWithDate = { valueDate, ...data };
+    let dateRangeState = dateRange;
+
+    let dataWithDate = { valueDate, dateRangeState, ...data };
     let step = getFormStep();
     let dataWithQuestion = { question, step, ...dataWithDate };
     setFormCookies(dataWithQuestion, THIRD_FORM);
@@ -81,21 +80,18 @@ const FourthStep: React.FC<FourthStepProps> = ({ fourthStepTranslation }) => {
       : dispatch({ type: NEXT_STEP, payload: 'DATA 1' });
   };
 
-    // Handle default value
+  // Handle default value
 
   function disabledDate(current: any) {
     // Disable dates after today
     return current && current.isAfter(dayjs().endOf('day'));
   }
-  
-  // Date Picker
-  const { RangePicker } = DatePicker;
 
   // end date today
-  const endate = "today";
+  const endate = 'today';
 
-   // On range picker change
-   function onDateRangeChange(date: any, dateString: any) {
+  // On range picker change
+  function onDateRangeChange(date: any, dateString: any) {
     // console.log('range', date);
     setDateRange(date);
   }
@@ -136,18 +132,18 @@ const FourthStep: React.FC<FourthStepProps> = ({ fourthStepTranslation }) => {
 
         {datePeriod && (
           <div className="mt-2 mb-8">
-          <RangePicker
-            onChange={onDateRangeChange}
-            disabledDate={disabledDate}
-            defaultValue={
-              formValues?.dateRangeState && [
-                dayjs(formValues?.dateRangeState[0]),
-                dayjs(formValues?.dateRangeState[1]),
-              ]
-            }
-            className="w-full py-3 border border-gray-300"
-          />
-        </div>
+            <RangePicker
+              onChange={onDateRangeChange}
+              disabledDate={disabledDate}
+              defaultValue={
+                formValues?.dateRangeState && [
+                  dayjs(formValues?.dateRangeState[0]),
+                  dayjs(formValues?.dateRangeState[1]),
+                ]
+              }
+              className="w-full py-3 border border-gray-300"
+            />
+          </div>
         )}
       </div>
     </form>

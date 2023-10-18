@@ -83,7 +83,7 @@ const ThirdStep: React.FC<ThirdStepProps> = ({ thirdStepTranslation }) => {
           placeholder={thirdStepTranslation?.placeholder}
           type="text"
         />
-        {formErrors && description.length !== 0 && (
+        {formErrors && description?.length !== 0 && (
           <label className="text-red-500 text-xs">
             A minimum of 50 Characters is expected
           </label>

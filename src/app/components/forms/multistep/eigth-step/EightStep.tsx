@@ -53,12 +53,21 @@ const EightStep: React.FC<EightStepProps> = ({ eightStepTranslation }) => {
         setValue('formOfDiscYesFreeField', formValues?.formOfDiscYesFreeField);
     }
 
-    {formOfDisc === 'Ja, und zwar:' && dispatch({ type: FORM_ERRORS, payload: true });}
-    {formOfDisc === 'Ja, und zwar:' && formOfDiscYes?.length > 0 && !formOfDiscYes?.includes('Anderes, und zwar:') && dispatch({ type: FORM_ERRORS, payload: false });}
+    {
+      formOfDisc === 'Ja, und zwar:' &&
+        dispatch({ type: FORM_ERRORS, payload: true });
+    }
+    {
+      formOfDisc === 'Ja, und zwar:' &&
+        formOfDiscYes?.length > 0 &&
+        !formOfDiscYes?.includes('Anderes, und zwar:') &&
+        dispatch({ type: FORM_ERRORS, payload: false });
+    }
 
     if (formOfDiscYesFreeField?.length >= 4) {
-      dispatch({ type: FORM_ERRORS, payload: false })
+      dispatch({ type: FORM_ERRORS, payload: false });
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [formOfDiscYes, formOfDiscYesFreeField, formOfDisc]);
 
   // Triggered when submitting form
@@ -103,12 +112,15 @@ const EightStep: React.FC<EightStepProps> = ({ eightStepTranslation }) => {
               <InputField name="" props={register('formOfDiscYesFreeField')} />
             )}
             <div>
-        {formOfDiscYes?.length > 0 && formOfDiscYes?.includes('Anderes, und zwar:') && formErrors && formOfDiscYesFreeField?.length !== 0 && (
-          <label className="text-red-500 text-xs">
-            A minimum of 4 Characters is expected
-          </label>
-        )}
-      </div>
+              {formOfDiscYes?.length > 0 &&
+                formOfDiscYes?.includes('Anderes, und zwar:') &&
+                formErrors &&
+                formOfDiscYesFreeField?.length !== 0 && (
+                  <label className="text-red-500 text-xs">
+                    A minimum of 4 Characters is expected
+                  </label>
+                )}
+            </div>
           </div>
         </div>
       </div>
