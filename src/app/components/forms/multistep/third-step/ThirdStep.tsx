@@ -65,16 +65,6 @@ const ThirdStep: React.FC<ThirdStepProps> = ({ thirdStepTranslation }) => {
       : dispatch({ type: NEXT_STEP, payload: 'DATA 1' });
   };
 
-  // const validationDesc = () => {
-  //   if (watchAllFields.description.length > 0) {
-  //     <label className="text-red-500">
-  //       A minimum of 50 Characters is expected
-  //     </label>
-  //   } else if (watchAllFields.description.length > 50) {
-  //     ""
-  //   }
-  // };
-
   return (
     <div className="relative w-full">
       <form

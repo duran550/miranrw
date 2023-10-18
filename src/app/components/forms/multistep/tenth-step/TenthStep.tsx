@@ -164,17 +164,6 @@ const TenthStep: React.FC<TenthStepProps> = ({ tenthStepTranslation }) => {
           ))}
         </div>
       </div>
-
-      {/* {reportingPerson ==="organization" && }
-      <div className="border lg:bg-white mb-8 md:mb-16 border-primaryColor rounded-lg p-4">
-        <h1 className="font-bold w-64 text-2xl">
-          {tenthStepTranslation?.title}
-        </h1>
-        <p className="mt-2 w-96">{tenthStepTranslation?.description}</p>
-        <Button className="mt-8 w-64 mb-8" onClick={() => clearFormStep()}>
-          {tenthStepTranslation?.buttonText}
-        </Button>
-      </div> */}
     </>
   );
 };

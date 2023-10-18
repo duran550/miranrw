@@ -59,9 +59,6 @@ const EightStep: React.FC<EightStepProps> = ({ eightStepTranslation }) => {
     if (formOfDiscYesFreeField?.length >= 4) {
       dispatch({ type: FORM_ERRORS, payload: false })
     }
-
-    // console.log(formOfDiscYes?.length > 0 && !formOfDiscYes?.includes('Anderes, und zwar:'));
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [formOfDiscYes, formOfDiscYesFreeField, formOfDisc]);
 
   // Triggered when submitting form

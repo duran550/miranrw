@@ -33,15 +33,14 @@ const FifthStep: React.FC<FifthStepProps> = ({ fifthStepTranslation }) => {
   useEffect(() => {
     dispatch({ type: FORM_ERRORS, payload: false });
 
-    // { location?.length <= 3 && dispatch({ type: FORM_ERRORS, payload: true })}
-     {fifthStepTranslation &&  dispatch({ type: FORM_ERRORS, payload: false })}
-
-    if(location?.length <= 3) {
+    if(location?.length <= 3 && locationOnline == fifthStepTranslation?.secondOption?.value) {
       dispatch({ type: FORM_ERRORS, payload: true })
-    } 
-
-    console.log(fifthStepTranslation)
-    // console.log(location, "location")
+    }else if(!locationOnline) {
+      dispatch({ type: FORM_ERRORS, payload: true })
+    } else {
+      dispatch({ type: FORM_ERRORS, payload: false })
+    }
+    
 
     if (formValues) {
       dispatch({ type: FORM_ERRORS, payload: false });

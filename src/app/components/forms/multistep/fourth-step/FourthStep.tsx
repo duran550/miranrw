@@ -33,7 +33,6 @@ const FourthStep: React.FC<FourthStepProps> = ({ fourthStepTranslation }) => {
   } = useForm<FourthFormValues>();
 
   let datePeriod: string = watch('datePeriod');
-  // let dateRange = watch('dateRange');
 
   // Getting form cookies
   let formValues: {
