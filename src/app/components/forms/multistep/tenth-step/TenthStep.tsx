@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { TenthFormValues, TenthStepProps } from './tenthStep';
-import { Button } from '@/app/components/button/Button';
 import { useFormContext } from '@/app/hooks/useFormContext';
-import { clearFormStep, getFormCookies } from '@/cookies/cookies';
+import { clearFormCookies, getFormCookies } from '@/cookies/cookies';
 import FormHeader from '../header/header';
 import Checkbox from '../../checkbox/Checkbox';
 import { SubmitHandler, useForm } from 'react-hook-form';
@@ -12,23 +11,19 @@ import {
   FIFTH_FORM,
   FIRST_FORM,
   FOURTH_FORM,
-  NINETH_FORM,
   SECOND_FORM,
   SEVENTH_FORM,
   SIXTH_FORM,
   THIRD_FORM,
 } from '@/cookies/cookies.d';
-
-type formCookies = {};
+import { FORM_ERRORS, NEXT_STEP } from '@/app/context/actions';
 
 const TenthStep: React.FC<TenthStepProps> = ({ tenthStepTranslation }) => {
   const { dispatch, reportingPerson } = useFormContext();
-  const [formData, setFormData] = useState<any>();
   const {
     register,
-    handleSubmit,
     watch,
-    setValue,
+    handleSubmit,
     formState: { errors },
   } = useForm<TenthFormValues>();
 
@@ -40,7 +35,7 @@ const TenthStep: React.FC<TenthStepProps> = ({ tenthStepTranslation }) => {
     question: string;
     step: number;
     valueDate: string;
-    dateRange: string;
+    dateRangeState: string;
     datePeriod: boolean;
   } = getFormCookies(THIRD_FORM);
   let fourthForm: {
@@ -82,70 +77,107 @@ const TenthStep: React.FC<TenthStepProps> = ({ tenthStepTranslation }) => {
     step: number;
   } = getFormCookies(EIGTH_FORM);
   console.log(eighthForm);
-  let ninethForm = getFormCookies(NINETH_FORM);
+
+  let validation = watch('validation');
+
+  const onSubmit: SubmitHandler<any> = (data) => {
+    clearFormCookies();
+    dispatch({ type: NEXT_STEP, payload: 'DATA 1' });
+  };
+
+  useEffect(() => {
+    dispatch({ type: FORM_ERRORS, payload: true });
+    validation?.length === 0
+      ? dispatch({ type: FORM_ERRORS, payload: true })
+      : dispatch({ type: FORM_ERRORS, payload: false });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [validation]);
 
   return (
-    <>
+    <form onSubmit={handleSubmit(onSubmit)} id="eighthForm">
       <h1 className="font-bold text-2xl mb-4">Are you okay with this data ?</h1>
       <div>
         <EditBlock
-          step={firstForm.step}
+          step={firstForm?.step}
           question={firstForm?.question}
           answer={firstForm?.identity}
         />
 
+        {secondForm && (
+          <EditBlock
+            step={secondForm.step}
+            question={secondForm?.question}
+            answer={secondForm?.description}
+          />
+        )}
+        {thirdForm && (
+          <EditBlock
+            step={thirdForm.step}
+            question={thirdForm?.question}
+            answer={
+              thirdForm?.datePeriod
+                ? thirdForm?.dateRangeState
+                : thirdForm?.valueDate
+            }
+          />
+        )}
         <EditBlock
-          step={secondForm.step}
-          question={secondForm?.question}
-          answer={secondForm?.description}
-        />
-        <EditBlock
-          step={thirdForm.step}
-          question={thirdForm?.question}
-          answer={
-            thirdForm?.datePeriod ? thirdForm?.dateRange : thirdForm?.valueDate
-          }
-        />
-        <EditBlock
-          step={fourthForm.step}
+          step={fourthForm?.step}
           question={fourthForm?.question}
-          answer={[fourthForm?.location, fourthForm?.locationOnline]}
+          answer={[
+            fourthForm?.location,
+            fourthForm?.locationOnline && 'online',
+          ]}
         />
-        <EditBlock
-          step={fifthForm?.step}
-          question={fifthForm?.question}
-          answer={[...fifthForm?.formOfDiscrimination, fifthForm?.otherForm]}
-        />
-        <EditBlock
-          step={sixthForm?.step}
-          question={sixthForm?.question}
-          answer={[...sixthForm?.typeOfDiscrimination, sixthForm?.otherForm]}
-        />
-        <EditBlock
-          step={seventhForm?.step}
-          question={seventhForm?.question}
-          answer={[...seventhForm?.formOfDiscYes, seventhForm?.formOfDisc]}
-        />
+        {fifthForm && fifthForm?.formOfDiscrimination && (
+          <EditBlock
+            step={fifthForm?.step}
+            question={fifthForm?.question}
+            answer={[...fifthForm?.formOfDiscrimination, fifthForm?.otherForm]}
+          />
+        )}
+
+        {sixthForm && sixthForm?.typeOfDiscrimination && (
+          <EditBlock
+            step={sixthForm?.step}
+            question={sixthForm?.question}
+            answer={[...sixthForm?.typeOfDiscrimination, sixthForm?.otherForm]}
+          />
+        )}
+        {seventhForm && seventhForm?.formOfDiscYes && (
+          <EditBlock
+            step={seventhForm?.step}
+            question={seventhForm?.question}
+            answer={[...seventhForm?.formOfDiscYes, seventhForm?.formOfDisc]}
+          />
+        )}
         {reportingPerson !== 'organization' && (
           <>
-            <EditBlock
-              step={eighthForm?.step}
-              question={eighthForm?.question1}
-              answer={[...eighthForm?.gender, eighthForm?.genderFreeField]}
-            />
-            <EditBlock
-              step={eighthForm?.step}
-              question={eighthForm?.question2}
-              answer={[
-                ...eighthForm?.sexualOrientation,
-                eighthForm?.sexualOrientationFreeField,
-              ]}
-            />
-            <EditBlock
-              step={eighthForm?.step}
-              question={eighthForm?.question3}
-              answer={eighthForm?.age}
-            />
+            {eighthForm && eighthForm?.gender && (
+              <EditBlock
+                step={eighthForm?.step}
+                question={eighthForm?.question1}
+                answer={[...eighthForm?.gender, eighthForm?.genderFreeField]}
+              />
+            )}
+            {eighthForm && eighthForm?.sexualOrientation && (
+              <EditBlock
+                step={eighthForm?.step}
+                question={eighthForm?.question2}
+                answer={[
+                  ...eighthForm?.sexualOrientation,
+                  eighthForm?.sexualOrientationFreeField,
+                ]}
+              />
+            )}
+
+            {eighthForm && (
+              <EditBlock
+                step={eighthForm?.step}
+                question={eighthForm?.question3}
+                answer={eighthForm?.age}
+              />
+            )}
           </>
         )}
       </div>
@@ -164,7 +196,7 @@ const TenthStep: React.FC<TenthStepProps> = ({ tenthStepTranslation }) => {
           ))}
         </div>
       </div>
-    </>
+    </form>
   );
 };
 

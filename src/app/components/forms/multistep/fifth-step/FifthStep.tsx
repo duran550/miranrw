@@ -33,28 +33,36 @@ const FifthStep: React.FC<FifthStepProps> = ({ fifthStepTranslation }) => {
   useEffect(() => {
     dispatch({ type: FORM_ERRORS, payload: false });
 
-    if(location?.length <= 3 && locationOnline == fifthStepTranslation?.secondOption?.value) {
-      dispatch({ type: FORM_ERRORS, payload: true })
-    }else if(!locationOnline) {
-      dispatch({ type: FORM_ERRORS, payload: true })
+    if (
+      location?.length <= 3 &&
+      locationOnline == fifthStepTranslation?.secondOption?.value
+    ) {
+      dispatch({ type: FORM_ERRORS, payload: true });
+    } else if (!locationOnline) {
+      dispatch({ type: FORM_ERRORS, payload: true });
     } else {
-      dispatch({ type: FORM_ERRORS, payload: false })
+      dispatch({ type: FORM_ERRORS, payload: false });
     }
-    
 
-    if (formValues) {
+    if (formValues && !locationOnline && !location) {
       dispatch({ type: FORM_ERRORS, payload: false });
       locationOnline !== formValues?.locationOnline &&
         setValue('locationOnline', formValues?.locationOnline);
       location !== formValues?.location &&
-        setValue('location', formValues?.location); 
+        setValue('location', formValues?.location);
     }
 
-    if(locationOnline === fifthStepTranslation?.firstOption?.value) {
-      setValue("location", "")
+    if (locationOnline === fifthStepTranslation?.firstOption?.value) {
+      setValue('location', '');
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [formValues?.location, formValues?.locationOnline, location?.length, locationOnline, location ]);
+  }, [
+    formValues?.location,
+    formValues?.locationOnline,
+    location?.length,
+    locationOnline,
+    location,
+  ]);
 
   // Triggered when submitting form
   const onSubmit: SubmitHandler<FifthFormValues> = (data) => {
@@ -100,15 +108,14 @@ const FifthStep: React.FC<FifthStepProps> = ({ fifthStepTranslation }) => {
               name="location"
               placeholder=""
               props={register('location')}
-              title=""
             />
           )}
           <div>
-            {formErrors && location?.length > 0 &&  (
-                <label className="text-red-500 text-xs">
-                  A minimum of 3 Characters is expected
-                </label>
-              )}
+            {formErrors && location?.length > 0 && (
+              <label className="text-red-500 text-xs">
+                A minimum of 3 Characters is expected
+              </label>
+            )}
           </div>
         </div>
       </div>

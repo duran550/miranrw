@@ -17,6 +17,7 @@ import TenthStep from './tenth-step/TenthStep';
 import ThirdStepOrganization from './third-step/ThirdStepOrganization';
 import FourthStepOrganization from './fourth-step/FourthStepOrganization';
 import { getFormStep } from '@/cookies/cookies';
+import EleventhStep from './eleventh-step/EleventhStep';
 
 type MultiStepFormValuesProps = {
   stepper: {
@@ -54,7 +55,7 @@ const MultiStepForm: React.FC<MultiStepFormProps> = ({ formTranslation }) => {
           />
         ) : (
           <div>
-            {step === 1 || step === 10 ? (
+            {step === 1 || step === 10 || step === 11 ? (
               ''
             ) : (
               <Stepper
@@ -114,10 +115,12 @@ const MultiStepForm: React.FC<MultiStepFormProps> = ({ formTranslation }) => {
                   <NinethStep
                     ninethStepTranslation={formTranslation?.stepper?.ninethStep}
                   />
-                ) : (
+                ) : step === 10 ? (
                   <TenthStep
                     tenthStepTranslation={formTranslation?.stepper?.tenthStep}
                   />
+                ) : (
+                  <EleventhStep />
                 )}
               </div>
             ) : (
@@ -174,6 +177,7 @@ const MultiStepForm: React.FC<MultiStepFormProps> = ({ formTranslation }) => {
 
             {isEditing &&
             stepFromCookies !== 10 &&
+            stepFromCookies !== 11 &&
             reportingPerson === 'myself' ? (
               <Button
                 form={`${
@@ -200,7 +204,7 @@ const MultiStepForm: React.FC<MultiStepFormProps> = ({ formTranslation }) => {
               <>
                 {step !== 1 ? (
                   <div className="flex  space-x-0 md:space-x-16 justify-between md:flex-row  md:justify-between items-center w-full">
-                    {step !== 10 && (
+                    {step !== 10 && step !== 11 && (
                       <Button
                         className="w-32 mr-auto justify-self-start font-bold"
                         variant="primary"
@@ -219,7 +223,8 @@ const MultiStepForm: React.FC<MultiStepFormProps> = ({ formTranslation }) => {
                         {formTranslation.button.submit}
                       </Button>
                     ) : (
-                      step !== 10 && (
+                      step !== 10 &&
+                      step !== 11 && (
                         <Button
                           form={`${
                             stepFromCookies === 2
