@@ -11,6 +11,8 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 import { FourthFormValues } from './fourthStep';
 import { getFormCookies, getFormStep, setFormCookies } from '@/cookies/cookies';
 import { THIRD_FORM } from '@/cookies/cookies.d';
+import {DatePicker, ConfigProvider} from 'antd';
+import { DatePickerProps } from 'antd/lib';
 
 type FourthStepProps = {
   fourthStepTranslation: { title: string; description: string };
@@ -20,6 +22,7 @@ const FourthStep: React.FC<FourthStepProps> = ({ fourthStepTranslation }) => {
   const { dispatch, reportingPerson, isEditing } = useFormContext();
   const [valueDate, setValueDate] = React.useState<Dayjs | null>(dayjs());
   const [question] = useState<string>(fourthStepTranslation?.title);
+  const [dateRange, setDateRange] = useState<any>();
 
   const {
     register,
@@ -30,7 +33,7 @@ const FourthStep: React.FC<FourthStepProps> = ({ fourthStepTranslation }) => {
   } = useForm<FourthFormValues>();
 
   let datePeriod: string = watch('datePeriod');
-  let dateRange = watch('dateRange');
+  // let dateRange = watch('dateRange');
 
   // Getting form cookies
   let formValues: {
@@ -38,12 +41,13 @@ const FourthStep: React.FC<FourthStepProps> = ({ fourthStepTranslation }) => {
     question: string;
     dateRange: string;
     valueDate: any;
+    dateRangeState: any;
   } = getFormCookies(THIRD_FORM);
 
-  useEffect(() => {
-    dispatch({ type: FORM_ERRORS, payload: true });
 
-    if (!dateRange && datePeriod) {
+  useEffect(() => {
+    dispatch({ type: FORM_ERRORS, payload: false });
+    if (!dateRange && datePeriod ) {
       dispatch({ type: FORM_ERRORS, payload: true });
     } else {
       dispatch({ type: FORM_ERRORS, payload: false });
@@ -64,7 +68,7 @@ const FourthStep: React.FC<FourthStepProps> = ({ fourthStepTranslation }) => {
     }
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [dateRange, formValues?.valueDate, formValues?.dateRange]);
+  }, [dateRange, datePeriod, formValues?.valueDate, formValues?.dateRange]);
 
   // Triggered when submitting form
   const onSubmit: SubmitHandler<FourthFormValues> = (data) => {
@@ -77,6 +81,25 @@ const FourthStep: React.FC<FourthStepProps> = ({ fourthStepTranslation }) => {
       ? dispatch({ type: LAST_STEP, payload: 10 })
       : dispatch({ type: NEXT_STEP, payload: 'DATA 1' });
   };
+
+    // Handle default value
+
+  function disabledDate(current: any) {
+    // Disable dates after today
+    return current && current.isAfter(dayjs().endOf('day'));
+  }
+  
+  // Date Picker
+  const { RangePicker } = DatePicker;
+
+  // end date today
+  const endate = "today";
+
+   // On range picker change
+   function onDateRangeChange(date: any, dateString: any) {
+    // console.log('range', date);
+    setDateRange(date);
+  }
 
   return (
     <form
@@ -96,6 +119,8 @@ const FourthStep: React.FC<FourthStepProps> = ({ fourthStepTranslation }) => {
               value={valueDate}
               defaultValue={valueDate}
               disabled={datePeriod ? true : false}
+              maxDate={dayjs()}
+              // disabledDate={disabledDate}
               onChange={(newValue) => setValueDate(newValue)}
             />
           </LocalizationProvider>
@@ -111,14 +136,19 @@ const FourthStep: React.FC<FourthStepProps> = ({ fourthStepTranslation }) => {
         />
 
         {datePeriod && (
-          <div className="ml-4">
-            <InputField
-              name="dateRange"
-              placeholder=""
-              props={register('dateRange', { required: true })}
-              title=""
-            />
-          </div>
+          <div className="mt-2 mb-8">
+          <RangePicker
+            onChange={onDateRangeChange}
+            disabledDate={disabledDate}
+            defaultValue={
+              formValues?.dateRangeState && [
+                dayjs(formValues?.dateRangeState[0]),
+                dayjs(formValues?.dateRangeState[1]),
+              ]
+            }
+            className="w-full py-3 border border-gray-300"
+          />
+        </div>
         )}
       </div>
     </form>

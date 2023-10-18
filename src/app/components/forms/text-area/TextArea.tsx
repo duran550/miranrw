@@ -5,6 +5,7 @@ type TextAreaProps = {
   name: string;
   placeholder: string;
   title: string;
+  type:string;
 };
 
 const TextArea: React.FC<TextAreaProps> = ({

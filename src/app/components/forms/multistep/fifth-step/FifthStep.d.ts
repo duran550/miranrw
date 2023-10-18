@@ -12,6 +12,7 @@ export type FifthStepProps = {
       name: string;
       id: string;
       value: string;
+      label:sting
     };
   };
 };

@@ -323,7 +323,8 @@
           "secondOption": {
             "name": "online",
             "id": "place",
-            "value": "freeField"
+            "value": "freeField",
+            "label": "Where did the incident occur"
           }
         },
         "sixthStep": {

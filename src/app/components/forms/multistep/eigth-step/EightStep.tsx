@@ -11,7 +11,7 @@ import { getFormCookies, getFormStep, setFormCookies } from '@/cookies/cookies';
 import { SEVENTH_FORM } from '@/cookies/cookies.d';
 
 const EightStep: React.FC<EightStepProps> = ({ eightStepTranslation }) => {
-  const { dispatch, isEditing, reportingPerson } = useFormContext();
+  const { dispatch, isEditing, reportingPerson, formErrors } = useFormContext();
   const [question] = useState<string>(eightStepTranslation?.title);
 
   const {
@@ -52,8 +52,17 @@ const EightStep: React.FC<EightStepProps> = ({ eightStepTranslation }) => {
       formOfDiscYesFreeField !== formValues?.formOfDiscYesFreeField &&
         setValue('formOfDiscYesFreeField', formValues?.formOfDiscYesFreeField);
     }
+
+    {formOfDisc === 'Ja, und zwar:' && dispatch({ type: FORM_ERRORS, payload: true });}
+    {formOfDisc === 'Ja, und zwar:' && formOfDiscYes?.length > 0 && !formOfDiscYes?.includes('Anderes, und zwar:') && dispatch({ type: FORM_ERRORS, payload: false });}
+
+    if (formOfDiscYesFreeField?.length >= 4) {
+      dispatch({ type: FORM_ERRORS, payload: false })
+    }
+
+    // console.log(formOfDiscYes?.length > 0 && !formOfDiscYes?.includes('Anderes, und zwar:'));
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [formOfDiscYes, formOfDiscYesFreeField, formOfDisc]);
 
   // Triggered when submitting form
   const onSubmit: SubmitHandler<EightFormValues> = (data) => {
@@ -96,6 +105,13 @@ const EightStep: React.FC<EightStepProps> = ({ eightStepTranslation }) => {
             {formOfDiscYes && formOfDiscYes?.includes('Anderes, und zwar:') && (
               <InputField name="" props={register('formOfDiscYesFreeField')} />
             )}
+            <div>
+        {formOfDiscYes?.length > 0 && formOfDiscYes?.includes('Anderes, und zwar:') && formErrors && formOfDiscYesFreeField?.length !== 0 && (
+          <label className="text-red-500 text-xs">
+            A minimum of 4 Characters is expected
+          </label>
+        )}
+      </div>
           </div>
         </div>
       </div>

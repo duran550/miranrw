@@ -10,7 +10,7 @@ import { getFormCookies, getFormStep, setFormCookies } from '@/cookies/cookies';
 import { FOURTH_FORM } from '@/cookies/cookies.d';
 
 const FifthStep: React.FC<FifthStepProps> = ({ fifthStepTranslation }) => {
-  const { dispatch, reportingPerson, isEditing } = useFormContext();
+  const { dispatch, reportingPerson, isEditing, formErrors } = useFormContext();
   const [question] = useState<string>(fifthStepTranslation?.title);
 
   const {
@@ -32,22 +32,30 @@ const FifthStep: React.FC<FifthStepProps> = ({ fifthStepTranslation }) => {
 
   useEffect(() => {
     dispatch({ type: FORM_ERRORS, payload: false });
-    // if (locationOnline) {
-    //   locationOnline === fifthStepTranslation?.secondOption.id &&
-    //     dispatch({ type: FORM_ERRORS, payload: false });
-    // } else {
-    //   dispatch({ type: FORM_ERRORS, payload: true });
-    // }
+
+    // { location?.length <= 3 && dispatch({ type: FORM_ERRORS, payload: true })}
+     {fifthStepTranslation &&  dispatch({ type: FORM_ERRORS, payload: false })}
+
+    if(location?.length <= 3) {
+      dispatch({ type: FORM_ERRORS, payload: true })
+    } 
+
+    console.log(fifthStepTranslation)
+    // console.log(location, "location")
 
     if (formValues) {
       dispatch({ type: FORM_ERRORS, payload: false });
       locationOnline !== formValues?.locationOnline &&
         setValue('locationOnline', formValues?.locationOnline);
       location !== formValues?.location &&
-        setValue('location', formValues?.location);
+        setValue('location', formValues?.location); 
+    }
+
+    if(locationOnline === fifthStepTranslation?.firstOption?.value) {
+      setValue("location", "")
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [formValues?.location, formValues?.locationOnline]);
+  }, [formValues?.location, formValues?.locationOnline, location?.length, locationOnline, location ]);
 
   // Triggered when submitting form
   const onSubmit: SubmitHandler<FifthFormValues> = (data) => {
@@ -83,17 +91,26 @@ const FifthStep: React.FC<FifthStepProps> = ({ fifthStepTranslation }) => {
         <RadioSingle
           value={fifthStepTranslation?.secondOption?.value}
           id={fifthStepTranslation?.secondOption.id}
-          label=""
+          label={fifthStepTranslation?.secondOption?.label}
           name="locationOnline"
           props={register('locationOnline')}
         />
         <div className="w-full">
-          <InputField
-            name=""
-            placeholder=""
-            props={register('location')}
-            title=""
-          />
+          {locationOnline == fifthStepTranslation?.secondOption?.value && (
+            <InputField
+              name="location"
+              placeholder=""
+              props={register('location')}
+              title=""
+            />
+          )}
+          <div>
+            {formErrors && location?.length > 0 &&  (
+                <label className="text-red-500 text-xs">
+                  A minimum of 3 Characters is expected
+                </label>
+              )}
+          </div>
         </div>
       </div>
     </form>
