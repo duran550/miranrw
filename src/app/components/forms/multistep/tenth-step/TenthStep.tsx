@@ -76,7 +76,6 @@ const TenthStep: React.FC<TenthStepProps> = ({ tenthStepTranslation }) => {
     sexualOrientationFreeField: string;
     step: number;
   } = getFormCookies(EIGTH_FORM);
-  console.log(eighthForm);
 
   let validation = watch('validation');
 
@@ -87,9 +86,10 @@ const TenthStep: React.FC<TenthStepProps> = ({ tenthStepTranslation }) => {
 
   useEffect(() => {
     dispatch({ type: FORM_ERRORS, payload: true });
-    validation?.length === 0
-      ? dispatch({ type: FORM_ERRORS, payload: true })
-      : dispatch({ type: FORM_ERRORS, payload: false });
+    validation?.length !== 1 && dispatch({ type: FORM_ERRORS, payload: false })
+    validation?.length === 0 && dispatch({ type: FORM_ERRORS, payload: true })
+    // {validation?.length > 1 && dispatch({ type: FORM_ERRORS, payload: true })}
+      console.log(validation?.length)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [validation]);
 

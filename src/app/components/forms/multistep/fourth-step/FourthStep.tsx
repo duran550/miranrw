@@ -46,7 +46,7 @@ const FourthStep: React.FC<FourthStepProps> = ({ fourthStepTranslation }) => {
 
   useEffect(() => {
     dispatch({ type: FORM_ERRORS, payload: false });
-    if (!dateRange && datePeriod) {
+    if (!dateRange) {
       dispatch({ type: FORM_ERRORS, payload: true });
     } else {
       dispatch({ type: FORM_ERRORS, payload: false });
@@ -64,7 +64,7 @@ const FourthStep: React.FC<FourthStepProps> = ({ fourthStepTranslation }) => {
     }
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [datePeriod, formValues?.valueDate]);
+  }, [formValues?.valueDate]);
 
   // Triggered when submitting form
   const onSubmit: SubmitHandler<FourthFormValues> = (data) => {
