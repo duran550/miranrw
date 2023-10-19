@@ -20,7 +20,7 @@ type FourthStepProps = {
 };
 
 const FourthStep: React.FC<FourthStepProps> = ({ fourthStepTranslation }) => {
-  const { dispatch, reportingPerson, isEditing } = useFormContext();
+  const { dispatch, reportingPerson, isEditing, formErrors } = useFormContext();
   const [valueDate, setValueDate] = React.useState<Dayjs | null>(dayjs());
   const [question] = useState<string>(fourthStepTranslation?.title);
   const [dateRange, setDateRange] = useState<any>();
@@ -45,15 +45,16 @@ const FourthStep: React.FC<FourthStepProps> = ({ fourthStepTranslation }) => {
   } = getFormCookies(THIRD_FORM);
 
   useEffect(() => {
-    dispatch({ type: FORM_ERRORS, payload: false });
-    if (!dateRange) {
+    // dispatch({ type: FORM_ERRORS, payload: false });
+    if (datePeriod && !dateRange) {
       dispatch({ type: FORM_ERRORS, payload: true });
-    } else {
+    } 
+    else {
       dispatch({ type: FORM_ERRORS, payload: false });
     }
 
     // Setting default values if exists in cookies
-
+    console.log(formErrors)
     if (formValues) {
       datePeriod !== formValues?.datePeriod &&
         setValue('datePeriod', formValues?.datePeriod);
@@ -64,7 +65,9 @@ const FourthStep: React.FC<FourthStepProps> = ({ fourthStepTranslation }) => {
     }
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [formValues?.valueDate]);
+  }, [formValues?.valueDate, datePeriod, dateRange]);
+
+
 
   // Triggered when submitting form
   const onSubmit: SubmitHandler<FourthFormValues> = (data) => {
@@ -92,7 +95,6 @@ const FourthStep: React.FC<FourthStepProps> = ({ fourthStepTranslation }) => {
 
   // On range picker change
   function onDateRangeChange(date: any, dateString: any) {
-    // console.log('range', date);
     setDateRange(date);
   }
 
