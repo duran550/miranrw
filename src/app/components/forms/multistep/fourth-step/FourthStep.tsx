@@ -54,7 +54,7 @@ const FourthStep: React.FC<FourthStepProps> = ({ fourthStepTranslation }) => {
 
     // Setting default values if exists in cookies
 
-    if (formValues) {
+    if (formValues && !datePeriod) {
       datePeriod !== formValues?.datePeriod &&
         setValue('datePeriod', formValues?.datePeriod);
 

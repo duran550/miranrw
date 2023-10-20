@@ -17,8 +17,8 @@ type SixthStepProps = {
 };
 
 type SixthStepValues = {
-  formOfDiscrimination: string[];
-  otherForm: string;
+  formOfQueerphobia: string[];
+  otherformOfQueerphobiaFreeField: string;
 };
 
 const SixthStep: React.FC<SixthStepProps> = ({ sixthStepTranslation }) => {
@@ -33,32 +33,44 @@ const SixthStep: React.FC<SixthStepProps> = ({ sixthStepTranslation }) => {
     formState: { errors },
   } = useForm<SixthStepValues>();
 
-  let formOfDiscrimination = watch('formOfDiscrimination');
-  let otherForm = watch('otherForm');
+  let formOfQueerphobia = watch('formOfQueerphobia');
+  let otherformOfQueerphobiaFreeField = watch(
+    'otherformOfQueerphobiaFreeField'
+  );
 
   // Getting form cookies
   useEffect(() => {
     let formValues: {
-      formOfDiscrimination: string[];
-      otherForm: string;
+      formOfQueerphobia: string[];
+      otherformOfQueerphobiaFreeField: string;
       question: string;
     } = getFormCookies(FIFTH_FORM);
 
     // dispatch({ type: FORM_ERRORS, payload: false });
-    if (formValues) {
+    if (formValues && !formOfQueerphobia && otherformOfQueerphobiaFreeField) {
       dispatch({ type: FORM_ERRORS, payload: false });
-      formOfDiscrimination !== formValues?.formOfDiscrimination &&
-        setValue('formOfDiscrimination', formValues?.formOfDiscrimination);
-      otherForm !== formValues?.otherForm &&
-        setValue('otherForm', formValues?.otherForm);
-    } else if (formOfDiscrimination && formOfDiscrimination?.includes('Anderes, und zwar') && otherForm?.length <= 3 || formOfDiscrimination && formOfDiscrimination?.includes('Other, specify') && otherForm?.length <= 3) {
+      formOfQueerphobia !== formValues?.formOfQueerphobia &&
+        setValue('formOfQueerphobia', formValues?.formOfQueerphobia);
+      otherformOfQueerphobiaFreeField !==
+        formValues?.otherformOfQueerphobiaFreeField &&
+        setValue(
+          'otherformOfQueerphobiaFreeField',
+          formValues?.otherformOfQueerphobiaFreeField
+        );
+    } else if (
+      (formOfQueerphobia &&
+        formOfQueerphobia?.includes('Anderes, und zwar') &&
+        otherformOfQueerphobiaFreeField?.length <= 3) ||
+      (formOfQueerphobia &&
+        formOfQueerphobia?.includes('Other, specify') &&
+        otherformOfQueerphobiaFreeField?.length <= 3)
+    ) {
       dispatch({ type: FORM_ERRORS, payload: true });
-    } 
-    else {
+    } else {
       dispatch({ type: FORM_ERRORS, payload: false });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [formOfDiscrimination, otherForm]);
+  }, [formOfQueerphobia, otherformOfQueerphobiaFreeField]);
 
   // Triggered when submitting form
   const onSubmit: SubmitHandler<SixthStepValues> = (data) => {
@@ -84,28 +96,28 @@ const SixthStep: React.FC<SixthStepProps> = ({ sixthStepTranslation }) => {
       {sixthStepTranslation?.choices?.map((choice: any) => (
         <Checkbox
           key={choice.iD}
-          props={register('formOfDiscrimination', { required: true })}
+          props={register('formOfQueerphobia', { required: true })}
           name={choice.name}
           id={choice.id}
           value={choice.value}
           label={choice.label}
         />
       ))}
-      {(formOfDiscrimination &&
-        formOfDiscrimination?.includes('Anderes, und zwar')) ||
-      (formOfDiscrimination &&
-        formOfDiscrimination?.includes('Other, specify')) ? (
+      {(formOfQueerphobia &&
+        formOfQueerphobia?.includes('Anderes, und zwar')) ||
+      (formOfQueerphobia && formOfQueerphobia?.includes('Other, specify')) ? (
         <InputField
           name=""
           placeholder=""
-          props={register('otherForm', { required: true })}
-          title=""
+          props={register('otherformOfQueerphobiaFreeField', {
+            required: true,
+          })}
         />
       ) : (
         ''
       )}
       <div>
-        {formErrors && otherForm?.length !== 0 && (
+        {formErrors && otherformOfQueerphobiaFreeField?.length !== 0 && (
           <label className="text-red-500 text-xs">
             A minimum of 4 Characters is expected
           </label>

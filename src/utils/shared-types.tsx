@@ -1,0 +1,21 @@
+export type reportType = {
+  identity: string;
+  description: string;
+  valueDate: string;
+  dateRangeState: string;
+  datePeriod: boolean;
+  location: string;
+  locationOnline: string;
+  formOfQueerphobia: string[];
+  otherformOfQueerphobiaFreeField: string;
+  typeOfDiscriminationFreeField: string;
+  typeOfDiscrimination: string[];
+  formOfDisc: string;
+  formOfDiscYes: string[];
+  formOfDiscYesFreeField: string;
+  gender: string[];
+  genderFreeField: string;
+  age: string;
+  sexualOrientation: string[];
+  sexualOrientationFreeField: string;
+};

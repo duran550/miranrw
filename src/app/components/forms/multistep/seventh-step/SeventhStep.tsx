@@ -18,7 +18,7 @@ type SeventhStepProps = {
 
 type SeventhStepValues = {
   typeOfDiscrimination: string[];
-  otherForm: string;
+  typeOfDiscriminationFreeField: string;
 };
 
 const SeventhStep: React.FC<SeventhStepProps> = ({
@@ -37,12 +37,12 @@ const SeventhStep: React.FC<SeventhStepProps> = ({
   } = useForm<SeventhStepValues>();
 
   let typeOfDiscrimination = watch('typeOfDiscrimination');
-  let otherForm = watch('otherForm');
+  let typeOfDiscriminationFreeField = watch('typeOfDiscriminationFreeField');
 
   useEffect(() => {
     let formValues: {
       typeOfDiscrimination: string[];
-      otherForm: string;
+      typeOfDiscriminationFreeField: string;
       question: string;
     } = getFormCookies(SIXTH_FORM);
 
@@ -54,26 +54,30 @@ const SeventhStep: React.FC<SeventhStepProps> = ({
       dispatch({ type: FORM_ERRORS, payload: true });
     }
 
-    if (formValues) {
+    if (formValues && !typeOfDiscrimination && !typeOfDiscriminationFreeField) {
       dispatch({ type: FORM_ERRORS, payload: false });
       typeOfDiscrimination !== formValues?.typeOfDiscrimination &&
         setValue('typeOfDiscrimination', formValues?.typeOfDiscrimination);
-      otherForm !== formValues?.otherForm &&
-        setValue('otherForm', formValues?.otherForm);
+      typeOfDiscriminationFreeField !==
+        formValues?.typeOfDiscriminationFreeField &&
+        setValue(
+          'typeOfDiscriminationFreeField',
+          formValues?.typeOfDiscriminationFreeField
+        );
     } else if (
       (typeOfDiscrimination &&
         typeOfDiscrimination?.includes('Anderes, und zwar') &&
-        otherForm.length <= 3) ||
+        typeOfDiscriminationFreeField.length <= 3) ||
       (typeOfDiscrimination &&
         typeOfDiscrimination?.includes('Other, specify') &&
-        otherForm?.length <= 3)
+        typeOfDiscriminationFreeField?.length <= 3)
     ) {
       dispatch({ type: FORM_ERRORS, payload: true });
     } else {
       dispatch({ type: FORM_ERRORS, payload: false });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [typeOfDiscrimination, otherForm]);
+  }, [typeOfDiscrimination, typeOfDiscriminationFreeField]);
 
   // Triggered when submitting form
   const onSubmit: SubmitHandler<SeventhStepValues> = (data) => {
@@ -113,14 +117,14 @@ const SeventhStep: React.FC<SeventhStepProps> = ({
         <InputField
           name=""
           placeholder=""
-          props={register('otherForm', { required: true })}
+          props={register('typeOfDiscriminationFreeField', { required: true })}
           title=""
         />
       ) : (
         ''
       )}
-       <div>
-        {formErrors && otherForm?.length !== 0 && (
+      <div>
+        {formErrors && typeOfDiscriminationFreeField?.length !== 0 && (
           <label className="text-red-500 text-xs">
             A minimum of 4 Characters is expected
           </label>
