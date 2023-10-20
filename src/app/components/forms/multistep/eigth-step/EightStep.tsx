@@ -43,7 +43,12 @@ const EightStep: React.FC<EightStepProps> = ({ eightStepTranslation }) => {
       dispatch({ type: FORM_ERRORS, payload: false });
     }
 
-    if (formValues) {
+    if (
+      formValues &&
+      !formOfDisc &&
+      !formOfDiscYes &&
+      !formOfDiscYesFreeField
+    ) {
       dispatch({ type: FORM_ERRORS, payload: false });
       formOfDisc !== formValues?.formOfDisc &&
         setValue('formOfDisc', formValues?.formOfDisc);
