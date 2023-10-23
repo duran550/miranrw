@@ -36,16 +36,17 @@ const FourthStepOrganization: React.FC<FourthStepOrganizationProps> = ({
 
     if (numberOfEmployees) {
       dispatch({ type: FORM_ERRORS, payload: false });
+    } else {
+      if (formValues && !numberOfEmployees) {
+        numberOfEmployees !== formValues?.numberOfEmployees &&
+          setValue('numberOfEmployees', formValues?.numberOfEmployees);
+
+        dispatch({ type: FORM_ERRORS, payload: false });
+      }
     }
 
-    if (formValues) {
-      numberOfEmployees !== formValues?.numberOfEmployees &&
-        setValue('numberOfEmployees', formValues?.numberOfEmployees);
-
-      dispatch({ type: FORM_ERRORS, payload: false });
-    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [formValues?.numberOfEmployees]);
+  }, [numberOfEmployees, formValues?.numberOfEmployees]);
 
   // Triggered when submitting form
   const onSubmit: SubmitHandler<FourthStepOrganizationFormValues> = (data) => {

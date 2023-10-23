@@ -3,7 +3,7 @@ import DataService from './dataService';
 
 export default class ReportService extends DataService {
   sendReport = (data: reportType) => {
-    return this.post('/report/', data);
+    return this.post('/api/report/', data);
   };
 
   getAllReport = (): reportType => {

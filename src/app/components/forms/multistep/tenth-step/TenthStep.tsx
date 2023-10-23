@@ -32,14 +32,20 @@ const TenthStep: React.FC<TenthStepProps> = ({ tenthStepTranslation }) => {
 
   let firstForm: { question: string; step: number; identity: string } =
     getFormCookies(FIRST_FORM);
-  let secondForm: { question: string; step: number; description: string } =
-    getFormCookies(SECOND_FORM);
+  let secondForm: {
+    question: string;
+    step: number;
+    description: string;
+    organizationType: string[];
+    organizationTypeFreeField: string;
+  } = getFormCookies(SECOND_FORM);
   let thirdForm: {
     question: string;
     step: number;
     valueDate: string;
     dateRangeState: string;
     datePeriod: boolean;
+    numberOfEmployees: string;
   } = getFormCookies(THIRD_FORM);
   let fourthForm: {
     question: string;
@@ -51,7 +57,7 @@ const TenthStep: React.FC<TenthStepProps> = ({ tenthStepTranslation }) => {
   let fifthForm: {
     question: string;
     step: number;
-    formOfQueerphobia;
+    formOfQueerphobia: any;
     otherformOfQueerphobiaFreeField: string;
   } = getFormCookies(FIFTH_FORM);
   let sixthForm: {
@@ -83,29 +89,21 @@ const TenthStep: React.FC<TenthStepProps> = ({ tenthStepTranslation }) => {
 
   let validation = watch('validation');
 
-  let data: reportType = {
-    ...firstForm,
-    ...secondForm,
-    ...thirdForm,
-    ...fourthForm,
-    ...fifthForm,
-    ...sixthForm,
-    ...seventhForm,
-    ...eighthForm,
-  };
-
-  console.log(data);
-
   const onSubmit: SubmitHandler<any> = async () => {
     // Getting values to be sent
     let firstForm: { identity: string } = getFormCookies(FIRST_FORM);
 
-    let secondForm: { description: string } = getFormCookies(SECOND_FORM);
+    let secondForm: {
+      description: string;
+      organizationType: string[];
+      organizationTypeFreeField: string;
+    } = getFormCookies(SECOND_FORM);
 
     let thirdForm: {
       valueDate: string;
       dateRangeState: string;
       datePeriod: boolean;
+      numberOfEmployees: string;
     } = getFormCookies(THIRD_FORM);
 
     let fourthForm: {
@@ -141,6 +139,9 @@ const TenthStep: React.FC<TenthStepProps> = ({ tenthStepTranslation }) => {
 
     let identity = firstForm?.identity;
     let description = secondForm?.description;
+    let organizationType = secondForm?.organizationType;
+    let organizationTypeFreeField = secondForm?.organizationTypeFreeField;
+    let numberOfEmployees = thirdForm?.numberOfEmployees;
     let valueDate = thirdForm?.valueDate;
     let dateRangeState = thirdForm?.dateRangeState;
     let datePeriod = thirdForm?.datePeriod;
@@ -164,6 +165,9 @@ const TenthStep: React.FC<TenthStepProps> = ({ tenthStepTranslation }) => {
     const report = {
       identity,
       description,
+      organizationType,
+      organizationTypeFreeField,
+      numberOfEmployees,
       valueDate,
       dateRangeState,
       datePeriod,
@@ -186,7 +190,7 @@ const TenthStep: React.FC<TenthStepProps> = ({ tenthStepTranslation }) => {
     // Sending data to API
     const response = await new ReportService().sendReport(report);
 
-    if (response.status === 200) {
+    if (response.status === 201) {
       console.log('Successfull');
     } else {
       throw new Error('Fetching error occured, please reload');
@@ -213,22 +217,27 @@ const TenthStep: React.FC<TenthStepProps> = ({ tenthStepTranslation }) => {
           answer={firstForm?.identity}
         />
 
-        {secondForm && (
+        {secondForm && secondForm?.organizationType && (
           <EditBlock
             step={secondForm.step}
             question={secondForm?.question}
-            answer={secondForm?.description}
+            answer={[
+              secondForm?.description,
+              ...secondForm?.organizationType,
+              secondForm?.organizationTypeFreeField,
+            ]}
           />
         )}
         {thirdForm && (
           <EditBlock
             step={thirdForm.step}
             question={thirdForm?.question}
-            answer={
+            answer={[
               thirdForm?.datePeriod
                 ? thirdForm?.dateRangeState
-                : thirdForm?.valueDate
-            }
+                : thirdForm?.valueDate,
+              thirdForm?.numberOfEmployees,
+            ]}
           />
         )}
         <EditBlock

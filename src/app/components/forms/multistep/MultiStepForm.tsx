@@ -161,13 +161,11 @@ const MultiStepForm: React.FC<MultiStepFormProps> = ({ formTranslation }) => {
                     eightStepTranslation={formTranslation?.stepper?.eightStep}
                   />
                 ) : step === 9 ? (
-                  <NinethStep
-                    ninethStepTranslation={formTranslation?.stepper?.ninethStep}
-                  />
-                ) : (
                   <TenthStep
                     tenthStepTranslation={formTranslation?.stepper?.tenthStep}
                   />
+                ) : (
+                  <EleventhStep />
                 )}
               </div>
               /* End of Organization scenario */
@@ -205,78 +203,113 @@ const MultiStepForm: React.FC<MultiStepFormProps> = ({ formTranslation }) => {
                 {step !== 1 ? (
                   <div className="flex  space-x-0 md:space-x-16 justify-between md:flex-row  md:justify-between items-center w-full">
                     {step !== 10 && step !== 11 && (
-                      <Button
-                        className="w-32 mr-auto justify-self-start font-bold"
-                        variant="primary"
-                        onClick={() => dispatch({ type: PREV_STEP })}
-                      >
-                        {formTranslation.button.prev}
-                      </Button>
+                      <>
+                        {reportingPerson === 'organization' && step === 9 ? (
+                          <></>
+                        ) : (
+                          <Button
+                            className="w-32 mr-auto justify-self-start font-bold"
+                            variant="primary"
+                            onClick={() => dispatch({ type: PREV_STEP })}
+                          >
+                            {formTranslation.button.prev}
+                          </Button>
+                        )}
+                      </>
                     )}
-                    {step === 10 ? (
-                      <Button
-                        form={`${step === 10 && 'eighthForm'}`}
-                        className="w-full lg:mr-auto lg:w-72 rounded-full py-4 font-bold"
-                        disabled={formErrors && true}
-                        variant={`${formErrors ? 'disabled' : 'primary'}`}
-                      >
-                        {formTranslation.button.submit}
-                      </Button>
-                    ) : (
-                      step !== 10 &&
-                      step !== 11 && (
+                    {step === 10 && reportingPerson !== 'organization' ? (
+                      <>
                         <Button
-                          form={`${
-                            stepFromCookies === 2
-                              ? 'firstForm'
-                              : stepFromCookies === 3
-                              ? 'secondForm'
-                              : stepFromCookies === 4
-                              ? 'thirdForm'
-                              : stepFromCookies === 5
-                              ? 'fourthForm'
-                              : stepFromCookies === 6
-                              ? 'fifthForm'
-                              : stepFromCookies === 7
-                              ? 'sixthForm'
-                              : stepFromCookies === 8
-                              ? 'seventhForm'
-                              : 'eighthForm'
-                          }`}
-                          className="w-32 font-bold ml-auto"
+                          form={`${step === 10 && 'eighthForm'}`}
+                          className="w-full lg:mr-auto lg:w-72 rounded-full py-4 font-bold"
                           disabled={formErrors && true}
                           variant={`${formErrors ? 'disabled' : 'primary'}`}
                         >
-                          {formTranslation.button.next}
+                          {formTranslation.button.submit}
                         </Button>
-                      )
+                      </>
+                    ) : (
+                      <>
+                        {reportingPerson === 'organization' && step === 9 && (
+                          <>
+                            <Button
+                              form={`${'eighthForm'}`}
+                              className="w-full lg:mr-auto lg:w-72 rounded-full py-4 font-bold"
+                              disabled={formErrors && true}
+                              variant={`${formErrors ? 'disabled' : 'primary'}`}
+                            >
+                              {formTranslation.button.submit}
+                            </Button>
+                          </>
+                        )}
+                        {step !== 10 && step !== 11 && (
+                          <>
+                            {/* {' Conditions for organization last form'} */}
+                            {step === 9 &&
+                            reportingPerson === 'organization' ? (
+                              <></>
+                            ) : (
+                              <Button
+                                form={`${
+                                  stepFromCookies === 2
+                                    ? 'firstForm'
+                                    : stepFromCookies === 3
+                                    ? 'secondForm'
+                                    : stepFromCookies === 4
+                                    ? 'thirdForm'
+                                    : stepFromCookies === 5
+                                    ? 'fourthForm'
+                                    : stepFromCookies === 6
+                                    ? 'fifthForm'
+                                    : stepFromCookies === 7
+                                    ? 'sixthForm'
+                                    : stepFromCookies === 8
+                                    ? 'seventhForm'
+                                    : 'eighthForm'
+                                }`}
+                                className="w-32 font-bold ml-auto"
+                                disabled={formErrors && true}
+                                variant={`${
+                                  formErrors ? 'disabled' : 'primary'
+                                }`}
+                              >
+                                {formTranslation.button.next}
+                              </Button>
+                            )}
+                          </>
+                        )}
+                      </>
                     )}
                   </div>
                 ) : (
-                  <Button
-                    form={`${
-                      stepFromCookies === 2
-                        ? 'firstForm'
-                        : stepFromCookies === 3
-                        ? 'secondForm'
-                        : stepFromCookies === 4
-                        ? 'thirdForm'
-                        : stepFromCookies === 5
-                        ? 'fourthForm'
-                        : stepFromCookies === 6
-                        ? 'fifthForm'
-                        : stepFromCookies === 7
-                        ? 'sixthForm'
-                        : stepFromCookies === 8
-                        ? 'seventhForm'
-                        : 'eighthForm'
-                    }`}
-                    className="w-32 font-bold ml-auto"
-                    disabled={formErrors && true}
-                    variant={`${formErrors ? 'disabled' : 'primary'}`}
-                  >
-                    {formTranslation.button.next}
-                  </Button>
+                  <>
+                    {reportingPerson !== 'organization' && (
+                      <Button
+                        form={`${
+                          stepFromCookies === 2
+                            ? 'firstForm'
+                            : stepFromCookies === 3
+                            ? 'secondForm'
+                            : stepFromCookies === 4
+                            ? 'thirdForm'
+                            : stepFromCookies === 5
+                            ? 'fourthForm'
+                            : stepFromCookies === 6
+                            ? 'fifthForm'
+                            : stepFromCookies === 7
+                            ? 'sixthForm'
+                            : stepFromCookies === 8
+                            ? 'seventhForm'
+                            : 'eighthForm'
+                        }`}
+                        className="w-32 font-bold ml-auto"
+                        disabled={formErrors && true}
+                        variant={`${formErrors ? 'disabled' : 'primary'}`}
+                      >
+                        {formTranslation.button.next}
+                      </Button>
+                    )}
+                  </>
                 )}
               </>
             )}
