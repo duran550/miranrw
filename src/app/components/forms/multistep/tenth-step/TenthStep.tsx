@@ -17,9 +17,12 @@ import {
   THIRD_FORM,
 } from '@/cookies/cookies.d';
 import { FORM_ERRORS, NEXT_STEP } from '@/app/context/actions';
+import ReportService from '@/services/reportService';
+import { reportType } from '@/utils/shared-types';
 
 const TenthStep: React.FC<TenthStepProps> = ({ tenthStepTranslation }) => {
   const { dispatch, reportingPerson } = useFormContext();
+  const [report, setReport] = useState<reportType>();
   const {
     register,
     watch,
@@ -48,7 +51,7 @@ const TenthStep: React.FC<TenthStepProps> = ({ tenthStepTranslation }) => {
   let fifthForm: {
     question: string;
     step: number;
-    formOfQueerphobia: string[];
+    formOfQueerphobia;
     otherformOfQueerphobiaFreeField: string;
   } = getFormCookies(FIFTH_FORM);
   let sixthForm: {
@@ -80,15 +83,123 @@ const TenthStep: React.FC<TenthStepProps> = ({ tenthStepTranslation }) => {
 
   let validation = watch('validation');
 
-  const onSubmit: SubmitHandler<any> = (data) => {
+  let data: reportType = {
+    ...firstForm,
+    ...secondForm,
+    ...thirdForm,
+    ...fourthForm,
+    ...fifthForm,
+    ...sixthForm,
+    ...seventhForm,
+    ...eighthForm,
+  };
+
+  console.log(data);
+
+  const onSubmit: SubmitHandler<any> = async () => {
+    // Getting values to be sent
+    let firstForm: { identity: string } = getFormCookies(FIRST_FORM);
+
+    let secondForm: { description: string } = getFormCookies(SECOND_FORM);
+
+    let thirdForm: {
+      valueDate: string;
+      dateRangeState: string;
+      datePeriod: boolean;
+    } = getFormCookies(THIRD_FORM);
+
+    let fourthForm: {
+      location: string;
+      locationOnline: string;
+    } = getFormCookies(FOURTH_FORM);
+
+    let fifthForm: {
+      formOfQueerphobia: string[];
+      otherformOfQueerphobiaFreeField: string;
+    } = getFormCookies(FIFTH_FORM);
+
+    let sixthForm: {
+      typeOfDiscriminationFreeField: string;
+      typeOfDiscrimination: string[];
+    } = getFormCookies(SIXTH_FORM);
+
+    let seventhForm: {
+      formOfDisc: string;
+      formOfDiscYes: string[];
+      formOfDiscYesFreeField: string;
+    } = getFormCookies(SEVENTH_FORM);
+
+    let eighthForm: {
+      gender: string[];
+      genderFreeField: string;
+      age: string;
+      sexualOrientation: string[];
+      sexualOrientationFreeField: string;
+    } = getFormCookies(EIGTH_FORM);
+
+    // Getting exact values
+
+    let identity = firstForm?.identity;
+    let description = secondForm?.description;
+    let valueDate = thirdForm?.valueDate;
+    let dateRangeState = thirdForm?.dateRangeState;
+    let datePeriod = thirdForm?.datePeriod;
+    let location = fourthForm?.location;
+    let locationOnline = fourthForm?.locationOnline;
+    let formOfQueerphobia = fifthForm?.formOfQueerphobia;
+    let otherformOfQueerphobiaFreeField =
+      fifthForm?.otherformOfQueerphobiaFreeField;
+    let typeOfDiscriminationFreeField =
+      sixthForm?.typeOfDiscriminationFreeField;
+    let typeOfDiscrimination = sixthForm?.typeOfDiscrimination;
+    let formOfDisc = seventhForm?.formOfDisc;
+    let formOfDiscYes = seventhForm?.formOfDiscYes;
+    let formOfDiscYesFreeField = seventhForm?.formOfDiscYesFreeField;
+    let gender = eighthForm?.gender;
+    let genderFreeField = eighthForm?.genderFreeField;
+    let age = eighthForm?.age;
+    let sexualOrientation = eighthForm?.sexualOrientation;
+    let sexualOrientationFreeField = eighthForm?.sexualOrientationFreeField;
+
+    const report = {
+      identity,
+      description,
+      valueDate,
+      dateRangeState,
+      datePeriod,
+      location,
+      locationOnline,
+      formOfQueerphobia,
+      otherformOfQueerphobiaFreeField,
+      typeOfDiscrimination,
+      typeOfDiscriminationFreeField,
+      formOfDisc,
+      formOfDiscYes,
+      formOfDiscYesFreeField,
+      gender,
+      genderFreeField,
+      age,
+      sexualOrientation,
+      sexualOrientationFreeField,
+    };
+
+    // Sending data to API
+    const response = await new ReportService().sendReport(report);
+
+    if (response.status === 200) {
+      console.log('Successfull');
+    } else {
+      throw new Error('Fetching error occured, please reload');
+    }
+
     clearFormCookies();
     dispatch({ type: NEXT_STEP, payload: 'DATA 1' });
   };
 
   useEffect(() => {
     dispatch({ type: FORM_ERRORS, payload: true });
-    validation?.length !== 1 && dispatch({ type: FORM_ERRORS, payload: false })
-    validation?.length === 0 && dispatch({ type: FORM_ERRORS, payload: true })
+    validation?.length !== 1 && dispatch({ type: FORM_ERRORS, payload: false });
+    validation?.length === 0 && dispatch({ type: FORM_ERRORS, payload: true });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [validation]);
 
