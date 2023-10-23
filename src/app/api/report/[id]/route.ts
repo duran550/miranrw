@@ -1,20 +1,19 @@
 import { NextApiRequest } from 'next';
 import dbConnect from '../../lib/dbConnect';
-import Report from '../../models/Report'
-import { NextResponse } from "next/server";
+import { Report } from '../../models/Report';
+import { NextResponse } from 'next/server';
 import { reportType } from '@/utils/shared-types';
 
+export async function PUT(request: any, { params }: any) {
+  const { report_id } = params;
 
-export async function PUT(request:any, {params}:any) {
-  const { report_id} = params;
-  
   const report: reportType = await request.json();
   await dbConnect();
-  await Report.findByIdAndUpdate(report_id, {report });
-  return NextResponse.json({ message: "Report updated" }, { status: 200 });
+  await Report.findByIdAndUpdate(report_id, { report });
+  return NextResponse.json({ message: 'Report updated' }, { status: 200 });
 }
 
-export async function GET(request:any, { params }:any) {
+export async function GET(request: any, { params }: any) {
   const { id } = params;
   await dbConnect();
   const report = await Report.findOne({ _id: id });

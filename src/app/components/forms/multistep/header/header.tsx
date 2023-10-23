@@ -29,26 +29,26 @@ const FormHeader: React.FC<FormHeaderProps> = ({
       {children}
       {description && (
         <div className="text-sm mt-2">
-          <p>{description?.firstParagraph}</p>{' '}
-          <p className="py-2">{description?.secondParagraph}</p>
-          <p className="py-2">{description?.thirdParagraph}</p>
-          <p>{description?.fourthParagraph}</p>
+          <div>{description?.firstParagraph}</div>{' '}
+          <div className="py-2">{description?.secondParagraph}</div>
+          <div className="py-2">{description?.thirdParagraph}</div>
+          <div>{description?.fourthParagraph}</div>
           <div className="flex my-4 items-center space-x-4 font-bold">
-            <p>
+            <div>
               <AnimateClick>
                 <Link href="/disclaimer">{description?.disclaimer}</Link>
               </AnimateClick>
-            </p>
-            <p>
+            </div>
+            <div>
               <AnimateClick>
                 <Link href="/datenschutz">{description?.datenschutz}</Link>
               </AnimateClick>
-            </p>
-            <p>
+            </div>
+            <div>
               <AnimateClick>
                 <Link href="/statement">{description?.explanation}</Link>
               </AnimateClick>
-            </p>
+            </div>
           </div>
         </div>
       )}
