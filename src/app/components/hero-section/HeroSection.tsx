@@ -21,9 +21,7 @@ const HeroSection: React.FC<heroSectionPropsType> = ({ lang, content }) => {
           <div className=" lg:max-w-2xl lg:ml-16">
             <h2 className="font-bold text-3xl  lg:text-4xl">MIQ</h2>
             <div className="pt-4">
-              <h1 className="font-bold text-xl lg:text-4xl">
-                {content.title}{' '}
-              </h1>
+              <h1 className="font-bold text-xl lg:text-4xl">{content.title}</h1>
               <p className="mt-2 w-fit lg:mt-8 max-w-sm lg:max-w-xl">
                 {content?.description?.firstParagraph}
               </p>
