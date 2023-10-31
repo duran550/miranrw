@@ -18,7 +18,7 @@ const HeroSection: React.FC<heroSectionPropsType> = ({ lang, content }) => {
       <div className="px-6 lg:px-12 my-12    ">
         {/* text-content */}
         <div className="flex flex-col lg:flex-row lg:gap-x-10 justify-between w-full lg:items-center pb:8 lg:pb-0">
-          <div className=" lg:max-w-2xl lg:ml-16">
+          <div className=" lg:max-w-2xl">
             <h2 className="font-bold text-3xl  lg:text-4xl">MIQ</h2>
             <div className="pt-4">
               <h1 className="font-bold text-xl lg:text-4xl">{content.title}</h1>
