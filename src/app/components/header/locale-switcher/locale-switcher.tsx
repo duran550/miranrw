@@ -22,49 +22,76 @@ export default function LocaleSwitcher() {
   };
 
   return (
-    <div>
-      <div className="flex flex-col relative items-center">
-        <AnimateClick>
-          <ul className="flex space-x-12 mr-16">
-            {i18n.locales.map((locale) => {
-              return (
-                <li key={locale}>
-                  <Link
-                    href={redirectedPathName(locale)}
-                    className="py-2 text-slate-900"
+    <div className="w-full">
+      <ul className="flex flex-col md:flex-row space-y-6 ml-24 md:ml-0 md:space-y-0 justify-between items-center  w-full">
+        {i18n.locales.map((locale) => (
+          <AnimateClick key={locale}>
+            <Link href={redirectedPathName(locale)} className="text-slate-900">
+              {locale === 'en' ? (
+                <div
+                  onClick={() => setToggle(false)}
+                  className="flex items-center w-full"
+                >
+                  <Image
+                    className="mr-2 w-8"
+                    src={EnglandLogo}
+                    alt="Logo England"
+                  />
+                  <div
+                    className={`${
+                      pathName?.split('/')[1] === 'en'
+                        ? ' font-bold text-sm flex'
+                        : 'flex'
+                    }`}
                   >
-                    {locale === 'en' ? (
-                      <div
-                        onClick={() => setToggle(false)}
-                        className="flex items-center w-10"
-                      >
-                        <Image
-                          className="mr-2"
-                          src={EnglandLogo}
-                          alt="Logo England"
-                        />
-                        <div>EN</div>
-                      </div>
-                    ) : (
-                      <div
-                        onClick={() => setToggle(false)}
-                        className="flex items-center w-10"
-                      >
-                        <Image
-                          className="mr-2"
-                          src={GermanLogo}
-                          alt="Logo Germany"
-                        />
-                        <div>DE</div>
-                      </div>
-                    )}
-                  </Link>
-                </li>
-              );
-            })}
-          </ul>
-        </AnimateClick>
-      </div>
+                    English
+                  </div>
+                </div>
+              ) : locale === 'de' ? (
+                <div
+                  onClick={() => setToggle(false)}
+                  className="flex md:ml-2 md:mr-14 items-center w-full"
+                >
+                  <Image
+                    className="mr-2 w-8"
+                    src={GermanLogo}
+                    alt="Logo Germany"
+                  />
+                  <div
+                    className={`${
+                      pathName?.split('/')[1] === 'de'
+                        ? ' font-bold text-sm'
+                        : 'flex text-sm '
+                    }`}
+                  >
+                    Deutsche
+                  </div>
+                </div>
+              ) : (
+                <div
+                  onClick={() => setToggle(false)}
+                  className="flex items-center w-full"
+                >
+                  <Image
+                    className="mr-2 w-8"
+                    src={GermanLogo}
+                    alt="Logo Germany"
+                  />
+                  <div
+                    className={`${
+                      pathName?.split('/')[1] === 'de-LS'
+                        ? ' font-bold text-sm md:w-[10rem]'
+                        : 'flex  md:w-[10rem] text-sm'
+                    }`}
+                  >
+                    Leichte Sprache
+                  </div>
+                </div>
+              )}
+            </Link>
+          </AnimateClick>
+        ))}
+      </ul>
     </div>
   );
 }

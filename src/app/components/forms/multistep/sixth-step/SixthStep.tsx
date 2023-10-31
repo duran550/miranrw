@@ -3,7 +3,12 @@ import Checkbox from '../../checkbox/Checkbox';
 import FormHeader from '../header/header';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { useFormContext } from '@/app/hooks/useFormContext';
-import { FORM_ERRORS, LAST_STEP, NEXT_STEP } from '@/app/context/actions';
+import {
+  FORM_ERRORS,
+  JUMP_STEP_FOR_WITNESS,
+  LAST_STEP,
+  NEXT_STEP,
+} from '@/app/context/actions';
 import InputField from '../../text-field/InputField';
 import { getFormCookies, getFormStep, setFormCookies } from '@/cookies/cookies';
 import { FIFTH_FORM } from '@/cookies/cookies.d';
@@ -82,7 +87,9 @@ const SixthStep: React.FC<SixthStepProps> = ({ sixthStepTranslation }) => {
 
     isEditing && reportingPerson === 'myself'
       ? dispatch({ type: LAST_STEP, payload: 10 })
-      : dispatch({ type: NEXT_STEP, payload: 'DATA 1' });
+      : !isEditing && reportingPerson === 'andere'
+      ? dispatch({ type: JUMP_STEP_FOR_WITNESS, payload: '' })
+      : dispatch({ type: NEXT_STEP, payload: '' });
   };
 
   return (
@@ -98,7 +105,7 @@ const SixthStep: React.FC<SixthStepProps> = ({ sixthStepTranslation }) => {
       {sixthStepTranslation?.choices?.map((choice: any) => (
         <Checkbox
           key={choice.iD}
-          props={register('formOfQueerphobia', { required: true })}
+          props={register('formOfQueerphobia')}
           name={choice.name}
           id={choice.id}
           value={choice.value}
@@ -109,8 +116,7 @@ const SixthStep: React.FC<SixthStepProps> = ({ sixthStepTranslation }) => {
         formOfQueerphobia?.includes('Anderes, und zwar')) ||
       (formOfQueerphobia && formOfQueerphobia?.includes('Other, specify')) ? (
         <InputField
-          name=""
-          placeholder=""
+          name="otherformOfQueerphobiaFreeField"
           props={register('otherformOfQueerphobiaFreeField', {
             required: true,
           })}
