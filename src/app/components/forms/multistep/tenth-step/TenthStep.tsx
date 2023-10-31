@@ -143,10 +143,11 @@ const TenthStep: React.FC<TenthStepProps> = ({ tenthStepTranslation }) => {
     let organizationType = secondForm?.organizationType;
     let organizationTypeFreeField = secondForm?.organizationTypeFreeField;
     let numberOfEmployees = thirdForm?.numberOfEmployees;
-    let valueDate = thirdForm?.valueDate;
-    let dateRangeState =
-      thirdForm?.dateRangeState && thirdForm?.dateRangeState.toString();
-    let datePeriod = thirdForm?.datePeriod && thirdForm?.datePeriod.toString();
+    let valueDate: string = thirdForm?.valueDate;
+    let dateRangeState: string =
+      (thirdForm?.dateRangeState && thirdForm?.dateRangeState.toString()) || '';
+    let datePeriod =
+      (thirdForm?.datePeriod && thirdForm?.datePeriod.toString()) || '';
     let location = fourthForm?.location;
     let locationOnline = fourthForm?.locationOnline;
     let formOfQueerphobia = fifthForm?.formOfQueerphobia;
