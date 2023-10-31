@@ -7,6 +7,7 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 import { ThirdFormValues } from './thirdStep.d';
 import { getFormCookies, getFormStep, setFormCookies } from '@/cookies/cookies';
 import { SECOND_FORM } from '@/cookies/cookies.d';
+import { useScrollOnTop } from '@/app/hooks/useScrollOnTop';
 
 type ThirdStepProps = {
   thirdStepTranslation: {
@@ -36,6 +37,9 @@ const ThirdStep: React.FC<ThirdStepProps> = ({ thirdStepTranslation }) => {
   let formValues: { description: string; question: string } =
     getFormCookies(SECOND_FORM);
 
+  // Scroll on top
+  useScrollOnTop();
+
   useEffect(() => {
     if (description && description?.length >= 50) {
       dispatch({ type: FORM_ERRORS, payload: false });
@@ -55,7 +59,6 @@ const ThirdStep: React.FC<ThirdStepProps> = ({ thirdStepTranslation }) => {
 
   // Triggered when submitting form
   const onSubmit: SubmitHandler<ThirdFormValues> = (data) => {
-    console.log('submit fired');
     let step = getFormStep();
     let dataWithQuestion = { question, step, ...data };
     setFormCookies(dataWithQuestion, SECOND_FORM);
@@ -89,7 +92,7 @@ const ThirdStep: React.FC<ThirdStepProps> = ({ thirdStepTranslation }) => {
           </label>
         )}
         <p className="flex items-center mt-4 text-sm">
-          <span className="text-red-500 mr-2">*</span>
+          <span className="mr-2">*</span>
           {thirdStepTranslation?.disclaimer}
         </p>
       </form>

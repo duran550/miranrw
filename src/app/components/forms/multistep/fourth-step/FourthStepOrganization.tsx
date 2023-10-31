@@ -8,6 +8,7 @@ import { useFormContext } from '@/app/hooks/useFormContext';
 import { FORM_ERRORS, LAST_STEP, NEXT_STEP } from '@/app/context/actions';
 import { getFormCookies, getFormStep, setFormCookies } from '@/cookies/cookies';
 import { THIRD_FORM } from '@/cookies/cookies.d';
+import { useScrollOnTop } from '@/app/hooks/useScrollOnTop';
 
 const FourthStepOrganization: React.FC<FourthStepOrganizationProps> = ({
   fourthStepOrganizationTranslation,
@@ -30,6 +31,9 @@ const FourthStepOrganization: React.FC<FourthStepOrganizationProps> = ({
     numberOfEmployees: string;
     question: string;
   } = getFormCookies(THIRD_FORM);
+
+  // Scroll on top
+  useScrollOnTop();
 
   useEffect(() => {
     dispatch({ type: FORM_ERRORS, payload: true });

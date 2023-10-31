@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import FormHeader from '../header/header';
 import { NinethStepProps, NinethFormValues } from './ninethStep.d';
 import RadioGroup from '../../radio/RadioGroup';
@@ -9,6 +9,7 @@ import { FORM_ERRORS, LAST_STEP, NEXT_STEP } from '@/app/context/actions';
 import InputField from '../../text-field/InputField';
 import { getFormCookies, getFormStep, setFormCookies } from '@/cookies/cookies';
 import { EIGTH_FORM } from '@/cookies/cookies.d';
+import { useScrollOnTop } from '@/app/hooks/useScrollOnTop';
 
 const NinethStep: React.FC<NinethStepProps> = ({ ninethStepTranslation }) => {
   const { dispatch, reportingPerson, isEditing, formErrors } = useFormContext();
@@ -39,6 +40,9 @@ const NinethStep: React.FC<NinethStepProps> = ({ ninethStepTranslation }) => {
   let age: string = watch('age');
   let genderFreeField: string = watch('genderFreeField');
 
+  // Scroll on top
+  useScrollOnTop();
+
   useEffect(() => {
     // Getting values from cookies
     let formValues: {
@@ -59,20 +63,21 @@ const NinethStep: React.FC<NinethStepProps> = ({ ninethStepTranslation }) => {
       dispatch({ type: FORM_ERRORS, payload: true });
     }
 
-    console.log(sexualOrientation?.length)
-    // validating form 9
-
     // first form validation
     {
       gender &&
-        gender?.includes('Selbstbezeichung:') && genderFreeField?.length <= 3 &&
+        gender?.includes('Selbstbezeichung:') &&
+        genderFreeField?.length <= 3 &&
         dispatch({ type: FORM_ERRORS, payload: true });
     }
-    
 
     // second form validation.
-    {sexualOrientation && sexualOrientation?.includes('Selbstbezeichung:') && sexualOrientationFreeField?.length <= 3 &&
-    dispatch({ type: FORM_ERRORS, payload: true }); }
+    {
+      sexualOrientation &&
+        sexualOrientation?.includes('Selbstbezeichung:') &&
+        sexualOrientationFreeField?.length <= 3 &&
+        dispatch({ type: FORM_ERRORS, payload: true });
+    }
 
     // Setting default values if the data are available in cookies
     if (formValues) {
@@ -140,10 +145,10 @@ const NinethStep: React.FC<NinethStepProps> = ({ ninethStepTranslation }) => {
                 {gender && gender?.includes('Selbstbezeichung:') && (
                   <InputField name="" props={register('genderFreeField')} />
                 )}
-                {
-                gender?.length > 0 &&
-                gender?.includes('Selbstbezeichung:') &&
-                  genderFreeField?.length !== 0 && formErrors && (
+                {gender?.length > 0 &&
+                  gender?.includes('Selbstbezeichung:') &&
+                  genderFreeField?.length !== 0 &&
+                  formErrors && (
                     <label className="text-red-500 text-xs">
                       A minimum of 4 Characters is expected
                     </label>
@@ -181,10 +186,10 @@ const NinethStep: React.FC<NinethStepProps> = ({ ninethStepTranslation }) => {
                       props={register('sexualOrientationFreeField')}
                     />
                   )}
-                  {
-                   sexualOrientation?.length > 0 &&
+                {sexualOrientation?.length > 0 &&
                   sexualOrientation?.includes('Selbstbezeichung:') &&
-                  sexualOrientationFreeField?.length !== 0 && formErrors && (
+                  sexualOrientationFreeField?.length !== 0 &&
+                  formErrors && (
                     <label className="text-red-500 text-xs">
                       A minimum of 4 Characters is expected
                     </label>

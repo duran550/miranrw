@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import 'dayjs/locale/de';
 import FormHeader from '../header/header';
 import { DateCalendar, LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
@@ -6,13 +7,13 @@ import dayjs, { Dayjs } from 'dayjs';
 import { useFormContext } from '@/app/hooks/useFormContext';
 import { FORM_ERRORS, LAST_STEP, NEXT_STEP } from '@/app/context/actions';
 import Checkbox from '../../checkbox/Checkbox';
-import InputField from '../../text-field/InputField';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { FourthFormValues } from './fourthStep';
 import { getFormCookies, getFormStep, setFormCookies } from '@/cookies/cookies';
 import { THIRD_FORM } from '@/cookies/cookies.d';
 import { DatePicker, ConfigProvider } from 'antd';
 import { DatePickerProps } from 'antd/lib';
+import { useScrollOnTop } from '@/app/hooks/useScrollOnTop';
 // Date Picker
 const { RangePicker } = DatePicker;
 type FourthStepProps = {
@@ -44,6 +45,9 @@ const FourthStep: React.FC<FourthStepProps> = ({ fourthStepTranslation }) => {
     dateRangeState: any;
   } = getFormCookies(THIRD_FORM);
 
+  // Scroll on top
+  useScrollOnTop();
+
   useEffect(() => {
     // dispatch({ type: FORM_ERRORS, payload: false });
     if (datePeriod && !dateRange) {
@@ -64,7 +68,7 @@ const FourthStep: React.FC<FourthStepProps> = ({ fourthStepTranslation }) => {
     }
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [formValues?.valueDate, datePeriod, dateRange]);
+  }, [formValues?.valueDate, formValues?.datePeriod, datePeriod, dateRange]);
 
   // Triggered when submitting form
   const onSubmit: SubmitHandler<FourthFormValues> = (data) => {
@@ -87,9 +91,6 @@ const FourthStep: React.FC<FourthStepProps> = ({ fourthStepTranslation }) => {
     return current && current.isAfter(dayjs().endOf('day'));
   }
 
-  // end date today
-  const endate = 'today';
-
   // On range picker change
   function onDateRangeChange(date: any, dateString: any) {
     setDateRange(date);
@@ -107,14 +108,20 @@ const FourthStep: React.FC<FourthStepProps> = ({ fourthStepTranslation }) => {
           subTitle={fourthStepTranslation?.description}
         />
         <div className="border border-primaryColor rounded-md">
-          <LocalizationProvider dateAdapter={AdapterDayjs}>
+          <LocalizationProvider adapterLocale="de" dateAdapter={AdapterDayjs}>
             <DateCalendar
-              sx={{ '&.MuiPickersPopper-root': { border: '4px solid red' } }}
+              sx={{
+                width: '100%',
+                '& .Mui-selected, & .Mui-selected:focus, & .Mui-selected:hover':
+                  {
+                    backgroundColor: `#463980 !important`,
+                  },
+              }}
               value={valueDate}
               defaultValue={valueDate}
               disabled={datePeriod ? true : false}
               maxDate={dayjs()}
-              // disabledDate={disabledDate}
+              views={['year', 'month', 'day']}
               onChange={(newValue) => setValueDate(newValue)}
             />
           </LocalizationProvider>

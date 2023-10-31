@@ -218,7 +218,14 @@ const MultiStepForm: React.FC<MultiStepFormProps> = ({ formTranslation }) => {
                       </>
                     )}
                     {step === 10 && reportingPerson !== 'organization' ? (
-                      <>
+                      <div className="flex justify-between w-full">
+                        <Button
+                          className="w-32 mr-auto justify-self-start font-bold"
+                          variant="primary"
+                          onClick={() => dispatch({ type: PREV_STEP })}
+                        >
+                          {formTranslation.button.prev}
+                        </Button>
                         <Button
                           form={`${step === 10 && 'eighthForm'}`}
                           className="w-full lg:mr-auto lg:w-72 rounded-full py-4 font-bold"
@@ -227,11 +234,18 @@ const MultiStepForm: React.FC<MultiStepFormProps> = ({ formTranslation }) => {
                         >
                           {formTranslation.button.submit}
                         </Button>
-                      </>
+                      </div>
                     ) : (
                       <>
                         {reportingPerson === 'organization' && step === 9 && (
-                          <>
+                          <div className="flex justify-between w-full">
+                            <Button
+                              className="w-32 mr-auto justify-self-start font-bold"
+                              variant="primary"
+                              onClick={() => dispatch({ type: PREV_STEP })}
+                            >
+                              {formTranslation.button.prev}
+                            </Button>
                             <Button
                               form={`${'eighthForm'}`}
                               className="w-full lg:mr-auto lg:w-72 rounded-full py-4 font-bold"
@@ -240,7 +254,7 @@ const MultiStepForm: React.FC<MultiStepFormProps> = ({ formTranslation }) => {
                             >
                               {formTranslation.button.submit}
                             </Button>
-                          </>
+                          </div>
                         )}
                         {step !== 10 && step !== 11 && (
                           <>

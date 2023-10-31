@@ -172,28 +172,28 @@
               "id": "age1",
               "name": "identity",
               "label": "Myself",
-              "value": "Ich selbst",
+              "value": "Myself",
               "checked": false
             },
             {
               "id": "identity2",
               "name": "identity",
               "label": "Another person",
-              "value": "Eine andere Person",
+              "value": "Another person",
               "checked": false
             },
             {
               "id": "identity3",
               "name": "identity",
               "label": "I'm reporting on behalf of the affected person",
-              "value": "Ich melde in Vertretung für die betroffene Person",
+              "value": "I'm reporting on behalf of the affected person",
               "checked": false
             },
             {
               "id": "identity4",
               "name": "identity",
               "label": "An organization/institution",
-              "value": "Eine Organisation/Institution",
+              "value": "An organization/institution",
               "checked": false
             }
           ],
@@ -225,51 +225,51 @@
             {
               "iD": 1,
               "name": "organizationType",
-              "value": "Nichtregierungsorganisation (NGO)",
+              "value": "Non-Governmental Organization (NGO)",
               "id": "Nichtregierungsorganisation",
               "label": "Non-Governmental Organization (NGO)"
             },
             {
               "iD": 2,
               "name": "organizationType",
-              "value": "Selbstorganisation",
+              "value": "Self-Organization",
               "id": "Selbstorganisation",
               "label": "Self-Organization"
             },
             {
               "iD": 3,
               "name": "organizationType",
-              "value": "Religiöse Einrichtung",
+              "value": "Religious Institution",
               "id": "Religiöse",
               "label": "Religious Institution"
             },
             {
               "iD": 4,
               "name": "organizationType",
-              "value": "Soziale Einrichtung",
+              "value": "Social Institution",
               "id": "Soziale",
               "label": "Social Institution"
             },
             {
               "iD": 5,
               "name": "organizationType",
-              "value": "Kulturelle Einrichtung",
+              "value": "Cultural Institution",
               "id": "Kulturelle",
               "label": "Cultural Institution"
             },
             {
               "iD": 6,
               "name": "organizationType",
-              "value": "Verein",
+              "value": "Association",
               "id": "association",
               "label": "Association"
             },
             {
               "iD": 7,
               "name": "organizationType",
-              "value": "Anderes, und zwar",
+              "value": "Other, and namely:",
               "id": "anderesOrg",
-              "label": "Other"
+              "label": "Other, and namely:"
             }
           ]
         },
@@ -284,7 +284,7 @@
             {
               "iD": 1,
               "name": "numberOfEmployees",
-              "value": "unter 10",
+              "value": "under 10",
               "id": "gender",
               "label": "under 10"
             },
@@ -305,7 +305,7 @@
             {
               "iD": 4,
               "name": "numberOfEmployees",
-              "value": "Über 250",
+              "value": "Over 250",
               "id": "genderExpression",
               "label": "Over 250"
             }
@@ -317,13 +317,13 @@
           "firstOption": {
             "name": "online",
             "id": "online",
-            "value": "Es ist online passiert.",
+            "value": "It happened online",
             "label": "It happened online"
           },
           "secondOption": {
             "name": "online",
             "id": "place",
-            "value": "freeField",
+            "value": "Online",
             "label": "Where did the incident occur"
           }
         },
@@ -396,7 +396,7 @@
             {
               "iD": 3,
               "name": "formOfDisc",
-              "value": "Bi+feindlichkeit",
+              "value": "Bisexual discrimination",
               "id": "bi",
               "label": "Bisexual discrimination"
             },
@@ -410,7 +410,7 @@
             {
               "iD": 5,
               "name": "formOfDisc",
-              "value": "Inter*feindlichkeit",
+              "value": "Intersex discrimination",
               "id": "Inter*feindlichkeit",
               "label": "Intersex discrimination"
             },
@@ -431,9 +431,9 @@
             {
               "iD": 8,
               "name": "formOfDisc",
-              "value": "Agendar discrimination",
-              "id": "agendar discrimination",
-              "label": "Agendar discrimination"
+              "value": "agender discrimination",
+              "id": "agender discrimination",
+              "label": "agender discrimination"
             },
             {
               "iD": 8,
@@ -459,14 +459,14 @@
                 "id": "formOfDisc1",
                 "name": "formOfDisc",
                 "label": "No",
-                "value": "Nein",
+                "value": "No",
                 "checked": false
               },
               {
                 "id": "formOfDisc",
                 "name": "formOfDisc",
                 "label": "Yes, specify:",
-                "value": "Ja, und zwar:",
+                "value": "Yes, specify:",
                 "checked": false
               }
             ],
@@ -475,48 +475,48 @@
                 "iD": 1,
                 "id": "Antiasiatischer",
                 "name": "formOfDiscYes",
-                "value": "Antiasiatischer Rassismus",
+                "value": "Anti-Asian Racism",
                 "label": "Anti-Asian Racism"
               },
               {
                 "iD": 2,
                 "id": "Antifeminismus",
                 "name": "formOfDiscYes",
-                "value": "Antifeminismus",
+                "value": "Antifeminism",
                 "label": "Antifeminism"
               },
               {
                 "iD": 3,
                 "name": "formOfDiscYes",
                 "id": "Antimuslimischer",
-                "value": "Antimuslimischer Rassismus",
+                "value": "Anti-Muslim Racism",
                 "label": "Anti-Muslim Racism"
               },
               {
                 "iD": 4,
                 "name": "formOfDiscYes",
                 "id": "Anti-Schwarzer",
-                "value": "Anti-Schwarzer Rassismus",
+                "value": "Anti-Black Racism",
                 "label": "Anti-Black Racism"
               },
               {
                 "iD": 5,
                 "name": "formOfDiscYes",
                 "id": "Antislawischer",
-                "value": "Antislawischer Rassismus",
+                "value": "Anti-Slavic Racism",
                 "label": "Anti-Slavic Racism"
               },
               {
                 "iD": 6,
                 "name": "formOfDiscYes",
-                "value": "Antiziganismus",
+                "value": "Antiziganism",
                 "id": "Antiziganismus",
                 "label": "Antiziganism"
               },
               {
                 "iD": 7,
                 "name": "formOfDiscYes",
-                "value": "Sexismus",
+                "value": "Sexism",
                 "id": "Sexismus",
                 "label": "Sexism"
               },
@@ -524,7 +524,7 @@
                 "iD": 8,
                 "name": "formOfDiscYes",
                 "id": "Anderes",
-                "value": "Anderes, und zwar:",
+                "value": "Other, specify:",
                 "label": "Other, specify:"
               }
             ]
@@ -542,29 +542,29 @@
               {
                 "id": "gender",
                 "name": "gender",
-                "label": "agendar",
-                "value": "agendar",
+                "label": "agender",
+                "value": "agender",
                 "checked": false
               },
               {
                 "id": "gender2",
                 "name": "gender",
                 "label": "intersex",
-                "value": "inter*",
+                "value": "intersex",
                 "checked": false
               },
               {
                 "id": "gender3",
                 "name": "gender",
                 "label": "male",
-                "value": "männlich",
+                "value": "male",
                 "checked": false
               },
               {
                 "id": "gender4",
                 "name": "gender",
                 "label": "non-binary",
-                "value": "nichtbinär",
+                "value": "non-binary",
                 "checked": false
               },
               {
@@ -585,14 +585,14 @@
                 "id": "gender7",
                 "name": "gender",
                 "label": "female",
-                "value": "weiblich",
+                "value": "female",
                 "checked": false
               },
               {
                 "id": "gender8",
                 "name": "gender",
                 "label": "Self-identification:",
-                "value": "Selbstbezeichung:",
+                "value": "Self-identification:",
                 "checked": false
               }
             ]
@@ -606,28 +606,28 @@
                 "id": "sexualOrientation",
                 "name": "sexualOrientation",
                 "label": "lesbian",
-                "value": "lesbisch",
+                "value": "lesbian",
                 "checked": false
               },
               {
                 "id": "sexualOrientation2",
                 "name": "sexualOrientation",
                 "label": "gay",
-                "value": "schwul",
+                "value": "gay",
                 "checked": false
               },
               {
                 "id": "sexualOrientation3",
                 "name": "sexualOrientation",
                 "label": "bi+sexual",
-                "value": "bi+sexuell",
+                "value": "bi+sexual",
                 "checked": false
               },
               {
                 "id": "sexualOrientation4",
                 "name": "sexualOrientation",
                 "label": "asexual",
-                "value": "asexuell",
+                "value": "asexual",
                 "checked": false
               },
               {
@@ -641,49 +641,49 @@
                 "id": "sexualOrientation6",
                 "name": "sexualOrientation",
                 "label": "pansexual",
-                "value": "pansexuell",
+                "value": "pansexual",
                 "checked": false
               },
               {
                 "id": "sexualOrientation7",
                 "name": "sexualOrientation",
                 "label": "heterosexual",
-                "value": "heterosexuell",
+                "value": "heterosexual",
                 "checked": false
               },
               {
                 "id": "sexualOrientation8",
                 "name": "sexualOrientation",
                 "label": "aromantic",
-                "value": "aromantisch",
+                "value": "aromantic",
                 "checked": false
               },
               {
                 "id": "sexualOrientation9",
                 "name": "sexualOrientation",
                 "label": "bi+romantic",
-                "value": "bi+romantisch",
+                "value": "bi+romantic",
                 "checked": false
               },
               {
                 "id": "sexualOrientation10",
                 "name": "sexualOrientation",
                 "label": "homoromantic",
-                "value": "homoromantisch",
+                "value": "homoromantic",
                 "checked": false
               },
               {
                 "id": "sexualOrientation11",
                 "name": "sexualOrientation",
                 "label": "panromantic",
-                "value": "panromantisch",
+                "value": "panromantic",
                 "checked": false
               },
               {
                 "id": "sexualOrientation12",
                 "name": "sexualOrientation",
                 "label": "Self-identification:",
-                "value": "Selbstbezeichung:",
+                "value": "Self-identification:",
                 "checked": false
               }
             ]
@@ -697,35 +697,35 @@
                 "id": "age1",
                 "name": "age",
                 "label": "under 18 years",
-                "value": "unter 18 Jahre",
+                "value": "under 18 years",
                 "checked": false
               },
               {
                 "id": "age2",
                 "name": "age",
                 "label": "18 - 27 years",
-                "value": "18 - 27 Jahre",
+                "value": "18 - 27 years",
                 "checked": false
               },
               {
                 "id": "age3",
                 "name": "age",
                 "label": "28 - 40 years",
-                "value": "28 - 40 Jahre",
+                "value": "28 - 40 years",
                 "checked": false
               },
               {
                 "id": "age4",
                 "name": "age",
                 "label": "41 - 65 years",
-                "value": "41 - 65 Jahre",
+                "value": "41 - 65 years",
                 "checked": false
               },
               {
                 "id": "age5",
                 "name": "age",
                 "label": "Over 65 years",
-                "value": "Über 65 Jahre",
+                "value": "Over 65 years",
                 "checked": false
               }
             ]
@@ -753,6 +753,7 @@
         },
         "tenthStep": {
           "title": "Thank you for your report.",
+          "verification": "Are you okay with this data ?",
           "description": "You can access our page with links to counseling here.",
           "buttonText": "Referral Counseling",
           "validation": {

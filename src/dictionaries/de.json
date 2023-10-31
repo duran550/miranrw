@@ -433,9 +433,9 @@
             {
               "iD": 8,
               "name": "formOfDisc",
-              "value": "Agendar discrimination",
-              "id": "agendar discrimination",
-              "label": "Agendarfeindlichkeit"
+              "value": "agender discrimination",
+              "id": "agender discrimination",
+              "label": "agenderfeindlichkeit"
             },
             {
               "iD": 8,
@@ -543,8 +543,8 @@
               {
                 "id": "gender",
                 "name": "gender",
-                "label": "agendar",
-                "value": "agendar",
+                "label": "agender",
+                "value": "agender",
                 "checked": false
               },
               {
@@ -753,6 +753,7 @@
         },
         "tenthStep": {
           "title": "Vielen Dank für deine Meldung.",
+          "verification": "Sind Sie mit diesen Daten einverstanden?",
           "description": "Hier gelangst Du zu unserer Seite mit Links zur Beratung.",
           "buttonText": "Verweisberatung",
           "validation": {

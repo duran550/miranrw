@@ -11,6 +11,7 @@ import Checkbox from '../../checkbox/Checkbox';
 import InputField from '../../text-field/InputField';
 import { getFormCookies, getFormStep, setFormCookies } from '@/cookies/cookies';
 import { SECOND_FORM } from '@/cookies/cookies.d';
+import { useScrollOnTop } from '@/app/hooks/useScrollOnTop';
 
 const ThirdStepOrganization: React.FC<ThirdStepOrganizationProps> = ({
   thirdStepOrganizationTranslation,
@@ -34,6 +35,9 @@ const ThirdStepOrganization: React.FC<ThirdStepOrganizationProps> = ({
     organizationTypeFreeField: string;
     question: string;
   } = getFormCookies(SECOND_FORM);
+
+  // Scroll on top
+  useScrollOnTop();
 
   useEffect(() => {
     dispatch({ type: FORM_ERRORS, payload: true });
