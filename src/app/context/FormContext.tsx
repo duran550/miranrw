@@ -5,6 +5,7 @@ import {
   EDIT_STEP,
   FORM_ERRORS,
   IS_EDITING,
+  JUMP_STEP_FOR_WITNESS,
   LAST_STEP,
   NEXT_STEP,
   PREV_STEP,
@@ -44,6 +45,13 @@ const reducer = (initialState: FormType, action: ActionType) => {
         formData: [initialState.formData, ...action.payload],
       };
 
+    case JUMP_STEP_FOR_WITNESS:
+      setFormStep(initialState?.step + 2);
+      return {
+        ...initialState,
+        step: getFormStep(),
+        formData: [initialState.formData, ...action.payload],
+      };
     case PREV_STEP:
       setFormStep(initialState?.step - 1);
       return {

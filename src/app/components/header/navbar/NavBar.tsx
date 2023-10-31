@@ -113,12 +113,9 @@ const NavBar: React.FC<NavBarProps> = ({ navigation, lang }) => {
                 </Link>
               </li>
               <li onClick={() => setToggle(!toggle)} className="relative">
-                <Link
-                  className={`${toggle ? 'font-bold' : ''}`}
-                  href={`/${lang}/about-us`}
-                >
+                <div className={`${toggle ? 'font-bold' : ''} cursor-pointer`}>
                   {navigation.aboutUs?.title}
-                </Link>
+                </div>
                 {toggle && (
                   <ul className="bg-menuAndFooterColor py-3 px-6 -left-6 w-[15rem] flex flex-col shadow-xl absolute top-6">
                     <Link href="/about-us/#referalCounseling">
@@ -146,16 +143,20 @@ const NavBar: React.FC<NavBarProps> = ({ navigation, lang }) => {
             <LocaleSwitcher />
           </nav>
         </div>
-        <div className="xl:justify-between  text-textColor items-center w-full lg:w-[130rem]  xl:w-[130rem] hidden xl:flex">
+        <div className="xl:justify-between  text-textColor items-center w-full lg:w-[230rem]  xl:w-[230rem] hidden xl:flex">
           {/* Horizontal or desktop navigation */}
           <nav
             className={`container w-full opacity-0 xl:opacity-100 xl:block flex  items-center justify-between  `}
           >
-            <ul className="flex w-full gap-x-8">
+            <ul className="flex w-full space-x-8">
               <li>
                 <Link
                   className={`${
-                    pathname === '/en' || pathname == '/de' ? 'font-bold' : ''
+                    pathname === '/en' ||
+                    pathname == '/de' ||
+                    pathname == '/de-LS'
+                      ? 'font-bold'
+                      : ''
                   }`}
                   href={`/${lang}`}
                 >
@@ -183,15 +184,14 @@ const NavBar: React.FC<NavBarProps> = ({ navigation, lang }) => {
                 </Link>
               </li>
               <li className="relative">
-                <Link
+                <div
                   onMouseOver={() => setToggle(true)}
                   className={`${toggle ? 'font-bold' : ''} ${
                     pathname?.split('/')[2] === 'about-us' ? 'font-bold' : ''
-                  } hover:`}
-                  href={`/${lang}/about-us`}
+                  } cursor-pointer`}
                 >
                   {navigation.aboutUs?.title}
-                </Link>
+                </div>
                 {toggle && (
                   <ul
                     onMouseLeave={() => setToggle(false)}
@@ -228,7 +228,7 @@ const NavBar: React.FC<NavBarProps> = ({ navigation, lang }) => {
             </ul>
           </nav>
           {/* <LocaleSwitcher /> */}
-          <div className="opacity-0 xl:opacity-100">
+          <div className="opacity-0 mr-4 lg:mr-12 xl:opacity-100">
             {/* Language switcher */}
 
             <LocaleSwitcher />

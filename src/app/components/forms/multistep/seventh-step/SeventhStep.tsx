@@ -107,7 +107,7 @@ const SeventhStep: React.FC<SeventhStepProps> = ({
       {seventhStepTranslation?.choices?.map((choice: any) => (
         <Checkbox
           key={choice.iD}
-          props={register('typeOfDiscrimination', { required: true })}
+          props={register('typeOfDiscrimination')}
           name={choice.name}
           id={choice.id}
           value={choice.value}
