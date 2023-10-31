@@ -7,6 +7,7 @@ import FormHeader from '../header/header';
 import InputField from '../../text-field/InputField';
 import { getFormCookies, getFormStep, setFormCookies } from '@/cookies/cookies';
 import { SIXTH_FORM } from '@/cookies/cookies.d';
+import { useScrollOnTop } from '@/app/hooks/useScrollOnTop';
 
 type SeventhStepProps = {
   seventhStepTranslation: {
@@ -38,6 +39,9 @@ const SeventhStep: React.FC<SeventhStepProps> = ({
 
   let typeOfDiscrimination = watch('typeOfDiscrimination');
   let typeOfDiscriminationFreeField = watch('typeOfDiscriminationFreeField');
+
+  // Scroll on top
+  useScrollOnTop();
 
   useEffect(() => {
     let formValues: {

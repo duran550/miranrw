@@ -31,3 +31,21 @@ input:checked + div svg {
   color: white !important;
   background-color: #463980 !important;
 }
+
+/* AntD datepicker */
+
+.ant-picker-focused {
+  border-color: #463980;
+}
+
+.ant-picker:hover:hover {
+  border-color: #463980 !important;
+}
+
+.ant-picker-cell-selected .ant-picker-cell-inner {
+  background-color: #463980 !important;
+}
+
+.ant-picker-cell-today .ant-picker-cell-inner::before {
+  border-color: #463980 !important;
+}

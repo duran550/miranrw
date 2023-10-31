@@ -12,6 +12,7 @@ import {
 } from '@/app/context/actions';
 import { getFormCookies, getFormStep, setFormCookies } from '@/cookies/cookies';
 import { FIRST_FORM } from '@/cookies/cookies.d';
+import { useScrollOnTop } from '@/app/hooks/useScrollOnTop';
 
 const SecondStep: React.FC<SecondStepProps> = ({ secondStepTranslation }) => {
   const { dispatch, reportingPerson, isEditing } = useFormContext();
@@ -29,6 +30,9 @@ const SecondStep: React.FC<SecondStepProps> = ({ secondStepTranslation }) => {
   // Getting form cookies
   let formValues: { identity: string; question: string } =
     getFormCookies(FIRST_FORM);
+
+  // Scroll on top
+  useScrollOnTop();
 
   useEffect(() => {
     // Check if field is selected and throw an error if not
@@ -80,7 +84,6 @@ const SecondStep: React.FC<SecondStepProps> = ({ secondStepTranslation }) => {
         <RadioGroup
           props={register('identity', { required: true })}
           options={secondStepTranslation?.options}
-          title=""
         />
       </form>
       {identity === secondStepTranslation?.options[2].value && (

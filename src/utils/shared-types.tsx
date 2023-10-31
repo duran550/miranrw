@@ -3,7 +3,7 @@ export type reportType = {
   description: string;
   valueDate: string;
   dateRangeState: string;
-  datePeriod: boolean;
+  datePeriod: string;
   location: string;
   locationOnline: string;
   formOfQueerphobia: string[];

@@ -8,6 +8,7 @@ import { useFormContext } from '@/app/hooks/useFormContext';
 import { FORM_ERRORS, LAST_STEP, NEXT_STEP } from '@/app/context/actions';
 import { getFormCookies, getFormStep, setFormCookies } from '@/cookies/cookies';
 import { FOURTH_FORM } from '@/cookies/cookies.d';
+import { useScrollOnTop } from '@/app/hooks/useScrollOnTop';
 
 const FifthStep: React.FC<FifthStepProps> = ({ fifthStepTranslation }) => {
   const { dispatch, reportingPerson, isEditing, formErrors } = useFormContext();
@@ -29,6 +30,9 @@ const FifthStep: React.FC<FifthStepProps> = ({ fifthStepTranslation }) => {
     location: string;
     question: string;
   } = getFormCookies(FOURTH_FORM);
+
+  // Scroll on top
+  useScrollOnTop();
 
   useEffect(() => {
     dispatch({ type: FORM_ERRORS, payload: false });
