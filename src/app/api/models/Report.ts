@@ -8,7 +8,7 @@ interface reportType {
   numberOfEmployees?: string;
   valueDate?: string;
   dateRangeState?: string;
-  datePeriod?: boolean;
+  datePeriod?: string;
   location?: string;
   locationOnline?: string;
   formOfQueerphobia?: string[];
@@ -33,7 +33,7 @@ const ReportSchema = new Schema<reportType>({
   numberOfEmployees: { type: String, required: false },
   valueDate: { type: String, required: false },
   dateRangeState: { type: String, required: false },
-  datePeriod: { type: Boolean, required: false },
+  datePeriod: { type: String, required: false },
   location: { type: String, required: false },
   locationOnline: { type: String, required: false },
   formOfQueerphobia: { type: Array<string>, required: false },

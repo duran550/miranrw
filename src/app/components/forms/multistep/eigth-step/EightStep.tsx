@@ -9,6 +9,7 @@ import { FORM_ERRORS, LAST_STEP, NEXT_STEP } from '@/app/context/actions';
 import InputField from '../../text-field/InputField';
 import { getFormCookies, getFormStep, setFormCookies } from '@/cookies/cookies';
 import { SEVENTH_FORM } from '@/cookies/cookies.d';
+import { useScrollOnTop } from '@/app/hooks/useScrollOnTop';
 
 const EightStep: React.FC<EightStepProps> = ({ eightStepTranslation }) => {
   const { dispatch, isEditing, reportingPerson, formErrors } = useFormContext();
@@ -25,6 +26,9 @@ const EightStep: React.FC<EightStepProps> = ({ eightStepTranslation }) => {
   let formOfDisc: string = watch('formOfDisc');
   let formOfDiscYes: string[] = watch('formOfDiscYes');
   let formOfDiscYesFreeField: string = watch('formOfDiscYesFreeField');
+
+  // Scroll on top
+  useScrollOnTop();
 
   useEffect(() => {
     // Getting values from the form

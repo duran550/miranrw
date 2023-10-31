@@ -1,6 +1,7 @@
 export type TenthStepProps = {
   tenthStepTranslation: {
     title: string;
+    verification: string;
     description: string;
     buttonText: string;
     validation: {
@@ -11,5 +12,5 @@ export type TenthStepProps = {
 };
 
 export type TenthFormValues = {
-  validation: string;
+  validation: string[];
 };

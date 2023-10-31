@@ -3,6 +3,7 @@ import FormHeader from '../header/header';
 import { Button } from '@/app/components/button/Button';
 import { NEXT_STEP } from '@/app/context/actions';
 import { useFormContext } from '@/app/hooks/useFormContext';
+import { useScrollOnTop } from '@/app/hooks/useScrollOnTop';
 
 type InitialStepProps = {
   initialStepTranslation: {
@@ -14,6 +15,9 @@ type InitialStepProps = {
 const InitialStep: React.FC<InitialStepProps> = ({
   initialStepTranslation,
 }) => {
+  // Scroll on top
+  useScrollOnTop();
+
   const { dispatch } = useFormContext();
   return (
     <div className="mb-64 lg:mb-[12rem] lg:max-w-lg lg:mx-auto">

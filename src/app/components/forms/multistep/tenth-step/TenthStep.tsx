@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { TenthFormValues, TenthStepProps } from './tenthStep';
 import { useFormContext } from '@/app/hooks/useFormContext';
 import { clearFormCookies, getFormCookies } from '@/cookies/cookies';
@@ -18,11 +18,12 @@ import {
 } from '@/cookies/cookies.d';
 import { FORM_ERRORS, NEXT_STEP } from '@/app/context/actions';
 import ReportService from '@/services/reportService';
-import { reportType } from '@/utils/shared-types';
+import { useScrollOnTop } from '@/app/hooks/useScrollOnTop';
 
 const TenthStep: React.FC<TenthStepProps> = ({ tenthStepTranslation }) => {
+  // Scroll on top
+  useScrollOnTop();
   const { dispatch, reportingPerson } = useFormContext();
-  const [report, setReport] = useState<reportType>();
   const {
     register,
     watch,
@@ -143,8 +144,8 @@ const TenthStep: React.FC<TenthStepProps> = ({ tenthStepTranslation }) => {
     let organizationTypeFreeField = secondForm?.organizationTypeFreeField;
     let numberOfEmployees = thirdForm?.numberOfEmployees;
     let valueDate = thirdForm?.valueDate;
-    let dateRangeState = thirdForm?.dateRangeState;
-    let datePeriod = thirdForm?.datePeriod;
+    let dateRangeState = thirdForm?.dateRangeState.toString();
+    let datePeriod = thirdForm?.datePeriod.toString();
     let location = fourthForm?.location;
     let locationOnline = fourthForm?.locationOnline;
     let formOfQueerphobia = fifthForm?.formOfQueerphobia;
@@ -202,14 +203,17 @@ const TenthStep: React.FC<TenthStepProps> = ({ tenthStepTranslation }) => {
 
   useEffect(() => {
     dispatch({ type: FORM_ERRORS, payload: true });
-    validation?.length !== 1 && dispatch({ type: FORM_ERRORS, payload: false });
-    validation?.length === 0 && dispatch({ type: FORM_ERRORS, payload: true });
+    validation?.length === 0
+      ? dispatch({ type: FORM_ERRORS, payload: true })
+      : dispatch({ type: FORM_ERRORS, payload: false });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [validation]);
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} id="eighthForm">
-      <h1 className="font-bold text-2xl mb-4">Are you okay with this data ?</h1>
+      <h1 className="font-bold text-2xl mb-4">
+        {tenthStepTranslation?.verification}
+      </h1>
       <div>
         <EditBlock
           step={firstForm?.step}
@@ -226,6 +230,14 @@ const TenthStep: React.FC<TenthStepProps> = ({ tenthStepTranslation }) => {
               ...secondForm?.organizationType,
               secondForm?.organizationTypeFreeField,
             ]}
+          />
+        )}
+
+        {secondForm?.description && (
+          <EditBlock
+            step={secondForm.step}
+            question={secondForm?.question}
+            answer={[secondForm?.description]}
           />
         )}
         {thirdForm && (

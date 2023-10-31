@@ -2,7 +2,7 @@ import React from 'react';
 
 type RadioGroupProps = {
   options: Array<any>;
-  title: string;
+  title?: string;
   props: any;
 };
 

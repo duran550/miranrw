@@ -7,6 +7,7 @@ import { FORM_ERRORS, LAST_STEP, NEXT_STEP } from '@/app/context/actions';
 import InputField from '../../text-field/InputField';
 import { getFormCookies, getFormStep, setFormCookies } from '@/cookies/cookies';
 import { FIFTH_FORM } from '@/cookies/cookies.d';
+import { useScrollOnTop } from '@/app/hooks/useScrollOnTop';
 
 type SixthStepProps = {
   sixthStepTranslation: {
@@ -37,7 +38,8 @@ const SixthStep: React.FC<SixthStepProps> = ({ sixthStepTranslation }) => {
   let otherformOfQueerphobiaFreeField = watch(
     'otherformOfQueerphobiaFreeField'
   );
-
+  // Scroll on top
+  useScrollOnTop();
   // Getting form cookies
   useEffect(() => {
     let formValues: {
@@ -47,7 +49,7 @@ const SixthStep: React.FC<SixthStepProps> = ({ sixthStepTranslation }) => {
     } = getFormCookies(FIFTH_FORM);
 
     // dispatch({ type: FORM_ERRORS, payload: false });
-    if (formValues && !formOfQueerphobia && otherformOfQueerphobiaFreeField) {
+    if (formValues && !formOfQueerphobia && !otherformOfQueerphobiaFreeField) {
       dispatch({ type: FORM_ERRORS, payload: false });
       formOfQueerphobia !== formValues?.formOfQueerphobia &&
         setValue('formOfQueerphobia', formValues?.formOfQueerphobia);
