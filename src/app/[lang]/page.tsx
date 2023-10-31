@@ -11,12 +11,13 @@ export default async function Home({
 }) {
   const { page } = await getDictionary(lang);
 
+  console.log(lang);
   return (
     <>
       <Header lang={lang} />
-      <HeroSection lang={lang} content={page.home.heroSection} />
+      <HeroSection lang={lang} content={page?.home?.heroSection} />
 
-      <Footer lang={lang} footer={page.footer} />
+      <Footer lang={lang} footer={page?.footer} />
     </>
   );
 }
