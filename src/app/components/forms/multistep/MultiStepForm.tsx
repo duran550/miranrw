@@ -40,9 +40,13 @@ type MultiStepFormValuesProps = {
 
 type MultiStepFormProps = {
   formTranslation: MultiStepFormValuesProps;
+  lang: string;
 };
 
-const MultiStepForm: React.FC<MultiStepFormProps> = ({ formTranslation }) => {
+const MultiStepForm: React.FC<MultiStepFormProps> = ({
+  formTranslation,
+  lang,
+}) => {
   const { step, dispatch, formErrors, reportingPerson, isEditing } =
     useFormContext();
   let stepFromCookies = getFormStep();
@@ -51,6 +55,7 @@ const MultiStepForm: React.FC<MultiStepFormProps> = ({ formTranslation }) => {
       <div className="lg:max-w-xl lg:mb-16">
         {step === 1 ? (
           <FirstStep
+            lang={lang}
             firstStepTranslation={formTranslation?.stepper?.firstStep}
           />
         ) : (

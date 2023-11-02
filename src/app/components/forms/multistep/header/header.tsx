@@ -5,6 +5,7 @@ import React, { ReactNode } from 'react';
 type FormHeaderProps = {
   children?: ReactNode;
   title: string;
+  lang?: string;
   description?: {
     firstParagraph: string;
     secondParagraph: string;
@@ -21,6 +22,7 @@ const FormHeader: React.FC<FormHeaderProps> = ({
   title,
   subTitle,
   description,
+  lang,
   children,
 }) => {
   return (
@@ -36,17 +38,23 @@ const FormHeader: React.FC<FormHeaderProps> = ({
           <div className="flex my-4 items-center space-x-4 font-bold">
             <div>
               <AnimateClick>
-                <Link href="/disclaimer">{description?.disclaimer}</Link>
+                <Link target="_blank" href={`/${lang}/disclaimer`}>
+                  {description?.disclaimer}
+                </Link>
               </AnimateClick>
             </div>
             <div>
               <AnimateClick>
-                <Link href="/datenschutz">{description?.datenschutz}</Link>
+                <Link target="_blank" href={`/${lang}/datenschutz`}>
+                  {description?.datenschutz}
+                </Link>
               </AnimateClick>
             </div>
             <div>
               <AnimateClick>
-                <Link href="/statement">{description?.explanation}</Link>
+                <Link target="_blank" href={`/${lang}/statement`}>
+                  {description?.explanation}
+                </Link>
               </AnimateClick>
             </div>
           </div>

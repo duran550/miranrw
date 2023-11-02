@@ -15,7 +15,7 @@ export default async function report({
     <div className="">
       <Header lang={lang} />
       <div className="md:mt-16 h-full  py-16 px-4 sm:px-[40px] lg:px-[250px]  ">
-        <MultiStepForm formTranslation={page.melden} />
+        <MultiStepForm lang={lang} formTranslation={page.melden} />
       </div>
       <div className="mt-0">
         <Footer lang={lang} footer={page.footer} />

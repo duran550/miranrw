@@ -207,6 +207,7 @@
           "description": "What exactly happened ?",
           "placeholder": "Please describe the incident as precisely as possible.",
           "disclaimer": "For data protection reasons we ask you not to enter names of other persons here.",
+          "minCharacters": "A minimum of 50 Characters is expected",
           "hints": {
             "title": "Possible Relevant Information",
             "list": [
@@ -795,7 +796,7 @@
       "impressum": "Legal notice",
       "contact": "Contact",
       "spendenkonto": "Donation account",
-      "socials": "Socials"
+      "socials": "Social Media"
     }
   }
 }

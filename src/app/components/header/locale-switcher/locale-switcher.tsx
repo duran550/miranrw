@@ -44,7 +44,7 @@ export default function LocaleSwitcher() {
                         : 'flex'
                     }`}
                   >
-                    English
+                    EN
                   </div>
                 </div>
               ) : locale === 'de' ? (
@@ -64,7 +64,7 @@ export default function LocaleSwitcher() {
                         : 'flex text-sm '
                     }`}
                   >
-                    Deutsche
+                    DE
                   </div>
                 </div>
               ) : (
@@ -72,15 +72,10 @@ export default function LocaleSwitcher() {
                   onClick={() => setToggle(false)}
                   className="flex items-center w-full"
                 >
-                  <Image
-                    className="mr-2 w-8"
-                    src={GermanLogo}
-                    alt="Logo Germany"
-                  />
                   <div
                     className={`${
                       pathName?.split('/')[1] === 'de-LS'
-                        ? ' font-bold text-sm md:w-[10rem]'
+                        ? ' font-bold text-sm md:w-[8.2rem]'
                         : 'flex  md:w-[10rem] text-sm'
                     }`}
                   >

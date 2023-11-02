@@ -12,7 +12,6 @@ import { FourthFormValues } from './fourthStep';
 import { getFormCookies, getFormStep, setFormCookies } from '@/cookies/cookies';
 import { THIRD_FORM } from '@/cookies/cookies.d';
 import { DatePicker, ConfigProvider } from 'antd';
-import { DatePickerProps } from 'antd/lib';
 import { useScrollOnTop } from '@/app/hooks/useScrollOnTop';
 // Date Picker
 const { RangePicker } = DatePicker;
