@@ -24,27 +24,37 @@ const CopyRightSection: React.FC<CopyrightProps> = ({
 }) => {
   return (
     <div className="lg:py-6 lg:space-x-16  flex flex-col-reverse xl:flex-row lg:flex lg:px-12 bg-menuAndFooterColor lg:border-t-8 border-dividerColor lg:justify-between lg:items-center xl:items-center text-textColor xl:justify-between">
-      <div className="grid grid-cols-2 max-sm:gap-y-4 max-sm:gap-x-8 sm:flex sm:w-fit sm:space-y-4 pb-4 lg:my-0 sm:flex-row  mx-4 mt-4 lg:mt-0 sm:gap-x-8">
-        <Image
-          className="sm:w-16 lg:w-40 w-32 m-0"
-          src={QNWLogo}
-          alt="QNW Logo"
-        />
-        <Image
-          className="sm:w-16 lg:w-40 w-32 m-0 max-sm:max-h-14"
-          src={NGVTLogo}
-          alt="NGVT Logo"
-        />
-        <Image
-          className="sm:w-16 lg:w-40 w-32 m-0 border"
-          src={RubikonLogo}
-          alt="Rubikon Logo"
-        />
-        <Image
-          className="sm:w-16 lg:w-40 w-32 m-0 border"
-          src={LSVDLogo}
-          alt="LSVD Logo"
-        />
+      <div className="flex flex-wrap items-center space-y-4 space-x-6 mt-4 px-4">
+        <Link target="_blank" href="https://queeres-netzwerk.nrw/ ">
+          <Image
+            className="sm:w-32 lg:w-40 w-32 m-0"
+            src={QNWLogo}
+            alt="QNW Logo"
+          />
+        </Link>
+        <Link href="https://ngvt.nrw/" target="_blank">
+          <Image
+            className="sm:w-32 lg:w-40 w-32 m-0 max-sm:max-h-14"
+            src={NGVTLogo}
+            alt="NGVT Logo"
+          />
+        </Link>
+
+        <Link target="_blank" href="https://rubicon-koeln.de/">
+          <Image
+            className="sm:w-32 lg:w-64 w-32 m-0 border"
+            src={RubikonLogo}
+            alt="Rubikon Logo"
+          />
+        </Link>
+        <Link href="https://nrw.lsvd.de/" target="_blank">
+          <Image
+            className="sm:w-32 lg:w-40 w-32 m-0 border"
+            src={LSVDLogo}
+            alt="LSVD Logo"
+          />
+        </Link>
+
         <Image
           className="sm:w-45  w-[20rem] border"
           src={MinisteriumLogo}

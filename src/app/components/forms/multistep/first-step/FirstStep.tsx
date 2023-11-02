@@ -6,15 +6,20 @@ import { NEXT_STEP } from '@/app/context/actions';
 
 type FirstStepProps = {
   firstStepTranslation: { title: string; description: any; buttonText: string };
+  lang: string;
 };
 
-const FirstStep: React.FC<FirstStepProps> = ({ firstStepTranslation }) => {
+const FirstStep: React.FC<FirstStepProps> = ({
+  firstStepTranslation,
+  lang,
+}) => {
   const { dispatch } = useFormContext();
   return (
     <div>
       <FormHeader
         title={firstStepTranslation?.title}
         description={firstStepTranslation?.description}
+        lang={lang}
       />
       <Button
         onClick={() => dispatch({ type: NEXT_STEP, payload: '' })}

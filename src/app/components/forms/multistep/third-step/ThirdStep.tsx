@@ -15,6 +15,7 @@ type ThirdStepProps = {
     description: string;
     placeholder: string;
     disclaimer: string;
+    minCharacters: string;
     hints: { title: string; list: string[] };
   };
 };
@@ -88,7 +89,7 @@ const ThirdStep: React.FC<ThirdStepProps> = ({ thirdStepTranslation }) => {
         />
         {formErrors && description?.length !== 0 && (
           <label className="text-red-500 text-xs">
-            A minimum of 50 Characters is expected
+            {thirdStepTranslation?.minCharacters}
           </label>
         )}
         <p className="flex items-center mt-4 text-sm">
