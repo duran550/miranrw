@@ -184,14 +184,15 @@ const NavBar: React.FC<NavBarProps> = ({ navigation, lang }) => {
                 </Link>
               </li>
               <li className="relative">
-                <div
+                <Link
+                  href={`/${lang}/about-us`}
                   onMouseOver={() => setToggle(true)}
                   className={`${toggle ? 'font-bold' : ''} ${
                     pathname?.split('/')[2] === 'about-us' ? 'font-bold' : ''
                   } cursor-pointer`}
                 >
                   {navigation.aboutUs?.title}
-                </div>
+                </Link>
                 {toggle && (
                   <ul
                     onMouseLeave={() => setToggle(false)}

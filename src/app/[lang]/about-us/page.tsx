@@ -70,40 +70,7 @@ export default async function aboutUs({
             <h1 className="font-bold text-3xl sm:mb-16 mb-6">
               {navigation?.aboutUs?.team}
             </h1>
-            <div className="grid grid-cols-4 gap-x-2 w-4/6 pb-6 hidden sm:block">
-              <iframe
-                src="https://wwwcom/embed/9zWPJR2u01w?si=iUdQY2YiqrJGzSOX"
-                title="YouTube video player"
-                frameBorder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                allowFullScreen
-                className="w-full"
-              ></iframe>
-              <iframe
-                src="https://wwwcom/embed/9zWPJR2u01w?si=iUdQY2YiqrJGzSOX"
-                title="YouTube video player"
-                frameBorder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                allowFullScreen
-                className="w-full"
-              ></iframe>
-              <iframe
-                src="https://wwwcom/embed/9zWPJR2u01w?si=iUdQY2YiqrJGzSOX"
-                title="YouTube video player"
-                frameBorder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                allowFullScreen
-                className="w-full"
-              ></iframe>
-              <iframe
-                src="https://wwwcom/embed/9zWPJR2u01w?si=iUdQY2YiqrJGzSOX"
-                title="YouTube video player"
-                frameBorder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                allowFullScreen
-                className="w-full"
-              ></iframe>
-            </div>
+            <div className="grid grid-cols-4 gap-x-2 w-4/6 pb-6 hidden sm:block"></div>
             <p className="w-full lg:max-w-2xl">
               Text text text Text text text Text text text Text text text Text
               text text Text text text Text text text Text text text Text text

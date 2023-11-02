@@ -4,7 +4,7 @@
     "reportIncident": "Vorfall melden",
     "aboutQueer": "Über Queerfeindlichkeit",
     "aboutUs": {
-      "title": "Über Uns",
+      "title": "Über uns",
       "referalCounseling": "Verweisberatung",
       "news": "Aktuelles",
       "publications": "Publikationen",
@@ -208,6 +208,7 @@
           "description": " Was genau ist passiert ?",
           "placeholder": "Bitte beschreibe den Vorfall so genau wie möglich.",
           "disclaimer": "Aus Gründen des Datenschutzes bitten wir dich, hier keine Namen anderer Personen anzugeben.",
+          "minCharacters": "Ein Minimum von 50 Zeichen wird erwartet",
           "hints": {
             "title": "Mögliche relevante Informationen",
             "list": [
@@ -795,7 +796,7 @@
       "impressum": "Impressum",
       "contact": "Kontakt",
       "spendenkonto": "Spendenkonto",
-      "socials": "Socials"
+      "socials": "Social Media"
     }
   }
 }
