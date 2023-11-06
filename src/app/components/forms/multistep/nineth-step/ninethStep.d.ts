@@ -16,6 +16,7 @@ type BlockDataType = {
 export type NinethStepProps = {
   ninethStepTranslation: {
     mainTitle: string;
+    minCharacters: string;
     firstBlock: BlockDataType;
     secondBlock: BlockDataType;
     thirdBlock: BlockDataType;

@@ -30,11 +30,17 @@ const EditBlock: React.FC<EditBlockProps> = ({ question, answer, step }) => {
       <div className="flex flex-wrap items-center">
         {typeof answer !== 'string'
           ? answer?.length !== 0 &&
-            answer?.map((element: string) => (
-              <div className="bg-slate-100 p-2 rounded-md mx-1 my-1" key="key">
-                {element && element}
-              </div>
-            ))
+            answer?.map(
+              (element: string) =>
+                element && (
+                  <div
+                    className="bg-slate-100 p-2 rounded-md mx-1 my-1"
+                    key="key"
+                  >
+                    {element && element}
+                  </div>
+                )
+            )
           : answer && (
               <div className="bg-slate-100 p-2 rounded-md mx-1" key="key">
                 {answer}

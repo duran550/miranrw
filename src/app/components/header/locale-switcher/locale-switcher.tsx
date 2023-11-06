@@ -76,7 +76,7 @@ export default function LocaleSwitcher() {
                     className={`${
                       pathName?.split('/')[1] === 'de-LS'
                         ? ' font-bold text-sm md:w-[8.2rem]'
-                        : 'flex  md:w-[10rem] text-sm'
+                        : 'flex  md:w-[8.2rem] text-sm'
                     }`}
                   >
                     Leichte Sprache
