@@ -49,3 +49,9 @@ input:checked + div svg {
 .ant-picker-cell-today .ant-picker-cell-inner::before {
   border-color: #463980 !important;
 }
+
+/* Autocomplte search icon */
+
+.search-icon {
+  display: none;
+}

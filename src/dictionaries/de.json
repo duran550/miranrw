@@ -2,7 +2,11 @@
   "navigation": {
     "home": "Startseite",
     "reportIncident": "Vorfall melden",
-    "aboutQueer": "Über Queerfeindlichkeit",
+    "aboutQueer": {
+      "title": "Über Queerfeindlichkeit",
+      "firstSubmenu": "Was ist Queerfeindlichkeit?",
+      "secondSubmenu": "Was ist Mehrfachdiskriminierung?"
+    },
     "aboutUs": {
       "title": "Über uns",
       "referalCounseling": "Verweisberatung",
@@ -167,7 +171,7 @@
           "buttonText": "Los geht’s"
         },
         "secondStep": {
-          "title": "Wer ist betroffen ?*",
+          "title": "Wer ist betroffen?*",
           "options": [
             {
               "id": "age1",
@@ -205,7 +209,7 @@
         },
         "thirdStep": {
           "title": "Vorfallbeschreibung*",
-          "description": " Was genau ist passiert ?",
+          "description": " Was genau ist passiert?",
           "placeholder": "Bitte beschreibe den Vorfall so genau wie möglich.",
           "disclaimer": "Aus Gründen des Datenschutzes bitten wir dich, hier keine Namen anderer Personen anzugeben.",
           "minCharacters": "Ein Minimum von 50 Zeichen wird erwartet",
@@ -330,7 +334,7 @@
           }
         },
         "sixthStep": {
-          "title": "Auf was bezog sich die Diskriminierung deiner Meinung nach ?",
+          "title": "Auf was bezog sich die Diskriminierung deiner Meinung nach?",
           "description": " Mehrfachnennung möglich",
           "choices": [
             {
@@ -535,7 +539,7 @@
         },
         "ninethStep": {
           "mainTitle": "Persönliche Angaben",
-
+          "minCharacters": "Ein Minimum von 3 Zeichen wird erwartet",
           "firstBlock": {
             "title": "Was ist deine geschlechtliche Identität?",
             "titleOnBehalf": "Was ist die geschlechtliche Identität der betroffenen Person?",
@@ -792,6 +796,7 @@
       "description": "Dies ist die About-Seite"
     },
     "footer": {
+      "partners": "Kooperationspartner*innen",
       "datenschutz": "Datenschutz",
       "impressum": "Impressum",
       "contact": "Kontakt",

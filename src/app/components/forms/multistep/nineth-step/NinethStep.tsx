@@ -64,20 +64,20 @@ const NinethStep: React.FC<NinethStepProps> = ({ ninethStepTranslation }) => {
     }
 
     // first form validation
-    {
-      gender &&
-        gender?.includes('Selbstbezeichung:') &&
-        genderFreeField?.length <= 3 &&
-        dispatch({ type: FORM_ERRORS, payload: true });
-    }
+    // {
+    //   gender &&
+    //     gender?.includes('Selbstbezeichung:') &&
+    //     genderFreeField?.length <= 3 &&
+    //     dispatch({ type: FORM_ERRORS, payload: true });
+    // }
 
     // second form validation.
-    {
-      sexualOrientation &&
-        sexualOrientation?.includes('Selbstbezeichung:') &&
-        sexualOrientationFreeField?.length <= 3 &&
-        dispatch({ type: FORM_ERRORS, payload: true });
-    }
+    // {
+    //   sexualOrientation &&
+    //     sexualOrientation?.includes('Selbstbezeichung:') &&
+    //     sexualOrientationFreeField?.length <= 3 &&
+    //     dispatch({ type: FORM_ERRORS, payload: true });
+    // }
 
     // Setting default values if the data are available in cookies
     if (formValues) {
@@ -150,7 +150,7 @@ const NinethStep: React.FC<NinethStepProps> = ({ ninethStepTranslation }) => {
                   genderFreeField?.length !== 0 &&
                   formErrors && (
                     <label className="text-red-500 text-xs">
-                      A minimum of 4 Characters is expected
+                      {ninethStepTranslation?.minCharacters}
                     </label>
                   )}
               </div>
@@ -191,7 +191,7 @@ const NinethStep: React.FC<NinethStepProps> = ({ ninethStepTranslation }) => {
                   sexualOrientationFreeField?.length !== 0 &&
                   formErrors && (
                     <label className="text-red-500 text-xs">
-                      A minimum of 4 Characters is expected
+                      {ninethStepTranslation?.minCharacters}
                     </label>
                   )}
               </div>

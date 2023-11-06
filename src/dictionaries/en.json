@@ -2,7 +2,11 @@
   "navigation": {
     "home": "Homepage",
     "reportIncident": "Report",
-    "aboutQueer": "About Queerphobia",
+    "aboutQueer": {
+      "title": "About Queerophobia",
+      "firstSubmenu": "What is Queerphobia ?",
+      "secondSubmenu": "What is multiple discrimination ?"
+    },
     "aboutUs": {
       "title": "About us",
       "referalCounseling": "Referral counseling",
@@ -534,6 +538,7 @@
 
         "ninethStep": {
           "mainTitle": "Personal Information",
+          "minCharacters": "A minimum of 4 Characters is expected",
 
           "firstBlock": {
             "title": "What is your gender identity ?",
@@ -792,6 +797,7 @@
       "description": "This is the About page."
     },
     "footer": {
+      "partners": "Cooperation Partners",
       "datenschutz": "Privacy Policy",
       "impressum": "Legal notice",
       "contact": "Contact",
