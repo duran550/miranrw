@@ -1,7 +1,7 @@
 import { getFormCookies } from '@/cookies/cookies';
 import { FOURTH_FORM } from '@/cookies/cookies.d';
 import { cities } from '@/utils/data';
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { ReactSearchAutocomplete } from 'react-search-autocomplete';
 
 type Item = {
@@ -23,27 +23,14 @@ const AutoComplete: React.FC<AutoCompleteProps> = ({
   handleOnSearch,
   handleOnSelect,
 }) => {
-  // const handleOnSearch = (string: string, results: any) => {
-  //   // onSearch will have as the first callback parameter
-  //   // the string searched and for the second the results.
-  //   console.log(string, results);
-  // };
+  const [location, setLocation] = useState<string>('');
 
-  // const handleOnHover = (result: any) => {
-  //   // the item hovered
-  //   console.log(result);
-  // };
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  useEffect(() => {
+    const formValues = getFormCookies(FOURTH_FORM);
 
-  // const handleOnSelect = (item: any) => {
-  //   // the item selected
-  //   console.log(item);
-  // };
-
-  // const handleOnFocus = () => {
-  //   console.log('Focused');
-  // };
-
-  const { location } = getFormCookies(FOURTH_FORM);
+    setLocation(formValues?.location);
+  });
 
   const formatResult = (item: any) => {
     return (
