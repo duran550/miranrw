@@ -133,10 +133,7 @@ const FifthStep: React.FC<FifthStepProps> = ({ fifthStepTranslation }) => {
         />
         <div className="w-full">
           {locationOnline == fifthStepTranslation?.secondOption?.value && (
-            <AutoComplete
-              location={(location && location) || ''}
-              handleOnSelect={handleOnSelect}
-            />
+            <AutoComplete handleOnSelect={handleOnSelect} />
           )}
           <div>
             {formErrors && location && location?.length > 0 && (
