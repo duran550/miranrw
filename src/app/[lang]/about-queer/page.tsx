@@ -21,8 +21,11 @@ export default async function aboutQueer({
         >
           <div className="flex lg:gap-x-32 gap-y-8 flex-col lg:flex-row">
             <div className="">
-              <h1 className="font-bold text-3xl sm:mb-16 mb-8">
-                {navigation?.aboutQueer}
+              <h1
+                id="whatIsQueerphobia"
+                className="font-bold text-3xl sm:mb-16 mb-8"
+              >
+                {navigation?.aboutQueer?.firstSubmenu}
               </h1>
               <p className="w-full lg:max-w-2xl">
                 Text text text Text text text Text text text Text text text Text
@@ -39,8 +42,11 @@ export default async function aboutQueer({
             </div>
           </div>
           <div className="mt-16">
-            <h1 className="font-bold text-3xl sm:mb-16 mb-8">
-              {navigation?.aboutQueer}
+            <h1
+              id="whatIsMultipleDiscrimination"
+              className="font-bold text-3xl sm:mb-16 mb-8"
+            >
+              {navigation?.aboutQueer.secondSubmenu}
             </h1>
             <p className="w-full lg:max-w-2xl">
               Text text text Text text text Text text text Text text text Text

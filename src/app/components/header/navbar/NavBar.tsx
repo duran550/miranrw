@@ -11,7 +11,11 @@ type NavBarProps = {
   navigation: {
     home: string;
     reportIncident: string;
-    aboutQueer: string;
+    aboutQueer: {
+      title: string;
+      firstSubmenu: string;
+      secondSubmenu: string;
+    };
     aboutUs: {
       title: string;
       referalCounseling: string;
@@ -28,6 +32,8 @@ type NavBarProps = {
 const NavBar: React.FC<NavBarProps> = ({ navigation, lang }) => {
   const [navbar, setNavbar] = useState<boolean>(false);
   const [toggle, setToggle] = useState<boolean>(false);
+  const [toggle1, setToggle1] = useState<boolean>(false);
+
   const pathname = usePathname();
 
   /* Container 36 */
@@ -107,11 +113,27 @@ const NavBar: React.FC<NavBarProps> = ({ navigation, lang }) => {
                   {navigation?.reportIncident}
                 </Link>
               </li>
-              <li>
-                <Link href={`/${lang}/about-queer`}>
-                  {navigation?.aboutQueer}
-                </Link>
+              <li onClick={() => setToggle1(!toggle1)} className="relative">
+                <div className={`${toggle1 ? 'font-bold' : ''} cursor-pointer`}>
+                  {navigation.aboutQueer?.title}
+                </div>
+                {toggle1 && (
+                  <ul className="bg-menuAndFooterColor py-3 px-6 -left-6 w-[15rem] flex flex-col shadow-xl absolute top-6">
+                    <Link
+                      href={`/${lang}/about-queer/#whatIsQueerphobia`}
+                      className="py-2"
+                    >
+                      {navigation.aboutQueer?.firstSubmenu}
+                    </Link>
+                    <Link
+                      href={`/${lang}/about-queer#whatIsMultipleDiscrimination`}
+                    >
+                      {navigation.aboutQueer?.secondSubmenu}
+                    </Link>
+                  </ul>
+                )}
               </li>
+              {/* About us section */}
               <li onClick={() => setToggle(!toggle)} className="relative">
                 <div className={`${toggle ? 'font-bold' : ''} cursor-pointer`}>
                   {navigation.aboutUs?.title}
@@ -121,21 +143,22 @@ const NavBar: React.FC<NavBarProps> = ({ navigation, lang }) => {
                     <Link href="/about-us/#referalCounseling">
                       {navigation.aboutUs?.referalCounseling}
                     </Link>
-                    <Link href="/about-us/#news" className="py-2">
+                    <Link href={`/${lang}/about-us/#news`} className="py-2">
                       {navigation.aboutUs?.news}
                     </Link>
-                    <Link href="/about-us/#publications">
+                    <Link href={`/${lang}/about-us/#publications`}>
                       {navigation.aboutUs?.publications}
                     </Link>
-                    <Link href="/about-us/#team" className="py-2">
+                    <Link href={`/${lang}/about-us/#team`} className="py-2">
                       {navigation.aboutUs?.team}
                     </Link>
-                    <Link href="/about-us/#partners">
+                    <Link href={`/${lang}/about-us/#partners`}>
                       {navigation.aboutUs?.partners}
                     </Link>
                   </ul>
                 )}
               </li>
+              {/* FAQs link */}
               <li>
                 <Link href={`/${lang}/faqs`}>{navigation?.faqs}</Link>
               </li>
@@ -173,54 +196,83 @@ const NavBar: React.FC<NavBarProps> = ({ navigation, lang }) => {
                   {navigation?.reportIncident}
                 </Link>
               </li>
-              <li>
-                <Link
-                  className={`${
-                    pathname?.split('/')[2] === 'about-queer' ? 'font-bold' : ''
-                  }`}
-                  href={`/${lang}/about-queer`}
-                >
-                  {navigation?.aboutQueer}
-                </Link>
-              </li>
-              <li className="relative">
+              {/* About Queerphobia link */}
+              <li className="relative h-full [&>*]:hover:flex">
                 <Link
                   href={`/${lang}/about-us`}
-                  onMouseOver={() => setToggle(true)}
-                  className={`${toggle ? 'font-bold' : ''} ${
+                  className={`hover:font-bold relative z-10 ${
+                    pathname?.split('/')[2] === 'about-us' ? 'font-bold' : ''
+                  } cursor-pointer`}
+                >
+                  {navigation.aboutQueer?.title}
+                </Link>
+                {/* Submenu About Queerphobia */}
+                <ul className="hidden bg-menuAndFooterColor py-3 px-6 text-sm -left-6 w-[18rem] flex-col  absolute top-4 z-0 pt-16">
+                  <Link
+                    href={`/${lang}/about-queer/#whatIsQueerphobia`}
+                    className="py-2 hover:font-bold"
+                  >
+                    {navigation.aboutQueer?.firstSubmenu}
+                  </Link>
+                  <Link
+                    className="py-2 hover:font-bold"
+                    href={`/${lang}/about-queer#whatIsMultipleDiscrimination`}
+                  >
+                    {navigation.aboutQueer?.secondSubmenu}
+                  </Link>
+                </ul>
+              </li>
+
+              {/* About us link */}
+              <li className="relative [&>*]:hover:flex">
+                <Link
+                  href={`/${lang}/about-us`}
+                  className={`hover:font-bold relative z-10 ${
                     pathname?.split('/')[2] === 'about-us' ? 'font-bold' : ''
                   } cursor-pointer`}
                 >
                   {navigation.aboutUs?.title}
                 </Link>
-                {toggle && (
-                  <ul
-                    onMouseLeave={() => setToggle(false)}
-                    className=" bg-menuAndFooterColor py-3 px-6 -left-6 w-[15rem] flex flex-col shadow-xl absolute top-16"
-                  >
-                    <Link href="/about-us/#referalCounseling">
+                {
+                  <ul className="hidden bg-menuAndFooterColor py-3 px-6 text-sm -left-6 w-[18rem] flex-col  absolute top-4 z-0 pt-16">
+                    <Link
+                      className="hover:font-bold"
+                      href="/about-us/#referalCounseling"
+                    >
                       {navigation.aboutUs?.referalCounseling}
                     </Link>
-                    <Link href="/about-us/#news" className="py-2">
+                    <Link
+                      className="hover:font-bold py-3"
+                      href="/about-us/#news"
+                    >
                       {navigation.aboutUs?.news}
                     </Link>
-                    <Link href="/about-us/#publications">
+                    <Link
+                      className="hover:font-bold"
+                      href="/about-us/#publications"
+                    >
                       {navigation.aboutUs?.publications}
                     </Link>
-                    <Link href="/about-us/#team" className="py-2">
+                    <Link
+                      className="hover:font-bold py-3"
+                      href="/about-us/#team"
+                    >
                       {navigation.aboutUs?.team}
                     </Link>
-                    <Link href="/about-us/#partners">
+                    <Link
+                      className="hover:font-bold"
+                      href="/about-us/#partners"
+                    >
                       {navigation.aboutUs?.partners}
                     </Link>
                   </ul>
-                )}
+                }
               </li>
               <li>
                 <Link
                   className={`${
                     pathname?.split('/')[2] === 'faqs' ? 'font-bold' : ''
-                  }`}
+                  } relative z-10`}
                   href={`/${lang}/faqs`}
                 >
                   {navigation?.faqs}

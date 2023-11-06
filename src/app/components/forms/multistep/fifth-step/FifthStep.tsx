@@ -9,11 +9,12 @@ import { FORM_ERRORS, LAST_STEP, NEXT_STEP } from '@/app/context/actions';
 import { getFormCookies, getFormStep, setFormCookies } from '@/cookies/cookies';
 import { FOURTH_FORM } from '@/cookies/cookies.d';
 import { useScrollOnTop } from '@/app/hooks/useScrollOnTop';
+import AutoComplete from '../../auto-complete/AutoComplete';
 
 const FifthStep: React.FC<FifthStepProps> = ({ fifthStepTranslation }) => {
   const { dispatch, reportingPerson, isEditing, formErrors } = useFormContext();
   const [question] = useState<string>(fifthStepTranslation?.title);
-
+  const [location, setLocation] = useState<string>();
   const {
     register,
     handleSubmit,
@@ -23,7 +24,6 @@ const FifthStep: React.FC<FifthStepProps> = ({ fifthStepTranslation }) => {
   } = useForm<FifthFormValues>();
 
   let locationOnline: string = watch('locationOnline');
-  let location: string = watch('location');
   // Getting form cookies
   let formValues: {
     locationOnline: string;
@@ -38,6 +38,7 @@ const FifthStep: React.FC<FifthStepProps> = ({ fifthStepTranslation }) => {
     dispatch({ type: FORM_ERRORS, payload: false });
 
     if (
+      location &&
       location?.length <= 3 &&
       locationOnline == fifthStepTranslation?.secondOption?.value
     ) {
@@ -52,13 +53,12 @@ const FifthStep: React.FC<FifthStepProps> = ({ fifthStepTranslation }) => {
       dispatch({ type: FORM_ERRORS, payload: false });
       locationOnline !== formValues?.locationOnline &&
         setValue('locationOnline', formValues?.locationOnline);
-      location !== formValues?.location &&
-        setValue('location', formValues?.location);
+      location !== formValues?.location && '';
     }
 
-    if (locationOnline === fifthStepTranslation?.firstOption?.value) {
-      setValue('location', '');
-    }
+    // if (locationOnline === fifthStepTranslation?.firstOption?.value) {
+    //   setValue('location', '');
+    // }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [
     formValues?.location,
@@ -71,12 +71,37 @@ const FifthStep: React.FC<FifthStepProps> = ({ fifthStepTranslation }) => {
   // Triggered when submitting form
   const onSubmit: SubmitHandler<FifthFormValues> = (data) => {
     let step = getFormStep();
-    let dataWithQuestion = { question, step, ...data };
+
+    let dataWithQuestion = { question, location, step, ...data };
     setFormCookies(dataWithQuestion, FOURTH_FORM);
 
     isEditing && reportingPerson === 'myself'
       ? dispatch({ type: LAST_STEP, payload: 10 })
       : dispatch({ type: NEXT_STEP, payload: 'DATA 1' });
+  };
+
+  console.log(location);
+
+  // Autocomple functions
+
+  const handleOnSearch = (string: string, results: any) => {
+    // onSearch will have as the first callback parameter
+    // the string searched and for the second the results.
+    console.log(string, results);
+  };
+
+  const handleOnHover = (result: any) => {
+    // the item hovered
+    console.log(result);
+  };
+
+  const handleOnSelect = (item: any) => {
+    // the item selected
+    setLocation(item?.name);
+  };
+
+  const handleOnFocus = () => {
+    console.log('Focused');
   };
 
   return (
@@ -108,14 +133,10 @@ const FifthStep: React.FC<FifthStepProps> = ({ fifthStepTranslation }) => {
         />
         <div className="w-full">
           {locationOnline == fifthStepTranslation?.secondOption?.value && (
-            <InputField
-              name="location"
-              placeholder=""
-              props={register('location')}
-            />
+            <AutoComplete handleOnSelect={handleOnSelect} />
           )}
           <div>
-            {formErrors && location?.length > 0 && (
+            {formErrors && location && location?.length > 0 && (
               <label className="text-red-500 text-xs">
                 A minimum of 3 Characters is expected
               </label>

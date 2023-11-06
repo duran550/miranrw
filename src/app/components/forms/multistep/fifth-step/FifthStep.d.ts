@@ -12,12 +12,11 @@ export type FifthStepProps = {
       name: string;
       id: string;
       value: string;
-      label:sting
+      label: sting;
     };
   };
 };
 
 export type FifthFormValues = {
-  location: string;
   locationOnline: string;
 };
