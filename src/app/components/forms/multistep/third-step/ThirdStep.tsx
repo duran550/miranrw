@@ -92,13 +92,13 @@ const ThirdStep: React.FC<ThirdStepProps> = ({ thirdStepTranslation }) => {
             {thirdStepTranslation?.minCharacters}
           </label>
         )}
-        <p className="flex items-center mt-4 text-sm">
-          <span className="mr-2">*</span>
+        <p className="flex items-center mt-4 text-xs text-red-600">
+          <span className="mr-2"></span>
           {thirdStepTranslation?.disclaimer}
         </p>
       </form>
 
-      <div className="mt-16 lg:mt-0 lg:absolute lg:-top-16 lg:-right-[40rem]">
+      <div className="mt-16 lg:mt-8 xl:mt-0 xl:absolute  lg:-top-0 lg:-right-[38rem]">
         <FormHeader title={'Mögliche relevante Informationen'}>
           <ul className="list-disc pl-8">
             {thirdStepTranslation?.hints.list?.map((element: string) => (

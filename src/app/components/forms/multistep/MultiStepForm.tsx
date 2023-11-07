@@ -34,6 +34,7 @@ type MultiStepFormValuesProps = {
     eightStep: any;
     ninethStep: any;
     tenthStep: any;
+    eleventhStep: any;
   };
   button: { start: string; next: string; prev: string; submit: string };
 };
@@ -125,7 +126,11 @@ const MultiStepForm: React.FC<MultiStepFormProps> = ({
                     tenthStepTranslation={formTranslation?.stepper?.tenthStep}
                   />
                 ) : (
-                  <EleventhStep />
+                  <EleventhStep
+                    eleventhStepTranslation={
+                      formTranslation?.stepper?.eleventhStep
+                    }
+                  />
                 )}
               </div>
             ) : (
@@ -170,7 +175,11 @@ const MultiStepForm: React.FC<MultiStepFormProps> = ({
                     tenthStepTranslation={formTranslation?.stepper?.tenthStep}
                   />
                 ) : (
-                  <EleventhStep />
+                  <EleventhStep
+                    eleventhStepTranslation={
+                      formTranslation?.stepper?.eleventhStep
+                    }
+                  />
                 )}
               </div>
               /* End of Organization scenario */
