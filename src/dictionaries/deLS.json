@@ -781,6 +781,11 @@
               }
             ]
           }
+        },
+        "eleventhStep": {
+          "title": "Vielen Dank für deine Meldung.",
+          "description": "Hier gelangst Du zu unserer Seite mit Links zur Beratung.",
+          "button": "Verweisberatung"
         }
       },
       "formFields": {},

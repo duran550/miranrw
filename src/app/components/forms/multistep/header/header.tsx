@@ -38,22 +38,8 @@ const FormHeader: React.FC<FormHeaderProps> = ({
           <div className="flex my-4 items-center space-x-4 font-bold">
             <div>
               <AnimateClick>
-                <Link target="_blank" href={`/${lang}/disclaimer`}>
-                  {description?.disclaimer}
-                </Link>
-              </AnimateClick>
-            </div>
-            <div>
-              <AnimateClick>
                 <Link target="_blank" href={`/${lang}/datenschutz`}>
                   {description?.datenschutz}
-                </Link>
-              </AnimateClick>
-            </div>
-            <div>
-              <AnimateClick>
-                <Link target="_blank" href={`/${lang}/statement`}>
-                  {description?.explanation}
                 </Link>
               </AnimateClick>
             </div>

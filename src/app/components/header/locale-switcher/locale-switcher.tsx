@@ -23,7 +23,7 @@ export default function LocaleSwitcher() {
 
   return (
     <div className="w-full">
-      <ul className="flex flex-col md:flex-row space-y-6 ml-24 md:ml-0 md:space-y-0 justify-between items-center  w-full">
+      <ul className="flex flex-col lg:flex-row space-y-6 ml-24 md:ml-0 md:space-y-0 justify-between items-center  w-full">
         {i18n.locales.map((locale) => (
           <AnimateClick key={locale}>
             <Link href={redirectedPathName(locale)} className="text-slate-900">
