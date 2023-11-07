@@ -38,7 +38,7 @@ const Footer: React.FC<FooterProps> = ({ footer, lang }) => {
                 <div className="mt-2">IBAN: DE89 3702 0500 0007 0255 01</div>
                 <div className="mb-2">BIC: BFSWDE33XXX</div>
               </li>
-              <div className="w-full mb-2 xl:mb-0 md:w-96 h-[1px] bg-gray-800 xl:hidden"></div>
+              <div className="w-full mb-2 xl:mb-0 md:w-96 h-[1.2px] bg-gray-800 xl:hidden"></div>
 
               <li className="flex font-bold pb-1 lg:items-center flex-col w-[9rem]">
                 {footer?.socials}
@@ -59,7 +59,7 @@ const Footer: React.FC<FooterProps> = ({ footer, lang }) => {
                   </AnimateClick>
                 </div>
               </li>
-              <div className="w-full md:w-96 h-[1px] bg-gray-800 xl:hidden"></div>
+              <div className="w-full md:w-96 h-[1.2px] bg-gray-800 xl:hidden"></div>
             </ul>
           </div>
         </div>

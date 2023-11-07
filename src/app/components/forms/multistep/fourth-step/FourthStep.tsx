@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import 'dayjs/locale/de';
+import locale from 'antd/es/date-picker/locale/de_DE';
 import FormHeader from '../header/header';
 import { DateCalendar, LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
@@ -11,7 +12,7 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 import { FourthFormValues } from './fourthStep';
 import { getFormCookies, getFormStep, setFormCookies } from '@/cookies/cookies';
 import { THIRD_FORM } from '@/cookies/cookies.d';
-import { DatePicker, ConfigProvider } from 'antd';
+import { DatePicker } from 'antd';
 import { useScrollOnTop } from '@/app/hooks/useScrollOnTop';
 // Date Picker
 const { RangePicker } = DatePicker;
@@ -138,6 +139,7 @@ const FourthStep: React.FC<FourthStepProps> = ({ fourthStepTranslation }) => {
         {datePeriod && (
           <div className="mt-2 mb-8">
             <RangePicker
+              locale={locale}
               onChange={onDateRangeChange}
               disabledDate={disabledDate}
               defaultValue={

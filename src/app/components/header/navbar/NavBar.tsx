@@ -102,7 +102,7 @@ const NavBar: React.FC<NavBarProps> = ({ navigation, lang }) => {
           <nav
             className={`container  z-10 ${
               navbar ? 'block w-full' : 'hidden w-full'
-            } flex absolute xl:hidden right-0 ml-auto top-24 left-0 bg-menuAndFooterColor  z-20 px-8  text-textColor items-center justify-between `}
+            } flex absolute xl:hidden right-0 ml-auto top-24 left-0 bg-menuAndFooterColor  z-20 px-8  text-textColor items-start justify-between `}
           >
             <ul className="flex flex-col gap-y-4 pt-8 mb-8">
               <li>
@@ -163,7 +163,9 @@ const NavBar: React.FC<NavBarProps> = ({ navigation, lang }) => {
                 <Link href={`/${lang}/faqs`}>{navigation?.faqs}</Link>
               </li>
             </ul>
-            <LocaleSwitcher />
+            <div className="pt-8 mb-8">
+              <LocaleSwitcher />
+            </div>
           </nav>
         </div>
         <div className="xl:justify-between  text-textColor items-center w-full lg:w-[230rem]  xl:w-[230rem] hidden xl:flex">
@@ -199,9 +201,9 @@ const NavBar: React.FC<NavBarProps> = ({ navigation, lang }) => {
               {/* About Queerphobia link */}
               <li className="relative h-full [&>*]:hover:flex">
                 <Link
-                  href={`/${lang}/about-us`}
+                  href={`/${lang}/about-queer`}
                   className={`hover:font-bold relative z-10 ${
-                    pathname?.split('/')[2] === 'about-us' ? 'font-bold' : ''
+                    pathname?.split('/')[2] === 'about-queer' ? 'font-bold' : ''
                   } cursor-pointer`}
                 >
                   {navigation.aboutQueer?.title}
