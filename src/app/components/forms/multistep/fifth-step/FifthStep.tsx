@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import FormHeader from '../header/header';
 import { FifthFormValues, FifthStepProps } from './FifthStep.d';
 import RadioSingle from '../../radio/RadioSingle';
-import InputField from '../../text-field/InputField';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { useFormContext } from '@/app/hooks/useFormContext';
 import { FORM_ERRORS, LAST_STEP, NEXT_STEP } from '@/app/context/actions';
@@ -56,9 +55,6 @@ const FifthStep: React.FC<FifthStepProps> = ({ fifthStepTranslation }) => {
       location !== formValues?.location && '';
     }
 
-    // if (locationOnline === fifthStepTranslation?.firstOption?.value) {
-    //   setValue('location', '');
-    // }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [
     formValues?.location,
