@@ -1,3 +1,4 @@
+import Faq from '@/app/components/faq/Faq';
 import Footer from '@/app/components/footer/Footer';
 import Header from '@/app/components/header/header';
 import SinglePageLayout from '@/app/components/layout/SinglePageLayout';
@@ -61,7 +62,20 @@ export default async function aboutQueer({
               Text text text Text text text Text text text Text text text
             </p>
           </div>
-          <div></div>
+
+          {/* Glossary section */}
+
+          <div className="mt-16">
+            <h1 id="glossary" className="font-bold text-3xl sm:mb-16 mb-8">
+              {navigation?.aboutQueer.thirdSubmenu}
+            </h1>
+            <div className="w-full lg:max-w-2xl">
+              <Faq
+                title={page?.aboutQueer?.glossary?.glossary1.title}
+                faqs={page?.aboutQueer?.glossary?.glossary1.glossaryArray}
+              />
+            </div>
+          </div>
         </SinglePageLayout>
       </div>
       <div className="mt-32 lg:mt-[6rem]">

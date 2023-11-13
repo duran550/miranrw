@@ -5,7 +5,8 @@
     "aboutQueer": {
       "title": "About Queerophobia",
       "firstSubmenu": "What is Queerphobia ?",
-      "secondSubmenu": "What is multiple discrimination ?"
+      "secondSubmenu": "What is multiple discrimination ?",
+      "thirdSubmenu": "Glossary"
     },
     "aboutUs": {
       "title": "About us",
@@ -800,6 +801,31 @@
     "about": {
       "title": "About Us",
       "description": "This is the About page."
+    },
+    "aboutQueer": {
+      "glossary": {
+        "title": "Glossary",
+        "glossary1": {
+          "title": "Theme 1 ",
+          "glossaryArray": [
+            {
+              "id": 1,
+              "question": "A-",
+              "answer": "Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text"
+            },
+            {
+              "id": 2,
+              "question": "B-",
+              "answer": "Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text"
+            },
+            {
+              "id": 3,
+              "question": "C-",
+              "answer": "Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text"
+            }
+          ]
+        }
+      }
     },
     "footer": {
       "partners": "Cooperation Partners",

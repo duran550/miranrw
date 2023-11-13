@@ -5,7 +5,8 @@
     "aboutQueer": {
       "title": "Über Queerfeindlichkeit",
       "firstSubmenu": "Was ist Queerfeindlichkeit?",
-      "secondSubmenu": "Was ist Mehrfachdiskriminierung?"
+      "secondSubmenu": "Was ist Mehrfachdiskriminierung?",
+      "thirdSubmenu": "Glossar"
     },
     "aboutUs": {
       "title": "Über uns",
@@ -799,6 +800,31 @@
     "about": {
       "title": "Über uns",
       "description": "Dies ist die About-Seite"
+    },
+    "aboutQueer": {
+      "glossary": {
+        "title": "Glossar",
+        "glossary1": {
+          "title": "Thema 1 ",
+          "glossaryArray": [
+            {
+              "id": 1,
+              "question": "A-",
+              "answer": "Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text"
+            },
+            {
+              "id": 2,
+              "question": "B-",
+              "answer": "Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text"
+            },
+            {
+              "id": 3,
+              "question": "C-",
+              "answer": "Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text"
+            }
+          ]
+        }
+      }
     },
     "footer": {
       "partners": "Kooperationspartner*innen",
