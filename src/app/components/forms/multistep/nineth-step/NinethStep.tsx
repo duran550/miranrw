@@ -1,6 +1,5 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import FormHeader from '../header/header';
-import { NinethStepProps, NinethFormValues } from './ninethStep.d';
 import RadioGroup from '../../radio/RadioGroup';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import Checkbox from '../../checkbox/Checkbox';
@@ -8,20 +7,13 @@ import { useFormContext } from '@/app/hooks/useFormContext';
 import { FORM_ERRORS, LAST_STEP, NEXT_STEP } from '@/app/context/actions';
 import InputField from '../../text-field/InputField';
 import { getFormCookies, getFormStep, setFormCookies } from '@/cookies/cookies';
-import { EIGTH_FORM } from '@/cookies/cookies.d';
 import { useScrollOnTop } from '@/app/hooks/useScrollOnTop';
+import { EIGTH_FORM } from '@/cookies/cookies.d';
+import { NinethFormValues, NinethStepProps } from './ninethStep';
 
 const NinethStep: React.FC<NinethStepProps> = ({ ninethStepTranslation }) => {
-  const { dispatch, reportingPerson, isEditing, formErrors } = useFormContext();
-  const [question1] = useState<string>(
-    ninethStepTranslation?.firstBlock?.title
-  );
-  const [question2] = useState<string>(
-    ninethStepTranslation?.secondBlock?.title
-  );
-  const [question3] = useState<string>(
-    ninethStepTranslation?.thirdBlock?.title
-  );
+  const { dispatch, isEditing, reportingPerson, formErrors } = useFormContext();
+  const [question] = useState<string>(ninethStepTranslation?.title);
 
   const {
     register,
@@ -31,83 +23,65 @@ const NinethStep: React.FC<NinethStepProps> = ({ ninethStepTranslation }) => {
     formState: { errors },
   } = useForm<NinethFormValues>();
 
-  let gender: string[] = watch('gender');
-  let sexualOrientation: string[] = watch('sexualOrientation');
-  let validation = watch('validation');
-  let sexualOrientationFreeField: string[] = watch(
-    'sexualOrientationFreeField'
+  let haveYouReported: string = watch('haveYouReported');
+  let haveYouReportedYes: string[] = watch('haveYouReportedYes');
+  let haveYouReportedYesFreeField1: string = watch(
+    'haveYouReportedYesFreeField1'
   );
-  let age: string = watch('age');
-  let genderFreeField: string = watch('genderFreeField');
+  let haveYouReportedYesFreeField2: string = watch(
+    'haveYouReportedYesFreeField2'
+  );
 
   // Scroll on top
   useScrollOnTop();
 
   useEffect(() => {
-    // Getting values from cookies
+    dispatch({ type: FORM_ERRORS, payload: false });
+    // Getting values from the form
     let formValues: {
-      gender: string[];
-      sexualOrientation: string[];
-      validation: string;
+      haveYouReported: string;
+      haveYouReportedYes: string[];
+      haveYouReportedYesFreeField1: string;
+      haveYouReportedYesFreeField2: string;
       question: string;
-      sexualOrientationFreeField: string[];
-      age: string;
-      genderFreeField: string;
     } = getFormCookies(EIGTH_FORM);
 
-    dispatch({ type: FORM_ERRORS, payload: true });
+    //   Setting values in the fields
 
-    if (validation?.length !== 0) {
-      dispatch({ type: FORM_ERRORS, payload: false });
-    } else {
-      dispatch({ type: FORM_ERRORS, payload: true });
-    }
+    if (formValues && !haveYouReported) {
+      haveYouReported !== formValues.haveYouReported &&
+        setValue('haveYouReported', formValues?.haveYouReported);
 
-    // first form validation
-    // {
-    //   gender &&
-    //     gender?.includes('Selbstbezeichung:') &&
-    //     genderFreeField?.length <= 3 &&
-    //     dispatch({ type: FORM_ERRORS, payload: true });
-    // }
+      haveYouReported !== formValues.haveYouReported &&
+        setValue('haveYouReportedYes', formValues?.haveYouReportedYes);
 
-    // second form validation.
-    // {
-    //   sexualOrientation &&
-    //     sexualOrientation?.includes('Selbstbezeichung:') &&
-    //     sexualOrientationFreeField?.length <= 3 &&
-    //     dispatch({ type: FORM_ERRORS, payload: true });
-    // }
-
-    // Setting default values if the data are available in cookies
-    if (formValues) {
-      dispatch({ type: FORM_ERRORS, payload: false });
-      gender !== formValues?.gender && setValue('gender', formValues?.gender);
-      sexualOrientation !== formValues?.sexualOrientation &&
-        setValue('sexualOrientation', formValues?.sexualOrientation);
-      validation !== formValues?.validation &&
-        setValue('validation', formValues?.validation);
-      sexualOrientationFreeField !== formValues?.sexualOrientationFreeField &&
+      haveYouReportedYesFreeField1 !==
+        formValues.haveYouReportedYesFreeField1 &&
         setValue(
-          'sexualOrientationFreeField',
-          formValues?.sexualOrientationFreeField
+          'haveYouReportedYesFreeField1',
+          formValues?.haveYouReportedYesFreeField1
         );
-      age !== formValues?.age && setValue('age', formValues?.age);
-      genderFreeField !== formValues?.genderFreeField &&
-        setValue('genderFreeField', formValues?.genderFreeField);
+
+      haveYouReportedYesFreeField2 !==
+        formValues.haveYouReportedYesFreeField2 &&
+        setValue(
+          'haveYouReportedYesFreeField2',
+          formValues?.haveYouReportedYesFreeField2
+        );
     }
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [gender, genderFreeField, sexualOrientationFreeField, sexualOrientation]);
+  }, [haveYouReported]);
 
   // Triggered when submitting form
   const onSubmit: SubmitHandler<NinethFormValues> = (data) => {
     let step = getFormStep();
-    let dataWithQuestion = { question1, question2, question3, step, ...data };
+    let dataWithQuestion = { question, step, ...data };
     setFormCookies(dataWithQuestion, EIGTH_FORM);
 
     isEditing && reportingPerson === 'myself'
       ? dispatch({ type: LAST_STEP, payload: 10 })
-      : dispatch({ type: NEXT_STEP, payload: 'DATA 1' });
+      : dispatch({ type: NEXT_STEP, payload: '' });
   };
 
   return (
@@ -116,126 +90,106 @@ const NinethStep: React.FC<NinethStepProps> = ({ ninethStepTranslation }) => {
       id="eighthForm"
       className="lg:w-[35rem]"
     >
-      {reportingPerson !== 'organization' && (
-        <>
-          <h1 className="font-bold text-3xl mb-4">
-            {ninethStepTranslation?.mainTitle}
-          </h1>
-          <div className="mt-8">
-            <FormHeader
-              title={
-                reportingPerson !== 'myself'
-                  ? ninethStepTranslation?.firstBlock?.titleOnBehalf
-                  : ninethStepTranslation?.firstBlock?.title
-              }
-              subTitle={ninethStepTranslation?.firstBlock?.description}
-            />
-            <div className="-mt-8">
-              {ninethStepTranslation?.firstBlock?.data?.map((element: any) => (
+      <FormHeader
+        title={ninethStepTranslation?.title}
+        subTitle={ninethStepTranslation?.description}
+      />
+      <div>
+        <RadioGroup
+          options={ninethStepTranslation?.data?.options}
+          props={register('haveYouReported')}
+        />
+        <div className="ml-8">
+          {haveYouReported ===
+            ninethStepTranslation?.data?.options[1]?.value && (
+            <>
+              {haveYouReported && (
+                <p className="text-xs text-red-600">
+                  {ninethStepTranslation?.mandatory}
+                </p>
+              )}
+              <div>
                 <Checkbox
-                  key={element?.iD}
-                  id={element?.id}
-                  name={element?.name}
-                  props={register('gender')}
-                  value={element?.value}
-                  label={element?.label}
+                  key={ninethStepTranslation?.data?.optionsYes[0]?.iD}
+                  id={ninethStepTranslation?.data?.optionsYes[0]?.id}
+                  name={ninethStepTranslation?.data?.optionsYes[0]?.name}
+                  props={register('haveYouReportedYes', { required: true })}
+                  value={ninethStepTranslation?.data?.optionsYes[0]?.value}
+                  label={ninethStepTranslation?.data?.optionsYes[0]?.label}
                 />
-              ))}
-              <div className="ml-4">
-                {gender && gender?.includes('Selbstbezeichung:') && (
-                  <InputField name="" props={register('genderFreeField')} />
-                )}
-                {gender?.length > 0 &&
-                  gender?.includes('Selbstbezeichung:') &&
-                  genderFreeField?.length !== 0 &&
-                  formErrors && (
-                    <label className="text-red-500 text-xs">
-                      {ninethStepTranslation?.minCharacters}
-                    </label>
+              </div>
+              <div>
+                <Checkbox
+                  key={ninethStepTranslation?.data?.optionsYes[1]?.iD}
+                  id={ninethStepTranslation?.data?.optionsYes[1]?.id}
+                  name={ninethStepTranslation?.data?.optionsYes[1]?.name}
+                  props={register('haveYouReportedYes', { required: true })}
+                  value={ninethStepTranslation?.data?.optionsYes[1]?.value}
+                  label={ninethStepTranslation?.data?.optionsYes[1]?.label}
+                />
+              </div>
+              <div>
+                <Checkbox
+                  key={ninethStepTranslation?.data?.optionsYes[2]?.iD}
+                  id={ninethStepTranslation?.data?.optionsYes[2]?.id}
+                  name={ninethStepTranslation?.data?.optionsYes[2]?.name}
+                  props={register('haveYouReportedYes', { required: true })}
+                  value={ninethStepTranslation?.data?.optionsYes[2]?.value}
+                  label={ninethStepTranslation?.data?.optionsYes[2]?.label}
+                />
+                {/* First freeText field */}
+                {haveYouReportedYes &&
+                  haveYouReportedYes?.includes(
+                    ninethStepTranslation?.data?.optionsYes[2].value
+                  ) && (
+                    <div className="lg:ml-16 -mt-6 mb-4">
+                      <InputField
+                        name="haveYouReportedYesFreeField1"
+                        props={register('haveYouReportedYesFreeField1', {
+                          required: true,
+                        })}
+                      />
+                      <p className="text-xs my-4 text-red-600">
+                        {errors?.haveYouReportedYesFreeField1 &&
+                          ninethStepTranslation?.minCharacters}
+                      </p>
+                    </div>
                   )}
               </div>
-            </div>
-          </div>
-
-          <div className="mt-8">
-            <FormHeader
-              title={
-                reportingPerson !== 'myself'
-                  ? ninethStepTranslation?.secondBlock?.titleOnBehalf
-                  : ninethStepTranslation?.secondBlock?.title
-              }
-              subTitle={ninethStepTranslation?.secondBlock?.description}
-            />
-            <div className="-mt-8">
-              {ninethStepTranslation?.secondBlock?.data?.map((element: any) => (
+              <div>
                 <Checkbox
-                  key={element?.iD}
-                  id={element?.id}
-                  name={element?.name}
-                  props={register('sexualOrientation')}
-                  value={element?.value}
-                  label={element?.label}
+                  key={ninethStepTranslation?.data?.optionsYes[3]?.iD}
+                  id={ninethStepTranslation?.data?.optionsYes[3]?.id}
+                  name={ninethStepTranslation?.data?.optionsYes[3]?.name}
+                  props={register('haveYouReportedYes', { required: true })}
+                  value={ninethStepTranslation?.data?.optionsYes[3]?.value}
+                  label={ninethStepTranslation?.data?.optionsYes[3]?.label}
                 />
-              ))}
-
-              <div className="ml-4">
-                {sexualOrientation &&
-                  sexualOrientation?.includes('Selbstbezeichung:') && (
-                    <InputField
-                      name=""
-                      props={register('sexualOrientationFreeField')}
-                    />
-                  )}
-                {sexualOrientation?.length > 0 &&
-                  sexualOrientation?.includes('Selbstbezeichung:') &&
-                  sexualOrientationFreeField?.length !== 0 &&
-                  formErrors && (
-                    <label className="text-red-500 text-xs">
-                      {ninethStepTranslation?.minCharacters}
-                    </label>
-                  )}
               </div>
-            </div>
-          </div>
+            </>
+          )}
 
-          <div className="mt-8">
-            <FormHeader
-              title={
-                reportingPerson !== 'myself'
-                  ? ninethStepTranslation?.thirdBlock?.titleOnBehalf
-                  : ninethStepTranslation?.thirdBlock?.title
-              }
-            />
-            <div className="-mt-8">
-              {
-                <RadioGroup
-                  options={ninethStepTranslation?.thirdBlock?.data}
-                  props={register('age')}
-                  title=""
+          {/* Second freeText field */}
+
+          {haveYouReportedYes &&
+            haveYouReportedYes?.includes(
+              ninethStepTranslation?.data?.optionsYes[3].value
+            ) && (
+              <div className="lg:ml-16 -mt-6">
+                <InputField
+                  name="haveYouReportedYesFreeField2"
+                  props={register('haveYouReportedYesFreeField2', {
+                    required: true,
+                  })}
                 />
-              }
-            </div>
-          </div>
-        </>
-      )}
-
-      {reportingPerson === 'organization' && (
-        <div className="mt-8">
-          <FormHeader title={ninethStepTranslation?.fourthBlock?.title} />
-          <div className="-mt-8">
-            {ninethStepTranslation?.fourthBlock?.data?.map((element: any) => (
-              <Checkbox
-                key={element?.iD}
-                id={element?.id}
-                name={element?.name}
-                props={register('validation')}
-                value={element?.value}
-                label={element?.label}
-              />
-            ))}
-          </div>
+                <p className="text-xs my-4 text-red-600">
+                  {errors?.haveYouReportedYesFreeField2 &&
+                    ninethStepTranslation?.minCharacters}
+                </p>
+              </div>
+            )}
         </div>
-      )}
+      </div>
     </form>
   );
 };

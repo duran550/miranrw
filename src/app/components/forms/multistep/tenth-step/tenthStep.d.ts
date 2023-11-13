@@ -1,16 +1,34 @@
+type ArrayType = Array<{
+  id: string;
+  name: string;
+  label: string;
+  value: string;
+  checked: boolean;
+}>;
+
+type BlockDataType = {
+  title: string;
+  titleOnBehalf: string;
+  description: string;
+  data: ArrayType;
+};
+
 export type TenthStepProps = {
   tenthStepTranslation: {
-    title: string;
-    verification: string;
-    description: string;
-    buttonText: string;
-    validation: {
-      title: string;
-      data: Array<{ id: string; name: string; label: string; value: string }>;
-    };
+    mainTitle: string;
+    minCharacters: string;
+    firstBlock: BlockDataType;
+    secondBlock: BlockDataType;
+    thirdBlock: BlockDataType;
+    fourthBlock: BlockDataType;
   };
 };
 
 export type TenthFormValues = {
-  validation: string[];
+  sexualOrientation: string[];
+  sexualOrientationFreeField: string[];
+  validation: string;
+  age: string;
+  gender: string[];
+  genderFreeField: string;
 };

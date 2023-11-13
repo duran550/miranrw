@@ -327,6 +327,7 @@
             "label": "It happened online"
           },
           "secondOption": {
+            "title": "City",
             "name": "online",
             "id": "place",
             "value": "Online",
@@ -536,8 +537,62 @@
             ]
           }
         },
-
         "ninethStep": {
+          "title": "Have you already taken other measures ?",
+          "description": "Multiple selections possible.",
+          "minCharacters": "A minimum of 3 Characters is expected",
+          "mandatory": "* Mandatory field",
+          "data": {
+            "options": [
+              {
+                "id": "haveYouReported1",
+                "name": "haveYouReported",
+                "label": "No",
+                "value": "No",
+                "checked": false
+              },
+              {
+                "id": "haveYouReported",
+                "name": "haveYouReported",
+                "label": "Yes, specify:",
+                "value": "Yes, specify:",
+                "checked": false
+              }
+            ],
+            "optionsYes": [
+              {
+                "iD": 1,
+                "name": "haveYouReportedYes",
+                "value": "I reached out to family/friends",
+                "id": "hav1",
+                "label": "I reached out to family/friends"
+              },
+              {
+                "iD": 2,
+                "name": "haveYouReportedYes",
+                "value": "I reported the case to the police",
+                "id": "hav2",
+                "label": "I reported the case to the police"
+              },
+              {
+                "iD": 3,
+                "name": "haveYouReportedYes",
+                "value": "I reported the case to another reporting agency, specifically:",
+                "id": "hav3",
+                "label": "I reported the case to another reporting agency, specifically:"
+              },
+              {
+                "iD": 4,
+                "name": "haveYouReportedYes",
+                "value": "Other, specify:",
+                "id": "hav4",
+                "label": "Other, specify:"
+              }
+            ]
+          }
+        },
+
+        "tenthStep": {
           "mainTitle": "Personal Information",
           "minCharacters": "A minimum of 4 Characters is expected",
 
@@ -758,7 +813,7 @@
             ]
           }
         },
-        "tenthStep": {
+        "eleventhStep": {
           "title": "Thank you for your report.",
           "verification": "Are you okay with this data ?",
           "description": "You can access our page with links to counseling here.",
@@ -784,7 +839,7 @@
             ]
           }
         },
-        "eleventhStep": {
+        "twelthStep": {
           "title": "Thank you for your report.",
           "description": "You can access our page with links to counseling here.",
           "button": "Reference Counseling"
@@ -795,7 +850,8 @@
         "start": "Let's start",
         "next": "Next",
         "prev": "Back",
-        "submit": "Submit"
+        "submit": "Submit",
+        "save": "Save"
       }
     },
     "about": {

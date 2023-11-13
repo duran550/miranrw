@@ -12,37 +12,14 @@ import FifthStep from './fifth-step/FifthStep';
 import SixthStep from './sixth-step/SixthStep';
 import SeventhStep from './seventh-step/SeventhStep';
 import EightStep from './eigth-step/EightStep';
-import NinethStep from './nineth-step/NinethStep';
-import TenthStep from './tenth-step/TenthStep';
 import ThirdStepOrganization from './third-step/ThirdStepOrganization';
 import FourthStepOrganization from './fourth-step/FourthStepOrganization';
 import { getFormStep } from '@/cookies/cookies';
+import TwelvethStep from './twelveth-step/TwelvethStep';
 import EleventhStep from './eleventh-step/EleventhStep';
-
-type MultiStepFormValuesProps = {
-  stepper: {
-    initialStep: any;
-    firstStep: any;
-    secondStep: any;
-    thirdStep: any;
-    thirdStepOrganization: any;
-    fourthStep: any;
-    fourthStepOrganization: any;
-    fifthStep: any;
-    sixthStep: any;
-    seventhStep: any;
-    eightStep: any;
-    ninethStep: any;
-    tenthStep: any;
-    eleventhStep: any;
-  };
-  button: { start: string; next: string; prev: string; submit: string };
-};
-
-type MultiStepFormProps = {
-  formTranslation: MultiStepFormValuesProps;
-  lang: string;
-};
+import TenthStep from './tenth-step/TenthStep';
+import { MultiStepFormProps } from './multiStepForm';
+import NinethStep from './nineth-step/NinethStep';
 
 const MultiStepForm: React.FC<MultiStepFormProps> = ({
   formTranslation,
@@ -79,7 +56,9 @@ const MultiStepForm: React.FC<MultiStepFormProps> = ({
                     : step === 7
                     ? 70
                     : step === 8
-                    ? 85
+                    ? 80
+                    : step === 9
+                    ? 90
                     : 100
                 }
               />
@@ -125,10 +104,16 @@ const MultiStepForm: React.FC<MultiStepFormProps> = ({
                   <TenthStep
                     tenthStepTranslation={formTranslation?.stepper?.tenthStep}
                   />
-                ) : (
+                ) : step === 11 ? (
                   <EleventhStep
                     eleventhStepTranslation={
                       formTranslation?.stepper?.eleventhStep
+                    }
+                  />
+                ) : (
+                  <TwelvethStep
+                    twelvethStepTranslation={
+                      formTranslation?.stepper?.twelthStep
                     }
                   />
                 )}
@@ -174,10 +159,16 @@ const MultiStepForm: React.FC<MultiStepFormProps> = ({
                   <TenthStep
                     tenthStepTranslation={formTranslation?.stepper?.tenthStep}
                   />
-                ) : (
+                ) : step === 10 ? (
                   <EleventhStep
                     eleventhStepTranslation={
                       formTranslation?.stepper?.eleventhStep
+                    }
+                  />
+                ) : (
+                  <TwelvethStep
+                    twelvethStepTranslation={
+                      formTranslation?.stepper.twelthStep
                     }
                   />
                 )}
@@ -207,10 +198,12 @@ const MultiStepForm: React.FC<MultiStepFormProps> = ({
                     ? 'sixthForm'
                     : stepFromCookies === 8
                     ? 'seventhForm'
-                    : 'eighthForm'
+                    : step === 9
+                    ? 'eigthForm'
+                    : 'ninethForm'
                 }`}
               >
-                Save
+                {formTranslation?.button.save}
               </Button>
             ) : (
               <>
@@ -293,7 +286,9 @@ const MultiStepForm: React.FC<MultiStepFormProps> = ({
                                     ? 'sixthForm'
                                     : stepFromCookies === 8
                                     ? 'seventhForm'
-                                    : 'eighthForm'
+                                    : stepFromCookies === 9
+                                    ? 'eighthForm'
+                                    : 'ninethForm'
                                 }`}
                                 className="w-32 font-bold ml-auto"
                                 disabled={formErrors && true}
@@ -328,7 +323,9 @@ const MultiStepForm: React.FC<MultiStepFormProps> = ({
                             ? 'sixthForm'
                             : stepFromCookies === 8
                             ? 'seventhForm'
-                            : 'eighthForm'
+                            : stepFromCookies === 9
+                            ? 'eighthForm'
+                            : 'ninethForm'
                         }`}
                         className="w-32 font-bold ml-auto"
                         disabled={formErrors && true}

@@ -9,6 +9,7 @@ export type FifthStepProps = {
       label: string;
     };
     secondOption: {
+      title: string;
       name: string;
       id: string;
       value: string;

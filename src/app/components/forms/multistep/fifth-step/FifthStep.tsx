@@ -13,7 +13,8 @@ import AutoComplete from '../../auto-complete/AutoComplete';
 const FifthStep: React.FC<FifthStepProps> = ({ fifthStepTranslation }) => {
   const { dispatch, reportingPerson, isEditing, formErrors } = useFormContext();
   const [question] = useState<string>(fifthStepTranslation?.title);
-  const [location, setLocation] = useState<string>();
+  const [location, setLocation] = useState<string>('');
+
   const {
     register,
     handleSubmit,
@@ -34,15 +35,7 @@ const FifthStep: React.FC<FifthStepProps> = ({ fifthStepTranslation }) => {
   useScrollOnTop();
 
   useEffect(() => {
-    dispatch({ type: FORM_ERRORS, payload: false });
-
-    if (
-      location &&
-      location?.length <= 3 &&
-      locationOnline == fifthStepTranslation?.secondOption?.value
-    ) {
-      dispatch({ type: FORM_ERRORS, payload: true });
-    } else if (!locationOnline) {
+    if (!locationOnline) {
       dispatch({ type: FORM_ERRORS, payload: true });
     } else {
       dispatch({ type: FORM_ERRORS, payload: false });
@@ -76,15 +69,7 @@ const FifthStep: React.FC<FifthStepProps> = ({ fifthStepTranslation }) => {
       : dispatch({ type: NEXT_STEP, payload: 'DATA 1' });
   };
 
-  console.log(location);
-
   // Autocomple functions
-
-  const handleOnSearch = (string: string, results: any) => {
-    // onSearch will have as the first callback parameter
-    // the string searched and for the second the results.
-    console.log(string, results);
-  };
 
   const handleOnHover = (result: any) => {
     // the item hovered
@@ -119,25 +104,18 @@ const FifthStep: React.FC<FifthStepProps> = ({ fifthStepTranslation }) => {
           value={fifthStepTranslation?.firstOption?.value}
         />
       </div>
-      <div className="flex justify-between items-center space-x-4">
+      <div className="flex flex-col ">
         <RadioSingle
           value={fifthStepTranslation?.secondOption?.value}
           id={fifthStepTranslation?.secondOption.id}
-          label={fifthStepTranslation?.secondOption?.label}
+          label={fifthStepTranslation?.secondOption?.title}
           name="locationOnline"
           props={register('locationOnline')}
         />
-        <div className="w-full">
+        <div className="w-full pl-8 my-4">
           {locationOnline == fifthStepTranslation?.secondOption?.value && (
             <AutoComplete handleOnSelect={handleOnSelect} />
           )}
-          <div>
-            {formErrors && location && location?.length > 0 && (
-              <label className="text-red-500 text-xs">
-                A minimum of 3 Characters is expected
-              </label>
-            )}
-          </div>
         </div>
       </div>
     </form>

@@ -329,6 +329,7 @@
             "label": "Es ist online passiert."
           },
           "secondOption": {
+            "title": "Stadt",
             "name": "online",
             "value": "freeField",
             "id": "place"
@@ -538,7 +539,62 @@
             ]
           }
         },
+
         "ninethStep": {
+          "title": "Hast du bereits andere Maßnahmen ergriffen?",
+          "description": "Mehrfachnennung möglich",
+          "minCharacters": "Es sind mindestens drei Zeichen erforderlich.",
+          "mandatory": "* Pflichtfelder",
+          "data": {
+            "options": [
+              {
+                "id": "haveYouReported1",
+                "name": "haveYouReported",
+                "label": "Nein",
+                "value": "Nein",
+                "checked": false
+              },
+              {
+                "id": "haveYouReported",
+                "name": "haveYouReported",
+                "label": "Ja, und zwar:",
+                "value": "Ja, und zwar:",
+                "checked": false
+              }
+            ],
+            "optionsYes": [
+              {
+                "iD": 1,
+                "name": "haveYouReportedYes",
+                "value": "Ich habe mich an Familie/Freunde gewendet",
+                "id": "hav1",
+                "label": "Ich habe mich an Familie/Freunde gewendet"
+              },
+              {
+                "iD": 2,
+                "name": "haveYouReportedYes",
+                "value": "Ich habe den Fall bei der Polizei angezeigt",
+                "id": "hav2",
+                "label": "Ich habe den Fall bei der Polizei angezeigt"
+              },
+              {
+                "iD": 3,
+                "name": "haveYouReportedYes",
+                "value": "Ich habe den Fall bei einer anderen Meldestelle angezeigt, und zwar: ",
+                "id": "hav3",
+                "label": "Ich habe den Fall bei einer anderen Meldestelle angezeigt, und zwar: "
+              },
+              {
+                "iD": 4,
+                "name": "haveYouReportedYes",
+                "value": "Anderes, und zwar:",
+                "id": "hav4",
+                "label": "Anderes, und zwar:"
+              }
+            ]
+          }
+        },
+        "tenthStep": {
           "mainTitle": "Persönliche Angaben",
           "minCharacters": "Ein Minimum von 3 Zeichen wird erwartet",
           "firstBlock": {
@@ -757,7 +813,7 @@
             ]
           }
         },
-        "tenthStep": {
+        "elventhStep": {
           "title": "Vielen Dank für deine Meldung.",
           "verification": "Sind Sie mit diesen Daten einverstanden?",
           "description": "Hier gelangst Du zu unserer Seite mit Links zur Beratung.",
@@ -783,7 +839,7 @@
             ]
           }
         },
-        "eleventhStep": {
+        "twelvethStep": {
           "title": "Vielen Dank für deine Meldung.",
           "description": "Hier gelangst Du zu unserer Seite mit Links zur Beratung.",
           "button": "Verweisberatung"
