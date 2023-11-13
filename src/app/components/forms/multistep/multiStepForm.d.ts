@@ -14,7 +14,7 @@ export type MultiStepFormValuesProps = {
     ninethStep: any;
     tenthStep: any;
     eleventhStep: any;
-    twelthStep: any;
+    twelvethStep: any;
   };
   button: {
     start: string;

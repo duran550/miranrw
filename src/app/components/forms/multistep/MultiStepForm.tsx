@@ -113,7 +113,7 @@ const MultiStepForm: React.FC<MultiStepFormProps> = ({
                 ) : (
                   <TwelvethStep
                     twelvethStepTranslation={
-                      formTranslation?.stepper?.twelthStep
+                      formTranslation?.stepper?.twelvethStep
                     }
                   />
                 )}
@@ -168,7 +168,7 @@ const MultiStepForm: React.FC<MultiStepFormProps> = ({
                 ) : (
                   <TwelvethStep
                     twelvethStepTranslation={
-                      formTranslation?.stepper.twelthStep
+                      formTranslation?.stepper.twelvethStep
                     }
                   />
                 )}

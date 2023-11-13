@@ -813,7 +813,8 @@
             ]
           }
         },
-        "elventhStep": {
+
+        "eleventhStep": {
           "title": "Vielen Dank für deine Meldung.",
           "verification": "Sind Sie mit diesen Daten einverstanden?",
           "description": "Hier gelangst Du zu unserer Seite mit Links zur Beratung.",
@@ -850,7 +851,8 @@
         "start": "Los geht’s",
         "next": "Weiter",
         "prev": "Zurück",
-        "submit": "Meldung abschicken"
+        "submit": "Meldung abschicken",
+        "save": "Speichern"
       }
     },
     "about": {
