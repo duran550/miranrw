@@ -55,3 +55,11 @@ input:checked + div svg {
 .search-icon {
   display: none;
 }
+
+@media (max-width: 480px) {
+  .ant-picker-panels {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+}
