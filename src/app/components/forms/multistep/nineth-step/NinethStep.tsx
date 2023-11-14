@@ -80,7 +80,7 @@ const NinethStep: React.FC<NinethStepProps> = ({ ninethStepTranslation }) => {
     setFormCookies(dataWithQuestion, EIGTH_FORM);
 
     isEditing && reportingPerson === 'myself'
-      ? dispatch({ type: LAST_STEP, payload: 10 })
+      ? dispatch({ type: LAST_STEP, payload: 11 })
       : dispatch({ type: NEXT_STEP, payload: '' });
   };
 
@@ -104,9 +104,7 @@ const NinethStep: React.FC<NinethStepProps> = ({ ninethStepTranslation }) => {
             ninethStepTranslation?.data?.options[1]?.value && (
             <>
               {haveYouReported && (
-                <p className="text-xs text-red-600">
-                  {ninethStepTranslation?.mandatory}
-                </p>
+                <p className="text-xs">{ninethStepTranslation?.mandatory}</p>
               )}
               <div>
                 <Checkbox

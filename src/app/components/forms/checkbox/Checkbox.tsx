@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
 type CheckboxProps = {
   name: string;
   id: string;
   value: string;
   label?: string;
+  checked?: boolean;
   props: any;
 };
 
@@ -13,16 +14,19 @@ const Checkbox: React.FC<CheckboxProps> = ({
   id,
   value,
   label,
+  checked,
   props,
 }) => {
   return (
-    <div className="p-4">
+    <div key={id} className="p-4">
       <div className="flex items-center mr-4 mb-2">
         <input
+          key={id}
           type="checkbox"
           id={id}
           name={name}
           value={value}
+          checked={checked}
           {...props}
           className="opacity-0 absolute h-6 w-6"
         />

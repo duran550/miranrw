@@ -172,6 +172,7 @@
         },
         "secondStep": {
           "title": "Who is affected ?*",
+          "mandatory": "* Mandatory field",
           "options": [
             {
               "id": "age1",
@@ -209,6 +210,7 @@
         },
         "thirdStep": {
           "title": "Incident Description*",
+          "mandatory": "* Mandatory field",
           "description": "What exactly happened ?",
           "placeholder": "Please describe the incident as precisely as possible.",
           "disclaimer": "For data protection reasons we ask you not to enter names of other persons here.",
@@ -226,6 +228,7 @@
         },
         "thirdStepOrganization": {
           "title": "What type of organization/institution is affected?",
+          "mandatory": "* Mandatory field",
           "subTitle": "Multiple selections possible",
           "data": [
             {
@@ -281,10 +284,12 @@
         },
         "fourthStep": {
           "title": "When did the incident occur ?*",
+          "mandatory": "* Mandatory field",
           "description": "Please select a date. If it occurred over an extended period, you can select that too."
         },
         "fourthStepOrganization": {
           "title": "How many individuals are active in the organization/institution?",
+          "mandatory": "* Mandatory field",
           "subTitle": "Main or volunteer, or as freelance contributors",
           "data": [
             {
@@ -319,6 +324,7 @@
         },
         "fifthStep": {
           "title": "Where did the incident occur ?*",
+          "mandatory": "* Mandatory field",
           "description": "",
           "firstOption": {
             "name": "online",
@@ -336,6 +342,8 @@
         },
         "sixthStep": {
           "title": "What did you believe the discrimination was based on ?",
+          "mandatory": "* Mandatory field",
+          "minCharacters": "A minimum of 4 Characters is expected",
           "description": "Multiple selections possible",
           "choices": [
             {
@@ -384,7 +392,9 @@
         },
         "seventhStep": {
           "title": "What form of queerphobia do you think this is  ?",
+          "mandatory": "* Mandatory field",
           "description": "Multiple selections possible",
+          "minCharacters": "A minimum of 4 Characters is expected",
           "choices": [
             {
               "iD": 1,
@@ -460,6 +470,8 @@
         },
         "eightStep": {
           "title": "Is it another form of discrimination ?",
+          "mandatory": "* Mandatory field",
+          "minCharacters": "A minimum of 4 Characters is expected",
           "data": {
             "options": [
               {
@@ -595,7 +607,7 @@
         "tenthStep": {
           "mainTitle": "Personal Information",
           "minCharacters": "A minimum of 4 Characters is expected",
-
+          "mandatory": "* Mandatory field",
           "firstBlock": {
             "title": "What is your gender identity ?",
             "titleOnBehalf": "What is the gender identity of the affected person ?",
@@ -818,6 +830,7 @@
           "verification": "Are you okay with this data ?",
           "description": "You can access our page with links to counseling here.",
           "buttonText": "Referral Counseling",
+          "mandatory": "* Mandatory field",
           "validation": {
             "title": "Consent",
             "description": "Multiple choices possible",

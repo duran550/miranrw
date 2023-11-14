@@ -29,7 +29,7 @@ const TenthStep: React.FC<TenthStepProps> = ({ tenthStepTranslation }) => {
 
   let gender: string[] = watch('gender');
   let sexualOrientation: string[] = watch('sexualOrientation');
-  let validation = watch('validation');
+  let validation: string[] = watch('validation');
   let sexualOrientationFreeField: string[] = watch(
     'sexualOrientationFreeField'
   );
@@ -38,6 +38,8 @@ const TenthStep: React.FC<TenthStepProps> = ({ tenthStepTranslation }) => {
 
   // Scroll on top
   useScrollOnTop();
+
+  console.log(validation);
 
   useEffect(() => {
     // Getting values from cookies
@@ -53,11 +55,9 @@ const TenthStep: React.FC<TenthStepProps> = ({ tenthStepTranslation }) => {
 
     dispatch({ type: FORM_ERRORS, payload: true });
 
-    if (validation?.length !== 0) {
-      dispatch({ type: FORM_ERRORS, payload: false });
-    } else {
-      dispatch({ type: FORM_ERRORS, payload: true });
-    }
+    !validation || validation?.length === 0
+      ? dispatch({ type: FORM_ERRORS, payload: true })
+      : dispatch({ type: FORM_ERRORS, payload: false });
 
     // Setting default values if the data are available in cookies
     if (formValues) {
@@ -77,7 +77,13 @@ const TenthStep: React.FC<TenthStepProps> = ({ tenthStepTranslation }) => {
         setValue('genderFreeField', formValues?.genderFreeField);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [gender, genderFreeField, sexualOrientationFreeField, sexualOrientation]);
+  }, [
+    gender,
+    genderFreeField,
+    sexualOrientationFreeField,
+    sexualOrientation,
+    validation,
+  ]);
 
   // Triggered when submitting form
   const onSubmit: SubmitHandler<TenthFormValues> = (data) => {
@@ -86,8 +92,8 @@ const TenthStep: React.FC<TenthStepProps> = ({ tenthStepTranslation }) => {
     setFormCookies(dataWithQuestion, NINETH_FORM);
 
     isEditing && reportingPerson === 'myself'
-      ? dispatch({ type: LAST_STEP, payload: 10 })
-      : dispatch({ type: NEXT_STEP, payload: 'DATA 1' });
+      ? dispatch({ type: LAST_STEP, payload: 11 })
+      : dispatch({ type: NEXT_STEP, payload: '' });
   };
 
   return (
@@ -122,11 +128,19 @@ const TenthStep: React.FC<TenthStepProps> = ({ tenthStepTranslation }) => {
                 />
               ))}
               <div className="ml-4">
-                {gender && gender?.includes('Selbstbezeichung:') && (
-                  <InputField name="" props={register('genderFreeField')} />
-                )}
+                {gender &&
+                  gender?.includes(
+                    tenthStepTranslation?.firstBlock?.data[7]?.value
+                  ) && (
+                    <InputField
+                      name="genderFreeField"
+                      props={register('genderFreeField')}
+                    />
+                  )}
                 {gender?.length > 0 &&
-                  gender?.includes('Selbstbezeichung:') &&
+                  gender?.includes(
+                    tenthStepTranslation?.firstBlock?.data[7]?.value
+                  ) &&
                   genderFreeField?.length !== 0 &&
                   formErrors && (
                     <label className="text-red-500 text-xs">
@@ -160,14 +174,18 @@ const TenthStep: React.FC<TenthStepProps> = ({ tenthStepTranslation }) => {
 
               <div className="ml-4">
                 {sexualOrientation &&
-                  sexualOrientation?.includes('Selbstbezeichung:') && (
+                  sexualOrientation?.includes(
+                    tenthStepTranslation?.secondBlock?.data[11]?.value
+                  ) && (
                     <InputField
                       name=""
                       props={register('sexualOrientationFreeField')}
                     />
                   )}
                 {sexualOrientation?.length > 0 &&
-                  sexualOrientation?.includes('Selbstbezeichung:') &&
+                  sexualOrientation?.includes(
+                    tenthStepTranslation?.secondBlock?.data[11]?.value
+                  ) &&
                   sexualOrientationFreeField?.length !== 0 &&
                   formErrors && (
                     <label className="text-red-500 text-xs">

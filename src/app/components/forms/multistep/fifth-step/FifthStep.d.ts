@@ -2,6 +2,7 @@ export type FifthStepProps = {
   fifthStepTranslation: {
     title: string;
     description: string;
+    mandatory: string;
     firstOption: {
       name: string;
       id: string;

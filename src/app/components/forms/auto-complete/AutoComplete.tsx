@@ -14,16 +14,18 @@ type Item = {
 
 type AutoCompleteProps = {
   handleOnSelect: any;
+  locationFromParent: string;
   handleOnHover?: () => void;
   handleOnFocus?: () => void;
 };
 
 const AutoComplete: React.FC<AutoCompleteProps> = ({
   handleOnFocus,
+  locationFromParent,
   handleOnHover,
   handleOnSelect,
 }) => {
-  const [location, setLocation] = useState<string>('');
+  const [location, setLocation] = useState<string>(locationFromParent);
   const { dispatch } = useFormContext();
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -40,7 +42,8 @@ const AutoComplete: React.FC<AutoCompleteProps> = ({
   const handleOnSearch = (string: string, results: any) => {
     // onSearch will have as the first callback parameter
     // the string searched and for the second the results.
-    if (string && string?.length <= 3) {
+
+    if (results.length <= 0) {
       dispatch({ type: FORM_ERRORS, payload: true });
     } else {
       dispatch({ type: FORM_ERRORS, payload: false });
@@ -61,7 +64,7 @@ const AutoComplete: React.FC<AutoCompleteProps> = ({
   return (
     <ReactSearchAutocomplete<Item>
       items={cities}
-      onSearch={(string, results) => handleOnSearch(string, results)}
+      onSearch={handleOnSearch}
       onHover={handleOnHover}
       showItemsOnFocus={false}
       onSelect={handleOnSelect}

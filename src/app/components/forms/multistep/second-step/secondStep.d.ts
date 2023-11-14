@@ -5,6 +5,7 @@ export type SecondFormValues = {
 export type SecondStepProps = {
   secondStepTranslation: {
     title: string;
+    mandatory: string;
     description: string;
     onBehalfHints: {
       title: string;

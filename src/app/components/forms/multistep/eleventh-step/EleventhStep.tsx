@@ -20,6 +20,7 @@ import {
 import { FORM_ERRORS, NEXT_STEP } from '@/app/context/actions';
 import ReportService from '@/services/reportService';
 import { useScrollOnTop } from '@/app/hooks/useScrollOnTop';
+import dayjs from 'dayjs';
 
 const EleventhStep: React.FC<EleventhStepProps> = ({
   eleventhStepTranslation,
@@ -100,7 +101,7 @@ const EleventhStep: React.FC<EleventhStepProps> = ({
     step: number;
   } = getFormCookies(NINETH_FORM);
 
-  let validation = watch('validation');
+  let validation: string[] = watch('validation');
 
   const onSubmit: SubmitHandler<any> = async () => {
     // Getting values to be sent
@@ -180,7 +181,12 @@ const EleventhStep: React.FC<EleventhStepProps> = ({
     let formOfDisc = seventhForm?.formOfDisc;
     let formOfDiscYes = seventhForm?.formOfDiscYes;
     let formOfDiscYesFreeField = seventhForm?.formOfDiscYesFreeField;
-    // Eiht form values here ----------------
+
+    let haveYouReported = eighthForm?.haveYouReported;
+    let haveYouReportedYes = eighthForm?.haveYouReportedYes;
+    let haveYouReportedYesFreeField1 = eighthForm?.haveYouReportedYesFreeField1;
+    let haveYouReportedYesFreeField2 = eighthForm?.haveYouReportedYesFreeField2;
+
     let gender = ninethForm?.gender;
     let genderFreeField = ninethForm?.genderFreeField;
     let age = ninethForm?.age;
@@ -205,6 +211,10 @@ const EleventhStep: React.FC<EleventhStepProps> = ({
       formOfDisc,
       formOfDiscYes,
       formOfDiscYesFreeField,
+      haveYouReported,
+      haveYouReportedYes,
+      haveYouReportedYesFreeField1,
+      haveYouReportedYesFreeField2,
       gender,
       genderFreeField,
       age,
@@ -227,7 +237,7 @@ const EleventhStep: React.FC<EleventhStepProps> = ({
 
   useEffect(() => {
     dispatch({ type: FORM_ERRORS, payload: true });
-    validation?.length === 0
+    !validation || validation?.length === 0
       ? dispatch({ type: FORM_ERRORS, payload: true })
       : dispatch({ type: FORM_ERRORS, payload: false });
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -271,7 +281,9 @@ const EleventhStep: React.FC<EleventhStepProps> = ({
             answer={[
               thirdForm?.datePeriod
                 ? thirdForm?.dateRangeState
-                : thirdForm?.valueDate,
+                : dayjs(thirdForm?.valueDate).format(
+                    'DD.MM.YYYY T HH:mm:ssZ[Z]'
+                  ),
               thirdForm?.numberOfEmployees,
             ]}
           />
@@ -305,6 +317,23 @@ const EleventhStep: React.FC<EleventhStepProps> = ({
             ]}
           />
         )}
+
+        {seventhForm && seventhForm?.formOfDiscYes && (
+          <>
+            <EditBlock
+              step={seventhForm?.step}
+              question={seventhForm?.question}
+              answer={[
+                ...seventhForm?.formOfDiscYes,
+                seventhForm?.formOfDisc,
+                seventhForm?.formOfDiscYesFreeField,
+              ]}
+            />
+          </>
+        )}
+
+        {/* When Nein is chosen don't display */}
+
         {seventhForm && seventhForm?.formOfDiscYes && (
           <EditBlock
             step={seventhForm?.step}
@@ -322,12 +351,16 @@ const EleventhStep: React.FC<EleventhStepProps> = ({
             step={eighthForm?.step}
             question={eighthForm?.question}
             answer={[
+              eighthForm?.haveYouReported,
               ...eighthForm?.haveYouReportedYes,
               eighthForm?.haveYouReportedYesFreeField1,
               eighthForm?.haveYouReportedYesFreeField2,
             ]}
           />
         )}
+
+        {/* When Nein is chosen don't display */}
+
         {reportingPerson !== 'organization' && (
           <>
             {ninethForm && ninethForm?.gender && (

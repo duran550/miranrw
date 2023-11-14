@@ -69,7 +69,7 @@ const SecondStep: React.FC<SecondStepProps> = ({ secondStepTranslation }) => {
     let dataWithQuestion = { question, step, ...data };
     setFormCookies(dataWithQuestion, FIRST_FORM);
     isEditing && reportingPerson === 'myself'
-      ? dispatch({ type: LAST_STEP, payload: 10 })
+      ? dispatch({ type: LAST_STEP, payload: 11 })
       : dispatch({ type: NEXT_STEP, payload: 'DATA 1' });
   };
 
@@ -81,6 +81,7 @@ const SecondStep: React.FC<SecondStepProps> = ({ secondStepTranslation }) => {
         className="h-full lg:w-[35rem]"
       >
         <FormHeader title={secondStepTranslation?.title} />
+        <p className="text-sm -mt-8 mb-8">{secondStepTranslation?.mandatory}</p>
         <RadioGroup
           props={register('identity', { required: true })}
           options={secondStepTranslation?.options}

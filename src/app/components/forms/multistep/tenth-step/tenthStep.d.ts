@@ -27,7 +27,7 @@ export type TenthStepProps = {
 export type TenthFormValues = {
   sexualOrientation: string[];
   sexualOrientationFreeField: string[];
-  validation: string;
+  validation: string[];
   age: string;
   gender: string[];
   genderFreeField: string;

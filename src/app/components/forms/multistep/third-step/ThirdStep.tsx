@@ -15,6 +15,7 @@ type ThirdStepProps = {
     description: string;
     placeholder: string;
     disclaimer: string;
+    mandatory: string;
     minCharacters: string;
     hints: { title: string; list: string[] };
   };
@@ -65,7 +66,7 @@ const ThirdStep: React.FC<ThirdStepProps> = ({ thirdStepTranslation }) => {
     setFormCookies(dataWithQuestion, SECOND_FORM);
 
     isEditing && reportingPerson === 'myself'
-      ? dispatch({ type: LAST_STEP, payload: 10 })
+      ? dispatch({ type: LAST_STEP, payload: 11 })
       : dispatch({ type: NEXT_STEP, payload: 'DATA 1' });
   };
 
@@ -80,10 +81,10 @@ const ThirdStep: React.FC<ThirdStepProps> = ({ thirdStepTranslation }) => {
           title={thirdStepTranslation?.title}
           subTitle={thirdStepTranslation?.description}
         />
+        <p className="text-sm -mt-8 mb-8">{thirdStepTranslation?.mandatory}</p>
         <TextArea
           name="vorfall"
           props={register('description')}
-          title=""
           placeholder={thirdStepTranslation?.placeholder}
           type="text"
         />
@@ -98,7 +99,7 @@ const ThirdStep: React.FC<ThirdStepProps> = ({ thirdStepTranslation }) => {
         </p>
       </form>
 
-      <div className="mt-16 lg:mt-8 xl:mt-0 xl:absolute  lg:-top-0 lg:-right-[38rem]">
+      <div className="mt-16 lg:mt-8  2xl:mt-0 2xl:absolute  lg:-top-0 lg:-right-[38rem]">
         <FormHeader title={'Mögliche relevante Informationen'}>
           <ul className="list-disc pl-8">
             {thirdStepTranslation?.hints.list?.map((element: string) => (

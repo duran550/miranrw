@@ -38,7 +38,7 @@ const MultiStepForm: React.FC<MultiStepFormProps> = ({
           />
         ) : (
           <div>
-            {step === 1 || step === 10 || step === 11 ? (
+            {step === 1 || step === 10 || step === 11 || step === 12 ? (
               ''
             ) : (
               <Stepper
@@ -181,6 +181,7 @@ const MultiStepForm: React.FC<MultiStepFormProps> = ({
             {isEditing &&
             stepFromCookies !== 10 &&
             stepFromCookies !== 11 &&
+            stepFromCookies !== 12 &&
             reportingPerson === 'myself' ? (
               <Button
                 form={`${
@@ -199,7 +200,7 @@ const MultiStepForm: React.FC<MultiStepFormProps> = ({
                     : stepFromCookies === 8
                     ? 'seventhForm'
                     : step === 9
-                    ? 'eigthForm'
+                    ? 'eighthForm'
                     : 'ninethForm'
                 }`}
               >
@@ -209,7 +210,7 @@ const MultiStepForm: React.FC<MultiStepFormProps> = ({
               <>
                 {step !== 1 ? (
                   <div className="flex  space-x-0 md:space-x-16 justify-between md:flex-row  md:justify-between items-center w-full">
-                    {step !== 10 && step !== 11 && (
+                    {step !== 11 && step !== 12 && (
                       <>
                         {reportingPerson === 'organization' && step === 9 ? (
                           <></>
@@ -224,7 +225,7 @@ const MultiStepForm: React.FC<MultiStepFormProps> = ({
                         )}
                       </>
                     )}
-                    {step === 10 && reportingPerson !== 'organization' ? (
+                    {step === 11 && reportingPerson !== 'organization' ? (
                       <div className="flex justify-between w-full">
                         <Button
                           className="w-32 mr-auto justify-self-start font-bold"
@@ -234,7 +235,7 @@ const MultiStepForm: React.FC<MultiStepFormProps> = ({
                           {formTranslation.button.prev}
                         </Button>
                         <Button
-                          form={`${step === 10 && 'eighthForm'}`}
+                          form={`${'tenthForm'}`}
                           className="w-full lg:mr-auto lg:w-72 rounded-full py-4 font-bold"
                           disabled={formErrors && true}
                           variant={`${formErrors ? 'disabled' : 'primary'}`}
@@ -244,7 +245,7 @@ const MultiStepForm: React.FC<MultiStepFormProps> = ({
                       </div>
                     ) : (
                       <>
-                        {reportingPerson === 'organization' && step === 9 && (
+                        {reportingPerson === 'organization' && step === 10 && (
                           <div className="flex justify-between w-full">
                             <Button
                               className="w-32 mr-auto justify-self-start font-bold"
@@ -254,7 +255,7 @@ const MultiStepForm: React.FC<MultiStepFormProps> = ({
                               {formTranslation.button.prev}
                             </Button>
                             <Button
-                              form={`${'eighthForm'}`}
+                              form={`${'ninethForm'}`}
                               className="w-full lg:mr-auto lg:w-72 rounded-full py-4 font-bold"
                               disabled={formErrors && true}
                               variant={`${formErrors ? 'disabled' : 'primary'}`}
@@ -263,10 +264,10 @@ const MultiStepForm: React.FC<MultiStepFormProps> = ({
                             </Button>
                           </div>
                         )}
-                        {step !== 10 && step !== 11 && (
+                        {step !== 11 && step !== 12 && (
                           <>
                             {/* {' Conditions for organization last form'} */}
-                            {step === 9 &&
+                            {step === 10 &&
                             reportingPerson === 'organization' ? (
                               <></>
                             ) : (

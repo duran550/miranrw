@@ -65,7 +65,7 @@ const FifthStep: React.FC<FifthStepProps> = ({ fifthStepTranslation }) => {
     setFormCookies(dataWithQuestion, FOURTH_FORM);
 
     isEditing && reportingPerson === 'myself'
-      ? dispatch({ type: LAST_STEP, payload: 10 })
+      ? dispatch({ type: LAST_STEP, payload: 11 })
       : dispatch({ type: NEXT_STEP, payload: 'DATA 1' });
   };
 
@@ -95,6 +95,7 @@ const FifthStep: React.FC<FifthStepProps> = ({ fifthStepTranslation }) => {
         title={fifthStepTranslation?.title}
         subTitle={fifthStepTranslation?.description}
       />
+      <p className="text-sm -mt-8 mb-8">{fifthStepTranslation?.mandatory}</p>
       <div>
         <RadioSingle
           id={fifthStepTranslation?.firstOption?.id}
@@ -114,7 +115,10 @@ const FifthStep: React.FC<FifthStepProps> = ({ fifthStepTranslation }) => {
         />
         <div className="w-full pl-8 my-4">
           {locationOnline == fifthStepTranslation?.secondOption?.value && (
-            <AutoComplete handleOnSelect={handleOnSelect} />
+            <AutoComplete
+              locationFromParent={location}
+              handleOnSelect={handleOnSelect}
+            />
           )}
         </div>
       </div>

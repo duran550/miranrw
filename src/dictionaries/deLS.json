@@ -173,6 +173,7 @@
         },
         "secondStep": {
           "title": "Wer ist betroffen?*",
+          "mandatory": "* Pflichtfelder",
           "options": [
             {
               "id": "age1",
@@ -210,6 +211,7 @@
         },
         "thirdStep": {
           "title": "Vorfallbeschreibung*",
+          "mandatory": "* Pflichtfelder",
           "description": " Was genau ist passiert?",
           "placeholder": "Bitte beschreibe den Vorfall so genau wie möglich.",
           "disclaimer": "Aus Gründen des Datenschutzes bitten wir dich, hier keine Namen anderer Personen anzugeben.",
@@ -283,11 +285,13 @@
         },
         "fourthStep": {
           "title": "Wann fand der Vorfall statt?*",
+          "mandatory": "* Pflichtfelder",
           "description": "Bitte wähle ein Datum aus. Falls es sich um einen längeren Zeitraum handelt, kannst du auch diesen auch auswählen"
         },
         "fourthStepOrganization": {
           "title": "Wie viele Personen sind in der Organisation/Institution tätig?",
           "subTitle": "Haupt- oder ehrenamtlich, oder in freier Mitarbeit",
+          "mandatory": "* Pflichtfelder",
           "data": [
             {
               "iD": 1,
@@ -321,6 +325,7 @@
         },
         "fifthStep": {
           "title": "Wo fand der Vorfall statt?*",
+          "mandatory": "* Pflichtfelder",
           "description": "",
           "firstOption": {
             "name": "online",
@@ -338,6 +343,8 @@
         "sixthStep": {
           "title": "Auf was bezog sich die Diskriminierung deiner Meinung nach?",
           "description": " Mehrfachnennung möglich",
+          "mandatory": "* Pflichtfelder",
+          "minCharacters": "Es wird eine Mindestanzahl von 4 Zeichen erwartet",
           "choices": [
             {
               "iD": 1,
@@ -387,6 +394,8 @@
         "seventhStep": {
           "title": "Um welche Form von Queerfeindlichkeit handelt es sich deiner Meinung nach?",
           "description": "Mehrfachnennung möglich",
+          "mandatory": "* Pflichtfelder",
+          "minCharacters": "Es wird eine Mindestanzahl von 4 Zeichen erwartet",
           "choices": [
             {
               "iD": 1,
@@ -462,6 +471,8 @@
         },
         "eightStep": {
           "title": "Handelt es sich um noch eine weitere Form der Diskriminierung?",
+          "mandatory": "* Pflichtfelder",
+          "minCharacters": "Es wird eine Mindestanzahl von 4 Zeichen erwartet",
           "data": {
             "options": [
               {
@@ -597,6 +608,7 @@
         "tenthStep": {
           "mainTitle": "Persönliche Angaben",
           "minCharacters": "Ein Minimum von 3 Zeichen wird erwartet",
+          "mandatory": "* Pflichtfelder",
           "firstBlock": {
             "title": "Was ist deine geschlechtliche Identität?",
             "titleOnBehalf": "Was ist die geschlechtliche Identität der betroffenen Person?",
@@ -813,10 +825,10 @@
             ]
           }
         },
-
         "eleventhStep": {
           "title": "Vielen Dank für deine Meldung.",
           "verification": "Sind Sie mit diesen Daten einverstanden?",
+          "mandatory": "* Pflichtfelder",
           "description": "Hier gelangst Du zu unserer Seite mit Links zur Beratung.",
           "buttonText": "Verweisberatung",
           "validation": {
@@ -885,11 +897,11 @@
       }
     },
     "footer": {
+      "partners": "Kooperationspartner*innen",
       "datenschutz": "Datenschutz",
       "impressum": "Impressum",
       "contact": "Kontakt",
       "spendenkonto": "Spendenkonto",
-      "partners": "Kooperationspartner*innen",
       "socials": "Social Media"
     }
   }
