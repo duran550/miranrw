@@ -2,6 +2,7 @@ export type FifthStepProps = {
   fifthStepTranslation: {
     title: string;
     description: string;
+    mandatory: string;
     firstOption: {
       name: string;
       id: string;
@@ -9,6 +10,7 @@ export type FifthStepProps = {
       label: string;
     };
     secondOption: {
+      title: string;
       name: string;
       id: string;
       value: string;

@@ -6,28 +6,7 @@ import Image from 'next/image';
 import Logo from '../../../../../public/logo.svg';
 import { useClickOutside } from '@/app/hooks/useClickOutside';
 import { usePathname } from 'next/navigation';
-
-type NavBarProps = {
-  navigation: {
-    home: string;
-    reportIncident: string;
-    aboutQueer: {
-      title: string;
-      firstSubmenu: string;
-      secondSubmenu: string;
-    };
-    aboutUs: {
-      title: string;
-      referalCounseling: string;
-      news: string;
-      publications: string;
-      team: string;
-      partners: string;
-    };
-    faqs: string;
-  };
-  lang: string;
-};
+import { NavBarProps } from './navbar.d';
 
 const NavBar: React.FC<NavBarProps> = ({ navigation, lang }) => {
   const [navbar, setNavbar] = useState<boolean>(false);
@@ -113,6 +92,7 @@ const NavBar: React.FC<NavBarProps> = ({ navigation, lang }) => {
                   {navigation?.reportIncident}
                 </Link>
               </li>
+              {/* About queer section */}
               <li onClick={() => setToggle1(!toggle1)} className="relative">
                 <div className={`${toggle1 ? 'font-bold' : ''} cursor-pointer`}>
                   {navigation.aboutQueer?.title}
@@ -129,6 +109,9 @@ const NavBar: React.FC<NavBarProps> = ({ navigation, lang }) => {
                       href={`/${lang}/about-queer#whatIsMultipleDiscrimination`}
                     >
                       {navigation.aboutQueer?.secondSubmenu}
+                    </Link>
+                    <Link href={`/${lang}/about-queer#glossary`}>
+                      {navigation.aboutQueer?.thirdSubmenu}
                     </Link>
                   </ul>
                 )}
@@ -173,7 +156,7 @@ const NavBar: React.FC<NavBarProps> = ({ navigation, lang }) => {
           <nav
             className={`container w-full opacity-0 xl:opacity-100 xl:block flex  items-center justify-between  `}
           >
-            <ul className="flex w-full space-x-8">
+            <ul className="flex w-full space-x-6 2xl:space-x-8">
               <li>
                 <Link
                   className={`${
@@ -221,6 +204,12 @@ const NavBar: React.FC<NavBarProps> = ({ navigation, lang }) => {
                     href={`/${lang}/about-queer#whatIsMultipleDiscrimination`}
                   >
                     {navigation.aboutQueer?.secondSubmenu}
+                  </Link>
+                  <Link
+                    className="py-2 hover:font-bold"
+                    href={`/${lang}/about-queer#glossary`}
+                  >
+                    {navigation.aboutQueer?.thirdSubmenu}
                   </Link>
                 </ul>
               </li>
@@ -282,12 +271,10 @@ const NavBar: React.FC<NavBarProps> = ({ navigation, lang }) => {
               </li>
             </ul>
           </nav>
-          {/* <LocaleSwitcher /> */}
           <div className="opacity-0 mr-4 lg:mr-12 xl:opacity-100">
             {/* Language switcher */}
 
             <LocaleSwitcher />
-            {/* <LocaleSwitcher /> */}
           </div>
         </div>
       </div>

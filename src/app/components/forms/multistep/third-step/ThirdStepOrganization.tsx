@@ -69,7 +69,7 @@ const ThirdStepOrganization: React.FC<ThirdStepOrganizationProps> = ({
     setFormCookies(dataWithQuestion, SECOND_FORM);
 
     isEditing && reportingPerson === 'myself'
-      ? dispatch({ type: LAST_STEP, payload: 10 })
+      ? dispatch({ type: LAST_STEP, payload: 11 })
       : dispatch({ type: NEXT_STEP, payload: 'DATA 1' });
   };
 

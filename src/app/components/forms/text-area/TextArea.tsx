@@ -4,8 +4,8 @@ type TextAreaProps = {
   props: any;
   name: string;
   placeholder: string;
-  title: string;
-  type:string;
+  title?: string;
+  type: string;
 };
 
 const TextArea: React.FC<TextAreaProps> = ({

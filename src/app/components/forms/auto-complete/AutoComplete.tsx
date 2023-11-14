@@ -1,3 +1,5 @@
+import { FORM_ERRORS } from '@/app/context/actions';
+import { useFormContext } from '@/app/hooks/useFormContext';
 import { getFormCookies } from '@/cookies/cookies';
 import { FOURTH_FORM } from '@/cookies/cookies.d';
 import { cities } from '@/utils/data';
@@ -11,27 +13,44 @@ type Item = {
 };
 
 type AutoCompleteProps = {
-  handleOnSearch?: () => void;
   handleOnSelect: any;
+  locationFromParent: string;
   handleOnHover?: () => void;
   handleOnFocus?: () => void;
 };
 
 const AutoComplete: React.FC<AutoCompleteProps> = ({
   handleOnFocus,
+  locationFromParent,
   handleOnHover,
-  handleOnSearch,
   handleOnSelect,
 }) => {
-  const [location, setLocation] = useState<string>('');
+  const [location, setLocation] = useState<string>(locationFromParent);
+  const { dispatch } = useFormContext();
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
     const formValues = getFormCookies(FOURTH_FORM);
 
-    setLocation(formValues?.location);
-  });
+    formValues && !location && setLocation(formValues?.location);
 
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [location]);
+
+  // Handle on search
+
+  const handleOnSearch = (string: string, results: any) => {
+    // onSearch will have as the first callback parameter
+    // the string searched and for the second the results.
+
+    if (results.length <= 0) {
+      dispatch({ type: FORM_ERRORS, payload: true });
+    } else {
+      dispatch({ type: FORM_ERRORS, payload: false });
+    }
+  };
+
+  // Formatting the text
   const formatResult = (item: any) => {
     return (
       <>
