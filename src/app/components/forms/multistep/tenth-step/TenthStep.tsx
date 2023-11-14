@@ -46,7 +46,7 @@ const TenthStep: React.FC<TenthStepProps> = ({ tenthStepTranslation }) => {
     let formValues: {
       gender: string[];
       sexualOrientation: string[];
-      validation: string;
+      validation: string[];
       question: string;
       sexualOrientationFreeField: string[];
       age: string;
