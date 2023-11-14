@@ -11,7 +11,6 @@ export default async function Home({
 }) {
   const { page } = await getDictionary(lang);
 
-  console.log(lang);
   return (
     <>
       <Header lang={lang} />

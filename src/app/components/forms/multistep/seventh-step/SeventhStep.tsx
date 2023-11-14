@@ -8,19 +8,7 @@ import InputField from '../../text-field/InputField';
 import { getFormCookies, getFormStep, setFormCookies } from '@/cookies/cookies';
 import { SIXTH_FORM } from '@/cookies/cookies.d';
 import { useScrollOnTop } from '@/app/hooks/useScrollOnTop';
-
-type SeventhStepProps = {
-  seventhStepTranslation: {
-    title: string;
-    description: string;
-    choices: Array<{ iD: number; id: string; value: string; label: string }>;
-  };
-};
-
-type SeventhStepValues = {
-  typeOfDiscrimination: string[];
-  typeOfDiscriminationFreeField: string;
-};
+import { SeventhStepProps, SeventhStepValues } from './seventhStep';
 
 const SeventhStep: React.FC<SeventhStepProps> = ({
   seventhStepTranslation,
@@ -90,7 +78,7 @@ const SeventhStep: React.FC<SeventhStepProps> = ({
     setFormCookies(dataWithQuestion, SIXTH_FORM);
 
     isEditing && reportingPerson === 'myself'
-      ? dispatch({ type: LAST_STEP, payload: 10 })
+      ? dispatch({ type: LAST_STEP, payload: 11 })
       : dispatch({ type: NEXT_STEP, payload: 'DATA 1' });
   };
 
@@ -119,7 +107,7 @@ const SeventhStep: React.FC<SeventhStepProps> = ({
       (typeOfDiscrimination &&
         typeOfDiscrimination?.includes('Other, specify')) ? (
         <InputField
-          name=""
+          name="typeOfDiscriminationFreeField"
           placeholder=""
           props={register('typeOfDiscriminationFreeField', { required: true })}
           title=""
@@ -130,7 +118,7 @@ const SeventhStep: React.FC<SeventhStepProps> = ({
       <div>
         {formErrors && typeOfDiscriminationFreeField?.length !== 0 && (
           <label className="text-red-500 text-xs">
-            A minimum of 4 Characters is expected
+            {seventhStepTranslation?.minCharacters}
           </label>
         )}
       </div>

@@ -1,34 +1,19 @@
-type ArrayType = Array<{
-  id: string;
-  name: string;
-  label: string;
-  value: string;
-  checked: boolean;
-}>;
-
-type BlockDataType = {
-  title: string;
-  titleOnBehalf: string;
-  description: string;
-  data: ArrayType;
-};
-
 export type NinethStepProps = {
   ninethStepTranslation: {
-    mainTitle: string;
+    title: string;
+    description: string;
     minCharacters: string;
-    firstBlock: BlockDataType;
-    secondBlock: BlockDataType;
-    thirdBlock: BlockDataType;
-    fourthBlock: BlockDataType;
+    mandatory: string;
+    data: {
+      options: any;
+      optionsYes: any;
+    };
   };
 };
 
 export type NinethFormValues = {
-  sexualOrientation: string[];
-  sexualOrientationFreeField: string[];
-  validation: string;
-  age: string;
-  gender: string[];
-  genderFreeField: string;
+  haveYouReported: string;
+  haveYouReportedYes: string[];
+  haveYouReportedYesFreeField1: string;
+  haveYouReportedYesFreeField2: string;
 };

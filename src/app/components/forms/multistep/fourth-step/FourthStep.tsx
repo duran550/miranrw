@@ -17,7 +17,11 @@ import { useScrollOnTop } from '@/app/hooks/useScrollOnTop';
 // Date Picker
 const { RangePicker } = DatePicker;
 type FourthStepProps = {
-  fourthStepTranslation: { title: string; description: string };
+  fourthStepTranslation: {
+    title: string;
+    description: string;
+    mandatory: string;
+  };
 };
 
 const FourthStep: React.FC<FourthStepProps> = ({ fourthStepTranslation }) => {
@@ -80,7 +84,7 @@ const FourthStep: React.FC<FourthStepProps> = ({ fourthStepTranslation }) => {
     setFormCookies(dataWithQuestion, THIRD_FORM);
 
     isEditing && reportingPerson === 'myself'
-      ? dispatch({ type: LAST_STEP, payload: 10 })
+      ? dispatch({ type: LAST_STEP, payload: 11 })
       : dispatch({ type: NEXT_STEP, payload: 'DATA 1' });
   };
 
@@ -107,6 +111,7 @@ const FourthStep: React.FC<FourthStepProps> = ({ fourthStepTranslation }) => {
           title={fourthStepTranslation?.title}
           subTitle={fourthStepTranslation?.description}
         />
+        <p className="text-sm -mt-8 mb-8">{fourthStepTranslation?.mandatory}</p>
         <div className="border border-primaryColor rounded-md">
           <LocalizationProvider adapterLocale="de" dateAdapter={AdapterDayjs}>
             <DateCalendar

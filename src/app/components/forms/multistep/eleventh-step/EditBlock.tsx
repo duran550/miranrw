@@ -5,7 +5,7 @@ import AnimateClick from '@/app/components/animate-click/AnimateClick';
 import { useFormContext } from '@/app/hooks/useFormContext';
 import { EDIT_STEP, IS_EDITING } from '@/app/context/actions';
 type EditBlockProps = {
-  question: string;
+  question?: string;
   answer: string | string[];
   step: number;
 };
@@ -19,7 +19,7 @@ const EditBlock: React.FC<EditBlockProps> = ({ question, answer, step }) => {
   return (
     <div className="my-8">
       <div className="flex  mb-2 items-center ">
-        <h1 className="font-bold text-md">{question}</h1>
+        {question && <h1 className="font-bold text-md">{question}</h1>}
         <span onClick={() => handleEdit(step)} className="ml-4 cursor-pointer">
           <AnimateClick>
             <Image src={EditIcon} alt="Edit icon" />
