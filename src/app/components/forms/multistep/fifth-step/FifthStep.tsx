@@ -95,7 +95,7 @@ const FifthStep: React.FC<FifthStepProps> = ({ fifthStepTranslation }) => {
         title={fifthStepTranslation?.title}
         subTitle={fifthStepTranslation?.description}
       />
-      <p className="text-sm -mt-8 mb-8">{fifthStepTranslation?.mandatory}</p>
+      <p className="text-sm -mt-12 mb-8">{fifthStepTranslation?.mandatory}</p>
       <div>
         <RadioSingle
           id={fifthStepTranslation?.firstOption?.id}

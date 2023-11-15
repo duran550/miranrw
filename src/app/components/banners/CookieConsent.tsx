@@ -60,7 +60,7 @@ const CookieConsent: React.FC<CookieConsentProps> = ({
             </Link>
           </div>
         </div>
-        <div className="flex items-center">
+        <div className="flex pt-4 lg:pt-0 items-center">
           <Button
             variant="primary"
             className="text-sm mt-0 font-bold text-white uppercase  whitespace-nowrap"

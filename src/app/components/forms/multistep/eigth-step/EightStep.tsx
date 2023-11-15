@@ -119,7 +119,6 @@ const EightStep: React.FC<EightStepProps> = ({ eightStepTranslation }) => {
                 key={element?.name}
                 id={element?.id}
                 name={element?.name}
-                checked={element?.checked && element?.checked}
                 props={register('formOfDiscYes')}
                 value={element?.value}
                 label={element?.label}
@@ -127,15 +126,20 @@ const EightStep: React.FC<EightStepProps> = ({ eightStepTranslation }) => {
             ))}
 
           <div className="ml-4">
-            {formOfDiscYes && formOfDiscYes?.includes('Anderes, und zwar:') && (
-              <InputField
-                name="formOfDiscYesFreeField"
-                props={register('formOfDiscYesFreeField')}
-              />
-            )}
+            {formOfDiscYes &&
+              formOfDiscYes?.includes(
+                eightStepTranslation?.data?.optionsYes[8].value
+              ) && (
+                <InputField
+                  name="formOfDiscYesFreeField"
+                  props={register('formOfDiscYesFreeField')}
+                />
+              )}
             <div>
               {formOfDiscYes?.length > 0 &&
-                formOfDiscYes?.includes('Anderes, und zwar:') &&
+                formOfDiscYes?.includes(
+                  eightStepTranslation?.data?.optionsYes[8].value
+                ) &&
                 formErrors &&
                 formOfDiscYesFreeField?.length !== 0 && (
                   <label className="text-red-500 text-xs">

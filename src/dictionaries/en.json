@@ -295,9 +295,9 @@
             {
               "iD": 1,
               "name": "numberOfEmployees",
-              "value": "under 10",
+              "value": "Under 10",
               "id": "gender",
-              "label": "under 10"
+              "label": "Under 10"
             },
             {
               "iD": 2,
@@ -535,12 +535,19 @@
               {
                 "iD": 7,
                 "name": "formOfDiscYes",
+                "value": "Antisemitism",
+                "id": "Antisemitism",
+                "label": "Antisemitism"
+              },
+              {
+                "iD": 8,
+                "name": "formOfDiscYes",
                 "value": "Sexism",
                 "id": "Sexismus",
                 "label": "Sexism"
               },
               {
-                "iD": 8,
+                "iD": 9,
                 "name": "formOfDiscYes",
                 "id": "Anderes",
                 "value": "Other, specify:",

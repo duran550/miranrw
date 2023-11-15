@@ -536,12 +536,19 @@
               {
                 "iD": 7,
                 "name": "formOfDiscYes",
+                "value": "Antisemitismus",
+                "id": "Antisemitismus",
+                "label": "Antisemitismus"
+              },
+              {
+                "iD": 8,
+                "name": "formOfDiscYes",
                 "value": "Sexismus",
                 "id": "Sexismus",
                 "label": "Sexismus"
               },
               {
-                "iD": 8,
+                "iD": 9,
                 "name": "formOfDiscYes",
                 "value": "Anderes, und zwar:",
                 "id": "Anderes",
@@ -770,8 +777,8 @@
               {
                 "id": "age1",
                 "name": "age",
-                "label": "unter 18 Jahre",
-                "value": "unter 18 Jahre",
+                "label": "Unter 18 Jahre",
+                "value": "Unter 18 Jahre",
                 "checked": false
               },
               {

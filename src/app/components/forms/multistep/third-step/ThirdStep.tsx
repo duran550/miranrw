@@ -81,7 +81,7 @@ const ThirdStep: React.FC<ThirdStepProps> = ({ thirdStepTranslation }) => {
           title={thirdStepTranslation?.title}
           subTitle={thirdStepTranslation?.description}
         />
-        <p className="text-sm -mt-8 mb-8">{thirdStepTranslation?.mandatory}</p>
+        <p className="text-sm -mt-12 mb-8">{thirdStepTranslation?.mandatory}</p>
         <TextArea
           name="vorfall"
           props={register('description')}
