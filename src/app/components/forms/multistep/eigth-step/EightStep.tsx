@@ -30,6 +30,9 @@ const EightStep: React.FC<EightStepProps> = ({ eightStepTranslation }) => {
   // Scroll on top
   useScrollOnTop();
 
+  console.log('form of disc', formOfDisc);
+  console.log('form of disc yes', formOfDiscYes);
+
   useEffect(() => {
     // Getting values from the form
     let formValues: {
@@ -47,6 +50,8 @@ const EightStep: React.FC<EightStepProps> = ({ eightStepTranslation }) => {
     } else {
       dispatch({ type: FORM_ERRORS, payload: false });
     }
+
+    // Reset checkboxes
 
     if (
       formValues &&
@@ -111,10 +116,10 @@ const EightStep: React.FC<EightStepProps> = ({ eightStepTranslation }) => {
           {formOfDisc === eightStepTranslation?.data?.options[1].value &&
             eightStepTranslation?.data?.optionsYes?.map((element: any) => (
               <Checkbox
-                key={element?.id}
+                key={element?.name}
                 id={element?.id}
                 name={element?.name}
-                checked={element?.checked}
+                checked={element?.checked && element?.checked}
                 props={register('formOfDiscYes')}
                 value={element?.value}
                 label={element?.label}
