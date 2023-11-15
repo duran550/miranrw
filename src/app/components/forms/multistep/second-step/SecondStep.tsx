@@ -81,7 +81,9 @@ const SecondStep: React.FC<SecondStepProps> = ({ secondStepTranslation }) => {
         className="h-full lg:w-[35rem]"
       >
         <FormHeader title={secondStepTranslation?.title} />
-        <p className="text-sm -mt-8 mb-8">{secondStepTranslation?.mandatory}</p>
+        <p className="text-sm -mt-12 mb-8">
+          {secondStepTranslation?.mandatory}
+        </p>
         <RadioGroup
           props={register('identity', { required: true })}
           options={secondStepTranslation?.options}

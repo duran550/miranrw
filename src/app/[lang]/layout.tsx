@@ -5,6 +5,8 @@ import { Poppins } from 'next/font/google';
 import Header from '../components/header/header';
 import Head from 'next/head';
 import { FormProvider } from '../context/FormContext';
+import CookieConsent from '../components/banners/CookieConsent';
+import { getDictionary } from '@/lib/dictionary';
 
 const poppins = Poppins({
   subsets: ['latin'],
@@ -20,13 +22,15 @@ export async function generateStaticParams() {
   return i18n.locales.map((locale) => ({ lang: locale }));
 }
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
   params,
 }: {
   children: React.ReactNode;
   params: { lang: Locale };
 }) {
+  const { page } = await getDictionary(params?.lang);
+
   return (
     <html lang={params.lang}>
       <Head>
@@ -38,6 +42,10 @@ export default function RootLayout({
       >
         {/* <Header lang={params.lang} /> */}
         <FormProvider>{children}</FormProvider>
+        <CookieConsent
+          lang={params?.lang}
+          cookieConsentTranslation={page?.cookiesConsent}
+        />
       </body>
     </html>
   );
