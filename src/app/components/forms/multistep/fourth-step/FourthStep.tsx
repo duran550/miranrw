@@ -111,7 +111,9 @@ const FourthStep: React.FC<FourthStepProps> = ({ fourthStepTranslation }) => {
           title={fourthStepTranslation?.title}
           subTitle={fourthStepTranslation?.description}
         />
-        <p className="text-sm -mt-8 mb-8">{fourthStepTranslation?.mandatory}</p>
+        <p className="text-sm -mt-12 mb-8">
+          {fourthStepTranslation?.mandatory}
+        </p>
         <div className="border border-primaryColor rounded-md">
           <LocalizationProvider adapterLocale="de" dateAdapter={AdapterDayjs}>
             <DateCalendar

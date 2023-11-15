@@ -237,7 +237,8 @@ const EleventhStep: React.FC<EleventhStepProps> = ({
 
   useEffect(() => {
     dispatch({ type: FORM_ERRORS, payload: true });
-    !validation || validation?.length === 0
+    !validation ||
+    !validation?.includes(eleventhStepTranslation?.validation?.data[1]?.value)
       ? dispatch({ type: FORM_ERRORS, payload: true })
       : dispatch({ type: FORM_ERRORS, payload: false });
     // eslint-disable-next-line react-hooks/exhaustive-deps
