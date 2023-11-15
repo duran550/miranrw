@@ -29,8 +29,6 @@ export default function RootLayout({
   children: React.ReactNode;
   params: { lang: Locale };
 }) {
-  // const { page } = await getDictionary(params?.lang);
-
   return (
     <html lang={params.lang}>
       <Head>
@@ -42,10 +40,6 @@ export default function RootLayout({
       >
         {/* <Header lang={params.lang} /> */}
         <FormProvider>{children}</FormProvider>
-        {/* <CookieConsent
-          lang={params?.lang}
-          cookieConsentTranslation={page?.cookiesConsent}
-        /> */}
       </body>
     </html>
   );
