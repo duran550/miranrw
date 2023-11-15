@@ -37,7 +37,7 @@ const CookieConsent: React.FC<CookieConsentProps> = ({
   }
 
   return (
-    <section className="fixed bg-white border border-gray-100  bottom-0 left-0 w-full py-4 md:py-4">
+    <section className="fixed bg-white border  bottom-0 left-0 w-full py-4 md:py-4">
       <div className="flex px-5 items-center">
         <h1 className=" font-bold md:text-xl ">
           {cookieConsentTranslation?.title}
@@ -60,7 +60,7 @@ const CookieConsent: React.FC<CookieConsentProps> = ({
             </Link>
           </div>
         </div>
-        <div className="flex pt-4 lg:pt-0 items-center">
+        <div className="flex items-center">
           <Button
             variant="primary"
             className="text-sm mt-0 font-bold text-white uppercase  whitespace-nowrap"

@@ -22,14 +22,14 @@ export async function generateStaticParams() {
   return i18n.locales.map((locale) => ({ lang: locale }));
 }
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
   params,
 }: {
   children: React.ReactNode;
   params: { lang: Locale };
 }) {
-  // const { page } = await getDictionary(params?.lang);
+  const { page } = await getDictionary(params?.lang);
 
   return (
     <html lang={params.lang}>
@@ -42,10 +42,10 @@ export default function RootLayout({
       >
         {/* <Header lang={params.lang} /> */}
         <FormProvider>{children}</FormProvider>
-        {/* <CookieConsent
-          lang={params?.lang}
+        <CookieConsent
           cookieConsentTranslation={page?.cookiesConsent}
-        /> */}
+          lang={params?.lang}
+        />
       </body>
     </html>
   );
