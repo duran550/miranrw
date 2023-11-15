@@ -55,7 +55,8 @@ const TenthStep: React.FC<TenthStepProps> = ({ tenthStepTranslation }) => {
 
     dispatch({ type: FORM_ERRORS, payload: true });
 
-    !validation || validation?.length === 0
+    (reportingPerson === 'organization' && !validation) ||
+    validation?.length === 0
       ? dispatch({ type: FORM_ERRORS, payload: true })
       : dispatch({ type: FORM_ERRORS, payload: false });
 
