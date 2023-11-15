@@ -867,6 +867,14 @@
         "save": "Save"
       }
     },
+
+    "cookiesConsent": {
+      "title": "Your privacy",
+      "content": "For the operation of our portal, we exclusively use cookies that are necessary for operation. Further information can be found in the",
+      "datenschutz": "privacy policy.",
+      "accept": "Yes, understood"
+    },
+
     "about": {
       "title": "About Us",
       "description": "This is the About page."

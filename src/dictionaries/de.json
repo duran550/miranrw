@@ -871,6 +871,12 @@
       "title": "Über uns",
       "description": "Dies ist die About-Seite"
     },
+    "cookiesConsent": {
+      "title": "Deine Privatsphäre",
+      "content": "Zum Betrieb unseres Portals verwenden wir ausschließlich Cookies, die zum Betrieb erforderlich sind. Erweiterte Informationen finden Sie in den",
+      "datenschutz": "Datenschutzhinweisen.",
+      "accept": "Ja, verstanden"
+    },
     "aboutQueer": {
       "glossary": {
         "title": "Glossar",
