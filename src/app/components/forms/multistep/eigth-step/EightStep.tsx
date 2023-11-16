@@ -30,9 +30,6 @@ const EightStep: React.FC<EightStepProps> = ({ eightStepTranslation }) => {
   // Scroll on top
   useScrollOnTop();
 
-  console.log('form of disc', formOfDisc);
-  console.log('form of disc yes', formOfDiscYes);
-
   useEffect(() => {
     // Getting values from the form
     let formValues: {
