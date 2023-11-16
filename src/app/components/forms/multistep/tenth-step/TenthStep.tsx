@@ -39,8 +39,6 @@ const TenthStep: React.FC<TenthStepProps> = ({ tenthStepTranslation }) => {
   // Scroll on top
   useScrollOnTop();
 
-  console.log(validation);
-
   useEffect(() => {
     // Getting values from cookies
     let formValues: {
