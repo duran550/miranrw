@@ -245,11 +245,11 @@ const EleventhStep: React.FC<EleventhStepProps> = ({
   }, [validation]);
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} id="tenthForm">
-      <h1 className="font-bold text-2xl mb-4">
-        {eleventhStepTranslation?.verification}
-      </h1>
+    <div>
       <div>
+        <h1 className="font-bold text-2xl mb-4">
+          {eleventhStepTranslation?.verification}
+        </h1>
         <EditBlock
           step={firstForm?.step}
           question={firstForm?.question}
@@ -351,14 +351,24 @@ const EleventhStep: React.FC<EleventhStepProps> = ({
           <EditBlock
             step={eighthForm?.step}
             question={eighthForm?.question}
-            answer={[
-              eighthForm?.haveYouReported,
-              ...eighthForm?.haveYouReportedYes,
-              eighthForm?.haveYouReportedYesFreeField1,
-              eighthForm?.haveYouReportedYesFreeField2,
-            ]}
+            answer={[eighthForm?.haveYouReported]}
           />
         )}
+
+        {eighthForm &&
+          eighthForm?.haveYouReportedYes &&
+          eighthForm?.haveYouReported !== 'Nein' &&
+          eighthForm?.haveYouReported !== 'No' && (
+            <EditBlock
+              step={eighthForm?.step}
+              question={eighthForm?.question}
+              answer={[
+                ...eighthForm?.haveYouReportedYes,
+                eighthForm?.haveYouReportedYesFreeField1,
+                eighthForm?.haveYouReportedYesFreeField2,
+              ]}
+            />
+          )}
 
         {/* When Nein is chosen don't display */}
 
@@ -395,19 +405,22 @@ const EleventhStep: React.FC<EleventhStepProps> = ({
       <div className="mt-8">
         <FormHeader title={eleventhStepTranslation?.validation?.title} />
         <div className="-mt-8">
-          {eleventhStepTranslation?.validation?.data?.map((element: any) => (
-            <Checkbox
-              key={element?.iD}
-              id={element?.id}
-              name={element?.name}
-              props={register('validation')}
-              value={element?.value}
-              label={element?.label}
-            />
-          ))}
+          <form onSubmit={handleSubmit(onSubmit)} id="tenthForm">
+            <h1 className="hidden">title</h1>
+            {eleventhStepTranslation?.validation?.data?.map((element: any) => (
+              <Checkbox
+                key={element?.id}
+                id={element?.id}
+                name={element?.name}
+                props={register('validation')}
+                value={element?.value}
+                label={element?.label}
+              />
+            ))}
+          </form>
         </div>
       </div>
-    </form>
+    </div>
   );
 };
 
