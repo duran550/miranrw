@@ -27,7 +27,7 @@ const FormHeader: React.FC<FormHeaderProps> = ({
 }) => {
   return (
     <div className="border lg:bg-white mb-8 md:mb-16 border-primaryColor rounded-md p-4">
-      <div className=" font-extrabold text-2xl mb-2">{title}</div>
+      <h1 className=" font-extrabold text-2xl mb-2">{title}</h1>
       {children}
       {description && (
         <div className="text-sm mt-2">
