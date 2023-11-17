@@ -212,7 +212,7 @@ const MultiStepForm: React.FC<MultiStepFormProps> = ({
                   <div className="flex  space-x-0 md:space-x-16 justify-between md:flex-row  md:justify-between items-center w-full">
                     {step !== 11 && step !== 12 && (
                       <>
-                        {reportingPerson === 'organization' && step === 9 ? (
+                        {reportingPerson === 'organization' && step === 10 ? (
                           <></>
                         ) : (
                           <Button

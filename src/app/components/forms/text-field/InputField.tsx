@@ -15,10 +15,7 @@ const InputField: React.FC<InputFieldProps> = ({
 }) => {
   return (
     <>
-      <label
-        className="font-bold block mb-1 mt-6 text-primaryColor"
-        htmlFor={name}
-      >
+      <label className="block mb-4 mt-6 text-sm" htmlFor={name}>
         {title}
       </label>
       <input

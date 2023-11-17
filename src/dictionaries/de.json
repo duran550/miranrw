@@ -286,7 +286,8 @@
         "fourthStep": {
           "title": "Wann fand der Vorfall statt?*",
           "mandatory": "* Pflichtfelder",
-          "description": "Bitte wähle ein Datum aus. Falls es sich um einen längeren Zeitraum handelt, kannst du auch diesen auch auswählen"
+          "description": "Bitte wähle ein Datum aus. Falls es sich um einen längeren Zeitraum handelt, kannst du auch diesen auch auswählen",
+          "happenedOverALongPeriod": "Es ist über einen längeren Zeitraum passiert."
         },
         "fourthStepOrganization": {
           "title": "Wie viele Personen sind in der Organisation/Institution tätig?",
@@ -338,6 +339,12 @@
             "name": "online",
             "value": "freeField",
             "id": "place"
+          },
+          "thirdOption": {
+            "title": "Stadtteil",
+            "name": "stadtteil",
+            "value": "Stadtteil",
+            "id": "stadtteil"
           }
         },
         "sixthStep": {

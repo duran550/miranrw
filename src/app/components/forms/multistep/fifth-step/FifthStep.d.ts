@@ -16,9 +16,16 @@ export type FifthStepProps = {
       value: string;
       label: sting;
     };
+    thirdOption: {
+      title: string;
+      name: string;
+      value: string;
+      id: string;
+    };
   };
 };
 
 export type FifthFormValues = {
   locationOnline: string;
+  stadtteil: string;
 };

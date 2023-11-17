@@ -9,11 +9,15 @@ import { getFormCookies, getFormStep, setFormCookies } from '@/cookies/cookies';
 import { FOURTH_FORM } from '@/cookies/cookies.d';
 import { useScrollOnTop } from '@/app/hooks/useScrollOnTop';
 import AutoComplete from '../../auto-complete/AutoComplete';
+import InputField from '../../text-field/InputField';
 
 const FifthStep: React.FC<FifthStepProps> = ({ fifthStepTranslation }) => {
-  const { dispatch, reportingPerson, isEditing, formErrors } = useFormContext();
+  const { dispatch, reportingPerson, isEditing } = useFormContext();
   const [question] = useState<string>(fifthStepTranslation?.title);
   const [location, setLocation] = useState<string>('');
+  const [searchedText, setSearchedText] = useState<string | undefined>(
+    undefined
+  );
 
   const {
     register,
@@ -23,7 +27,10 @@ const FifthStep: React.FC<FifthStepProps> = ({ fifthStepTranslation }) => {
     formState: { errors },
   } = useForm<FifthFormValues>();
 
+  // Watching fields
+
   let locationOnline: string = watch('locationOnline');
+
   // Getting form cookies
   let formValues: {
     locationOnline: string;
@@ -35,10 +42,21 @@ const FifthStep: React.FC<FifthStepProps> = ({ fifthStepTranslation }) => {
   useScrollOnTop();
 
   useEffect(() => {
+    dispatch({ type: FORM_ERRORS, payload: true });
+
+    // Validating fields
+
     if (!locationOnline) {
       dispatch({ type: FORM_ERRORS, payload: true });
     } else {
-      dispatch({ type: FORM_ERRORS, payload: false });
+      if (
+        !searchedText &&
+        locationOnline === fifthStepTranslation?.secondOption?.value
+      ) {
+        dispatch({ type: FORM_ERRORS, payload: true });
+      } else {
+        dispatch({ type: FORM_ERRORS, payload: false });
+      }
     }
 
     if (formValues && !locationOnline && !location) {
@@ -55,6 +73,7 @@ const FifthStep: React.FC<FifthStepProps> = ({ fifthStepTranslation }) => {
     location?.length,
     locationOnline,
     location,
+    searchedText,
   ]);
 
   // Triggered when submitting form
@@ -83,6 +102,14 @@ const FifthStep: React.FC<FifthStepProps> = ({ fifthStepTranslation }) => {
 
   const handleOnFocus = () => {
     console.log('Focused');
+  };
+
+  // Handle on search
+
+  const handleOnSearch = (string: string, results: any) => {
+    // onSearch will have as the first callback parameter
+    // the string searched and for the second the results.
+    setSearchedText(string);
   };
 
   return (
@@ -114,11 +141,21 @@ const FifthStep: React.FC<FifthStepProps> = ({ fifthStepTranslation }) => {
           props={register('locationOnline')}
         />
         <div className="w-full pl-8 my-4">
-          {locationOnline == fifthStepTranslation?.secondOption?.value && (
-            <AutoComplete
-              locationFromParent={location}
-              handleOnSelect={handleOnSelect}
-            />
+          {locationOnline === fifthStepTranslation?.secondOption?.value && (
+            <>
+              <AutoComplete
+                handleOnSearch={handleOnSearch}
+                locationFromParent={location}
+                handleOnSelect={handleOnSelect}
+              />
+              <div className="mt-4">
+                <InputField
+                  props={register('stadtteil')}
+                  name={fifthStepTranslation?.thirdOption?.name}
+                  title={fifthStepTranslation?.thirdOption?.title}
+                />
+              </div>
+            </>
           )}
         </div>
       </div>
