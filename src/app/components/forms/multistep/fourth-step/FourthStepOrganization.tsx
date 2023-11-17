@@ -36,7 +36,7 @@ const FourthStepOrganization: React.FC<FourthStepOrganizationProps> = ({
   useScrollOnTop();
 
   useEffect(() => {
-    dispatch({ type: FORM_ERRORS, payload: true });
+    // dispatch({ type: FORM_ERRORS, payload: true });
 
     if (numberOfEmployees) {
       dispatch({ type: FORM_ERRORS, payload: false });

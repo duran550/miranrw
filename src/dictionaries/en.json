@@ -285,7 +285,8 @@
         "fourthStep": {
           "title": "When did the incident occur ?*",
           "mandatory": "* Mandatory field",
-          "description": "Please select a date. If it occurred over an extended period, you can select that too."
+          "description": "Please select a date. If it occurred over an extended period, you can select that too.",
+          "happenedOverALongPeriod": "It happened over a long period of time."
         },
         "fourthStepOrganization": {
           "title": "How many individuals are active in the organization/institution?",
@@ -338,6 +339,12 @@
             "id": "place",
             "value": "Online",
             "label": "Where did the incident occur"
+          },
+          "thirdOption": {
+            "title": "City district",
+            "name": "stadtteil",
+            "value": "City district",
+            "id": "stadtteil"
           }
         },
         "sixthStep": {

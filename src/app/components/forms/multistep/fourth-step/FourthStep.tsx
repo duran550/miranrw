@@ -20,6 +20,7 @@ type FourthStepProps = {
   fourthStepTranslation: {
     title: string;
     description: string;
+    happenedOverALongPeriod: string;
     mandatory: string;
   };
 };
@@ -138,8 +139,8 @@ const FourthStep: React.FC<FourthStepProps> = ({ fourthStepTranslation }) => {
         <Checkbox
           props={register('datePeriod')}
           name="datePeriod"
-          value="Es ist über einen längeren Zeitraum passiert."
-          label="Es ist über einen längeren Zeitraum passiert."
+          value={fourthStepTranslation?.happenedOverALongPeriod}
+          label={fourthStepTranslation?.happenedOverALongPeriod}
           id="datePeriod"
         />
 

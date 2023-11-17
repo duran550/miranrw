@@ -86,7 +86,7 @@ const SeventhStep: React.FC<SeventhStepProps> = ({
     <form
       onSubmit={handleSubmit(onSubmit)}
       id="sixthForm"
-      className="lg:w-[35rem]"
+      className="lg:w-[38rem]"
     >
       <FormHeader
         title={seventhStepTranslation?.title}
