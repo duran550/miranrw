@@ -97,7 +97,9 @@ const ThirdStepOrganization: React.FC<ThirdStepOrganizationProps> = ({
           ))}
           <div className="ml-4">
             {organizationType &&
-              organizationType?.includes('Anderes, und zwar') && (
+              organizationType?.includes(
+                thirdStepOrganizationTranslation?.data[6]?.value
+              ) && (
                 <InputField
                   name="organizationTypeFreeField"
                   props={register('organizationTypeFreeField')}
