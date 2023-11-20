@@ -222,7 +222,8 @@
               "How was the discrimination manifested?",
               "Who was the perpetrator of the attack?",
               "How did other individuals react?",
-              "What made the incident queerphobic?"
+              "What made the incident queerphobic?",
+              "What impact did the incident have on you (e.g., emotional, physical, social, or financial) ?"
             ]
           }
         },
@@ -344,6 +345,7 @@
             "title": "City district",
             "name": "stadtteil",
             "value": "City district",
+            "minCharacters": "A minimum of 4 Characters is expected",
             "id": "stadtteil"
           }
         },
@@ -555,6 +557,14 @@
               },
               {
                 "iD": 9,
+                "name": "formOfDiscYes",
+                "value": "Queerphobia",
+                "id": "Queerphobia",
+                "label": "Queerphobia"
+              },
+
+              {
+                "iD": 10,
                 "name": "formOfDiscYes",
                 "id": "Anderes",
                 "value": "Other, specify:",

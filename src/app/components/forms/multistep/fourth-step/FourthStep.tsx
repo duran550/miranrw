@@ -11,7 +11,7 @@ import Checkbox from '../../checkbox/Checkbox';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { FourthFormValues } from './fourthStep';
 import { getFormCookies, getFormStep, setFormCookies } from '@/cookies/cookies';
-import { THIRD_FORM } from '@/cookies/cookies.d';
+import { FIFTH_FORM, THIRD_FORM } from '@/cookies/cookies.d';
 import { DatePicker } from 'antd';
 import { useScrollOnTop } from '@/app/hooks/useScrollOnTop';
 // Date Picker
@@ -23,9 +23,13 @@ type FourthStepProps = {
     happenedOverALongPeriod: string;
     mandatory: string;
   };
+  id?: string;
 };
 
-const FourthStep: React.FC<FourthStepProps> = ({ fourthStepTranslation }) => {
+const FourthStep: React.FC<FourthStepProps> = ({
+  fourthStepTranslation,
+  id,
+}) => {
   const { dispatch, reportingPerson, isEditing, formErrors } = useFormContext();
   const [valueDate, setValueDate] = React.useState<Dayjs | null>(dayjs());
   const [question] = useState<string>(fourthStepTranslation?.title);
@@ -82,7 +86,9 @@ const FourthStep: React.FC<FourthStepProps> = ({ fourthStepTranslation }) => {
     let dataWithDate = { valueDate, dateRangeState, ...data };
     let step = getFormStep();
     let dataWithQuestion = { question, step, ...dataWithDate };
-    setFormCookies(dataWithQuestion, THIRD_FORM);
+    id === 'fifthForm'
+      ? setFormCookies(dataWithQuestion, FIFTH_FORM)
+      : setFormCookies(dataWithQuestion, THIRD_FORM);
 
     isEditing && reportingPerson === 'myself'
       ? dispatch({ type: LAST_STEP, payload: 11 })
@@ -104,7 +110,7 @@ const FourthStep: React.FC<FourthStepProps> = ({ fourthStepTranslation }) => {
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      id="thirdForm"
+      id={id === 'fifthForm' ? 'fifthForm' : 'thirdForm'}
       className="flex flex-col relative"
     >
       <div className="lg:w-[35rem]">
