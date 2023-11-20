@@ -6,12 +6,13 @@ import Checkbox from '../../checkbox/Checkbox';
 import FormHeader from '../header/header';
 import InputField from '../../text-field/InputField';
 import { getFormCookies, getFormStep, setFormCookies } from '@/cookies/cookies';
-import { SIXTH_FORM } from '@/cookies/cookies.d';
+import { SEVENTH_FORM, SIXTH_FORM } from '@/cookies/cookies.d';
 import { useScrollOnTop } from '@/app/hooks/useScrollOnTop';
 import { SeventhStepProps, SeventhStepValues } from './seventhStep';
 
 const SeventhStep: React.FC<SeventhStepProps> = ({
   seventhStepTranslation,
+  id,
 }) => {
   const { dispatch, isEditing, reportingPerson, formErrors } = useFormContext();
 
@@ -75,7 +76,10 @@ const SeventhStep: React.FC<SeventhStepProps> = ({
   const onSubmit: SubmitHandler<SeventhStepValues> = (data) => {
     let step = getFormStep();
     let dataWithQuestion = { question, step, ...data };
-    setFormCookies(dataWithQuestion, SIXTH_FORM);
+
+    id === 'seventhForm'
+      ? setFormCookies(dataWithQuestion, SEVENTH_FORM)
+      : setFormCookies(dataWithQuestion, SIXTH_FORM);
 
     isEditing && reportingPerson === 'myself'
       ? dispatch({ type: LAST_STEP, payload: 11 })
@@ -85,7 +89,7 @@ const SeventhStep: React.FC<SeventhStepProps> = ({
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      id="sixthForm"
+      id={id === 'seventhForm' ? 'seventhForm' : 'sixthForm'}
       className="lg:w-[38rem]"
     >
       <FormHeader

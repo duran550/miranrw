@@ -6,7 +6,7 @@ import { FORM_ERRORS, LAST_STEP, NEXT_STEP } from '@/app/context/actions';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { ThirdFormValues } from './thirdStep.d';
 import { getFormCookies, getFormStep, setFormCookies } from '@/cookies/cookies';
-import { SECOND_FORM } from '@/cookies/cookies.d';
+import { FOURTH_FORM, SECOND_FORM, THIRD_FORM } from '@/cookies/cookies.d';
 import { useScrollOnTop } from '@/app/hooks/useScrollOnTop';
 
 type ThirdStepProps = {
@@ -19,11 +19,14 @@ type ThirdStepProps = {
     minCharacters: string;
     hints: { title: string; list: string[] };
   };
+  id?: string;
 };
 
-const ThirdStep: React.FC<ThirdStepProps> = ({ thirdStepTranslation }) => {
+const ThirdStep: React.FC<ThirdStepProps> = ({ thirdStepTranslation, id }) => {
   const { dispatch, reportingPerson, isEditing, formErrors } = useFormContext();
   const [question] = useState<string>(thirdStepTranslation?.title);
+
+  // Dynamic hints description
 
   const {
     register,
@@ -43,6 +46,7 @@ const ThirdStep: React.FC<ThirdStepProps> = ({ thirdStepTranslation }) => {
   useScrollOnTop();
 
   useEffect(() => {
+    dispatch({ type: FORM_ERRORS, payload: true });
     if (description && description?.length >= 50) {
       dispatch({ type: FORM_ERRORS, payload: false });
     } else {
@@ -63,7 +67,10 @@ const ThirdStep: React.FC<ThirdStepProps> = ({ thirdStepTranslation }) => {
   const onSubmit: SubmitHandler<ThirdFormValues> = (data) => {
     let step = getFormStep();
     let dataWithQuestion = { question, step, ...data };
-    setFormCookies(dataWithQuestion, SECOND_FORM);
+
+    id !== 'fourthForm'
+      ? setFormCookies(dataWithQuestion, SECOND_FORM)
+      : setFormCookies(dataWithQuestion, FOURTH_FORM);
 
     isEditing && reportingPerson === 'myself'
       ? dispatch({ type: LAST_STEP, payload: 11 })
@@ -74,7 +81,7 @@ const ThirdStep: React.FC<ThirdStepProps> = ({ thirdStepTranslation }) => {
     <div className="relative w-full">
       <form
         onSubmit={handleSubmit(onSubmit)}
-        id="secondForm"
+        id={id === 'fourthForm' ? 'fourthForm' : 'secondForm'}
         className="h-full lg:w-[35rem]"
       >
         <FormHeader
@@ -99,13 +106,23 @@ const ThirdStep: React.FC<ThirdStepProps> = ({ thirdStepTranslation }) => {
         </p>
       </form>
 
-      <div className="mt-16 lg:mt-8  2xl:mt-0 2xl:absolute  lg:-top-0 lg:-right-[38rem]">
+      <div className="mt-16 w-full md:max-w-md lg:mt-8  2xl:mt-0 2xl:absolute  lg:-top-0 lg:-right-[38rem]">
         <FormHeader title={thirdStepTranslation?.hints?.title}>
-          <ul className="list-disc pl-8">
-            {thirdStepTranslation?.hints.list?.map((element: string) => (
-              <li key="null">{element}</li>
-            ))}
-          </ul>
+          {reportingPerson !== 'onBehalf' ? (
+            <ul className="list-disc pl-8">
+              {thirdStepTranslation?.hints?.list.map((element: string) => (
+                <li key={`${element}`}>{element}</li>
+              ))}
+            </ul>
+          ) : (
+            <ul className="list-disc pl-8">
+              {thirdStepTranslation?.hints?.list
+                ?.slice(0, thirdStepTranslation?.hints?.list?.length - 1)
+                ?.map((element: string) => (
+                  <li key={`${element}`}>{element}</li>
+                ))}
+            </ul>
+          )}
         </FormHeader>
       </div>
     </div>

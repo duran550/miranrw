@@ -1,5 +1,6 @@
 export type EightStepProps = {
   eightStepTranslation: any;
+  id?: string;
 };
 
 export type EightFormValues = {

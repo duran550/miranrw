@@ -138,28 +138,38 @@ const MultiStepForm: React.FC<MultiStepFormProps> = ({
                     }
                   />
                 ) : step === 5 ? (
-                  <FifthStep
-                    fifthStepTranslation={formTranslation?.stepper?.fifthStep}
+                  <ThirdStep
+                    id="fourthForm"
+                    thirdStepTranslation={formTranslation?.stepper?.thirdStep}
                   />
                 ) : step === 6 ? (
-                  <SixthStep
-                    sixthStepTranslation={formTranslation?.stepper?.sixthStep}
+                  <FourthStep
+                    id="fifthForm"
+                    fourthStepTranslation={formTranslation?.stepper?.fourthStep}
                   />
                 ) : step === 7 ? (
+                  <FifthStep
+                    id="sixthForm"
+                    fifthStepTranslation={formTranslation?.stepper?.fifthStep}
+                  />
+                ) : step === 8 ? (
                   <SeventhStep
+                    id="seventhForm"
                     seventhStepTranslation={
                       formTranslation?.stepper?.seventhStep
                     }
                   />
-                ) : step === 8 ? (
+                ) : step === 9 ? (
                   <EightStep
+                    id="eighthForm"
                     eightStepTranslation={formTranslation?.stepper?.eightStep}
                   />
-                ) : step === 9 ? (
-                  <TenthStep
-                    tenthStepTranslation={formTranslation?.stepper?.tenthStep}
-                  />
                 ) : step === 10 ? (
+                  <NinethStep
+                    id="ninethForm"
+                    ninethStepTranslation={formTranslation?.stepper?.ninethStep}
+                  />
+                ) : step === 11 ? (
                   <EleventhStep
                     eleventhStepTranslation={
                       formTranslation?.stepper?.eleventhStep
@@ -212,7 +222,7 @@ const MultiStepForm: React.FC<MultiStepFormProps> = ({
                   <div className="flex  space-x-0 md:space-x-16 justify-between md:flex-row  md:justify-between items-center w-full">
                     {step !== 11 && step !== 12 && (
                       <>
-                        {reportingPerson === 'organization' && step === 10 ? (
+                        {reportingPerson === 'organization' && step === 11 ? (
                           <></>
                         ) : (
                           <Button
@@ -245,7 +255,7 @@ const MultiStepForm: React.FC<MultiStepFormProps> = ({
                       </div>
                     ) : (
                       <>
-                        {reportingPerson === 'organization' && step === 10 && (
+                        {reportingPerson === 'organization' && step === 11 && (
                           <div className="flex justify-between w-full">
                             <Button
                               className="w-32 mr-auto justify-self-start font-bold"
@@ -267,7 +277,7 @@ const MultiStepForm: React.FC<MultiStepFormProps> = ({
                         {step !== 11 && step !== 12 && (
                           <>
                             {/* {' Conditions for organization last form'} */}
-                            {step === 10 &&
+                            {step === 11 &&
                             reportingPerson === 'organization' ? (
                               <></>
                             ) : (

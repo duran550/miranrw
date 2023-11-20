@@ -5,6 +5,7 @@ export type SeventhStepProps = {
     description: string;
     choices: Array<{ iD: number; id: string; value: string; label: string }>;
   };
+  id?: string;
 };
 
 export type SeventhStepValues = {

@@ -149,51 +149,54 @@ const TenthStep: React.FC<TenthStepProps> = ({ tenthStepTranslation }) => {
               </div>
             </div>
           </div>
-
-          <div className="mt-8">
-            <FormHeader
-              title={
-                reportingPerson !== 'myself'
-                  ? tenthStepTranslation?.secondBlock?.titleOnBehalf
-                  : tenthStepTranslation?.secondBlock?.title
-              }
-              subTitle={tenthStepTranslation?.secondBlock?.description}
-            />
-            <div className="-mt-8">
-              {tenthStepTranslation?.secondBlock?.data?.map((element: any) => (
-                <Checkbox
-                  key={element?.iD}
-                  id={element?.id}
-                  name={element?.name}
-                  props={register('sexualOrientation')}
-                  value={element?.value}
-                  label={element?.label}
-                />
-              ))}
-
-              <div className="ml-4">
-                {sexualOrientation &&
-                  sexualOrientation?.includes(
-                    tenthStepTranslation?.secondBlock?.data[11]?.value
-                  ) && (
-                    <InputField
-                      name=""
-                      props={register('sexualOrientationFreeField')}
+          {reportingPerson !== 'andere' && (
+            <div className="mt-8">
+              <FormHeader
+                title={
+                  reportingPerson !== 'myself'
+                    ? tenthStepTranslation?.secondBlock?.titleOnBehalf
+                    : tenthStepTranslation?.secondBlock?.title
+                }
+                subTitle={tenthStepTranslation?.secondBlock?.description}
+              />
+              <div className="-mt-8">
+                {tenthStepTranslation?.secondBlock?.data?.map(
+                  (element: any) => (
+                    <Checkbox
+                      key={element?.iD}
+                      id={element?.id}
+                      name={element?.name}
+                      props={register('sexualOrientation')}
+                      value={element?.value}
+                      label={element?.label}
                     />
-                  )}
-                {sexualOrientation?.length > 0 &&
-                  sexualOrientation?.includes(
-                    tenthStepTranslation?.secondBlock?.data[11]?.value
-                  ) &&
-                  sexualOrientationFreeField?.length !== 0 &&
-                  formErrors && (
-                    <label className="text-red-500 text-xs">
-                      {tenthStepTranslation?.minCharacters}
-                    </label>
-                  )}
+                  )
+                )}
+
+                <div className="ml-4">
+                  {sexualOrientation &&
+                    sexualOrientation?.includes(
+                      tenthStepTranslation?.secondBlock?.data[11]?.value
+                    ) && (
+                      <InputField
+                        name=""
+                        props={register('sexualOrientationFreeField')}
+                      />
+                    )}
+                  {sexualOrientation?.length > 0 &&
+                    sexualOrientation?.includes(
+                      tenthStepTranslation?.secondBlock?.data[11]?.value
+                    ) &&
+                    sexualOrientationFreeField?.length !== 0 &&
+                    formErrors && (
+                      <label className="text-red-500 text-xs">
+                        {tenthStepTranslation?.minCharacters}
+                      </label>
+                    )}
+                </div>
               </div>
             </div>
-          </div>
+          )}
 
           <div className="mt-8">
             <FormHeader
