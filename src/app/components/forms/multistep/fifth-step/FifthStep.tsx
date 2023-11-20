@@ -6,12 +6,12 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 import { useFormContext } from '@/app/hooks/useFormContext';
 import { FORM_ERRORS, LAST_STEP, NEXT_STEP } from '@/app/context/actions';
 import { getFormCookies, getFormStep, setFormCookies } from '@/cookies/cookies';
-import { FOURTH_FORM } from '@/cookies/cookies.d';
+import { FOURTH_FORM, SIXTH_FORM } from '@/cookies/cookies.d';
 import { useScrollOnTop } from '@/app/hooks/useScrollOnTop';
 import AutoComplete from '../../auto-complete/AutoComplete';
 import InputField from '../../text-field/InputField';
 
-const FifthStep: React.FC<FifthStepProps> = ({ fifthStepTranslation }) => {
+const FifthStep: React.FC<FifthStepProps> = ({ fifthStepTranslation, id }) => {
   const { dispatch, reportingPerson, isEditing } = useFormContext();
   const [question] = useState<string>(fifthStepTranslation?.title);
   const [location, setLocation] = useState<string>('');
@@ -30,6 +30,7 @@ const FifthStep: React.FC<FifthStepProps> = ({ fifthStepTranslation }) => {
   // Watching fields
 
   let locationOnline: string = watch('locationOnline');
+  let stadtteil: string = watch('stadtteil');
 
   // Getting form cookies
   let formValues: {
@@ -50,8 +51,9 @@ const FifthStep: React.FC<FifthStepProps> = ({ fifthStepTranslation }) => {
       dispatch({ type: FORM_ERRORS, payload: true });
     } else {
       if (
-        !searchedText &&
-        locationOnline === fifthStepTranslation?.secondOption?.value
+        (!searchedText &&
+          locationOnline === fifthStepTranslation?.secondOption?.value) ||
+        stadtteil?.length < 4
       ) {
         dispatch({ type: FORM_ERRORS, payload: true });
       } else {
@@ -73,6 +75,7 @@ const FifthStep: React.FC<FifthStepProps> = ({ fifthStepTranslation }) => {
     location?.length,
     locationOnline,
     location,
+    stadtteil,
     searchedText,
   ]);
 
@@ -81,7 +84,9 @@ const FifthStep: React.FC<FifthStepProps> = ({ fifthStepTranslation }) => {
     let step = getFormStep();
 
     let dataWithQuestion = { question, location, step, ...data };
-    setFormCookies(dataWithQuestion, FOURTH_FORM);
+    id === 'sixthForm'
+      ? setFormCookies(dataWithQuestion, SIXTH_FORM)
+      : setFormCookies(dataWithQuestion, FOURTH_FORM);
 
     isEditing && reportingPerson === 'myself'
       ? dispatch({ type: LAST_STEP, payload: 11 })
@@ -115,7 +120,7 @@ const FifthStep: React.FC<FifthStepProps> = ({ fifthStepTranslation }) => {
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      id="fourthForm"
+      id={id === 'sixthForm' ? 'sixthForm' : 'fourthForm'}
       className="lg:w-[35rem]"
     >
       <FormHeader
@@ -150,10 +155,16 @@ const FifthStep: React.FC<FifthStepProps> = ({ fifthStepTranslation }) => {
               />
               <div className="mt-4">
                 <InputField
-                  props={register('stadtteil')}
+                  props={register('stadtteil', {
+                    minLength: 4,
+                  })}
                   name={fifthStepTranslation?.thirdOption?.name}
                   title={fifthStepTranslation?.thirdOption?.title}
                 />
+                <p className="text-sm mt-1 ml-4 text-red-600">
+                  {errors?.stadtteil &&
+                    fifthStepTranslation?.thirdOption?.minCharacters}
+                </p>
               </div>
             </>
           )}

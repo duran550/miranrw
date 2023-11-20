@@ -9,6 +9,7 @@ export type NinethStepProps = {
       optionsYes: any;
     };
   };
+  id?: string;
 };
 
 export type NinethFormValues = {

@@ -223,7 +223,8 @@
               "Wie wurde diskriminiert?",
               "Von wem ging der Angriff aus?",
               "Wie haben andere Personen reagiert?",
-              "Was war an dem Vorfall queerfeindlich?"
+              "Was war an dem Vorfall queerfeindlich?",
+              "Welche Auswirkungen hatte der Vorfall für dich (z.B. emotionale, körperliche, soziale oder finanzielle)?"
             ]
           }
         },
@@ -344,7 +345,8 @@
             "title": "Stadtteil",
             "name": "stadtteil",
             "value": "Stadtteil",
-            "id": "stadtteil"
+            "id": "stadtteil",
+            "minCharacters": "Es wird eine Mindestanzahl von 4 Zeichen erwartet"
           }
         },
         "sixthStep": {
@@ -554,8 +556,16 @@
                 "id": "Sexismus",
                 "label": "Sexismus"
               },
+
               {
                 "iD": 9,
+                "name": "formOfDiscYes",
+                "value": "Queerfeindlichkeit",
+                "id": "Queerfeindlichkeit",
+                "label": "Queerfeindlichkeit"
+              },
+              {
+                "iD": 10,
                 "name": "formOfDiscYes",
                 "value": "Anderes, und zwar:",
                 "id": "Anderes",

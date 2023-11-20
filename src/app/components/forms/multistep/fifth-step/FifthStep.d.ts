@@ -20,9 +20,11 @@ export type FifthStepProps = {
       title: string;
       name: string;
       value: string;
+      minCharacters: string;
       id: string;
     };
   };
+  id?: string;
 };
 
 export type FifthFormValues = {
