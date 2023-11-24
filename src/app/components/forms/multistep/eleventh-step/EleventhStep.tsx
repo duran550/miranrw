@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { EleventhFormValues, EleventhStepProps } from './eleventhStep';
 import { useFormContext } from '@/app/hooks/useFormContext';
 import { clearFormCookies, getFormCookies } from '@/cookies/cookies';
@@ -21,13 +21,22 @@ import { FORM_ERRORS, NEXT_STEP } from '@/app/context/actions';
 import ReportService from '@/services/reportService';
 import { useScrollOnTop } from '@/app/hooks/useScrollOnTop';
 import dayjs from 'dayjs';
+import { useGoogleReCaptcha } from 'react-google-recaptcha-v3';
+import { verifyCaptchaAction } from '@/app/components/captcha/Captcha';
+import CaptchaCheckbox from '@/app/components/captcha/captcha-checkbox/CaptchaCheckbox';
+import Image from 'next/image';
 
 const EleventhStep: React.FC<EleventhStepProps> = ({
   eleventhStepTranslation,
 }) => {
   // Scroll on top
   useScrollOnTop();
+  const { executeRecaptcha } = useGoogleReCaptcha();
+
   const { dispatch, reportingPerson } = useFormContext();
+  const [captchLoading, setCaptchaLoading] = useState<boolean>(true);
+  const [verified, setVerified] = useState<any>(false);
+
   const {
     register,
     watch,
@@ -101,7 +110,36 @@ const EleventhStep: React.FC<EleventhStepProps> = ({
     step: number;
   } = getFormCookies(NINETH_FORM);
 
+  // Listening to fields
+
   let validation: string[] = watch('validation');
+  let captcha: string = watch('captcha');
+
+  const handleCaptcha = async () => {
+    // Captcha verification
+    // if the component is not mounted yet
+    if (!executeRecaptcha) {
+      return;
+    }
+    // receive a token
+
+    try {
+      const token = await executeRecaptcha('onSubmit');
+
+      // validate the token via the server action we've created previously
+
+      const verified = await verifyCaptchaAction(token);
+
+      verified && setVerified(verified);
+
+      setCaptchaLoading(false);
+    } catch (error) {
+      console.log(error);
+      setCaptchaLoading(false);
+    }
+  };
+
+  captcha && handleCaptcha();
 
   const onSubmit: SubmitHandler<any> = async () => {
     // Getting values to be sent
@@ -222,27 +260,39 @@ const EleventhStep: React.FC<EleventhStepProps> = ({
       sexualOrientationFreeField,
     };
 
-    // Sending data to API
-    const response = await new ReportService().sendReport(report);
+    try {
+      if (verified) {
+        setCaptchaLoading(false);
+        // Here you would send the input data to a database, and
+        // reset the form UI, display success message logic etc.
+        // Sending data to API
+        const response = await new ReportService().sendReport(report);
 
-    if (response.status === 201) {
-      console.log('Successfull');
-    } else {
-      throw new Error('Fetching error occured, please reload');
+        if (response.status === 201) {
+          console.log('Successfull');
+        } else {
+          setCaptchaLoading(false);
+          throw new Error('Fetching error occured, please reload');
+        }
+
+        clearFormCookies();
+        dispatch({ type: NEXT_STEP, payload: 'DATA 1' });
+      }
+    } catch (error) {
+      console.log('verify error captcha', error);
+      setCaptchaLoading(false);
     }
 
-    clearFormCookies();
-    dispatch({ type: NEXT_STEP, payload: 'DATA 1' });
+    // End captcha verification
   };
 
   useEffect(() => {
     dispatch({ type: FORM_ERRORS, payload: true });
-    !validation ||
-    !validation?.includes(eleventhStepTranslation?.validation?.data[1]?.value)
+    !verified
       ? dispatch({ type: FORM_ERRORS, payload: true })
       : dispatch({ type: FORM_ERRORS, payload: false });
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [validation]);
+  }, [verified]);
 
   return (
     <div>
@@ -420,6 +470,21 @@ const EleventhStep: React.FC<EleventhStepProps> = ({
           </form>
         </div>
       </div>
+      {/* Captcha check */}
+      {validation &&
+        validation?.includes(
+          eleventhStepTranslation?.validation?.data[1]?.value
+        ) && (
+          <CaptchaCheckbox
+            id="captcha"
+            loading={captchLoading}
+            checked={captcha ? true : false}
+            name="captcha"
+            props={register('captcha')}
+            value="captcha"
+            label={eleventhStepTranslation?.captcha}
+          />
+        )}
     </div>
   );
 };

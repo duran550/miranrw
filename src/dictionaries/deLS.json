@@ -874,7 +874,8 @@
                 "checked": false
               }
             ]
-          }
+          },
+          "captcha": "Ich bin kein Roboter"
         },
         "twelvethStep": {
           "title": "Vielen Dank für deine Meldung.",
