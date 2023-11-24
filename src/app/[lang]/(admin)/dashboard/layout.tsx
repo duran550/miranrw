@@ -1,4 +1,3 @@
-'use client';
 import { Locale, i18n } from '@/i18n.config';
 import type { Metadata } from 'next';
 import AdminHeader from './components/header/header';

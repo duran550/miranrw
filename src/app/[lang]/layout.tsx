@@ -2,15 +2,13 @@ import { Locale, i18n } from '@/i18n.config';
 import './globals.css';
 import type { Metadata } from 'next';
 import { Poppins } from 'next/font/google';
-import Header from '../components/header/header';
 import Head from 'next/head';
 import { FormProvider } from '../context/FormContext';
-import CookieConsent from '../components/banners/CookieConsent';
-import { getDictionary } from '@/lib/dictionary';
+import { Providers } from '../components/captcha/providers';
 
 const poppins = Poppins({
   subsets: ['latin'],
-  weight: '500',
+  weight: '400',
 });
 
 export const metadata: Metadata = {
@@ -38,8 +36,9 @@ export default function RootLayout({
       <body
         className={`${poppins.className} flex flex-col bg-white text-textColor min-h-screen`}
       >
-        {/* <Header lang={params.lang} /> */}
-        <FormProvider>{children}</FormProvider>
+        <Providers>
+          <FormProvider>{children}</FormProvider>
+        </Providers>
       </body>
     </html>
   );

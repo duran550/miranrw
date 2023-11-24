@@ -8,9 +8,11 @@ export type EleventhStepProps = {
       title: string;
       data: Array<{ id: string; name: string; label: string; value: string }>;
     };
+    captcha: string;
   };
 };
 
 export type EleventhFormValues = {
   validation: string[];
+  captcha: string;
 };
