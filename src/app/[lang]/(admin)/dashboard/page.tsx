@@ -1,12 +1,12 @@
-'use client';
-import React from 'react';
+import { Locale } from '@/i18n.config';
+import { getDictionary } from '@/lib/dictionary';
 
-const Admin = () => {
-  return (
-    <div>
-      Admin <button color="primary">Login</button>
-    </div>
-  );
-};
+export default async function dashboard({
+  params: { lang },
+}: {
+  params: { lang: Locale };
+}) {
+  const { page, navigation } = await getDictionary(lang);
 
-export default Admin;
+  return <div className=""></div>;
+}
