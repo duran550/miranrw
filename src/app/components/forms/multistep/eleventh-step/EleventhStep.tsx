@@ -24,7 +24,6 @@ import dayjs from 'dayjs';
 import { useGoogleReCaptcha } from 'react-google-recaptcha-v3';
 import { verifyCaptchaAction } from '@/app/components/captcha/Captcha';
 import CaptchaCheckbox from '@/app/components/captcha/captcha-checkbox/CaptchaCheckbox';
-import Image from 'next/image';
 
 const EleventhStep: React.FC<EleventhStepProps> = ({
   eleventhStepTranslation,
