@@ -7,6 +7,7 @@ import Logo from '../../../../../public/logo.svg';
 import { useClickOutside } from '@/app/hooks/useClickOutside';
 import { usePathname } from 'next/navigation';
 import { NavBarProps } from './navbar.d';
+import { Button } from '../../button/Button';
 
 const NavBar: React.FC<NavBarProps> = ({ navigation, lang }) => {
   const [navbar, setNavbar] = useState<boolean>(false);
@@ -24,7 +25,14 @@ const NavBar: React.FC<NavBarProps> = ({ navigation, lang }) => {
 
   return (
     <nav ref={domNode} className="w-full relative z-20">
-      <div className="w-full xl:w-full items-center relative  py-12 xl:py-4 justify-between px-2 mx-auto xl:items-center flex  bg-menuAndFooterColor xl:flex xl:px-8">
+      <div className="w-full border-b-[1.2px] py-5 border-black">
+        <div className="opacity-0 mr-4 lg:mr-12 xl:opacity-100 w-fit ml-auto">
+          {/* Language switcher */}
+
+          <LocaleSwitcher />
+        </div>
+      </div>
+      <div className="w-full xl:w-full items-center relative  py-12 xl:py-4 justify-between px-2 mx-auto xl:items-center flex  bg-white xl:flex xl:px-8">
         <div
           className={`${
             navbar
@@ -192,7 +200,7 @@ const NavBar: React.FC<NavBarProps> = ({ navigation, lang }) => {
                   {navigation.aboutQueer?.title}
                 </Link>
                 {/* Submenu About Queerphobia */}
-                <ul className="hidden bg-menuAndFooterColor py-3 px-6 text-sm -left-6 w-[18rem] flex-col  absolute top-4 z-0 pt-16">
+                <ul className="hidden bg-white shadow-lg py-3 px-6 text-sm left-0 w-[18rem] flex-col  absolute top-4 z-0 pt-4">
                   <Link
                     href={`/${lang}/about-queer/#whatIsQueerphobia`}
                     className="py-2 hover:font-bold"
@@ -271,10 +279,8 @@ const NavBar: React.FC<NavBarProps> = ({ navigation, lang }) => {
               </li>
             </ul>
           </nav>
-          <div className="opacity-0 mr-4 lg:mr-12 xl:opacity-100">
-            {/* Language switcher */}
-
-            <LocaleSwitcher />
+          <div className="w-72">
+            <Button variant="primary">{navigation?.button}</Button>
           </div>
         </div>
       </div>
