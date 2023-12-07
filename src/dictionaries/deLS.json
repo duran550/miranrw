@@ -895,7 +895,19 @@
     },
     "about": {
       "title": "Über uns",
-      "description": "Dies ist die About-Seite"
+      "description": "Dies ist die About-Seite",
+      "block1": {
+        "title1": "Hier fndest du alle Informationen über uns lorem ipsum",
+        "p": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu."
+      },
+      "block2": {
+        "title": "Verweisberatung",
+        "p": "Wir helfen dir gerne weiter ipsum dolor sit amet, adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla quis enim. "
+      },
+      "block3": {
+        "title": "Aktuelles",
+        "p": "Wir helfen dir gerne weiter ipsum dolor sit amet, adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. "
+      }
     },
     "cookiesConsent": {
       "title": "Deine Privatsphäre",

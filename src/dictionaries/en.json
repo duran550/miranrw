@@ -903,7 +903,19 @@
 
     "about": {
       "title": "About Us",
-      "description": "This is the About page."
+      "description": "This is the About page.",
+      "block1": {
+        "title1": "Here you will find all information about us lorem ipsum",
+        "p": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu."
+      },
+      "block2": {
+        "title": "Referral advice",
+        "p": "We are happy to help you ipsum dolor sit amet, adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla quis enim. "
+      },
+      "block3": {
+        "title": "Latest news",
+        "p": "We are happy to help you ipsum dolor sit amet, adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. "
+      }
     },
     "aboutQueer": {
       "glossary": {
@@ -936,7 +948,13 @@
       "impressum": "Legal notice",
       "contact": "Contact",
       "spendenkonto": "Donation account",
-      "socials": "Social Media"
+      "socials": "Social Media",
+      "block1": {
+        "title": "Queer Network NRW e.V"
+      },
+      "block2": {
+        "title": "Donation account"
+      }
     }
   }
 }

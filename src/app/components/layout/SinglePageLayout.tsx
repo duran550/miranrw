@@ -14,12 +14,12 @@ const SinglePageLayout: React.FC<SinglePageLayoutProps> = ({
 }) => {
   return (
     <div className="relative w-full ">
-      <div className="pb-24 lg:pb-0">{children}</div>
+      <div className=" lg:pb-0">{children}</div>
 
       <div className="absolute w-[20rem] right-0 -top-24 mb-auto">
-        <Button className="rounded-full w-full" href={`/${lang}/report`}>
+        {/* <Button className="rounded-full w-full" href={`/${lang}/report`}>
           {buttonTitle && buttonTitle}
-        </Button>
+        </Button> */}
       </div>
     </div>
   );

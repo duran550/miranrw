@@ -2,6 +2,7 @@ import React from 'react';
 import CopyRightSection from './CopyRightSection';
 import FacebookIcon from '../../../../public/icons/icons8-facebook.svg';
 import InstagramIcon from '../../../../public/icons/icons8-instagram.svg';
+import ligne from '../../../../public/images/Frame 1.png';
 import Image from 'next/image';
 import AnimateClick from '../animate-click/AnimateClick';
 
@@ -12,6 +13,12 @@ type FooterValues = {
   contact: string;
   spendenkonto: string;
   socials: string;
+  block1: {
+    title: string;
+  };
+  block2: {
+    title: string;
+  };
 };
 
 type FooterProps = {
@@ -22,7 +29,7 @@ type FooterProps = {
 const Footer: React.FC<FooterProps> = ({ footer, lang }) => {
   return (
     <>
-      <div className="flex relative w-full mt-auto left-0 flex-col md:flex-row justify-start md:justify-between text-textColor  md:items-end h d border-t- bg-menuAndFooterColor pt-5 px-4 lg:px-12">
+      {/* <div className="flex relative w-full mt-auto left-0 flex-col md:flex-row justify-start md:justify-between text-textColor  md:items-end h d border-t- bg-menuAndFooterColor pt-5 px-4 lg:px-12">
         <div className="flex flex-col space-y-2">
           <div className="flex flex-col lg:block">
             <ul className="flex my-4 flex-col max-w-xl lg:max-w-3xl lg:flex-row lg:w-full items-start justify-between gap-x-16">
@@ -63,7 +70,31 @@ const Footer: React.FC<FooterProps> = ({ footer, lang }) => {
             </ul>
           </div>
         </div>
+      </div> */}
+      <Image src={ligne} alt='' className='w-full h-3'/>
+      <div className="w-full bg-[#463880] md:flex block md:px-4 px-2 lg:px-11 py-14 md:justify-between text-white	">
+        <div className="	 md:mb-0 mb-12">
+          <p className="font-bold text-lg">{footer.block1.title}</p>
+          <ul>
+            <li>Adresse</li>
+            <li>Numéro de téléphone</li>
+            <li>E-mail</li>
+          </ul>
+        </div>
+        <div className=" md:mb-0 mb-12">
+          <p className="font-bold text-lg ">{footer.block2.title}</p>
+          <ul>
+            <li>Numero de compte 1</li>
+            <li>Numero de compte 2</li>
+          </ul>
+        </div>
+
+        <div className=" flex  md:pt-7">
+          <Image src={FacebookIcon} alt="" className="h-10 text-withe" />
+          <Image src={InstagramIcon} alt="" className="h-10 text-withe" />
+        </div>
       </div>
+
       <CopyRightSection lang={lang} copyrightTranslation={footer} />
     </>
   );

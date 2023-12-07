@@ -24,7 +24,7 @@ const CopyRightSection: React.FC<CopyrightProps> = ({
   lang,
 }) => {
   return (
-    <div className="bg-menuAndFooterColor lg:border-t-8  lg:px-12  lg:py-6 border-dividerColor">
+    <div className="bg-menuAndFooterColor pt-5 lg:border-t-8  lg:px-12  lg:py-6 border-dividerColor">
       <h1 className="font-bold text-xl px-4 hidden lg:block lg:px-0 py-4">
         {copyrightTranslation?.partners}
       </h1>
