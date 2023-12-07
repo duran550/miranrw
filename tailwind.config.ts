@@ -15,7 +15,7 @@ const config: Config = {
       },
 
       colors: {
-        primaryColor: '#463980',
+        primaryColor: '#E30303',
         secondaryColorSlate: '#EDEBF6',
         menuAndFooterColor: '#EDEBF6',
         dividerColor: '#463980',

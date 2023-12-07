@@ -54,6 +54,8 @@
     "typescript": "5.1.6"
   },
   "devDependencies": {
-    "@playwright/test": "^1.39.0"
+    "@playwright/test": "^1.39.0",
+    "eslint-plugin-jest-dom": "^5.1.0",
+    "eslint-plugin-testing-library": "^6.2.0"
   }
 }

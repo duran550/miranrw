@@ -7,8 +7,8 @@ import { useState } from 'react';
 import Image from 'next/image';
 import GermanLogo from '../../../../../public/images/germany-flag.svg';
 import EnglandLogo from '../../../../../public/images/england-flag.svg';
-import DownIcon from '../../../../../public/icons/downIcon.svg';
 import AnimateClick from '../../animate-click/AnimateClick';
+import LeicheSpracheLogo from '../../../../../public/icons/leichteSpracheIcon.png';
 
 export default function LocaleSwitcher() {
   const [toggle, setToggle] = useState<boolean>(false);
@@ -44,7 +44,7 @@ export default function LocaleSwitcher() {
                         : 'flex'
                     }`}
                   >
-                    EN
+                    English
                   </div>
                 </div>
               ) : locale === 'de' ? (
@@ -64,19 +64,24 @@ export default function LocaleSwitcher() {
                         : 'flex text-sm '
                     }`}
                   >
-                    DE
+                    Deutsch
                   </div>
                 </div>
               ) : (
                 <div
                   onClick={() => setToggle(false)}
-                  className="flex items-center w-full"
+                  className="flex  items-center w-fit"
                 >
+                  <Image
+                    className="mr-2 w-8"
+                    src={LeicheSpracheLogo}
+                    alt="Leichte sprache logo"
+                  />
                   <div
                     className={`${
                       pathName?.split('/')[1] === 'de-LS'
-                        ? ' font-bold text-sm md:w-[8.2rem]'
-                        : 'flex  md:w-[8.2rem] text-sm'
+                        ? ' font-bold text-sm md:w-[10rem]'
+                        : 'flex  md:w-[10rem] text-sm'
                     }`}
                   >
                     Leichte Sprache

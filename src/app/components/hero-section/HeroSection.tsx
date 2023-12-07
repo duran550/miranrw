@@ -1,5 +1,7 @@
 import React from 'react';
 import { Button } from '../button/Button';
+import Image from 'next/image';
+import videoPlaceholder from '../../../../public/images/videoPlaceholder.png';
 
 type heroSectionPropsValuesType = {
   title: string;
@@ -29,22 +31,30 @@ const HeroSection: React.FC<heroSectionPropsType> = ({ lang, content }) => {
                 {content?.description?.secondParagraph}
               </p>
             </div>
-            <Button
-              href={`/${lang}/report`}
-              className=" w-full sm:w-fit lg:w-[20rem] bg-primaryColor text-white font-bold rounded-full text-lg"
-            >
-              {content.buttonText}
-            </Button>
+            <div className="mt-8">
+              <Button
+                href={`/${lang}/report`}
+                className=" w-full sm:w-fit lg:w-[20rem] bg-primaryColor text-white font-bold text-lg"
+              >
+                {content.buttonText}
+              </Button>
+            </div>
           </div>
 
-          <iframe
+          <Image
+            className="w-6/12 lg:h-[25rem] object-cover"
+            src={videoPlaceholder}
+            alt="video"
+          />
+
+          {/* <iframe
             src="https://wwwcom/embed/9zWPJR2u01w?si=iUdQY2YiqrJGzSOX"
             title="YouTube video player"
             frameBorder="0"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
             allowFullScreen
             className="w-full lg:max-w-4xl lg:mr-0 h-[20rem]  lg:h-[25rem] mt-8"
-          ></iframe>
+          ></iframe> */}
         </div>
       </div>
     </>
