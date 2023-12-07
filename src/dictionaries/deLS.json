@@ -946,7 +946,13 @@
       "impressum": "Impressum",
       "contact": "Kontakt",
       "spendenkonto": "Spendenkonto",
-      "socials": "Social Media"
+      "socials": "Social Media",
+      "block1": {
+        "title": "Queeres Netzwerk NRW e.V"
+      },
+      "block2": {
+        "title": "Spendenkonto"
+      }
     }
   }
 }
