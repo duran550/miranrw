@@ -56,7 +56,7 @@ export default async function aboutUs({
               />
             </div>
             <div className="md:w-8/12 w-full md:py-5 md:ml-11">
-              <p className="mb-3 text-2xl md:text-3xl md:mt-[10%]">
+              <p className="mb-3 text-2xl md:text-3xl ">
                 {page.about.block2.title}
               </p>
               <p className="md:text-xl text-base w-full lg:w-7/12">
@@ -72,11 +72,11 @@ export default async function aboutUs({
               </p>
               <p className="md:text-xl text-base ">{page.about.block3.p}</p>
             </div>
-            <div className="md:w-auto w-full md:pr-3 md:ml-7	">
+            <div className="md:w-6/12 w-full md:pr-3 md:ml-7 ">
               <Image
                 src={img2}
                 alt=""
-                className="md:h-[100%]   w-[100%] md:w-auto "
+                className="h-[100%]   w-[100%] md:w-auto  "
               />
             </div>
           </div>
