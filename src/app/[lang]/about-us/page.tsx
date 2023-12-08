@@ -39,7 +39,7 @@ export default async function aboutUs({
             </div>
           </div> */}
 
-          <div className=" px-4 md:px-0  md:ml-[12%] lg:mt-14 mt-4">
+          <div className="md:w-9/12 px-4 md:px-0  md:ml-[12%] lg:mt-14 mt-4">
             <h1 className="lg:text-4xl md:text-3xl text-2xl mb-3 w-auto md:w-5/12">
               {page.about.block1.title1}
             </h1>
@@ -47,16 +47,16 @@ export default async function aboutUs({
               {page.about.block1.p}
             </p>
           </div>
-          <div className="w-[100vw] md:pl-[12%]  pl-4 md:px-0 md:flex py-5 md:py-0 my-14 bg-[#EDECF3] box-border pr-2 block">
-            <div className="md:w-auto w-full md:ml-14 md:mb-0 mb-8 md:pr-3 	">
+          <div className="w-[100vw] md:pl-[12%]  pl-4  md:flex py-5 md:py-0 my-14 bg-[#EDECF3] box-border pr-2 block">
+            <div className="md:w-auto w-full md:ml-8 lg:ml-14 md:mb-0 mb-8 md:pr-3 	">
               <Image
                 src={img1}
                 alt=""
-                className="md:h-[80%] md:mt-[10%]  w-[100%] md:w-auto  "
+                className="md:h-[90%] md:mt-[5%]  w-[100%] md:w-auto  "
               />
             </div>
             <div className="md:w-8/12 w-full md:py-5 md:ml-11">
-              <p className="mb-3 text-2xl md:text-3xl ">
+              <p className="mb-3 text-2xl md:text-3xl md:mt-[8%] ">
                 {page.about.block2.title}
               </p>
               <p className="md:text-xl text-base w-full lg:w-7/12">
