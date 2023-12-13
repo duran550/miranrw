@@ -6,7 +6,7 @@ import { motion } from 'framer-motion';
 const AnimateClick = ({ children }: { children: React.ReactNode }) => {
   return (
     <motion.div
-      className="cursor-pointer w-full relative"
+      className="cursor-pointer w-fit relative"
       whileHover={{ scale: 1 }}
       whileTap={{ scale: 0.98 }}
     >
