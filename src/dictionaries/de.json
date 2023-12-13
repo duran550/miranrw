@@ -3,9 +3,9 @@
     "home": "Startseite",
     "reportIncident": "Vorfall melden",
     "aboutQueer": {
-      "title": "Über Queerfeindlichkeit",
+      "title": "Queerfeindlichkeit",
       "firstSubmenu": "Was ist Queerfeindlichkeit?",
-      "secondSubmenu": "Was ist Mehrfachdiskriminierung?",
+      "secondSubmenu": "Ich benötige Hilfe",
       "thirdSubmenu": "Glossar"
     },
     "aboutUs": {
@@ -16,7 +16,8 @@
       "team": "Team",
       "partners": "Verbund & Kooperationen"
     },
-    "faqs": "FAQs"
+    "faqs": "FAQs",
+    "button": "Vorfall melden"
   },
   "page": {
     "datenschutz": {
@@ -144,7 +145,7 @@
     },
     "home": {
       "heroSection": {
-        "title": "Melde- und Informationsstelle für Queerfeindlichkeit",
+        "title": "Wir sind MIQ und helfen dir gerne weiter!",
         "description": {
           "firstParagraph": "MIQ steht für  “Melde- und  Informationsstelle zu Queerfeindlichkeit” und ist ein Projekt, welches Queerfeindlichkeit in NRW aufzeigen möchte.",
           "secondParagraph": " Du kannst auf unserer Website einen queerfeindlichen Vorfall melden. Wir sind außerdem eine Informationsstelle und zeigen Dir auf, wo Du weitere Beratung in NRW aufsuchen kannst."
@@ -893,7 +894,19 @@
     },
     "about": {
       "title": "Über uns",
-      "description": "Dies ist die About-Seite"
+      "description": "Dies ist die About-Seite",
+      "block1": {
+        "title1": "Hier fndest du alle Informationen über uns lorem ipsum",
+        "p": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu."
+      },
+      "block2": {
+        "title": "Verweisberatung",
+        "p": "Wir helfen dir gerne weiter ipsum dolor sit amet, adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla quis enim. "
+      },
+      "block3": {
+        "title": "Aktuelles",
+        "p": "Wir helfen dir gerne weiter ipsum dolor sit amet, adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. "
+      }
     },
     "cookiesConsent": {
       "title": "Deine Privatsphäre",
@@ -932,7 +945,13 @@
       "impressum": "Impressum",
       "contact": "Kontakt",
       "spendenkonto": "Spendenkonto",
-      "socials": "Social Media"
+      "socials": "Social Media",
+      "block1": {
+        "title": "Queeres Netzwerk NRW e.V"
+      },
+      "block2": {
+        "title": "Spendenkonto"
+      }
     }
   }
 }

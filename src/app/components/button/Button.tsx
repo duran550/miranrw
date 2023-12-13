@@ -15,7 +15,7 @@ interface ButtonProps
 }
 
 const buttonVariants = cva(
-  'w-full py-3 text-white font-medium  flex justify-center px-4 mt-10 rounded focus:outline-none focus:shadow-outline',
+  'w-full py-3 text-white font-medium  flex justify-center px-4 rounded focus:outline-none focus:shadow-outline',
 
   {
     variants: {

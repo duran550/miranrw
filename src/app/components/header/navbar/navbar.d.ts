@@ -17,6 +17,7 @@ export type NavBarProps = {
       partners: string;
     };
     faqs: string;
+    button: string;
   };
   lang: string;
 };
