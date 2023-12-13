@@ -231,7 +231,7 @@ const NavBar: React.FC<NavBarProps> = ({ navigation, lang }) => {
                   {navigation.aboutUs?.title}
                 </Link>
                 {
-                  <ul className="hidden bg-menuAndFooterColor py-3 px-6 text-sm -left-6 w-[18rem] flex-col  absolute top-4 z-0 pt-16">
+                  <ul className="hidden bg-menuAndFooterColor py-3 px-6 text-sm -left-6 w-[18rem] flex-col  absolute top-4.5 z-0 pt-4">
                     <Link
                       className="hover:font-bold py-3"
                       href="/about-us/#team"
@@ -251,13 +251,13 @@ const NavBar: React.FC<NavBarProps> = ({ navigation, lang }) => {
                       {navigation.aboutUs?.news}
                     </Link>
                     <Link
-                      className="hover:font-bold"
+                      className="hover:font-bold "
                       href="/about-us/#referalCounseling"
                     >
                       {navigation.aboutUs?.referalCounseling}
                     </Link>
                     <Link
-                      className="hover:font-bold"
+                      className="hover:font-bold py-3"
                       href="/about-us/#publications"
                     >
                       {navigation.aboutUs?.publications}

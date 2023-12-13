@@ -24,7 +24,7 @@ const CopyRightSection: React.FC<CopyrightProps> = ({
   lang,
 }) => {
   return (
-    <div className="bg-menuAndFooterColor py-5 lg:border-t-8  lg:px-12  lg:py-6 border-dividerColor">
+    <div className="bg-white py-5 lg:border-t-8  lg:px-12  lg:py-6 border-dividerColor">
       <h1 className="font-bold text-base sm:text-xl px-4 hidden lg:block lg:px-0 py-4">
         {copyrightTranslation?.partners}
       </h1>
@@ -32,14 +32,14 @@ const CopyRightSection: React.FC<CopyrightProps> = ({
         <div className="flex flex-wrap items-center space-y-4 lg:space-x-28 md:space-x-20 space-x-6 mt-4 px-4">
           <Link target="_blank" href="https://queeres-netzwerk.nrw/ ">
             <Image
-              className="sm:w-32 lg:w-40 w-32 m-0"
+              className="sm:w-32 grayscale lg:w-40 w-32 m-0"
               src={QNWLogo}
               alt="QNW Logo"
             />
           </Link>
           <Link href="https://ngvt.nrw/" target="_blank">
             <Image
-              className="sm:w-32 lg:w-40 w-32 m-0 max-sm:max-h-14"
+              className="sm:w-32 grayscale lg:w-40 w-32 m-0 max-sm:max-h-14"
               src={NGVTLogo}
               alt="NGVT Logo"
             />
@@ -47,21 +47,21 @@ const CopyRightSection: React.FC<CopyrightProps> = ({
 
           <Link target="_blank" href="https://rubicon-koeln.de/">
             <Image
-              className="sm:w-32 lg:w-64 w-32 m-0"
+              className="sm:w-32 grayscale lg:w-64 w-32 m-0"
               src={RubikonLogo}
               alt="Rubikon Logo"
             />
           </Link>
           <Link href="https://nrw.lsvd.de/" target="_blank">
             <Image
-              className="sm:w-32 lg:w-40 w-32 m-0"
+              className="sm:w-32 grayscale lg:w-40 w-32 m-0"
               src={LSVDLogo}
               alt="LSVD Logo"
             />
           </Link>
 
           <Image
-            className="sm:w-45  w-[20rem] "
+            className="sm:w-45 grayscale  w-[20rem] "
             src={MinisteriumLogo}
             alt="Ministerium Logo"
           />
@@ -69,14 +69,6 @@ const CopyRightSection: React.FC<CopyrightProps> = ({
         <h1 className="font-bold lg:hidden text-xl px-4 lg:px-0 py-8">
           {copyrightTranslation?.partners}
         </h1>
-        {/* <div className="flex font-bold space-y-2 lg:space-y-0 flex-col px-4 lg:mx-0 lg:flex-row w-full lg:w-[18rem] lg:items-center justify-between lg:gap-x-8">
-          <Link href={`/${lang}/datenschutz`}>
-            {copyrightTranslation?.datenschutz}
-          </Link>
-          <Link href={`/${lang}/impressum`}>
-            {copyrightTranslation?.impressum}
-          </Link>
-        </div> */}
       </div>
     </div>
   );
