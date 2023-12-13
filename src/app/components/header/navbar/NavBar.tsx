@@ -26,7 +26,7 @@ const NavBar: React.FC<NavBarProps> = ({ navigation, lang }) => {
   return (
     <nav ref={domNode} className="w-full relative z-20">
       <div className="w-full border-b-[1.2px] py-5 border-black">
-        <div className="opacity-0 mr-4 lg:mr-12 xl:opacity-100 w-fit ml-auto">
+        <div className="xl:mr-12 xl:opacity-100 w-full lg:w-fit md:w-full sm:ml-auto">
           {/* Language switcher */}
 
           <LocaleSwitcher />
@@ -41,7 +41,7 @@ const NavBar: React.FC<NavBarProps> = ({ navigation, lang }) => {
           } flex  h-full justify-center  absolute xl:relative top-0 left-0 right-0  flex-col xl:mt-0`}
         >
           <div
-            className={`flex px-2 w-full z-10 items-center justify-between py-0 `}
+            className={`flex lg:px-8 xl:px-2 w-full z-10 items-center justify-between py-0 `}
           >
             <Link className="pt-1" href="/">
               <Image className="md:w-96 w-72" src={Logo} alt="Logo" />
@@ -108,17 +108,15 @@ const NavBar: React.FC<NavBarProps> = ({ navigation, lang }) => {
                 {toggle1 && (
                   <ul className="bg-menuAndFooterColor py-3 px-6 -left-6 w-[15rem] flex flex-col shadow-xl absolute top-6">
                     <Link
-                      href={`/${lang}/about-queer/#whatIsQueerphobia`}
+                      href={`/${lang}/queerphobia/#whatIsQueerphobia`}
                       className="py-2"
                     >
                       {navigation.aboutQueer?.firstSubmenu}
                     </Link>
-                    <Link
-                      href={`/${lang}/about-queer#whatIsMultipleDiscrimination`}
-                    >
+                    <Link href={`/${lang}/queerphobia#iNeedHelp`}>
                       {navigation.aboutQueer?.secondSubmenu}
                     </Link>
-                    <Link href={`/${lang}/about-queer#glossary`}>
+                    <Link href={`/${lang}/queerphobia#glossary`}>
                       {navigation.aboutQueer?.thirdSubmenu}
                     </Link>
                   </ul>
@@ -131,20 +129,20 @@ const NavBar: React.FC<NavBarProps> = ({ navigation, lang }) => {
                 </div>
                 {toggle && (
                   <ul className="bg-menuAndFooterColor py-3 px-6 -left-6 w-[15rem] flex flex-col shadow-xl absolute top-6">
-                    <Link href="/about-us/#referalCounseling">
-                      {navigation.aboutUs?.referalCounseling}
+                    <Link href={`/${lang}/about-us/#team`} className="py-2">
+                      MIQ NRW
+                    </Link>
+                    <Link href={`/${lang}/about-us/#partners`}>
+                      {navigation.aboutUs?.partners}
                     </Link>
                     <Link href={`/${lang}/about-us/#news`} className="py-2">
                       {navigation.aboutUs?.news}
                     </Link>
+                    <Link href="/about-us/#referalCounseling">
+                      {navigation.aboutUs?.referalCounseling}
+                    </Link>
                     <Link href={`/${lang}/about-us/#publications`}>
                       {navigation.aboutUs?.publications}
-                    </Link>
-                    <Link href={`/${lang}/about-us/#team`} className="py-2">
-                      {navigation.aboutUs?.team}
-                    </Link>
-                    <Link href={`/${lang}/about-us/#partners`}>
-                      {navigation.aboutUs?.partners}
                     </Link>
                   </ul>
                 )}
@@ -192,9 +190,9 @@ const NavBar: React.FC<NavBarProps> = ({ navigation, lang }) => {
               {/* About Queerphobia link */}
               <li className="relative h-full [&>*]:hover:flex">
                 <Link
-                  href={`/${lang}/about-queer`}
+                  href={`/${lang}/queerphobia`}
                   className={`hover:font-bold relative z-10 ${
-                    pathname?.split('/')[2] === 'about-queer' ? 'font-bold' : ''
+                    pathname?.split('/')[2] === 'queerphobia' ? 'font-bold' : ''
                   } cursor-pointer`}
                 >
                   {navigation.aboutQueer?.title}
@@ -202,20 +200,20 @@ const NavBar: React.FC<NavBarProps> = ({ navigation, lang }) => {
                 {/* Submenu About Queerphobia */}
                 <ul className="hidden bg-white shadow-lg py-3 px-6 text-sm left-0 w-[18rem] flex-col  absolute top-4 z-0 pt-4">
                   <Link
-                    href={`/${lang}/about-queer/#whatIsQueerphobia`}
+                    href={`/${lang}/queerphobia/#whatIsQueerphobia`}
                     className="py-2 hover:font-bold"
                   >
                     {navigation.aboutQueer?.firstSubmenu}
                   </Link>
                   <Link
                     className="py-2 hover:font-bold"
-                    href={`/${lang}/about-queer#whatIsMultipleDiscrimination`}
+                    href={`/${lang}/queerphobia#iNeedHelp`}
                   >
                     {navigation.aboutQueer?.secondSubmenu}
                   </Link>
                   <Link
                     className="py-2 hover:font-bold"
-                    href={`/${lang}/about-queer#glossary`}
+                    href={`/${lang}/queerphobia#glossary`}
                   >
                     {navigation.aboutQueer?.thirdSubmenu}
                   </Link>
@@ -235,10 +233,16 @@ const NavBar: React.FC<NavBarProps> = ({ navigation, lang }) => {
                 {
                   <ul className="hidden bg-menuAndFooterColor py-3 px-6 text-sm -left-6 w-[18rem] flex-col  absolute top-4 z-0 pt-16">
                     <Link
-                      className="hover:font-bold"
-                      href="/about-us/#referalCounseling"
+                      className="hover:font-bold py-3"
+                      href="/about-us/#team"
                     >
-                      {navigation.aboutUs?.referalCounseling}
+                      MIQ NRW
+                    </Link>
+                    <Link
+                      className="hover:font-bold"
+                      href="/about-us/#partners"
+                    >
+                      {navigation.aboutUs?.partners}
                     </Link>
                     <Link
                       className="hover:font-bold py-3"
@@ -248,21 +252,15 @@ const NavBar: React.FC<NavBarProps> = ({ navigation, lang }) => {
                     </Link>
                     <Link
                       className="hover:font-bold"
-                      href="/about-us/#publications"
+                      href="/about-us/#referalCounseling"
                     >
-                      {navigation.aboutUs?.publications}
-                    </Link>
-                    <Link
-                      className="hover:font-bold py-3"
-                      href="/about-us/#team"
-                    >
-                      {navigation.aboutUs?.team}
+                      {navigation.aboutUs?.referalCounseling}
                     </Link>
                     <Link
                       className="hover:font-bold"
-                      href="/about-us/#partners"
+                      href="/about-us/#publications"
                     >
-                      {navigation.aboutUs?.partners}
+                      {navigation.aboutUs?.publications}
                     </Link>
                   </ul>
                 }
@@ -279,8 +277,10 @@ const NavBar: React.FC<NavBarProps> = ({ navigation, lang }) => {
               </li>
             </ul>
           </nav>
-          <div className="w-72">
-            <Button variant="primary">{navigation?.button}</Button>
+          <div className="w-fit xl:pr-4">
+            <Button className="w-64" variant="primary">
+              {navigation?.button}
+            </Button>
           </div>
         </div>
       </div>

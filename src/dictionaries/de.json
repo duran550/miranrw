@@ -3,9 +3,9 @@
     "home": "Startseite",
     "reportIncident": "Vorfall melden",
     "aboutQueer": {
-      "title": "Über Queerfeindlichkeit",
+      "title": "Queerfeindlichkeit",
       "firstSubmenu": "Was ist Queerfeindlichkeit?",
-      "secondSubmenu": "Was ist Mehrfachdiskriminierung?",
+      "secondSubmenu": "Ich benötige Hilfe",
       "thirdSubmenu": "Glossar"
     },
     "aboutUs": {
@@ -145,7 +145,7 @@
     },
     "home": {
       "heroSection": {
-        "title": "Melde- und Informationsstelle für Queerfeindlichkeit",
+        "title": "Wir sind MIQ und helfen dir gerne weiter!",
         "description": {
           "firstParagraph": "MIQ steht für  “Melde- und  Informationsstelle zu Queerfeindlichkeit” und ist ein Projekt, welches Queerfeindlichkeit in NRW aufzeigen möchte.",
           "secondParagraph": " Du kannst auf unserer Website einen queerfeindlichen Vorfall melden. Wir sind außerdem eine Informationsstelle und zeigen Dir auf, wo Du weitere Beratung in NRW aufsuchen kannst."
@@ -903,10 +903,9 @@
         "title": "Verweisberatung",
         "p": "Wir helfen dir gerne weiter ipsum dolor sit amet, adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla quis enim. "
       },
-      "block3":{
+      "block3": {
         "title": "Aktuelles",
-        "p":"Wir helfen dir gerne weiter ipsum dolor sit amet, adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. "
-
+        "p": "Wir helfen dir gerne weiter ipsum dolor sit amet, adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. "
       }
     },
     "cookiesConsent": {
