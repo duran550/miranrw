@@ -232,6 +232,7 @@
           "title": "What type of organization/institution is affected?",
           "mandatory": "* Mandatory field",
           "subTitle": "Multiple selections possible",
+          "minCharacters": "A minimum of 4 Characters is expected",
           "data": [
             {
               "iD": 1,

@@ -40,7 +40,7 @@ const EleventhStep: React.FC<EleventhStepProps> = ({
     register,
     watch,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, isValid },
   } = useForm<EleventhFormValues>();
 
   let firstForm: { question: string; step: number; identity: string } =
@@ -286,12 +286,28 @@ const EleventhStep: React.FC<EleventhStepProps> = ({
   };
 
   useEffect(() => {
-    dispatch({ type: FORM_ERRORS, payload: true });
-    !verified
-      ? dispatch({ type: FORM_ERRORS, payload: true })
-      : dispatch({ type: FORM_ERRORS, payload: false });
+    // dispatch({ type: FORM_ERRORS, payload: true });
+
+    if (captcha && captcha.length>0 && captcha.includes('captcha')) {
+      dispatch({ type: FORM_ERRORS, payload: false })
+       console.log(captcha, 'capchatccccccc');
+    }
+    if (!captcha) {
+      dispatch({ type: FORM_ERRORS, payload: true });
+    }
+
+   
+    
+    // if (isValid===false) {
+    //   dispatch({ type: FORM_ERRORS, payload: true });
+    // }else{
+    //   dispatch({ type: FORM_ERRORS, payload: false });
+    // }
+    // !verified
+    //   ? dispatch({ type: FORM_ERRORS, payload: true })
+    //   : dispatch({ type: FORM_ERRORS, payload: false });
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [verified]);
+  }, [verified, captcha, isValid]);
 
   return (
     <div>
@@ -474,15 +490,17 @@ const EleventhStep: React.FC<EleventhStepProps> = ({
         validation?.includes(
           eleventhStepTranslation?.validation?.data[1]?.value
         ) && (
-          <CaptchaCheckbox
-            id="captcha"
-            loading={captchLoading}
-            checked={captcha ? true : false}
-            name="captcha"
-            props={register('captcha')}
-            value="captcha"
-            label={eleventhStepTranslation?.captcha}
-          />
+          <div className='w-full mb-4'>
+            <CaptchaCheckbox
+              id="captcha"
+              loading={captchLoading}
+              // checked={captcha ? true : false}
+              name="captcha"
+              props={register('captcha', {required:true})}
+              value="captcha"
+              label={eleventhStepTranslation?.captcha}
+            />
+          </div>
         )}
     </div>
   );

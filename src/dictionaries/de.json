@@ -232,6 +232,7 @@
         "thirdStepOrganization": {
           "title": "Was für eine Organisation/Institution ist betroffen?",
           "subTitle": "Mehrfachnennung möglich",
+          "minCharacters": "Ein Minimum von 4 Zeichen wird erwartet",
           "data": [
             {
               "iD": 1,

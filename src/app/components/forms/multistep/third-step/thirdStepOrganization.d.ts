@@ -2,6 +2,7 @@ export type ThirdStepOrganizationProps = {
   thirdStepOrganizationTranslation: {
     title: string;
     subTitle: string;
+    minCharacters:string;
     data: Array<{
       iD: number;
       name: string;

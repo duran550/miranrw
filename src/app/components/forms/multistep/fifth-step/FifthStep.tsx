@@ -18,6 +18,7 @@ const FifthStep: React.FC<FifthStepProps> = ({ fifthStepTranslation, id }) => {
   const [searchedText, setSearchedText] = useState<string | undefined>(
     undefined
   );
+console.log(fifthStepTranslation);
 
   const {
     register,
@@ -44,25 +45,42 @@ const FifthStep: React.FC<FifthStepProps> = ({ fifthStepTranslation, id }) => {
 
   useEffect(() => {
     dispatch({ type: FORM_ERRORS, payload: true });
+console.log(locationOnline, 'location');
 
     // Validating fields
+
+    // if (stadtteil && stadtteil.length>0 && stadtteil.length<3) {
+    //    dispatch({ type: FORM_ERRORS, payload: true });
+      
+    // }
+    //   if (stadtteil && stadtteil.length == 0 ) {
+    //     dispatch({ type: FORM_ERRORS, payload: true });
+    //   }
+
+
 
     if (!locationOnline) {
       dispatch({ type: FORM_ERRORS, payload: true });
     } else {
       if (
-        (!searchedText &&
-          locationOnline === fifthStepTranslation?.secondOption?.value) ||
-        stadtteil?.length < 4
+        (locationOnline &&
+          locationOnline === fifthStepTranslation?.secondOption?.value) 
       ) {
         dispatch({ type: FORM_ERRORS, payload: true });
-      } else {
+        if (location && location.length>0) {
+          dispatch({ type: FORM_ERRORS, payload: false });
+        }
+      } 
+      if (
+        locationOnline &&
+        locationOnline === fifthStepTranslation?.firstOption?.value
+      ) {
         dispatch({ type: FORM_ERRORS, payload: false });
-      }
+      } 
     }
 
     if (formValues && !locationOnline && !location) {
-      dispatch({ type: FORM_ERRORS, payload: false });
+      // dispatch({ type: FORM_ERRORS, payload: false });
       locationOnline !== formValues?.locationOnline &&
         setValue('locationOnline', formValues?.locationOnline);
       location !== formValues?.location && '';
@@ -133,7 +151,7 @@ const FifthStep: React.FC<FifthStepProps> = ({ fifthStepTranslation, id }) => {
           id={fifthStepTranslation?.firstOption?.id}
           label={fifthStepTranslation?.firstOption?.label}
           name="locationOnline"
-          props={register('locationOnline')}
+          props={register('locationOnline', {required:true})}
           value={fifthStepTranslation?.firstOption?.value}
         />
       </div>
@@ -155,16 +173,14 @@ const FifthStep: React.FC<FifthStepProps> = ({ fifthStepTranslation, id }) => {
               />
               <div className="mt-4">
                 <InputField
-                  props={register('stadtteil', {
-                    minLength: 4,
-                  })}
+                  props={register('stadtteil', {minLength:4})}
                   name={fifthStepTranslation?.thirdOption?.name}
                   title={fifthStepTranslation?.thirdOption?.title}
                 />
-                <p className="text-sm mt-1 ml-4 text-red-600">
+                {/* <p className="text-sm mt-1 ml-4 text-red-600">
                   {errors?.stadtteil &&
                     fifthStepTranslation?.thirdOption?.minCharacters}
-                </p>
+                </p> */}
               </div>
             </>
           )}

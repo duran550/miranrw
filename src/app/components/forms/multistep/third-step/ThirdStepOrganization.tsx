@@ -18,6 +18,7 @@ const ThirdStepOrganization: React.FC<ThirdStepOrganizationProps> = ({
 }) => {
   const { dispatch, isEditing, reportingPerson } = useFormContext();
   const [question] = useState<string>(thirdStepOrganizationTranslation?.title);
+console.log(thirdStepOrganizationTranslation, 'third');
 
   const {
     register,
@@ -28,7 +29,7 @@ const ThirdStepOrganization: React.FC<ThirdStepOrganizationProps> = ({
   } = useForm<ThirdStepOrganizationFormValues>();
 
   let organizationType: string[] = watch('organizationType');
-
+let organizationTypeFreeField: string= watch('organizationTypeFreeField')
   // Getting form cookies
   let formValues: {
     organizationType: string[];
@@ -40,10 +41,35 @@ const ThirdStepOrganization: React.FC<ThirdStepOrganizationProps> = ({
   useScrollOnTop();
 
   useEffect(() => {
-    dispatch({ type: FORM_ERRORS, payload: true });
+    console.log(organizationTypeFreeField, 'orga');
 
-    if (organizationType?.length !== 0) {
+    if (
+      !organizationType ||
+      (organizationType && organizationType.length == 0)
+    ) {
       dispatch({ type: FORM_ERRORS, payload: false });
+    }
+
+    if (organizationType && organizationType.length > 0) {
+      if (
+        organizationType.length > 0 &&
+        organizationType.includes(
+          thirdStepOrganizationTranslation.data[6].value
+        )
+      ) {
+        dispatch({ type: FORM_ERRORS, payload: true });
+        if (organizationTypeFreeField && organizationTypeFreeField.length > 3) {
+          dispatch({ type: FORM_ERRORS, payload: false });
+        }
+      }
+      if (
+        organizationType.length > 0 &&
+        !organizationType.includes(
+          thirdStepOrganizationTranslation.data[6].value
+        )
+      ) {
+        dispatch({ type: FORM_ERRORS, payload: false });
+      }
     }
 
     // Setting default values if exists in cookies
@@ -60,7 +86,7 @@ const ThirdStepOrganization: React.FC<ThirdStepOrganizationProps> = ({
     }
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [organizationType]);
+  }, [organizationType, organizationTypeFreeField]);
 
   // Triggered when submitting form
   const onSubmit: SubmitHandler<ThirdStepOrganizationFormValues> = (data) => {
@@ -100,10 +126,20 @@ const ThirdStepOrganization: React.FC<ThirdStepOrganizationProps> = ({
               organizationType?.includes(
                 thirdStepOrganizationTranslation?.data[6]?.value
               ) && (
-                <InputField
-                  name="organizationTypeFreeField"
-                  props={register('organizationTypeFreeField')}
-                />
+                <div className="w-full mb-5">
+                  <InputField
+                    name="organizationTypeFreeField"
+                    props={register('organizationTypeFreeField', {
+                      required: true,
+                      minLength: 4,
+                    })}
+                  />
+                  {organizationTypeFreeField?.length !== 0 && (
+                    <label className="text-red-500 text-xs pl-2">
+                      {thirdStepOrganizationTranslation?.minCharacters}
+                    </label>
+                  )}
+                </div>
               )}
           </div>
         </div>

@@ -54,11 +54,17 @@ const ThirdStep: React.FC<ThirdStepProps> = ({ thirdStepTranslation, id }) => {
     }
 
     // Setting default values if exists in cookies
+if (!description || (description && description.length<50)) {
+   dispatch({ type: FORM_ERRORS, payload: true });
+}else{
+   dispatch({ type: FORM_ERRORS, payload: false });
+}
+
 
     if (formValues && !description) {
       description !== formValues?.description &&
         setValue('description', formValues?.description);
-      dispatch({ type: FORM_ERRORS, payload: false });
+     
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [description, formValues?.description]);
@@ -96,11 +102,11 @@ const ThirdStep: React.FC<ThirdStepProps> = ({ thirdStepTranslation, id }) => {
           type="text"
         />
         {formErrors && description?.length !== 0 && (
-          <label className="text-red-500 text-xs">
+          <label className="text-red-500 text-xs pl-2">
             {thirdStepTranslation?.minCharacters}
           </label>
         )}
-        <p className="flex items-center mt-4 text-xs text-red-600">
+        <p className="flex items-center mt-4 text-xs text-red-600 pb-3  pl-0">
           <span className="mr-2"></span>
           {thirdStepTranslation?.disclaimer}
         </p>
