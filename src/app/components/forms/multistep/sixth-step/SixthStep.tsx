@@ -42,6 +42,9 @@ const SixthStep: React.FC<SixthStepProps> = ({ sixthStepTranslation }) => {
     } = getFormCookies(FIFTH_FORM);
 
     // dispatch({ type: FORM_ERRORS, payload: false });
+    // if (formOfQueerphobia.length<0) {
+    //   dispatch({ type: FORM_ERRORS, payload: true });
+    // }
     if (formValues && !formOfQueerphobia && !otherformOfQueerphobiaFreeField) {
       dispatch({ type: FORM_ERRORS, payload: false });
       formOfQueerphobia !== formValues?.formOfQueerphobia &&
@@ -103,22 +106,29 @@ const SixthStep: React.FC<SixthStepProps> = ({ sixthStepTranslation }) => {
       {(formOfQueerphobia &&
         formOfQueerphobia?.includes('Anderes, und zwar')) ||
       (formOfQueerphobia && formOfQueerphobia?.includes('Other, specify')) ? (
-        <InputField
-          name="otherformOfQueerphobiaFreeField"
-          props={register('otherformOfQueerphobiaFreeField', {
-            required: true,
-          })}
-        />
+        <div className="w-full pb-4">
+          <InputField
+            name="otherformOfQueerphobiaFreeField"
+            props={register('otherformOfQueerphobiaFreeField', {
+              required: true,
+            })}
+          />
+          {formErrors && otherformOfQueerphobiaFreeField?.length !== 0 && (
+            <label className="text-red-500 text-xs pb-3">
+              {sixthStepTranslation?.minCharacters}
+            </label>
+          )}
+        </div>
       ) : (
         ''
       )}
-      <div>
+      {/* <div>
         {formErrors && otherformOfQueerphobiaFreeField?.length !== 0 && (
-          <label className="text-red-500 text-xs">
+          <label className="text-red-500 text-xs pb-3">
             {sixthStepTranslation?.minCharacters}
           </label>
         )}
-      </div>
+      </div> */}
     </form>
   );
 };

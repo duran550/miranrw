@@ -27,7 +27,7 @@ export default async function aboutUs({
             <h1 className="lg:text-4xl md:text-3xl text-2xl mb-3 w-auto md:w-5/12">
               {page.about.block1.title1}
             </h1>
-            <p className="md:text-xl text-base md:w-8/12 w-auto">
+            <p className="lg:text-xl sm:text-base text-sm md:w-8/12 w-auto">
               {page.about.block1.p}
             </p>
           </div>
@@ -36,14 +36,14 @@ export default async function aboutUs({
               <Image
                 src={img1}
                 alt=""
-                className="md:h-[90%] md:mt-[5%]  w-[100%] md:w-auto  "
+                className="md:h-full   w-[100%] md:w-auto object-contain	 "
               />
             </div>
             <div className="md:w-8/12 w-full md:py-5 md:ml-11">
-              <p className="mb-3 text-2xl md:text-3xl md:mt-[8%] ">
+              <p className="mb-3 sm:text-2xl text-xl md:text-3xl md:mt-[8%] ">
                 {page.about.block2.title}
               </p>
-              <p className="md:text-xl text-base w-full lg:w-7/12">
+              <p className="lg:text-xl sm:text-base text-sm w-full lg:w-7/12">
                 {page.about.block2.p}
               </p>
             </div>

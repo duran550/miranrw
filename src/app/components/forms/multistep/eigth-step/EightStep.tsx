@@ -14,6 +14,7 @@ import { useScrollOnTop } from '@/app/hooks/useScrollOnTop';
 const EightStep: React.FC<EightStepProps> = ({ eightStepTranslation, id }) => {
   const { dispatch, isEditing, reportingPerson, formErrors } = useFormContext();
   const [question] = useState<string>(eightStepTranslation?.title);
+console.log(eightStepTranslation, 'oooooooooooooooooo');
 
   const {
     register,
@@ -41,8 +42,26 @@ const EightStep: React.FC<EightStepProps> = ({ eightStepTranslation, id }) => {
 
     dispatch({ type: FORM_ERRORS, payload: true });
 
-    if (formOfDisc) {
-      dispatch({ type: FORM_ERRORS, payload: false });
+    if (formOfDisc === eightStepTranslation?.data?.options[1].value) {
+      dispatch({ type: FORM_ERRORS, payload: true });
+      if (
+        formOfDiscYes?.length > 0 &&
+        formOfDiscYes?.includes(eightStepTranslation?.data?.optionsYes[9].value)
+      ) {
+        dispatch({ type: FORM_ERRORS, payload: true });
+        if (formOfDiscYesFreeField?.length >= 4) {
+          dispatch({ type: FORM_ERRORS, payload: false });
+        }
+      }
+
+       if (
+         formOfDiscYes?.length > 0 &&
+         !formOfDiscYes?.includes(
+           eightStepTranslation?.data?.optionsYes[9].value
+         )
+       ) {
+         dispatch({ type: FORM_ERRORS, payload: false });
+       }
       // Clear field when no selected
     } else {
       dispatch({ type: FORM_ERRORS, payload: false });
@@ -65,20 +84,20 @@ const EightStep: React.FC<EightStepProps> = ({ eightStepTranslation, id }) => {
         setValue('formOfDiscYesFreeField', formValues?.formOfDiscYesFreeField);
     }
 
-    {
-      formOfDisc === 'Ja, und zwar:' &&
-        dispatch({ type: FORM_ERRORS, payload: true });
-    }
-    {
-      formOfDisc === 'Ja, und zwar:' &&
-        formOfDiscYes?.length > 0 &&
-        !formOfDiscYes?.includes('Anderes, und zwar:') &&
-        dispatch({ type: FORM_ERRORS, payload: false });
-    }
+    // {
+    //   formOfDisc === 'Ja, und zwar:' &&
+    //     dispatch({ type: FORM_ERRORS, payload: true });
+    // }
+    // {
+    //   formOfDisc === 'Ja, und zwar:' &&
+    //     formOfDiscYes?.length > 0 &&
+    //     !formOfDiscYes?.includes('Anderes, und zwar:') &&
+    //     dispatch({ type: FORM_ERRORS, payload: false });
+    // }
 
-    if (formOfDiscYesFreeField?.length >= 4) {
-      dispatch({ type: FORM_ERRORS, payload: false });
-    }
+    // if (formOfDiscYesFreeField?.length >= 4) {
+    //   dispatch({ type: FORM_ERRORS, payload: false });
+    // }
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [formOfDiscYes, formOfDiscYesFreeField, formOfDisc]);
@@ -128,17 +147,33 @@ const EightStep: React.FC<EightStepProps> = ({ eightStepTranslation, id }) => {
           <div className="ml-4">
             {formOfDiscYes &&
               formOfDiscYes?.includes(
-                eightStepTranslation?.data?.optionsYes[8].value
+                eightStepTranslation?.data?.optionsYes[9].value
               ) && (
-                <InputField
-                  name="formOfDiscYesFreeField"
-                  props={register('formOfDiscYesFreeField')}
-                />
+                <div className="w-full pb-4 ">
+                  {' '}
+                  <InputField
+                    name="formOfDiscYesFreeField"
+                    props={register('formOfDiscYesFreeField', {
+                      required: true,
+                      minLength:4
+                    })}
+                  />
+                  {formOfDiscYes?.length > 0 &&
+                    formOfDiscYes?.includes(
+                      eightStepTranslation?.data?.optionsYes[9].value
+                    ) &&
+                    formErrors &&
+                    formOfDiscYesFreeField?.length <4  && (
+                      <label className="text-red-500 text-xs pb-3">
+                        {eightStepTranslation?.minCharacters}
+                      </label>
+                    )}
+                </div>
               )}
-            <div>
+            {/* <div>
               {formOfDiscYes?.length > 0 &&
                 formOfDiscYes?.includes(
-                  eightStepTranslation?.data?.optionsYes[8].value
+                  eightStepTranslation?.data?.optionsYes[9].value
                 ) &&
                 formErrors &&
                 formOfDiscYesFreeField?.length !== 0 && (
@@ -146,7 +181,7 @@ const EightStep: React.FC<EightStepProps> = ({ eightStepTranslation, id }) => {
                     {eightStepTranslation?.minCharacters}
                   </label>
                 )}
-            </div>
+            </div> */}
           </div>
         </div>
       </div>
