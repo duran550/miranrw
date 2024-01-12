@@ -22,18 +22,21 @@ export default function LocaleSwitcher() {
   };
 
   return (
-    <div className="w-full">
-      <ul className="flex flex-col lg:flex-row space-y-6 ml-24 md:ml-0 md:space-y-0 justify-between items-center  w-full">
+    <div className="w-fit ml-auto lg:ml-0 lg:w-full mr-4 lg:mr-12 xl:mr-0">
+      <ul className="flex   lg:flex-row space-x-6 lg:space-x-0 xl:ml-24 text-slate-900 md:ml-0 md:space-y-0 justify-between items-center w-full  md:w-fit">
         {i18n.locales.map((locale) => (
           <AnimateClick key={locale}>
-            <Link href={redirectedPathName(locale)} className="text-slate-900">
+            <Link
+              href={redirectedPathName(locale)}
+              className="text-slate-900 w-fit"
+            >
               {locale === 'en' ? (
                 <div
                   onClick={() => setToggle(false)}
-                  className="flex items-center w-full"
+                  className="flex items-center w-fit"
                 >
                   <Image
-                    className="mr-2 w-8"
+                    className="mr-2 w-4 md:w-8"
                     src={EnglandLogo}
                     alt="Logo England"
                   />
@@ -50,10 +53,10 @@ export default function LocaleSwitcher() {
               ) : locale === 'de' ? (
                 <div
                   onClick={() => setToggle(false)}
-                  className="flex md:ml-2 md:mr-14 items-center w-full"
+                  className="flex md:ml-2 md:mr-14 items-center w-fit"
                 >
                   <Image
-                    className="mr-2 w-8"
+                    className="mr-2 w-4 md:w-8"
                     src={GermanLogo}
                     alt="Logo Germany"
                   />
@@ -70,18 +73,18 @@ export default function LocaleSwitcher() {
               ) : (
                 <div
                   onClick={() => setToggle(false)}
-                  className="flex  items-center w-fit"
+                  className="flex  items-center w-fit mr-2 lg:mr-8 xl:pr-0"
                 >
                   <Image
-                    className="mr-2 w-8"
+                    className="mr-2 w-4 md:w-8"
                     src={LeicheSpracheLogo}
                     alt="Leichte sprache logo"
                   />
                   <div
                     className={`${
                       pathName?.split('/')[1] === 'de-LS'
-                        ? ' font-bold text-sm md:w-[10rem]'
-                        : 'flex  md:w-[10rem] text-sm'
+                        ? ' font-bold text-sm md:w-[8rem]'
+                        : 'flex  md:w-[8rem] text-sm'
                     }`}
                   >
                     Leichte Sprache

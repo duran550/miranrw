@@ -121,7 +121,7 @@ const FourthStep: React.FC<FourthStepProps> = ({
         <p className="text-sm -mt-12 mb-8">
           {fourthStepTranslation?.mandatory}
         </p>
-        <div className="border border-primaryColor rounded-md">
+        <div className="border border-primaryColor rounded-md mb-4">
           <LocalizationProvider adapterLocale="de" dateAdapter={AdapterDayjs}>
             <DateCalendar
               sx={{

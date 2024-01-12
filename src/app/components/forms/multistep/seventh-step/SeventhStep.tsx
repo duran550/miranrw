@@ -41,10 +41,27 @@ const SeventhStep: React.FC<SeventhStepProps> = ({
 
     dispatch({ type: FORM_ERRORS, payload: true });
 
-    if (typeOfDiscrimination?.length !== 0) {
+    if (
+      !typeOfDiscrimination ||
+      (typeOfDiscrimination && typeOfDiscrimination?.length !== 0)
+    ) {
       dispatch({ type: FORM_ERRORS, payload: false });
     } else {
+     if (typeOfDiscrimination && typeOfDiscrimination.length>0 && typeOfDiscrimination.includes(seventhStepTranslation.choices[8].value)) {
       dispatch({ type: FORM_ERRORS, payload: true });
+      if (typeOfDiscriminationFreeField.length>3) {
+        dispatch({ type: FORM_ERRORS, payload: false });
+      }else{
+        dispatch({ type: FORM_ERRORS, payload: true });
+      }
+     }
+      if (
+        typeOfDiscrimination &&
+        typeOfDiscrimination.length > 0 &&
+        !typeOfDiscrimination.includes(seventhStepTranslation.choices[8].value)
+      ) {
+        dispatch({ type: FORM_ERRORS, payload: false });
+      }
     }
 
     if (formValues && !typeOfDiscrimination && !typeOfDiscriminationFreeField) {
@@ -110,22 +127,31 @@ const SeventhStep: React.FC<SeventhStepProps> = ({
         typeOfDiscrimination?.includes('Anderes, und zwar')) ||
       (typeOfDiscrimination &&
         typeOfDiscrimination?.includes('Other, specify')) ? (
-        <InputField
-          name="typeOfDiscriminationFreeField"
-          placeholder=""
-          props={register('typeOfDiscriminationFreeField', { required: true })}
-          title=""
-        />
+        <div className="w-full pb-4 ">
+          <InputField
+            name="typeOfDiscriminationFreeField"
+            placeholder=""
+            props={register('typeOfDiscriminationFreeField', {
+              required: true,
+            })}
+            title=""
+          />
+          {formErrors && typeOfDiscriminationFreeField?.length !== 0 && (
+            <label className="text-red-500 text-xs pb-3">
+              {seventhStepTranslation?.minCharacters}
+            </label>
+          )}
+        </div>
       ) : (
         ''
       )}
-      <div>
+      {/* <div>
         {formErrors && typeOfDiscriminationFreeField?.length !== 0 && (
           <label className="text-red-500 text-xs">
             {seventhStepTranslation?.minCharacters}
           </label>
         )}
-      </div>
+      </div> */}
     </form>
   );
 };

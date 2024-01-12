@@ -2,6 +2,8 @@ import React from 'react';
 import { Button } from '../button/Button';
 import Image from 'next/image';
 import videoPlaceholder from '../../../../public/images/videoPlaceholder.png';
+import MeldungIcon from '../../../../public/icons/meldungIcon.svg';
+import Link from 'next/link';
 
 type heroSectionPropsValuesType = {
   title: string;
@@ -19,22 +21,27 @@ const HeroSection: React.FC<heroSectionPropsType> = ({ lang, content }) => {
     <>
       <div className="px-6 lg:px-12 my-12    ">
         {/* text-content */}
-        <div className="flex flex-col lg:flex-row lg:gap-x-10 justify-between w-full lg:items-center pb:8 lg:pb-0">
+        <div className="flex flex-col-reverse lg:flex-row lg:gap-x-10 justify-between w-full lg:items-center pb:8 lg:pb-0">
           <div className=" lg:max-w-2xl">
-            <h2 className="font-bold text-3xl  lg:text-4xl">MIQ</h2>
             <div className="pt-4">
-              <h1 className="font-bold text-xl lg:text-4xl">{content.title}</h1>
-              <p className="mt-2 w-fit lg:mt-8 max-w-sm lg:max-w-xl">
+              <h1 className="font-bold text-2xl lg:text-4xl">
+                {content.title}
+              </h1>
+              <p className="w-fit mt-4 lg:mt-8 max-w-sm lg:max-w-xl">
                 {content?.description?.firstParagraph}
               </p>
               <p className="mt-2 pt-1 w-fit max-w-sm lg:max-w-xl">
                 {content?.description?.secondParagraph}
               </p>
             </div>
-            <div className="mt-8">
+
+            <div className="mt-8 w-full space-x-4 flex items-center">
+              <Link href={`/${lang}/report`}>
+                <Image className="w-24 " src={MeldungIcon} alt="Meldung icon" />
+              </Link>
               <Button
                 href={`/${lang}/report`}
-                className=" w-full sm:w-fit lg:w-[20rem] bg-primaryColor text-white font-bold text-lg"
+                className=" w-full md:w-fit lg:w-[20rem] bg-primaryColor text-white font-bold text-lg"
               >
                 {content.buttonText}
               </Button>
@@ -42,7 +49,7 @@ const HeroSection: React.FC<heroSectionPropsType> = ({ lang, content }) => {
           </div>
 
           <Image
-            className="w-6/12 lg:h-[25rem] object-cover"
+            className="w-full mb-8 xl:mb-0 xl:w-6/12 lg:h-[25rem] object-cover"
             src={videoPlaceholder}
             alt="video"
           />

@@ -15,6 +15,8 @@ const NinethStep: React.FC<NinethStepProps> = ({
   ninethStepTranslation,
   id,
 }) => {
+  console.log(ninethStepTranslation);
+
   const { dispatch, isEditing, reportingPerson, formErrors } = useFormContext();
   const [question] = useState<string>(ninethStepTranslation?.title);
 
@@ -23,7 +25,7 @@ const NinethStep: React.FC<NinethStepProps> = ({
     handleSubmit,
     watch,
     setValue,
-    formState: { errors },
+    formState: { errors, isValid },
   } = useForm<NinethFormValues>();
 
   let haveYouReported: string = watch('haveYouReported');
@@ -48,8 +50,75 @@ const NinethStep: React.FC<NinethStepProps> = ({
       haveYouReportedYesFreeField2: string;
       question: string;
     } = getFormCookies(EIGTH_FORM);
+    dispatch({ type: FORM_ERRORS, payload: true });
 
     //   Setting values in the fields
+
+    if (haveYouReported === ninethStepTranslation?.data?.options[1].value) {
+      dispatch({ type: FORM_ERRORS, payload: true });
+      if (haveYouReported &&
+        haveYouReportedYes?.length > 0 &&
+        !haveYouReportedYes?.includes(
+          ninethStepTranslation?.data?.optionsYes[3].value
+        ) &&
+        !haveYouReportedYes?.includes(
+          ninethStepTranslation?.data?.optionsYes[2].value
+        )
+      ) {
+        dispatch({ type: FORM_ERRORS, payload: false });
+      } else {
+        if (
+          haveYouReported &&
+          haveYouReportedYes?.length > 0 &&
+          haveYouReportedYes?.includes(
+            ninethStepTranslation?.data?.optionsYes[2].value
+          )
+        ) {
+          dispatch({ type: FORM_ERRORS, payload: true });
+          if (
+            haveYouReportedYesFreeField1 &&
+            haveYouReportedYesFreeField1.length > 2
+          ) {
+            dispatch({ type: FORM_ERRORS, payload: false });
+          }
+        } else if (
+          haveYouReportedYes?.length > 0 &&
+          haveYouReportedYes?.includes(
+            ninethStepTranslation?.data?.optionsYes[3].value
+          )
+        ) {
+          dispatch({ type: FORM_ERRORS, payload: true });
+          if (
+            haveYouReportedYesFreeField2 &&
+            haveYouReportedYesFreeField2.length > 2
+          ) {
+            dispatch({ type: FORM_ERRORS, payload: false });
+          }
+        } else if (
+          haveYouReportedYes?.length > 0 &&
+          haveYouReportedYes?.includes(
+            ninethStepTranslation?.data?.optionsYes[3].value
+          ) &&
+          haveYouReportedYes?.includes(
+            ninethStepTranslation?.data?.optionsYes[2].value
+          )
+        ) {
+          dispatch({ type: FORM_ERRORS, payload: true });
+        
+        }
+      }
+        if (!isValid) {
+          dispatch({ type: FORM_ERRORS, payload: true });
+        } else {
+          dispatch({ type: FORM_ERRORS, payload: false });
+        }
+
+      
+
+      // Clear field when no selected
+    } else {
+      dispatch({ type: FORM_ERRORS, payload: false });
+    }
 
     if (formValues && !haveYouReported) {
       haveYouReported !== formValues.haveYouReported &&
@@ -74,7 +143,13 @@ const NinethStep: React.FC<NinethStepProps> = ({
     }
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [haveYouReported]);
+  }, [
+    haveYouReported,
+    haveYouReportedYes,
+    haveYouReportedYesFreeField1,
+    haveYouReportedYesFreeField2,
+    isValid
+  ]);
 
   // Triggered when submitting form
   const onSubmit: SubmitHandler<NinethFormValues> = (data) => {
@@ -150,10 +225,12 @@ const NinethStep: React.FC<NinethStepProps> = ({
                         name="haveYouReportedYesFreeField1"
                         props={register('haveYouReportedYesFreeField1', {
                           required: true,
+                          minLength: 3,
                         })}
                       />
                       <p className="text-xs my-4 text-red-600">
-                        {errors?.haveYouReportedYesFreeField1 &&
+                        {haveYouReportedYesFreeField1 &&
+                          haveYouReportedYesFreeField1.length < 3 &&
                           ninethStepTranslation?.minCharacters}
                       </p>
                     </div>
@@ -183,10 +260,12 @@ const NinethStep: React.FC<NinethStepProps> = ({
                   name="haveYouReportedYesFreeField2"
                   props={register('haveYouReportedYesFreeField2', {
                     required: true,
+                    minLength: 3,
                   })}
                 />
                 <p className="text-xs my-4 text-red-600">
-                  {errors?.haveYouReportedYesFreeField2 &&
+                  {haveYouReportedYesFreeField2 &&
+                    haveYouReportedYesFreeField2.length < 3 &&
                     ninethStepTranslation?.minCharacters}
                 </p>
               </div>

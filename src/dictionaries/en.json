@@ -3,9 +3,9 @@
     "home": "Homepage",
     "reportIncident": "Report",
     "aboutQueer": {
-      "title": "About Queerophobia",
+      "title": "Queerophobia",
       "firstSubmenu": "What is Queerphobia ?",
-      "secondSubmenu": "What is multiple discrimination ?",
+      "secondSubmenu": "I need help",
       "thirdSubmenu": "Glossary"
     },
     "aboutUs": {
@@ -144,7 +144,7 @@
     },
     "home": {
       "heroSection": {
-        "title": "Reporting and Information Center for Queer Hostility",
+        "title": "We are MIQ and will be happy to help you!",
         "description": {
           "firstParagraph": "MIQ stands for 'Reporting and Information Center for Queer Hostility' and is a project that aims to highlight queer hostility in NRW.",
           "secondParagraph": "You can report a queer-hostile incident on our website. We also serve as an information resource and guide you to further counseling services available in NRW."
@@ -232,6 +232,7 @@
           "title": "What type of organization/institution is affected?",
           "mandatory": "* Mandatory field",
           "subTitle": "Multiple selections possible",
+          "minCharacters": "A minimum of 4 Characters is expected",
           "data": [
             {
               "iD": 1,
