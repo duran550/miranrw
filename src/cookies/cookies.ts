@@ -64,3 +64,8 @@ export const clearFormCookies = () => {
   cookies.remove(EIGTH_FORM);
   cookies.remove(NINETH_FORM);
 };
+
+export const clearFormCookiesStep = (step:string) => {
+  cookies.remove(step);
+
+}

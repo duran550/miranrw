@@ -5,7 +5,7 @@ import { FORM_ERRORS, LAST_STEP, NEXT_STEP } from '@/app/context/actions';
 import Checkbox from '../../checkbox/Checkbox';
 import FormHeader from '../header/header';
 import InputField from '../../text-field/InputField';
-import { getFormCookies, getFormStep, setFormCookies } from '@/cookies/cookies';
+import { clearFormCookiesStep, getFormCookies, getFormStep, setFormCookies } from '@/cookies/cookies';
 import { SEVENTH_FORM, SIXTH_FORM } from '@/cookies/cookies.d';
 import { useScrollOnTop } from '@/app/hooks/useScrollOnTop';
 import { SeventhStepProps, SeventhStepValues } from './seventhStep';
@@ -91,6 +91,7 @@ const SeventhStep: React.FC<SeventhStepProps> = ({
 
   // Triggered when submitting form
   const onSubmit: SubmitHandler<SeventhStepValues> = (data) => {
+    
     let step = getFormStep();
     let dataWithQuestion = { question, step, ...data };
 

@@ -384,33 +384,34 @@ const EleventhStep: React.FC<EleventhStepProps> = ({
           />
         )}
 
-        {seventhForm && seventhForm?.formOfDiscYes && (
-          <>
-            <EditBlock
-              step={seventhForm?.step}
-              question={seventhForm?.question}
-              answer={[
-                ...seventhForm?.formOfDiscYes,
-                seventhForm?.formOfDisc,
-                seventhForm?.formOfDiscYesFreeField,
-              ]}
-            />
-          </>
-        )}
+        {seventhForm &&
+          seventhForm?.formOfDiscYes &&
+          seventhForm?.formOfDisc.length >= 6 && (
+            <>
+              <EditBlock
+                step={seventhForm?.step}
+                question={seventhForm?.question}
+                answer={[
+                  seventhForm?.formOfDisc,
+                  ...seventhForm?.formOfDiscYes,
+
+                  seventhForm?.formOfDiscYesFreeField,
+                ]}
+              />
+            </>
+          )}
 
         {/* When Nein is chosen don't display */}
 
-        {seventhForm && seventhForm?.formOfDiscYes && (
-          <EditBlock
-            step={seventhForm?.step}
-            question={seventhForm?.question}
-            answer={[
-              ...seventhForm?.formOfDiscYes,
-              seventhForm?.formOfDisc,
-              seventhForm?.formOfDiscYesFreeField,
-            ]}
-          />
-        )}
+        {seventhForm &&
+          seventhForm?.formOfDiscYes &&
+          seventhForm?.formOfDisc.length < 6 && (
+            <EditBlock
+              step={seventhForm?.step}
+              question={seventhForm?.question}
+              answer={[seventhForm?.formOfDisc]}
+            />
+          )}
 
         {eighthForm && eighthForm?.haveYouReported && (
           <EditBlock
@@ -490,13 +491,13 @@ const EleventhStep: React.FC<EleventhStepProps> = ({
         validation?.includes(
           eleventhStepTranslation?.validation?.data[1]?.value
         ) && (
-          <div className='w-full mb-4'>
+          <div className="w-full mb-4">
             <CaptchaCheckbox
               id="captcha"
               loading={captchLoading}
               // checked={captcha ? true : false}
               name="captcha"
-              props={register('captcha', {required:true})}
+              props={register('captcha', { required: true })}
               value="captcha"
               label={eleventhStepTranslation?.captcha}
             />

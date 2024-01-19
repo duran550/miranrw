@@ -7,7 +7,7 @@ import Checkbox from '../../checkbox/Checkbox';
 import { useFormContext } from '@/app/hooks/useFormContext';
 import { FORM_ERRORS, LAST_STEP, NEXT_STEP } from '@/app/context/actions';
 import InputField from '../../text-field/InputField';
-import { getFormCookies, getFormStep, setFormCookies } from '@/cookies/cookies';
+import { clearFormCookiesStep, getFormCookies, getFormStep, setFormCookies } from '@/cookies/cookies';
 import { NINETH_FORM } from '@/cookies/cookies.d';
 import { useScrollOnTop } from '@/app/hooks/useScrollOnTop';
 
@@ -86,6 +86,7 @@ const TenthStep: React.FC<TenthStepProps> = ({ tenthStepTranslation }) => {
 
   // Triggered when submitting form
   const onSubmit: SubmitHandler<TenthFormValues> = (data) => {
+     
     let step = getFormStep();
     let dataWithQuestion = { question1, question2, question3, step, ...data };
     setFormCookies(dataWithQuestion, NINETH_FORM);

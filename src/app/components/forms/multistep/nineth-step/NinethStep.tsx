@@ -6,10 +6,11 @@ import Checkbox from '../../checkbox/Checkbox';
 import { useFormContext } from '@/app/hooks/useFormContext';
 import { FORM_ERRORS, LAST_STEP, NEXT_STEP } from '@/app/context/actions';
 import InputField from '../../text-field/InputField';
-import { getFormCookies, getFormStep, setFormCookies } from '@/cookies/cookies';
+import { clearFormCookiesStep, getFormCookies, getFormStep, setFormCookies } from '@/cookies/cookies';
 import { useScrollOnTop } from '@/app/hooks/useScrollOnTop';
-import { EIGTH_FORM, NINETH_FORM } from '@/cookies/cookies.d';
+import { EIGTH_FORM, NINETH_FORM, SEVENTH_FORM } from '@/cookies/cookies.d';
 import { NinethFormValues, NinethStepProps } from './ninethStep';
+import SeventhStep from '../seventh-step/SeventhStep';
 
 const NinethStep: React.FC<NinethStepProps> = ({
   ninethStepTranslation,
@@ -17,8 +18,19 @@ const NinethStep: React.FC<NinethStepProps> = ({
 }) => {
   console.log(ninethStepTranslation);
 
-  const { dispatch, isEditing, reportingPerson, formErrors } = useFormContext();
+  const { dispatch, isEditing, reportingPerson, formErrors, id_, formValue } = useFormContext();
   const [question] = useState<string>(ninethStepTranslation?.title);
+
+  // useEffect(()=>{
+  //   if (formValue && formValue!=='') {
+  //     id_ === 'eighthForm'
+  //       ? setFormCookies(formValue, EIGTH_FORM)
+  //       : setFormCookies(formValue, SEVENTH_FORM);
+
+  //       console.log(formValue, 'valueeeeeeeeeee');
+        
+  //   }
+  // },[])
 
   const {
     register,
@@ -41,6 +53,7 @@ const NinethStep: React.FC<NinethStepProps> = ({
   useScrollOnTop();
 
   useEffect(() => {
+   
     dispatch({ type: FORM_ERRORS, payload: false });
     // Getting values from the form
     let formValues: {
@@ -153,11 +166,39 @@ const NinethStep: React.FC<NinethStepProps> = ({
 
   // Triggered when submitting form
   const onSubmit: SubmitHandler<NinethFormValues> = (data) => {
-    let step = getFormStep();
-    let dataWithQuestion = { question, step, ...data };
-    id === 'ninethForm'
-      ? setFormCookies(dataWithQuestion, NINETH_FORM)
-      : setFormCookies(dataWithQuestion, EIGTH_FORM);
+      // let formValues: {
+      //   formOfDisc: string;
+      //   formOfDiscYes: string[];
+      //   formOfDiscYesFreeField: string;
+      //   question: string;
+      // } = getFormCookies(EIGTH_FORM);
+
+      // if (formValues) {
+        // clearFormCookiesStep(EIGTH_FORM);
+          let step = getFormStep();
+           if (data.haveYouReported.length < 5) {
+            
+             let dataWithQuestion = {
+               question,
+               step,
+               haveYouReported: data.haveYouReported,
+               haveYouReportedYes: [],
+             };
+             // dispatch({ type: ID_FORM, payload: id });
+             //  dispatch({ type: FORM_VALUE, payload: dataWithQuestion });
+             id === 'eighthForm'
+               ? setFormCookies(dataWithQuestion, NINETH_FORM)
+               : setFormCookies(dataWithQuestion, EIGTH_FORM);
+           } else {
+            
+             let dataWithQuestion = { question, step, ...data };
+             id === 'ninethForm'
+               ? setFormCookies(dataWithQuestion, NINETH_FORM)
+               : setFormCookies(dataWithQuestion, EIGTH_FORM);
+           }
+      
+  
+  
 
     isEditing && reportingPerson === 'myself'
       ? dispatch({ type: LAST_STEP, payload: 11 })

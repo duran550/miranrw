@@ -1,9 +1,11 @@
+'use client';
 import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
 import RubikonLogo from '../../../../public/images/secondImage.png';
 import NGVTLogo from '../../../../public/images/fourthImg.svg';
 import LSVDLogo from '../../../../public/images/thirdImg.svg';
+import LSVDLogo2 from '../../../../public/images/thirdImg.svg';
 import MinisteriumLogo from '../../../../public/images/ministerium.svg';
 import QNWLogo from '../../../../public/images/fifthLogo.svg';
 
@@ -32,14 +34,17 @@ const CopyRightSection: React.FC<CopyrightProps> = ({
         <div className="flex flex-wrap items-center space-y-4 lg:space-x-28 md:space-x-20 space-x-6 mt-4 px-4">
           <Link target="_blank" href="https://queeres-netzwerk.nrw/ ">
             <Image
-              className="sm:w-32 grayscale lg:w-40 w-32 m-0"
+              className="sm:w-32 hover:grayscale-0  grayscale  lg:w-40 w-32 m-0"
               src={QNWLogo}
               alt="QNW Logo"
+              onBlur={() => {
+                alert('ok');
+              }}
             />
           </Link>
           <Link href="https://ngvt.nrw/" target="_blank">
             <Image
-              className="sm:w-32 grayscale lg:w-40 w-32 m-0 max-sm:max-h-14"
+              className="sm:w-32 hover:grayscale-0  grayscale  lg:w-40 w-32 m-0 max-sm:max-h-14"
               src={NGVTLogo}
               alt="NGVT Logo"
             />
@@ -47,21 +52,21 @@ const CopyRightSection: React.FC<CopyrightProps> = ({
 
           <Link target="_blank" href="https://rubicon-koeln.de/">
             <Image
-              className="sm:w-32 grayscale lg:w-64 w-32 m-0"
+              className="sm:w-32 hover:grayscale-0  grayscale  lg:w-64 w-32 m-0"
               src={RubikonLogo}
               alt="Rubikon Logo"
             />
           </Link>
           <Link href="https://nrw.lsvd.de/" target="_blank">
             <Image
-              className="sm:w-32 grayscale lg:w-40 w-32 m-0"
+              className="sm:w-32 hover:grayscale-0  grayscale  lg:w-40 w-32 m-0"
               src={LSVDLogo}
               alt="LSVD Logo"
             />
           </Link>
 
           <Image
-            className="sm:w-45 grayscale  w-[20rem] "
+            className="sm:w-45 hover:grayscale-0  grayscale   w-[20rem] "
             src={MinisteriumLogo}
             alt="Ministerium Logo"
           />

@@ -5,14 +5,14 @@ import RadioGroup from '../../radio/RadioGroup';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import Checkbox from '../../checkbox/Checkbox';
 import { useFormContext } from '@/app/hooks/useFormContext';
-import { FORM_ERRORS, LAST_STEP, NEXT_STEP } from '@/app/context/actions';
+import { FORM_ERRORS, LAST_STEP, NEXT_STEP, FORM_VALUE, ID_FORM } from '@/app/context/actions';
 import InputField from '../../text-field/InputField';
-import { getFormCookies, getFormStep, setFormCookies } from '@/cookies/cookies';
+import { clearFormCookiesStep, getFormCookies, getFormStep, setFormCookies } from '@/cookies/cookies';
 import { EIGTH_FORM, SEVENTH_FORM } from '@/cookies/cookies.d';
 import { useScrollOnTop } from '@/app/hooks/useScrollOnTop';
 
 const EightStep: React.FC<EightStepProps> = ({ eightStepTranslation, id }) => {
-  const { dispatch, isEditing, reportingPerson, formErrors } = useFormContext();
+  const { dispatch, isEditing, reportingPerson, formErrors, formValue } = useFormContext();
   const [question] = useState<string>(eightStepTranslation?.title);
 console.log(eightStepTranslation, 'oooooooooooooooooo');
 
@@ -104,16 +104,50 @@ console.log(eightStepTranslation, 'oooooooooooooooooo');
 
   // Triggered when submitting form
   const onSubmit: SubmitHandler<EightFormValues> = (data) => {
-    let step = getFormStep();
-    let dataWithQuestion = { question, step, ...data };
+    //  let formValues: {
+    //    formOfDisc: string;
+    //    formOfDiscYes: string[];
+    //    formOfDiscYesFreeField: string;
+    //    question: string;
+    //  } = getFormCookies(SEVENTH_FORM);
 
-    id === 'eighthForm'
-      ? setFormCookies(dataWithQuestion, EIGTH_FORM)
-      : setFormCookies(dataWithQuestion, SEVENTH_FORM);
+    //  if (formValues) {
+    //   clearFormCookiesStep(SEVENTH_FORM)
+    //  }
 
-    isEditing && reportingPerson === 'myself'
-      ? dispatch({ type: LAST_STEP, payload: 11 })
-      : dispatch({ type: NEXT_STEP, payload: 'DATA 1' });
+    if (data.formOfDisc.length<5) {
+
+         let step = getFormStep();
+         let dataWithQuestion = {
+           question,
+           step,
+           formOfDisc: data.formOfDisc,
+           formOfDiscYes:[],
+         };
+         // dispatch({ type: ID_FORM, payload: id });
+         dispatch({ type: FORM_VALUE, payload: dataWithQuestion });
+          id === 'eighthForm'
+            ? setFormCookies(dataWithQuestion, EIGTH_FORM)
+            : setFormCookies(dataWithQuestion, SEVENTH_FORM);
+    }else{
+       let step = getFormStep();
+       let dataWithQuestion = { question, step, ...data };
+       // dispatch({ type: ID_FORM, payload: id });
+       dispatch({ type: FORM_VALUE, payload: dataWithQuestion });
+        id === 'eighthForm'
+          ? setFormCookies(dataWithQuestion, EIGTH_FORM)
+          : setFormCookies(dataWithQuestion, SEVENTH_FORM);
+    }
+   
+ 
+     
+
+     
+
+      isEditing && reportingPerson === 'myself'
+        ? dispatch({ type: LAST_STEP, payload: 11 })
+        : dispatch({ type: NEXT_STEP, payload: 'DATA 1' });
+ 
   };
 
   return (

@@ -10,7 +10,7 @@ import {
   NEXT_STEP,
 } from '@/app/context/actions';
 import InputField from '../../text-field/InputField';
-import { getFormCookies, getFormStep, setFormCookies } from '@/cookies/cookies';
+import { clearFormCookiesStep, getFormCookies, getFormStep, setFormCookies } from '@/cookies/cookies';
 import { FIFTH_FORM } from '@/cookies/cookies.d';
 import { useScrollOnTop } from '@/app/hooks/useScrollOnTop';
 import { SixthStepProps, SixthStepValues } from './sixthStep';
@@ -72,6 +72,7 @@ const SixthStep: React.FC<SixthStepProps> = ({ sixthStepTranslation }) => {
 
   // Triggered when submitting form
   const onSubmit: SubmitHandler<SixthStepValues> = (data) => {
+    
     let step = getFormStep();
     let dataWithQuestion = { question, step, ...data };
     setFormCookies(dataWithQuestion, FIFTH_FORM);
