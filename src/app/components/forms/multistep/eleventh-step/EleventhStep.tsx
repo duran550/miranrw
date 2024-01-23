@@ -24,6 +24,7 @@ import dayjs from 'dayjs';
 import { useGoogleReCaptcha } from 'react-google-recaptcha-v3';
 import { verifyCaptchaAction } from '@/app/components/captcha/Captcha';
 import CaptchaCheckbox from '@/app/components/captcha/captcha-checkbox/CaptchaCheckbox';
+import { error } from 'console';
 
 const EleventhStep: React.FC<EleventhStepProps> = ({
   eleventhStepTranslation,
@@ -65,6 +66,7 @@ const EleventhStep: React.FC<EleventhStepProps> = ({
     step: number;
     location: string;
     locationOnline: string;
+    stadtteil: string;
   } = getFormCookies(FOURTH_FORM);
 
   let fifthForm: {
@@ -160,6 +162,7 @@ const EleventhStep: React.FC<EleventhStepProps> = ({
     let fourthForm: {
       location: string;
       locationOnline: string;
+      stadtteil: string;
     } = getFormCookies(FOURTH_FORM);
 
     let fifthForm: {
@@ -208,6 +211,7 @@ const EleventhStep: React.FC<EleventhStepProps> = ({
     let datePeriod =
       (thirdForm?.datePeriod && thirdForm?.datePeriod.toString()) || '';
     let location = fourthForm?.location;
+    let stadtteil = fourthForm?.stadtteil;
     let locationOnline = fourthForm?.locationOnline;
     let formOfQueerphobia = fifthForm?.formOfQueerphobia;
     let otherformOfQueerphobiaFreeField =
@@ -240,6 +244,7 @@ const EleventhStep: React.FC<EleventhStepProps> = ({
       dateRangeState,
       datePeriod,
       location,
+      stadtteil,
       locationOnline,
       formOfQueerphobia,
       otherformOfQueerphobiaFreeField,
@@ -260,23 +265,30 @@ const EleventhStep: React.FC<EleventhStepProps> = ({
     };
 
     try {
-      if (verified) {
+      // if (verified) {
         setCaptchaLoading(false);
         // Here you would send the input data to a database, and
         // reset the form UI, display success message logic etc.
         // Sending data to API
-        const response = await new ReportService().sendReport(report);
+        const response = await new ReportService().sendReport(report).then((result)=>{
+          if (result.status===201 || result.status===200) {
+            console.log('Successfull');
+            clearFormCookies();
+            dispatch({ type: NEXT_STEP, payload: 'DATA 1' });
+          }else{
+            console.log('failed');
+            setCaptchaLoading(false);
+            throw new Error('Fetching error occured, please reload');
+          }
+        }).catch((error)=>{console.log("error")
+        setCaptchaLoading(false);
+          throw new Error('Fetching error occured, please reload');}
+        );
 
-        if (response.status === 201) {
-          console.log('Successfull');
-        } else {
-          setCaptchaLoading(false);
-          throw new Error('Fetching error occured, please reload');
-        }
+     
 
-        clearFormCookies();
-        dispatch({ type: NEXT_STEP, payload: 'DATA 1' });
-      }
+       
+      // }
     } catch (error) {
       console.log('verify error captcha', error);
       setCaptchaLoading(false);
