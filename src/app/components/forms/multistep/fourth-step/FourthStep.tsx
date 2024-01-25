@@ -10,7 +10,7 @@ import { FORM_ERRORS, LAST_STEP, NEXT_STEP } from '@/app/context/actions';
 import Checkbox from '../../checkbox/Checkbox';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { FourthFormValues } from './fourthStep';
-import { getFormCookies, getFormStep, setFormCookies } from '@/cookies/cookies';
+import { clearFormCookiesStep, getFormCookies, getFormStep, setFormCookies } from '@/cookies/cookies';
 import { FIFTH_FORM, THIRD_FORM } from '@/cookies/cookies.d';
 import { DatePicker } from 'antd';
 import { useScrollOnTop } from '@/app/hooks/useScrollOnTop';
@@ -34,6 +34,7 @@ const FourthStep: React.FC<FourthStepProps> = ({
   const [valueDate, setValueDate] = React.useState<Dayjs | null>(dayjs());
   const [question] = useState<string>(fourthStepTranslation?.title);
   const [dateRange, setDateRange] = useState<any>();
+  const [checked,setChecked]=useState<number>(0)
 
   const {
     register,
@@ -56,8 +57,21 @@ const FourthStep: React.FC<FourthStepProps> = ({
 
   // Scroll on top
   useScrollOnTop();
-
+let check: any = datePeriod;
   useEffect(() => {
+    
+   if (check==false) {
+    setChecked(0)
+   }
+
+   if (datePeriod===undefined) {
+    console.log(datePeriod, 'periode');
+   }
+   
+    
+    console.log(dateRange, 'range');
+    console.log(check, 'check');
+    
     // dispatch({ type: FORM_ERRORS, payload: false });
     if (datePeriod && !dateRange) {
       dispatch({ type: FORM_ERRORS, payload: true });
@@ -65,27 +79,94 @@ const FourthStep: React.FC<FourthStepProps> = ({
       dispatch({ type: FORM_ERRORS, payload: false });
     }
 
+    if (formValues) {
+    
+
+    
+     if (
+       checked == 0 
+     ) {
+       if (
+         formValues.datePeriod &&
+         formValues.dateRangeState &&
+         formValues.dateRangeState.length > 0
+       ) {
+         // console.log(formValues.datePeriod, '------------');
+
+         dispatch({ type: FORM_ERRORS, payload: false });
+
+         // if (!dateRange) {
+         //    setDateRange(formValues.dateRangeState)
+         // }
+       }
+     }
+      // if (formValues.datePeriod && dateRange == null) {
+      //   dispatch({ type: FORM_ERRORS, payload: true });
+      // }
+    }
     // Setting default values if exists in cookies
 
-    if (formValues && !datePeriod) {
-      datePeriod !== formValues?.datePeriod &&
-        setValue('datePeriod', formValues?.datePeriod);
-
-      formValues?.valueDate && setValueDate(dayjs(formValues?.valueDate));
-
-      dispatch({ type: FORM_ERRORS, payload: false });
+// if (formValues && datePeriod && checked!==1)  {
+//   if (!dateRange) {
+//       setDateRange(formValues.dateRangeState);
+//   }
+// }
+ 
+    if (
+      datePeriod !== undefined &&
+      datePeriod != fourthStepTranslation?.happenedOverALongPeriod
+    ) {
+      console.log('las good');
+      setChecked(3)
+      
+       setDateRange(null);
     }
+console.log('lasssssssst', dateRange);
 
+   if (formValues && datePeriod===undefined) {
+      //  console.log(formValues, 'my date');
+     
+     if (formValues.datePeriod && formValues.datePeriod.length>0) {
+        datePeriod !== formValues?.datePeriod &&
+            setValue('datePeriod', formValues?.datePeriod);
+              setDateRange(formValues.dateRangeState);
+     }
+        
+     
+     
+     
+        
+          
+
+       formValues?.valueDate!==valueDate && setValueDate(dayjs(formValues?.valueDate));
+
+      //  dispatch({ type: FORM_ERRORS, payload: false });
+     }
+  
+
+    
+    // console.log(id, 'id');
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [formValues?.valueDate, formValues?.datePeriod, datePeriod, dateRange]);
+  }, [
+   
+    datePeriod,
+    dateRange,
+    valueDate,
+ setValueDate,
+ checked
+   
+    
+  ]);
 
   // Triggered when submitting form
   const onSubmit: SubmitHandler<FourthFormValues> = (data) => {
+    
     let dateRangeState = dateRange;
 
     let dataWithDate = { valueDate, dateRangeState, ...data };
     let step = getFormStep();
     let dataWithQuestion = { question, step, ...dataWithDate };
+
     id === 'fifthForm'
       ? setFormCookies(dataWithQuestion, FIFTH_FORM)
       : setFormCookies(dataWithQuestion, THIRD_FORM);
@@ -105,6 +186,14 @@ const FourthStep: React.FC<FourthStepProps> = ({
   // On range picker change
   function onDateRangeChange(date: any, dateString: any) {
     setDateRange(date);
+   if (!date) {
+    setChecked(1);
+    console.log(date, 'nulllllllllllllllllllll');
+    dispatch({ type: FORM_ERRORS, payload: true });
+   }
+      
+      
+   
   }
 
   return (
@@ -141,13 +230,14 @@ const FourthStep: React.FC<FourthStepProps> = ({
           </LocalizationProvider>
         </div>
       </div>
-      <div className="mt-4 lg:absolute lg:-right-[40rem]">
+      <div className="mt-4 xl:absolute xl:-right-[30rem] 2xl:-right-[40rem]">
         <Checkbox
           props={register('datePeriod')}
           name="datePeriod"
           value={fourthStepTranslation?.happenedOverALongPeriod}
           label={fourthStepTranslation?.happenedOverALongPeriod}
           id="datePeriod"
+        
         />
 
         {datePeriod && (
@@ -157,10 +247,10 @@ const FourthStep: React.FC<FourthStepProps> = ({
               onChange={onDateRangeChange}
               disabledDate={disabledDate}
               defaultValue={
-                formValues?.dateRangeState && [
+                dateRange!==null&&formValues?.dateRangeState ? [
                   dayjs(formValues?.dateRangeState[0]),
                   dayjs(formValues?.dateRangeState[1]),
-                ]
+                ] : null
               }
               className="w-full py-3 border border-gray-300"
             />

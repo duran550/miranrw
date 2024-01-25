@@ -5,7 +5,7 @@ import { useFormContext } from '@/app/hooks/useFormContext';
 import { FORM_ERRORS, LAST_STEP, NEXT_STEP } from '@/app/context/actions';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { ThirdFormValues } from './thirdStep.d';
-import { getFormCookies, getFormStep, setFormCookies } from '@/cookies/cookies';
+import { clearFormCookiesStep, getFormCookies, getFormStep, setFormCookies } from '@/cookies/cookies';
 import { FOURTH_FORM, SECOND_FORM, THIRD_FORM } from '@/cookies/cookies.d';
 import { useScrollOnTop } from '@/app/hooks/useScrollOnTop';
 
@@ -71,6 +71,7 @@ if (!description || (description && description.length<50)) {
 
   // Triggered when submitting form
   const onSubmit: SubmitHandler<ThirdFormValues> = (data) => {
+    
     let step = getFormStep();
     let dataWithQuestion = { question, step, ...data };
 

@@ -9,7 +9,7 @@ import { FORM_ERRORS, LAST_STEP, NEXT_STEP } from '@/app/context/actions';
 import FormHeader from '../header/header';
 import Checkbox from '../../checkbox/Checkbox';
 import InputField from '../../text-field/InputField';
-import { getFormCookies, getFormStep, setFormCookies } from '@/cookies/cookies';
+import { clearFormCookiesStep, getFormCookies, getFormStep, setFormCookies } from '@/cookies/cookies';
 import { SECOND_FORM } from '@/cookies/cookies.d';
 import { useScrollOnTop } from '@/app/hooks/useScrollOnTop';
 
@@ -90,6 +90,7 @@ let organizationTypeFreeField: string= watch('organizationTypeFreeField')
 
   // Triggered when submitting form
   const onSubmit: SubmitHandler<ThirdStepOrganizationFormValues> = (data) => {
+     
     let step = getFormStep();
     let dataWithQuestion = { question, step, ...data };
     setFormCookies(dataWithQuestion, SECOND_FORM);

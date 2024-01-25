@@ -13,7 +13,7 @@ const NavBar: React.FC<NavBarProps> = ({ navigation, lang }) => {
   const [navbar, setNavbar] = useState<boolean>(false);
   const [toggle, setToggle] = useState<boolean>(false);
   const [toggle1, setToggle1] = useState<boolean>(false);
-
+ 
   const pathname = usePathname();
 
   /* Container 36 */
@@ -277,11 +277,16 @@ const NavBar: React.FC<NavBarProps> = ({ navigation, lang }) => {
               </li>
             </ul>
           </nav>
-          <div className="w-fit xl:pr-4">
-            <Button className="w-64" variant="primary">
-              {navigation?.button}
-            </Button>
-          </div>
+          {/* <div className="w-fit xl:pr-4 "> */}
+          <Button
+            className={` ${
+              pathname === '/' + lang + '' ? 'xl:pr-4 ' : 'fixed right-4 top-28'
+            } ${pathname === '/' + lang + '/report' && "hidden"} w-64 `}
+            variant="primary"
+          >
+            {navigation?.button}
+          </Button>
+          {/* </div> */}
         </div>
       </div>
     </nav>

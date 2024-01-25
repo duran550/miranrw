@@ -10,7 +10,7 @@ import {
   NEXT_STEP,
   REPORTING_PERSON,
 } from '@/app/context/actions';
-import { getFormCookies, getFormStep, setFormCookies } from '@/cookies/cookies';
+import { clearFormCookiesStep, getFormCookies, getFormStep, setFormCookies } from '@/cookies/cookies';
 import { FIRST_FORM } from '@/cookies/cookies.d';
 import { useScrollOnTop } from '@/app/hooks/useScrollOnTop';
 
@@ -65,6 +65,7 @@ const SecondStep: React.FC<SecondStepProps> = ({ secondStepTranslation }) => {
 
   // Triggered when submitting form
   const onSubmit: SubmitHandler<SecondFormValues> = (data) => {
+   
     let step = getFormStep();
     let dataWithQuestion = { question, step, ...data };
     setFormCookies(dataWithQuestion, FIRST_FORM);

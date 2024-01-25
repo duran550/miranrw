@@ -6,7 +6,7 @@ import { FourthStepOrganizationFormValues } from './fourthStepOrganization';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { useFormContext } from '@/app/hooks/useFormContext';
 import { FORM_ERRORS, LAST_STEP, NEXT_STEP } from '@/app/context/actions';
-import { getFormCookies, getFormStep, setFormCookies } from '@/cookies/cookies';
+import { clearFormCookiesStep, getFormCookies, getFormStep, setFormCookies } from '@/cookies/cookies';
 import { THIRD_FORM } from '@/cookies/cookies.d';
 import { useScrollOnTop } from '@/app/hooks/useScrollOnTop';
 
@@ -54,6 +54,7 @@ const FourthStepOrganization: React.FC<FourthStepOrganizationProps> = ({
 
   // Triggered when submitting form
   const onSubmit: SubmitHandler<FourthStepOrganizationFormValues> = (data) => {
+  
     let step = getFormStep();
     let dataWithQuestion = { question, step, ...data };
     setFormCookies(dataWithQuestion, THIRD_FORM);
