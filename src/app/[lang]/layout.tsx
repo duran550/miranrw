@@ -5,6 +5,7 @@ import { Poppins } from 'next/font/google';
 import Head from 'next/head';
 import { FormProvider } from '../context/FormContext';
 import { Providers } from '../components/captcha/providers';
+import Script from 'next/script';
 
 const poppins = Poppins({
   subsets: ['latin'],
@@ -32,13 +33,20 @@ export default function RootLayout({
       <Head>
         <meta name="description">{metadata.description}</meta>
       </Head>
-
+   
       <body
         className={`${poppins.className} flex flex-col bg-white text-textColor min-h-screen`}
       >
         <Providers>
           <FormProvider>{children}</FormProvider>
         </Providers>
+        {/* <script id="dacs" src="" defer></script> */}
+
+        <script
+          id="dacs"
+          src="https://download.digiaccess.org/digiaccess"
+          defer
+        ></script>
       </body>
     </html>
   );

@@ -9,5 +9,7 @@ export const useFormContext = () => {
     state?.reportingPerson;
   let isEditing: boolean = state?.isEditing;
   let formErrors: boolean = state?.formErrors;
-  return { step, formData, reportingPerson, formErrors, dispatch, isEditing };
+  let formValue:any=state.formValue;
+  let id_:string=state.id
+  return { step, formData, reportingPerson, formErrors, dispatch, isEditing,formValue, id_ };
 };

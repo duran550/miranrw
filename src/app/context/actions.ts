@@ -7,3 +7,5 @@ export const IS_EDITING = 'IS_EDITING';
 export const EDIT_STEP = 'EDIT_STEP';
 export const LAST_STEP = 'LAST_STEP';
 export const JUMP_STEP_FOR_WITNESS = 'JUMP_STEP_FOR_WITNESS';
+export const FORM_VALUE = 'FORM_VALUE';
+export const ID_FORM = 'ID_FORM';

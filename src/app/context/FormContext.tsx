@@ -11,6 +11,8 @@ import {
   PREV_STEP,
   REPORTING_PERSON,
   SUBMIT_FORM,
+  FORM_VALUE,
+  ID_FORM
 } from './actions';
 import { getFormStep, setFormStep } from '@/cookies/cookies';
 
@@ -20,6 +22,8 @@ type FormType = {
   isEditing: boolean;
   reportingPerson: 'myself' | 'andere' | 'organization' | 'onBehalf';
   formErrors: boolean;
+  formValue:any,
+  id:string
 };
 
 type ActionType = {
@@ -33,6 +37,8 @@ const initialState: FormType = {
   reportingPerson: 'myself',
   isEditing: false,
   formErrors: true,
+  formValue:'',
+  id:''
 };
 
 const reducer = (initialState: FormType, action: ActionType) => {
@@ -63,6 +69,18 @@ const reducer = (initialState: FormType, action: ActionType) => {
       return {
         ...initialState,
         formErrors: action?.payload,
+      };
+
+    case FORM_VALUE:
+      return {
+        ...initialState,
+        formValue: action?.payload,
+      };
+
+    case ID_FORM:
+      return {
+        ...initialState,
+        id: action?.payload,
       };
 
     case REPORTING_PERSON:

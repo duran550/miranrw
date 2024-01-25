@@ -46,26 +46,26 @@ const MultiStepForm: React.FC<MultiStepFormProps> = ({
                   step === 2
                     ? 10
                     : step === 3
-                    ? 20
-                    : step === 4
-                    ? 30
-                    : step === 5
-                    ? 40
-                    : step === 6
-                    ? 50
-                    : step === 7
-                    ? 70
-                    : step === 8
-                    ? 80
-                    : step === 9
-                    ? 90
-                    : 100
+                      ? 20
+                      : step === 4
+                        ? 30
+                        : step === 5
+                          ? 40
+                          : step === 6
+                            ? 50
+                            : step === 7
+                              ? 70
+                              : step === 8
+                                ? 80
+                                : step === 9
+                                  ? 90
+                                  : 100
                 }
               />
             )}
 
             {reportingPerson !== 'organization' ? (
-              <div className="">
+              <div className="mb-6">
                 {step === 2 ? (
                   <SecondStep
                     secondStepTranslation={formTranslation?.stepper?.secondStep}
@@ -120,7 +120,7 @@ const MultiStepForm: React.FC<MultiStepFormProps> = ({
               </div>
             ) : (
               /* Organization scenario */
-              <div className="">
+              <div className="mb-6">
                 {step === 2 ? (
                   <SecondStep
                     secondStepTranslation={formTranslation?.stepper?.secondStep}
@@ -198,21 +198,23 @@ const MultiStepForm: React.FC<MultiStepFormProps> = ({
                   stepFromCookies === 2
                     ? 'firstForm'
                     : stepFromCookies === 3
-                    ? 'secondForm'
-                    : stepFromCookies === 4
-                    ? 'thirdForm'
-                    : stepFromCookies === 5
-                    ? 'fourthForm'
-                    : stepFromCookies === 6
-                    ? 'fifthForm'
-                    : stepFromCookies === 7
-                    ? 'sixthForm'
-                    : stepFromCookies === 8
-                    ? 'seventhForm'
-                    : step === 9
-                    ? 'eighthForm'
-                    : 'ninethForm'
+                      ? 'secondForm'
+                      : stepFromCookies === 4
+                        ? 'thirdForm'
+                        : stepFromCookies === 5
+                          ? 'fourthForm'
+                          : stepFromCookies === 6
+                            ? 'fifthForm'
+                            : stepFromCookies === 7
+                              ? 'sixthForm'
+                              : stepFromCookies === 8
+                                ? 'seventhForm'
+                                : step === 9
+                                  ? 'eighthForm'
+                                  : 'ninethForm'
                 }`}
+                disabled={formErrors && true}
+                variant={`${formErrors ? 'disabled' : 'primary'}`}
               >
                 {formTranslation?.button.save}
               </Button>
@@ -286,20 +288,20 @@ const MultiStepForm: React.FC<MultiStepFormProps> = ({
                                   stepFromCookies === 2
                                     ? 'firstForm'
                                     : stepFromCookies === 3
-                                    ? 'secondForm'
-                                    : stepFromCookies === 4
-                                    ? 'thirdForm'
-                                    : stepFromCookies === 5
-                                    ? 'fourthForm'
-                                    : stepFromCookies === 6
-                                    ? 'fifthForm'
-                                    : stepFromCookies === 7
-                                    ? 'sixthForm'
-                                    : stepFromCookies === 8
-                                    ? 'seventhForm'
-                                    : stepFromCookies === 9
-                                    ? 'eighthForm'
-                                    : 'ninethForm'
+                                      ? 'secondForm'
+                                      : stepFromCookies === 4
+                                        ? 'thirdForm'
+                                        : stepFromCookies === 5
+                                          ? 'fourthForm'
+                                          : stepFromCookies === 6
+                                            ? 'fifthForm'
+                                            : stepFromCookies === 7
+                                              ? 'sixthForm'
+                                              : stepFromCookies === 8
+                                                ? 'seventhForm'
+                                                : stepFromCookies === 9
+                                                  ? 'eighthForm'
+                                                  : 'ninethForm'
                                 }`}
                                 className="w-32 font-bold ml-auto"
                                 disabled={formErrors && true}
@@ -323,20 +325,20 @@ const MultiStepForm: React.FC<MultiStepFormProps> = ({
                           stepFromCookies === 2
                             ? 'firstForm'
                             : stepFromCookies === 3
-                            ? 'secondForm'
-                            : stepFromCookies === 4
-                            ? 'thirdForm'
-                            : stepFromCookies === 5
-                            ? 'fourthForm'
-                            : stepFromCookies === 6
-                            ? 'fifthForm'
-                            : stepFromCookies === 7
-                            ? 'sixthForm'
-                            : stepFromCookies === 8
-                            ? 'seventhForm'
-                            : stepFromCookies === 9
-                            ? 'eighthForm'
-                            : 'ninethForm'
+                              ? 'secondForm'
+                              : stepFromCookies === 4
+                                ? 'thirdForm'
+                                : stepFromCookies === 5
+                                  ? 'fourthForm'
+                                  : stepFromCookies === 6
+                                    ? 'fifthForm'
+                                    : stepFromCookies === 7
+                                      ? 'sixthForm'
+                                      : stepFromCookies === 8
+                                        ? 'seventhForm'
+                                        : stepFromCookies === 9
+                                          ? 'eighthForm'
+                                          : 'ninethForm'
                         }`}
                         className="w-32 font-bold ml-auto"
                         disabled={formErrors && true}

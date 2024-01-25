@@ -5,27 +5,27 @@ import RadioSingle from '../../radio/RadioSingle';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { useFormContext } from '@/app/hooks/useFormContext';
 import { FORM_ERRORS, LAST_STEP, NEXT_STEP } from '@/app/context/actions';
-import { getFormCookies, getFormStep, setFormCookies } from '@/cookies/cookies';
+import { clearFormCookiesStep, getFormCookies, getFormStep, setFormCookies } from '@/cookies/cookies';
 import { FOURTH_FORM, SIXTH_FORM } from '@/cookies/cookies.d';
 import { useScrollOnTop } from '@/app/hooks/useScrollOnTop';
 import AutoComplete from '../../auto-complete/AutoComplete';
 import InputField from '../../text-field/InputField';
 
 const FifthStep: React.FC<FifthStepProps> = ({ fifthStepTranslation, id }) => {
-  const { dispatch, reportingPerson, isEditing } = useFormContext();
+  const { dispatch, reportingPerson, isEditing, formErrors } = useFormContext();
   const [question] = useState<string>(fifthStepTranslation?.title);
   const [location, setLocation] = useState<string>('');
   const [searchedText, setSearchedText] = useState<string | undefined>(
     undefined
   );
-console.log(fifthStepTranslation);
+ 
 
   const {
     register,
     handleSubmit,
     watch,
     setValue,
-    formState: { errors },
+    formState: { errors, isValid },
   } = useForm<FifthFormValues>();
 
   // Watching fields
@@ -38,52 +38,106 @@ console.log(fifthStepTranslation);
     locationOnline: string;
     location: string;
     question: string;
+    stadtteil: string;
   } = getFormCookies(FOURTH_FORM);
 
   // Scroll on top
   useScrollOnTop();
 
   useEffect(() => {
-    dispatch({ type: FORM_ERRORS, payload: true });
-console.log(locationOnline, 'location');
+    console.log(formErrors, 'probleme');
+    // dispatch({ type: FORM_ERRORS, payload: true });
+    console.log(locationOnline, 'location');
+    dispatch({ type: FORM_ERRORS, payload: false });
 
     // Validating fields
 
     // if (stadtteil && stadtteil.length>0 && stadtteil.length<3) {
     //    dispatch({ type: FORM_ERRORS, payload: true });
-      
+
     // }
     //   if (stadtteil && stadtteil.length == 0 ) {
     //     dispatch({ type: FORM_ERRORS, payload: true });
     //   }
 
-
-
-    if (!locationOnline) {
-      dispatch({ type: FORM_ERRORS, payload: true });
+    if (!locationOnline && !formValues) {
+       dispatch({ type: FORM_ERRORS, payload: true });
+       console.log('bouyakaaa5');
     } else {
-      if (
-        (locationOnline &&
-          locationOnline === fifthStepTranslation?.secondOption?.value) 
-      ) {
-        dispatch({ type: FORM_ERRORS, payload: true });
-        if (location && location.length>0) {
+      if (locationOnline) {
+        if (
+          locationOnline &&
+          locationOnline === fifthStepTranslation?.secondOption?.value
+        ) {
+            dispatch({ type: FORM_ERRORS, payload: true });
+            
+          if (location && location.length > 0) {
+            dispatch({ type: FORM_ERRORS, payload: false });
+            if (stadtteil && stadtteil.length == 0 ) {
+               dispatch({ type: FORM_ERRORS, payload: true });
+           
+            }
+            if (stadtteil && stadtteil.length > 0 && stadtteil.length < 4) {
+
+               dispatch({ type: FORM_ERRORS, payload: true });
+               
+            }
+            if (stadtteil && stadtteil.length > 3) {
+              dispatch({ type: FORM_ERRORS, payload: false });
+              
+            }
+          }
+          if (!location && formValues && formValues.location.length>0) {
+            //  dispatch({ type: FORM_ERRORS, payload: true });
+            
+          }
+        }
+        if (
+          locationOnline &&
+          locationOnline === fifthStepTranslation?.firstOption?.value
+        ) {
           dispatch({ type: FORM_ERRORS, payload: false });
         }
-      } 
-      if (
-        locationOnline &&
-        locationOnline === fifthStepTranslation?.firstOption?.value
-      ) {
-        dispatch({ type: FORM_ERRORS, payload: false });
-      } 
+      } else {
+        if (!location && !stadtteil && formValues && formValues.stadtteil && formValues.stadtteil.length>0) {
+        
+
+           dispatch({ type: FORM_ERRORS, payload: false });
+        }
+      }
+    //   // else{
+    //   //    if (
+    //   //      formValues &&
+    //   //      formValues.location &&
+    //   //      formValues.location.length > 0
+
+    //   //    ) {
+    //   //      dispatch({ type: FORM_ERRORS, payload: false });
+    //   //      console.log('good');
+
+    //   //      if (!location && formValues.stadtteil && formValues.stadtteil.length > 0) {
+    //   //       dispatch({ type: FORM_ERRORS, payload: true });
+    //   //       console.log('weuttttt');
+    //   //      }
+    //   //    }
+    //   // }
     }
 
-    if (formValues && !locationOnline && !location) {
-      // dispatch({ type: FORM_ERRORS, payload: false });
+    if (formValues && !locationOnline) {
       locationOnline !== formValues?.locationOnline &&
         setValue('locationOnline', formValues?.locationOnline);
-      location !== formValues?.location && '';
+
+      if (formValues.location && formValues.location.length > 0 && !location) {
+        location !== formValues?.location && setLocation(formValues?.location);
+
+        if (formValues.stadtteil && formValues.stadtteil.length > 0) {
+          // console.log(formValues.stadtteil, 'stadtteil--------yes');
+          stadtteil !== formValues?.stadtteil &&
+            setValue('stadtteil', formValues.stadtteil);
+
+          // dispatch({ type: FORM_ERRORS, payload: false });
+        }
+      }
     }
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -95,10 +149,14 @@ console.log(locationOnline, 'location');
     location,
     stadtteil,
     searchedText,
+    formErrors,
   ]);
 
   // Triggered when submitting form
+  // console.log(location, 'locationoui');
+
   const onSubmit: SubmitHandler<FifthFormValues> = (data) => {
+   
     let step = getFormStep();
 
     let dataWithQuestion = { question, location, step, ...data };
@@ -151,7 +209,7 @@ console.log(locationOnline, 'location');
           id={fifthStepTranslation?.firstOption?.id}
           label={fifthStepTranslation?.firstOption?.label}
           name="locationOnline"
-          props={register('locationOnline', {required:true})}
+          props={register('locationOnline', { required: true })}
           value={fifthStepTranslation?.firstOption?.value}
         />
       </div>
@@ -171,16 +229,16 @@ console.log(locationOnline, 'location');
                 locationFromParent={location}
                 handleOnSelect={handleOnSelect}
               />
-              <div className="mt-4">
+              <div className="mt-4 mb-6">
                 <InputField
-                  props={register('stadtteil', {minLength:4})}
+                  props={register('stadtteil')}
                   name={fifthStepTranslation?.thirdOption?.name}
                   title={fifthStepTranslation?.thirdOption?.title}
                 />
-                {/* <p className="text-sm mt-1 ml-4 text-red-600">
+                <p className="text-sm mt-1 ml-4 text-red-600">
                   {errors?.stadtteil &&
                     fifthStepTranslation?.thirdOption?.minCharacters}
-                </p> */}
+                </p>
               </div>
             </>
           )}
