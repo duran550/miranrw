@@ -265,7 +265,7 @@ const EleventhStep: React.FC<EleventhStepProps> = ({
     };
 
     try {
-      // if (verified) {
+      //  if (verified) {
         setCaptchaLoading(false);
         // Here you would send the input data to a database, and
         // reset the form UI, display success message logic etc.
@@ -288,7 +288,7 @@ const EleventhStep: React.FC<EleventhStepProps> = ({
      
 
        
-      // }
+      //  }
     } catch (error) {
       console.log('verify error captcha', error);
       setCaptchaLoading(false);
@@ -298,7 +298,7 @@ const EleventhStep: React.FC<EleventhStepProps> = ({
   };
 
   useEffect(() => {
-    // dispatch({ type: FORM_ERRORS, payload: true });
+    dispatch({ type: FORM_ERRORS, payload: true });
 
     if (captcha && captcha.length>0 && captcha.includes('captcha')) {
       dispatch({ type: FORM_ERRORS, payload: false })
