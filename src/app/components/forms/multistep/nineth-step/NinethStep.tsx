@@ -176,7 +176,7 @@ const NinethStep: React.FC<NinethStepProps> = ({
       // if (formValues) {
         // clearFormCookiesStep(EIGTH_FORM);
           let step = getFormStep();
-           if (data.haveYouReported.length < 5) {
+           if (data.haveYouReported && data.haveYouReported.length < 5) {
             
              let dataWithQuestion = {
                question,
@@ -257,7 +257,9 @@ const NinethStep: React.FC<NinethStepProps> = ({
                   label={ninethStepTranslation?.data?.optionsYes[2]?.label}
                 />
                 {/* First freeText field */}
-                {haveYouReportedYes &&
+                {haveYouReported ===
+                  ninethStepTranslation?.data?.options[1].value &&
+                  haveYouReportedYes &&
                   haveYouReportedYes?.includes(
                     ninethStepTranslation?.data?.optionsYes[2].value
                   ) && (
@@ -292,7 +294,8 @@ const NinethStep: React.FC<NinethStepProps> = ({
 
           {/* Second freeText field */}
 
-          {haveYouReportedYes &&
+          {haveYouReported ===
+            ninethStepTranslation?.data?.options[1].value&&haveYouReportedYes &&
             haveYouReportedYes?.includes(
               ninethStepTranslation?.data?.optionsYes[3].value
             ) && (
