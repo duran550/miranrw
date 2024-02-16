@@ -65,7 +65,7 @@ const MultiStepForm: React.FC<MultiStepFormProps> = ({
             )}
 
             {reportingPerson !== 'organization' ? (
-              <div className="mb-6">
+              <div className="mb-16">
                 {step === 2 ? (
                   <SecondStep
                     secondStepTranslation={formTranslation?.stepper?.secondStep}
@@ -120,7 +120,7 @@ const MultiStepForm: React.FC<MultiStepFormProps> = ({
               </div>
             ) : (
               /* Organization scenario */
-              <div className="mb-6">
+              <div className="mb-14">
                 {step === 2 ? (
                   <SecondStep
                     secondStepTranslation={formTranslation?.stepper?.secondStep}

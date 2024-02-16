@@ -228,6 +228,7 @@ const FifthStep: React.FC<FifthStepProps> = ({ fifthStepTranslation, id }) => {
                 handleOnSearch={handleOnSearch}
                 locationFromParent={location}
                 handleOnSelect={handleOnSelect}
+                
               />
               <div className="mt-4 mb-6">
                 <InputField
