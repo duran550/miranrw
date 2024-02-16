@@ -15,6 +15,7 @@ const NavBar: React.FC<NavBarProps> = ({ navigation, lang }) => {
   const [toggle1, setToggle1] = useState<boolean>(false);
  
   const pathname = usePathname();
+  const urlSplit=pathname.split('/')
 
   /* Container 36 */
 
@@ -43,7 +44,7 @@ const NavBar: React.FC<NavBarProps> = ({ navigation, lang }) => {
           <div
             className={`flex lg:px-8 xl:px-2 w-full z-10 items-center justify-between py-0 `}
           >
-            <Link className="pt-1" href="/">
+            <Link className="pt-1" href={'/' + urlSplit[1]}>
               <Image className="md:w-96 w-72" src={Logo} alt="Logo" />
             </Link>
             <div className="xl:hidden flex flex-col">

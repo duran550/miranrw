@@ -852,7 +852,7 @@
         },
         "eleventhStep": {
           "title": "Vielen Dank für deine Meldung.",
-          "verification": "Sind Sie mit diesen Daten einverstanden?",
+          "verification": "Sind deine Angaben korrekt?",
           "mandatory": "* Pflichtfeld",
           "description": "Hier gelangst Du zu unserer Seite mit Links zur Beratung.",
           "buttonText": "Verweisberatung",

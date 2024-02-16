@@ -68,14 +68,32 @@ let check: any = datePeriod;
     console.log(dateRange, 'range');
     console.log(check, 'check');
     if (valueDate == null && !datePeriod) {
-      dispatch({ type: FORM_ERRORS, payload: true });
+       console.log('help');
+        dispatch({ type: FORM_ERRORS, payload: true });
+    } else {
+       if (datePeriod && !dateRange) {
+         dispatch({ type: FORM_ERRORS, payload: true });
+       } else {
+         if (datePeriod && dateRange) {
+           dispatch({ type: FORM_ERRORS, payload: false });
+         }
+
+         // dispatch({ type: FORM_ERRORS, payload: false });
+       }
+      if (valueDate && !datePeriod) {
+         dispatch({ type: FORM_ERRORS, payload: false });
+      }
     }
     // dispatch({ type: FORM_ERRORS, payload: false });
-    if (datePeriod && !dateRange) {
-      dispatch({ type: FORM_ERRORS, payload: true });
-    } else {
-      dispatch({ type: FORM_ERRORS, payload: false });
-    }
+    // if (datePeriod && !dateRange) {
+    //   dispatch({ type: FORM_ERRORS, payload: true });
+    // } else {
+    //    if (datePeriod && dateRange) {
+    //      dispatch({ type: FORM_ERRORS, payload: false });
+    //    }
+      
+    //   // dispatch({ type: FORM_ERRORS, payload: false });
+    // }
 
     if (formValues) {
       if (checked == 0) {
