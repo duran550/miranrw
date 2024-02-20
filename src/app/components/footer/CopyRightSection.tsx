@@ -6,7 +6,7 @@ import RubikonLogo from '../../../../public/images/secondImage.png';
 import NGVTLogo from '../../../../public/images/fourthImg.svg';
 import LSVDLogo from '../../../../public/images/thirdImg.svg';
 import LSVDLogo2 from '../../../../public/images/thirdImg.svg';
-import MinisteriumLogo from '../../../../public/images/ministerium.svg';
+import MinisteriumLogo from '../../../../public/images/BG + Footer Image.svg';
 import QNWLogo from '../../../../public/images/fifthLogo.svg';
 
 type CopyrightProps = {
@@ -64,12 +64,14 @@ const CopyRightSection: React.FC<CopyrightProps> = ({
               alt="LSVD Logo"
             />
           </Link>
-
-          <Image
-            className="sm:w-45 hover:grayscale-0  grayscale   w-[20rem] "
-            src={MinisteriumLogo}
-            alt="Ministerium Logo"
-          />
+          <Link href="https://www.mkw.nrw/ministerium" target="_blank">
+            {' '}
+            <Image
+              className="sm:w-45 hover:grayscale-0  grayscale   w-[20rem] "
+              src={MinisteriumLogo}
+              alt="Ministerium Logo"
+            />
+          </Link>
         </div>
         <h1 className="font-bold lg:hidden text-xl px-4 lg:px-0 py-8">
           {copyrightTranslation?.partners}

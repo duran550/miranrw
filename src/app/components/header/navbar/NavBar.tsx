@@ -90,12 +90,12 @@ const NavBar: React.FC<NavBarProps> = ({ navigation, lang }) => {
           <nav
             className={`container  z-10 ${
               navbar ? 'block w-full' : 'hidden w-full'
-            } flex absolute xl:hidden right-0 ml-auto top-24 left-0 bg-menuAndFooterColor  z-20 px-8  text-textColor items-start justify-between `}
+            } flex absolute xl:hidden right-0 ml-auto top-24 left-0 bg-menuAndFooterColor z-50 px-8  text-textColor items-start justify-between `}
           >
             <ul className="flex flex-col gap-y-4 pt-8 mb-8">
-              <li>
+              {/* <li>
                 <Link href={`/${lang}`}>{navigation?.home}</Link>
-              </li>
+              </li> */}
               <li>
                 <Link href={`/${lang}/report`}>
                   {navigation?.reportIncident}
@@ -107,7 +107,7 @@ const NavBar: React.FC<NavBarProps> = ({ navigation, lang }) => {
                   {navigation.aboutQueer?.title}
                 </div>
                 {toggle1 && (
-                  <ul className="bg-menuAndFooterColor py-3 px-6 -left-6 w-[15rem] flex flex-col shadow-xl absolute top-6">
+                  <ul className="bg-white py-3 px-6 -left-6 w-[15rem] flex flex-col shadow-xl absolute top-6 z-10">
                     <Link
                       href={`/${lang}/queerphobia/#whatIsQueerphobia`}
                       className="py-2"
@@ -126,10 +126,12 @@ const NavBar: React.FC<NavBarProps> = ({ navigation, lang }) => {
               {/* About us section */}
               <li onClick={() => setToggle(!toggle)} className="relative">
                 <div className={`${toggle ? 'font-bold' : ''} cursor-pointer`}>
-                  {navigation.aboutUs?.title}
+                  <Link href={`/${lang}/about-us`}>
+                    {navigation.aboutUs?.title}
+                  </Link>
                 </div>
                 {toggle && (
-                  <ul className="bg-menuAndFooterColor py-3 px-6 -left-6 w-[15rem] flex flex-col shadow-xl absolute top-6">
+                  <ul className="bg-white py-3 px-6 -left-6 w-[15rem] flex flex-col shadow-xl absolute top-6 z-10">
                     <Link href={`/${lang}/about-us/#team`} className="py-2">
                       MIQ NRW
                     </Link>
@@ -153,7 +155,7 @@ const NavBar: React.FC<NavBarProps> = ({ navigation, lang }) => {
                 <Link href={`/${lang}/faqs`}>{navigation?.faqs}</Link>
               </li>
             </ul>
-            <div className="pt-8 mb-8">
+            <div className="pt-8 mb-8 sm:block hidden">
               <LocaleSwitcher />
             </div>
           </nav>
@@ -164,7 +166,7 @@ const NavBar: React.FC<NavBarProps> = ({ navigation, lang }) => {
             className={`container w-full opacity-0 xl:opacity-100 xl:block flex  items-center justify-between  `}
           >
             <ul className="flex w-full space-x-6 2xl:space-x-8">
-              <li>
+              {/* <li>
                 <Link
                   className={`${
                     pathname === '/en' ||
@@ -177,7 +179,7 @@ const NavBar: React.FC<NavBarProps> = ({ navigation, lang }) => {
                 >
                   {navigation?.home}
                 </Link>
-              </li>
+              </li> */}
               <li>
                 <Link
                   className={`${
@@ -232,7 +234,7 @@ const NavBar: React.FC<NavBarProps> = ({ navigation, lang }) => {
                   {navigation.aboutUs?.title}
                 </Link>
                 {
-                  <ul className="hidden bg-menuAndFooterColor py-3 px-6 text-sm -left-6 w-[18rem] flex-col  absolute top-4.5 z-0 pt-4">
+                  <ul className="hidden bg-white py-3 px-6 text-sm -left-6 w-[18rem] flex-col  absolute top-4.5 z-0 pt-4">
                     <Link
                       className="hover:font-bold py-3"
                       href="/about-us/#team"
@@ -279,14 +281,20 @@ const NavBar: React.FC<NavBarProps> = ({ navigation, lang }) => {
             </ul>
           </nav>
           {/* <div className="w-fit xl:pr-4 "> */}
-          <Button
-            className={` ${
-              pathname === '/' + lang + '' ? 'xl:pr-4 ' : 'fixed right-4 top-28'
-            } ${pathname === '/' + lang + '/report' && "hidden"} w-64 `}
-            variant="primary"
-          >
-            {navigation?.button}
-          </Button>
+          <Link href={`/${lang}/report`}>
+            {' '}
+            <Button
+              className={` ${
+                pathname === '/' + lang + ''
+                  ? 'xl:pr-4 '
+                  : 'fixed right-4 top-28'
+              } ${pathname === '/' + lang + '/report' && 'hidden'} w-64 `}
+              variant="primary"
+            >
+              {navigation?.button}
+            </Button>
+          </Link>
+
           {/* </div> */}
         </div>
       </div>
