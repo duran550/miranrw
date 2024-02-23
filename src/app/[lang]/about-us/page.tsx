@@ -4,7 +4,9 @@ import Header from '@/app/components/header/header';
 import SinglePageLayout from '@/app/components/layout/SinglePageLayout';
 import { Locale } from '@/i18n.config';
 import { getDictionary } from '@/lib/dictionary';
-import img1 from '../../../../public/images/VERWEISBERATUNG Illu Image.png';
+import img1 from '../../../../public/images/VERWEISBERATUNG Illu Image.svg';
+import img2 from '../../../../public/images/AKTUELLES Illu Image.svg';
+
 import Image from 'next/image';
 import News from '@/app/components/news/News';
 
@@ -48,6 +50,7 @@ export default async function aboutUs({
               </p>
             </div>
           </div>
+          <div></div>
 
           <News newsTranslation={page.about} />
         </SinglePageLayout>

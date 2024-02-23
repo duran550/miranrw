@@ -29,7 +29,7 @@ const InputField: React.FC<InputFieldProps> = ({
             type="text"
             placeholder={placeholder}
             autoComplete="off"
-            autoFocus
+            // autoFocus
             name={name}
             {...props}
             onChange={change}
@@ -47,7 +47,7 @@ const InputField: React.FC<InputFieldProps> = ({
             type="text"
             placeholder={placeholder}
             autoComplete="off"
-            autoFocus
+            // autoFocus
             name={name}
             {...props}
           />

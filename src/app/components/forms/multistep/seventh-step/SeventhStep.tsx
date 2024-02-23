@@ -39,6 +39,10 @@ const SeventhStep: React.FC<SeventhStepProps> = ({
       question: string;
     } = getFormCookies(SIXTH_FORM);
 
+    if (id && id === 'seventhForm') {
+      formValues = getFormCookies(SEVENTH_FORM);
+    }
+
     dispatch({ type: FORM_ERRORS, payload: true });
 
     if (
@@ -99,9 +103,10 @@ const SeventhStep: React.FC<SeventhStepProps> = ({
       ? setFormCookies(dataWithQuestion, SEVENTH_FORM)
       : setFormCookies(dataWithQuestion, SIXTH_FORM);
 
-    isEditing && reportingPerson === 'myself'
-      ? dispatch({ type: LAST_STEP, payload: 11 })
-      : dispatch({ type: NEXT_STEP, payload: 'DATA 1' });
+     dispatch({ type: NEXT_STEP, payload: 'DATA 1' });
+    // isEditing && reportingPerson === 'myself'
+    //   ? dispatch({ type: LAST_STEP, payload: 11 })
+    //   : dispatch({ type: NEXT_STEP, payload: 'DATA 1' });
   };
 
   return (

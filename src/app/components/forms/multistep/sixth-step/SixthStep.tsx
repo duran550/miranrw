@@ -77,9 +77,11 @@ const SixthStep: React.FC<SixthStepProps> = ({ sixthStepTranslation }) => {
     let dataWithQuestion = { question, step, ...data };
     setFormCookies(dataWithQuestion, FIFTH_FORM);
 
-    isEditing && reportingPerson === 'myself'
-      ? dispatch({ type: LAST_STEP, payload: 11 })
-      : !isEditing && reportingPerson === 'andere'
+     dispatch({ type: NEXT_STEP, payload: 'DATA 1' });
+    // isEditing && reportingPerson === 'myself'
+    //   ? dispatch({ type: LAST_STEP, payload: 11 })
+    //   : dispatch({ type: NEXT_STEP, payload: 'DATA 1' });
+    !isEditing && reportingPerson === 'andere'
       ? dispatch({ type: JUMP_STEP_FOR_WITNESS, payload: '' })
       : dispatch({ type: NEXT_STEP, payload: '' });
   };

@@ -63,6 +63,10 @@ const NinethStep: React.FC<NinethStepProps> = ({
       haveYouReportedYesFreeField2: string;
       question: string;
     } = getFormCookies(EIGTH_FORM);
+
+    if (id && id === 'ninethForm') {
+      formValues = getFormCookies(NINETH_FORM);
+    }
     dispatch({ type: FORM_ERRORS, payload: true });
 
     //   Setting values in the fields
@@ -186,7 +190,7 @@ const NinethStep: React.FC<NinethStepProps> = ({
              };
              // dispatch({ type: ID_FORM, payload: id });
              //  dispatch({ type: FORM_VALUE, payload: dataWithQuestion });
-             id === 'eighthForm'
+             id === 'ninethForm'
                ? setFormCookies(dataWithQuestion, NINETH_FORM)
                : setFormCookies(dataWithQuestion, EIGTH_FORM);
            } else {
@@ -198,11 +202,10 @@ const NinethStep: React.FC<NinethStepProps> = ({
            }
       
   
-  
-
-    isEditing && reportingPerson === 'myself'
-      ? dispatch({ type: LAST_STEP, payload: 11 })
-      : dispatch({ type: NEXT_STEP, payload: '' });
+   dispatch({ type: NEXT_STEP, payload: 'DATA 1' });
+    // isEditing && reportingPerson === 'myself'
+    //   ? dispatch({ type: LAST_STEP, payload: 11 })
+    //   : dispatch({ type: NEXT_STEP, payload: 'DATA 1' });
   };
 
   return (
