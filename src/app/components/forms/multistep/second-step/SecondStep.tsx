@@ -69,9 +69,10 @@ const SecondStep: React.FC<SecondStepProps> = ({ secondStepTranslation }) => {
     let step = getFormStep();
     let dataWithQuestion = { question, step, ...data };
     setFormCookies(dataWithQuestion, FIRST_FORM);
-    isEditing && reportingPerson === 'myself'
-      ? dispatch({ type: LAST_STEP, payload: 11 })
-      : dispatch({ type: NEXT_STEP, payload: 'DATA 1' });
+    dispatch({ type: NEXT_STEP, payload: 'DATA 1' });
+    // isEditing && reportingPerson === 'myself'
+    //   ? dispatch({ type: LAST_STEP, payload: 11 })
+    //   : dispatch({ type: NEXT_STEP, payload: 'DATA 1' });
   };
 
   return (

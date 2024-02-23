@@ -109,6 +109,7 @@ const MultiStepForm: React.FC<MultiStepFormProps> = ({
                     eleventhStepTranslation={
                       formTranslation?.stepper?.eleventhStep
                     }
+                    secondStepTranslation={formTranslation?.stepper?.secondStep}
                   />
                 ) : (
                   <TwelvethStep
@@ -174,6 +175,7 @@ const MultiStepForm: React.FC<MultiStepFormProps> = ({
                     eleventhStepTranslation={
                       formTranslation?.stepper?.eleventhStep
                     }
+                    secondStepTranslation={formTranslation?.stepper?.secondStep}
                   />
                 ) : (
                   <TwelvethStep
@@ -192,32 +194,33 @@ const MultiStepForm: React.FC<MultiStepFormProps> = ({
             stepFromCookies !== 10 &&
             stepFromCookies !== 11 &&
             stepFromCookies !== 12 &&
-            reportingPerson === 'myself' ? (
-              <Button
-                form={`${
-                  stepFromCookies === 2
-                    ? 'firstForm'
-                    : stepFromCookies === 3
-                      ? 'secondForm'
-                      : stepFromCookies === 4
-                        ? 'thirdForm'
-                        : stepFromCookies === 5
-                          ? 'fourthForm'
-                          : stepFromCookies === 6
-                            ? 'fifthForm'
-                            : stepFromCookies === 7
-                              ? 'sixthForm'
-                              : stepFromCookies === 8
-                                ? 'seventhForm'
-                                : step === 9
-                                  ? 'eighthForm'
-                                  : 'ninethForm'
-                }`}
-                disabled={formErrors && true}
-                variant={`${formErrors ? 'disabled' : 'primary'}`}
-              >
-                {formTranslation?.button.save}
-              </Button>
+                reportingPerson !== 'myself' && reportingPerson!=="andere" && reportingPerson!=="onBehalf"  && reportingPerson!=="organization" ? (
+            <></>
+              // <Button
+              //   form={`${
+              //     stepFromCookies === 2
+              //       ? 'firstForm'
+              //       : stepFromCookies === 3
+              //         ? 'secondForm'
+              //         : stepFromCookies === 4
+              //           ? 'thirdForm'
+              //           : stepFromCookies === 5
+              //             ? 'fourthForm'
+              //             : stepFromCookies === 6
+              //               ? 'fifthForm'
+              //               : stepFromCookies === 7
+              //                 ? 'sixthForm'
+              //                 : stepFromCookies === 8
+              //                   ? 'seventhForm'
+              //                   : step === 9
+              //                     ? 'eighthForm'
+              //                     : 'ninethForm'
+              //   }`}
+              //   disabled={formErrors && true}
+              //   variant={`${formErrors ? 'disabled' : 'primary'}`}
+              // >
+              //   {formTranslation?.button.save}
+              // </Button>
             ) : (
               <>
                 {step !== 1 ? (
@@ -267,7 +270,7 @@ const MultiStepForm: React.FC<MultiStepFormProps> = ({
                               {formTranslation.button.prev}
                             </Button>
                             <Button
-                              form={`${'ninethForm'}`}
+                              form={`${'tenthForm'}`}
                               className="w-full lg:mr-auto lg:w-72 rounded-full py-4 font-bold"
                               disabled={formErrors && true}
                               variant={`${formErrors ? 'disabled' : 'primary'}`}

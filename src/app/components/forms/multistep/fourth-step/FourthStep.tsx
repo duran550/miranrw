@@ -45,15 +45,27 @@ const FourthStep: React.FC<FourthStepProps> = ({
   } = useForm<FourthFormValues>();
 
   let datePeriod: string = watch('datePeriod');
-
-  // Getting form cookies
   let formValues: {
     datePeriod: string;
     question: string;
     dateRange: string;
     valueDate: any;
     dateRangeState: any;
-  } = getFormCookies(THIRD_FORM);
+  } = {
+    datePeriod: '',
+    question: '',
+    dateRange: '',
+    valueDate: '',
+    dateRangeState: '',
+  };
+  // Getting form cookies
+  // alert(id)
+ if (id && id === 'fifthForm') {
+   formValues = getFormCookies(FIFTH_FORM);
+ } else {
+   formValues = getFormCookies(THIRD_FORM);
+   console.log('organization', formValues);
+ }
   // dispatch({ type: FORM_ERRORS, payload: true });
   // Scroll on top
   useScrollOnTop();
@@ -159,13 +171,14 @@ let check: any = datePeriod;
     let step = getFormStep();
     let dataWithQuestion = { question, step, ...dataWithDate };
 
-    id === 'fifthForm'
+   id && id === 'fifthForm'
       ? setFormCookies(dataWithQuestion, FIFTH_FORM)
       : setFormCookies(dataWithQuestion, THIRD_FORM);
 
-    isEditing && reportingPerson === 'myself'
-      ? dispatch({ type: LAST_STEP, payload: 11 })
-      : dispatch({ type: NEXT_STEP, payload: 'DATA 1' });
+  dispatch({ type: NEXT_STEP, payload: 'DATA 1' });
+    // isEditing && reportingPerson === 'myself'
+    //   ? dispatch({ type: LAST_STEP, payload: 11 })
+    //   : dispatch({ type: NEXT_STEP, payload: 'DATA 1' });
   };
 
   // Handle default value

@@ -39,8 +39,13 @@ const ThirdStep: React.FC<ThirdStepProps> = ({ thirdStepTranslation, id }) => {
   // const watchAllFields = watch();
   let description: string = watch('description');
   // Getting form cookies
-  let formValues: { description: string; question: string } =
-    getFormCookies(SECOND_FORM);
+  let formValues: { description: string; question: string } = getFormCookies(SECOND_FORM);
+console.log('formValues',formValues);
+
+  if (id && id == 'fourthForm') {
+  
+    formValues = getFormCookies(FOURTH_FORM);
+  }
 
   // Scroll on top
   useScrollOnTop();
@@ -75,13 +80,14 @@ if (!description || (description && description.length<50)) {
     let step = getFormStep();
     let dataWithQuestion = { question, step, ...data };
 
-    id !== 'fourthForm'
+     id !== 'fourthForm'
       ? setFormCookies(dataWithQuestion, SECOND_FORM)
       : setFormCookies(dataWithQuestion, FOURTH_FORM);
 
-    isEditing && reportingPerson === 'myself'
-      ? dispatch({ type: LAST_STEP, payload: 11 })
-      : dispatch({ type: NEXT_STEP, payload: 'DATA 1' });
+    dispatch({ type: NEXT_STEP, payload: 'DATA 1' });
+    // isEditing && reportingPerson === 'myself'
+    //   ? dispatch({ type: LAST_STEP, payload: 11 })
+    //   : dispatch({ type: NEXT_STEP, payload: 'DATA 1' });
   };
 
   return (

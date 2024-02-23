@@ -91,9 +91,10 @@ const TenthStep: React.FC<TenthStepProps> = ({ tenthStepTranslation }) => {
     let dataWithQuestion = { question1, question2, question3, step, ...data };
     setFormCookies(dataWithQuestion, NINETH_FORM);
 
-    isEditing && reportingPerson === 'myself'
-      ? dispatch({ type: LAST_STEP, payload: 11 })
-      : dispatch({ type: NEXT_STEP, payload: '' });
+    dispatch({type:NEXT_STEP,payload:''})
+    // isEditing && reportingPerson === 'myself'
+    //   ? dispatch({ type: LAST_STEP, payload: 11 })
+    //   : dispatch({ type: NEXT_STEP, payload: '' });
   };
 
   return (
