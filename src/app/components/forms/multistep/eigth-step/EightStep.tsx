@@ -40,6 +40,10 @@ console.log(eightStepTranslation, 'oooooooooooooooooo');
       question: string;
     } = getFormCookies(SEVENTH_FORM);
 
+    if (id && id === 'eighthForm') {
+      formValues = getFormCookies(EIGTH_FORM);
+    }
+
     dispatch({ type: FORM_ERRORS, payload: false });
 
     if (formOfDisc &&  formOfDisc === eightStepTranslation?.data?.options[1].value) {
@@ -144,9 +148,10 @@ console.log(eightStepTranslation, 'oooooooooooooooooo');
 
      
 
-      isEditing && reportingPerson === 'myself'
-        ? dispatch({ type: LAST_STEP, payload: 11 })
-        : dispatch({ type: NEXT_STEP, payload: 'DATA 1' });
+     dispatch({ type: NEXT_STEP, payload: 'DATA 1' });
+    // isEditing && reportingPerson === 'myself'
+    //   ? dispatch({ type: LAST_STEP, payload: 11 })
+    //   : dispatch({ type: NEXT_STEP, payload: 'DATA 1' });
  
   };
 

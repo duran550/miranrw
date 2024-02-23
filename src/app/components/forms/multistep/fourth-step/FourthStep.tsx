@@ -31,10 +31,10 @@ const FourthStep: React.FC<FourthStepProps> = ({
   id,
 }) => {
   const { dispatch, reportingPerson, isEditing, formErrors } = useFormContext();
-  const [valueDate, setValueDate] = React.useState<Dayjs | null>(dayjs());
+  const [valueDate, setValueDate] = React.useState<Dayjs | null>(null);
   const [question] = useState<string>(fourthStepTranslation?.title);
   const [dateRange, setDateRange] = useState<any>();
-  const [checked,setChecked]=useState<number>(0)
+  const [checked, setChecked] = useState<number>(0);
 
   const {
     register,
@@ -45,135 +45,140 @@ const FourthStep: React.FC<FourthStepProps> = ({
   } = useForm<FourthFormValues>();
 
   let datePeriod: string = watch('datePeriod');
-
-  // Getting form cookies
   let formValues: {
     datePeriod: string;
     question: string;
     dateRange: string;
     valueDate: any;
     dateRangeState: any;
-  } = getFormCookies(THIRD_FORM);
-
+  } = {
+    datePeriod: '',
+    question: '',
+    dateRange: '',
+    valueDate: '',
+    dateRangeState: '',
+  };
+  // Getting form cookies
+  // alert(id)
+ if (id && id === 'fifthForm') {
+   formValues = getFormCookies(FIFTH_FORM);
+ } else {
+   formValues = getFormCookies(THIRD_FORM);
+   console.log('organization', formValues);
+ }
+  // dispatch({ type: FORM_ERRORS, payload: true });
   // Scroll on top
   useScrollOnTop();
 let check: any = datePeriod;
   useEffect(() => {
-    
-   if (check==false) {
-    setChecked(0)
-   }
+    if (check == false) {
+      setChecked(0);
+    }
 
-   if (datePeriod===undefined) {
-    console.log(datePeriod, 'periode');
-   }
    
-    
+
     console.log(dateRange, 'range');
     console.log(check, 'check');
-    
-    // dispatch({ type: FORM_ERRORS, payload: false });
-    if (datePeriod && !dateRange) {
-      dispatch({ type: FORM_ERRORS, payload: true });
+    if (valueDate == null && !datePeriod) {
+       console.log('help');
+        dispatch({ type: FORM_ERRORS, payload: true });
     } else {
-      dispatch({ type: FORM_ERRORS, payload: false });
+       if (datePeriod && !dateRange) {
+         dispatch({ type: FORM_ERRORS, payload: true });
+       } else {
+         if (datePeriod && dateRange) {
+           dispatch({ type: FORM_ERRORS, payload: false });
+         }
+
+         // dispatch({ type: FORM_ERRORS, payload: false });
+       }
+      if (valueDate && !datePeriod) {
+         dispatch({ type: FORM_ERRORS, payload: false });
+      }
     }
+    // dispatch({ type: FORM_ERRORS, payload: false });
+    // if (datePeriod && !dateRange) {
+    //   dispatch({ type: FORM_ERRORS, payload: true });
+    // } else {
+    //    if (datePeriod && dateRange) {
+    //      dispatch({ type: FORM_ERRORS, payload: false });
+    //    }
+      
+    //   // dispatch({ type: FORM_ERRORS, payload: false });
+    // }
 
     if (formValues) {
+      if (checked == 0) {
+        if (
+          formValues.datePeriod &&
+          formValues.dateRangeState &&
+          formValues.dateRangeState.length > 0
+        ) {
+          // console.log(formValues.datePeriod, '------------');
+
+          dispatch({ type: FORM_ERRORS, payload: false });
+
+          // if (!dateRange) {
+          //    setDateRange(formValues.dateRangeState)
+          // }
+        }
+      }
     
-
-    
-     if (
-       checked == 0 
-     ) {
-       if (
-         formValues.datePeriod &&
-         formValues.dateRangeState &&
-         formValues.dateRangeState.length > 0
-       ) {
-         // console.log(formValues.datePeriod, '------------');
-
-         dispatch({ type: FORM_ERRORS, payload: false });
-
-         // if (!dateRange) {
-         //    setDateRange(formValues.dateRangeState)
-         // }
-       }
-     }
-      // if (formValues.datePeriod && dateRange == null) {
-      //   dispatch({ type: FORM_ERRORS, payload: true });
-      // }
     }
-    // Setting default values if exists in cookies
+  
 
-// if (formValues && datePeriod && checked!==1)  {
-//   if (!dateRange) {
-//       setDateRange(formValues.dateRangeState);
-//   }
-// }
- 
     if (
       datePeriod !== undefined &&
       datePeriod != fourthStepTranslation?.happenedOverALongPeriod
     ) {
-      console.log('las good');
-      setChecked(3)
-      
-       setDateRange(null);
+     
+      setChecked(3);
+
+      setDateRange(null);
+    
     }
-console.log('lasssssssst', dateRange);
+   
 
-   if (formValues && datePeriod===undefined) {
-      //  console.log(formValues, 'my date');
-     
-     if (formValues.datePeriod && formValues.datePeriod.length>0) {
+    if (formValues && datePeriod === undefined) {
+    
+
+      if (formValues.datePeriod && formValues.datePeriod.length > 0) {
         datePeriod !== formValues?.datePeriod &&
-            setValue('datePeriod', formValues?.datePeriod);
-              setDateRange(formValues.dateRangeState);
-     }
-        
-     
-     
-     
-        
-          
-
-       formValues?.valueDate!==valueDate && setValueDate(dayjs(formValues?.valueDate));
+          setValue('datePeriod', formValues?.datePeriod);
+        setDateRange(formValues.dateRangeState);
+        setValueDate(null);
+      } else {
+        formValues?.valueDate !== valueDate &&
+          setValueDate(dayjs(formValues?.valueDate));
+      }
 
       //  dispatch({ type: FORM_ERRORS, payload: false });
-     }
-  
+    }
 
-    
     // console.log(id, 'id');
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [
-   
-    datePeriod,
-    dateRange,
-    valueDate,
- setValueDate,
- checked
-   
-    
-  ]);
+  }, [datePeriod, dateRange, valueDate, setValueDate, checked]);
 
   // Triggered when submitting form
   const onSubmit: SubmitHandler<FourthFormValues> = (data) => {
-    
+    if (dateRange) {
+      setValueDate(null);
+    }
+
     let dateRangeState = dateRange;
 
     let dataWithDate = { valueDate, dateRangeState, ...data };
     let step = getFormStep();
     let dataWithQuestion = { question, step, ...dataWithDate };
 
-    id === 'fifthForm'
+   id && id === 'fifthForm'
       ? setFormCookies(dataWithQuestion, FIFTH_FORM)
       : setFormCookies(dataWithQuestion, THIRD_FORM);
 
-    isEditing && reportingPerson === 'myself'
-      ? dispatch({ type: LAST_STEP, payload: 11 })
-      : dispatch({ type: NEXT_STEP, payload: 'DATA 1' });
+  dispatch({ type: NEXT_STEP, payload: 'DATA 1' });
+    // isEditing && reportingPerson === 'myself'
+    //   ? dispatch({ type: LAST_STEP, payload: 11 })
+    //   : dispatch({ type: NEXT_STEP, payload: 'DATA 1' });
   };
 
   // Handle default value
@@ -221,7 +226,7 @@ console.log('lasssssssst', dateRange);
                   },
               }}
               value={valueDate}
-              defaultValue={valueDate}
+              // defaultValue={valueDate}
               disabled={datePeriod ? true : false}
               maxDate={dayjs()}
               views={['year', 'month', 'day']}
@@ -237,7 +242,6 @@ console.log('lasssssssst', dateRange);
           value={fourthStepTranslation?.happenedOverALongPeriod}
           label={fourthStepTranslation?.happenedOverALongPeriod}
           id="datePeriod"
-        
         />
 
         {datePeriod && (
@@ -247,10 +251,12 @@ console.log('lasssssssst', dateRange);
               onChange={onDateRangeChange}
               disabledDate={disabledDate}
               defaultValue={
-                dateRange!==null&&formValues?.dateRangeState ? [
-                  dayjs(formValues?.dateRangeState[0]),
-                  dayjs(formValues?.dateRangeState[1]),
-                ] : null
+                dateRange !== null && formValues?.dateRangeState
+                  ? [
+                      dayjs(formValues?.dateRangeState[0]),
+                      dayjs(formValues?.dateRangeState[1]),
+                    ]
+                  : null
               }
               className="w-full py-3 border border-gray-300"
             />
