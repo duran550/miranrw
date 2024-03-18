@@ -8,23 +8,20 @@ import React, { FC, useEffect } from 'react';
 
 import { useState, useContext } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
-// import { Button } from '../button/Button';
-// import InputField from './InputField';
-// import LocaleSwitcher from '../localSwitcher/locale-switcher';
-// import LocaleSwitcher from '../header/locale-switcher/locale-switcher';
+
 import key from '../../../../../../../public/icons/Key.svg';
 import personne from '../../../../../../../public/icons/Person.svg';
 import eye from '../../../../../../../public/icons/Eye.svg';
 import Image from 'next/image';
-// import { useAuth } from '@/app/hooks/useAuth';
-// import { login } from '@/redux/features/auth-slice';
-// import { emailIcon, passwordIcon } from './icons/icons';
+
 import AuthService from '@/services/authService';
 import { usePathname, useRouter } from 'next/navigation';
 import toast, { Toaster } from 'react-hot-toast';
 import { Result } from 'postcss';
 import { setUserCookies } from '@/cookies/cookies';
 import InputField from '@/app/components/forms/text-field/InputField';
+import { AuthContext, AuthProvider } from '@/app/context/AuthContext';
+import { useAuth } from '@/app/hooks/useAuth';
 
 interface IFormInput {
   email: string;
@@ -50,11 +47,10 @@ const LoginForm = () => {
     handleSubmit,
     reset,
   } = useForm<IFormInput>({ mode: 'onChange' || 'onBlur' || 'onSubmit' });
-
+  const {loginUser, user }=useAuth()
+ 
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  // const { countryState, skipState } = useCountry();
-  // const{c}  useCLient()
-  // const { dispatch, user } = useAuth();
+ 
   const pathname = usePathname();
   const { push } = useRouter();
 
@@ -66,11 +62,8 @@ const LoginForm = () => {
         console.log('result',result);
         
         if (result.status == 201) {
-          // setUserCookies(result.data);
-          // dispatch(login(result.data));
-
-          // window.location.href = '/' + pathname.split('/')[1] + '/user/send-transfer';
-          //  push('/' + lang + '/user/send-transfer');
+          loginUser(result.data.user[0])
+         setUserCookies(result.data.user[0]);
 
           toast.success(result.data.message);
           setIsLoading(false);
@@ -92,6 +85,13 @@ const LoginForm = () => {
   function togglePasswordVisibility() {
     setIsPasswordVisible((prevState) => !prevState);
   }
+// console.log(user, 'ctx');
+  useEffect(() => {
+    if (user) {
+      console.log(user,'user');
+      
+    }
+  },[user])
   return (
     <div className="flex xl:items-center justify-center h-[100vh] mt-16 sm:mt-40 xl:mt-0">
       <Toaster position="top-center" reverseOrder={false} />

@@ -13,7 +13,7 @@ export default class AuthService extends DataService {
         fullname: string;
         email: string;
         password: string;
-        role: 1;
+        role: number;
         createdAt: string;
         updatedAt: string;
         __v: number;
