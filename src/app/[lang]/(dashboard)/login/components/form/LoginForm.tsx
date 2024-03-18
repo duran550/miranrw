@@ -63,9 +63,7 @@ const LoginForm = () => {
         if (result.status == 201) {
           loginUser(result.data.user[0]);
           setUserCookies(result.data.user[0]);
-          // window.location.href = '/en/dashboard';
-          push('/en/dashboard');
-
+          window.location.href = '/en/dashboard';
           toast.success(result.data.message);
           setIsLoading(false);
         }
@@ -105,9 +103,7 @@ const LoginForm = () => {
         </div>
         <div>
           <form onSubmit={handleSubmit(onSubmit)}>
-            <h1 className="text-3xl sm:text-4xl mb-4">
-              {/* {loginTranslation.login} */}
-            </h1>
+            <h1 className="text-3xl sm:text-4xl mb-4"></h1>
             <div className="w-full ">
               <InputField
                 name="email"
@@ -127,12 +123,9 @@ const LoginForm = () => {
               <InputField
                 name="password"
                 type={isPasswordVisible ? 'text' : 'password'}
-                // type={isPasswordVisible ? 'text' : 'password'}
                 id="password"
                 placeholder="Enter your password"
                 img={key}
-                // disabled={false}
-                // title="ok"
                 isValid={errors.password ? true : false}
                 props={{
                   ...register('password', {
@@ -149,7 +142,7 @@ const LoginForm = () => {
               />
             </div>
             <Button
-              className="mt-7 rounded-lg text-sm sm:text-xl bg-[#2B8049]"
+              className="mt-7 rounded-lg text-sm sm:text-xl bg-primary"
               variant={!isValid || isLoading ? 'disabled' : 'primary'}
               type="submit"
               disabled={!isValid || isLoading ? true : false}
@@ -166,9 +159,7 @@ const LoginForm = () => {
           </form>
         </div>
       </div>
-      <div className="w-3/5 h-full  items-center justify-center bg-[#2B8049] hidden xl:flex">
-        {/* <Image src={Frame} alt="frame logo" className="w-[500px]" /> */}
-      </div>
+      <div className="w-3/5 h-full  items-center justify-center bg-primary hidden xl:flex"></div>
     </div>
   );
 };
