@@ -7,6 +7,7 @@ import {
   cleanerLinks,
   riskManagerLinks,
 } from './links';
+import Logo from '../../../../../../public/logo.svg';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import LogoutIcon from './icons/LogoutIcon';
@@ -17,8 +18,8 @@ const Sidebar = () => {
   const { user } = useAuth();
   return (
     <div className="w-1/6 sticky top-0 border-r-2 h-screen px-8">
-      <div>
-        <Image src={''} alt="Logo" />
+      <div className="mt-8">
+        <Image src={Logo} alt="Logo" />
       </div>
       <div className="my-24">
         {user &&
