@@ -4,13 +4,16 @@ import NavLink from './NavLink';
 import { adminLinks, viewerLinks,cleanerLinks,riskManagerLinks } from './links';
 import Image from 'next/image';
 import { useAuth } from '@/app/hooks/useAuth';
+import { removeUserCookies } from '@/cookies/cookies';
+import logo from '../../../../../../public/logo.svg';
+
 
 const Sidebar = () => {
   const {user }=useAuth()
   return (
     <div className="w-1/6 sticky top-0 border-r-2 h-screen px-8">
       <div>
-        <Image src={''} alt="Logo" />
+        <Image src={logo} alt="Logo" />
       </div>
       <div className="my-24">
         {user &&
@@ -30,12 +33,20 @@ const Sidebar = () => {
           ))}
         {user &&
           user.role == 4 &&
-          riskManagerLinks?.map((nav:any) => (
+          riskManagerLinks?.map((nav: any) => (
             <NavLink key={nav.name} href={nav.href} name={nav.name} />
           ))}
       </div>
 
-      <div className="absolute bottom-12">Logout</div>
+      <div
+        className="absolute bottom-12 cursor-pointer"
+        onClick={() => {
+          removeUserCookies();
+          window.location.href = '/en/login';
+        }}
+      >
+        Logout
+      </div>
     </div>
   );
 };
