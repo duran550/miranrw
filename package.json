@@ -27,6 +27,7 @@
     "antd": "^5.8.6",
     "autoprefixer": "10.4.15",
     "axios": "^1.4.0",
+    "bcrypt": "^5.1.1",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.0",
     "cross-env": "^7.0.3",
@@ -46,6 +47,7 @@
     "react-dom": "^18.2.0",
     "react-google-recaptcha-v3": "^1.10.1",
     "react-hook-form": "^7.46.2",
+    "react-hot-toast": "^2.4.1",
     "react-search-autocomplete": "^8.5.2",
     "react-slick": "^0.29.0",
     "server-only": "^0.0.1",
@@ -57,6 +59,7 @@
   },
   "devDependencies": {
     "@playwright/test": "^1.39.0",
+    "@types/bcrypt": "^5.0.2",
     "@types/react-slick": "^0.23.12",
     "eslint-plugin-jest-dom": "^5.1.0",
     "eslint-plugin-testing-library": "^6.2.0"

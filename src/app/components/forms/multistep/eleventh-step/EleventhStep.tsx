@@ -25,9 +25,11 @@ import { useGoogleReCaptcha } from 'react-google-recaptcha-v3';
 import { verifyCaptchaAction } from '@/app/components/captcha/Captcha';
 import CaptchaCheckbox from '@/app/components/captcha/captcha-checkbox/CaptchaCheckbox';
 import { error } from 'console';
+import { identity } from '../first-step/firstFormData';
 
 const EleventhStep: React.FC<EleventhStepProps> = ({
   eleventhStepTranslation,
+  secondStepTranslation
 }) => {
   // Scroll on top
   useScrollOnTop();
@@ -53,21 +55,42 @@ const EleventhStep: React.FC<EleventhStepProps> = ({
     organizationType: string[];
     organizationTypeFreeField: string;
   } = getFormCookies(SECOND_FORM);
-  let thirdForm: {
+
+  console.log('secondForm',secondForm);
+  
+  let secondFormOrganization: {
     question: string;
     step: number;
-    valueDate: string;
-    dateRangeState: string;
-    datePeriod: boolean;
-    numberOfEmployees: string;
-  } = getFormCookies(THIRD_FORM);
-  let fourthForm: {
-    question: string;
-    step: number;
-    location: string;
-    locationOnline: string;
-    stadtteil: string;
-  } = getFormCookies(FOURTH_FORM);
+    description: string;
+    organizationType: string[];
+    organizationTypeFreeField: string;
+  } = getFormCookies(SECOND_FORM);
+   let thirdForm: {
+     question: string;
+     step: number;
+     valueDate: string;
+     dateRangeState: string;
+     datePeriod: boolean;
+     numberOfEmployees: string;
+   } = getFormCookies(THIRD_FORM);
+   let thirdFormOrganization: {
+     question: string;
+     step: number;
+     valueDate: string;
+     dateRangeState: string;
+     datePeriod: boolean;
+     numberOfEmployees: string;
+   } = getFormCookies(THIRD_FORM);
+   let fourthForm: {
+     question: string;
+     step: number;
+     location: string;
+     locationOnline: string;
+     stadtteil: string;
+   } = getFormCookies(FOURTH_FORM);
+
+ 
+ 
 
   let fifthForm: {
     question: string;
@@ -111,6 +134,29 @@ const EleventhStep: React.FC<EleventhStepProps> = ({
     step: number;
   } = getFormCookies(NINETH_FORM);
 
+
+
+
+
+
+
+
+
+
+
+    if (
+      firstForm.identity ===
+      secondStepTranslation?.options[secondStepTranslation.options.length - 1]
+        .value
+    ) {
+      thirdForm = getFormCookies(FIFTH_FORM);
+      fourthForm = getFormCookies(SIXTH_FORM);
+      sixthForm = getFormCookies(SEVENTH_FORM);
+      seventhForm = getFormCookies(EIGTH_FORM)
+      eighthForm = getFormCookies(NINETH_FORM)
+      secondForm=getFormCookies(FOURTH_FORM)
+    } 
+
   // Listening to fields
 
   let validation: string[] = watch('validation');
@@ -151,6 +197,11 @@ const EleventhStep: React.FC<EleventhStepProps> = ({
       organizationType: string[];
       organizationTypeFreeField: string;
     } = getFormCookies(SECOND_FORM);
+     let secondFormOrganization: {
+       description: string;
+       organizationType: string[];
+       organizationTypeFreeField: string;
+     } = getFormCookies(SECOND_FORM);
 
     let thirdForm: {
       valueDate: string;
@@ -158,6 +209,12 @@ const EleventhStep: React.FC<EleventhStepProps> = ({
       datePeriod: boolean;
       numberOfEmployees: string;
     } = getFormCookies(THIRD_FORM);
+     let thirdFormOrganization: {
+       valueDate: string;
+       dateRangeState: string;
+       datePeriod: boolean;
+       numberOfEmployees: string;
+     } = getFormCookies(THIRD_FORM);
 
     let fourthForm: {
       location: string;
@@ -197,14 +254,27 @@ const EleventhStep: React.FC<EleventhStepProps> = ({
       sexualOrientation: string[];
       sexualOrientationFreeField: string;
     } = getFormCookies(NINETH_FORM);
+      if (
+        firstForm.identity ===
+        secondStepTranslation?.options[secondStepTranslation.options.length - 1]
+          .value
+      ) {
+        
+        thirdForm = getFormCookies(FIFTH_FORM);
+        fourthForm = getFormCookies(SIXTH_FORM);
+        sixthForm = getFormCookies(SEVENTH_FORM);
+        seventhForm = getFormCookies(EIGTH_FORM);
+        eighthForm = getFormCookies(NINETH_FORM);
+        secondForm = getFormCookies(FOURTH_FORM);
+      } 
 
     // Getting exact values
 
     let identity = firstForm?.identity;
     let description = secondForm?.description;
-    let organizationType = secondForm?.organizationType;
-    let organizationTypeFreeField = secondForm?.organizationTypeFreeField;
-    let numberOfEmployees = thirdForm?.numberOfEmployees;
+    let organizationType = secondFormOrganization?.organizationType;
+    let organizationTypeFreeField = secondFormOrganization?.organizationTypeFreeField;
+    let numberOfEmployees = thirdFormOrganization?.numberOfEmployees;
     let valueDate: string = thirdForm?.valueDate;
     let dateRangeState: string =
       (thirdForm?.dateRangeState && thirdForm?.dateRangeState.toString()) || '';
@@ -264,8 +334,11 @@ const EleventhStep: React.FC<EleventhStepProps> = ({
       sexualOrientationFreeField,
     };
 
+    console.log('report', report);
+    
+
     try {
-      // if (verified) {
+      //  if (verified) {
         setCaptchaLoading(false);
         // Here you would send the input data to a database, and
         // reset the form UI, display success message logic etc.
@@ -288,7 +361,7 @@ const EleventhStep: React.FC<EleventhStepProps> = ({
      
 
        
-      // }
+      //  }
     } catch (error) {
       console.log('verify error captcha', error);
       setCaptchaLoading(false);
@@ -298,7 +371,7 @@ const EleventhStep: React.FC<EleventhStepProps> = ({
   };
 
   useEffect(() => {
-    // dispatch({ type: FORM_ERRORS, payload: true });
+    dispatch({ type: FORM_ERRORS, payload: true });
 
     if (captcha && captcha.length>0 && captcha.includes('captcha')) {
       dispatch({ type: FORM_ERRORS, payload: false })
@@ -333,23 +406,36 @@ const EleventhStep: React.FC<EleventhStepProps> = ({
           answer={firstForm?.identity}
         />
 
-        {secondForm && secondForm?.organizationType && (
-          <EditBlock
-            step={secondForm.step}
-            question={secondForm?.question}
-            answer={[
-              secondForm?.description,
-              ...secondForm?.organizationType,
-              secondForm?.organizationTypeFreeField,
-            ]}
-          />
-        )}
+        {reportingPerson ===
+          secondStepTranslation?.options[
+            secondStepTranslation.options.length - 1
+          ].value &&
+          secondFormOrganization &&
+          secondFormOrganization?.organizationType && (
+            <EditBlock
+              step={secondFormOrganization.step}
+              question={secondFormOrganization?.question}
+              answer={[
+                secondFormOrganization?.description,
+                ...secondFormOrganization?.organizationType,
+                secondFormOrganization?.organizationTypeFreeField,
+              ]}
+            />
+          )}
 
         {secondForm?.description && (
           <EditBlock
             step={secondForm.step}
             question={secondForm?.question}
             answer={[secondForm?.description]}
+          />
+        )}
+
+        {thirdFormOrganization?.numberOfEmployees && (
+          <EditBlock
+            step={thirdFormOrganization.step}
+            question={thirdFormOrganization?.question}
+            answer={thirdFormOrganization?.numberOfEmployees}
           />
         )}
         {thirdForm && (
@@ -372,6 +458,7 @@ const EleventhStep: React.FC<EleventhStepProps> = ({
           answer={[
             fourthForm?.location,
             fourthForm?.location ? '' : fourthForm?.locationOnline,
+            fourthForm.stadtteil && fourthForm.stadtteil,
           ]}
         />
         {fifthForm && fifthForm?.formOfQueerphobia && (
@@ -450,7 +537,10 @@ const EleventhStep: React.FC<EleventhStepProps> = ({
 
         {/* When Nein is chosen don't display */}
 
-        {reportingPerson !== 'organization' && (
+        {reportingPerson !==
+          secondStepTranslation?.options[
+            secondStepTranslation.options.length - 1
+          ].value && (
           <>
             {ninethForm && ninethForm?.gender && (
               <EditBlock

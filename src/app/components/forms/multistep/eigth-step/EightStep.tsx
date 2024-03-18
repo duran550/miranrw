@@ -40,9 +40,13 @@ console.log(eightStepTranslation, 'oooooooooooooooooo');
       question: string;
     } = getFormCookies(SEVENTH_FORM);
 
-    dispatch({ type: FORM_ERRORS, payload: true });
+    if (id && id === 'eighthForm') {
+      formValues = getFormCookies(EIGTH_FORM);
+    }
 
-    if (formOfDisc === eightStepTranslation?.data?.options[1].value) {
+    dispatch({ type: FORM_ERRORS, payload: false });
+
+    if (formOfDisc &&  formOfDisc === eightStepTranslation?.data?.options[1].value) {
       dispatch({ type: FORM_ERRORS, payload: true });
       if (
         formOfDiscYes?.length > 0 &&
@@ -115,7 +119,7 @@ console.log(eightStepTranslation, 'oooooooooooooooooo');
     //   clearFormCookiesStep(SEVENTH_FORM)
     //  }
 
-    if (data.formOfDisc.length<5) {
+    if (data.formOfDisc &&  data.formOfDisc.length<5) {
 
          let step = getFormStep();
          let dataWithQuestion = {
@@ -144,9 +148,10 @@ console.log(eightStepTranslation, 'oooooooooooooooooo');
 
      
 
-      isEditing && reportingPerson === 'myself'
-        ? dispatch({ type: LAST_STEP, payload: 11 })
-        : dispatch({ type: NEXT_STEP, payload: 'DATA 1' });
+     dispatch({ type: NEXT_STEP, payload: 'DATA 1' });
+    // isEditing && reportingPerson === 'myself'
+    //   ? dispatch({ type: LAST_STEP, payload: 11 })
+    //   : dispatch({ type: NEXT_STEP, payload: 'DATA 1' });
  
   };
 
@@ -179,7 +184,7 @@ console.log(eightStepTranslation, 'oooooooooooooooooo');
             ))}
 
           <div className="ml-4">
-            {formOfDiscYes &&
+            {formOfDisc &&  formOfDisc === eightStepTranslation?.data?.options[1].value &&  formOfDiscYes &&
               formOfDiscYes?.includes(
                 eightStepTranslation?.data?.optionsYes[9].value
               ) && (

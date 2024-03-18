@@ -61,6 +61,7 @@ const AutoComplete: React.FC<AutoCompleteProps> = ({
       showItemsOnFocus={false}
       onSelect={handleOnSelect}
       onFocus={handleOnFocus}
+      autoFocus
       inputSearchString={location}
       // autoFocus
       formatResult={formatResult}

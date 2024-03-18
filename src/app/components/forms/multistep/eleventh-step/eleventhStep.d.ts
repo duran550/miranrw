@@ -10,6 +10,23 @@ export type EleventhStepProps = {
     };
     captcha: string;
   };
+
+  secondStepTranslation: {
+    title: string;
+    mandatory: string;
+    description: string;
+    onBehalfHints: {
+      title: string;
+      description: string;
+    };
+    options: Array<{
+      id: string;
+      name: string;
+      label: string;
+      value: string;
+      checked: boolean;
+    }>;
+  };
 };
 
 export type EleventhFormValues = {

@@ -45,7 +45,9 @@ const Button: FC<ButtonProps> = ({
 }) => {
   if (href) {
     return (
-      <AnimateClick>
+      // <AnimateClick>
+      <>
+        {' '}
         {icon ? (
           <Link
             href={href}
@@ -64,11 +66,13 @@ const Button: FC<ButtonProps> = ({
             {children}
           </Link>
         )}
-      </AnimateClick>
+      </>
+
+      //  </AnimateClick>
     );
   }
   return (
-    <AnimateClick>
+    // <AnimateClick>
       <button {...props} className={cn(buttonVariants({ variant, className }))}>
         <div className="flex items-center">
           <span className="mr-2">
@@ -77,7 +81,8 @@ const Button: FC<ButtonProps> = ({
           {children}
         </div>
       </button>
-    </AnimateClick>
+    //</AnimateClick> 
+  
   );
 };
 
