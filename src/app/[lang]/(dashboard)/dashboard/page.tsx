@@ -1,5 +1,6 @@
 import { Locale } from '@/i18n.config';
 import { getDictionary } from '@/lib/dictionary';
+import Home from '../common/components/home/Home';
 
 export default async function dashboard({
   params: { lang },
@@ -8,5 +9,9 @@ export default async function dashboard({
 }) {
   const { page, navigation } = await getDictionary(lang);
 
-  return <div className=""></div>;
+  return (
+    <div className="">
+      <Home />
+    </div>
+  );
 }

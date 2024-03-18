@@ -7,18 +7,29 @@ import {
   cleanerLinks,
   riskManagerLinks,
 } from './links';
+import Logo from '../../../../../../public/logo.svg';
 import Image from 'next/image';
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import LogoutIcon from './icons/LogoutIcon';
 import { useAuth } from '@/app/hooks/useAuth';
+import { removeUserCookies } from '@/cookies/cookies';
+import logo from '../../../../../../public/logo.svg';
 
 const Sidebar = () => {
   const pathname = usePathname();
+  const { push } = useRouter();
   const { user } = useAuth();
+
+  const handleLogout = () => {
+    console.log('clicked');
+    removeUserCookies();
+    push('/login');
+  };
+
   return (
     <div className="w-1/6 sticky top-0 border-r-2 h-screen px-8">
-      <div>
-        <Image src={''} alt="Logo" />
+      <div className="mt-8">
+        <Image src={Logo} alt="Logo" />
       </div>
       <div className="my-24">
         {user &&
@@ -63,7 +74,10 @@ const Sidebar = () => {
           ))}
       </div>
 
-      <div className="absolute cursor-pointer hover:text-primary flex items-center gap-x-2 bottom-12">
+      <div
+        onClick={handleLogout}
+        className="absolute cursor-pointer hover:text-primary flex items-center gap-x-2 bottom-12"
+      >
         <LogoutIcon />
         <div>Logout</div>
       </div>
