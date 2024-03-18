@@ -4,7 +4,7 @@ import React from 'react';
 type InputFieldProps = {
   type?: string;
   title?: string;
-  id: string;
+  id?: string;
   placeholder?: string;
   name: string;
   icon?: any;
@@ -65,7 +65,7 @@ const InputField: React.FC<InputFieldProps> = ({
               name={name}
               type={type}
               {...props}
-              id={id}
+              id={id ? id : name}
               disabled={disabled}
               value={value}
               className={` ${

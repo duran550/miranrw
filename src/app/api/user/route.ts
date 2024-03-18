@@ -5,6 +5,10 @@ import User from '../models/user'
 import { NextResponse } from "next/server";
 
 export async function POST(request: any) {
+  // console.log('ok');
+  // let data = await request.json()
+  // console.log(data);
+  
   let { fullname, password, email, role } = await request.json();
   await dbConnect();
    const is_exist=  await User.find({email: email})
@@ -25,6 +29,8 @@ export async function GET() {
 }
 
 export async function DELETE(request: any) {
+  
+  
   const id = request.nextUrl.searchParams.get("id");
   await dbConnect();
   await User.findByIdAndDelete(id);

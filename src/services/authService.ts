@@ -1,12 +1,34 @@
 import DataService from './dataService';
 
 export default class AuthService extends DataService {
-  login = (data: any) => {
-    return this.post('/auth/login', data);
+  login = (data: {
+    password: string;
+    email: string;
+  }): Promise<{
+    data: {
+      status: string;
+      message: string;
+      user: {
+        _id: string;
+        fullname: string;
+        email: string;
+        password: string;
+        role: 1;
+        createdAt: string;
+        updatedAt: string;
+        __v: number;
+      }[];
+    };
+    status: number;
+  }> => {
+    return this.post('/api/auth/', data);
   };
 
-  register = (data: any, config: any) => {
-    return this.post('/auth/register', data);
+  register = (
+    data: { fullname: string; password: string; email: string; role: string },
+    config?: any
+  ): Promise<{ data: { message: string }; status: number }> => {
+    return this.post('/api/user/', data);
   };
 
   //   changePassword = (data: any) => {

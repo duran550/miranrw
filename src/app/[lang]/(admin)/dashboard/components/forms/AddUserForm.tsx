@@ -12,7 +12,7 @@ const AddUserForm = () => {
       <h1 className="font-medium text-2xl text-center py-0 text-primaryColor">
         Add User
       </h1>
-      <InputField name={'name'} title='Full Name' placeholder='John Doe'/>
+      <InputField name={'name'} title='Full Name' placeholder='John Doe' />
       <InputField name={'username'} title='Username' placeholder='johndoe'/>
       <EmailField />
       <InputField name={'role'} title='Role' placeholder='editor'/>

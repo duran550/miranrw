@@ -55,19 +55,19 @@ const AuthProvider = ({ children }: Props) => {
   ) => {
     new AuthService()
       .login(params)
-      .then(async (response: AxiosResponse<UserDataType, any>) => {
+      .then( (result) => {
         setLoading(false);
 
-        const { data, status } = response as AxiosResponse<UserDataType, any>;
-        if (status === 200) {
+        // const { data, status } = response as AxiosResponse<UserDataType, any>;
+        if (result.status === 200) {
           const returnUrl = router.query.returnUrl;
           const redirectURL = returnUrl && returnUrl !== '/' ? returnUrl : '/';
 
           // Found users and setting parameters into cookies
 
-          setUserCookies({ ...data, remember: params?.remember });
+          setUserCookies({ ...result.data, remember: params?.remember });
         } else {
-          if (errorCallback) errorCallback({ message: data.message || '' });
+          if (errorCallback) errorCallback({ message: result.data.message || '' });
         }
       })
       .catch((error: any) => {

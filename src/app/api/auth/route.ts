@@ -15,7 +15,7 @@ export async function POST(request: any) {
       const passwordMatches = await bcrypt.compare(password, user[0].password);
 
       if (passwordMatches) {
-        return NextResponse.json({status: 'Success', message: 'Login successful'}, { status: 201 });
+        return NextResponse.json({status: 'Success', message: 'Login successful', user:user}, { status: 201 });
       } else {
         return NextResponse.json({ status: 'Error', message: 'Invalid password' }, { status: 403 });
       }

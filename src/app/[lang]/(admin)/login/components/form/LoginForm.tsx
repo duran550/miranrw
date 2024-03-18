@@ -20,12 +20,11 @@ import Image from 'next/image';
 // import { login } from '@/redux/features/auth-slice';
 // import { emailIcon, passwordIcon } from './icons/icons';
 import AuthService from '@/services/authService';
-import { useRouter } from 'next/navigation';
-// import toast, { Toaster } from 'react-hot-toast';
+import { usePathname, useRouter } from 'next/navigation';
+import toast, { Toaster } from 'react-hot-toast';
 import { Result } from 'postcss';
 import { setUserCookies } from '@/cookies/cookies';
 import InputField from '@/app/components/forms/text-field/InputField';
-
 
 interface IFormInput {
   email: string;
@@ -43,7 +42,7 @@ type LoignProps = {
   };
 };
 
-const LoginForm= () => {
+const LoginForm = () => {
   const {
     register,
     watch,
@@ -56,42 +55,31 @@ const LoginForm= () => {
   // const { countryState, skipState } = useCountry();
   // const{c}  useCLient()
   // const { dispatch, user } = useAuth();
-
+  const pathname = usePathname();
   const { push } = useRouter();
 
   const onSubmit: SubmitHandler<IFormInput> = async (data) => {
     setIsLoading(true);
-    // const response = new AuthService()
-    //   .login(data)
-    //   .then((result) => {
-    //     if (result.status == 200) {
-    //       setUserCookies(result.data);
-    //       dispatch(login(result.data));
+    const response = new AuthService()
+      .login(data)
+      .then((result) => {
+        console.log('result',result);
+        
+        if (result.status == 201) {
+          // setUserCookies(result.data);
+          // dispatch(login(result.data));
 
-    //       if (result.data.roles[0] == 'user') {
-    //         if (countryState.length < 1) {
-    //           if (skipState) {
-    //             window.location.href = '/' + lang + '/user/send-transfer';
-    //           } else {
-    //             window.location.href = '/' + lang + '/onboarding/country-list';
-    //             //  push('/' + lang + '/onboarding/country-list');
-    //           }
-    //         } else {
-    //           window.location.href = '/' + lang + '/user/send-transfer';
-    //           //  push('/' + lang + '/user/send-transfer');
-    //         }
-    //       } else {
-    //         push('/' + lang + '/admin/dashboard');
-    //       }
+          // window.location.href = '/' + pathname.split('/')[1] + '/user/send-transfer';
+          //  push('/' + lang + '/user/send-transfer');
 
-    //       toast.success('Signed in successfully');
-    //       setIsLoading(false);
-    //     }
-    //   })
-    //   .catch((error) => {
-    //     toast.error('Something went wrong, try again');
-    //     setIsLoading(false);
-    //   });
+          toast.success(result.data.message);
+          setIsLoading(false);
+        }
+      })
+      .catch((error) => {
+        toast.error('Something went wrong, try again');
+        setIsLoading(false);
+      });
   };
 
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
@@ -106,7 +94,7 @@ const LoginForm= () => {
   }
   return (
     <div className="flex xl:items-center justify-center h-[100vh] mt-16 sm:mt-40 xl:mt-0">
-      {/* <Toaster position="top-center" reverseOrder={false} /> */}
+      <Toaster position="top-center" reverseOrder={false} />
 
       <div className="w-full sm:w-[70%] xl:w-2/5 flex flex-col gap-y-20 h-1/2 px-8 xl:px-32">
         <div>
