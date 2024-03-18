@@ -44,7 +44,8 @@ export default function RootLayout({
             <FormProvider>{children}</FormProvider>
           </Providers>
         </NextUIProvider> */}
-        <LayoutComponent children={children} />
+        <LayoutComponent>{children}</LayoutComponent>
+
         {/* <script id="dacs" src="" defer></script> */}
 
         <script
