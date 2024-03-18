@@ -3,7 +3,6 @@ import { Button } from '@/app/components/button/Button';
 import EmailField from '@/app/components/forms/email-field/EmailField';
 import PasswordField from '@/app/components/forms/password-field/PasswordField';
 
-
 import React, { FC, useEffect } from 'react';
 
 import { useState, useContext } from 'react';
@@ -47,10 +46,10 @@ const LoginForm = () => {
     handleSubmit,
     reset,
   } = useForm<IFormInput>({ mode: 'onChange' || 'onBlur' || 'onSubmit' });
-  const {loginUser, user }=useAuth()
- 
+  const { loginUser, user } = useAuth();
+
   const [isLoading, setIsLoading] = useState<boolean>(false);
- 
+
   const pathname = usePathname();
   const { push } = useRouter();
 
@@ -59,12 +58,14 @@ const LoginForm = () => {
     const response = new AuthService()
       .login(data)
       .then((result) => {
-        console.log('result',result);
-        
+        console.log('result', result);
+
         if (result.status == 201) {
-          loginUser(result.data.user[0])
-         setUserCookies(result.data.user[0]);
-          window.location.href = '/en/dashboard';
+          loginUser(result.data.user[0]);
+          setUserCookies(result.data.user[0]);
+          // window.location.href = '/en/dashboard';
+          push('/en/dashboard');
+
           toast.success(result.data.message);
           setIsLoading(false);
         }
@@ -85,13 +86,12 @@ const LoginForm = () => {
   function togglePasswordVisibility() {
     setIsPasswordVisible((prevState) => !prevState);
   }
-// console.log(user, 'ctx');
+  // console.log(user, 'ctx');
   useEffect(() => {
     if (user) {
-      console.log(user,'user');
-      
+      console.log(user, 'user');
     }
-  },[user])
+  }, [user]);
   return (
     <div className="flex xl:items-center justify-center h-[100vh] mt-16 sm:mt-40 xl:mt-0">
       <Toaster position="top-center" reverseOrder={false} />

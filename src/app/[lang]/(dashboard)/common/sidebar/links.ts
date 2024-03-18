@@ -57,7 +57,7 @@ export const viewerLinks: any = [
   ,
   {
     name: 'Compare data',
-    href: '/en/dashboard/qualitative',
+    href: '/en/dashboard/compare-data',
   },
 ];
 
