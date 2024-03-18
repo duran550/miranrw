@@ -2,22 +2,13 @@ import React from 'react';
 const columns = [
   { name: 'ID', uid: 'id', sortable: true },
   { name: 'Contact Name', uid: 'name', sortable: true }, // modified
-  { name: 'Company Name', uid: 'company_name', sortable: true }, // modified
+  { name: 'Full Name', uid: 'fullname', sortable: true }, // modified
   { name: 'Number', uid: 'number' }, // modified
-  { name: 'Postition', uid: 'position' },
+  { name: 'Created', uid: 'createdAt' },
   { name: 'ROLE', uid: 'role', sortable: true },
   { name: 'Contact Email', uid: 'email' }, // modified
   { name: 'STATUS', uid: 'status', sortable: true },
   { name: 'ACTIONS', uid: 'actions' },
-
-  // {name: "ID", uid: "id", sortable: true},
-  // {name: "NAME", uid: "name", sortable: true},
-  // {name: "AGE", uid: "age", sortable: true},
-  // {name: "ROLE", uid: "role", sortable: true},
-  // {name: "TEAM", uid: "team"},
-  // {name: "EMAIL", uid: "email"},
-  // {name: "STATUS", uid: "status", sortable: true},
-  // {name: "ACTIONS", uid: "actions"},
 ];
 
 const statusOptions = [
