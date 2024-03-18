@@ -16,10 +16,13 @@ const config: Config = {
 
       colors: {
         primaryColor: '#E30303',
+        primary: '#6E82FE',
         secondaryColorSlate: '#EDEBF6',
         menuAndFooterColor: '#EDEBF6',
         dividerColor: '#463980',
         textColor: '#1F1F1F',
+        btnReportsColorUncategorized: 'rgba(224, 0, 52, 0.2)',
+        btnReportsColorCategorized: 'rgba(25, 154, 70, 0.2)',
       },
       borderColor: {
         primary: '#6E82FE',

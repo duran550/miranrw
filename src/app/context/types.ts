@@ -5,22 +5,23 @@ export type LoginParams = {
 };
 
 export type UserDataType = {
-  message: string;
-  id: number;
+  _id: string;
+  fullname: string;
   email: string;
-  username: string;
-  isActive: boolean;
   password: string;
   role: number;
+  createdAt: string;
+  updatedAt: string;
+  __v: number;
 };
 
 export type AuthValuesType = {
   loading: boolean;
   logout: () => void;
-  setUser: (value: UserDataType | null) => void;
-  user: UserDataType | null;
-  setLoading: (value: UserDataType | null) => void;
-  login: (params: LoginParams) => void;
+  setUser: (value: UserDataType | undefined) => void;
+  user: UserDataType | undefined;
+  setLoading: (value: UserDataType | undefined) => void;
+  login: (params: UserDataType) => void;
 };
 
 export type ErrCallbackType = (err: { [key: string]: string }) => void;
