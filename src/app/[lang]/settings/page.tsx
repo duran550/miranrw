@@ -6,6 +6,8 @@ import { getDictionary } from '@/lib/dictionary';
 import DeleteUser from '@/app/components/settings/DeleteUser';
 import EditUser from '@/app/components/settings/EditUser';
 import AddUser from '@/app/components/settings/AddUser';
+import ClientTable from '../../components/settings/clientTable/ClientTable';
+import CompTable from '@/app/components/settings/table-comp/CompTable';
 
 export default async function settings({
   params: { lang },
@@ -16,9 +18,14 @@ export default async function settings({
 
   return (
     <div className="space-y-5 p-5">
-      <AddUser />
+      {/* <AddUser />
       <EditUser />
-      <DeleteUser lang={lang} />
+      <DeleteUser lang={lang} /> */}
+      <div className="">
+        <div className="w-[70%] m-auto mt-20">
+          <ClientTable />
+        </div>
+      </div>
     </div>
   );
 }

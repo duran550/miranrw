@@ -6,6 +6,8 @@ import { Button } from '../button/Button';
 import CustomModal from '../modal/Modal';
 import InputField from '../forms/text-field/InputField';
 import { useForm } from 'react-hook-form';
+import EditUserIcon from '../../../../public/icons/edit.svg';
+import Image from 'next/image';
 
 interface IFormInput {
   fullname: string;
@@ -50,7 +52,7 @@ function EditUser({ lang }: any) {
               <InputField name="username" />
             </div>
           </div>
-          <div className="flex gap-x-4">
+          <div className="flex gap-x-4 mb-4">
             <Button className="bg-black">Save User</Button>
             <Button className="bg-black">Cancel</Button>
           </div>
@@ -58,12 +60,12 @@ function EditUser({ lang }: any) {
       </CustomModal>
 
       <div>
-        <Button
+        <Image
+          className="cursor-pointer w-5"
+          src={EditUserIcon}
+          alt="edit"
           onClick={() => setOpenModal(true)}
-          className="w-fit font-bold bg-green-400"
-        >
-          Edit User
-        </Button>
+        />
       </div>
     </div>
   );

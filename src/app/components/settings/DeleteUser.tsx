@@ -4,6 +4,8 @@ import React from 'react';
 import { useState } from 'react';
 import CustomModal from '../modal/Modal';
 import { Button } from '../button/Button';
+import DeleteIcon from '../../../../public/icons/del.svg';
+import Image from 'next/image';
 
 function DeleteUser({ lang }: any) {
   const [openModal, setOpenModal] = useState<boolean>(false);
@@ -33,12 +35,18 @@ function DeleteUser({ lang }: any) {
       </CustomModal>
 
       <div>
-        <Button
+        {/* <Button
           onClick={() => setOpenModal(true)}
           className="w-fit font-bold bg-green-400"
         >
           Delete User
-        </Button>
+        </Button> */}
+        <Image
+          className="cursor-pointer"
+          src={DeleteIcon}
+          alt="del"
+          onClick={() => setOpenModal(true)}
+        />
       </div>
     </div>
   );

@@ -6,6 +6,8 @@ import { Button } from '../button/Button';
 import CustomModal from '../modal/Modal';
 import InputField from '../forms/text-field/InputField';
 import { useForm, SubmitHandler } from 'react-hook-form';
+import Image from 'next/image';
+import AddIcon from '../../../../public/icons/add.svg';
 
 interface IFormInput {
   fullname: string;
@@ -51,7 +53,7 @@ function AddUser({ lang }: any) {
               <InputField name="username" />
             </div>
           </div>
-          <div className="flex gap-x-4">
+          <div className="flex gap-x-4 mb-4">
             <Button className="bg-black">Add User</Button>
             <Button className="bg-black">Cancel</Button>
           </div>
@@ -59,12 +61,18 @@ function AddUser({ lang }: any) {
       </CustomModal>
 
       <div>
-        <Button
+        {/* <Button
           onClick={() => setOpenModal(true)}
           className="w-fit font-bold bg-green-400"
         >
           Add User
-        </Button>
+        </Button> */}
+        <Image
+          className="cursor-pointer w-5"
+          src={AddIcon}
+          alt="delete"
+          onClick={() => setOpenModal(true)}
+        />
       </div>
     </div>
   );
