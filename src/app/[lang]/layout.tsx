@@ -6,6 +6,8 @@ import Head from 'next/head';
 import { FormProvider } from '../context/FormContext';
 import { Providers } from '../components/captcha/providers';
 import Script from 'next/script';
+import { NextUIProvider } from '@nextui-org/react';
+import LayoutComponent from './LayoutComponent';
 
 const poppins = Poppins({
   subsets: ['latin'],
@@ -33,13 +35,16 @@ export default function RootLayout({
       <Head>
         <meta name="description">{metadata.description}</meta>
       </Head>
-   
+
       <body
         className={`${poppins.className} flex flex-col bg-white text-textColor min-h-screen`}
       >
-        <Providers>
-          <FormProvider>{children}</FormProvider>
-        </Providers>
+        {/* <NextUIProvider>
+          <Providers>
+            <FormProvider>{children}</FormProvider>
+          </Providers>
+        </NextUIProvider> */}
+        <LayoutComponent children={children} />
         {/* <script id="dacs" src="" defer></script> */}
 
         <script

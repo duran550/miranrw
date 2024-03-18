@@ -5,7 +5,7 @@ type InputFieldProps = {
   name: string;
   placeholder?: string;
   title?: string;
-  change?:any
+  change?: any;
 };
 
 const InputField: React.FC<InputFieldProps> = ({
@@ -13,7 +13,7 @@ const InputField: React.FC<InputFieldProps> = ({
   title,
   name,
   placeholder,
-  change
+  change,
 }) => {
   return (
     <>
@@ -38,7 +38,7 @@ const InputField: React.FC<InputFieldProps> = ({
       ) : (
         <>
           {' '}
-          <label className="block mb-4 mt-6 text-sm" htmlFor={name}>
+          <label className="block text-sm" htmlFor={name}>
             {title}
           </label>
           <input

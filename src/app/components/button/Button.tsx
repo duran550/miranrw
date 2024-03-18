@@ -73,16 +73,15 @@ const Button: FC<ButtonProps> = ({
   }
   return (
     // <AnimateClick>
-      <button {...props} className={cn(buttonVariants({ variant, className }))}>
-        <div className="flex items-center">
-          <span className="mr-2">
-            {icon ? <Image src={icon} alt={'Icon'} /> : ''}
-          </span>
-          {children}
-        </div>
-      </button>
-    //</AnimateClick> 
-  
+    <button {...props} className={cn(buttonVariants({ variant, className }))}>
+      <div className="flex items-center">
+        <span className="mr-2">
+          {icon ? <Image src={icon} alt={'Icon'} /> : ''}
+        </span>
+        {children}
+      </div>
+    </button>
+    //</AnimateClick>
   );
 };
 
