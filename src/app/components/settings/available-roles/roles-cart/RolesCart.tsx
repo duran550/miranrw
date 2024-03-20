@@ -80,9 +80,6 @@ const RolesCart = () => {
     };
   });
 
-  console.log(getUsers, 'this is my getUsers');
-  console.log(updatedArray, 'this is my roles');
-
   return (
     <div>
       <div className="sm:flex sm:flex-row flex-col  mb-10 sm:gap-x-4 space-y-4 sm:space-y-0">

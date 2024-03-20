@@ -27,7 +27,7 @@ const Sidebar = () => {
   };
 
   return (
-    <div className="w-1/6 sticky top-0 border-r-2 h-screen px-8">
+    <div className="w-1/6 fixed top-0 border-r-2 h-screen px-8">
       <div className="mt-8">
         <Image src={Logo} alt="Logo" />
       </div>

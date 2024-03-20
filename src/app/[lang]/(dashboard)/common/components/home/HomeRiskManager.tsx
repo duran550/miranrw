@@ -8,7 +8,7 @@ import NewReportsIcon from '../../../../../../../public/icons/dashboard/newRepor
 import RecentActivitiesIcon from '../../../../../../../public/icons/dashboard/recentActivitiesIcon.svg';
 import { Category } from '../report-card/reportCard.d';
 
-const HomeCleaner = () => {
+const HomeRiskManager = () => {
   return (
     <div>
       <Header />
@@ -34,22 +34,22 @@ const HomeCleaner = () => {
         <h1 className="text-xl mb-4 font-bold">Recent reports</h1>
         <div className="w-full gap-y-4 flex flex-col">
           <ReportCard
-            reportType={Category.Raw}
+            reportType={Category.Dangerous}
             date="Tuesday, 7 September 2023, 20h45 "
             title="Data 001100111"
           />
           <ReportCard
-            reportType={Category.Raw}
+            reportType={Category.Dangerous}
             date="Tuesday, 7 September 2023, 20h45 "
             title="Data 001100111"
           />
           <ReportCard
-            reportType={Category.Raw}
+            reportType={Category.Dangerous}
             date="Tuesday, 7 September 2023, 20h45 "
             title="Data 001100111"
           />
           <ReportCard
-            reportType={Category.Raw}
+            reportType={Category.Dangerous}
             date="Tuesday, 7 September 2023, 20h45 "
             title="Data 001100111"
           />
@@ -59,4 +59,4 @@ const HomeCleaner = () => {
   );
 };
 
-export default HomeCleaner;
+export default HomeRiskManager;

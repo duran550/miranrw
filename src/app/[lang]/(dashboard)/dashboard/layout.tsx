@@ -1,6 +1,7 @@
 import { Locale, i18n } from '@/i18n.config';
 import { AdminProvider } from '../common/context/AdminContext';
 import Sidebar from '../common/sidebar/Sidebar';
+import { Suspense } from 'react';
 
 export async function generateStaticParams() {
   return i18n.locales.map((locale) => ({ lang: locale }));
@@ -16,9 +17,12 @@ export default function AdminLayout({
   return (
     <AdminProvider>
       <div className="w-full flex ">
-        <Sidebar />
-        <div className="bg-white w-full">
-          <main className=" p-16">{children}</main>
+        <Suspense fallback={<>Loading</>}>
+          <Sidebar />
+        </Suspense>
+
+        <div className="h-screen overflow-clip  w-5/6 ml-auto">
+          <main className="h-fit mx-12">{children}</main>
         </div>
       </div>
     </AdminProvider>
