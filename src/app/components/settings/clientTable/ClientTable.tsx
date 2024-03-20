@@ -31,7 +31,7 @@ import { APIURL } from '@/app/api/lib/url';
 import CustomModal from '@/app/components/modal/Modal';
 import dayjs, { Dayjs } from 'dayjs';
 import { DatePicker, DatePickerProps } from 'antd';
-import AddUser from '@/app/components/settings/AddUser';
+import SeeDetails from '../SeeDetails';
 import EditUser from '@/app/components/settings/EditUser';
 import DeleteUser from '@/app/components/settings/DeleteUser';
 import { getAllUsers } from '@/services/userService';
@@ -53,7 +53,13 @@ const statusColorMap: Record<string, ChipProps['color']> = {
   vacation: 'warning',
 };
 
-const INITIAL_VISIBLE_COLUMNS = ['fullname', 'createdAt', 'actions', 'email'];
+const INITIAL_VISIBLE_COLUMNS = [
+  'fullname',
+  'createdAt',
+  'actions',
+  'email',
+  'role',
+];
 
 type User = (typeof users)[0];
 
@@ -72,14 +78,11 @@ export default function ClientTable() {
     direction: 'ascending',
   });
   const [getUsers, setGetUsers] = useState<clientInfoProps[] | any>([]);
-  // const [selectedCell, setSelectedCell] = useState<clientInfoProps>();
   const [selectedCell, setSelectedCell] = useState<any>();
   // modal states
   const [openModal, setOpenModal] = useState<boolean>(false);
   // date states
   const [date, setDate] = useState<Date>(new Date());
-
-  console.log(getAllUsers, 'this is my get all users');
 
   // get All Clients
   useEffect(() => {
@@ -161,10 +164,13 @@ export default function ClientTable() {
     });
   }, [sortDescriptor, items]);
 
+  console.log(items, 'this is my sortedItems');
+
   function selectedCellInfo(id: number) {
     const currentCellInfo = sortedItems.find(
-      (item) => item.id.toString() === id.toString()
+      (item) => item._id === id.toString()
     );
+    console.log(currentCellInfo, '00000000');
     setSelectedCell(currentCellInfo);
     setOpenModal(true);
   }
@@ -212,7 +218,7 @@ export default function ClientTable() {
         return (
           <div className="">
             <div className="flex gap-x-2">
-              <AddUser />
+              <SeeDetails />
               <EditUser />
               <DeleteUser />
             </div>
@@ -428,7 +434,6 @@ export default function ClientTable() {
           wrapper: 'max-h-[382px]',
         }}
         selectedKeys={selectedKeys}
-        // selectionMode="multiple"
         sortDescriptor={sortDescriptor}
         topContent={topContent}
         topContentPlacement="outside"
@@ -451,7 +456,7 @@ export default function ClientTable() {
             <TableRow
               key={item._id}
               className=""
-              // onClick={() => selectedCellInfo(item.id)}
+              // onClick={() => (setOpenModal(true), selectedCellInfo(item._id))}
             >
               {(columnKey) => (
                 <TableCell>{renderCell(item, columnKey)}</TableCell>
