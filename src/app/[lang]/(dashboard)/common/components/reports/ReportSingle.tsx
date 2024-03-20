@@ -11,7 +11,7 @@ const ReportSingle = () => {
 
       <div className="flex  gap-x-6">
         <ReportSummary />
-        {/* <ReportActions /> */}
+        <ReportActions />
       </div>
     </div>
   );

@@ -101,7 +101,8 @@ export function middleware(request: NextRequest) {
       user &&
       user?.role &&
       user?.role == 3 &&
-      !privateCleanerPaths.includes(pathname)
+      !privateCleanerPaths.includes(pathname) &&
+      !pathname.includes('/dashboard/clean-data')
     ) {
       return NextResponse.redirect(
         new URL(`/${locale}/dashboard`, request.url)
