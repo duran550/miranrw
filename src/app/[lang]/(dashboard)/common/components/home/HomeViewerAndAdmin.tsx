@@ -10,7 +10,7 @@ import { Category } from '../report-card/reportCard.d';
 
 const HomeViewerAndAdmin = () => {
   return (
-    <div>
+    <div className="mt-8">
       <Header />
       <div className="flex gap-4">
         <OverviewCard
