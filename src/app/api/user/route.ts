@@ -8,7 +8,7 @@ import { create_user_schema } from '../validators/validate';
 export async function POST(request: any) {
   const {error, value} = await create_user_schema.validate(await request.json())
   if(error) return NextResponse.json({ message: error.details[0].message }, { status: 400 });
-  let { fullname, password, email, role } = await request.json();
+  let { fullname, password, email, role } = value;
   await dbConnect();
    const is_exist=  await User.find({email: email})
    
