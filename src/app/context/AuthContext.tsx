@@ -15,11 +15,11 @@ import AuthService from '@/services/authService';
 import { AxiosResponse } from 'axios';
 
 const defaultProvider: AuthValuesType = {
-  user: null,
+  user: getUserCookies(),
   loading: true,
   setUser: () => null,
-  login: () => Promise.resolve(),
-  logout: () => Promise.resolve(),
+  login: () => {},
+  logout: () => {},
   setLoading: () => Boolean,
 };
 
@@ -31,7 +31,7 @@ type Props = {
 
 const AuthProvider = ({ children }: Props) => {
   // ** States
-  const [user, setUser] = useState<UserDataType | null>(defaultProvider.user);
+  const [user, setUser] = useState<UserDataType | undefined>(defaultProvider.user);
   const [loading, setLoading] = useState<boolean>(defaultProvider.loading);
 
   // ** Hooks
@@ -50,36 +50,40 @@ const AuthProvider = ({ children }: Props) => {
   }, []);
 
   const handleLogin = (
-    params: LoginParams,
-    errorCallback?: ErrCallbackType
+    // params: LoginParams,
+    // errorCallback?: ErrCallbackType
+    user: UserDataType
   ) => {
-    new AuthService()
-      .login(params)
-      .then(async (response: AxiosResponse<UserDataType, any>) => {
-        setLoading(false);
+    setUser(user);
+    alert('ok')
+    
+    // new AuthService()
+    //   .login(params)
+    //   .then( (result) => {
+    //     setLoading(false);
 
-        const { data, status } = response as AxiosResponse<UserDataType, any>;
-        if (status === 200) {
-          const returnUrl = router.query.returnUrl;
-          const redirectURL = returnUrl && returnUrl !== '/' ? returnUrl : '/';
+    //     // const { data, status } = response as AxiosResponse<UserDataType, any>;
+    //     if (result.status === 200) {
+    //       const returnUrl = router.query.returnUrl;
+    //       const redirectURL = returnUrl && returnUrl !== '/' ? returnUrl : '/';
 
-          // Found users and setting parameters into cookies
-
-          setUserCookies({ ...data, remember: params?.remember });
-        } else {
-          if (errorCallback) errorCallback({ message: data.message || '' });
-        }
-      })
-      .catch((error: any) => {
-        if (errorCallback) errorCallback(error);
-      });
+    //       // Found users and setting parameters into cookies
+setUserCookies(user)
+          // setUserCookies({ ...result.data, remember: params?.remember });
+    //     } else {
+    //       if (errorCallback) errorCallback({ message: result.data.message || '' });
+    //     }
+    //   })
+    //   .catch((error: any) => {
+    //     if (errorCallback) errorCallback(error);
+    //   });
   };
 
   // Logout
 
   const handleLogout = () => {
     removeUserCookies();
-    setUser(null);
+    setUser(undefined);
     router.push('/login');
   };
 

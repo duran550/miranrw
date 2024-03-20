@@ -38,6 +38,118 @@ export function middleware(request: NextRequest) {
       )
     );
   }
+
+ const locale = getLocale(request);
+  const privateAdminPaths = [
+    `/${locale}/dashboard`,
+    `/${locale}/dashboard/reports`,
+    `/${locale}/dashboard/quantitative`,
+    `/${locale}/dashboard/qualitative`,
+    `/${locale}/dashboard/settings`,
+  ];
+    const privateCleanerPaths = [
+      `/${locale}/dashboard`,
+      `/${locale}/dashboard/clean-data`,
+     
+  ];
+   const privateViewerPaths = [
+     `/${locale}/dashboard`,
+     `/${locale}/dashboard/cleaned-reports`,
+     `/${locale}/dashboard/quantitative`,
+     `/${locale}/dashboard/qualitative`,
+     `/${locale}/dashboard/compare-data`,
+  ];
+
+     const privateRiskPaths = [
+       `/${locale}/dashboard`,
+       `/${locale}/dashboard/dangerous-reports`,
+     ];
+  
+
+  //  const privateUserPaths = [
+  //    '/fr/settings/notification',
+  //    '/en/settings/notification',
+  //    '/fr/user/history',
+  //    '/en/user/history',
+  //    '/fr/user/send-transfer',
+  //    '/en/user/send-transfer',
+  //    '/fr/settings',
+  //    '/en/settings',
+  //    '/en/settings/clients',
+  //    '/fr/settings/clients',
+  //    '/fr/user/manage-clients',
+  //    '/en/user/manage-clients',
+  //  ];
+
+   const publicPath = [`/${locale}/login`];
+
+  
+
+   // console.log(request.cookies.get('user_data'), 'this is my request');
+   if (!request.cookies.get('user_data') && pathname.includes('/dashboard')) {
+     return NextResponse.redirect(new URL(`/${locale}/login`, request.url));
+   } else if (
+     request.cookies.get('user_data') &&
+     publicPath.includes(pathname)
+   ) {
+       return NextResponse.redirect(
+         new URL(`/${locale}/dashboard`, request.url)
+       );
+
+    //  if (user && user?.role === 1) {
+    //    return NextResponse.redirect(
+    //      new URL(`/${locale}/admin/dashboard`, request.url)
+    //    );
+    //  } else {
+    //    return NextResponse.redirect(
+    //      new URL(`/${locale}/user/send-transfer`, request.url)
+    //    );
+    //  }
+   } else if (
+     request.cookies.get('user_data') &&
+     !publicPath.includes(pathname)
+   ) {
+     let user = JSON.parse(request.cookies.get('user_data')?.value!);
+     if (
+       user &&
+       user?.role &&
+       user?.role == 1 &&
+       !privateAdminPaths.includes(pathname)
+     ) {
+       return NextResponse.redirect(
+         new URL(`/${locale}/dashboard`, request.url)
+       );
+     } else if (
+       user &&
+       user?.role &&
+       user?.role == 2 &&
+       !privateViewerPaths.includes(pathname)
+     ) {
+       return NextResponse.redirect(
+         new URL(`/${locale}/dashboard`, request.url)
+       );
+     } else if (
+       user &&
+       user?.role &&
+       user?.role == 3 &&
+       !privateCleanerPaths.includes(pathname)
+     ) {
+       return NextResponse.redirect(
+         new URL(`/${locale}/dashboard`, request.url)
+       );
+     } else if (
+       user &&
+       user?.role &&
+       user?.role == 4 &&
+       !privateRiskPaths.includes(pathname)
+     ) {
+       return NextResponse.redirect(
+         new URL(`/${locale}/dashboard`, request.url)
+       );
+     }
+   } else {
+     return NextResponse.next();
+   }
 }
 
 export const config = {

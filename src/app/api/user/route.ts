@@ -28,6 +28,8 @@ export async function GET() {
 }
 
 export async function DELETE(request: any) {
+  
+  
   const id = request.nextUrl.searchParams.get("id");
   await dbConnect();
   await User.findByIdAndDelete(id);
