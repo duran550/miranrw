@@ -4,7 +4,7 @@ import jwt from 'jsonwebtoken';
 import dbConnect from '../lib/dbConnect';
 import User from '../models/user'
 import { NextResponse } from "next/server";
-import { user_login_schema } from '../validators/route';
+import { user_login_schema } from '../validators/validate';
 
 export async function POST(request: any) {
   // Validate the request body

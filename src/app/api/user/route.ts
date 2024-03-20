@@ -3,7 +3,7 @@ import bcrypt from 'bcrypt';
 import dbConnect from '../lib/dbConnect';
 import User from '../models/user'
 import { NextResponse } from "next/server";
-import { create_user_schema } from '../validators/route';
+import { create_user_schema } from '../validators/validate';
 
 export async function POST(request: any) {
   const {error, value} = await create_user_schema.validate(await request.json())
