@@ -1,5 +1,5 @@
 import React from 'react';
-import ReportSingle from '../../../common/components/reports/reports-cleaner/ReportSingle';
+import ReportSingle from '../../../common/components/reports/ReportSingle';
 
 const page = () => {
   return (

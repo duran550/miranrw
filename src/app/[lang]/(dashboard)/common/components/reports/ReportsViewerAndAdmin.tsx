@@ -22,9 +22,15 @@ const ReportsViewerAndAdmin = () => {
       <p className="text-sm opacity-70">Click to view data details</p>
       <div className="mt-8">
         {status == Category.Uncategorized ? (
-          <ReportContainCard data={reportsCardTableUncategorized} />
+          <ReportContainCard
+            href="/dashboard/cleaned-reports"
+            data={reportsCardTableUncategorized}
+          />
         ) : (
-          <ReportContainCard data={reportsCardTableCategorized} />
+          <ReportContainCard
+            href="/dashboard/cleaned-reports"
+            data={reportsCardTableCategorized}
+          />
         )}
       </div>
 
