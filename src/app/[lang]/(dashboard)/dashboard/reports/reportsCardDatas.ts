@@ -1,3 +1,5 @@
+import { Category } from '../../common/components/report-card/reportCard.d';
+
 export const reportsCardTableUncategorized: {
   id: string;
   text: string;
@@ -6,37 +8,37 @@ export const reportsCardTableUncategorized: {
   {
     id: 'PT1245O',
     text: 'Tuesday 7 September 2023, 20H45',
-    btn: 'Uncategorized',
+    btn: Category.Uncategorized,
   },
   {
     id: 'PT1245O',
     text: 'Tuesday 7 September 2023, 20H45',
-    btn: 'Uncategorized',
+    btn: Category.Uncategorized,
   },
   {
     id: 'PT1245O',
     text: 'Tuesday 7 September 2023, 20H45',
-    btn: 'Uncategorized',
+    btn: Category.Uncategorized,
   },
   {
     id: 'PT1245O',
     text: 'Tuesday 7 September 2023, 20H45',
-    btn: 'Uncategorized',
+    btn: Category.Uncategorized,
   },
   {
     id: 'PT1245O',
     text: 'Tuesday 7 September 2023, 20H45',
-    btn: 'Uncategorized',
+    btn: Category.Uncategorized,
   },
   {
     id: 'PT1245O',
     text: 'Tuesday 7 September 2023, 20H45',
-    btn: 'Uncategorized',
+    btn: Category.Uncategorized,
   },
   {
     id: 'PT1245O',
     text: 'Tuesday 7 September 2023, 20H45',
-    btn: 'Uncategorized',
+    btn: Category.Uncategorized,
   },
 ];
 
@@ -48,31 +50,31 @@ export const reportsCardTableCategorized: {
   {
     id: 'PT1245O',
     text: 'Tuesday 7 September 2023, 20H45',
-    btn: 'categorized',
+    btn: Category.Categorized,
   },
   {
     id: 'PT1245O',
     text: 'Tuesday 7 September 2023, 20H45',
-    btn: 'categorized',
+    btn: Category.Categorized,
   },
   {
     id: 'PT1245O',
     text: 'Tuesday 7 September 2023, 20H45',
-    btn: 'categorized',
+    btn: Category.Categorized,
   },
   {
     id: 'PT1245O',
     text: 'Tuesday 7 September 2023, 20H45',
-    btn: 'categorized',
+    btn: Category.Categorized,
   },
   {
     id: 'PT1245O',
     text: 'Tuesday 7 September 2023, 20H45',
-    btn: 'categorized',
+    btn: Category.Categorized,
   },
   {
     id: 'PT1245O',
     text: 'Tuesday 7 September 2023, 20H45',
-    btn: 'categorized',
+    btn: Category.Categorized,
   },
 ];

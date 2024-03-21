@@ -13,13 +13,13 @@ type InputFieldProps = {
   disabled?: boolean;
   img?: any;
   isValid?: boolean;
-  min?:string;
-  max?:string;
-  change?:any;
+  min?: string;
+  max?: string;
+  change?: any;
 };
 
 const InputField: React.FC<InputFieldProps> = ({
-   type,
+  type,
   icon,
   title,
   name,
@@ -32,10 +32,9 @@ const InputField: React.FC<InputFieldProps> = ({
   isValid,
   min,
   max,
-  change
+  change,
 }) => {
   return (
-   
     <div className="mt-3">
       {change && (
         <>
@@ -78,7 +77,6 @@ const InputField: React.FC<InputFieldProps> = ({
               min={min ? min : ''}
               max={max ? max : ''}
               onChange={change}
-              
             />
           </div>
         </>
@@ -119,7 +117,7 @@ const InputField: React.FC<InputFieldProps> = ({
                 isValid
                   ? 'border-red-600 bg-red-100'
                   : 'boder-[#E9ECEF] bg-[#E9ECEF] '
-              } pl-12 sm:py-4 py-3 text-base focus:outline-none focus:ring-1 sm:text-sm focus:ring-emerald-500 text-gray-900 rounded-xl block w-full  p-2.5 placeholder:text-sm sm:placeholder:text-lg appearance-none	`}
+              } pl-12 sm:py-4 py-3 text-base focus:outline-none focus:ring-1 sm:text-sm focus:ring-primary text-gray-900 rounded-xl block w-full  p-2.5 placeholder:text-sm sm:placeholder:text-lg appearance-none	`}
               placeholder={placeholder}
               // required
               min={min ? min : ''}
