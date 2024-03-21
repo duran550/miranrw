@@ -6,7 +6,7 @@ export default class DataService {
   client: any;
   constructor() {
     this.client = axios.create({
-      baseURL: "https://www.kaeyros.org",
+      baseURL: API_URL,
       headers: {
         'content-type': 'application/json',
       },
