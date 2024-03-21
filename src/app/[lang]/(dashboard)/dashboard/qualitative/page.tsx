@@ -10,15 +10,15 @@ const Page = () => {
 
   return (
     <div className="mt-8">
-      {loading && (
+      {/* {loading && (
         <div className="w-full">
           <Loading />
         </div>
-      )}
+      )} */}
       <iframe
         onLoad={handleIframeLoaded}
         loading="lazy"
-        src="https://winniemafouo.shinyapps.io/antid_miq/_w_716b033d/#!/qualitative"
+        src="https://dashboard.kaeyros.org/#!/qualitative"
         className="w-full h-screen"
       />
     </div>
