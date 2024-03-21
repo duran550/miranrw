@@ -98,6 +98,8 @@ const EleventhStep: React.FC<EleventhStepProps> = ({
     formOfQueerphobia: any;
     otherformOfQueerphobiaFreeField: string;
   } = getFormCookies(FIFTH_FORM);
+  console.log('fifthForm',fifthForm);
+  
   let sixthForm: {
     question: string;
     step: number;
@@ -342,7 +344,9 @@ const EleventhStep: React.FC<EleventhStepProps> = ({
         setCaptchaLoading(false);
         // Here you would send the input data to a database, and
         // reset the form UI, display success message logic etc.
-        // Sending data to API
+      // Sending data to API
+      console.log('report', report);
+      
         const response = await new ReportService().sendReport(report).then((result)=>{
           if (result.status===201 || result.status===200) {
             console.log('Successfull');

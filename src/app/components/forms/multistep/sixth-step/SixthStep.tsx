@@ -76,7 +76,8 @@ const SixthStep: React.FC<SixthStepProps> = ({ sixthStepTranslation }) => {
     let step = getFormStep();
     let dataWithQuestion = { question, step, ...data };
     setFormCookies(dataWithQuestion, FIFTH_FORM);
-
+    console.log('dataWithQuestion',dataWithQuestion);
+    
      dispatch({ type: NEXT_STEP, payload: 'DATA 1' });
     // isEditing && reportingPerson === 'myself'
     //   ? dispatch({ type: LAST_STEP, payload: 11 })
