@@ -5,7 +5,6 @@ import React, { ButtonHTMLAttributes, FC } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { cn } from '@/utils/utils';
-import AnimateClick from '../animate-click/AnimateClick';
 
 interface ButtonProps
   extends ButtonHTMLAttributes<HTMLButtonElement>,
@@ -22,6 +21,10 @@ const buttonVariants = cva(
       variant: {
         default: 'bg-primaryColor w-full text-white hover:opacity-90',
         primary: 'bg-primaryColor hover:opacity-90',
+        outlinePrimary:
+          'text-[#2B8049] border border-[#2B8049] hover:opacity-90',
+        outlineWarning:
+          'text-[#F36D38] border border-[#F36D38] hover:opacity-90',
         disabled: 'bg-primaryColor opacity-50',
         danger: 'bg-red-500 w-full text-white hover:bg-red-600',
         outline:
@@ -73,16 +76,15 @@ const Button: FC<ButtonProps> = ({
   }
   return (
     // <AnimateClick>
-      <button {...props} className={cn(buttonVariants({ variant, className }))}>
-        <div className="flex items-center">
-          <span className="mr-2">
-            {icon ? <Image src={icon} alt={'Icon'} /> : ''}
-          </span>
-          {children}
-        </div>
-      </button>
-    //</AnimateClick> 
-  
+    <button {...props} className={cn(buttonVariants({ variant, className }))}>
+      <div className="flex items-center">
+        <span className="mr-2">
+          {icon ? <Image src={icon} alt={'Icon'} /> : ''}
+        </span>
+        {children}
+      </div>
+    </button>
+    //</AnimateClick>
   );
 };
 
