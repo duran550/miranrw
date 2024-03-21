@@ -20,6 +20,7 @@ const buttonVariants = cva(
     variants: {
       variant: {
         default: 'bg-primaryColor w-full text-white hover:opacity-90',
+        saveCategorizationDisabled: 'bg-greenDisable w-full text-white', 
         primary: 'bg-primaryColor hover:opacity-90',
         outlinePrimary:
           'text-[#2B8049] border border-[#2B8049] hover:opacity-90',

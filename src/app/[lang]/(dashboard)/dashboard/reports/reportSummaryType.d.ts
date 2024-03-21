@@ -27,6 +27,7 @@ export type DescriptionType = {
 export type OptionType = {
     id: number; 
     name: string; 
+    formName: string; 
     description: DescriptionType; 
 }
 

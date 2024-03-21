@@ -1,5 +1,5 @@
 import { Category } from '../../common/components/report-card/reportCard.d';
-import { AllReportsType } from './reportSummaryType';
+import { AllReportsType, DataCategorizationOptionsType } from './reportSummaryType';
 
 export const reportsCardTableUncategorized: AllReportsType = [
   {
@@ -147,3 +147,460 @@ export const reportsCardTableCategorized: {
     btn: Category.Categorized,
   },
 ];
+
+export const dataCategorizationOptions: DataCategorizationOptionsType = [
+  {
+    id: 1, 
+    name: "Category 1", 
+    options: [
+      {
+        id: 1, 
+        name: "Option 1", 
+        formName: "option_1", 
+        description: {
+          title: "Description", 
+          description: "The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from 'de Finibus Bonorum et Malorum' by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham."
+        }
+      }, 
+      {
+        id: 2, 
+        name: "Option 2", 
+        formName: "option_2", 
+        description: {
+          title: "Description", 
+          description: "The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from 'de Finibus Bonorum et Malorum' by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham."
+        }
+      }, 
+      {
+        id: 3, 
+        name: "Option 3", 
+        formName: "option_3", 
+        description: {
+          title: "Description", 
+          description: "The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from 'de Finibus Bonorum et Malorum' by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham."
+        }
+      }, 
+      {
+        id: 4, 
+        name: "Option 4", 
+        formName: "option_4", 
+        description: {
+          title: "Description", 
+          description: "The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from 'de Finibus Bonorum et Malorum' by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham."
+        }
+      }, 
+      {
+        id: 5, 
+        name: "Option 5", 
+        formName: "option_5", 
+        description: {
+          title: "Description", 
+          description: "The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from 'de Finibus Bonorum et Malorum' by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham."
+        }
+      }, 
+      {
+        id: 6, 
+        name: "Option 6", 
+        formName: "option_6", 
+        description: {
+          title: "Description", 
+          description: "The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from 'de Finibus Bonorum et Malorum' by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham."
+        }
+      }, 
+      {
+        id: 7, 
+        name: "Option 7", 
+        formName: "option_7", 
+        description: {
+          title: "Description", 
+          description: "The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from 'de Finibus Bonorum et Malorum' by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham."
+        }
+      }, 
+      {
+        id: 8, 
+        name: "Option 8", 
+        formName: "option_8", 
+        description: {
+          title: "Description", 
+          description: "The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from 'de Finibus Bonorum et Malorum' by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham."
+        }
+      }, 
+      {
+        id: 9, 
+        name: "Option 9", 
+        formName: "option_9", 
+        description: {
+          title: "Description", 
+          description: "The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from 'de Finibus Bonorum et Malorum' by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham."
+        }
+      }, 
+      
+    ]
+  }, 
+  {
+    id: 2, 
+    name: "Category 2", 
+    options: [
+      {
+        id: 1, 
+        name: "Option 1", 
+        formName: "option_1", 
+        description: {
+          title: "Description", 
+          description: "The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from 'de Finibus Bonorum et Malorum' by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham."
+        }
+      }, 
+      {
+        id: 2, 
+        name: "Option 2", 
+        formName: "option_2", 
+        description: {
+          title: "Description", 
+          description: "The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from 'de Finibus Bonorum et Malorum' by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham."
+        }
+      }, 
+      {
+        id: 3, 
+        name: "Option 3", 
+        formName: "option_3", 
+        description: {
+          title: "Description", 
+          description: "The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from 'de Finibus Bonorum et Malorum' by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham."
+        }
+      }, 
+      
+    ]
+  }, 
+  {
+    id: 3, 
+    name: "Category 3", 
+    options: [
+      {
+        id: 1, 
+        name: "Option 1", 
+        formName: "option_1", 
+        description: {
+          title: "Description", 
+          description: "The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from 'de Finibus Bonorum et Malorum' by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham."
+        }
+      }, 
+      {
+        id: 2, 
+        name: "Option 2", 
+        formName: "option_2", 
+        description: {
+          title: "Description", 
+          description: "The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from 'de Finibus Bonorum et Malorum' by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham."
+        }
+      }, 
+      {
+        id: 3, 
+        name: "Option 3", 
+        formName: "option_3", 
+        description: {
+          title: "Description", 
+          description: "The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from 'de Finibus Bonorum et Malorum' by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham."
+        }
+      }, 
+      {
+        id: 4, 
+        name: "Option 4", 
+        formName: "option_4", 
+        description: {
+          title: "Description", 
+          description: "The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from 'de Finibus Bonorum et Malorum' by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham."
+        }
+      }, 
+      {
+        id: 5, 
+        name: "Option 5", 
+        formName: "option_5", 
+        description: {
+          title: "Description", 
+          description: "The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from 'de Finibus Bonorum et Malorum' by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham."
+        }
+      }, 
+      {
+        id: 6, 
+        name: "Option 6", 
+        formName: "option_6", 
+        description: {
+          title: "Description", 
+          description: "The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from 'de Finibus Bonorum et Malorum' by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham."
+        }
+      }, 
+      {
+        id: 7, 
+        name: "Option 7", 
+        formName: "option_7", 
+        description: {
+          title: "Description", 
+          description: "The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from 'de Finibus Bonorum et Malorum' by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham."
+        }
+      }, 
+      {
+        id: 8, 
+        name: "Option 8", 
+        formName: "option_8", 
+        description: {
+          title: "Description", 
+          description: "The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from 'de Finibus Bonorum et Malorum' by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham."
+        }
+      }, 
+      {
+        id: 9, 
+        name: "Option 9", 
+        formName: "option_9", 
+        description: {
+          title: "Description", 
+          description: "The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from 'de Finibus Bonorum et Malorum' by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham."
+        }
+      }, 
+      
+    ]
+  }, 
+  {
+    id: 4, 
+    name: "Category 4", 
+    options: [
+      {
+        id: 1, 
+        name: "Option 1", 
+        formName: "option_1", 
+        description: {
+          title: "Description", 
+          description: "The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from 'de Finibus Bonorum et Malorum' by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham."
+        }
+      }, 
+      {
+        id: 2, 
+        name: "Option 2", 
+        formName: "option_2", 
+        description: {
+          title: "Description", 
+          description: "The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from 'de Finibus Bonorum et Malorum' by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham."
+        }
+      }, 
+      {
+        id: 3, 
+        name: "Option 3", 
+        formName: "option_3", 
+        description: {
+          title: "Description", 
+          description: "The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from 'de Finibus Bonorum et Malorum' by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham."
+        }
+      }, 
+      {
+        id: 4, 
+        name: "Option 4", 
+        formName: "option_4", 
+        description: {
+          title: "Description", 
+          description: "The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from 'de Finibus Bonorum et Malorum' by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham."
+        }
+      }, 
+      {
+        id: 5, 
+        name: "Option 5", 
+        formName: "option_5", 
+        description: {
+          title: "Description", 
+          description: "The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from 'de Finibus Bonorum et Malorum' by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham."
+        }
+      }, 
+      {
+        id: 6, 
+        name: "Option 6", 
+        formName: "option_6", 
+        description: {
+          title: "Description", 
+          description: "The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from 'de Finibus Bonorum et Malorum' by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham."
+        }
+      }, 
+      {
+        id: 7, 
+        name: "Option 7", 
+        formName: "option_7", 
+        description: {
+          title: "Description", 
+          description: "The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from 'de Finibus Bonorum et Malorum' by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham."
+        }
+      }, 
+      {
+        id: 8, 
+        name: "Option 8", 
+        formName: "option_8", 
+        description: {
+          title: "Description", 
+          description: "The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from 'de Finibus Bonorum et Malorum' by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham."
+        }
+      }, 
+      {
+        id: 9, 
+        name: "Option 9", 
+        formName: "option_9", 
+        description: {
+          title: "Description", 
+          description: "The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from 'de Finibus Bonorum et Malorum' by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham."
+        }
+      }, 
+      
+    ]
+  }, 
+  {
+    id: 5, 
+    name: "Category 5", 
+    options: [
+      {
+        id: 1, 
+        name: "Option 1", 
+        formName: "option_1", 
+        description: {
+          title: "Description", 
+          description: "The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from 'de Finibus Bonorum et Malorum' by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham."
+        }
+      }, 
+      {
+        id: 2, 
+        name: "Option 2", 
+        formName: "option_2", 
+        description: {
+          title: "Description", 
+          description: "The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from 'de Finibus Bonorum et Malorum' by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham."
+        }
+      }, 
+      {
+        id: 3, 
+        name: "Option 3", 
+        formName: "option_3", 
+        description: {
+          title: "Description", 
+          description: "The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from 'de Finibus Bonorum et Malorum' by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham."
+        }
+      }, 
+      
+    ]
+  }, 
+  {
+    id: 6, 
+    name: "Category 6", 
+    options: [
+      {
+        id: 1, 
+        name: "Option 1", 
+        formName: "option_1", 
+        description: {
+          title: "Description", 
+          description: "The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from 'de Finibus Bonorum et Malorum' by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham."
+        }
+      }, 
+      {
+        id: 2, 
+        name: "Option 2", 
+        formName: "option_2", 
+        description: {
+          title: "Description", 
+          description: "The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from 'de Finibus Bonorum et Malorum' by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham."
+        }
+      }, 
+      {
+        id: 3, 
+        name: "Option 3", 
+        formName: "option_3", 
+        description: {
+          title: "Description", 
+          description: "The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from 'de Finibus Bonorum et Malorum' by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham."
+        }
+      }, 
+      
+    ]
+  }, 
+  {
+    id: 7, 
+    name: "Category 7", 
+    options: [
+      {
+        id: 1, 
+        name: "Option 1", 
+        formName: "option_1", 
+        description: {
+          title: "Description", 
+          description: "The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from 'de Finibus Bonorum et Malorum' by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham."
+        }
+      }, 
+      {
+        id: 2, 
+        name: "Option 2", 
+        formName: "option_2", 
+        description: {
+          title: "Description", 
+          description: "The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from 'de Finibus Bonorum et Malorum' by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham."
+        }
+      }, 
+      {
+        id: 3, 
+        name: "Option 3", 
+        formName: "option_3", 
+        description: {
+          title: "Description", 
+          description: "The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from 'de Finibus Bonorum et Malorum' by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham."
+        }
+      }, 
+      {
+        id: 4, 
+        name: "Option 4", 
+        formName: "option_4", 
+        description: {
+          title: "Description", 
+          description: "The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from 'de Finibus Bonorum et Malorum' by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham."
+        }
+      }, 
+      {
+        id: 5, 
+        name: "Option 5", 
+        formName: "option_5", 
+        description: {
+          title: "Description", 
+          description: "The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from 'de Finibus Bonorum et Malorum' by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham."
+        }
+      }, 
+      {
+        id: 6, 
+        name: "Option 6", 
+        formName: "option_6", 
+        description: {
+          title: "Description", 
+          description: "The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from 'de Finibus Bonorum et Malorum' by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham."
+        }
+      }, 
+      {
+        id: 7, 
+        name: "Option 7", 
+        formName: "option_7", 
+        description: {
+          title: "Description", 
+          description: "The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from 'de Finibus Bonorum et Malorum' by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham."
+        }
+      }, 
+      {
+        id: 8, 
+        name: "Option 8", 
+        formName: "option_8", 
+        description: {
+          title: "Description", 
+          description: "The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from 'de Finibus Bonorum et Malorum' by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham."
+        }
+      }, 
+      {
+        id: 9, 
+        name: "Option 9", 
+        formName: "option_9", 
+        description: {
+          title: "Description", 
+          description: "The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from 'de Finibus Bonorum et Malorum' by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham."
+        }
+      }, 
+      
+    ]
+  },
+]

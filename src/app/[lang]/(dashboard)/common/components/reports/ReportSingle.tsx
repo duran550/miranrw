@@ -17,16 +17,7 @@ const ReportSingle = () => {
     <div>
       <Header href="/cleaned-data" title="Data Info" />
       <div className="flex  gap-x-6">
-        <ReportSummary  
-          personAffected={ uncategorizedData?.summary?.personAffected }
-          genderIdentity={ uncategorizedData?.summary?.genderIdentity }
-          age={ uncategorizedData?.summary?.age }
-          date={ uncategorizedData?.summary?.date }
-          placeOfIncident={ uncategorizedData?.summary?.placeOfIncident }
-          incidentDescription={ uncategorizedData?.summary?.incidentDescription }
-          characteristic={ uncategorizedData?.summary?.characteristic }
-          otherMesures={ uncategorizedData?.summary?.otherMesures }
-        />
+        <ReportSummary />
         {/* <ReportActions /> */}
         <CategorizeDataForm />
       </div>

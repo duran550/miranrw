@@ -1,9 +1,9 @@
 import React from 'react';
 
 type RadioSingleProps = {
-  id: string;
+  id: number;
   props: any;
-  value: string;
+  value?: string;
   label: string;
   name: string;
 };
@@ -16,7 +16,7 @@ const RadioSingle: React.FC<RadioSingleProps> = ({
   value,
 }) => {
   return (
-    <div key={id} className="flex items-center pl-4 ">
+    <div key={id} className="flex items-center">
       <input
         {...props}
         id={`${id}`}
@@ -27,7 +27,7 @@ const RadioSingle: React.FC<RadioSingleProps> = ({
       />
       {label && (
         <label
-          htmlFor={id}
+          htmlFor={id.toString()}
           className="w-full py-3 ml-4 text-sm font-medium text-gray-900 "
         >
           {label}
