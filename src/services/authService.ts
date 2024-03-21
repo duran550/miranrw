@@ -43,6 +43,8 @@ export default class AuthService extends DataService {
     return this.post('/auth/forgottenPassword', data);
   };
 
+  updateUser = {};
+
   //   getProfile = (data: any) => {
   //     return this.get(`/auth/user/${data}`);
   //   };
