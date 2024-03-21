@@ -5,6 +5,7 @@ import { SHOW_DRAWER } from './constants';
 
 type AdminType = {
   showDrawer: boolean;
+  cleanerDesc: string;
 };
 
 type ActionType = {
@@ -14,6 +15,7 @@ type ActionType = {
 
 const initialState: AdminType = {
   showDrawer: false,
+  cleanerDesc: '',
 };
 
 const reducer = (initialState: AdminType, action: ActionType) => {
@@ -23,7 +25,11 @@ const reducer = (initialState: AdminType, action: ActionType) => {
         ...initialState,
         showDrawer: !initialState.showDrawer,
       };
-
+    case 'SET_CLEANER_DES':
+      return {
+        ...initialState,
+        cleanerDesc: action.payload,
+      };
     default:
       return initialState;
   }
@@ -32,15 +38,20 @@ const reducer = (initialState: AdminType, action: ActionType) => {
 export const AdminContext = createContext<{
   state: AdminType;
   dispatch: Dispatch<ActionType>;
-}>({ state: initialState, dispatch: () => null });
+  setCleanerDes: (cleanerDesc: string) => void;
+}>({ state: initialState, dispatch: () => null, setCleanerDes: () => null });
 
 export const AdminProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
 
+  const setCleanerDes = (cleanerDesc: string) => {
+    dispatch({ type: 'SET_CLEANER_DES', payload: cleanerDesc });
+  };
+
   return (
-    <AdminContext.Provider value={{ state, dispatch }}>
+    <AdminContext.Provider value={{ state, dispatch, setCleanerDes }}>
       {children}
     </AdminContext.Provider>
   );
