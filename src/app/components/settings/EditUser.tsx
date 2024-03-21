@@ -61,7 +61,7 @@ function EditUser({ lang }: any) {
 
       <div>
         <Image
-          className="cursor-pointer w-5"
+          className="cursor-pointer"
           src={EditUserIcon}
           alt="edit"
           onClick={() => setOpenModal(true)}

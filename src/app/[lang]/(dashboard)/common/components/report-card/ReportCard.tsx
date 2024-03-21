@@ -17,7 +17,6 @@ export const getColorByReportType = (reportType: string) => {
       return ['#199A46', 'rgba(25, 154, 70, 0.2)'];
     case Category.Managed:
       return ['#199A46', 'rgba(25, 154, 70, 0.2)'];
-
     default:
       return [''];
   }
