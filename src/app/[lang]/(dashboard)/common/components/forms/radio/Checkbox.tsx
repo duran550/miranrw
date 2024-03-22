@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 
 type CheckboxProps = {
   name: string;
-  id: string | number;
+  id: any;
   value?: string;
   label?: string;
   checked?: boolean;
