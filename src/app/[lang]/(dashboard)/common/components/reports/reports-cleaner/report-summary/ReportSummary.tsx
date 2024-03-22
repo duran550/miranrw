@@ -21,9 +21,6 @@ const ReportSummary: React.FC<ReportSummaryType> = ({
   // focus:border border focus:border-primaryColor border-primaryColor
   const combinedClassName = className ? `${className}` : defaultClassName;
 
-  console.log(mutate, 'this is my mutate style');
-  console.log(visible, 'this is my visible');
-
   return (
     <div className={combinedClassName}>
       <div className="flex justify-between items-center">
