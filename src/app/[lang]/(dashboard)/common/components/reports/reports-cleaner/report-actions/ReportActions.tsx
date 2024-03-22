@@ -83,14 +83,14 @@ const ReportActions: React.FC<ReportActionProps> = (whatHappened) => {
       ) : (
         <div className={reportStyles}>
           <ReportSummary
-            personAffected={uncategorizedData?.summary?.personAffected}
-            genderIdentity={uncategorizedData?.summary?.genderIdentity}
-            age={uncategorizedData?.summary?.age}
-            date={uncategorizedData?.summary?.date}
-            placeOfIncident={uncategorizedData?.summary?.placeOfIncident}
+            // personAffected={uncategorizedData?.summary?.personAffected}
+            // genderIdentity={uncategorizedData?.summary?.genderIdentity}
+            // age={uncategorizedData?.summary?.age}
+            // date={uncategorizedData?.summary?.date}
+            // placeOfIncident={uncategorizedData?.summary?.placeOfIncident}
             incidentDescription={state.cleanerDesc}
-            characteristic={uncategorizedData?.summary?.characteristic}
-            otherMesures={uncategorizedData?.summary?.otherMesures}
+            // characteristic={uncategorizedData?.summary?.characteristic}
+            // otherMesures={uncategorizedData?.summary?.otherMesures}
             className="w-full"
             mutate={mutateContent}
             visible={visible}
