@@ -1,8 +1,10 @@
 import ReportCard from '@/app/[lang]/(dashboard)/common/components/report-card/ReportCard';
+import { ReportSummaryType } from '@/app/[lang]/(dashboard)/dashboard/reports/reportSummaryType';
 import Link from 'next/link';
 
 const ReportContainCard: React.FC<{
-  data: { id: string; text: string; btn: any }[];
+  data: { id: string; text: string; btn?: any; summary?: ReportSummaryType | undefined, 
+    categories?: [] | undefined,  }[];
   href: string;
 }> = (props) => {
   return (

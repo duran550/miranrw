@@ -15,8 +15,16 @@ export type ReportSummaryType = {
 export type ReportType = {
   id: string;
   text: string;
-  btn: string;
-  summary: ReportSummaryType;
+  btn?:
+    | string
+    | 'Uncategorized'
+    | 'Raw'
+    | 'Irrelevant'
+    | '!Dangerous'
+    | 'Categorized'
+    | 'Managed'
+    | 'Cleaned';
+  summary?: ReportSummaryType;
   categories?: [];
 };
 
@@ -30,6 +38,8 @@ export type DescriptionType = {
 export type OptionType = {
   id: number;
   name: string;
+  formName: string;
+  value: string;
   description: DescriptionType;
 };
 

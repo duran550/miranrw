@@ -143,6 +143,7 @@ export default function ClientTable() {
     }
 
     return filteredUsers;
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [getUsers, filterValue, statusFilter]);
 
   const pages = Math.ceil(filteredItems.length / rowsPerPage);
@@ -349,6 +350,7 @@ export default function ClientTable() {
         </div>
       </div>
     );
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [
     filterValue,
     statusFilter,
@@ -396,6 +398,7 @@ export default function ClientTable() {
         </div>
       </div>
     );
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedKeys, items.length, page, pages, hasSearchFilter]);
 
   return (

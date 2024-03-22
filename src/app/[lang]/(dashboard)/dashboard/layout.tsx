@@ -21,7 +21,7 @@ export default function AdminLayout({
           <Sidebar />
         </Suspense>
 
-        <div className="h-screen overflow-clip  w-5/6 ml-auto">
+        <div className="h-screen overflow-clip pt-8  w-5/6 ml-auto">
           <main className="h-fit mx-12">{children}</main>
         </div>
       </div>
