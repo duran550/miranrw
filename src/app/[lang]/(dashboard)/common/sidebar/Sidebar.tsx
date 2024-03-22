@@ -9,19 +9,17 @@ import {
 } from './links';
 import Logo from '../../../../../../public/logo.svg';
 import Image from 'next/image';
-import { usePathname, useRouter } from 'next/navigation';
+import { useRouter, useSelectedLayoutSegment } from 'next/navigation';
 import LogoutIcon from './icons/LogoutIcon';
 import { useAuth } from '@/app/hooks/useAuth';
 import { removeUserCookies } from '@/cookies/cookies';
-import logo from '../../../../../../public/logo.svg';
 
 const Sidebar = () => {
-  const pathname = usePathname();
   const { push } = useRouter();
   const { user } = useAuth();
+  const activeSegment = useSelectedLayoutSegment();
 
   const handleLogout = () => {
-    console.log('clicked');
     removeUserCookies();
     push('/login');
   };
@@ -36,40 +34,44 @@ const Sidebar = () => {
           user.role == 1 &&
           adminLinks?.map((nav) => (
             <NavLink
-              icon={<nav.icon isActive={pathname === nav.href} />}
+              icon={<nav.icon isActive={activeSegment === nav.targetSegment} />}
               key={nav.name}
               href={nav.href}
               name={nav.name}
+              targetSegment={nav.targetSegment}
             />
           ))}
         {user &&
           user.role == 2 &&
           viewerLinks?.map((nav: any) => (
             <NavLink
-              icon={<nav.icon isActive={pathname === nav.href} />}
+              icon={<nav.icon isActive={activeSegment === nav.targetSegment} />}
               key={nav.name}
               href={nav.href}
               name={nav.name}
+              targetSegment={nav.targetSegment}
             />
           ))}
         {user &&
           user.role == 3 &&
           cleanerLinks?.map((nav) => (
             <NavLink
-              icon={<nav.icon isActive={pathname === nav.href} />}
+              icon={<nav.icon isActive={activeSegment === nav.targetSegment} />}
               key={nav.name}
               href={nav.href}
               name={nav.name}
+              targetSegment={nav.targetSegment}
             />
           ))}
         {user &&
           user.role == 4 &&
           riskManagerLinks?.map((nav: any) => (
             <NavLink
-              icon={<nav.icon isActive={pathname === nav.href} />}
+              icon={<nav.icon isActive={activeSegment === nav.targetSegment} />}
               key={nav.name}
               href={nav.href}
               name={nav.name}
+              targetSegment={nav.targetSegment}
             />
           ))}
       </div>

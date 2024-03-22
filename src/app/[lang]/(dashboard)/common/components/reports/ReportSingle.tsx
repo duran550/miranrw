@@ -14,9 +14,9 @@ const ReportSingle = () => {
   const { uncategorizedData } = useFindReport (); 
 
   return (
-    <div>
+    <div className='mb-[2rem]'>
       <Header href="/cleaned-data" title="Data Info" />
-      <div className="flex  gap-x-6">
+      <div className="flex  gap-x-6 mb-[3rem]">
         <ReportSummary />
         {/* <ReportActions /> */}
         <CategorizeDataForm />

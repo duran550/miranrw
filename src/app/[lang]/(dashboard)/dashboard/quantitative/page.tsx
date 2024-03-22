@@ -1,15 +1,30 @@
-import React from 'react';
+'use client';
+import React, { useState } from 'react';
+import Loading from './loading';
 
-const page = () => {
+const Page = () => {
+  const [loading, setIsLoading] = useState(true);
+  const handleIframeLoaded = () => {
+    setIsLoading(false);
+  };
+
   return (
-    <div>
+    <div className="mt-8">
+      <h1 className="font-bold text-2xl mb-4">Quantitative data</h1>
+
+      {loading && (
+        <div className="w-full">
+          <Loading />
+        </div>
+      )}
       <iframe
-        src="https://kaeyros-analytics-dashboard.shinyapps.io/DashboardAntiDNoSidebar/_w_2f6fc258/#!/quantitative"
-        width={1000}
-        height={1200}
+        onLoad={handleIframeLoaded}
+        loading="lazy"
+        src="https://winniemafouo.shinyapps.io/antid_miq/_w_716b033d/#!/quantitative"
+        className="w-full h-screen"
       />
     </div>
   );
 };
 
-export default page;
+export default Page;

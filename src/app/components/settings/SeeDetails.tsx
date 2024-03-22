@@ -5,9 +5,9 @@ import { useState } from 'react';
 import { Button } from '../button/Button';
 import CustomModal from '../modal/Modal';
 import InputField from '../forms/text-field/InputField';
-import { useForm, SubmitHandler } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 import Image from 'next/image';
-import AddIcon from '../../../../public/icons/add.svg';
+import SeeDetailsIcon from '../../../../public/icons/see.svg';
 
 interface IFormInput {
   fullname: string;
@@ -16,7 +16,7 @@ interface IFormInput {
   confirmPassword: string;
 }
 
-function AddUser({ lang }: any) {
+function SeeDetails({ lang }: any) {
   const [openModal, setOpenModal] = useState<boolean>(false);
 
   const {
@@ -68,8 +68,8 @@ function AddUser({ lang }: any) {
           Add User
         </Button> */}
         <Image
-          className="cursor-pointer w-5"
-          src={AddIcon}
+          className="cursor-pointer"
+          src={SeeDetailsIcon}
           alt="delete"
           onClick={() => setOpenModal(true)}
         />
@@ -78,4 +78,4 @@ function AddUser({ lang }: any) {
   );
 }
 
-export default AddUser;
+export default SeeDetails;
