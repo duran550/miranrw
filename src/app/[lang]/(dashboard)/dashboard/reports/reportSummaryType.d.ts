@@ -12,9 +12,15 @@ export type ReportSummaryType = {
 export type ReportType = {
     id: string;
     text: string;
-    btn?: string;
-    summary: ReportSummaryType, 
-    categories?: [], 
+    btn?: string | 'Uncategorized'
+    | 'Raw'
+    | 'Irrelevant'
+    | '!Dangerous'
+    | 'Categorized'
+    | 'Managed'
+    | 'Cleaned';
+    summary?: ReportSummaryType | undefined, 
+    categories?: [] | undefined, 
 }
 
 export type AllReportsType = ReportType []
