@@ -64,7 +64,19 @@ export function middleware(request: NextRequest) {
     `/${locale}/dashboard/dangerous-reports`,
   ];
 
-  const publicPath = [`/${locale}/login`];
+  const publicPath = [
+    `/${locale}/login`,
+    `/${locale}/datenschutz`,
+    `/${locale}/disclaimer`,
+    `/${locale}/faqs`,
+    `/${locale}/impressum`,
+    `/${locale}/queerphobia`,
+    `/${locale}/report`,
+    `/${locale}/statement`,
+    `/${locale}/`,
+    `/${locale}/about-us`,
+    
+  ];
 
   if (!request.cookies.get('user_data') && pathname.includes('/dashboard')) {
     return NextResponse.redirect(new URL(`/${locale}/login`, request.url));
