@@ -7,11 +7,12 @@ import imgcatActive from '../../../../../../../public/images/Checkmark Starburst
 import imgcatDesactive from '../../../../../../../public/images/Checkmark Starburst (1).svg';
 import imgUncatDesactive from '../../../../../../../public/images/Square Dismiss.svg';
 import imgUncatActive from '../../../../../../../public/images/Square Dismiss (1).svg';
-import {
-  reportsCardTableCategorized,
-  reportsCardTableUncategorized,
-} from '../../../dashboard/reports/reportsCardDatas';
+
 import { Category } from '../report-card/reportCard.d';
+import {
+  reportsDataDangerous,
+  reportsDataManaged,
+} from '../../../dashboard/reports/reportsDataDangerous';
 
 const ReportsRiskManager = () => {
   const [status, setStatut] = useState(Category.Dangerous);
@@ -23,13 +24,13 @@ const ReportsRiskManager = () => {
       <div className="mt-8">
         {status == Category.Dangerous ? (
           <ReportContainCard
-            href="/dashboard/cleaned-reports"
-            data={reportsCardTableUncategorized}
+            href="/dashboard/dangerous-reports"
+            data={reportsDataDangerous}
           />
         ) : (
           <ReportContainCard
-            href="/dashboard/cleaned-reports"
-            data={reportsCardTableCategorized}
+            href="/dashboard/dangerous-reports"
+            data={reportsDataManaged}
           />
         )}
       </div>
