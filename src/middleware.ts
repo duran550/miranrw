@@ -102,6 +102,7 @@ export function middleware(request: NextRequest) {
       user?.role &&
       user?.role == 1 &&
       !privateAdminPaths.includes(pathname) &&
+      !pathname.includes('/dashboard/cleaned-reports') &&
       !allPaths.includes(pathname)
     ) {
       return NextResponse.redirect(
