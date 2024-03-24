@@ -134,6 +134,7 @@ export function middleware(request: NextRequest) {
       user?.role &&
       user?.role == 4 &&
       !privateRiskPaths.includes(pathname) &&
+      !pathname.includes('/dashboard/dangerous-reports') &&
       !allPaths.includes(pathname)
     ) {
       return NextResponse.redirect(
