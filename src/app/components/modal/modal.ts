@@ -11,4 +11,7 @@ export type ModalPropsType = {
   iconTitle?: string;
   showFooter?: boolean;
   onValidateButton?: () => void;
+  positon: string | any;
+  hideCloseButton?: boolean;
+  modalClass?: string;
 };

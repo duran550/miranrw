@@ -64,7 +64,7 @@ const CleanData: FC<ClientDataProps> = ({
   };
 
   return (
-    <CustomModal onClose={onClose} isOpen={isOpen}>
+    <CustomModal onClose={onClose} isOpen={isOpen} positon="center">
       <h1 className="font-bold text-2xl text-gray-400">Clean Data</h1>
       <div>
         <form onSubmit={handleSubmit(onSubmit)}>

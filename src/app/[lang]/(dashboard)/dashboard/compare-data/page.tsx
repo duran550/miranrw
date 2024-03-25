@@ -19,7 +19,7 @@ const Page = () => {
       <iframe
         onLoad={handleIframeLoaded}
         loading="lazy"
-        src="https://winniemafouo.shinyapps.io/antid_miq/_w_716b033d/#!/compare"
+        src="https://dashboard.kaeyros.org/#!/compare"
         className="w-full h-screen"
       />
     </div>

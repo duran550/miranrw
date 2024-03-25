@@ -21,6 +21,9 @@ const CustomModal: React.FC<ModalPropsType & ModalProps> = ({
   iconTitle,
   onValidateButton,
   showFooter,
+  positon,
+  hideCloseButton,
+  modalClass,
 }) => {
   return (
     <Modal
@@ -28,15 +31,18 @@ const CustomModal: React.FC<ModalPropsType & ModalProps> = ({
       backdrop="blur"
       isOpen={isOpen}
       onClose={onClose}
-      placement="center"
+      placement={positon}
+      hideCloseButton={hideCloseButton}
     >
       <ModalContent>
         {(onClose) => (
           <>
-            <ModalHeader className="flex flex-col gap-1 ml-[2%] font-[900] text-2xl">
-              {title}
-            </ModalHeader>
-            <ModalBody>{children}</ModalBody>
+            {title && (
+              <ModalHeader className="flex flex-col gap-1 ml-[2%] font-[900] text-2xl">
+                {title}
+              </ModalHeader>
+            )}
+            <ModalBody className={modalClass}>{children}</ModalBody>
 
             {showFooter ? (
               <ModalFooter>

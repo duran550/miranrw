@@ -4,12 +4,15 @@ import React, { Dispatch, createContext, useReducer } from 'react';
 import { ADD_CATEGORY, SHOW_DRAWER } from './constants';
 // import { Category } from '../components/report-card/reportCard';
 import { AllReportsType } from '../../dashboard/reports/reportSummaryType';
-// import { Category } from '../components/report-card/reportCard';
+import { ClientInfoProps } from './constants';
 
 type AdminType = {
   showDrawer: boolean;
   cleanerDesc: string;
   reportsCardTableUncategorized: AllReportsType;
+  isIrrelevant: boolean;
+  isDangerous: boolean;
+  clientInfo: ClientInfoProps | null;
 };
 
 type ActionType = {
@@ -20,6 +23,9 @@ type ActionType = {
 const initialState: AdminType = {
   showDrawer: false,
   cleanerDesc: '',
+  isIrrelevant: false,
+  isDangerous: false,
+  clientInfo: null,
   reportsCardTableUncategorized: [
     {
       id: 'PT1245O',
@@ -157,6 +163,15 @@ const reducer = (initialState: AdminType, action: ActionType) => {
       return {
         ...initialState,
         cleanerDesc: action.payload,
+      };
+    case 'TOGGLE_IS_IRRELEVANT':
+      return { ...initialState, isIrrelevant: !initialState.isIrrelevant };
+    case 'TOGGLE_IS_DANGEROUS':
+      return { ...initialState, isDangerous: !initialState.isDangerous };
+    case 'SET_CLIENT_INFO':
+      return {
+        ...initialState,
+        clientInfo: action.payload,
       };
     case ADD_CATEGORY:
       const resultedReportsCardTableUncategorized =

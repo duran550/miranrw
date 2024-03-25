@@ -12,7 +12,7 @@ type ReportSummaryProps = {
   markedAsDangerous?: boolean;
 };
 
-const ReportSummary: React.FC<ReportSummaryProps> = ({
+const ReportSummaryLeft: React.FC<ReportSummaryProps> = ({
   className,
   mutate,
   visible,
@@ -26,10 +26,7 @@ const ReportSummary: React.FC<ReportSummaryProps> = ({
   const combinedClassName = className ? `${className}` : defaultClassName;
   const { uncategorizedData } = useFindReport();
 
-  console.log(
-    mutate && !state.isDangerous && !state.isIrrelevant,
-    'isdangerous'
-  );
+  console.log(visible, 'visible');
 
   return (
     <div className={combinedClassName}>
@@ -49,7 +46,7 @@ const ReportSummary: React.FC<ReportSummaryProps> = ({
             <div className="rounded-full bg-opacity-20 px-4 py-2 w-fit opacity-[0.7] bg-[#F36D38] font-bold text-[#F36D38]">
               Irrelevant
             </div>
-          ) : mutate || (!state.isDangerous && !state.isIrrelevant) ? (
+          ) : visible ? (
             <div className="rounded-full bg-[#E00034] bg-opacity-20 px-4 py-2 w-fit opacity-[0.7] text-[#E00034] font-bold">
               Raw
             </div>
@@ -127,4 +124,4 @@ const ReportSummary: React.FC<ReportSummaryProps> = ({
   );
 };
 
-export default ReportSummary;
+export default ReportSummaryLeft;

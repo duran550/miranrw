@@ -9,7 +9,7 @@ export async function generateStaticParams() {
 
 export default function AdminLayout({
   children,
-  params,
+  params: { lang },
 }: {
   children: React.ReactNode;
   params: { lang: Locale };
@@ -18,7 +18,7 @@ export default function AdminLayout({
     <AdminProvider>
       <div className="w-full flex ">
         <Suspense fallback={<>Loading</>}>
-          <Sidebar />
+          <Sidebar lang={lang} />
         </Suspense>
 
         <div className="h-screen overflow-clip pt-8  w-5/6 ml-auto">
