@@ -32,6 +32,7 @@ function EditUser({ lang }: any) {
         isOpen={openModal}
         classStyle="text-black"
         showFooter={false}
+        positon="center"
       >
         <form>
           <div className="space-y-5 pb-5">

@@ -17,6 +17,7 @@ function DeleteUser({ lang }: any) {
         isOpen={openModal}
         classStyle="text-black"
         showFooter={false}
+        positon="center"
       >
         <div className="flex justify-around p-10">
           <Button
