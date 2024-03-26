@@ -83,12 +83,12 @@ const MultiStepForm: React.FC<MultiStepFormProps> = ({
                     fifthStepTranslation={formTranslation?.stepper?.fifthStep}
                   />
                 ) : step === 6 ? (
-                  <SixthStep
-                    sixthStepTranslation={formTranslation?.stepper?.sixthStep}
+                  <SeventhStep
+                    seventhStepTranslation={formTranslation?.stepper?.sixthStep}
                   />
                 ) : step === 7 ? (
-                  <SeventhStep
-                    seventhStepTranslation={
+                  <SixthStep
+                    sixthStepTranslation={
                       formTranslation?.stepper?.seventhStep
                     }
                   />
@@ -153,10 +153,11 @@ const MultiStepForm: React.FC<MultiStepFormProps> = ({
                     id="sixthForm"
                     fifthStepTranslation={formTranslation?.stepper?.fifthStep}
                   />
-                ) : step === 8 ? (
-                  <SeventhStep
+                              ) : step === 8 ? (
+                
+                  <SixthStep
                     id="seventhForm"
-                    seventhStepTranslation={
+                    sixthStepTranslation={
                       formTranslation?.stepper?.seventhStep
                     }
                   />
