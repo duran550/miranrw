@@ -97,7 +97,7 @@ const EleventhStep: React.FC<EleventhStepProps> = ({
     step: number;
     formOfQueerphobia: any;
     otherformOfQueerphobiaFreeField: string;
-  } = getFormCookies(FIFTH_FORM);
+  } = getFormCookies(SIXTH_FORM);
   console.log('fifthForm',fifthForm);
   
   let sixthForm: {
@@ -105,7 +105,7 @@ const EleventhStep: React.FC<EleventhStepProps> = ({
     step: number;
     typeOfDiscriminationFreeField: string;
     typeOfDiscrimination: string[];
-  } = getFormCookies(SIXTH_FORM);
+  } = getFormCookies(FIFTH_FORM);
 
   let seventhForm: {
     question: string;
@@ -153,7 +153,7 @@ const EleventhStep: React.FC<EleventhStepProps> = ({
     ) {
       thirdForm = getFormCookies(FIFTH_FORM);
       fourthForm = getFormCookies(SIXTH_FORM);
-      sixthForm = getFormCookies(SEVENTH_FORM);
+      fifthForm = getFormCookies(SEVENTH_FORM);
       seventhForm = getFormCookies(EIGTH_FORM)
       eighthForm = getFormCookies(NINETH_FORM)
       secondForm=getFormCookies(FOURTH_FORM)
@@ -227,18 +227,18 @@ const EleventhStep: React.FC<EleventhStepProps> = ({
     let fifthForm: {
       formOfQueerphobia: string[];
       otherformOfQueerphobiaFreeField: string;
-    } = getFormCookies(FIFTH_FORM);
+    } = getFormCookies(SIXTH_FORM);
 
     let sixthForm: {
       typeOfDiscriminationFreeField: string;
       typeOfDiscrimination: string[];
-    } = getFormCookies(SIXTH_FORM);
+    } = getFormCookies(FIFTH_FORM);
 
     let seventhForm: {
       formOfDisc: string;
       formOfDiscYes: string[];
       formOfDiscYesFreeField: string;
-    } = getFormCookies(SEVENTH_FORM);
+    } = getFormCookies(SIXTH_FORM);
 
     let eighthForm: {
       haveYouReported: string;
@@ -264,7 +264,7 @@ const EleventhStep: React.FC<EleventhStepProps> = ({
         
         thirdForm = getFormCookies(FIFTH_FORM);
         fourthForm = getFormCookies(SIXTH_FORM);
-        sixthForm = getFormCookies(SEVENTH_FORM);
+        fifthForm = getFormCookies(SEVENTH_FORM);
         seventhForm = getFormCookies(EIGTH_FORM);
         eighthForm = getFormCookies(NINETH_FORM);
         secondForm = getFormCookies(FOURTH_FORM);
@@ -340,6 +340,7 @@ const EleventhStep: React.FC<EleventhStepProps> = ({
     
 
     try {
+      dispatch({ type: FORM_ERRORS, payload: true });
       //  if (verified) {
         setCaptchaLoading(false);
         // Here you would send the input data to a database, and
@@ -350,15 +351,20 @@ const EleventhStep: React.FC<EleventhStepProps> = ({
         const response = await new ReportService().sendReport(report).then((result)=>{
           if (result.status===201 || result.status===200) {
             console.log('Successfull');
+            dispatch({ type: FORM_ERRORS, payload: false });
             clearFormCookies();
             dispatch({ type: NEXT_STEP, payload: 'DATA 1' });
           }else{
             console.log('failed');
             setCaptchaLoading(false);
+            dispatch({ type: FORM_ERRORS, payload: false });
+
             throw new Error('Fetching error occured, please reload');
           }
         }).catch((error)=>{console.log("error")
-        setCaptchaLoading(false);
+          setCaptchaLoading(false);
+            dispatch({ type: FORM_ERRORS, payload: false });
+          
           throw new Error('Fetching error occured, please reload');}
         );
 
@@ -367,6 +373,8 @@ const EleventhStep: React.FC<EleventhStepProps> = ({
        
       //  }
     } catch (error) {
+            dispatch({ type: FORM_ERRORS, payload: false });
+
       console.log('verify error captcha', error);
       setCaptchaLoading(false);
     }

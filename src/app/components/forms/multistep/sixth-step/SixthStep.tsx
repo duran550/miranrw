@@ -11,11 +11,11 @@ import {
 } from '@/app/context/actions';
 import InputField from '../../text-field/InputField';
 import { clearFormCookiesStep, getFormCookies, getFormStep, setFormCookies } from '@/cookies/cookies';
-import { FIFTH_FORM } from '@/cookies/cookies.d';
+import { FIFTH_FORM,SEVENTH_FORM, SIXTH_FORM } from '@/cookies/cookies.d';
 import { useScrollOnTop } from '@/app/hooks/useScrollOnTop';
 import { SixthStepProps, SixthStepValues } from './sixthStep';
 
-const SixthStep: React.FC<SixthStepProps> = ({ sixthStepTranslation }) => {
+const SixthStep: React.FC<SixthStepProps> = ({ sixthStepTranslation, id }) => {
   const { dispatch, isEditing, reportingPerson, formErrors } = useFormContext();
   const [question] = useState<string>(sixthStepTranslation?.title);
 
@@ -39,8 +39,10 @@ const SixthStep: React.FC<SixthStepProps> = ({ sixthStepTranslation }) => {
       formOfQueerphobia: string[];
       otherformOfQueerphobiaFreeField: string;
       question: string;
-    } = getFormCookies(FIFTH_FORM);
-
+    } = getFormCookies(SIXTH_FORM);
+ if (id && id === 'seventhForm') {
+   formValues = getFormCookies(SEVENTH_FORM);
+ }
     // dispatch({ type: FORM_ERRORS, payload: false });
     // if (formOfQueerphobia.length<0) {
     //   dispatch({ type: FORM_ERRORS, payload: true });
@@ -75,21 +77,23 @@ const SixthStep: React.FC<SixthStepProps> = ({ sixthStepTranslation }) => {
     
     let step = getFormStep();
     let dataWithQuestion = { question, step, ...data };
-    setFormCookies(dataWithQuestion, FIFTH_FORM);
+    // setFormCookies(dataWithQuestion, FIFTH_FORM);
     console.log('dataWithQuestion',dataWithQuestion);
-    
-     dispatch({ type: NEXT_STEP, payload: 'DATA 1' });
+     id && id === 'seventhForm'
+       ? setFormCookies(dataWithQuestion, SEVENTH_FORM)
+       : setFormCookies(dataWithQuestion, SIXTH_FORM);
+     dispatch({ type: NEXT_STEP, payload: '' });
     // isEditing && reportingPerson === 'myself'
     //   ? dispatch({ type: LAST_STEP, payload: 11 })
     //   : dispatch({ type: NEXT_STEP, payload: 'DATA 1' });
-    !isEditing && reportingPerson === 'andere'
-      ? dispatch({ type: JUMP_STEP_FOR_WITNESS, payload: '' })
-      : dispatch({ type: NEXT_STEP, payload: '' });
+    // !isEditing && reportingPerson === 'andere'
+    //   ? dispatch({ type: JUMP_STEP_FOR_WITNESS, payload: '' })
+    //   : dispatch({ type: NEXT_STEP, payload: '' });
   };
 
   return (
     <form
-      id="fifthForm"
+      id={id && id == 'seventhForm' ? 'seventhForm' : 'sixthForm'}
       onSubmit={handleSubmit(onSubmit)}
       className="lg:w-[35rem]"
     >
