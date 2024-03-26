@@ -12,15 +12,18 @@ const Page = () => {
     <div className="mt-8">
       <h1 className="font-bold text-2xl mb-4">Quantitative data</h1>
 
-      {loading && (
+      {/* {(loading && (
         <div className="w-full">
           <Loading />
         </div>
-      )}
+      )) || (
+        
+      )} */}
+
       <iframe
         onLoad={handleIframeLoaded}
         loading="lazy"
-        src="https://winniemafouo.shinyapps.io/antid_miq/_w_716b033d/#!/quantitative"
+        src="https://dashboard.kaeyros.org/#!/quantitative"
         className="w-full h-screen"
       />
     </div>

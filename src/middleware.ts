@@ -43,6 +43,7 @@ export function middleware(request: NextRequest) {
     `/${locale}/dashboard/reports`,
     `/${locale}/dashboard/quantitative`,
     `/${locale}/dashboard/qualitative`,
+    `/${locale}/dashboard/compare-data`,
     `/${locale}/dashboard/settings`,
   ];
 
@@ -70,21 +71,39 @@ export function middleware(request: NextRequest) {
     
   ];
 
-   const allPaths = [
-     `/${locale}/datenschutz`,
-     `/${locale}/disclaimer`,
-     `/${locale}/faqs`,
-     `/${locale}/impressum`,
-     `/${locale}/queerphobia`,
-     `/${locale}/report`,
-     `/${locale}/statement`,
-     `/${locale}`,
-     `/${locale}/about-us`,
-   ];
+  //  const allPaths = [
+  //    `/${locale}/datenschutz`,
+  //    `/${locale}/disclaimer`,
+  //    `/${locale}/faqs`,
+  //    `/${locale}/impressum`,
+  //    `/${locale}/queerphobia`,
+  //    `/${locale}/report`,
+  //    `/${locale}/statement`,
+  //    `/${locale}`,
+  //    `/${locale}/about-us`,
+  //  ];
+
+  const allPaths = [
+    `/${locale}/datenschutz`,
+    `/${locale}/disclaimer`,
+    `/${locale}/faqs`,
+    `/${locale}/impressum`,
+    `/${locale}/queerphobia`,
+    `/${locale}/report`,
+    `/${locale}/statement`,
+    `/${locale}`,
+    `/${locale}/about-us`,
+  ];
 
   if (!request.cookies.get('user_data') && pathname.includes('/dashboard')) {
     return NextResponse.redirect(new URL(`/${locale}/login`, request.url));
   } else if (request.cookies.get('user_data') && publicPath.includes(pathname)) {
+    return NextResponse.redirect(new URL(`/${locale}/dashboard`, request.url));
+  } else if (
+    request.cookies.get('user_data') &&
+    !allPaths.includes(pathname) &&
+    !pathname.includes('/dashboard')
+  ) {
     return NextResponse.redirect(new URL(`/${locale}/dashboard`, request.url));
   } else if (
     request.cookies.get('user_data') &&
@@ -101,7 +120,8 @@ export function middleware(request: NextRequest) {
       user &&
       user?.role &&
       user?.role == 1 &&
-      !privateAdminPaths.includes(pathname)&&
+      !privateAdminPaths.includes(pathname) &&
+      !pathname.includes('/dashboard/cleaned-reports') &&
       !allPaths.includes(pathname)
     ) {
       return NextResponse.redirect(

@@ -13,8 +13,7 @@ const ReportSingle = () => {
 
       <div className="flex  gap-x-6">
         <ReportSummary />
-
-        {user && user.role === 3 && <ReportActions />}
+        {/* <ReportActions /> */}
       </div>
     </div>
   );
