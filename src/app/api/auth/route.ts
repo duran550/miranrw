@@ -27,7 +27,8 @@ export async function POST(request: any) {
         const tokenData = {
           id: user[0]._id,
           fullname: user[0]?.fullname,
-          email: user[0]?.email
+          email: user[0]?.email,
+          role: user[0]?.role
           }
         const token= createToken(tokenData, '1h')
         const refreshToken = createToken(tokenData, '2h');

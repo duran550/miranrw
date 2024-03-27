@@ -29,3 +29,14 @@ export const update_user_schema = Joi.object({
     disable: Joi.boolean()
         // .email({ minDomainSegments: 2, tlds: { allow: ['com', 'net'] } })
 })
+
+export const category_schema = Joi.object({
+    name: Joi.string().alphanum().min(3).max(30).required(),
+        // .email({ minDomainSegments: 2, tlds: { allow: ['com', 'net'] } })
+})
+
+export const category_option_schema = Joi.object({
+    name: Joi.string().alphanum().min(3).max(30).required(),
+    category: Joi.string().alphanum().min(3).max(100).required(),
+        // .email({ minDomainSegments: 2, tlds: { allow: ['com', 'net'] } })
+})
