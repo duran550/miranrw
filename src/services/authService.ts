@@ -32,6 +32,10 @@ export default class AuthService extends DataService {
     return this.post('/api/user/', data);
   };
 
+  getUsers = (): Promise<{ data: any; status: number }> => {
+    return this.get('/api/user/');
+  };
+
   //   changePassword = (data: any) => {
   //     return this.post('/auth/changePassword', data)
   //   }

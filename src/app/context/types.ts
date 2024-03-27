@@ -5,14 +5,13 @@ export type LoginParams = {
 };
 
 export type UserDataType = {
-  _id: string;
+  id: string;
   fullname: string;
   email: string;
-  password: string;
+ 
   role: number;
-  createdAt: string;
-  updatedAt: string;
-  __v: number;
+  toke:string
+ 
 };
 
 export type AuthValuesType = {

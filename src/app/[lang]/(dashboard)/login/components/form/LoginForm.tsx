@@ -63,7 +63,13 @@ const LoginForm = () => {
   
         if (result.status === 201) {
           const user =  DecodeToken(result.headers.authorization);
-          user.then((result)=>{console.log('result',result);
+          user.then((result1) => {
+            // let user1:UserDataType=result1
+            console.log('result', result1)
+            // setUserCookies({ token: result.headers.authorization, ...result1 });
+              window.location.href = '/en/dashboard';
+              toast.success(result.data.message);
+              setIsLoading(false);
           })
           
       // console.log('result', result);
@@ -76,9 +82,7 @@ const LoginForm = () => {
           
           // loginUser(result.data.user[0]);
           // setUserCookies(result.data.user[0]);
-          // window.location.href = '/en/dashboard';
-          // toast.success(result.data.message);
-          setIsLoading(false);
+         
         }
       })
       .catch((error) => {

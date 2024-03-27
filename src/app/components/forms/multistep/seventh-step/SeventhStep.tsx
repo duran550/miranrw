@@ -79,11 +79,16 @@ console.log(typeOfDiscrimination);
         );
     } else if (
       (typeOfDiscrimination &&
-        typeOfDiscrimination?.includes('Anderes, und zwar') &&
+        typeOfDiscrimination?.includes(
+          typeOfDiscrimination[typeOfDiscrimination.length - 1]
+        ) &&
+        typeOfDiscriminationFreeField &&
         typeOfDiscriminationFreeField.length <= 3) ||
       (typeOfDiscrimination &&
-        typeOfDiscrimination?.includes('Other, specify') &&
-        typeOfDiscriminationFreeField?.length <= 3)
+        typeOfDiscrimination?.includes(
+          typeOfDiscrimination[typeOfDiscrimination.length - 1]
+        ) &&
+        !typeOfDiscriminationFreeField)
     ) {
       dispatch({ type: FORM_ERRORS, payload: true });
     } else {

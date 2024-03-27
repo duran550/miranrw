@@ -10,3 +10,5 @@ export async function getAllUsers() {
     throw error; // Re-throw the error to handle it in the component
   }
 }
+
+

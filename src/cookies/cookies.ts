@@ -19,6 +19,8 @@ export const setUserCookies = (data: any) => {
 
 export const getUserCookies = () => {
   const data = cookies.get(USER_DATA);
+  console.log('data',data);
+  
   return data ? JSON.parse(data) : undefined;
 };
 
