@@ -21,6 +21,8 @@ import { setUserCookies } from '@/cookies/cookies';
 import InputField from '@/app/components/forms/text-field/InputField';
 import { AuthContext, AuthProvider } from '@/app/context/AuthContext';
 import { useAuth } from '@/app/hooks/useAuth';
+import { DecodeToken } from '../DecodeToken';
+// import { verify } from '@/app/api/utils/decode';
 
 interface IFormInput {
   email: string;
@@ -58,17 +60,30 @@ const LoginForm = () => {
     const response = new AuthService()
       .login(data)
       .then((result) => {
-        console.log('result', result);
-
-        if (result.status == 201) {
-          loginUser(result.data.user[0]);
-          setUserCookies(result.data.user[0]);
-          window.location.href = '/en/dashboard';
-          toast.success(result.data.message);
+  
+        if (result.status === 201) {
+          const user =  DecodeToken(result.headers.authorization);
+          user.then((result)=>{console.log('result',result);
+          })
+          
+      // console.log('result', result);
+      // console.log('user', result.headers.authorization);
+          // const user = verify(result.headers.authorization);
+          // console.log(
+          //   'user',
+          //   jwt.verify(result.headers.authorization,)
+          // );
+          
+          // loginUser(result.data.user[0]);
+          // setUserCookies(result.data.user[0]);
+          // window.location.href = '/en/dashboard';
+          // toast.success(result.data.message);
           setIsLoading(false);
         }
       })
       .catch((error) => {
+        console.log('error',error);
+        
         toast.error('Something went wrong, try again');
         setIsLoading(false);
       });

@@ -5,6 +5,7 @@ export default class AuthService extends DataService {
     password: string;
     email: string;
   }): Promise<{
+    headers: any;
     data: {
       status: string;
       message: string;
