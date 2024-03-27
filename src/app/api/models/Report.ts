@@ -60,6 +60,9 @@ const ReportSchema = new Schema<reportType>({
   sexualOrientation: { type: Array<string>, required: false },
   sexualOrientationFreeField: { type: String, required: false },
   
+},
+{
+  timestamps: true,
 });
 ReportSchema.set('timestamps', true);
 export const Report =
