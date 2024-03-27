@@ -24,9 +24,8 @@ export async function POST(request: any) {
 }
 
 export async function GET(request: any) {
-  console.log('ok');
-  
-  authenticate(request)
+  let flag = await authenticate(request)
+  if (!flag) return NextResponse.json({ status: 'Error', message: 'Access Denied. Invalid Token.' }, { status: 400 });
   await dbConnect();
   const users = await User.find();
   return NextResponse.json({ users });
@@ -34,7 +33,8 @@ export async function GET(request: any) {
 
 
 export async function PUT(request: any, { params }: any) {
-  authenticate(request)
+  let flag = await authenticate(request)
+  if (!flag) return NextResponse.json({ status: 'Error', message: 'Access Denied. Invalid Token.' }, { status: 400 });
   const { id } = params;
 
   // const user= await request.json();
@@ -47,7 +47,8 @@ export async function PUT(request: any, { params }: any) {
 }
 
 export async function DELETE(request: any) {
-  authenticate(request)
+  let flag = await authenticate(request)
+  if (!flag) return NextResponse.json({ status: 'Error', message: 'Access Denied. Invalid Token.' }, { status: 400 });
   const id = request.nextUrl.searchParams.get("id");
   await dbConnect();
   await User.findByIdAndDelete(id);
