@@ -5,7 +5,8 @@ import { NextResponse } from "next/server";
 import { authenticate } from '../utils/decode';
 
 export async function POST(request: any) {
-  authenticate(request)
+  let flag = await authenticate(request)
+  if (!flag) return NextResponse.json({ status: 'Error', message: 'Access Denied. Invalid Token.' }, { status: 400 });
   const { role, description } = await request.json();
   await dbConnect();
   await Roles.create({ role, description });
@@ -13,14 +14,16 @@ export async function POST(request: any) {
 }
 
 export async function GET(request: any) {
-  authenticate(request)
+  let flag = await authenticate(request)
+  if (!flag) return NextResponse.json({ status: 'Error', message: 'Access Denied. Invalid Token.' }, { status: 400 });
   await dbConnect();
   const roles = await Roles.find();
   return NextResponse.json({ roles });
 }
 
 export async function DELETE(request: any) {
-  authenticate(request)
+  let flag = await authenticate(request)
+  if (!flag) return NextResponse.json({ status: 'Error', message: 'Access Denied. Invalid Token.' }, { status: 400 });
   const id = request.nextUrl.searchParams.get("id");
   await dbConnect();
   await Roles.findByIdAndDelete(id);
