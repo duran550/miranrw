@@ -1,8 +1,8 @@
 import { NextApiRequest } from 'next';
-import { NextResponse } from 'next/server';
+import { NextRequest, NextResponse } from 'next/server';
 import { createToken, verify } from '../../utils/decode';
 
-export async function GET(request: NextApiRequest) {
+export async function GET(request: any) {
     const refreshToken = request.cookies['refreshToken'];
     if (!refreshToken) {
     return NextResponse.json({ status: 'Error', message: 'Access Denied. No refresh token provided.' }, { status: 401 });
