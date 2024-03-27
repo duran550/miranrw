@@ -58,8 +58,6 @@ const LoginForm = () => {
     const response = new AuthService()
       .login(data)
       .then((result) => {
-        console.log('result', result);
-
         if (result.status == 201) {
           loginUser(result.data.user[0]);
           setUserCookies(result.data.user[0]);
@@ -87,7 +85,7 @@ const LoginForm = () => {
   // console.log(user, 'ctx');
   useEffect(() => {
     if (user) {
-      console.log(user, 'user');
+      // console.log(user, 'user');
     }
   }, [user]);
   return (

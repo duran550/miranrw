@@ -37,6 +37,7 @@ import DeleteUser from '@/app/components/settings/DeleteUser';
 import { getAllUsers } from '@/services/userService';
 import { AdminContext } from '@/app/[lang]/(dashboard)/common/context/AdminContext';
 import { useContext } from 'react';
+import AddUser from './AddUserModal';
 
 interface ClientInfoProps {
   createdAt: string;
@@ -86,10 +87,19 @@ export default function ClientTable() {
   // date states
   const [date, setDate] = useState<Date>(new Date());
 
+  // set Add users modal
+  const [addUser, setAddUser] = useState<boolean>(false);
+
+  const [refresh, setRefresh] = useState<boolean>(false);
+
   const { dispatch } = useContext(AdminContext);
 
   const setClientInfo = (info: ClientInfoProps | null) => {
     dispatch({ type: 'SET_CLIENT_INFO', payload: info });
+  };
+
+  const refreshHandler = () => {
+    setRefresh(true);
   };
 
   // get All Clients
@@ -103,9 +113,12 @@ export default function ClientTable() {
       }
     }
 
-    fetchUsers();
-    setClientInfo(selectedCell);
-  }, [selectedCell]);
+    if (refresh || getUsers.length < 1) {
+      fetchUsers();
+      setRefresh(false);
+    }
+    // setClientInfo(selectedCell);
+  }, [refresh, getUsers]);
 
   // date variable
   const dateFormat = 'DD-MM-YYYY';
@@ -178,7 +191,8 @@ export default function ClientTable() {
     const currentCellInfo = sortedItems.find(
       (item) => item._id === id.toString()
     );
-    setSelectedCell(currentCellInfo);
+    // setSelectedCell(currentCellInfo);
+    setClientInfo(currentCellInfo);
   }
 
   const renderCell = React.useCallback((user: User, columnKey: React.Key) => {
@@ -223,8 +237,8 @@ export default function ClientTable() {
           <div className="">
             <div className="flex gap-x-2">
               <SeeDetails />
-              <EditUser />
-              <DeleteUser />
+              <EditUser refresh={refreshHandler} />
+              <DeleteUser refresh={refreshHandler} />
             </div>
           </div>
         );
@@ -329,7 +343,11 @@ export default function ClientTable() {
                   ))}
                 </DropdownMenu>
               </Dropdown>
-              <Button color="primary" endContent={<PlusIcon />}>
+              <Button
+                color="primary"
+                endContent={<PlusIcon />}
+                onClick={() => setAddUser(true)}
+              >
                 Add New
               </Button>
             </div>
@@ -432,6 +450,13 @@ export default function ClientTable() {
           </div>
         </div>
       </CustomModal>
+      <AddUser
+        onClose={() => {
+          setAddUser(false);
+        }}
+        isOpen={addUser}
+        refresh={refreshHandler}
+      />
       <Table
         aria-label="Example table with custom cells, pagination and sorting"
         isHeaderSticky
@@ -458,7 +483,7 @@ export default function ClientTable() {
             </TableColumn>
           )}
         </TableHeader>
-        <TableBody emptyContent={'No users found'} items={sortedItems}>
+        <TableBody emptyContent={'Loading Users...'} items={sortedItems}>
           {(item) => (
             <TableRow
               key={item._id}

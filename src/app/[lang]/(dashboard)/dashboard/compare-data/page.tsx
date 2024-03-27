@@ -11,11 +11,11 @@ const Page = () => {
   return (
     <div className="mt-8">
       <h1 className="font-bold text-2xl mb-4">Compare data</h1>
-      {loading && (
+      {/* {loading && (
         <div className="w-full">
           <Loading />
         </div>
-      )}
+      )} */}
       <iframe
         onLoad={handleIframeLoaded}
         loading="lazy"

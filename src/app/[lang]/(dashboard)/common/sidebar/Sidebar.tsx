@@ -13,6 +13,7 @@ import { useRouter, useSelectedLayoutSegment } from 'next/navigation';
 import LogoutIcon from './icons/LogoutIcon';
 import { useAuth } from '@/app/hooks/useAuth';
 import { removeUserCookies } from '@/cookies/cookies';
+import Link from 'next/link';
 
 interface SidebarProps {
   lang: string;
@@ -31,7 +32,9 @@ const Sidebar: FC<SidebarProps> = ({ lang }) => {
   return (
     <div className="w-1/6 fixed top-0 border-r-2 h-screen px-8">
       <div className="mt-8">
-        <Image src={Logo} alt="Logo" />
+        <Link href="/">
+          <Image src={Logo} alt="Logo" />
+        </Link>
       </div>
       <div className="my-24">
         {user &&

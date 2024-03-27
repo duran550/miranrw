@@ -28,8 +28,6 @@ function SeeDetails({ lang }: SeedetailsProps) {
   const { state } = useContext(AdminContext);
   const { clientInfo } = state;
 
-  console.log(clientInfo, 'this is my clientInfo');
-
   const {
     watch,
     formState: { errors, isSubmitting, isDirty, isValid },

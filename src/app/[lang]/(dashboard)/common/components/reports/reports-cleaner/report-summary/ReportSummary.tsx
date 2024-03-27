@@ -26,11 +26,6 @@ const ReportSummary: React.FC<ReportSummaryProps> = ({
   const combinedClassName = className ? `${className}` : defaultClassName;
   const { uncategorizedData } = useFindReport();
 
-  console.log(
-    mutate && !state.isDangerous && !state.isIrrelevant,
-    'isdangerous'
-  );
-
   return (
     <div className={combinedClassName}>
       <div className="flex justify-between items-center">
