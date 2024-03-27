@@ -5,10 +5,11 @@ import dbConnect from '../lib/dbConnect';
 import User from '../models/user'
 import { NextResponse } from "next/server";
 import { user_login_schema } from '../validators/validate';
+import { createToken, verify } from '../utils/decode';
+
 
 export async function POST(request: any) {
   // Validate the request body
-
   const {error, value} = await user_login_schema.validate(await request.json())
   if(error) return NextResponse.json({ message: error.details[0].message }, { status: 400 });
   
@@ -28,9 +29,11 @@ export async function POST(request: any) {
           fullname: user[0]?.fullname,
           email: user[0]?.email
           }
-          const token = jwt.sign(tokenData, process.env.JWT_SECRET as string, { expiresIn: '1d' });
+        const token= createToken(tokenData, '1h')
+        const refreshToken = createToken(tokenData, '2h');
         const response= NextResponse.json({success: 'Success', message: 'Login successful'},{ status: 201 })
-        response.cookies.set('token', token, {httpOnly: true});
+        response.cookies.set('refreshToken', refreshToken, {httpOnly: true});
+        response.headers.set('Authorization', token);
         return response
       } else {
         return NextResponse.json({ status: 'Error', message: 'Invalid password' }, { status: 403 });

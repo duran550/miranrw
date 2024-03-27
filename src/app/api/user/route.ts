@@ -3,9 +3,11 @@ import bcrypt from 'bcrypt';
 import dbConnect from '../lib/dbConnect';
 import User from '../models/user'
 import { NextResponse } from "next/server";
-import { create_user_schema } from '../validators/validate';
+import { create_user_schema, update_user_schema } from '../validators/validate';
+import { authenticate } from '../utils/decode';
 
 export async function POST(request: any) {
+  authenticate(request)
   const {error, value} = await create_user_schema.validate(await request.json())
   if(error) return NextResponse.json({ message: error.details[0].message }, { status: 400 });
   let { fullname, password, email, role } = value;
@@ -21,15 +23,29 @@ export async function POST(request: any) {
   return NextResponse.json({ message: "Role Created" }, { status: 201 });
 }
 
-export async function GET() {
+export async function GET(request: NextApiRequest) {
+  authenticate(request)
   await dbConnect();
   const users = await User.find();
   return NextResponse.json({ users });
 }
 
+
+export async function PUT(request: any, { params }: any) {
+  authenticate(request)
+  const { id } = params;
+
+  // const user= await request.json();
+  const {error, value} = await update_user_schema.validate(await request.json())
+  if(error) return NextResponse.json({ message: error.details[0].message }, { status: 400 });
+
+  await dbConnect();
+  await User.findByIdAndUpdate(id, { value });
+  return NextResponse.json({ message: 'User updated' }, { status: 200 });
+}
+
 export async function DELETE(request: any) {
-  
-  
+  authenticate(request)
   const id = request.nextUrl.searchParams.get("id");
   await dbConnect();
   await User.findByIdAndDelete(id);
