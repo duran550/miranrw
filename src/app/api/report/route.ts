@@ -13,8 +13,8 @@ export async function POST(request: any) {
   return NextResponse.json({ message: 'Report Created' }, { status: 201 });
 }
 
-export async function GET(request: NextApiRequest) {
-  console.log('report ===================> hello');
+export async function GET(request: any) {
+  
   
   authenticate(request)
   await dbConnect();

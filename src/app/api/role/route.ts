@@ -12,7 +12,7 @@ export async function POST(request: any) {
   return NextResponse.json({ message: "Role Created" }, { status: 201 });
 }
 
-export async function GET(request: NextApiRequest) {
+export async function GET(request: any) {
   authenticate(request)
   await dbConnect();
   const roles = await Roles.find();
