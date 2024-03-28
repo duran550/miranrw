@@ -22,11 +22,11 @@ export async function GET(request: any) {
   await dbConnect();
   let categorys: any[] = await Category.find()
   let arr:any=[]
+  let obj:any={}
   if (categorys.length) {
     for await (let category of categorys) {
       let options = await CategoryOption.find({ category: category._id })
-      // console.log(options);
-      let obj:any={}
+     
       obj['category']=category
       obj['options']=options
       arr.push(obj)
