@@ -15,32 +15,32 @@ export const adminLinks: Array<{
 }> = [
   {
     name: 'Dashboard',
-    href: '/dashboard',
+    href: 'dashboard',
     icon: HomeIcon,
     targetSegment: null,
   },
   {
     name: 'Reports',
-    href: '/dashboard/reports',
+    href: 'dashboard/reports',
     icon: ReportsIcon,
     targetSegment: 'reports',
   },
 
   {
     name: 'Quantitative',
-    href: '/dashboard/quantitative',
+    href: 'dashboard/quantitative',
     icon: QuantitativeIcon,
     targetSegment: 'quantitative',
   },
   {
     name: 'Qualitative',
-    href: '/dashboard/qualitative',
+    href: 'dashboard/qualitative',
     icon: QualitativeIcon,
     targetSegment: 'qualitative',
   },
   {
     name: 'settings',
-    href: '/dashboard/settings',
+    href: 'dashboard/settings',
     icon: SettingsIcon,
     targetSegment: 'settings',
   },
@@ -55,13 +55,13 @@ export const cleanerLinks: Array<{
 }> = [
   {
     name: 'Home',
-    href: '/dashboard',
+    href: 'dashboard',
     icon: HomeIcon,
     targetSegment: null,
   },
   {
     name: 'Clean data',
-    href: '/dashboard/clean-data',
+    href: 'dashboard/clean-data',
     icon: CleanDataIcon,
     targetSegment: 'clean-data',
   },
@@ -71,33 +71,33 @@ export const cleanerLinks: Array<{
 export const viewerLinks: any = [
   {
     name: 'Dashboard',
-    href: '/dashboard',
+    href: 'dashboard',
     icon: HomeIcon,
     targetSegment: null,
   },
   {
     name: 'Reports',
-    href: '/dashboard/cleaned-reports',
+    href: 'dashboard/cleaned-reports',
     icon: ReportsIcon,
     targetSegment: 'cleaned-reports',
   },
 
   {
     name: 'Quantitative',
-    href: '/dashboard/quantitative',
+    href: 'dashboard/quantitative',
     icon: QuantitativeIcon,
     targetSegment: 'quantitative',
   },
   {
     name: 'qualitative',
-    href: '/dashboard/qualitative',
+    href: 'dashboard/qualitative',
     icon: QualitativeIcon,
     targetSegment: 'qualitative',
   },
   ,
   {
     name: 'Compare data',
-    href: '/dashboard/compare-data',
+    href: 'dashboard/compare-data',
     icon: CompareIcon,
     targetSegment: 'compare-data',
   },
@@ -108,13 +108,13 @@ export const viewerLinks: any = [
 export const riskManagerLinks: any = [
   {
     name: 'Dashboard',
-    href: '/dashboard',
+    href: 'dashboard',
     icon: HomeIcon,
     targetSegment: null,
   },
   {
     name: 'Reports',
-    href: '/dashboard/dangerous-reports',
+    href: 'dashboard/dangerous-reports',
     icon: ReportsWarningIcon,
     targetSegment: 'dangerous-reports',
   },

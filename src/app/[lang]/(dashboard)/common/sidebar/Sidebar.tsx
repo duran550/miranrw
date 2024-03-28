@@ -1,5 +1,5 @@
 'use client';
-import React from 'react';
+import React, { FC } from 'react';
 import NavLink from './NavLink';
 import {
   adminLinks,
@@ -15,7 +15,11 @@ import { useAuth } from '@/app/hooks/useAuth';
 import { removeUserCookies } from '@/cookies/cookies';
 import Link from 'next/link';
 
-const Sidebar = () => {
+interface SidebarProps {
+  lang: string;
+}
+
+const Sidebar: FC<SidebarProps> = ({ lang }) => {
   const { push } = useRouter();
   const { user } = useAuth();
   const activeSegment = useSelectedLayoutSegment();
@@ -42,6 +46,7 @@ const Sidebar = () => {
               href={nav.href}
               name={nav.name}
               targetSegment={nav.targetSegment}
+              lang={lang}
             />
           ))}
         {user &&
@@ -53,6 +58,7 @@ const Sidebar = () => {
               href={nav.href}
               name={nav.name}
               targetSegment={nav.targetSegment}
+              lang={lang}
             />
           ))}
         {user &&
@@ -64,6 +70,7 @@ const Sidebar = () => {
               href={nav.href}
               name={nav.name}
               targetSegment={nav.targetSegment}
+              lang={lang}
             />
           ))}
         {user &&
@@ -75,6 +82,7 @@ const Sidebar = () => {
               href={nav.href}
               name={nav.name}
               targetSegment={nav.targetSegment}
+              lang={lang}
             />
           ))}
       </div>

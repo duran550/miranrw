@@ -71,7 +71,7 @@ const InputField: React.FC<InputFieldProps> = ({
                 isValid
                   ? 'border-red-600 bg-red-100'
                   : 'boder-[#E9ECEF] bg-[#E9ECEF] '
-              } pl-12 sm:py-4 py-3 text-base focus:outline-none focus:ring-1 sm:text-sm focus:ring-emerald-500 text-gray-900 rounded-xl block w-full  p-2.5 placeholder:text-sm sm:placeholder:text-lg appearance-none	`}
+              } pl-8 sm:py-4 py-3 text-base focus:outline-none focus:ring-1 sm:text-sm focus:ring-emerald-500 text-gray-900 rounded-xl block w-full  p-2.5 placeholder:text-sm sm:placeholder:text-lg appearance-none	`}
               placeholder={placeholder}
               // required
               min={min ? min : ''}
@@ -117,7 +117,7 @@ const InputField: React.FC<InputFieldProps> = ({
                 isValid
                   ? 'border-red-600 bg-red-100'
                   : 'boder-[#E9ECEF] bg-[#E9ECEF] '
-              } pl-12 sm:py-4 py-3 text-base focus:outline-none focus:ring-1 sm:text-sm focus:ring-primary text-gray-900 rounded-xl block w-full  p-2.5 placeholder:text-sm sm:placeholder:text-lg appearance-none	`}
+              } pl-8 sm:py-4 py-3 text-base focus:outline-none focus:ring-1 sm:text-sm focus:ring-primary text-gray-900 rounded-xl block w-full  p-2.5 placeholder:text-sm sm:placeholder:text-lg appearance-none	`}
               placeholder={placeholder}
               // required
               min={min ? min : ''}
