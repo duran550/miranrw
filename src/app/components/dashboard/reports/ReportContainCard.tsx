@@ -3,10 +3,16 @@ import { ReportSummaryType } from '@/app/[lang]/(dashboard)/dashboard/reports/re
 import Link from 'next/link';
 
 const ReportContainCard: React.FC<{
-  data: { id: string; text: string; btn?: any; summary?: ReportSummaryType | undefined, 
-    categories?: [] | undefined,  }[];
+  data: {
+    id: string;
+    text: string;
+    btn?: any;
+    summary?: ReportSummaryType | undefined;
+    categories?: [] | undefined;
+  }[];
   href: string;
 }> = (props) => {
+  // console.log(props.data, '000000000000000000000000');
   return (
     <div className="grid grid-cols-3 gap-5">
       {props.data.map((item, index) => {
