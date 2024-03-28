@@ -11,10 +11,9 @@ import { DataCategorizationOptionType } from '@/app/[lang]/(dashboard)/dashboard
 type AnyInputType = any;
 
 const CategorizeDataForm = () => {
-  //
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [reportCarData] = useState(dataCategorizationOptions);
-  // console.log("/////", reportCarData, dataCategorizationOptions)
+
   const {
     register,
     handleSubmit,
