@@ -9,6 +9,7 @@ type NavLinkProps = {
   href: string;
   icon?: ReactNode;
   targetSegment?: string | null;
+  lang: string;
 };
 
 const NavLink: React.FC<NavLinkProps> = ({
@@ -16,13 +17,14 @@ const NavLink: React.FC<NavLinkProps> = ({
   href,
   icon,
   targetSegment,
+  lang,
 }) => {
   const activeSegment = useSelectedLayoutSegment();
 
   return (
     <Link
       key={name}
-      href={href}
+      href={`/${lang}/${href}`}
       className={clsx(
         `flex h-[48px] ${
           (activeSegment === targetSegment && 'hover:bg-primary text-white') ||

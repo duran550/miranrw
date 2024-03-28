@@ -34,21 +34,25 @@ const HomeViewerAndAdmin = () => {
         <h1 className="text-xl mb-4 font-bold">Recent reports</h1>
         <div className="w-full gap-y-4 flex flex-col">
           <ReportCard
+            href="/en/dashboard/cleaned-reports/PT1024"
             reportType={Category.Uncategorized}
             date="Tuesday, 7 September 2023, 20h45 "
             title="Data 001100111"
           />
           <ReportCard
+            href="/en/dashboard/cleaned-reports/PT1025"
             reportType={Category.Uncategorized}
             date="Tuesday, 7 September 2023, 20h45 "
             title="Data 001100111"
           />
           <ReportCard
+            href="/en/dashboard/cleaned-reports/PT1026"
             reportType={Category.Uncategorized}
             date="Tuesday, 7 September 2023, 20h45 "
             title="Data 001100111"
           />
           <ReportCard
+            href="/en/dashboard/cleaned-reports/PT1027"
             reportType={Category.Uncategorized}
             date="Tuesday, 7 September 2023, 20h45 "
             title="Data 001100111"

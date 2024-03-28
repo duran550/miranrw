@@ -5,6 +5,7 @@ export type SixthStepProps = {
     minCharacters: string;
     choices: Array<{ iD: number; id: string; value: string; label: string }>;
   };
+  id?: string;
 };
 
 export type SixthStepValues = {

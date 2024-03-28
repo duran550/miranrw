@@ -1,5 +1,6 @@
 import React from 'react';
 import { Category, ReportCardProps } from './reportCard.d';
+import Link from 'next/link';
 
 export const getColorByReportType = (reportType: string) => {
   switch (reportType) {
@@ -22,21 +23,28 @@ export const getColorByReportType = (reportType: string) => {
   }
 };
 
-const ReportCard: React.FC<ReportCardProps> = ({ date, reportType, title }) => {
+const ReportCard: React.FC<ReportCardProps> = ({
+  date,
+  reportType,
+  title,
+  href,
+}) => {
   let colors: string[] = getColorByReportType(reportType);
   return (
-    <div className="w-full flex items-center justify-between p-4 rounded-xl border border-gray-300">
-      <div>
-        <h1 className="font-bold mb-2">{title}</h1>
-        <p className="text-gray-500 text-sm">{date}</p>
+    <Link href={href ? `${href}` : ''}>
+      <div className="w-full flex items-center justify-between p-4 rounded-xl border border-gray-300">
+        <div>
+          <h1 className="font-bold mb-2">{title}</h1>
+          <p className="text-gray-500 text-sm">{date}</p>
+        </div>
+        <div
+          style={{ backgroundColor: `${colors[1]}`, color: `${colors[0]}` }}
+          className="rounded-full  px-3 py-2 text-sm"
+        >
+          {reportType}
+        </div>
       </div>
-      <div
-        style={{ backgroundColor: `${colors[1]}`, color: `${colors[0]}` }}
-        className="rounded-full  px-3 py-2 text-sm"
-      >
-        {reportType}
-      </div>
-    </div>
+    </Link>
   );
 };
 
