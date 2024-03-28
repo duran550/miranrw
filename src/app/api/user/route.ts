@@ -13,15 +13,21 @@ export async function POST(request: any) {
   if(error) return NextResponse.json({ message: error.details[0].message }, { status: 400 });
   let { fullname, password, email, role } = value;
   await dbConnect();
-   const is_exist=  await User.find({email: email})
-   
-   if (is_exist.length) {
-    return NextResponse.json({ message: "This email is use please provide another one" }, { status: 401 });
-   }
-  const hash= await bcrypt.hash(password, 12)
-  password= hash
-  await User.create({ fullname,role,password, email });
-  return NextResponse.json({ message: "Role Created" }, { status: 201 });
+  const is_exist = await User.find({ email: email });
+
+  if (is_exist.length) {
+    return NextResponse.json(
+      { message: 'This email is use please provide another one' },
+      { status: 401 }
+    );
+  }
+  const hash = await bcrypt.hash(password, 12);
+  password = hash;
+  const result = await User.create({ fullname, role, password, email });
+  return NextResponse.json(
+    { message: 'Role Created', result: result },
+    { status: 201 }
+  );
 }
 
 export async function GET(request: any) {

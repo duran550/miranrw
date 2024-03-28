@@ -8,6 +8,8 @@ import InputField from '../forms/text-field/InputField';
 import { useForm } from 'react-hook-form';
 import Image from 'next/image';
 import SeeDetailsIcon from '../../../../public/icons/see.svg';
+import { useContext } from 'react';
+import { AdminContext } from '@/app/[lang]/(dashboard)/common/context/AdminContext';
 
 interface IFormInput {
   fullname: string;
@@ -16,8 +18,15 @@ interface IFormInput {
   confirmPassword: string;
 }
 
-function SeeDetails({ lang }: any) {
+interface SeedetailsProps {
+  lang?: any;
+}
+
+function SeeDetails({ lang }: SeedetailsProps) {
   const [openModal, setOpenModal] = useState<boolean>(false);
+  // console.log(data, 'this is my data');
+  const { state } = useContext(AdminContext);
+  const { clientInfo } = state;
 
   const {
     watch,
@@ -33,31 +42,12 @@ function SeeDetails({ lang }: any) {
         isOpen={openModal}
         classStyle="text-black"
         showFooter={false}
+        positon="center"
       >
-        <form>
-          <div className="space-y-5 pb-5">
-            <div className="">
-              <h1 className="font-bold">Full Name</h1>
-              <InputField name="username" />
-            </div>
-            <div>
-              <h1 className="font-bold">Email</h1>
-              <InputField name="username" />
-            </div>
-            <div>
-              <h1 className="font-bold">Password</h1>
-              <InputField name="username" />
-            </div>
-            <div>
-              <h1 className="font-bold">Confirm Password</h1>
-              <InputField name="username" />
-            </div>
-          </div>
-          <div className="flex gap-x-4 mb-4">
-            <Button className="bg-black">Add User</Button>
-            <Button className="bg-black">Cancel</Button>
-          </div>
-        </form>
+        <div>
+          <h1>my name is {clientInfo?.fullname}</h1>
+          <h1>Created At {clientInfo?.createdAt}</h1>
+        </div>
       </CustomModal>
 
       <div>

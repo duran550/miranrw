@@ -18,6 +18,7 @@ const config: Config = {
 
       colors: {
         primaryColor: '#E30303',
+        greenDisable: '#2B8049', 
         primary: '#463880',
         secondaryColorSlate: '#EDEBF6',
         menuAndFooterColor: '#EDEBF6',

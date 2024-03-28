@@ -116,7 +116,7 @@ const LoginForm = () => {
   // console.log(user, 'ctx');
   useEffect(() => {
     if (user) {
-      console.log(user, 'user');
+      // console.log(user, 'user');
     }
   }, [user]);
   return (

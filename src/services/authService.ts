@@ -26,7 +26,7 @@ export default class AuthService extends DataService {
   };
 
   register = (
-    data: { fullname: string; password: string; email: string; role: string },
+    data: { fullname: string; password: string; email: string; role: number },
     config?: any
   ): Promise<{ data: { message: string }; status: number }> => {
     return this.post('/api/user/', data);
@@ -49,12 +49,4 @@ export default class AuthService extends DataService {
   };
 
   updateUser = {};
-
-  //   getProfile = (data: any) => {
-  //     return this.get(`/auth/user/${data}`);
-  //   };
-
-  //   getUser = (data: any) => {
-  //     return this.get(`/user/${data}`);
-  //   };
 }

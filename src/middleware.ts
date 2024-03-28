@@ -48,6 +48,7 @@ export function middleware(request: NextRequest, response: any, next: any) {
     `/${locale}/dashboard/quantitative`,
     `/${locale}/dashboard/qualitative`,
     `/${locale}/dashboard/compare-data`,
+    `/${locale}/dashboard/clean-data`,
     `/${locale}/dashboard/settings`,
   ];
 
@@ -69,11 +70,7 @@ export function middleware(request: NextRequest, response: any, next: any) {
     `/${locale}/dashboard/dangerous-reports`,
   ];
 
-  const publicPath = [
-    `/${locale}/login`,
-   
-    
-  ];
+  const publicPath = [`/${locale}/login`];
 
   //  const allPaths = [
   //    `/${locale}/datenschutz`,
@@ -101,7 +98,10 @@ export function middleware(request: NextRequest, response: any, next: any) {
 
   if (!request.cookies.get('user_data') && pathname.includes('/dashboard')) {
     return NextResponse.redirect(new URL(`/${locale}/login`, request.url));
-  } else if (request.cookies.get('user_data') && publicPath.includes(pathname)) {
+  } else if (
+    request.cookies.get('user_data') &&
+    publicPath.includes(pathname)
+  ) {
     return NextResponse.redirect(new URL(`/${locale}/dashboard`, request.url));
   } else if (
     request.cookies.get('user_data') &&
@@ -158,7 +158,8 @@ export function middleware(request: NextRequest, response: any, next: any) {
       user?.role &&
       user?.role == 4 &&
       !privateRiskPaths.includes(pathname) &&
-      !allPaths.includes(pathname)
+      !allPaths.includes(pathname) &&
+      !pathname.includes('/dashboard/dangerous-reports')
     ) {
       return NextResponse.redirect(
         new URL(`/${locale}/dashboard`, request.url)
