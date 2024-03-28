@@ -70,7 +70,7 @@ const LoginForm = () => {
             
             if (typeof result1 == 'object') {
               // console.log('result', typeof result1);
-              // setUserCookies(result1);
+              setUserCookies(result1);
                setRefreshToken(result.headers.authorization);
               toast.success(result.data.message);
               setIsLoading(false);

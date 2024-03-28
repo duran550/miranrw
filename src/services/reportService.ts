@@ -6,7 +6,7 @@ export default class ReportService extends DataService {
     return this.post('/api/report/', data);
   };
 
-  getAllReport = (): reportType => {
-    return this.get('/');
+  getAllReport = ():Promise<{data:any,status:number}> => {
+    return this.get('/api/report');
   };
 }

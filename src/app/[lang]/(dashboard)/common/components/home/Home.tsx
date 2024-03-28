@@ -8,6 +8,7 @@ import HomeRiskManager from './HomeRiskManager';
 import { getAllUsers } from '@/services/userService';
 import AuthService from '@/services/authService';
 import { Result } from 'postcss';
+import ReportService from '@/services/reportService';
 
 const Home = () => {
   const { user } = useAuth();
@@ -15,8 +16,8 @@ const Home = () => {
   //   const users = getAllUsers()
     //  console.log(users);
     
-    const response = new AuthService().getUsers().then((result) => {
-      console.log('result',result);
+    const response = new ReportService().getAllReport().then((result) => {
+      console.log('report',result);
       
     }).then((error) => {
       console.log(error);
