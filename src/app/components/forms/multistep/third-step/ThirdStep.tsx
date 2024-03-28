@@ -33,24 +33,27 @@ const ThirdStep: React.FC<ThirdStepProps> = ({ thirdStepTranslation, id }) => {
     handleSubmit,
     watch,
     setValue,
-    formState: { errors },
+    formState: { errors, isValid },
   } = useForm<ThirdFormValues>();
 
   // const watchAllFields = watch();
   let description: string = watch('description');
   // Getting form cookies
-  let formValues: { description: string; question: string } = getFormCookies(SECOND_FORM);
-console.log('formValues',formValues);
-
-  if (id && id == 'fourthForm') {
-  
-    formValues = getFormCookies(FOURTH_FORM);
-  }
+ 
 
   // Scroll on top
   useScrollOnTop();
 
   useEffect(() => {
+     let formValues: { description: string; question: string } =
+       getFormCookies(SECOND_FORM);
+     console.log('formValues', isValid);
+
+     if (id && id == 'fourthForm') {
+       formValues = getFormCookies(FOURTH_FORM);
+     }
+    console.log(description);
+    
     dispatch({ type: FORM_ERRORS, payload: true });
     if (description && description?.length >= 50) {
       dispatch({ type: FORM_ERRORS, payload: false });
@@ -72,7 +75,7 @@ if (!description || (description && description.length<50)) {
      
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [description, formValues?.description]);
+  }, [description]);
 
   // Triggered when submitting form
   const onSubmit: SubmitHandler<ThirdFormValues> = (data) => {
@@ -104,7 +107,7 @@ if (!description || (description && description.length<50)) {
         <p className="text-sm -mt-12 mb-8">{thirdStepTranslation?.mandatory}</p>
         <TextArea
           name="vorfall"
-          props={register('description')}
+          props={register('description',{required:true, minLength:50})}
           placeholder={thirdStepTranslation?.placeholder}
           type="text"
         />

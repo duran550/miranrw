@@ -17,17 +17,20 @@ import ReportService from '@/services/reportService';
 import ReportCard from '../report-card/ReportCard';
 import { reportType } from '@/utils/shared-types';
 import Link from 'next/link';
+import { UseReport } from '@/app/hooks/useReports';
 
 const ReportsCleaner = () => {
   const [status, setStatut] = useState(Category.Raw);
-  const [report, setReport] = useState<reportType[]>([]);
+  const [reports, setReport] = useState<reportType[]>([]);
+  const{report,setReports}= UseReport()
   useEffect(() => {
    if (report.length==0) {
      const response = new ReportService()
        .getAllReport()
        .then((result) => {
          console.log('report', result.data.reports);
-         setReport(result.data.reports);
+         setReports(result.data.reports);
+        //  setReports();
        })
        .then((error) => {
          console.log(error);
@@ -52,7 +55,7 @@ const ReportsCleaner = () => {
                   title={item._id ? item._id : 'PT0124'}
                   date={item.createdAt ? item.createdAt : ''}
                   href={`/en/dashboard/clean-data/${item._id}`}
-                  reportType={item.statut ? Category.Raw : Category.Cleaned}
+                  reportType={item.status=='pending' ? Category.Raw : Category.Cleaned}
                 />
              
             ))}

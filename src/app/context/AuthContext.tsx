@@ -13,6 +13,7 @@ import {
 } from '@/cookies/cookies';
 import AuthService from '@/services/authService';
 import { AxiosResponse } from 'axios';
+import { reportType } from '@/utils/shared-types';
 
 const defaultProvider: AuthValuesType = {
   user: getUserCookies(),
@@ -21,6 +22,9 @@ const defaultProvider: AuthValuesType = {
   login: () => {},
   logout: () => {},
   setLoading: () => Boolean,
+  reports: [],
+  setReports:()=>{}
+  
 };
 
 const AuthContext = createContext(defaultProvider);
@@ -32,6 +36,10 @@ type Props = {
 const AuthProvider = ({ children }: Props) => {
   // ** States
   const [user, setUser] = useState<UserDataType | undefined>(defaultProvider.user);
+  const [report, setReport] = useState<reportType[]>(
+   []
+  );
+
   const [loading, setLoading] = useState<boolean>(defaultProvider.loading);
 
   // ** Hooks
@@ -40,6 +48,7 @@ const AuthProvider = ({ children }: Props) => {
   useEffect(() => {
     const initAuth = async (): Promise<void> => {
       const userData: UserDataType = await getUserCookies();
+      
       if (userData) {
         setUser({ ...userData });
       }
@@ -48,6 +57,11 @@ const AuthProvider = ({ children }: Props) => {
 
     initAuth();
   }, []);
+
+  const handlerReport = (report:reportType[]) => {
+  setReport(report)
+}
+
 
   const handleLogin = (
     // params: LoginParams,
@@ -94,6 +108,8 @@ setUserCookies(user)
     setLoading,
     login: handleLogin,
     logout: handleLogout,
+    reports:report,
+    setReports: handlerReport,
   };
 
   return <AuthContext.Provider value={values}>{children}</AuthContext.Provider>;

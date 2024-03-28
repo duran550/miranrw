@@ -28,5 +28,6 @@ export type reportType = {
   sexualOrientation?: string[];
   sexualOrientationFreeField?: string;
   createdAt?: string
-  statut?:string
+  status?: string
+  category?: any[]
 };

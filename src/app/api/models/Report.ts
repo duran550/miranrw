@@ -61,13 +61,11 @@ const ReportSchema = new Schema<reportType>({
   age: { type: String, required: false },
   sexualOrientation: { type: Array<string>, required: false },
   sexualOrientationFreeField: { type: String, required: false },
-  status: { type: String, required: false, default: 'pending'},
-  category: [
-    { type: Object, required: false }
-  ],
-},
-{
-  timestamps: true,
+  status: { type: String, required: false, default: 'pending' },
+  category: { type: Array<object>, required: false },
+  // category: [
+  //   { type: Object, required: false }
+  // ],
 });
 ReportSchema.set('timestamps', true);
 export const Report =

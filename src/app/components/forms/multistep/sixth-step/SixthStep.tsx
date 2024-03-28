@@ -113,7 +113,7 @@ const SixthStep: React.FC<SixthStepProps> = ({ sixthStepTranslation, id }) => {
       ))}
       {(formOfQueerphobia &&
         formOfQueerphobia?.includes('Anderes, und zwar')) ||
-      (formOfQueerphobia && formOfQueerphobia?.includes(formOfQueerphobia[formOfQueerphobia.length-1])) ? (
+      (formOfQueerphobia && formOfQueerphobia?.includes('Other, specify')) ? (
         <div className="w-full pb-4">
           <InputField
             name="otherformOfQueerphobiaFreeField"

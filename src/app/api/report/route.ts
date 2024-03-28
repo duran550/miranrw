@@ -7,8 +7,8 @@ import { middleware_1 } from '@/middleware/middleware';
 import { authenticate } from '../utils/decode';
 
 export async function POST(request: any) {
-  let flag = await authenticate(request)
-  if (!flag) return NextResponse.json({ status: 'Error', message: 'Access Denied. Invalid Token.' }, { status: 400 });
+  // let flag = await authenticate(request)
+  // if (!flag) return NextResponse.json({ status: 'Error', message: 'Access Denied. Invalid Token.' }, { status: 400 });
   let report: reportType = await request.json();
   await dbConnect();
   await Report.create(report);
