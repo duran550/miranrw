@@ -6,7 +6,7 @@ import Checkbox from '../../checkbox/Checkbox';
 import FormHeader from '../header/header';
 import InputField from '../../text-field/InputField';
 import { clearFormCookiesStep, getFormCookies, getFormStep, setFormCookies } from '@/cookies/cookies';
-import { SEVENTH_FORM, SIXTH_FORM } from '@/cookies/cookies.d';
+import { SEVENTH_FORM, SIXTH_FORM, FIFTH_FORM } from '@/cookies/cookies.d';
 import { useScrollOnTop } from '@/app/hooks/useScrollOnTop';
 import { SeventhStepProps, SeventhStepValues } from './seventhStep';
 
@@ -37,11 +37,10 @@ const SeventhStep: React.FC<SeventhStepProps> = ({
       typeOfDiscrimination: string[];
       typeOfDiscriminationFreeField: string;
       question: string;
-    } = getFormCookies(SIXTH_FORM);
+    } = getFormCookies(FIFTH_FORM);
 
-    if (id && id === 'seventhForm') {
-      formValues = getFormCookies(SEVENTH_FORM);
-    }
+   
+console.log(typeOfDiscrimination);
 
     dispatch({ type: FORM_ERRORS, payload: true });
 
@@ -98,12 +97,11 @@ const SeventhStep: React.FC<SeventhStepProps> = ({
     
     let step = getFormStep();
     let dataWithQuestion = { question, step, ...data };
+setFormCookies(dataWithQuestion, FIFTH_FORM);
+   console.log('step',step);
+   
 
-    id === 'seventhForm'
-      ? setFormCookies(dataWithQuestion, SEVENTH_FORM)
-      : setFormCookies(dataWithQuestion, SIXTH_FORM);
-
-     dispatch({ type: NEXT_STEP, payload: 'DATA 1' });
+     dispatch({ type: NEXT_STEP, payload: '' });
     // isEditing && reportingPerson === 'myself'
     //   ? dispatch({ type: LAST_STEP, payload: 11 })
     //   : dispatch({ type: NEXT_STEP, payload: 'DATA 1' });
@@ -112,7 +110,7 @@ const SeventhStep: React.FC<SeventhStepProps> = ({
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      id={id === 'seventhForm' ? 'seventhForm' : 'sixthForm'}
+      id={'fifthForm'}
       className="lg:w-[38rem]"
     >
       <FormHeader

@@ -61,7 +61,7 @@ const ReportSchema = new Schema<reportType>({
   sexualOrientationFreeField: { type: String, required: false },
   
 });
-
+ReportSchema.set('timestamps', true);
 export const Report =
   mongoose.models.Report || mongoose.model<reportType>('Report', ReportSchema);
 // export const User = mongoose.models.User || mongoose.model('User', user)

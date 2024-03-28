@@ -34,21 +34,25 @@ const HomeCleaner = () => {
         <h1 className="text-xl mb-4 font-bold">Recent reports</h1>
         <div className="w-full gap-y-4 flex flex-col">
           <ReportCard
+            href="/en/dashboard/clean-data/PT2011"
             reportType={Category.Raw}
             date="Tuesday, 7 September 2023, 20h45 "
             title="Data 001100111"
           />
           <ReportCard
+            href="/en/dashboard/clean-data/PT2012"
             reportType={Category.Raw}
             date="Tuesday, 7 September 2023, 20h45 "
             title="Data 001100111"
           />
           <ReportCard
+            href="/en/dashboard/clean-data/PT2013"
             reportType={Category.Raw}
             date="Tuesday, 7 September 2023, 20h45 "
             title="Data 001100111"
           />
           <ReportCard
+            href="/en/dashboard/clean-data/PT2014"
             reportType={Category.Raw}
             date="Tuesday, 7 September 2023, 20h45 "
             title="Data 001100111"
