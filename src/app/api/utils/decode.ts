@@ -17,8 +17,8 @@ export const createToken= (tokenData:any, time:string) => {
 export const authenticate = async (req: NextApiRequest) => {
     return new Promise<boolean>((resolve, reject) => {
         const accessToken = req.headers['Authorization'];
-  const refreshToken = req.cookies['refreshToken'];
-  if (!accessToken && !refreshToken) {
+  // const refreshToken = req.cookies['refreshToken'];
+  if (!accessToken) {
     // return NextResponse.json({ status: 'Error', message: 'Access Denied. No refresh token provided.' }, { status: 401 });
     resolve(false)
   }
@@ -27,18 +27,19 @@ export const authenticate = async (req: NextApiRequest) => {
     const decoded = verify(accessToken);
    resolve(true)
   } catch (error) {
-    if (!refreshToken) {
-        resolve(false)
-        // return NextResponse.json({ status: 'Error', message: 'Access Denied. No refresh token provided.' }, { status: 401 });
-    }
+    resolve(false)
+    // if (!refreshToken) {
+    //     resolve(false)
+    //     // return NextResponse.json({ status: 'Error', message: 'Access Denied. No refresh token provided.' }, { status: 401 });
+    // }
 
-    try {
-      const decoded = verify(refreshToken);
-      resolve(true)
-    } catch (error) {
-        // return NextResponse.json({ status: 'Error', message: 'Access Denied. Invalid Token.' }, { status: 400 });
-        resolve(false)
-    }
+    // try {
+    //   const decoded = verify(refreshToken);
+    //   resolve(true)
+    // } catch (error) {
+    //     // return NextResponse.json({ status: 'Error', message: 'Access Denied. Invalid Token.' }, { status: 400 });
+    //     resolve(false)
+    // }
   }
     
     })
