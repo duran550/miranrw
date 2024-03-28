@@ -28,6 +28,8 @@ interface reportType {
   age?: string;
   sexualOrientation?: string[];
   sexualOrientationFreeField?: string;
+  status?: string
+  category?: any[]
   
 }
 
@@ -59,7 +61,10 @@ const ReportSchema = new Schema<reportType>({
   age: { type: String, required: false },
   sexualOrientation: { type: Array<string>, required: false },
   sexualOrientationFreeField: { type: String, required: false },
-  
+  status: { type: String, required: false, default: 'pending'},
+  category: [
+    { type: Object, required: false }
+  ],
 },
 {
   timestamps: true,
