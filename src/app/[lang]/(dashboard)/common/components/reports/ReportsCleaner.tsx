@@ -1,6 +1,6 @@
 'use client';
 import ReportContainCard from '@/app/components/dashboard/reports/ReportContainCard';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { Button } from '@/app/components/button/Button';
 import imgcatActive from '../../../../../../../public/images/Checkmark Starburst (1).svg';
@@ -13,16 +13,52 @@ import {
   reportsDataCleaned,
   reportsDataRaw,
 } from '../../../dashboard/reports/reportsDataCleanedAndRaw';
+import ReportService from '@/services/reportService';
+import ReportCard from '../report-card/ReportCard';
+import { reportType } from '@/utils/shared-types';
+import Link from 'next/link';
 
 const ReportsCleaner = () => {
   const [status, setStatut] = useState(Category.Raw);
+  const [report, setReport] = useState<reportType[]>([]);
+  useEffect(() => {
+   if (report.length==0) {
+     const response = new ReportService()
+       .getAllReport()
+       .then((result) => {
+         console.log('report', result.data.reports);
+         setReport(result.data.reports);
+       })
+       .then((error) => {
+         console.log(error);
+       });
+   }
+    console.log(report);
+    
+  }, [report]);
   return (
     <div className="w-full relative  h-fit">
       <h1 className="text-2xl font-bold my-8">All reports</h1>
       <h2 className="font-bold  opacity-80">{`${status} Data`}</h2>
       <p className="text-sm opacity-70">Click to view data details</p>
       <div className="mt-8">
-        {status == Category.Raw ? (
+        <div className="grid grid-cols-3 gap-5 max-h-[60vh] overflow-y-auto overscroll-none no-scrollbar">
+          {' '}
+          {report.length > 0 &&
+            report.map((item, index) => (
+             
+                <ReportCard
+                  key={item._id}
+                  title={item._id ? item._id : 'PT0124'}
+                  date={item.createdAt ? item.createdAt : ''}
+                  href={`/en/dashboard/clean-data/${item._id}`}
+                  reportType={item.statut ? Category.Raw : Category.Cleaned}
+                />
+             
+            ))}
+        </div>
+
+        {/* {status == Category.Raw ? (
           <ReportContainCard
             href="/dashboard/clean-data"
             data={reportsDataRaw}
@@ -32,7 +68,7 @@ const ReportsCleaner = () => {
             href="/dashboard/clean-data"
             data={reportsDataCleaned}
           />
-        )}
+        )} */}
       </div>
 
       <div className="flex w-fit fixed bottom-8  mt-14 ">
