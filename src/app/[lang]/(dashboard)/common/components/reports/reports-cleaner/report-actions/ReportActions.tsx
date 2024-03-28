@@ -15,9 +15,12 @@ import Image from 'next/image';
 import toast, { Toaster } from 'react-hot-toast';
 import Irrelevant from './action-modals/Irrelevant';
 import Dangerous from './action-modals/Dangerous';
+import { reportType } from '@/utils/shared-types';
 
 interface ReportActionProps {
   WhatHappened: string | any;
+  refresh?: any
+  report?:reportType
 }
 
 const ReportActions: React.FC<ReportActionProps> = (whatHappened) => {

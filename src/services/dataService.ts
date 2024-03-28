@@ -6,12 +6,12 @@ import {
   setUserCookies,
 } from '@/cookies/cookies';
 const API_URL = process.env.REACT_APP_API_URL;
-const token = getRefreshToken();
+const user = getUserCookies();
 console.log('get',getRefreshToken());
 
-// if (token) {
-//   console.log('user.token', token.token);
-// }
+if (user) {
+  console.log('user.token', user.token);
+}
 
 export default class DataService {
   client: any;
@@ -20,7 +20,7 @@ export default class DataService {
       baseURL: API_URL,
       headers: {
         'content-type': 'application/json',
-        Authorization: `Bearer ${token ? token : ''}`,
+        'Authorization': `Bearer ${user ? user.token : ''}`,
       },
     });
   }

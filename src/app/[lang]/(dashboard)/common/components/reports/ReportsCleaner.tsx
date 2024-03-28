@@ -1,6 +1,6 @@
 'use client';
 import ReportContainCard from '@/app/components/dashboard/reports/ReportContainCard';
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 
 import { Button } from '@/app/components/button/Button';
 import imgcatActive from '../../../../../../../public/images/Checkmark Starburst (1).svg';
@@ -18,18 +18,21 @@ import ReportCard from '../report-card/ReportCard';
 import { reportType } from '@/utils/shared-types';
 import Link from 'next/link';
 import { UseReport } from '@/app/hooks/useReports';
+import { AuthContext } from '@/app/context/AuthContext';
 
 const ReportsCleaner = () => {
   const [status, setStatut] = useState(Category.Raw);
   const [reports, setReport] = useState<reportType[]>([]);
-  const{report,setReports}= UseReport()
+  const { report, setReports } = UseReport()
+  const ctx=useContext(AuthContext)
   useEffect(() => {
-   if (report.length==0) {
+   if (reports.length==0) {
      const response = new ReportService()
        .getAllReport()
        .then((result) => {
          console.log('report', result.data.reports);
-         setReports(result.data.reports);
+         setReport(result.data.reports);
+        //  setReports(result.data.reports);
         //  setReports();
        })
        .then((error) => {
@@ -38,7 +41,7 @@ const ReportsCleaner = () => {
    }
     console.log(report);
     
-  }, [report]);
+  }, [reports]);
   return (
     <div className="w-full relative  h-fit">
       <h1 className="text-2xl font-bold my-8">All reports</h1>
@@ -47,18 +50,43 @@ const ReportsCleaner = () => {
       <div className="mt-8">
         <div className="grid grid-cols-3 gap-5 max-h-[60vh] overflow-y-auto overscroll-none no-scrollbar">
           {' '}
-          {report.length > 0 &&
-            report.map((item, index) => (
-             
-                <ReportCard
-                  key={item._id}
-                  title={item._id ? item._id : 'PT0124'}
-                  date={item.createdAt ? item.createdAt : ''}
-                  href={`/en/dashboard/clean-data/${item._id}`}
-                  reportType={item.status=='pending' ? Category.Raw : Category.Cleaned}
-                />
-             
-            ))}
+          {reports.length > 0 &&
+            reports.map((item, index) => {
+
+              if (status==Category.Raw) {
+               if (item.status=='pending') {
+                 return (
+                   <ReportCard
+                     key={item._id}
+                     title={item._id ? item._id : 'PT0124'}
+                     date={item.createdAt ? item.createdAt : ''}
+                     href={`/en/dashboard/clean-data/${item._id}`}
+                     reportType={
+                       item.status == 'pending'
+                         ? Category.Raw
+                         : Category.Cleaned
+                     }
+                   />
+                 );
+               }
+              } else {
+                if (item.status!=='pending') {
+                   return (
+                     <ReportCard
+                       key={item._id}
+                       title={item._id ? item._id : 'PT0124'}
+                       date={item.createdAt ? item.createdAt : ''}
+                       href={`/en/dashboard/clean-data/${item._id}`}
+                       reportType={
+                         item.status == 'pending'
+                           ? Category.Raw
+                           : Category.Cleaned
+                       }
+                     />
+                   );
+                }
+              }
+            })}
         </div>
 
         {/* {status == Category.Raw ? (

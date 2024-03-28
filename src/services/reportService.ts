@@ -6,6 +6,10 @@ export default class ReportService extends DataService {
     return this.post('/api/report/', data);
   };
 
+  updateReport = (id:string,data: reportType): Promise<{ data: any; status: number }> => {
+    return this.put('/api/report/'+id, data);
+  };
+
   getAllReport = (): Promise<{
     data: { reports: reportType[] };
     status: number;

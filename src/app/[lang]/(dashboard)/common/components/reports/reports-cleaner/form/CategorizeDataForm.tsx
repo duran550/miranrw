@@ -10,7 +10,7 @@ import { DataCategorizationOptionType } from '@/app/[lang]/(dashboard)/dashboard
 
 type AnyInputType = any;
 
-const CategorizeDataForm = () => {
+const CategorizeDataForm:React.FC<{option?:any}> = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [reportCarData] = useState(dataCategorizationOptions);
 

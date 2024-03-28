@@ -2,6 +2,8 @@ import { ReportSummaryType } from '@/app/[lang]/(dashboard)/dashboard/reports/re
 import React, { useContext } from 'react';
 import { AdminContext } from '../../../../context/AdminContext';
 import { useFindReport } from '@/app/hooks/useFindReport';
+import { reportType } from '@/utils/shared-types';
+import { Span } from 'next/dist/trace';
 
 type ReportSummaryProps = {
   className?: string;
@@ -10,6 +12,7 @@ type ReportSummaryProps = {
   incidentDescription?: string;
   markedAsIrrelevant?: boolean;
   markedAsDangerous?: boolean;
+  report?: reportType;
 };
 
 const ReportSummary: React.FC<ReportSummaryProps> = ({
@@ -19,6 +22,7 @@ const ReportSummary: React.FC<ReportSummaryProps> = ({
   incidentDescription,
   markedAsDangerous,
   markedAsIrrelevant,
+  report,
 }) => {
   const { state } = useContext(AdminContext);
 
@@ -59,28 +63,35 @@ const ReportSummary: React.FC<ReportSummaryProps> = ({
           <h1 className="font-bold text-[16px] text-black opacity-80">
             Person Affected
           </h1>
-          <span className="text-gray-500 text-[13px]">
-            {uncategorizedData?.summary?.personAffected}
+          <span className="text-gray-500 text-[13px] ">
+            {report?.identity}
+            {/* {uncategorizedData?.summary?.personAffected} */}
           </span>
         </div>
         <div>
           <h1 className="font-bold text-[16px] text-black opacity-80">
             Gender Identity
           </h1>
-          <span className="text-gray-500 text-[13px]">
-            {uncategorizedData?.summary?.genderIdentity}
-          </span>
+          <div className="text-gray-500 text-[13px] grid grid-cols-5">
+            {/* {uncategorizedData?.summary?.genderIdentity} */}
+            {report?.gender &&
+              report.gender.map((item, index) => (
+                <span key={index}>{item}</span>
+              ))}
+          </div>
         </div>
         <div>
           <h1 className="font-bold text-[16px] text-black opacity-80">Age</h1>
           <span className="text-gray-500 text-[13px]">
-            {uncategorizedData?.summary?.age}
+            {/* {uncategorizedData?.summary?.age} */}
+            {report?.age}
           </span>
         </div>
         <div>
           <h1 className="font-bold text-[16px] text-black opacity-80">Date</h1>
           <span className="text-gray-500 text-[13px]">
-            {uncategorizedData?.summary?.date}
+            {/* {uncategorizedData?.summary?.date} */}
+            {report?.valueDate}
           </span>
         </div>
         <div>
@@ -88,7 +99,7 @@ const ReportSummary: React.FC<ReportSummaryProps> = ({
             Place of Incident
           </h1>
           <span className="text-gray-500 text-[13px]">
-            {uncategorizedData?.summary?.placeOfIncident}
+            {report?.location ? report.location : report?.locationOnline}
           </span>
         </div>
 
@@ -97,11 +108,11 @@ const ReportSummary: React.FC<ReportSummaryProps> = ({
             What Happened
           </h1>
           <span className={`text-[15px] ${mutate ? 'text-[#199A46]' : ''}`}>
-            {incidentDescription}
+            {report?.description}
             {/* {state.cleanerDesc} */}
           </span>
         </div>
-        <div>
+        {/* <div>
           <h1 className="font-bold text-[16px] text-black opacity-80">
             Characteristics
           </h1>
@@ -116,7 +127,7 @@ const ReportSummary: React.FC<ReportSummaryProps> = ({
           <span className="text-gray-500 text-[13px]">
             {uncategorizedData?.summary?.otherMesures}
           </span>
-        </div>
+        </div> */}
       </div>
     </div>
   );

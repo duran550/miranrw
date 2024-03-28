@@ -70,8 +70,11 @@ const LoginForm = () => {
             
             if (typeof result1 == 'object') {
               // console.log('result', typeof result1);
-              setUserCookies(result1);
-               setRefreshToken(result.headers.authorization);
+              setUserCookies({
+                ...result1,
+                token: result.headers.authorization,
+              });
+              //  setRefreshToken(result.headers.authorization);
               toast.success(result.data.message);
               setIsLoading(false);
               // window.location.href = '/en/dashboard';
