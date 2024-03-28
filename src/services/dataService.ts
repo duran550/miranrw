@@ -1,12 +1,17 @@
 import axios from 'axios';
 import {
+  getRefreshToken,
   getUserCookies,
   removeUserCookies,
   setUserCookies,
 } from '@/cookies/cookies';
 const API_URL = process.env.REACT_APP_API_URL;
-const user = getUserCookies();
-console.log('user.token',user);
+const token = getRefreshToken();
+console.log('get',getRefreshToken());
+
+// if (token) {
+//   console.log('user.token', token.token);
+// }
 
 export default class DataService {
   client: any;
@@ -15,7 +20,7 @@ export default class DataService {
       baseURL: API_URL,
       headers: {
         'content-type': 'application/json',
-        Authorization: `Bearer ${user ? user.token : ''}`,
+        Authorization: `Bearer ${token ? token : ''}`,
       },
     });
   }

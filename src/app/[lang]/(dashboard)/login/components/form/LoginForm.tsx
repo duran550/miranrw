@@ -17,7 +17,7 @@ import AuthService from '@/services/authService';
 import { usePathname, useRouter } from 'next/navigation';
 import toast, { Toaster } from 'react-hot-toast';
 import { Result } from 'postcss';
-import { setUserCookies } from '@/cookies/cookies';
+import { removeRefreshToken, setRefreshToken, setUserCookies } from '@/cookies/cookies';
 import InputField from '@/app/components/forms/text-field/InputField';
 import { AuthContext, AuthProvider } from '@/app/context/AuthContext';
 import { useAuth } from '@/app/hooks/useAuth';
@@ -49,6 +49,7 @@ const LoginForm = () => {
     reset,
   } = useForm<IFormInput>({ mode: 'onChange' || 'onBlur' || 'onSubmit' });
   const { loginUser, user } = useAuth();
+    removeRefreshToken();
 
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
@@ -62,14 +63,23 @@ const LoginForm = () => {
       .then((result) => {
   
         if (result.status === 201) {
-          const user =  DecodeToken(result.headers.authorization);
+          const user = DecodeToken(result.headers.authorization);
+          
           user.then((result1) => {
             // let user1:UserDataType=result1
-            console.log('result', result1)
-            // setUserCookies({ token: result.headers.authorization, ...result1 });
-              window.location.href = '/en/dashboard';
+            
+            if (typeof result1 == 'object') {
+              // console.log('result', typeof result1);
+              // setUserCookies(result1);
+               setRefreshToken(result.headers.authorization);
               toast.success(result.data.message);
               setIsLoading(false);
+              // window.location.href = '/en/dashboard';
+              
+            }
+            // setUserCookies({ token: result.headers.authorization, ...result1 });
+              // window.location.href = '/en/dashboard';
+              // toast.success(result.data.message);
           })
           
       // console.log('result', result);
