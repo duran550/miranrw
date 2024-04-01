@@ -31,7 +31,7 @@ const ReportCard: React.FC<ReportCardProps> = ({
 }) => {
   let colors: string[] = getColorByReportType(reportType);
   return (
-    <Link href={href ? `${href}` : ''}>
+    <Link href={href ? `${href}` : '#'}>
       <div className="w-full flex items-center justify-between p-4 rounded-xl border border-gray-300">
         <div>
           <h1 className="font-bold mb-2">{title}</h1>

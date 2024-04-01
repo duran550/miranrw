@@ -27,62 +27,100 @@ const ReportSingle = () => {
   const [reports2, setReport2] = useState<reportType | undefined>();
   
   const [refresh, setRefresh] = useState(false)
-   const [send, setsend] = useState(false);
-    useEffect(() => {
-      if (!reports) {
-        const response = new ReportService()
-          .getAllReport()
-          .then((result) => {
-            console.log('report', result.data.reports);
-            const report = result.data.reports.filter((item) => item._id == urlSplit[urlSplit.length-1]);
-            setReport(report[0]);
-            //  setReports(result.data.reports);
-            //  setReports();
-          })
-          .then((error) => {
-            console.log(error);
-          });
-      }
+  const [refreshRaw, setRefreshRaw] = useState(false);
 
-      if (refresh) {
-         const response = new ReportService()
-           .getAllReport()
-           .then((result) => {
-             console.log('report', result.data.reports);
-             console.log(pathname.split('/'));
-             
-             const report = result.data.reports.filter(
-               (item) => item._id == pathname.split('/')[pathname.length-1]
-             );
-             setReport2(report[0]);
-             setRefresh(false)
-             //  setReports(result.data.reports);
-             //  setReports();
-           })
-           .then((error) => {
-             console.log(error);
-           });
-      }
-      console.log(reports);
-    }, [reports,refresh]);
+  const [refreshCurrent, setRefreshCurrent] = useState(false);
+
+  const [send, setsend] = useState(false);
+  const refreshHandler = () => {
+    setRefresh(true);
+  };
+
+  const refreshCurrentHandler = () => {
+    setRefreshCurrent(true);
+      alert('ok');
+    
+   };
+  useEffect(() => {
+    if (!reports || refreshCurrent) {
+      const response = new ReportService()
+        .getAllReport()
+        .then((result) => {
+          console.log('report', result.data.reports);
+          const report = result.data.reports.filter(
+            (item) => item._id == urlSplit[urlSplit.length - 1]
+          );
+          // if (report[0].status!=='pending') {
+          //   window.location.href='dashboard/clean-data'
+          // }
+          setReport(report[0]);
+          setRefreshCurrent(false)
+          //  setReports(result.data.reports);
+          //  setReports();
+        })
+        .then((error) => {
+          console.log(error);
+        });
+    }
+
+    if (refresh) {
+      const response = new ReportService()
+        .getAllReport()
+        .then((result) => {
+          console.log('report', result.data.reports);
+          //  console.log(pathname.split('/'));
+
+          const report = result.data.reports.filter(
+            (item) => item._id == urlSplit[urlSplit.length - 1]
+          );
+          console.log('report', report);
+
+          setReport2(report[0]);
+          setRefresh(false);
+          //  setReports(result.data.reports);
+          //  setReports();
+        })
+        .then((error) => {
+          console.log(error);
+        });
+    }
+  }, [reports, refresh, refreshCurrent]);
 
   return (
     <div className="mb-[2rem]">
-      <Header href="/cleaned-data" title="Data Info" />
+      {user && user.role == 3 && (
+        <Header href="/clean-data" title="Data Info" />
+      )}
+      {user && user.role == 1 && (
+        <Header href="/cleaned-data" title="Data Info" />
+      )}
+      {user && user.role == 4 && (
+        <Header href="/dangerous-reports" title="Data Info" />
+      )}
+
       <div className="flex  gap-x-6 h-full">
         <ReportSummary
           report={reports}
           incidentDescription={uncategorizedData?.summary?.incidentDescription}
         />
-        {user?.role === Role.CLEANER ? (
+        {user?.role === Role.CLEANER && reports && (
           <ReportActions
+            text={
+              !reports2?.description
+                ? reports?.description
+                : reports2.description
+            }
             WhatHappened={uncategorizedData?.summary.incidentDescription}
-            report={reports2}
-            refresh={()=>{setRefresh(true)}}
+            report={
+              reports?.status == 'cleaned' && !reports2 ? reports : reports2
+            }
+            refresh={refreshHandler}
+            refreshCurrent={refreshCurrentHandler}
+            action={reports.status}
           />
-        ) : (
-          <CategorizeDataForm />
         )}
+        {/* : (
+        <CategorizeDataForm />) */}
       </div>
     </div>
   );

@@ -1,3 +1,4 @@
+'use client'
 import { ReportSummaryType } from '@/app/[lang]/(dashboard)/dashboard/reports/reportSummaryType';
 import React, { useContext } from 'react';
 import { AdminContext } from '../../../../context/AdminContext';
@@ -13,6 +14,7 @@ type ReportSummaryProps = {
   markedAsIrrelevant?: boolean;
   markedAsDangerous?: boolean;
   report?: reportType;
+  update?: boolean;
 };
 
 const ReportSummary: React.FC<ReportSummaryProps> = ({
@@ -23,12 +25,14 @@ const ReportSummary: React.FC<ReportSummaryProps> = ({
   markedAsDangerous,
   markedAsIrrelevant,
   report,
+  update,
 }) => {
   const { state } = useContext(AdminContext);
 
-  const defaultClassName = `border rounded-xl p-4 border-gray-300 w-full`;
+  const defaultClassName = `border rounded-xl p-4 border-gray-300 w-full max-h-[70vh] overflow-y-auto overscroll-none no-scrollbar`;
   const combinedClassName = className ? `${className}` : defaultClassName;
   const { uncategorizedData } = useFindReport();
+console.log(report);
 
   return (
     <div className={combinedClassName}>
@@ -36,19 +40,20 @@ const ReportSummary: React.FC<ReportSummaryProps> = ({
         <h1 className="font-bold text-xl opacity-80 my-4">Summary</h1>
         {/* {visible && ( */}
         <div>
-          {mutate ? (
+          {report?.status && report.status == 'cleaned' ? (
             <div className="rounded-full bg-opacity-20 px-4 py-2 w-fit opacity-[0.7] bg-[#199A46] font-bold text-[#199A46]">
               Cleaned
             </div>
-          ) : state.isDangerous ? (
+          ) : report?.status && report.status == 'dangerous' ? (
             <div className="rounded-full bg-opacity-20 px-4 py-2 w-fit opacity-[0.7] bg-[#E00034] font-bold text-[#E00034]">
-              Dangerous
+              !Dangerous
             </div>
-          ) : state.isIrrelevant ? (
+          ) : report?.status && report.status == 'Irrelevant' ? (
             <div className="rounded-full bg-opacity-20 px-4 py-2 w-fit opacity-[0.7] bg-[#F36D38] font-bold text-[#F36D38]">
               Irrelevant
             </div>
-          ) : mutate || (!state.isDangerous && !state.isIrrelevant) ? (
+          ) : (report?.status && report.status == 'pending') ||
+            !report?.status ? (
             <div className="rounded-full bg-[#E00034] bg-opacity-20 px-4 py-2 w-fit opacity-[0.7] text-[#E00034] font-bold">
               Raw
             </div>
@@ -68,30 +73,85 @@ const ReportSummary: React.FC<ReportSummaryProps> = ({
             {/* {uncategorizedData?.summary?.personAffected} */}
           </span>
         </div>
-        <div>
-          <h1 className="font-bold text-[16px] text-black opacity-80">
-            Gender Identity
-          </h1>
-          <div className="text-gray-500 text-[13px] grid grid-cols-5">
-            {/* {uncategorizedData?.summary?.genderIdentity} */}
-            {report?.gender &&
-              report.gender.map((item, index) => (
-                <span key={index}>{item}</span>
-              ))}
+
+        {report?.organizationType && report.organizationType.length > 0 && (
+          <div>
+            <h1 className="font-bold text-[16px] text-black opacity-80">
+              Type of Organization
+            </h1>
+            <div className="text-gray-500 text-[13px] grid grid-cols-5">
+              {/* {uncategorizedData?.summary?.genderIdentity} */}
+              {report?.organizationType &&
+                report.organizationType.map((item, index) => (
+                  <span key={index}>{item}</span>
+                ))}
+            </div>
           </div>
-        </div>
-        <div>
-          <h1 className="font-bold text-[16px] text-black opacity-80">Age</h1>
-          <span className="text-gray-500 text-[13px]">
-            {/* {uncategorizedData?.summary?.age} */}
-            {report?.age}
-          </span>
-        </div>
+        )}
+
+        {report?.organizationTypeFreeField &&
+          report.organizationTypeFreeField.length > 0 && (
+            <div>
+              <h1 className="font-bold text-[16px] text-black opacity-80">
+                Specify
+              </h1>
+              <span className="text-gray-500 text-[13px] grid grid-cols-5">
+                {/* {uncategorizedData?.summary?.genderIdentity} */}
+                {report?.organizationTypeFreeField}
+              </span>
+            </div>
+          )}
+        {report?.gender && report.gender.length > 0 && (
+          <div>
+            <h1 className="font-bold text-[16px] text-black opacity-80">
+              Gender Identity
+            </h1>
+            <div className="text-gray-500 text-[13px] grid grid-cols-5">
+              {/* {uncategorizedData?.summary?.genderIdentity} */}
+              {report?.gender &&
+                report.gender.map((item, index) => (
+                  <span key={index}>{item}</span>
+                ))}
+            </div>
+          </div>
+        )}
+        {report?.genderFreeField && report.genderFreeField.length > 0 && (
+          <div>
+            <h1 className="font-bold text-[16px] text-black opacity-80">
+              Specify
+            </h1>
+            <span className="text-gray-500 text-[13px] grid grid-cols-5">
+              {/* {uncategorizedData?.summary?.genderIdentity} */}
+              {report?.genderFreeField}
+            </span>
+          </div>
+        )}
+        {report?.age && report.age.length > 0 && (
+          <div>
+            <h1 className="font-bold text-[16px] text-black opacity-80">Age</h1>
+            <span className="text-gray-500 text-[13px]">
+              {/* {uncategorizedData?.summary?.age} */}
+              {report?.age}
+            </span>
+          </div>
+        )}
+
+        {report?.numberOfEmployees && report.numberOfEmployees.length > 0 && (
+          <div>
+            <h1 className="font-bold text-[16px] text-black opacity-80">
+              Number of employes
+            </h1>
+            <span className="text-gray-500 text-[13px]">
+              {/* {uncategorizedData?.summary?.age} */}
+              {report?.numberOfEmployees}
+            </span>
+          </div>
+        )}
         <div>
           <h1 className="font-bold text-[16px] text-black opacity-80">Date</h1>
           <span className="text-gray-500 text-[13px]">
             {/* {uncategorizedData?.summary?.date} */}
-            {report?.valueDate}
+            {report?.dateRangeState ? report.dateRangeState : report?.valueDate}
           </span>
         </div>
         <div>
@@ -99,7 +159,9 @@ const ReportSummary: React.FC<ReportSummaryProps> = ({
             Place of Incident
           </h1>
           <span className="text-gray-500 text-[13px]">
-            {report?.location ? report.location : report?.locationOnline}
+            {report?.location
+              ? report.location + '   ' + report.stadtteil
+              : report?.locationOnline}
           </span>
         </div>
 
@@ -107,11 +169,148 @@ const ReportSummary: React.FC<ReportSummaryProps> = ({
           <h1 className="font-bold text-[16px] text-black opacity-80">
             What Happened
           </h1>
-          <span className={`text-[15px] ${mutate ? 'text-[#199A46]' : ''}`}>
+          <span className={`text-[15px] ${update ? 'text-[#199A46]' : ''}`}>
             {report?.description}
             {/* {state.cleanerDesc} */}
           </span>
         </div>
+        {report?.sexualOrientation && report.sexualOrientation.length > 0 && (
+          <div>
+            <h1 className="font-bold text-[16px] text-black opacity-80">
+              Sexual Orientation
+            </h1>
+            <div className="text-gray-500 text-[13px] grid grid-cols-5">
+              {/* {uncategorizedData?.summary?.genderIdentity} */}
+              {report?.sexualOrientation &&
+                report.sexualOrientation.map((item, index) => (
+                  <span key={index}>{item}</span>
+                ))}
+            </div>
+          </div>
+        )}
+
+        {report?.sexualOrientationFreeField &&
+          report.sexualOrientationFreeField.length > 0 && (
+            <div>
+              <h1 className="font-bold text-[16px] text-black opacity-80">
+                Specify :
+              </h1>
+              <span className="text-gray-500 text-[13px] grid grid-cols-5">
+                {/* {uncategorizedData?.summary?.genderIdentity} */}
+                {report?.sexualOrientationFreeField}
+              </span>
+            </div>
+          )}
+
+        {report?.typeOfDiscrimination &&
+          report.typeOfDiscrimination.length > 0 && (
+            <div>
+              <h1 className="font-bold text-[16px] text-black opacity-80">
+                What did you believe the discrimination was based on ?
+              </h1>
+              <div className="text-gray-500 text-[13px] grid grid-cols-5">
+                {/* {uncategorizedData?.summary?.genderIdentity} */}
+                {report?.typeOfDiscrimination &&
+                  report.typeOfDiscrimination.map((item, index) => (
+                    <span key={index}>{item}</span>
+                  ))}
+              </div>
+            </div>
+          )}
+
+        {report?.typeOfDiscriminationFreeField &&
+          report.typeOfDiscriminationFreeField.length > 0 && (
+            <div>
+              <h1 className="font-bold text-[16px] text-black opacity-80">
+                Specify :
+              </h1>
+              <span className="text-gray-500 text-[13px] grid grid-cols-5">
+                {/* {uncategorizedData?.summary?.genderIdentity} */}
+                {report?.typeOfDiscriminationFreeField}
+              </span>
+            </div>
+          )}
+
+        {report?.formOfQueerphobia && report.formOfQueerphobia.length > 0 && (
+          <div>
+            <h1 className="font-bold text-[16px] text-black opacity-80">
+              What form of queerphobia
+            </h1>
+            <div className="text-gray-500 text-[13px] grid grid-cols-5">
+              {/* {uncategorizedData?.summary?.genderIdentity} */}
+              {report?.formOfQueerphobia &&
+                report.formOfQueerphobia.map((item, index) => (
+                  <span key={index}>{item}</span>
+                ))}
+            </div>
+          </div>
+        )}
+        {report?.otherformOfQueerphobiaFreeField &&
+          report.otherformOfQueerphobiaFreeField.length > 0 && (
+            <div>
+              <h1 className="font-bold text-[16px] text-black opacity-80">
+                Specify :
+              </h1>
+              <span className="text-gray-500 text-[13px] grid grid-cols-5">
+                {/* {uncategorizedData?.summary?.genderIdentity} */}
+                {report?.otherformOfQueerphobiaFreeField}
+              </span>
+            </div>
+          )}
+
+        {report?.formOfDiscYes && report.formOfDiscYes.length > 0 && (
+          <div>
+            <h1 className="font-bold text-[16px] text-black opacity-80">
+              Other form of discrimination
+            </h1>
+            <div className="text-gray-500 text-[13px] grid grid-cols-5">
+              {/* {uncategorizedData?.summary?.genderIdentity} */}
+              {report?.formOfDiscYes &&
+                report.formOfDiscYes.map((item, index) => (
+                  <span key={index}>{item}</span>
+                ))}
+            </div>
+          </div>
+        )}
+        {report?.formOfDiscYesFreeField &&
+          report.formOfDiscYesFreeField.length > 0 && (
+            <div>
+              <h1 className="font-bold text-[16px] text-black opacity-80">
+                Specify :
+              </h1>
+              <span className="text-gray-500 text-[13px] grid grid-cols-5">
+                {/* {uncategorizedData?.summary?.genderIdentity} */}
+                {report?.formOfDiscYesFreeField}
+              </span>
+            </div>
+          )}
+        {report?.haveYouReportedYes && report.haveYouReportedYes.length > 0 && (
+          <div>
+            <h1 className="font-bold text-[16px] text-black opacity-80">
+              Have you already report
+            </h1>
+            <div className="text-gray-500 text-[13px] grid grid-cols-5">
+              {/* {uncategorizedData?.summary?.genderIdentity} */}
+              {report?.haveYouReportedYes &&
+                report.haveYouReportedYes.map((item, index) => (
+                  <span key={index}>{item}</span>
+                ))}
+            </div>
+          </div>
+        )}
+        {report?.haveYouReportedYesFreeField1 ||
+          (report?.haveYouReportedYesFreeField2 && (
+            <div>
+              <h1 className="font-bold text-[16px] text-black opacity-80">
+                Specify :
+              </h1>
+              <span className="text-gray-500 text-[13px] grid grid-cols-1">
+                <span>{report?.haveYouReportedYesFreeField1}</span>
+
+                <span>{report?.haveYouReportedYesFreeField2}</span>
+              </span>
+            </div>
+          ))}
         {/* <div>
           <h1 className="font-bold text-[16px] text-black opacity-80">
             Characteristics

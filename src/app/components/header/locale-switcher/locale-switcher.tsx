@@ -9,12 +9,14 @@ import GermanLogo from '../../../../../public/images/germany-flag.svg';
 import EnglandLogo from '../../../../../public/images/england-flag.svg';
 import AnimateClick from '../../animate-click/AnimateClick';
 import LeicheSpracheLogo from '../../../../../public/icons/leichteSpracheIcon.png';
+import { clearFormCookies } from '@/cookies/cookies';
 
 export default function LocaleSwitcher() {
   const [toggle, setToggle] = useState<boolean>(false);
   const pathName = usePathname();
   const selectedLanguage: any = pathName.split('/')[1];
   const redirectedPathName = (locale: string) => {
+    // clearFormCookies()
     if (!pathName) return '/';
     const segments = pathName.split('/');
     segments[1] = locale;
@@ -32,7 +34,11 @@ export default function LocaleSwitcher() {
             >
               {locale === 'en' ? (
                 <div
-                  onClick={() => setToggle(false)}
+                  onClick={() => {
+                    alert('ok');
+
+                    setToggle(false);
+                  }}
                   className="flex items-center w-fit"
                 >
                   <Image
@@ -52,7 +58,11 @@ export default function LocaleSwitcher() {
                 </div>
               ) : locale === 'de' ? (
                 <div
-                  onClick={() => setToggle(false)}
+                  onClick={() => {
+                    alert('ok');
+                   
+                    setToggle(false);
+                  }}
                   className="flex md:ml-2 md:mr-14 items-center w-fit"
                 >
                   <Image
@@ -72,7 +82,11 @@ export default function LocaleSwitcher() {
                 </div>
               ) : (
                 <div
-                  onClick={() => setToggle(false)}
+                  onClick={() => {
+                    alert('ok');
+                 
+                    setToggle(false);
+                  }}
                   className="flex  items-center w-fit mr-2 lg:mr-8 xl:pr-0"
                 >
                   <Image

@@ -6,13 +6,21 @@ import { reportType } from '@/utils/shared-types';
 import { authenticate } from '../../utils/decode';
 
 export async function PUT(request: any, { params }: any) {
-  // let flag = await authenticate(request)
-  // if (!flag) return NextResponse.json({ status: 'Error', message: 'Access Denied. Invalid Token.' }, { status: 400 });
-  const { report_id } = params;
+  let flag = await authenticate(request);
+  if (!flag)
+    return NextResponse.json(
+      { status: 'Error', message: 'Access Denied. Invalid Token.' },
+      { status: 400 }
+    );
+  const { id } = params;
 
   const report: reportType = await request.json();
   await dbConnect();
-  await Report.findByIdAndUpdate(report_id, { report });
+  console.log(id);
+  console.log(report);
+  console.log('request', params);
+
+  await Report.findByIdAndUpdate(id, report);
   return NextResponse.json({ message: 'Report updated' }, { status: 200 });
 }
 

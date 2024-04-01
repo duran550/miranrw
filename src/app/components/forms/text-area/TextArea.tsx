@@ -40,7 +40,7 @@ const TextArea: React.FC<TextAreaProps> = ({
         name={name}
         {...props}
         value={val}
-        onChange={handleChange}
+        // onChange={handleChange}
         className={combinedClassName}
         placeholder={placeholder}
       ></textarea>

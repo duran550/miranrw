@@ -12,7 +12,7 @@ export type UserDataType = {
   email: string;
  
   role: number;
-  toke:string
+  token:string
  
 };
 

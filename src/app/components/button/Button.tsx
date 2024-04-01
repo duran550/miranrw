@@ -11,6 +11,7 @@ interface ButtonProps
     VariantProps<typeof buttonVariants> {
   href?: string;
   icon?: any;
+  disabeld?:boolean
 }
 
 const buttonVariants = cva(

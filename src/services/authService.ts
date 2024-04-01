@@ -36,6 +36,10 @@ export default class AuthService extends DataService {
     return this.get('/api/user/');
   };
 
+  refreshToken = (): Promise<{ data: any; status: number }> => {
+    return this.get('/api/auth/refresh');
+  };
+
   //   changePassword = (data: any) => {
   //     return this.post('/auth/changePassword', data)
   //   }

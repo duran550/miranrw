@@ -1,6 +1,7 @@
 import jwt from 'jsonwebtoken';
 import { NextApiRequest } from 'next';
 import { NextResponse } from 'next/server';
+import {headers} from 'next/headers'
 
 export const decode = (token: string) => {
     return jwt.decode(token) as any;
@@ -16,7 +17,10 @@ export const createToken= (tokenData:any, time:string) => {
 
 export const authenticate = async (req: NextApiRequest) => {
     return new Promise<boolean>((resolve, reject) => {
-        const accessToken = req.headers['Authorization'];
+      // const accessToken = req.headers['authorization'];
+      const accessToken = headers().get('authorization');
+      console.log('accessToken', accessToken);
+      
   // const refreshToken = req.cookies['refreshToken'];
   if (!accessToken) {
     // return NextResponse.json({ status: 'Error', message: 'Access Denied. No refresh token provided.' }, { status: 401 });

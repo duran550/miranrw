@@ -41,8 +41,8 @@ export async function GET(request: any) {
 }
 
 export async function DELETE(request: any) {
-  // let flag = await authenticate(request)
-  // if (!flag) return NextResponse.json({ status: 'Error', message: 'Access Denied. Invalid Token.' }, { status: 400 });
+  let flag = await authenticate(request)
+  if (!flag) return NextResponse.json({ status: 'Error', message: 'Access Denied. Invalid Token.' }, { status: 400 });
   const id = request.nextUrl.searchParams.get('id');
   await dbConnect();
   await Category.findByIdAndDelete(id);

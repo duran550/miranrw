@@ -2,7 +2,7 @@ export type reportType = {
   _id?: string;
   organizationType?: string[];
   organizationTypeFreeField?: string;
-  identity: string;
+  identity?: string;
   description?: string;
   valueDate?: string;
   dateRangeState?: string;

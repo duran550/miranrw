@@ -18,10 +18,11 @@ import { usePathname, useRouter } from 'next/navigation';
 import toast, { Toaster } from 'react-hot-toast';
 import { Result } from 'postcss';
 import { removeRefreshToken, setRefreshToken, setUserCookies } from '@/cookies/cookies';
-import InputField from '@/app/components/forms/text-field/InputField';
+// import InputField from '@/app/components/forms/text-field/InputField';
 import { AuthContext, AuthProvider } from '@/app/context/AuthContext';
 import { useAuth } from '@/app/hooks/useAuth';
 import { DecodeToken } from '../DecodeToken';
+import InputField from './InputField';
 // import { verify } from '@/app/api/utils/decode';
 
 interface IFormInput {
