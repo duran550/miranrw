@@ -411,15 +411,15 @@
             {
               "iD": 1,
               "name": "Yes",
-              "value": "Lesbophobia",
-              "id": "lesbophobia",
+              "value": "Lesbenfeindlichkeit",
+              "id": "Lesbenfeindlichkeit",
               "label": "Lesbenfeindlichkeit"
             },
             {
               "iD": 2,
               "name": "formOfDisc",
-              "value": "Homophobia",
-              "id": "homophobia",
+              "value": "Schwulenfeindlichkeit",
+              "id": "Schwulenfeindlichkeit",
               "label": "Schwulenfeindlichkeit"
             },
             {
@@ -432,7 +432,7 @@
             {
               "iD": 4,
               "name": "formOfDisc",
-              "value": "Transphobia",
+              "value": "Trans*feindlichkeit",
               "id": "trans",
               "label": "Trans*feindlichkeit"
             },
@@ -446,36 +446,36 @@
             {
               "iD": 6,
               "name": "formOfDisc",
-              "value": "Asexual discrimination",
-              "id": "asexual discrimination",
+              "value": "Asexuellenfeindlichkeit",
+              "id": "Asexuellenfeindlichkeit",
               "label": "Asexuellenfeindlichkeit"
             },
             {
               "iD": 7,
               "name": "formOfDisc",
-              "value": "Non-binary discrimination",
-              "id": "non-binary discrimination",
+              "value": "Nichtbinärfeindlichkeit",
+              "id": "Nichtbinärfeindlichkeit",
               "label": "Nichtbinärfeindlichkeit"
             },
             {
               "iD": 8,
               "name": "formOfDisc",
               "value": "Agenderfeindlichkeit",
-              "id": "agender discrimination",
+              "id": "Agenderfeindlichkeit",
               "label": "Agenderfeindlichkeit"
             },
             {
               "iD": 8,
               "name": "formOfDisc",
-              "value": "General queerphobia",
-              "id": "general queerphobia",
+              "value": "Queerfeindlichkeit allgemein",
+              "id": "Queerfeindlichkeit allgemein",
               "label": "Queerfeindlichkeit allgemein"
             },
             {
               "iD": 9,
               "name": "formOfDisc",
-              "value": "Other, specify",
-              "id": "other",
+              "value": "Anderes, und zwar",
+              "id": "Anderes",
               "label": "Anderes, und zwar"
             }
           ]
