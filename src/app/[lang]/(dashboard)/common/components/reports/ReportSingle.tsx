@@ -94,9 +94,7 @@ const ReportSingle = () => {
           console.log(error);
         });
     }
-    if (refreshRaw) {
-      alert('okloii')
-    }
+   
   }, [reports, refresh, refreshCurrent,refreshRaw]);
   // console.log('refreshRaw',refreshRaw);
   
