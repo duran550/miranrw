@@ -16,9 +16,6 @@ export async function PUT(request: any, { params }: any) {
 
   const report: reportType = await request.json();
   await dbConnect();
-  console.log(id);
-  console.log(report);
-  console.log('request', params);
 
   await Report.findByIdAndUpdate(id, report);
   return NextResponse.json({ message: 'Report updated' }, { status: 200 });
