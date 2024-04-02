@@ -3,6 +3,7 @@
 import React, { useEffect, useState } from 'react';
 import { PersonSubtract, PersonAvailable, Glasses, PersonStar } from './icons';
 import { getAllUsers } from '@/services/userService';
+import { useAuth } from '@/app/hooks/useAuth';
 interface clientInfoProps {
   _id: string;
   fullname: string;
@@ -38,13 +39,15 @@ const roleData = [
 ];
 
 const RolesCart = () => {
+  const { user } = useAuth();
+
   const [getUsers, setGetUsers] = useState<clientInfoProps[] | any>([]);
 
   // get All Clients
   useEffect(() => {
     async function fetchUsers() {
       try {
-        const usersData = await getAllUsers();
+        const usersData = await getAllUsers(user?.token!);
         setGetUsers(usersData.users);
       } catch (error) {
         console.error('Error fetching users:', error);
