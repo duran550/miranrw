@@ -5,6 +5,7 @@ export default class AuthService extends DataService {
     password: string;
     email: string;
   }): Promise<{
+    headers: any;
     data: {
       status: string;
       message: string;
@@ -30,6 +31,22 @@ export default class AuthService extends DataService {
   ): Promise<{ data: { message: string }; status: number }> => {
     return this.post('/api/user/', data);
   };
+
+  getUsers = (): Promise<{ data: any; status: number }> => {
+    return this.get('/api/user/');
+  };
+
+  refreshToken = (): Promise<{ data: any; status: number }> => {
+    return this.get('/api/auth/refresh');
+  };
+
+  //   changePassword = (data: any) => {
+  //     return this.post('/auth/changePassword', data)
+  //   }
+
+  //   sendResetPasswordEmail = (data: any) => {
+  //     return this.post('/auth/sendResetPasswordEmail', data)
+  //   }
 
   forgottenPassword = (data: any) => {
     return this.post('/auth/forgottenPassword', data);

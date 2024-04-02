@@ -7,11 +7,28 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 import Checkbox from '../../../forms/radio/Checkbox';
 import { AdminContext } from '../../../../context/AdminContext';
 import { DataCategorizationOptionType } from '@/app/[lang]/(dashboard)/dashboard/reports/reportSummaryType';
+import CategoryService from '@/services/categoryService';
 
 type AnyInputType = any;
-
-const CategorizeDataForm = () => {
+type categoryType = {
+  category: {
+    _id: string;
+    name: string;
+    createdAt: string;
+    updatedAt: string;
+  };
+  options: {
+    _id: string;
+    name: string;
+    category: string;
+    createdAt: string;
+    updatedAt: string;
+  }[];
+}[];
+const CategorizeDataForm:React.FC<{option?:any}> = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [cat, setCat] = useState<categoryType>([]);
+
   const [reportCarData] = useState(dataCategorizationOptions);
 
   const {
@@ -28,6 +45,17 @@ const CategorizeDataForm = () => {
   // useEffect (() => {
   //     setValue ()
   // }, [])
+  useEffect(() => {
+    const response = new CategoryService().getAllCategory().then((result) => {
+      setCat(result.data.categorys);
+      
+      if (result.status==200 || result.status==201) {
+        
+      }
+    })
+  },[])
+
+
 
   const onSubmit: SubmitHandler<AnyInputType> = (data) => {
     const newReportData = {};
@@ -40,32 +68,30 @@ const CategorizeDataForm = () => {
       <h1 className="font-bold text-xl opacity-80 my-4">Categorize Data</h1>
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="py-4 flex flex-col gap-4 h-[500px] overflow-y-scroll">
-          {reportCarData &&
-            reportCarData?.map((reportCard: any) => {
+          {cat && cat.length>0 &&
+            cat?.map((reportCard) => {
               return (
                 <div
-                  key={reportCard?.id}
+                  key={reportCard?.category._id}
                   className="border rounded-xl p-4 border-gray-300 w-full"
                 >
-                  <h1>{reportCard?.name}</h1>
+                  <h1>{reportCard?.category.name}</h1>
                   <div className="grid grid-cols-[repeat(auto-fit,minmax(50px,150px))]">
-                    {reportCard?.options?.map((option: any) => {
+                    {reportCard?.options?.map((option) => {
                       return (
-                        <div key={option?.id} className="relative group">
+                        <div key={option?._id} className="relative group">
                           <Checkbox
-                            name={option?.formName}
+                            name={option?.name}
                             label={option?.name}
-                            id={option?.id}
-                            value={option?.value}
-                            props={register(option?.formName, {
+                            id={option?._id}
+                            value={option?._id}
+                            props={register(reportCard?.category.name, {
                               required: false,
                             })}
                           />
                           <div className="absolute w-[250px] bg-white p-4 hidden group-hover:block group-hover:rounded-xl z-10 border">
-                            <h2>{option?.description?.title}</h2>
-                            <p className="text-[10px] ">
-                              {option?.description?.description}
-                            </p>
+                            <h2>{option?.name}</h2>
+                            <p className="text-[10px] ">{option?.name}</p>
                           </div>
                         </div>
                       );
@@ -76,7 +102,7 @@ const CategorizeDataForm = () => {
             })}
         </div>
 
-        <div className="w-full flex justify-end">
+        {/* <div className="w-full flex justify-end">
           <Button
             className={`mt-7 rounded-lg text-sm sm:text-xl  ${
               !isValid || isLoading ? 'opacity-100' : ' opacity-50'
@@ -96,7 +122,7 @@ const CategorizeDataForm = () => {
               <span className="text-sm font-bold">Save Categorization</span>
             )}
           </Button>
-        </div>
+        </div> */}
       </form>
     </div>
   );

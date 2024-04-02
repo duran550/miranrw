@@ -363,6 +363,7 @@ const EleventhStep: React.FC<EleventhStepProps> = ({
           }
         }).catch((error)=>{console.log("error")
           setCaptchaLoading(false);
+          console.log('verify error captcha2', error);
             dispatch({ type: FORM_ERRORS, payload: false });
           
           throw new Error('Fetching error occured, please reload');}

@@ -40,19 +40,18 @@ const SeventhStep: React.FC<SeventhStepProps> = ({
     } = getFormCookies(FIFTH_FORM);
 
    
-console.log(typeOfDiscrimination);
+ console.log('typeOfDiscrimination', typeOfDiscrimination);
 
     dispatch({ type: FORM_ERRORS, payload: true });
 
     if (
-      !typeOfDiscrimination ||
-      (typeOfDiscrimination && typeOfDiscrimination?.length !== 0)
+      !typeOfDiscrimination
     ) {
       dispatch({ type: FORM_ERRORS, payload: false });
     } else {
-     if (typeOfDiscrimination && typeOfDiscrimination.length>0 && typeOfDiscrimination.includes(seventhStepTranslation.choices[8].value)) {
+     if (typeOfDiscrimination && typeOfDiscrimination.length>0 && typeOfDiscrimination.includes(seventhStepTranslation.choices[seventhStepTranslation.choices.length-1].value)) {
       dispatch({ type: FORM_ERRORS, payload: true });
-      if (typeOfDiscriminationFreeField.length>3) {
+      if ((typeOfDiscriminationFreeField && typeOfDiscriminationFreeField.length>3)) {
         dispatch({ type: FORM_ERRORS, payload: false });
       }else{
         dispatch({ type: FORM_ERRORS, payload: true });
@@ -61,7 +60,11 @@ console.log(typeOfDiscrimination);
       if (
         typeOfDiscrimination &&
         typeOfDiscrimination.length > 0 &&
-        !typeOfDiscrimination.includes(seventhStepTranslation.choices[8].value)
+        !typeOfDiscrimination.includes(
+          seventhStepTranslation.choices[
+            seventhStepTranslation.choices.length - 1
+          ].value
+        )
       ) {
         dispatch({ type: FORM_ERRORS, payload: false });
       }
@@ -79,16 +82,28 @@ console.log(typeOfDiscrimination);
         );
     } else if (
       (typeOfDiscrimination &&
-        typeOfDiscrimination?.includes('Anderes, und zwar') &&
+        typeOfDiscrimination?.includes(
+          typeOfDiscrimination[typeOfDiscrimination.length - 1]
+        ) &&
+        typeOfDiscriminationFreeField &&
         typeOfDiscriminationFreeField.length <= 3) ||
       (typeOfDiscrimination &&
-        typeOfDiscrimination?.includes('Other, specify') &&
-        typeOfDiscriminationFreeField?.length <= 3)
+        typeOfDiscrimination?.includes(
+          typeOfDiscrimination[typeOfDiscrimination.length - 1]
+        ) &&
+        !typeOfDiscriminationFreeField)
     ) {
-      dispatch({ type: FORM_ERRORS, payload: true });
+      // dispatch({ type: FORM_ERRORS, payload: true });
     } else {
       dispatch({ type: FORM_ERRORS, payload: false });
     }
+
+    console.log(
+      'end',
+      seventhStepTranslation.choices[seventhStepTranslation.choices.length - 1]
+        .value
+    );
+    
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [typeOfDiscrimination, typeOfDiscriminationFreeField]);
 
@@ -98,7 +113,7 @@ console.log(typeOfDiscrimination);
     let step = getFormStep();
     let dataWithQuestion = { question, step, ...data };
 setFormCookies(dataWithQuestion, FIFTH_FORM);
-   console.log('step',step);
+  //  console.log('step',step);
    
 
      dispatch({ type: NEXT_STEP, payload: '' });

@@ -12,7 +12,7 @@ import Image from 'next/image';
 import { useRouter, useSelectedLayoutSegment } from 'next/navigation';
 import LogoutIcon from './icons/LogoutIcon';
 import { useAuth } from '@/app/hooks/useAuth';
-import { removeUserCookies } from '@/cookies/cookies';
+import { removeRefreshToken, removeUserCookies } from '@/cookies/cookies';
 import Link from 'next/link';
 
 interface SidebarProps {
@@ -25,7 +25,9 @@ const Sidebar: FC<SidebarProps> = ({ lang }) => {
   const activeSegment = useSelectedLayoutSegment();
 
   const handleLogout = () => {
+     removeRefreshToken();
     removeUserCookies();
+   
     push('/login');
   };
 

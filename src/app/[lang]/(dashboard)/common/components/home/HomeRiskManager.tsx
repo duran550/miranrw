@@ -7,8 +7,9 @@ import TotalReportsIcon from '../../../../../../../public/icons/dashboard/totalR
 import NewReportsIcon from '../../../../../../../public/icons/dashboard/newReportsIcon.svg';
 import RecentActivitiesIcon from '../../../../../../../public/icons/dashboard/recentActivitiesIcon.svg';
 import { Category } from '../report-card/reportCard.d';
+import { reportType } from '@/utils/shared-types';
 
-const HomeRiskManager = () => {
+const HomeRiskManager: React.FC<{ report?: reportType[] }> = ({ report }) => {
   return (
     <div>
       <Header />
@@ -33,7 +34,21 @@ const HomeRiskManager = () => {
       <div className="mt-8">
         <h1 className="text-xl mb-4 font-bold">Recent reports</h1>
         <div className="w-full gap-y-4 flex flex-col">
-          <ReportCard
+          {report &&
+            report.map((item) => (
+              <ReportCard
+                key={item._id}
+                title={item._id ? item._id : 'PT0124'}
+                date={item.createdAt ? item.createdAt : ''}
+                href={`/dashboard/dangerous-reports/${item._id}`}
+                reportType={
+                  item.status == 'Dangerous'
+                    ? Category.Dangerous
+                    : Category.Managed
+                }
+              />
+            ))}
+          {/* <ReportCard
             reportType={Category.Dangerous}
             date="Tuesday, 7 September 2023, 20h45 "
             title="Data 001100111"
@@ -52,7 +67,7 @@ const HomeRiskManager = () => {
             reportType={Category.Dangerous}
             date="Tuesday, 7 September 2023, 20h45 "
             title="Data 001100111"
-          />
+          /> */}
         </div>
       </div>
     </div>

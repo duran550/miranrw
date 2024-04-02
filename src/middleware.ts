@@ -5,9 +5,12 @@ import { i18n } from './i18n.config';
 
 import { match as matchLocale } from '@formatjs/intl-localematcher';
 import Negotiator from 'negotiator';
+import { middleware_1 } from './middleware/middleware';
+import AuthService from './services/authService';
 
 // Get locale based on country
 function getLocale(request: NextRequest): string | undefined {
+ 
   const negotiatorHeaders: Record<string, string> = {};
   request.headers.forEach((value, key) => (negotiatorHeaders[key] = value));
 
@@ -19,7 +22,11 @@ function getLocale(request: NextRequest): string | undefined {
   return locale;
 }
 
-export function middleware(request: NextRequest) {
+
+
+export function middleware(request: NextRequest, response: any, next: any) {
+  
+  
   const pathname = request.nextUrl.pathname;
   const pathnameIsMissingLocale = i18n.locales.every(
     (locale) => !pathname.startsWith(`/${locale}/`) && pathname !== `/${locale}`
@@ -79,7 +86,7 @@ export function middleware(request: NextRequest) {
   //    `/${locale}`,
   //    `/${locale}/about-us`,
   //  ];
-
+console.log('okk');
   const allPaths = [
     `/${locale}/datenschutz`,
     `/${locale}/disclaimer`,
@@ -98,24 +105,32 @@ export function middleware(request: NextRequest) {
     request.cookies.get('user_data') &&
     publicPath.includes(pathname)
   ) {
+    console.log('ok7');
+    //  let user = JSON.parse(request.cookies.get('user_data')?.value!);
     return NextResponse.redirect(new URL(`/${locale}/dashboard`, request.url));
   } else if (
     request.cookies.get('user_data') &&
     !allPaths.includes(pathname) &&
     !pathname.includes('/dashboard')
   ) {
+// console.log('ok');
+console.log('ok8');
     return NextResponse.redirect(new URL(`/${locale}/dashboard`, request.url));
   } else if (
     request.cookies.get('user_data') &&
     !allPaths.includes(pathname) &&
     !pathname.includes('/dashboard')
   ) {
+    console.log('ok4');
     return NextResponse.redirect(new URL(`/${locale}/dashboard`, request.url));
   } else if (
+    
     request.cookies.get('user_data') &&
     !publicPath.includes(pathname)
   ) {
+    // console.log('ok3');
     let user = JSON.parse(request.cookies.get('user_data')?.value!);
+    // refreshToken(user.token);
     if (
       user &&
       user?.role &&
@@ -146,6 +161,8 @@ export function middleware(request: NextRequest) {
       !pathname.includes('/dashboard/clean-data') &&
       !allPaths.includes(pathname)
     ) {
+    // refreshToken(user.token);
+      console.log('ok1');
       return NextResponse.redirect(
         new URL(`/${locale}/dashboard`, request.url)
       );
@@ -162,6 +179,8 @@ export function middleware(request: NextRequest) {
       );
     }
   } else {
+// console.log('ok');
+
     return NextResponse.next();
   }
 }
@@ -169,4 +188,5 @@ export function middleware(request: NextRequest) {
 export const config = {
   // Matcher ignoring `/_next/` and `/api/`
   matcher: ['/((?!api|_next/static|_next/image|favicon.ico).*)'],
+  // matcher: "/api/:path*",
 };

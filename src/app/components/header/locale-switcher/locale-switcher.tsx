@@ -9,16 +9,21 @@ import GermanLogo from '../../../../../public/images/germany-flag.svg';
 import EnglandLogo from '../../../../../public/images/england-flag.svg';
 import AnimateClick from '../../animate-click/AnimateClick';
 import LeicheSpracheLogo from '../../../../../public/icons/leichteSpracheIcon.png';
+import { clearFormCookies, clearFormStep } from '@/cookies/cookies';
 
 export default function LocaleSwitcher() {
   const [toggle, setToggle] = useState<boolean>(false);
   const pathName = usePathname();
-  const selectedLanguage: any = pathName.split('/')[1];
+  const selectedLanguage: any = pathName.split('/');
+  console.log(selectedLanguage);
+  
   const redirectedPathName = (locale: string) => {
-    if (!pathName) return '/';
-    const segments = pathName.split('/');
-    segments[1] = locale;
-    return segments.join('/');
+    // clearFormCookies()
+    // if (!pathName) return '/';
+    // const segments = pathName.split('/');
+    // segments[1] = locale;
+    // return segments.join('/');
+    // return (window.location.href = '/' + locale + '/report');
   };
 
   return (
@@ -27,12 +32,23 @@ export default function LocaleSwitcher() {
         {i18n.locales.map((locale) => (
           <AnimateClick key={locale}>
             <Link
-              href={redirectedPathName(locale)}
+              href={
+                selectedLanguage[2]
+                  ? '/' + locale +'/'+ selectedLanguage[2]
+                  : '/' + locale 
+              }
               className="text-slate-900 w-fit"
             >
               {locale === 'en' ? (
                 <div
-                  onClick={() => setToggle(false)}
+                  onClick={() => {
+                    // clearFormStep();
+
+                    // clearFormCookies();
+                    clearFormCookies();
+                    // window?.location?.reload();
+                    setToggle(false);
+                  }}
                   className="flex items-center w-fit"
                 >
                   <Image
@@ -52,7 +68,15 @@ export default function LocaleSwitcher() {
                 </div>
               ) : locale === 'de' ? (
                 <div
-                  onClick={() => setToggle(false)}
+                  onClick={() => {
+                    setToggle(false);
+
+                    clearFormCookies();
+                    // window?.location?.reload();
+                    // clearFormStep();
+
+                    //  clearFormCookies();
+                  }}
                   className="flex md:ml-2 md:mr-14 items-center w-fit"
                 >
                   <Image
@@ -72,7 +96,14 @@ export default function LocaleSwitcher() {
                 </div>
               ) : (
                 <div
-                  onClick={() => setToggle(false)}
+                  onClick={() => {
+                    setToggle(false);
+
+                    clearFormCookies();
+                    //  window?.location?.reload();
+                    // clearFormCookies();
+                    // clearFormStep()
+                  }}
                   className="flex  items-center w-fit mr-2 lg:mr-8 xl:pr-0"
                 >
                   <Image

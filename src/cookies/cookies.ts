@@ -11,14 +11,33 @@ import {
   SIXTH_FORM,
   THIRD_FORM,
   USER_DATA,
+  REFRESH_TOKEN
 } from './cookies.d';
 
+
+export const setRefreshToken = (data: any) => {
+  console.log('data',data);
+  
+  cookies.set(REFRESH_TOKEN, data);
+};
+export const getRefreshToken = () => {
+   const data = cookies.get(REFRESH_TOKEN);
+   console.log('data', data);
+
+   return data ? data : undefined;
+};
 export const setUserCookies = (data: any) => {
   cookies.set(USER_DATA, JSON.stringify(data));
 };
 
+export const removeRefreshToken = () => {
+  cookies.remove(REFRESH_TOKEN);
+};
+
 export const getUserCookies = () => {
   const data = cookies.get(USER_DATA);
+  console.log('data',data);
+  
   return data ? JSON.parse(data) : undefined;
 };
 

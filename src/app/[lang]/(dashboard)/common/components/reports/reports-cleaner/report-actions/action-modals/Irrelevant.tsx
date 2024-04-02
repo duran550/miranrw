@@ -10,6 +10,7 @@ interface ClientDataProps {
   onClose: () => void;
   isOpen: boolean;
   data?: string | any;
+  refresh?:any
 }
 
 const Irrelevant: FC<ClientDataProps> = ({ onClose, isOpen, data }) => {

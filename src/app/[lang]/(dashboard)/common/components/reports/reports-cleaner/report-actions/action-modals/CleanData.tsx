@@ -6,6 +6,8 @@ import AnimateClick from '@/app/components/animate-click/AnimateClick';
 import { AdminContext } from '@/app/[lang]/(dashboard)/common/context/AdminContext';
 import ReportSummary from '../../report-summary/ReportSummary';
 import { useFindReport } from '@/app/hooks/useFindReport';
+import ReportService from '@/services/reportService';
+import { usePathname } from 'next/navigation';
 
 interface ClientDataProps {
   onClose: () => void;
@@ -14,6 +16,8 @@ interface ClientDataProps {
   mutated?: boolean;
   setMutated: () => void;
   setvisible: () => void;
+  text?: string;
+  refresh?:any
 }
 
 interface ClientDataFormValues {
@@ -26,16 +30,20 @@ const CleanData: FC<ClientDataProps> = ({
   data,
   setMutated,
   setvisible,
+  text,
+  refresh
 }) => {
+   const pathname = usePathname();
+   const urlSplit = pathname.split('/');
   const { uncategorizedData } = useFindReport();
   const [cleanDataDynamicVal, setCleanDataDynamicVal] = useState(
-    data.WhatHappened
+   text!
   );
   const { setCleanerDes } = useContext(AdminContext);
 
   const handleUpdateCleanerDes = () => {
     setCleanerDes(cleanDataDynamicVal);
-    onClose();
+    // onClose();
   };
 
   // Dynamic hints description
@@ -47,13 +55,43 @@ const CleanData: FC<ClientDataProps> = ({
     formState: { errors, isSubmitting, isDirty, isValid },
   } = useForm<ClientDataFormValues>();
 
+  let description: string = watch('description');
+
+  const updateReport = () => {
+    console.log(description);
+    
+    const report = new ReportService().updateReport(
+      urlSplit[urlSplit.length - 1],
+      { description: description, status:'cleaned' }
+    ).then((result) => {
+      if (result.status==200 || result.status==201) {
+        refresh()
+        setTimeout(() => {
+          onClose();
+
+          setvisible();
+        },3000)
+      }
+    }).catch((error) => {
+      console.log('error',error);
+      
+      alert('ok')
+    });
+  }
   // Define custom classnames
   const customClassName = 'border border-gray-400 bg-gray-100';
 
   // const watchAllFields = watch();
-  let description: string = watch('description');
 
-  useEffect(() => setCleanerDes(cleanDataDynamicVal), []);
+  useEffect(() => {
+    // alert('ok')
+    // setCleanerDes(cleanDataDynamicVal);
+    if (text && text.length>0) {
+      setValue('description', text);
+    }
+
+    // console.log('text', text);
+  }, []);
 
   const handleChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
     setCleanDataDynamicVal(event.target.value);
@@ -74,9 +112,9 @@ const CleanData: FC<ClientDataProps> = ({
               name="clean_data_des"
               type="string"
               props={register('description')}
-              placeholder="Explain what happened exactly"
-              val={cleanDataDynamicVal}
-              handleChange={handleChange}
+              placeholder={text!}
+              // val={cleanDataDynamicVal}
+              // handleChange={handleChange}
               className={customClassName}
             ></TextArea>
             <div className="flex justify-end gap-x-3 mt-10 mb-2">
@@ -92,7 +130,8 @@ const CleanData: FC<ClientDataProps> = ({
                 <button
                   className="border py-4 px-6 w-fit bg-[#2B8049] rounded-lg text-white"
                   onClick={() => {
-                    handleUpdateCleanerDes(), setMutated(), setvisible();
+                    updateReport()
+                    // handleUpdateCleanerDes(), setMutated(), setvisible();
                   }}
                 >
                   Clean

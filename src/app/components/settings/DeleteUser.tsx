@@ -9,6 +9,7 @@ import Image from 'next/image';
 import { getAllUsers } from '@/services/userService';
 import { AdminContext } from '@/app/[lang]/(dashboard)/common/context/AdminContext';
 import toast, { Toaster } from 'react-hot-toast';
+import { useAuth } from '@/app/hooks/useAuth';
 
 interface ClientInfoProps {
   createdAt: string;
@@ -30,25 +31,27 @@ function DeleteUser({ lang, refresh }: DelUserPros) {
   const [openModal, setOpenModal] = useState<boolean>(false);
   const [getUsers, setGetUsers] = useState<ClientInfoProps[] | any>([]);
   const [deletedUserId, setDeletedUserId] = useState(null);
+  const { user } = useAuth();
 
   // get unique user id
   const { state } = useContext(AdminContext);
   const { clientInfo } = state;
 
   console.log(clientInfo?._id, 'this is my client info');
+  console.log('user_user', user);
 
   // get All Clients
   useEffect(() => {
-    async function fetchUsers() {
+    async function fetchUsers(token: string) {
       try {
-        const usersData = await getAllUsers();
+        const usersData = await getAllUsers(token);
         setGetUsers(usersData.users);
       } catch (error) {
         console.error('Error fetching users:', error);
       }
     }
 
-    fetchUsers();
+    fetchUsers(user?.token!);
   }, [deletedUserId]);
 
   // code to delete user
@@ -57,6 +60,9 @@ function DeleteUser({ lang, refresh }: DelUserPros) {
     try {
       const response = await fetch(`/api/user/${userId}`, {
         method: 'DELETE',
+        headers: {
+          authorization: user?.token!,
+        },
       });
 
       if (response.ok) {

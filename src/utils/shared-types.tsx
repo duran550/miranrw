@@ -1,7 +1,8 @@
 export type reportType = {
+  _id?: string;
   organizationType?: string[];
   organizationTypeFreeField?: string;
-  identity: string;
+  identity?: string;
   description?: string;
   valueDate?: string;
   dateRangeState?: string;
@@ -26,5 +27,7 @@ export type reportType = {
   age?: string;
   sexualOrientation?: string[];
   sexualOrientationFreeField?: string;
- 
+  createdAt?: string
+  status?: string
+  category?: any[]
 };

@@ -1,23 +1,127 @@
 'use client';
 import { useAuth } from '@/app/hooks/useAuth';
 import { Role } from '@/utils/utils';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import HomeViewerAndAdmin from './HomeViewerAndAdmin';
 import HomeCleaner from './HomeCleaner';
 import HomeRiskManager from './HomeRiskManager';
+import { getAllUsers } from '@/services/userService';
+import AuthService from '@/services/authService';
+import { Result } from 'postcss';
+import ReportService, { getAllReport } from '@/services/reportService';
+import { ReportType } from '../../../dashboard/reports/reportSummaryType';
+import { reportType } from '@/utils/shared-types';
+import { error } from 'console';
+import { removeUserCookies } from '@/cookies/cookies';
+import axios from 'axios';
 
 const Home = () => {
   const { user } = useAuth();
+  const [refresh,setRefresh]=useState(true)
+  const [report, setReport] = useState<reportType[]>([])
+  const getReport = async (token: string) => {
+      const options = {
+        method: 'GET',
+        url: '/api/report',
+
+        headers: {
+          Authorization: `${token}`,
+          'content-type': 'application/json',
+        },
+      };
+
+      try {
+        await axios
+          .request(options)
+          .then(function (response) {
+            const { data } = response;
+            console.log('data', data.reports);
+             if (user?.role === 3 && data.reports.length > 0) {
+               const report = data.reports.filter(
+                 (item:reportType) => item.status == 'pending'
+               );
+               if (report.length < 6 && report.length > 0) {
+                 setReport(report);
+               } else {
+                 setReport(report.reverse().slice(0, 5));
+               }
+             }
+
+             if (
+               (user?.role === 1 || user?.role == 2) &&
+               data.reports.length > 0
+             ) {
+               const report = data.reports.filter(
+                 (item: reportType) => item.status == 'cleaned'
+               );
+               if (report.length < 6 && report.length > 0) {
+                 setReport(report);
+               } else {
+                 setReport(report.reverse().slice(0, 5));
+               }
+             }
+
+             if (user?.role === 4 && data.reports.length > 0) {
+               const report = data.reports.filter(
+                 (item:reportType) => item.status == 'Dangerous'
+               );
+               if (report.length < 6 && report.length > 0) {
+                 setReport(report);
+               } else {
+                 setReport(report.reverse().slice(0, 5));
+               }
+             }
+           
+          })
+          .catch(function (error) {
+            console.error(error);
+            //  setIsLoad(false);
+          });
+      } catch (error) {
+        // setIsLoad(false);
+      }
+   
+    setRefresh(false)
+   
+  }
+
+  useEffect(() => {
+    const response = new AuthService().refreshToken().catch((error) => {
+      console.log('error', error);
+      //  removeUserCookies()
+
+      
+    })
+ 
+
+  },[])
+ 
+  useEffect(() => {
+    if (refresh) {
+    
+       getReport(user?.token!)
+  setRefresh(false)
+  
+    }
+    if (!refresh) {
+      setTimeout(() => {
+        setRefresh(true)
+      }, 5000)
+    }
+   
+   
+   
+  },[refresh])
   return (
     <>
       {user?.role === Role.ADMIN ? (
-        <HomeViewerAndAdmin />
+        <HomeViewerAndAdmin report={report} />
       ) : user?.role === Role.VIEWER ? (
-        <HomeViewerAndAdmin />
+        <HomeViewerAndAdmin report={report}/>
       ) : user?.role === Role.CLEANER ? (
-        <HomeCleaner />
+        <HomeCleaner report={report} />
       ) : (
-        user && <HomeRiskManager />
+        user && <HomeRiskManager report={report}/>
       )}
     </>
   );
