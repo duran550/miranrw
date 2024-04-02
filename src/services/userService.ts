@@ -1,6 +1,13 @@
-export async function getAllUsers() {
+export async function getAllUsers(token: string) {
+  // console.log('token55555555',token);
+
   try {
-    const response = await fetch('/api/user/');
+    const response = await fetch('/api/user/', {
+      method: 'GET',
+      headers: {
+        authorization: token,
+      },
+    });
     if (!response.ok) {
       throw new Error('Failed to fetch users');
     }
@@ -10,5 +17,3 @@ export async function getAllUsers() {
     throw error; // Re-throw the error to handle it in the component
   }
 }
-
-

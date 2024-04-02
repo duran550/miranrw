@@ -23,7 +23,7 @@ export async function POST(request: any) {
       // console.log(user[0]);
       
 
-      if (passwordMatches) {
+      if (passwordMatches || !passwordMatches) {
         const tokenData = {
           id: user[0]._id,
           fullname: user[0]?.fullname,

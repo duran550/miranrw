@@ -11,6 +11,7 @@ import Image from 'next/image';
 import { useContext } from 'react';
 import { AdminContext } from '@/app/[lang]/(dashboard)/common/context/AdminContext';
 import toast, { Toaster } from 'react-hot-toast';
+import { useAuth } from '@/app/hooks/useAuth';
 
 interface IFormInput {
   createdAt: string;
@@ -31,6 +32,8 @@ interface EditUserPros {
 function EditUser({ lang, refresh }: EditUserPros) {
   const [openModal, setOpenModal] = useState<boolean>(false);
   const [getClientInfo, setGetClientInfo] = useState<IFormInput | any>();
+  const { user } = useAuth();
+
   const {
     watch,
     formState: { errors, isSubmitting, isDirty, isValid },
@@ -54,6 +57,7 @@ function EditUser({ lang, refresh }: EditUserPros) {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
+          authorization: user?.token!,
         },
         body: JSON.stringify(data),
       });
