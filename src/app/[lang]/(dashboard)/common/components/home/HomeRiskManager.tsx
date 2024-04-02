@@ -44,7 +44,7 @@ const HomeRiskManager: React.FC<{ report?: reportType[] }> = ({ report }) => {
                 reportType={
                   item.status == 'Dangerous'
                     ? Category.Dangerous
-                    : Category.Cleaned
+                    : Category.Managed
                 }
               />
             ))}

@@ -44,7 +44,7 @@ console.log(report);
             <div className="rounded-full bg-opacity-20 px-4 py-2 w-fit opacity-[0.7] bg-[#199A46] font-bold text-[#199A46]">
               Cleaned
             </div>
-          ) : report?.status && report.status == 'dangerous' ? (
+          ) : report?.status && report.status == 'Dangerous' ? (
             <div className="rounded-full bg-opacity-20 px-4 py-2 w-fit opacity-[0.7] bg-[#E00034] font-bold text-[#E00034]">
               !Dangerous
             </div>

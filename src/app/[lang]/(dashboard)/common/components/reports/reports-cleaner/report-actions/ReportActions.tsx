@@ -65,14 +65,14 @@ const ReportActions: React.FC<ReportActionProps> = (whatHappened) => {
             setIsload(false);
         setStateAction(status);
 
-          }, 3000);
+          }, 1000);
         }
       })
       .catch((error) => {
         console.log('error', error);
         setIsload(true);
 
-        alert('ok');
+        // alert('ok');
       });
   };
   // to be used
@@ -131,7 +131,7 @@ const ReportActions: React.FC<ReportActionProps> = (whatHappened) => {
                 <h1>
                   Recommended as:
                   <span className="text-[#E00034] ml-2">
-                    {state.isDangerous ? 'Dangerous' : 'Irrelevant'}
+                    {stateAction == 'Dangerous' ? 'Dangerous' : 'Irrelevant'}
                   </span>
                 </h1>
                 <Image src={warning} alt="warning" className="-mt-1" />
@@ -139,33 +139,16 @@ const ReportActions: React.FC<ReportActionProps> = (whatHappened) => {
             </div>
 
             <div>
-              {stateAction == 'Dangerous' ? (
-                <Button
-                  className="text-lg w-fit"
-                  variant="outlineWarning"
-                  disabeld={isLoad}
-                  icon={DangerousIcon}
-                  disabled={
-                    whatHappened.text && whatHappened.text.length > 0
-                      ? false
-                      : true
-                  }
-                  onClick={() => {
-                    setMarkedAsDangerous(false), toggleIsDangerous();
-                  }}
-                >
-                  Dangerous
-                </Button>
-              ) : stateAction == 'Irrelevant' ? (
+              {stateAction == 'Irrelevant' || stateAction == 'Dangerous' ? (
                 <Button
                   className="text-lg w-fit"
                   // variant="outlinePrimary"
                   variant={isLoad ? 'disabled' : 'outlinePrimary'}
-                  disabeld={isLoad}
+                  disabled={isLoad}
                   icon={IrrelevantIcon}
                   onClick={() => {
                     toggleIsIrrelevant();
-                    updateReport('cleaned');
+                    updateReport('pending');
                   }}
                 >
                   Unmark
@@ -173,9 +156,9 @@ const ReportActions: React.FC<ReportActionProps> = (whatHappened) => {
               ) : (
                 <div className="flex  gap-x-4">
                   <Button
-                        className="text-xs bg-[#2B8049]"
-                        variant={isLoad ? 'disabled' : null}
-                    disabeld={isLoad}
+                    className="text-xs bg-[#2B8049]"
+                    variant={isLoad ? 'disabled' : null}
+                    disabled={isLoad}
                     icon={CleanIcon}
                     onClick={() => {
                       if (whatHappened.text && whatHappened.text.length > 0) {
@@ -187,7 +170,7 @@ const ReportActions: React.FC<ReportActionProps> = (whatHappened) => {
                   </Button>
                   <Button
                     className="text-xs"
-                    disabeld={isLoad}
+                    disabled={isLoad}
                     variant={isLoad ? 'disabled' : 'outlinePrimary'}
                     icon={IrrelevantIcon}
                     onClick={() => {
@@ -198,7 +181,7 @@ const ReportActions: React.FC<ReportActionProps> = (whatHappened) => {
                   </Button>
                   <Button
                     className="text-xs"
-                    disabeld={isLoad}
+                    disabled={isLoad}
                     variant={isLoad ? 'disabled' : 'outlineWarning'}
                     // variant="outlineWarning"
                     icon={DangerousIcon}
@@ -229,7 +212,7 @@ const ReportActions: React.FC<ReportActionProps> = (whatHappened) => {
             <Button
               className="text-xs w-fit"
               variant={isLoad ? 'disabled' : 'outlineWarning'}
-              disabeld={isLoad}
+              disabled={isLoad}
               icon={DangerousIcon}
               onClick={() => {
                 // setOpenDangerous(true),
@@ -244,7 +227,7 @@ const ReportActions: React.FC<ReportActionProps> = (whatHappened) => {
               className="text-xs w-fit"
               variant={isLoad ? 'disabled' : 'outlinePrimary'}
               icon={IrrelevantIcon}
-              disabeld={isLoad}
+              disabled={isLoad}
               onClick={() => {
                 // setOpenIrrelevant(true),
                 //   toggleIsIrrelevant(),
@@ -257,7 +240,7 @@ const ReportActions: React.FC<ReportActionProps> = (whatHappened) => {
             </Button>
             <Button
               className="text-xs bg-[#2B8049] w-fit"
-              disabeld={isLoad}
+              disabled={isLoad}
               icon={cleanerEdit}
               onClick={() => setOpenCleanModal(true)}
             >

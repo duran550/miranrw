@@ -46,12 +46,11 @@ const HomeViewerAndAdmin: React.FC<{ report?: reportType[] }> = ({
                 title={item._id ? item._id : 'PT0124'}
                 date={item.createdAt ? item.createdAt : ''}
                 href={
-                  user && user?.role == 1
-                    ? `/dashboard/cleaned-reports/${item._id}`
-                    : '#'
+                `/dashboard/cleaned-reports/${item._id}`
+                  
                 }
                 reportType={
-                  item.category && item.category.length > 0
+                  item.category && item.category.length == 0
                     ? Category.Uncategorized
                     : Category.Categorized
                 }

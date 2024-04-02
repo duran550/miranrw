@@ -38,7 +38,7 @@ const ReportSingle = () => {
 
   const refreshCurrentHandler = () => {
     setRefreshCurrent(true);
-      alert('ok');
+      // alert('ok');
     
    };
   useEffect(() => {
@@ -53,6 +53,11 @@ const ReportSingle = () => {
           // if (report[0].status!=='pending') {
           //   window.location.href='dashboard/clean-data'
           // }
+          if (report[0].status=='cleaned') {
+            setReport2(report[0]);
+          } else {
+            setReport2(undefined);
+          }
           setReport(report[0]);
           setRefreshCurrent(false)
           //  setReports(result.data.reports);
@@ -91,7 +96,8 @@ const ReportSingle = () => {
       {user && user.role == 3 && (
         <Header href="/clean-data" title="Data Info" />
       )}
-      {user && user.role == 1 && (
+      {user && user.role == 1 && <Header href="/reports" title="Data Info" />}
+      {user && user.role == 2 && (
         <Header href="/cleaned-data" title="Data Info" />
       )}
       {user && user.role == 4 && (
@@ -111,14 +117,13 @@ const ReportSingle = () => {
                 : reports2.description
             }
             WhatHappened={uncategorizedData?.summary.incidentDescription}
-            report={
-              reports?.status == 'cleaned' && !reports2 ? reports : reports2
-            }
+            report={reports2}
             refresh={refreshHandler}
             refreshCurrent={refreshCurrentHandler}
             action={reports.status}
           />
         )}
+        {user?.role == Role.ADMIN && <CategorizeDataForm />}
         {/* : (
         <CategorizeDataForm />) */}
       </div>
