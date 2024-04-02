@@ -1,5 +1,5 @@
 'use client';
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import Header from './Header';
 import ReportSummary from './reports-cleaner/report-summary/ReportSummary';
 import ReportActions from './reports-cleaner/report-actions/ReportActions';
@@ -16,20 +16,23 @@ import { useAuth } from '@/app/hooks/useAuth';
 import { Role } from '@/utils/utils';
 import ReportService from '@/services/reportService';
 import { reportType } from '@/utils/shared-types';
+import ReportSummaryCleanData from './reports-cleaner/report-summary/ReportSummaryCleanData';
+import { AdminContext } from '../../context/AdminContext';
 
 const ReportSingle = () => {
-  const pathname = usePathname()
-     const urlSplit = pathname.split('/');
-  
+  const pathname = usePathname();
+  const urlSplit = pathname.split('/');
+
   const { uncategorizedData } = useFindReport();
   const { user } = useAuth();
   const [reports, setReport] = useState<reportType | undefined>();
   const [reports2, setReport2] = useState<reportType | undefined>();
-  
-  const [refresh, setRefresh] = useState(false)
+
+  const [refresh, setRefresh] = useState(false);
   const [refreshRaw, setRefreshRaw] = useState(false);
 
   const [refreshCurrent, setRefreshCurrent] = useState(false);
+  const { state, dispatch } = useContext(AdminContext);
 
   const [send, setsend] = useState(false);
   const refreshHandler = () => {
@@ -38,9 +41,8 @@ const ReportSingle = () => {
 
   const refreshCurrentHandler = () => {
     setRefreshCurrent(true);
-      // alert('ok');
-    
-   };
+    // alert('ok');
+  };
   useEffect(() => {
     if (!reports || refreshCurrent) {
       const response = new ReportService()
@@ -53,13 +55,13 @@ const ReportSingle = () => {
           // if (report[0].status!=='pending') {
           //   window.location.href='dashboard/clean-data'
           // }
-          if (report[0].status=='cleaned') {
+          if (report[0].status == 'cleaned') {
             setReport2(report[0]);
           } else {
             setReport2(undefined);
           }
           setReport(report[0]);
-          setRefreshCurrent(false)
+          setRefreshCurrent(false);
           //  setReports(result.data.reports);
           //  setReports();
         })
@@ -91,6 +93,13 @@ const ReportSingle = () => {
     }
   }, [reports, refresh, refreshCurrent]);
 
+  const irrelevant = state.isIrrelevant;
+  const dangerous = state.isDangerous;
+  const cleanDataboolean = state.cleanData;
+  console.log(irrelevant, 'irrelevant');
+  console.log(dangerous, 'dangerous');
+  console.log(cleanDataboolean, 'report status');
+
   return (
     <div className="mb-[2rem]">
       {user && user.role == 3 && (
@@ -105,10 +114,23 @@ const ReportSingle = () => {
       )}
 
       <div className="flex  gap-x-6 h-full">
-        <ReportSummary
-          report={reports}
-          incidentDescription={uncategorizedData?.summary?.incidentDescription}
-        />
+        {irrelevant === false &&
+        dangerous === false &&
+        cleanDataboolean === false ? (
+          <ReportSummaryCleanData
+            report={reports}
+            incidentDescription={
+              uncategorizedData?.summary?.incidentDescription
+            }
+          />
+        ) : (
+          <ReportSummary
+            report={reports}
+            incidentDescription={
+              uncategorizedData?.summary?.incidentDescription
+            }
+          />
+        )}
         {user?.role === Role.CLEANER && reports && (
           <ReportActions
             text={
