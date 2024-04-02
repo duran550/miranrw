@@ -78,7 +78,7 @@ const LoginForm = () => {
               //  setRefreshToken(result.headers.authorization);
               toast.success(result.data.message);
               setIsLoading(false);
-              // window.location.href = '/en/dashboard';
+              window.location.href = '/en/dashboard';
               
             }
             // setUserCookies({ token: result.headers.authorization, ...result1 });
