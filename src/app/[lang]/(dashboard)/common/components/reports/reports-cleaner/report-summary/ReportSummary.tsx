@@ -32,7 +32,8 @@ const ReportSummary: React.FC<ReportSummaryProps> = ({
   const defaultClassName = `border rounded-xl p-4 border-gray-300 w-full max-h-[70vh] overflow-y-auto overscroll-none no-scrollbar`;
   const combinedClassName = className ? `${className}` : defaultClassName;
   const { uncategorizedData } = useFindReport();
-console.log(report);
+// console.log(report);
+// console.log('update', update);
 
   return (
     <div className={combinedClassName}>
@@ -169,7 +170,11 @@ console.log(report);
           <h1 className="font-bold text-[16px] text-black opacity-80">
             What Happened
           </h1>
-          <span className={`text-[15px] ${update ? 'text-[#199A46]' : ''}`}>
+          <span
+            className={`text-[15px] 
+             ${report?.status == 'cleaned' && update && 'text-[#199A46]'}
+          ${report?.status == 'pending' && update && 'text-[#E00034]'}`}
+          >
             {report?.description}
             {/* {state.cleanerDesc} */}
           </span>

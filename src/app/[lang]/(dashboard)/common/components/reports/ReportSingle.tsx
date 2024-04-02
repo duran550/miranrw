@@ -32,12 +32,17 @@ const ReportSingle = () => {
   const [refreshCurrent, setRefreshCurrent] = useState(false);
 
   const [send, setsend] = useState(false);
+  
   const refreshHandler = () => {
+    // alert('ok')
     setRefresh(true);
+    setRefreshRaw(true)
   };
 
   const refreshCurrentHandler = () => {
     setRefreshCurrent(true);
+    setRefreshRaw(false);
+
       // alert('ok');
     
    };
@@ -46,7 +51,7 @@ const ReportSingle = () => {
       const response = new ReportService()
         .getAllReport()
         .then((result) => {
-          console.log('report', result.data.reports);
+          // console.log('report', result.data.reports);
           const report = result.data.reports.filter(
             (item) => item._id == urlSplit[urlSplit.length - 1]
           );
@@ -72,13 +77,13 @@ const ReportSingle = () => {
       const response = new ReportService()
         .getAllReport()
         .then((result) => {
-          console.log('report', result.data.reports);
+          // console.log('report', result.data.reports);
           //  console.log(pathname.split('/'));
 
           const report = result.data.reports.filter(
             (item) => item._id == urlSplit[urlSplit.length - 1]
           );
-          console.log('report', report);
+          // console.log('report', report);
 
           setReport2(report[0]);
           setRefresh(false);
@@ -89,7 +94,12 @@ const ReportSingle = () => {
           console.log(error);
         });
     }
-  }, [reports, refresh, refreshCurrent]);
+    if (refreshRaw) {
+      alert('okloii')
+    }
+  }, [reports, refresh, refreshCurrent,refreshRaw]);
+  // console.log('refreshRaw',refreshRaw);
+  
 
   return (
     <div className="mb-[2rem]">
@@ -108,6 +118,7 @@ const ReportSingle = () => {
         <ReportSummary
           report={reports}
           incidentDescription={uncategorizedData?.summary?.incidentDescription}
+          update={refreshRaw}
         />
         {user?.role === Role.CLEANER && reports && (
           <ReportActions
