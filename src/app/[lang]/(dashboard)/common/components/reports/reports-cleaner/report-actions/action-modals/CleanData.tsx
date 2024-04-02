@@ -75,7 +75,7 @@ const CleanData: FC<ClientDataProps> = ({
     }).catch((error) => {
       console.log('error',error);
       
-      alert('ok')
+    
     });
   }
   // Define custom classnames
