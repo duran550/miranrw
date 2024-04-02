@@ -18,34 +18,33 @@ import ReportService from '@/services/reportService';
 import { reportType } from '@/utils/shared-types';
 
 const ReportSingle = () => {
-  const pathname = usePathname()
-     const urlSplit = pathname.split('/');
-  
+  const pathname = usePathname();
+  const urlSplit = pathname.split('/');
+
   const { uncategorizedData } = useFindReport();
   const { user } = useAuth();
   const [reports, setReport] = useState<reportType | undefined>();
   const [reports2, setReport2] = useState<reportType | undefined>();
-  
-  const [refresh, setRefresh] = useState(false)
+
+  const [refresh, setRefresh] = useState(false);
   const [refreshRaw, setRefreshRaw] = useState(false);
 
   const [refreshCurrent, setRefreshCurrent] = useState(false);
 
   const [send, setsend] = useState(false);
-  
+
   const refreshHandler = () => {
     // alert('ok')
     setRefresh(true);
-    setRefreshRaw(true)
+    setRefreshRaw(true);
   };
 
   const refreshCurrentHandler = () => {
     setRefreshCurrent(true);
     setRefreshRaw(false);
 
-      // alert('ok');
-    
-   };
+    // alert('ok');
+  };
   useEffect(() => {
     if (!reports || refreshCurrent) {
       const response = new ReportService()
@@ -58,13 +57,13 @@ const ReportSingle = () => {
           // if (report[0].status!=='pending') {
           //   window.location.href='dashboard/clean-data'
           // }
-          if (report[0].status=='cleaned') {
+          if (report[0].status == 'cleaned') {
             setReport2(report[0]);
           } else {
             setReport2(undefined);
           }
           setReport(report[0]);
-          setRefreshCurrent(false)
+          setRefreshCurrent(false);
           //  setReports(result.data.reports);
           //  setReports();
         })
@@ -97,7 +96,6 @@ const ReportSingle = () => {
    
   }, [reports, refresh, refreshCurrent,refreshRaw]);
   // console.log('refreshRaw',refreshRaw);
-  
 
   return (
     <div className="mb-[2rem]">
