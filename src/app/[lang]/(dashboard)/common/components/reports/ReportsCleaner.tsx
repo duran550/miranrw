@@ -36,12 +36,12 @@ const ReportsCleaner = () => {
   const [reports, setReport] = useState<reportType[]>([]);
   const { report, setReports } = UseReport()
   const ctx=useContext(AuthContext)
-  useEffect(() => {
-    const response = new AuthService().refreshToken().catch((error) => {
-      console.log('error', error);
-      // removeUserCookies();
-    });
-  }, []);
+  // useEffect(() => {
+  //   const response = new AuthService().refreshToken().catch((error) => {
+  //     console.log('error', error);
+  //     // removeUserCookies();
+  //   });
+  // }, []);
   const getReport = async (token: string) => {
     const options = {
       method: 'GET',

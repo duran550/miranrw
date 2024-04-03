@@ -87,16 +87,16 @@ const Home = () => {
    
   }
 
-  useEffect(() => {
-    const response = new AuthService().refreshToken().catch((error) => {
-      console.log('error', error);
-      //  removeUserCookies()
+  // useEffect(() => {
+  //   const response = new AuthService().refreshToken().catch((error) => {
+  //     console.log('error', error);
+  //     //  removeUserCookies()
 
       
-    })
+  //   })
  
 
-  },[])
+  // },[])
  
   useEffect(() => {
     if (refresh) {
