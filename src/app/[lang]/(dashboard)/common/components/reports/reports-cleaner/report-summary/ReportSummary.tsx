@@ -61,12 +61,14 @@ const ReportSummary: React.FC<ReportSummaryProps> = ({
               Irrelevant
             </div>
           ) : (report?.updatereport &&
-              report.updatereport.status == 'pending') ||
-            !report?.updatereport ||
-            (report?.updatereport &&
-              report.updatereport.status == 'cleaned' && !update) ? (
+              report.updatereport.status == 'cleaned' && user?.role==1 && report.updatereport.category?.length==0) ? (
             <div className="rounded-full bg-[#E00034] bg-opacity-20 px-4 py-2 w-fit opacity-[0.7] text-[#E00034] font-bold">
-              Raw
+              Uncategorized
+            </div>
+          ) : report?.updatereport &&
+            report.updatereport.status == 'Irrelevant' ? (
+            <div className="rounded-full bg-opacity-20 px-4 py-2 w-fit opacity-[0.7] bg-[#F36D38] font-bold text-[#F36D38]">
+              Irrelevant
             </div>
           ) : (
             ''
@@ -189,10 +191,7 @@ const ReportSummary: React.FC<ReportSummaryProps> = ({
                update &&
                'text-[#199A46]'
              }
-          ${
-            (color) &&
-            'text-[#E00034]'
-          }`}
+          ${color && 'text-[#E00034]'}`}
             >
               {/* {!update ? report?.description : report?.updatereport?.description} */}
               {report?.updatereport &&
