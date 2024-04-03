@@ -4,8 +4,11 @@ import { Report } from '../../models/Report';
 import { NextResponse } from 'next/server';
 import { reportType } from '@/utils/shared-types';
 import { authenticate } from '../../utils/decode';
+import { rateLimitMiddleware } from '../../utils/limiter';
 
 export async function PUT(request: any, { params }: any) {
+  let pass= await rateLimitMiddleware(request)
+  if (!pass) return NextResponse.json({ status: 'Error', message: 'Too Many Requests.' }, { status: 400 });
   let flag = await authenticate(request);
   if (!flag)
     return NextResponse.json(
@@ -22,6 +25,8 @@ export async function PUT(request: any, { params }: any) {
 }
 
 export async function GET(request: any, { params }: any) {
+  let pass= await rateLimitMiddleware(request)
+  if (!pass) return NextResponse.json({ status: 'Error', message: 'Too Many Requests.' }, { status: 400 });
   let flag = await authenticate(request)
   if (!flag) return NextResponse.json({ status: 'Error', message: 'Access Denied. Invalid Token.' }, { status: 400 });
   const { id } = params;

@@ -6,10 +6,13 @@ import User from '../models/user'
 import { NextResponse } from "next/server";
 import { user_login_schema } from '../validators/validate';
 import { createToken, verify } from '../utils/decode';
+import { rateLimitMiddleware } from '../utils/limiter';
 
 
 export async function POST(request: any) {
   // Validate the request body
+  let pass= await rateLimitMiddleware(request)
+  if (!pass) return NextResponse.json({ status: 'Error', message: 'Too Many Requests.' }, { status: 400 });
   const {error, value} = await user_login_schema.validate(await request.json())
   if(error) return NextResponse.json({ message: error.details[0].message }, { status: 400 });
   
@@ -47,7 +50,9 @@ export async function POST(request: any) {
   }
 }
 
-export async function GET() {
+export async function GET(request: any) {
+  let pass= await rateLimitMiddleware(request)
+  if (!pass) return NextResponse.json({ status: 'Error', message: 'Too Many Requests.' }, { status: 400 });
   try {
     const response= NextResponse.json({success: 'Success', message: 'Logout successful'},{ status: 201 })
     response.cookies.set('token', '', {httpOnly: true, expires: new Date(0)});
