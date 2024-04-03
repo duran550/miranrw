@@ -29,12 +29,12 @@ const ReportsRiskManager = () => {
    const [reports, setReport] = useState<reportType[]>([]);
    // const { report, setReports } = UseReport();
    // const ctx = useContext(AuthContext);
-   useEffect(() => {
-     const response = new AuthService().refreshToken().catch((error) => {
-       console.log('error', error);
-       // removeUserCookies();
-     });
-   }, []);
+  //  useEffect(() => {
+  //    const response = new AuthService().refreshToken().catch((error) => {
+  //      console.log('error', error);
+  //      // removeUserCookies();
+  //    });
+  //  }, []);
    const getReport = async (token: string) => {
      const options = {
        method: 'GET',
@@ -53,9 +53,9 @@ const ReportsRiskManager = () => {
            console.log('report', result.data.reports);
            const report = result.data.reports.filter((item: reportType) => {
              if (
-               item.updatereport &&
-               (item.updatereport.status == 'Dangerous' ||
-                 item.updatereport.status == 'Managed')
+               item &&
+               (item.status == 'Dangerous' ||
+                 item.status == 'Managed')
              ) {
                return item;
              }
@@ -79,7 +79,7 @@ const ReportsRiskManager = () => {
      if (!refresh) {
        setTimeout(() => {
          setRefresh(true);
-       }, 9000);
+       }, 10000);
      }
    }, [refresh]);
    return (
@@ -93,8 +93,8 @@ const ReportsRiskManager = () => {
              reports.map((item, index) => {
                if (status == Category.Dangerous) {
                  if (
-                   item.updatereport &&
-                   item.updatereport.status == 'Dangerous'
+                   item &&
+                   item.status == 'Dangerous'
                  ) {
                    return (
                      <ReportCard
@@ -108,8 +108,8 @@ const ReportsRiskManager = () => {
                  }
                } else {
                  if (
-                   item.updatereport &&
-                   item.updatereport.status !== 'Dangerous'
+                   item &&
+                   item.status !== 'Dangerous'
                  ) {
                    return (
                      <ReportCard

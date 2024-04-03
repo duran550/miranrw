@@ -13,8 +13,12 @@ import { rateLimitMiddleware } from '../../utils/limiter';
 // }
 
 export const PUT = async (request: any, { params }: any) => {
-  let pass= await rateLimitMiddleware(request)
-  if (!pass) return NextResponse.json({ status: 'Error', message: 'Too Many Requests.' }, { status: 400 });
+  let pass = await rateLimitMiddleware(request);
+  if (!pass)
+    return NextResponse.json(
+      { status: 'Error', message: 'Too Many Requests.' },
+      { status: 400 }
+    );
    let flag = await authenticate(request);
    if (!flag)
      return NextResponse.json(
@@ -51,8 +55,12 @@ export const PUT = async (request: any, { params }: any) => {
 };
 
 export async function DELETE(request: any, { params }: any) {
-  let pass= await rateLimitMiddleware(request)
-  if (!pass) return NextResponse.json({ status: 'Error', message: 'Too Many Requests.' }, { status: 400 });
+  let pass = await rateLimitMiddleware(request);
+  if (!pass)
+    return NextResponse.json(
+      { status: 'Error', message: 'Too Many Requests.' },
+      { status: 400 }
+    );
    let flag = await authenticate(request);
    if (!flag)
      return NextResponse.json(

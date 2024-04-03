@@ -63,8 +63,7 @@ const ReportActions: React.FC<ReportActionProps> = (whatHappened) => {
               setOpenDangerous(true), toggleIsDangerous();
             }
             setIsload(false);
-        setStateAction(status);
-
+            setStateAction(status);
           }, 1000);
         }
       })
@@ -207,6 +206,7 @@ const ReportActions: React.FC<ReportActionProps> = (whatHappened) => {
             markedAsIrrelevant={markedAsIrrelevant}
             report={whatHappened.report}
             update={true}
+            role={whatHappened.report ? true : false}
           />
           <div className="flex  gap-x-4">
             <Button

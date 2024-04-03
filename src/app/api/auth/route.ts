@@ -10,6 +10,12 @@ import { rateLimitMiddleware } from '../utils/limiter';
 
 
 export async function POST(request: any) {
+  // let pass = await rateLimitMiddleware(request);
+  // if (!pass)
+  //   return NextResponse.json(
+  //     { status: 'Error', message: 'Too Many Requests.' },
+  //     { status: 400 }
+  //   );
   // Validate the request body
   let pass= await rateLimitMiddleware(request)
   if (!pass) return NextResponse.json({ status: 'Error', message: 'Too Many Requests.' }, { status: 400 });
@@ -50,9 +56,8 @@ export async function POST(request: any) {
   }
 }
 
-export async function GET(request: any) {
-  let pass= await rateLimitMiddleware(request)
-  if (!pass) return NextResponse.json({ status: 'Error', message: 'Too Many Requests.' }, { status: 400 });
+export async function GET() {
+  
   try {
     const response= NextResponse.json({success: 'Success', message: 'Logout successful'},{ status: 201 })
     response.cookies.set('token', '', {httpOnly: true, expires: new Date(0)});

@@ -36,12 +36,12 @@ const ReportsCleaner = () => {
   const [reports, setReport] = useState<reportType[]>([]);
   const { report, setReports } = UseReport()
   const ctx=useContext(AuthContext)
-  useEffect(() => {
-    const response = new AuthService().refreshToken().catch((error) => {
-      console.log('error', error);
-      // removeUserCookies();
-    });
-  }, []);
+  // useEffect(() => {
+  //   const response = new AuthService().refreshToken().catch((error) => {
+  //     console.log('error', error);
+  //     // removeUserCookies();
+  //   });
+  // }, []);
   const getReport = async (token: string) => {
     const options = {
       method: 'GET',
@@ -59,11 +59,11 @@ const ReportsCleaner = () => {
           console.log('report', result.data.reports);
           const report = result.data.reports.filter((item: reportType) => {
             if (
-              !item.updatereport ||
-              (item.updatereport &&
-                (item.updatereport.status == 'pending' ||
-                  item.updatereport.status == 'cleaned' ||
-                  item.updatereport.status == 'Irrelevant'))
+            
+              (item &&
+                (item.status == 'pending' ||
+                  item.status == 'cleaned' ||
+                  item.status == 'Irrelevant'))
             ) {
               return item;
             }
@@ -86,7 +86,7 @@ const ReportsCleaner = () => {
       if (!refresh) {
         setTimeout(() => {
           setRefresh(true);
-        }, 9000);
+        }, 10000);
       }
     }, [refresh]);
   return (
@@ -102,8 +102,8 @@ const ReportsCleaner = () => {
 
               if (status==Category.Raw) {
                if (
-                 !item.updatereport ||
-                 (item.updatereport && item.updatereport.status == 'pending')
+                 !item ||
+                 (item && item.status == 'pending')
                ) {
                  return (
                    <ReportCard
@@ -117,8 +117,8 @@ const ReportsCleaner = () => {
                }
               } else {
                 if (
-                  item.updatereport &&
-                  item.updatereport.status !== 'pending'
+                  item &&
+                  item.status !== 'pending'
                 ) {
                   return (
                     <ReportCard
@@ -127,7 +127,7 @@ const ReportsCleaner = () => {
                       date={item.createdAt ? item.createdAt : ''}
                       href={`/en/dashboard/clean-data/${item._id}`}
                       reportType={
-                        item.updatereport.status == 'cleaned'
+                        item.status == 'cleaned'
                           ? Category.Cleaned
                           : Category.Irrelevant
                       }

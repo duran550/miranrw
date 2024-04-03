@@ -8,10 +8,8 @@ import Checkbox from '../../../forms/radio/Checkbox';
 import { AdminContext } from '../../../../context/AdminContext';
 import { DataCategorizationOptionType } from '@/app/[lang]/(dashboard)/dashboard/reports/reportSummaryType';
 import CategoryService from '@/services/categoryService';
-import { reportType } from '@/utils/shared-types';
-import ReportService from '@/services/reportService';
 import { usePathname } from 'next/navigation';
-
+import { reportType } from '@/utils/shared-types';
 type AnyInputType = {
   options:string[]
 };
@@ -31,7 +29,7 @@ type categoryType = {
     updatedAt: string;
   }[];
 }[];
-const CategorizeDataForm:React.FC<{option?:any, report?:reportType}> = () => {
+const CategorizeDataForm: React.FC<{ option?: any, report?:reportType }> = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [cat, setCat] = useState<categoryType>([]);
    const pathname = usePathname();
@@ -53,45 +51,14 @@ const CategorizeDataForm:React.FC<{option?:any, report?:reportType}> = () => {
   // useEffect (() => {
   //     setValue ()
   // }, [])
-   const updateReport = (cat:any[]) => {
-   
-
-     const report = new ReportService()
-       .updateReport(urlSplit[urlSplit.length - 1], {
-      
-         category:cat
-       })
-       .then((result) => {
-         if (result.status == 200 || result.status == 201) {
-        
-           setTimeout(() => {
-          
-           }, 3000);
-         }
-       })
-       .catch((error) => {
-         console.log('error', error);
-       });
-   };
   useEffect(() => {
-    
-        const response = new CategoryService()
-          .getAllCategory()
-          .then((result) => {
-            setCat(result.data.categorys);
+    const response = new CategoryService().getAllCategory().then((result) => {
+      setCat(result.data.categorys);
 
-            if (result.status == 200 || result.status == 201) {
-            }
-          });
-  
-  
-  }, [])
-  useEffect(() => {
-    console.log('options',options);
-    
-  },[options])
-
-
+      if (result.status == 200 || result.status == 201) {
+      }
+    });
+  }, []);
 
   const onSubmit: SubmitHandler<AnyInputType> = (data) => {
     // const newReportData = {};
@@ -101,6 +68,8 @@ const CategorizeDataForm:React.FC<{option?:any, report?:reportType}> = () => {
     
     // dispatch({ type: 'ADD_CATEGORY', payload: state });
   };
+
+  console.log(cat, 'this is my cat');
 
   return (
     <div className="border rounded-xl p-4 border-gray-300 w-full mb-6 max-h-[70vh] overflow-y-auto overscroll-none no-scrollbar">

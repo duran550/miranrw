@@ -28,12 +28,12 @@ const ReportsViewerAndAdmin = () => {
   const [reports, setReport] = useState<reportType[]>([]);
   // const { report, setReports } = UseReport();
   // const ctx = useContext(AuthContext);
-  useEffect(() => {
-    const response = new AuthService().refreshToken().catch((error) => {
-      console.log('error', error);
-      // removeUserCookies();
-    });
-  }, []);
+  // useEffect(() => {
+  //   const response = new AuthService().refreshToken().catch((error) => {
+  //     console.log('error', error);
+  //     // removeUserCookies();
+  //   });
+  // }, []);
   const getReport = async (token: string) => {
     const options = {
       method: 'GET',
@@ -51,7 +51,7 @@ const ReportsViewerAndAdmin = () => {
         .then((result) => {
           console.log('report', result.data.reports);
           const report = result.data.reports.filter((item: reportType) => {
-            if (item.updatereport && item.updatereport.status == 'cleaned') {
+            if (item && item.status == 'cleaned') {
               return item;
             }
           });
@@ -74,7 +74,7 @@ const ReportsViewerAndAdmin = () => {
     if (!refresh) {
       setTimeout(() => {
         setRefresh(true);
-      }, 9000);
+      }, 10000);
     }
   }, [refresh]);
   return (
@@ -88,9 +88,9 @@ const ReportsViewerAndAdmin = () => {
             reports.map((item, index) => {
               if (status == Category.Uncategorized) {
                 if (
-                  item.updatereport &&
-                  item.updatereport.category &&
-                  item.updatereport.category.length == 0
+                  item &&
+                  item.category &&
+                  item.category.length == 0
                 ) {
                   return (
                     <ReportCard
@@ -104,9 +104,9 @@ const ReportsViewerAndAdmin = () => {
                 }
               } else {
                 if (
-                  item.updatereport &&
-                  item.updatereport.category &&
-                  item.updatereport.category.length > 0
+                  item &&
+                  item.category &&
+                  item.category.length > 0
                 ) {
                   return (
                     <ReportCard

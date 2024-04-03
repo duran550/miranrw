@@ -41,9 +41,9 @@ const Home = () => {
                  .reverse()
                  .filter((item: reportType) => {
                    if (
-                     !item.updatereport ||
-                     (item.updatereport &&
-                       item.updatereport.status == 'pending')
+                     
+                     (item &&
+                       item.status == 'pending')
                    ) {
                      return item;
                    }
@@ -65,8 +65,8 @@ const Home = () => {
                  .reverse()
                  .filter((item: reportType) => {
                    if (
-                     item.updatereport &&
-                     item.updatereport.status == 'cleaned'
+                     item &&
+                     item.status == 'cleaned'
                    ) {
                      return item;
                    }
@@ -83,8 +83,8 @@ const Home = () => {
                  .reverse()
                  .filter((item: reportType) => {
                    if (
-                     item.updatereport &&
-                     item.updatereport.status == 'Dangerous'
+                     item &&
+                     item.status == 'Dangerous'
                    ) {
                      return item;
                    }
@@ -109,16 +109,16 @@ const Home = () => {
    
   }
 
-  useEffect(() => {
-    const response = new AuthService().refreshToken().catch((error) => {
-      console.log('error', error);
-      //  removeUserCookies()
+  // useEffect(() => {
+  //   const response = new AuthService().refreshToken().catch((error) => {
+  //     console.log('error', error);
+  //     //  removeUserCookies()
 
       
-    })
+  //   })
  
 
-  },[])
+  // },[])
  
   useEffect(() => {
     if (refresh) {
@@ -130,7 +130,7 @@ const Home = () => {
     if (!refresh) {
       setTimeout(() => {
         setRefresh(true)
-      }, 9000)
+      }, 10000)
     }
    
    

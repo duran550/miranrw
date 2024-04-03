@@ -8,8 +8,12 @@ import { authenticate } from '../utils/decode';
 import { rateLimitMiddleware } from '../utils/limiter';
 
 export async function POST(request: any) {
-  let pass= await rateLimitMiddleware(request)
-  if (!pass) return NextResponse.json({ status: 'Error', message: 'Too Many Requests.' }, { status: 400 });
+  let pass = await rateLimitMiddleware(request);
+  if (!pass)
+    return NextResponse.json(
+      { status: 'Error', message: 'Too Many Requests.' },
+      { status: 400 }
+    );
   let flag = await authenticate(request)
   if (!flag) return NextResponse.json({ status: 'Error', message: 'Access Denied. Invalid Token.' }, { status: 400 });
   const {error, value} = await create_user_schema.validate(await request.json())
@@ -34,8 +38,12 @@ export async function POST(request: any) {
 }
 
 export async function GET(request: any) {
-  let pass= await rateLimitMiddleware(request)
-  if (!pass) return NextResponse.json({ status: 'Error', message: 'Too Many Requests.' }, { status: 400 });
+  let pass = await rateLimitMiddleware(request);
+  if (!pass)
+    return NextResponse.json(
+      { status: 'Error', message: 'Too Many Requests.' },
+      { status: 400 }
+    );
   let flag = await authenticate(request)
   if (!flag) return NextResponse.json({ status: 'Error', message: 'Access Denied. Invalid Token.' }, { status: 400 });
   await dbConnect();
@@ -45,8 +53,12 @@ export async function GET(request: any) {
 
 
 export async function PUT(request: any, { params }: any) {
-  let pass= await rateLimitMiddleware(request)
-  if (!pass) return NextResponse.json({ status: 'Error', message: 'Too Many Requests.' }, { status: 400 });
+  let pass = await rateLimitMiddleware(request);
+  if (!pass)
+    return NextResponse.json(
+      { status: 'Error', message: 'Too Many Requests.' },
+      { status: 400 }
+    );
   let flag = await authenticate(request)
   if (!flag) return NextResponse.json({ status: 'Error', message: 'Access Denied. Invalid Token.' }, { status: 400 });
   const { id } = params;
@@ -61,8 +73,12 @@ export async function PUT(request: any, { params }: any) {
 }
 
 export async function DELETE(request: any) {
-  let pass= await rateLimitMiddleware(request)
-  if (!pass) return NextResponse.json({ status: 'Error', message: 'Too Many Requests.' }, { status: 400 });
+  let pass = await rateLimitMiddleware(request);
+  if (!pass)
+    return NextResponse.json(
+      { status: 'Error', message: 'Too Many Requests.' },
+      { status: 400 }
+    );
   let flag = await authenticate(request)
   if (!flag) return NextResponse.json({ status: 'Error', message: 'Access Denied. Invalid Token.' }, { status: 400 });
   const id = request.nextUrl.searchParams.get("id");
