@@ -113,10 +113,10 @@ function EditUser({ lang, refresh }: EditUserPros) {
             </div>
           </div>
           <div className="flex gap-x-4 mb-4">
-            <Button className="bg-black" type="button">
+            <Button className="bg-primary" type="button">
               Cancel
             </Button>
-            <Button className="bg-black" onClick={() => setOpenModal(false)}>
+            <Button className="bg-primary" onClick={() => setOpenModal(false)}>
               Update User
             </Button>
           </div>

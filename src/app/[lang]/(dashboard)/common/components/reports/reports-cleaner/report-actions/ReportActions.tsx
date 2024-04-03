@@ -63,8 +63,7 @@ const ReportActions: React.FC<ReportActionProps> = (whatHappened) => {
               setOpenDangerous(true), toggleIsDangerous();
             }
             setIsload(false);
-        setStateAction(status);
-
+            setStateAction(status);
           }, 1000);
         }
       })

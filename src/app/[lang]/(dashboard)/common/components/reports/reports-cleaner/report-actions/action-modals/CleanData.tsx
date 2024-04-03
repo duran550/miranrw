@@ -17,7 +17,7 @@ interface ClientDataProps {
   setMutated: () => void;
   setvisible: () => void;
   text?: string;
-  refresh?:any
+  refresh?: any;
 }
 
 interface ClientDataFormValues {
@@ -31,15 +31,14 @@ const CleanData: FC<ClientDataProps> = ({
   setMutated,
   setvisible,
   text,
-  refresh
+  refresh,
 }) => {
-   const pathname = usePathname();
-   const urlSplit = pathname.split('/');
+  const pathname = usePathname();
+  const urlSplit = pathname.split('/');
   const { uncategorizedData } = useFindReport();
-  const [cleanDataDynamicVal, setCleanDataDynamicVal] = useState(
-   text!
-  );
+  const [cleanDataDynamicVal, setCleanDataDynamicVal] = useState(text!);
   const { setCleanerDes } = useContext(AdminContext);
+  const { state, dispatch } = useContext(AdminContext);
 
   const handleUpdateCleanerDes = () => {
     setCleanerDes(cleanDataDynamicVal);
@@ -59,25 +58,28 @@ const CleanData: FC<ClientDataProps> = ({
 
   const updateReport = () => {
     console.log(description);
-    
-    const report = new ReportService().updateReport(
-      urlSplit[urlSplit.length - 1],
-      { description: description, status:'cleaned' }
-    ).then((result) => {
-      if (result.status==200 || result.status==201) {
-        refresh()
-        setTimeout(() => {
-          onClose();
 
-          setvisible();
-        },3000)
-      }
-    }).catch((error) => {
-      console.log('error',error);
-      
-    
-    });
-  }
+    const report = new ReportService()
+      .updateReport(urlSplit[urlSplit.length - 1], {
+        description: description,
+        status: 'cleaned',
+      })
+      .then((result) => {
+        if (result.status == 200 || result.status == 201) {
+          refresh();
+          setTimeout(() => {
+            onClose();
+
+            setvisible();
+          }, 3000);
+        }
+      })
+      .catch((error) => {
+        console.log('error', error);
+
+        alert('ok');
+      });
+  };
   // Define custom classnames
   const customClassName = 'border border-gray-400 bg-gray-100';
 
@@ -86,7 +88,7 @@ const CleanData: FC<ClientDataProps> = ({
   useEffect(() => {
     // alert('ok')
     // setCleanerDes(cleanDataDynamicVal);
-    if (text && text.length>0) {
+    if (text && text.length > 0) {
       setValue('description', text);
     }
 
@@ -99,6 +101,10 @@ const CleanData: FC<ClientDataProps> = ({
 
   const onSubmit: SubmitHandler<ClientDataFormValues> = (data) => {
     let formData = new FormData();
+  };
+
+  const toggleCleanData = () => {
+    dispatch({ type: 'TOGGLE_CLEAN_DATA', payload: undefined });
   };
 
   return (
@@ -130,7 +136,7 @@ const CleanData: FC<ClientDataProps> = ({
                 <button
                   className="border py-4 px-6 w-fit bg-[#2B8049] rounded-lg text-white"
                   onClick={() => {
-                    updateReport()
+                    updateReport(), toggleCleanData();
                     // handleUpdateCleanerDes(), setMutated(), setvisible();
                   }}
                 >

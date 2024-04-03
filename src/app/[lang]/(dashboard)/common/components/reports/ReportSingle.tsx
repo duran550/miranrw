@@ -1,5 +1,5 @@
 'use client';
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import Header from './Header';
 import ReportSummary from './reports-cleaner/report-summary/ReportSummary';
 import ReportActions from './reports-cleaner/report-actions/ReportActions';
@@ -16,6 +16,8 @@ import { useAuth } from '@/app/hooks/useAuth';
 import { Role } from '@/utils/utils';
 import ReportService from '@/services/reportService';
 import { reportType } from '@/utils/shared-types';
+import ReportSummaryCleanData from './reports-cleaner/report-summary/ReportSummaryCleanData';
+import { AdminContext } from '../../context/AdminContext';
 
 const ReportSingle = () => {
   const pathname = usePathname();
@@ -30,6 +32,7 @@ const ReportSingle = () => {
   const [refreshRaw, setRefreshRaw] = useState(false);
 
   const [refreshCurrent, setRefreshCurrent] = useState(false);
+  const { state, dispatch } = useContext(AdminContext);
 
   const [send, setsend] = useState(false);
 
@@ -96,6 +99,13 @@ const ReportSingle = () => {
    
   }, [reports, refresh, refreshCurrent,refreshRaw]);
   // console.log('refreshRaw',refreshRaw);
+
+  const irrelevant = state.isIrrelevant;
+  const dangerous = state.isDangerous;
+  const cleanDataboolean = state.cleanData;
+  console.log(irrelevant, 'irrelevant');
+  console.log(dangerous, 'dangerous');
+  console.log(cleanDataboolean, 'report status');
 
   return (
     <div className="mb-[2rem]">

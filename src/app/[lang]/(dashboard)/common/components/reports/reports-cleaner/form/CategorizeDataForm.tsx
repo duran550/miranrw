@@ -25,7 +25,7 @@ type categoryType = {
     updatedAt: string;
   }[];
 }[];
-const CategorizeDataForm:React.FC<{option?:any}> = () => {
+const CategorizeDataForm: React.FC<{ option?: any }> = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [cat, setCat] = useState<categoryType>([]);
 
@@ -48,14 +48,11 @@ const CategorizeDataForm:React.FC<{option?:any}> = () => {
   useEffect(() => {
     const response = new CategoryService().getAllCategory().then((result) => {
       setCat(result.data.categorys);
-      
-      if (result.status==200 || result.status==201) {
-        
+
+      if (result.status == 200 || result.status == 201) {
       }
-    })
-  },[])
-
-
+    });
+  }, []);
 
   const onSubmit: SubmitHandler<AnyInputType> = (data) => {
     const newReportData = {};
@@ -63,12 +60,15 @@ const CategorizeDataForm:React.FC<{option?:any}> = () => {
     dispatch({ type: 'ADD_CATEGORY', payload: state });
   };
 
+  console.log(cat, 'this is my cat');
+
   return (
     <div className="border rounded-xl p-4 border-gray-300 w-full mb-6">
       <h1 className="font-bold text-xl opacity-80 my-4">Categorize Data</h1>
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="py-4 flex flex-col gap-4 h-[500px] overflow-y-scroll">
-          {cat && cat.length>0 &&
+          {cat &&
+            cat.length > 0 &&
             cat?.map((reportCard) => {
               return (
                 <div
@@ -89,10 +89,10 @@ const CategorizeDataForm:React.FC<{option?:any}> = () => {
                               required: false,
                             })}
                           />
-                          <div className="absolute w-[250px] bg-white p-4 hidden group-hover:block group-hover:rounded-xl z-10 border">
+                          {/* <div className="absolute w-[250px] bg-white p-4 hidden group-hover:block group-hover:rounded-xl z-10 border">
                             <h2>{option?.name}</h2>
-                            <p className="text-[10px] ">{option?.name}</p>
-                          </div>
+                            <p className="text-[10px]">{option?.name}</p>
+                          </div> */}
                         </div>
                       );
                     })}
