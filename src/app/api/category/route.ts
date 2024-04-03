@@ -53,3 +53,16 @@ export async function DELETE(request: any) {
   await Category.findByIdAndDelete(id);
   return NextResponse.json({ message: 'Category deleted' }, { status: 200 });
 }
+
+// let reports: reportType[] = await Report.find({})
+// let arr:any=[]
+// if (reports.length) {
+//   for await (let report of reports) {
+    
+//     let options = await UpdateReport.find({ _id: report.updatereport})
+//     arr.push({ 'report': report, 'reportupdate': options })
+//   }
+//   return NextResponse.json({ 'reports': arr });
+// }else{
+//   return NextResponse.json({ reports});
+// }

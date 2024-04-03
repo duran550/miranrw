@@ -30,4 +30,5 @@ export type reportType = {
   createdAt?: string
   status?: string
   category?: any[]
+  updatereport?: any
 };
