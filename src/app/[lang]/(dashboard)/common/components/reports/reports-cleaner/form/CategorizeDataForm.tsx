@@ -8,9 +8,15 @@ import Checkbox from '../../../forms/radio/Checkbox';
 import { AdminContext } from '../../../../context/AdminContext';
 import { DataCategorizationOptionType } from '@/app/[lang]/(dashboard)/dashboard/reports/reportSummaryType';
 import CategoryService from '@/services/categoryService';
+import { reportType } from '@/utils/shared-types';
+import ReportService from '@/services/reportService';
+import { usePathname } from 'next/navigation';
 
-type AnyInputType = any;
+type AnyInputType = {
+  options:string[]
+};
 type categoryType = {
+ 
   category: {
     _id: string;
     name: string;
@@ -25,10 +31,11 @@ type categoryType = {
     updatedAt: string;
   }[];
 }[];
-const CategorizeDataForm:React.FC<{option?:any}> = () => {
+const CategorizeDataForm:React.FC<{option?:any, report?:reportType}> = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [cat, setCat] = useState<categoryType>([]);
-
+   const pathname = usePathname();
+   const urlSplit = pathname.split('/');
   const [reportCarData] = useState(dataCategorizationOptions);
 
   const {
@@ -40,39 +47,72 @@ const CategorizeDataForm:React.FC<{option?:any}> = () => {
   } = useForm<AnyInputType>();
 
   const { state, dispatch } = useContext(AdminContext);
+  let options=watch('options')
   // console.log("/./././././: ", state.reportsCardTableUncategorized)
 
   // useEffect (() => {
   //     setValue ()
   // }, [])
-  useEffect(() => {
-    const response = new CategoryService().getAllCategory().then((result) => {
-      setCat(result.data.categorys);
+   const updateReport = (cat:any[]) => {
+   
+
+     const report = new ReportService()
+       .updateReport(urlSplit[urlSplit.length - 1], {
       
-      if (result.status==200 || result.status==201) {
+         category:cat
+       })
+       .then((result) => {
+         if (result.status == 200 || result.status == 201) {
         
-      }
-    })
-  },[])
+           setTimeout(() => {
+          
+           }, 3000);
+         }
+       })
+       .catch((error) => {
+         console.log('error', error);
+       });
+   };
+  useEffect(() => {
+    
+        const response = new CategoryService()
+          .getAllCategory()
+          .then((result) => {
+            setCat(result.data.categorys);
+
+            if (result.status == 200 || result.status == 201) {
+            }
+          });
+  
+  
+  }, [])
+  useEffect(() => {
+    console.log('options',options);
+    
+  },[options])
 
 
 
   const onSubmit: SubmitHandler<AnyInputType> = (data) => {
-    const newReportData = {};
-
-    dispatch({ type: 'ADD_CATEGORY', payload: state });
+    // const newReportData = {};
+    console.log('data', data);
+    console.log('cat',cat);
+    
+    
+    // dispatch({ type: 'ADD_CATEGORY', payload: state });
   };
 
   return (
-    <div className="border rounded-xl p-4 border-gray-300 w-full mb-6">
+    <div className="border rounded-xl p-4 border-gray-300 w-full mb-6 max-h-[70vh] overflow-y-auto overscroll-none no-scrollbar">
       <h1 className="font-bold text-xl opacity-80 my-4">Categorize Data</h1>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <div className="py-4 flex flex-col gap-4 h-[500px] overflow-y-scroll">
-          {cat && cat.length>0 &&
-            cat?.map((reportCard) => {
+        <div className="py-4 flex flex-col gap-4 max-h-[50vh] overflow-y-scroll">
+          {cat &&
+            cat.length > 0 &&
+            cat?.map((reportCard, index) => {
               return (
                 <div
-                  key={reportCard?.category._id}
+                  key={index}
                   className="border rounded-xl p-4 border-gray-300 w-full"
                 >
                   <h1>{reportCard?.category.name}</h1>
@@ -85,8 +125,8 @@ const CategorizeDataForm:React.FC<{option?:any}> = () => {
                             label={option?.name}
                             id={option?._id}
                             value={option?._id}
-                            props={register(reportCard?.category.name, {
-                              required: false,
+                            props={register('options', {
+                              required: true,
                             })}
                           />
                           <div className="absolute w-[250px] bg-white p-4 hidden group-hover:block group-hover:rounded-xl z-10 border">
@@ -102,14 +142,14 @@ const CategorizeDataForm:React.FC<{option?:any}> = () => {
             })}
         </div>
 
-        {/* <div className="w-full flex justify-end">
+        <div className="w-full flex justify-end ">
           <Button
             className={`mt-7 rounded-lg text-sm sm:text-xl  ${
-              !isValid || isLoading ? 'opacity-100' : ' opacity-50'
+              !isValid || isLoading ? 'opacity-50' : ' opacity-100'
             } bg-greenDisable w-[30%]`}
-            variant={
-              !isValid || isLoading ? 'primary' : 'saveCategorizationDisabled'
-            }
+            // variant={
+            //   !isValid || isLoading ? 'primary' : 'saveCategorizationDisabled'
+            // }
             type="submit"
             disabled={!isValid || isLoading ? true : false}
           >
@@ -122,7 +162,7 @@ const CategorizeDataForm:React.FC<{option?:any}> = () => {
               <span className="text-sm font-bold">Save Categorization</span>
             )}
           </Button>
-        </div> */}
+        </div>
       </form>
     </div>
   );

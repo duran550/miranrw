@@ -39,7 +39,15 @@ const Home = () => {
              if (user?.role === 3 && data.reports.length > 0) {
                const report = data.reports
                  .reverse()
-                 .filter((item: reportType) => item.status == 'pending');
+                 .filter((item: reportType) => {
+                   if (
+                     !item.updatereport ||
+                     (item.updatereport &&
+                       item.updatereport.status == 'pending')
+                   ) {
+                     return item;
+                   }
+                 });
                console.log('report.reverse()', report);
 
                if (report.length < 6 && report.length > 0) {
@@ -55,7 +63,14 @@ const Home = () => {
              ) {
                const report = data.reports
                  .reverse()
-                 .filter((item: reportType) => item.status == 'cleaned');
+                 .filter((item: reportType) => {
+                   if (
+                     item.updatereport &&
+                     item.updatereport.status == 'cleaned'
+                   ) {
+                     return item;
+                   }
+                 });
                if (report.length < 6 && report.length > 0) {
                  setReport(report);
                } else {
@@ -66,7 +81,14 @@ const Home = () => {
              if (user?.role === 4 && data.reports.length > 0) {
                const report = data.reports
                  .reverse()
-                 .filter((item: reportType) => item.status == 'Dangerous');
+                 .filter((item: reportType) => {
+                   if (
+                     item.updatereport &&
+                     item.updatereport.status == 'Dangerous'
+                   ) {
+                     return item;
+                   }
+                 });
                if (report.length < 6 && report.length > 0) {
                  setReport(report);
                } else {
@@ -108,7 +130,7 @@ const Home = () => {
     if (!refresh) {
       setTimeout(() => {
         setRefresh(true)
-      }, 5000)
+      }, 9000)
     }
    
    

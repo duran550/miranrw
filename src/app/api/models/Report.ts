@@ -30,6 +30,7 @@ interface reportType {
   sexualOrientationFreeField?: string;
   status?: string
   category?: any[]
+  updatereport?: string
   
 }
 
@@ -63,6 +64,7 @@ const ReportSchema = new Schema<reportType>({
   sexualOrientationFreeField: { type: String, required: false },
   status: { type: String, required: false, default: 'pending' },
   category: { type: Array<object>, required: false },
+  updatereport: { type: Schema.Types.ObjectId, ref: 'UpdateReport', required: false }
   // category: [
   //   { type: Object, required: false }
   // ],

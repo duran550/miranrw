@@ -36,12 +36,12 @@ const ReportSingle = () => {
   const refreshHandler = () => {
     // alert('ok')
     setRefresh(true);
-    setRefreshRaw(true);
+    setRefreshRaw(false);
   };
 
   const refreshCurrentHandler = () => {
     setRefreshCurrent(true);
-    setRefreshRaw(false);
+    setRefreshRaw(true);
 
     // alert('ok');
   };
@@ -57,7 +57,7 @@ const ReportSingle = () => {
           // if (report[0].status!=='pending') {
           //   window.location.href='dashboard/clean-data'
           // }
-          if (report[0].status == 'cleaned') {
+          if (report[0].updatereport && report[0].updatereport.status == 'cleaned') {
             setReport2(report[0]);
           } else {
             setReport2(undefined);
@@ -114,7 +114,9 @@ const ReportSingle = () => {
         <ReportSummary
           report={reports}
           incidentDescription={uncategorizedData?.summary?.incidentDescription}
-          update={refreshRaw}
+          // update={refreshRaw}
+          // role={user?.role}
+          color={reports2 ? true : false}
         />
         {user?.role === Role.CLEANER && reports && (
           <ReportActions
@@ -127,10 +129,10 @@ const ReportSingle = () => {
             report={reports2}
             refresh={refreshHandler}
             refreshCurrent={refreshCurrentHandler}
-            action={reports.status}
+            action={reports.updatereport ? reports.updatereport.status : 'pending'}
           />
         )}
-        {user?.role == Role.ADMIN && <CategorizeDataForm />}
+        {user?.role == Role.ADMIN && <CategorizeDataForm report={reports} />}
         {/* : (
         <CategorizeDataForm />) */}
       </div>
