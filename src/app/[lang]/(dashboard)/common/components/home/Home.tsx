@@ -37,13 +37,15 @@ const Home = () => {
             const { data } = response;
             console.log('data', data.reports);
              if (user?.role === 3 && data.reports.length > 0) {
-               const report = data.reports.filter(
-                 (item:reportType) => item.status == 'pending'
-               );
+               const report = data.reports
+                 .reverse()
+                 .filter((item: reportType) => item.status == 'pending');
+               console.log('report.reverse()', report);
+
                if (report.length < 6 && report.length > 0) {
                  setReport(report);
                } else {
-                 setReport(report.reverse().slice(0, 5));
+                 setReport(report.slice(0, 5));
                }
              }
 
@@ -51,24 +53,24 @@ const Home = () => {
                (user?.role === 1 || user?.role == 2) &&
                data.reports.length > 0
              ) {
-               const report = data.reports.filter(
-                 (item: reportType) => item.status == 'cleaned'
-               );
+               const report = data.reports
+                 .reverse()
+                 .filter((item: reportType) => item.status == 'cleaned');
                if (report.length < 6 && report.length > 0) {
                  setReport(report);
                } else {
-                 setReport(report.reverse().slice(0, 5));
+                 setReport(report.slice(0, 5));
                }
              }
 
              if (user?.role === 4 && data.reports.length > 0) {
-               const report = data.reports.filter(
-                 (item:reportType) => item.status == 'Dangerous'
-               );
+               const report = data.reports
+                 .reverse()
+                 .filter((item: reportType) => item.status == 'Dangerous');
                if (report.length < 6 && report.length > 0) {
                  setReport(report);
                } else {
-                 setReport(report.reverse().slice(0, 5));
+                 setReport(report.slice(0, 5));
                }
              }
            

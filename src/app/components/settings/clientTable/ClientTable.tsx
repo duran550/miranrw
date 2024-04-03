@@ -38,6 +38,7 @@ import { getAllUsers } from '@/services/userService';
 import { AdminContext } from '@/app/[lang]/(dashboard)/common/context/AdminContext';
 import { useContext } from 'react';
 import AddUser from './AddUserModal';
+import { useAuth } from '@/app/hooks/useAuth';
 
 interface ClientInfoProps {
   createdAt: string;
@@ -67,6 +68,8 @@ const INITIAL_VISIBLE_COLUMNS = [
 type User = (typeof users)[0];
 
 export default function ClientTable() {
+  const { user } = useAuth();
+
   const [filterValue, setFilterValue] = React.useState('');
   const [selectedKeys, setSelectedKeys] = React.useState<Selection>(
     new Set([])
@@ -104,9 +107,9 @@ export default function ClientTable() {
 
   // get All Clients
   useEffect(() => {
-    async function fetchUsers() {
+    async function fetchUsers(token: string) {
       try {
-        const usersData = await getAllUsers();
+        const usersData = await getAllUsers(token);
         setGetUsers(usersData.users);
       } catch (error) {
         console.error('Error fetching users:', error);
@@ -114,7 +117,7 @@ export default function ClientTable() {
     }
 
     if (refresh || getUsers.length < 1) {
-      fetchUsers();
+      fetchUsers(user?.token!);
       setRefresh(false);
     }
     // setClientInfo(selectedCell);

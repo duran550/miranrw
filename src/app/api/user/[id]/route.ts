@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import dbConnect from '../../lib/dbConnect';
 import User from '../../models/user';
+import { authenticate } from '../../utils/decode';
 
 // export async function PUT(request: any) {
 //   const id = request.nextUrl.searchParams.get('id');
@@ -11,6 +12,12 @@ import User from '../../models/user';
 // }
 
 export const PUT = async (request: any, { params }: any) => {
+   let flag = await authenticate(request);
+   if (!flag)
+     return NextResponse.json(
+       { status: 'Error', message: 'Access Denied. Invalid Token.' },
+       { status: 400 }
+     );
   try {
     const { id } = params;
     let { fullname, email, role } = await request.json();
@@ -41,6 +48,12 @@ export const PUT = async (request: any, { params }: any) => {
 };
 
 export async function DELETE(request: any, { params }: any) {
+   let flag = await authenticate(request);
+   if (!flag)
+     return NextResponse.json(
+       { status: 'Error', message: 'Access Denied. Invalid Token.' },
+       { status: 400 }
+     );
   try {
     const { id } = params;
     await dbConnect();
