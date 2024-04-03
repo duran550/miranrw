@@ -1,9 +1,11 @@
 import { NextApiRequest } from 'next';
 import { NextRequest, NextResponse } from 'next/server';
 import { createToken, verify } from '../../utils/decode';
+import { headers } from 'next/headers';
 
 export async function GET(request: any) {
-  const accessToken = request.headers['Authorization'];
+  // const accessToken = request.headers['Authorization'];
+  const accessToken = headers().get('authorization');
     if (!accessToken) {
     return NextResponse.json({ status: 'Error', message: 'Access Denied. No refresh token provided.' }, { status: 401 });
     }
