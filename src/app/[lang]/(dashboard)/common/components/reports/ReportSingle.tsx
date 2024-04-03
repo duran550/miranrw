@@ -1,5 +1,5 @@
 'use client';
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import Header from './Header';
 import ReportSummary from './reports-cleaner/report-summary/ReportSummary';
 import ReportActions from './reports-cleaner/report-actions/ReportActions';
@@ -16,6 +16,8 @@ import { useAuth } from '@/app/hooks/useAuth';
 import { Role } from '@/utils/utils';
 import ReportService from '@/services/reportService';
 import { reportType } from '@/utils/shared-types';
+import ReportSummaryCleanData from './reports-cleaner/report-summary/ReportSummaryCleanData';
+import { AdminContext } from '../../context/AdminContext';
 
 const ReportSingle = () => {
   const pathname = usePathname();
@@ -30,18 +32,19 @@ const ReportSingle = () => {
   const [refreshRaw, setRefreshRaw] = useState(false);
 
   const [refreshCurrent, setRefreshCurrent] = useState(false);
+  const { state, dispatch } = useContext(AdminContext);
 
   const [send, setsend] = useState(false);
 
   const refreshHandler = () => {
     // alert('ok')
     setRefresh(true);
-    setRefreshRaw(true);
+    setRefreshRaw(false);
   };
 
   const refreshCurrentHandler = () => {
     setRefreshCurrent(true);
-    setRefreshRaw(false);
+    setRefreshRaw(true);
 
     // alert('ok');
   };
@@ -57,7 +60,7 @@ const ReportSingle = () => {
           // if (report[0].status!=='pending') {
           //   window.location.href='dashboard/clean-data'
           // }
-          if (report[0].status == 'cleaned') {
+          if (report[0] && report[0].status == 'cleaned') {
             setReport2(report[0]);
           } else {
             setReport2(undefined);
@@ -97,6 +100,13 @@ const ReportSingle = () => {
   }, [reports, refresh, refreshCurrent,refreshRaw]);
   // console.log('refreshRaw',refreshRaw);
 
+  const irrelevant = state.isIrrelevant;
+  const dangerous = state.isDangerous;
+  const cleanDataboolean = state.cleanData;
+  console.log(irrelevant, 'irrelevant');
+  console.log(dangerous, 'dangerous');
+  console.log(cleanDataboolean, 'report status');
+
   return (
     <div className="mb-[2rem]">
       {user && user.role == 3 && (
@@ -114,7 +124,9 @@ const ReportSingle = () => {
         <ReportSummary
           report={reports}
           incidentDescription={uncategorizedData?.summary?.incidentDescription}
-          update={refreshRaw}
+          // update={refreshRaw}
+          // role={user?.role}
+          color={reports2 ? true : false}
         />
         {user?.role === Role.CLEANER && reports && (
           <ReportActions
@@ -127,10 +139,10 @@ const ReportSingle = () => {
             report={reports2}
             refresh={refreshHandler}
             refreshCurrent={refreshCurrentHandler}
-            action={reports.status}
+            action={reports ? reports.status : 'pending'}
           />
         )}
-        {user?.role == Role.ADMIN && <CategorizeDataForm />}
+        {user?.role == Role.ADMIN && <CategorizeDataForm report={reports} />}
         {/* : (
         <CategorizeDataForm />) */}
       </div>

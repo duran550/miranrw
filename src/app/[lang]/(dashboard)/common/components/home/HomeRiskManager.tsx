@@ -42,9 +42,8 @@ const HomeRiskManager: React.FC<{ report?: reportType[] }> = ({ report }) => {
                 date={item.createdAt ? item.createdAt : ''}
                 href={`/dashboard/dangerous-reports/${item._id}`}
                 reportType={
-                  item.status == 'Dangerous'
-                    ? Category.Dangerous
-                    : Category.Managed
+                 Category.Dangerous
+                  
                 }
               />
             ))}

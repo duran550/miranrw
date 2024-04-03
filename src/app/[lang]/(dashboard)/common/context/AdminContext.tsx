@@ -13,6 +13,7 @@ type AdminType = {
   isIrrelevant: boolean;
   isDangerous: boolean;
   clientInfo: ClientInfoProps | null;
+  cleanData: boolean;
 };
 
 type ActionType = {
@@ -26,6 +27,7 @@ const initialState: AdminType = {
   isIrrelevant: false,
   isDangerous: false,
   clientInfo: null,
+  cleanData: false,
   reportsCardTableUncategorized: [
     {
       id: 'PT1245O',
@@ -168,6 +170,8 @@ const reducer = (initialState: AdminType, action: ActionType) => {
       return { ...initialState, isIrrelevant: !initialState.isIrrelevant };
     case 'TOGGLE_IS_DANGEROUS':
       return { ...initialState, isDangerous: !initialState.isDangerous };
+    case 'TOGGLE_CLEAN_DATA':
+      return { ...initialState, cleanData: !initialState.cleanData };
     case 'SET_CLIENT_INFO':
       return {
         ...initialState,

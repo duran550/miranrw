@@ -198,6 +198,28 @@ export default function ClientTable() {
     setClientInfo(currentCellInfo);
   }
 
+  const replaceRoleNames = (users: any) => {
+    return users.map((user: any) => {
+      switch (user.role) {
+        case 1:
+          return { ...user, role: 'Admin' };
+        case 2:
+          return { ...user, role: 'Viewer' };
+        case 3:
+          return { ...user, role: 'Cleaner' };
+        case 4:
+          return { ...user, role: 'Risk-manager' };
+        default:
+          return user;
+      }
+    });
+  };
+
+  const updatedUsers = replaceRoleNames(sortedItems);
+
+  console.log(sortedItems, 'this is my sorted items');
+  console.log(updatedUsers, 'this is my updated users');
+
   const renderCell = React.useCallback((user: User, columnKey: React.Key) => {
     const cellValue = user[columnKey as keyof User];
 
@@ -219,9 +241,9 @@ export default function ClientTable() {
         return (
           <div className="flex flex-col">
             <p className="text-bold text-small capitalize">{cellValue}</p>
-            <p className="text-bold text-tiny capitalize text-default-500">
+            {/* <p className="text-bold text-tiny capitalize text-default-500">
               {user.role}
-            </p>
+            </p> */}
           </div>
         );
       case 'status':
@@ -486,8 +508,8 @@ export default function ClientTable() {
             </TableColumn>
           )}
         </TableHeader>
-        <TableBody emptyContent={'Loading Users...'} items={sortedItems}>
-          {(item) => (
+        <TableBody emptyContent={'Loading Users...'} items={updatedUsers}>
+          {(item: any) => (
             <TableRow
               key={item._id}
               className=""

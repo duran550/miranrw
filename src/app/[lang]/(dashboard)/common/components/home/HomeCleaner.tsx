@@ -42,7 +42,7 @@ const HomeCleaner:React.FC<{report?:reportType[]}> = ({report}) => {
                 date={item.createdAt ? item.createdAt : ''}
                 href={`/en/dashboard/clean-data/${item._id}`}
                 reportType={
-                  item.status == 'pending' ? Category.Raw : Category.Cleaned
+                   Category.Raw 
                 }
               />
             ))}
