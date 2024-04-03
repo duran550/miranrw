@@ -5,6 +5,7 @@ import { NextResponse } from 'next/server';
 import { reportType } from '@/utils/shared-types';
 import { authenticate } from '../../utils/decode';
 import { rateLimitMiddleware } from '../../utils/limiter';
+import { UpdateReport } from '../../models/UpdateReport';
 
 export async function PUT(request: any, { params }: any) {
   let pass= await rateLimitMiddleware(request)
@@ -19,8 +20,8 @@ export async function PUT(request: any, { params }: any) {
 
   const report: reportType = await request.json();
   await dbConnect();
-
-  await Report.findByIdAndUpdate(id, report);
+  const update_report= await UpdateReport.create(report);
+  await Report.findByIdAndUpdate(id, {updatereport: update_report._id });
   return NextResponse.json({ message: 'Report updated' }, { status: 200 });
 }
 
@@ -31,6 +32,6 @@ export async function GET(request: any, { params }: any) {
   if (!flag) return NextResponse.json({ status: 'Error', message: 'Access Denied. Invalid Token.' }, { status: 400 });
   const { id } = params;
   await dbConnect();
-  const report = await Report.findOne({ _id: id });
+  const report = await Report.findOne({ _id: id }).populate('updatereport');
   return NextResponse.json({ report }, { status: 200 });
 }
