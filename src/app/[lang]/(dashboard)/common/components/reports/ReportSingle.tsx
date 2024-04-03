@@ -60,7 +60,7 @@ const ReportSingle = () => {
           // if (report[0].status!=='pending') {
           //   window.location.href='dashboard/clean-data'
           // }
-          if (report[0].updatereport && report[0].updatereport.status == 'cleaned') {
+          if (report[0] && report[0].status == 'cleaned') {
             setReport2(report[0]);
           } else {
             setReport2(undefined);
@@ -139,7 +139,7 @@ const ReportSingle = () => {
             report={reports2}
             refresh={refreshHandler}
             refreshCurrent={refreshCurrentHandler}
-            action={reports.updatereport ? reports.updatereport.status : 'pending'}
+            action={reports ? reports.status : 'pending'}
           />
         )}
         {user?.role == Role.ADMIN && <CategorizeDataForm report={reports} />}

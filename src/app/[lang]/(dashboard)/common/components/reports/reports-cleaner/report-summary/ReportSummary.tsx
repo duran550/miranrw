@@ -17,7 +17,7 @@ type ReportSummaryProps = {
   report?: reportType;
   update?: boolean;
   role?: boolean;
-  color?:string
+  color?:boolean
 };
 
 const ReportSummary: React.FC<ReportSummaryProps> = ({
@@ -66,8 +66,8 @@ const ReportSummary: React.FC<ReportSummaryProps> = ({
             <div className="rounded-full bg-opacity-20 px-4 py-2 w-fit opacity-[0.7] bg-[#E00034] font-bold text-[#E00034]">
               !Dangerous
             </div>
-          ) : report?.updatereport &&
-            report.updatereport.status == 'Irrelevant' ? (
+          ) : report &&
+            report.status == 'Irrelevant' ? (
             <div className="rounded-full bg-opacity-20 px-4 py-2 w-fit opacity-[0.7] bg-[#F36D38] font-bold text-[#F36D38]">
               Irrelevant
             </div>
@@ -76,10 +76,10 @@ const ReportSummary: React.FC<ReportSummaryProps> = ({
                 (report?.status == 'cleaned' && !role))) ||
             !report?.status ? (
             <div className="rounded-full bg-[#E00034] bg-opacity-20 px-4 py-2 w-fit opacity-[0.7] text-[#E00034] font-bold">
-              Uncategorized
+              Raw
             </div>
-          ) : report?.updatereport &&
-            report.updatereport.status == 'Irrelevant' ? (
+          ) : report &&
+            report.status == 'Irrelevant' ? (
             <div className="rounded-full bg-opacity-20 px-4 py-2 w-fit opacity-[0.7] bg-[#F36D38] font-bold text-[#F36D38]">
               Irrelevant
             </div>
@@ -199,18 +199,18 @@ const ReportSummary: React.FC<ReportSummaryProps> = ({
             <span
               className={`text-[15px] 
              ${
-               report?.updatereport &&
-               report.updatereport.status == 'cleaned' &&
+               
+               report?.status == 'cleaned' &&
                update &&
                'text-[#199A46]'
              }
           ${color && 'text-[#E00034]'}`}
             >
-              {/* {!update ? report?.description : report?.updatereport?.description} */}
-              {report?.updatereport &&
-              report?.updatereport?.status == 'cleaned' &&
+              {/* {!update ? report?.description : report?.description} */}
+              {report &&
+              report?.status == 'cleaned' &&
               update
-                ? report.updatereport.description
+                ? report.description
                 : report?.description}
               {/* {state.cleanerDesc} */}
             </span>
@@ -226,7 +226,7 @@ const ReportSummary: React.FC<ReportSummaryProps> = ({
               className={`text-[15px] 
             `}
             >
-              {/* {!update ? report?.description : report?.updatereport?.description} */}
+              {/* {!update ? report?.description : report?.description} */}
               {report?.description!}
               {/* {state.cleanerDesc} */}
             </span>

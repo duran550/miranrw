@@ -51,7 +51,7 @@ const ReportsViewerAndAdmin = () => {
         .then((result) => {
           console.log('report', result.data.reports);
           const report = result.data.reports.filter((item: reportType) => {
-            if (item.updatereport && item.updatereport.status == 'cleaned') {
+            if (item && item.status == 'cleaned') {
               return item;
             }
           });
@@ -88,9 +88,9 @@ const ReportsViewerAndAdmin = () => {
             reports.map((item, index) => {
               if (status == Category.Uncategorized) {
                 if (
-                  item.updatereport &&
-                  item.updatereport.category &&
-                  item.updatereport.category.length == 0
+                  item &&
+                  item.category &&
+                  item.category.length == 0
                 ) {
                   return (
                     <ReportCard
@@ -104,9 +104,9 @@ const ReportsViewerAndAdmin = () => {
                 }
               } else {
                 if (
-                  item.updatereport &&
-                  item.updatereport.category &&
-                  item.updatereport.category.length > 0
+                  item &&
+                  item.category &&
+                  item.category.length > 0
                 ) {
                   return (
                     <ReportCard

@@ -8,6 +8,8 @@ import Checkbox from '../../../forms/radio/Checkbox';
 import { AdminContext } from '../../../../context/AdminContext';
 import { DataCategorizationOptionType } from '@/app/[lang]/(dashboard)/dashboard/reports/reportSummaryType';
 import CategoryService from '@/services/categoryService';
+import { usePathname } from 'next/navigation';
+import { reportType } from '@/utils/shared-types';
 type AnyInputType = {
   options:string[]
 };
@@ -27,7 +29,7 @@ type categoryType = {
     updatedAt: string;
   }[];
 }[];
-const CategorizeDataForm: React.FC<{ option?: any }> = () => {
+const CategorizeDataForm: React.FC<{ option?: any, report?:reportType }> = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [cat, setCat] = useState<categoryType>([]);
    const pathname = usePathname();
