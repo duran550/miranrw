@@ -19,7 +19,7 @@ export const authenticate = async (req: NextApiRequest) => {
     return new Promise<boolean>((resolve, reject) => {
       // const accessToken = req.headers['authorization'];
       const accessToken = headers().get('authorization');
-      console.log('accessToken', accessToken);
+      // console.log('accessToken', accessToken);
       
   // const refreshToken = req.cookies['refreshToken'];
   if (!accessToken) {

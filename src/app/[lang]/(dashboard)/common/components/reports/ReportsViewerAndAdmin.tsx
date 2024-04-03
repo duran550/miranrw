@@ -72,7 +72,7 @@ const ReportsViewerAndAdmin = () => {
     if (!refresh) {
       setTimeout(() => {
         setRefresh(true);
-      }, 5000);
+      }, 10000);
     }
   }, [refresh]);
   return (

@@ -108,7 +108,7 @@ const Home = () => {
     if (!refresh) {
       setTimeout(() => {
         setRefresh(true)
-      }, 5000)
+      }, 10000)
     }
    
    
