@@ -17,6 +17,7 @@ type ReportSummaryProps = {
   report?: reportType;
   update?: boolean;
   role?: boolean;
+  color?:string
 };
 
 const ReportSummary: React.FC<ReportSummaryProps> = ({
@@ -29,7 +30,10 @@ const ReportSummary: React.FC<ReportSummaryProps> = ({
   report,
   update,
   role,
+  color
 }) => {
+  // const { user } = useAuth();
+
   const { state } = useContext(AdminContext);
   const { user } = useAuth();
   const defaultClassName = `border rounded-xl p-4 border-gray-300 w-full max-h-[70vh] overflow-y-auto overscroll-none no-scrollbar`;
@@ -62,7 +66,8 @@ const ReportSummary: React.FC<ReportSummaryProps> = ({
             <div className="rounded-full bg-opacity-20 px-4 py-2 w-fit opacity-[0.7] bg-[#E00034] font-bold text-[#E00034]">
               !Dangerous
             </div>
-          ) : report?.status && report.status == 'Irrelevant' ? (
+          ) : report?.updatereport &&
+            report.updatereport.status == 'Irrelevant' ? (
             <div className="rounded-full bg-opacity-20 px-4 py-2 w-fit opacity-[0.7] bg-[#F36D38] font-bold text-[#F36D38]">
               Irrelevant
             </div>
@@ -71,7 +76,12 @@ const ReportSummary: React.FC<ReportSummaryProps> = ({
                 (report?.status == 'cleaned' && !role))) ||
             !report?.status ? (
             <div className="rounded-full bg-[#E00034] bg-opacity-20 px-4 py-2 w-fit opacity-[0.7] text-[#E00034] font-bold">
-              Raw
+              Uncategorized
+            </div>
+          ) : report?.updatereport &&
+            report.updatereport.status == 'Irrelevant' ? (
+            <div className="rounded-full bg-opacity-20 px-4 py-2 w-fit opacity-[0.7] bg-[#F36D38] font-bold text-[#F36D38]">
+              Irrelevant
             </div>
           ) : (
             ''
@@ -181,19 +191,47 @@ const ReportSummary: React.FC<ReportSummaryProps> = ({
           </span>
         </div>
 
-        <div>
-          <h1 className="font-bold text-[16px] text-black opacity-80">
-            What Happened
-          </h1>
-          <span
-            className={`text-[15px] 
-             ${report?.status == 'cleaned' && update && 'text-[#199A46]'}
-          ${report?.status == 'pending' && update && 'text-[#E00034]'}`}
-          >
-            {report?.description}
-            {/* {state.cleanerDesc} */}
-          </span>
-        </div>
+        {user && user.role == 3 && (
+          <div>
+            <h1 className="font-bold text-[16px] text-black opacity-80">
+              What Happened
+            </h1>
+            <span
+              className={`text-[15px] 
+             ${
+               report?.updatereport &&
+               report.updatereport.status == 'cleaned' &&
+               update &&
+               'text-[#199A46]'
+             }
+          ${color && 'text-[#E00034]'}`}
+            >
+              {/* {!update ? report?.description : report?.updatereport?.description} */}
+              {report?.updatereport &&
+              report?.updatereport?.status == 'cleaned' &&
+              update
+                ? report.updatereport.description
+                : report?.description}
+              {/* {state.cleanerDesc} */}
+            </span>
+          </div>
+        )}
+
+        {user && user.role !== 3 && (
+          <div>
+            <h1 className="font-bold text-[16px] text-black opacity-80">
+              What Happened
+            </h1>
+            <span
+              className={`text-[15px] 
+            `}
+            >
+              {/* {!update ? report?.description : report?.updatereport?.description} */}
+              {report?.description!}
+              {/* {state.cleanerDesc} */}
+            </span>
+          </div>
+        )}
         {report?.sexualOrientation && report.sexualOrientation.length > 0 && (
           <div>
             <h1 className="font-bold text-[16px] text-black opacity-80">

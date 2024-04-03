@@ -27,7 +27,16 @@ export type reportType = {
   age?: string;
   sexualOrientation?: string[];
   sexualOrientationFreeField?: string;
-  createdAt?: string
-  status?: string
-  category?: any[]
+  createdAt?: string;
+  status?: string;
+  category?: any[];
+  updatereport?: {
+    _id?: string;
+    description?: string;
+    status: string;
+    category?: any[];
+    createdAt?: string;
+    updatedAt?: string;
+   
+  };
 };

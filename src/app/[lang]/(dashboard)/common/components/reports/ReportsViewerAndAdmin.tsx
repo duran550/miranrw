@@ -50,9 +50,11 @@ const ReportsViewerAndAdmin = () => {
         .request(options)
         .then((result) => {
           console.log('report', result.data.reports);
-          const report = result.data.reports.filter(
-            (item: reportType) => item.status == 'cleaned'
-          );
+          const report = result.data.reports.filter((item: reportType) => {
+            if (item.updatereport && item.updatereport.status == 'cleaned') {
+              return item;
+            }
+          });
           setReport(report.reverse());
           //  setReports(result.data.reports);
           //  setReports();
@@ -85,26 +87,27 @@ const ReportsViewerAndAdmin = () => {
           {reports.length > 0 &&
             reports.map((item, index) => {
               if (status == Category.Uncategorized) {
-                if (item.category && item.category.length == 0) {
+                if (
+                  item.updatereport &&
+                  item.updatereport.category &&
+                  item.updatereport.category.length == 0
+                ) {
                   return (
                     <ReportCard
                       key={item._id}
                       title={item._id ? item._id : 'PT0124'}
                       date={item.createdAt ? item.createdAt : ''}
-                      href={
-                        `/dashboard/cleaned-reports/${item._id}`
-                          
-                      }
-                      reportType={
-                        item.category?.length == 0
-                          ? Category.Uncategorized
-                          : Category.Categorized
-                      }
+                      href={`/dashboard/cleaned-reports/${item._id}`}
+                      reportType={Category.Uncategorized}
                     />
                   );
                 }
               } else {
-                if (item.category && item.category.length > 0) {
+                if (
+                  item.updatereport &&
+                  item.updatereport.category &&
+                  item.updatereport.category.length > 0
+                ) {
                   return (
                     <ReportCard
                       key={item._id}
@@ -115,11 +118,7 @@ const ReportsViewerAndAdmin = () => {
                           ? `/dashboard/cleaned-reports/${item._id}`
                           : '#'
                       }
-                      reportType={
-                        item.category?.length == 0
-                          ? Category.Uncategorized
-                          : Category.Categorized
-                      }
+                      reportType={Category.Categorized}
                     />
                   );
                 }

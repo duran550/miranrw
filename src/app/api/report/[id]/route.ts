@@ -42,6 +42,6 @@ export async function GET(request: any, { params }: any) {
   if (!flag) return NextResponse.json({ status: 'Error', message: 'Access Denied. Invalid Token.' }, { status: 400 });
   const { id } = params;
   await dbConnect();
-  const report = await Report.findOne({ _id: id });
+  const report = await Report.findOne({ _id: id }).populate('updatereport');
   return NextResponse.json({ report }, { status: 200 });
 }

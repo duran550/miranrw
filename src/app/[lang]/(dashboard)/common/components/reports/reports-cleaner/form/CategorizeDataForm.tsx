@@ -12,6 +12,7 @@ type AnyInputType = {
   options:string[]
 };
 type categoryType = {
+ 
   category: {
     _id: string;
     name: string;
@@ -29,7 +30,8 @@ type categoryType = {
 const CategorizeDataForm: React.FC<{ option?: any }> = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [cat, setCat] = useState<categoryType>([]);
-
+   const pathname = usePathname();
+   const urlSplit = pathname.split('/');
   const [reportCarData] = useState(dataCategorizationOptions);
 
   const {
@@ -41,6 +43,7 @@ const CategorizeDataForm: React.FC<{ option?: any }> = () => {
   } = useForm<AnyInputType>();
 
   const { state, dispatch } = useContext(AdminContext);
+  let options=watch('options')
   // console.log("/./././././: ", state.reportsCardTableUncategorized)
 
   // useEffect (() => {
@@ -56,15 +59,18 @@ const CategorizeDataForm: React.FC<{ option?: any }> = () => {
   }, []);
 
   const onSubmit: SubmitHandler<AnyInputType> = (data) => {
-    const newReportData = {};
-
-    dispatch({ type: 'ADD_CATEGORY', payload: state });
+    // const newReportData = {};
+    console.log('data', data);
+    console.log('cat',cat);
+    
+    
+    // dispatch({ type: 'ADD_CATEGORY', payload: state });
   };
 
   console.log(cat, 'this is my cat');
 
   return (
-    <div className="border rounded-xl p-4 border-gray-300 w-full mb-6">
+    <div className="border rounded-xl p-4 border-gray-300 w-full mb-6 max-h-[70vh] overflow-y-auto overscroll-none no-scrollbar">
       <h1 className="font-bold text-xl opacity-80 my-4">Categorize Data</h1>
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="py-4 flex flex-col gap-4 max-h-[50vh] overflow-y-scroll">
