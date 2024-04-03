@@ -99,13 +99,13 @@ function DeleteUser({ lang, refresh }: DelUserPros) {
             onClick={() => {
               setOpenModal(false), deleteUser(clientInfo?._id);
             }}
-            className="w-fit font-bold bg-green-400"
+            className="w-fit font-bold bg-primary"
           >
             Delete User
           </Button>
           <Button
             onClick={() => setOpenModal(false)}
-            className="w-fit font-bold bg-green-400"
+            className="w-fit font-bold bg-primary"
           >
             cancel
           </Button>

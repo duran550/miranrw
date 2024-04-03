@@ -10,6 +10,7 @@ import { Button } from '../../button/Button';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import AuthService from '@/services/authService';
 import toast, { Toaster } from 'react-hot-toast';
+import Password from 'antd/es/input/Password';
 
 interface ClientDataProps {
   onClose: () => void;
@@ -22,7 +23,7 @@ interface IFormInput {
   fullname: string;
   password: string;
   email: string;
-  role: number;
+  role: any;
 }
 
 const AddUser: FC<ClientDataProps> = ({ onClose, isOpen, data, refresh }) => {
@@ -34,13 +35,48 @@ const AddUser: FC<ClientDataProps> = ({ onClose, isOpen, data, refresh }) => {
     register,
   } = useForm<IFormInput>({ mode: 'onChange' || 'onBlur' || 'onSubmit' });
 
+  const validatePassword = (value: any) => {
+    if (!value) {
+      return 'Password is required';
+    }
+    if (!/^[a-zA-Z0-9]+$/.test(value)) {
+      return 'Password must be alphanumeric';
+    }
+    if (value.length < 5) {
+      return 'Password must be at least 5 characters long';
+    }
+    return true;
+  };
+
+  // Function to replace role with numeric values
+  function replaceRoleWithValue(user: IFormInput) {
+    switch (user.role) {
+      case 'Admin':
+        user.role = 1;
+        break;
+      case 'Viewer':
+        user.role = 2;
+        break;
+      case 'Cleaner':
+        user.role = 3;
+        break;
+      case 'Risk-manager':
+        user.role = 4;
+        break;
+      default:
+        // Do nothing if role doesn't match any of the specified roles
+        break;
+    }
+    return user;
+  }
+
   const onSubmit: SubmitHandler<IFormInput> = async (data) => {
-    const response = new AuthService().register(data);
+    const updatedUserObject = replaceRoleWithValue(data);
+    const response = new AuthService().register(updatedUserObject);
     try {
       const result = await response;
       if (result.status === 201) {
         refresh();
-        console.log(result, 'this is my result');
         toast.success(`This user was Succesfully Added`);
       }
     } catch (error) {
@@ -82,22 +118,37 @@ const AddUser: FC<ClientDataProps> = ({ onClose, isOpen, data, refresh }) => {
               <InputField
                 name="password"
                 type="password"
-                props={register('password', { required: true })}
+                props={register('password', {
+                  required: true,
+                  validate: validatePassword,
+                })}
               />
+              {errors.password && (
+                <span className="text-red-500">{errors.password.message}</span>
+              )}
             </div>
             <div>
               <h1 className="font-bold">Role</h1>
               <InputField
                 name="role"
                 type="text"
-                props={register('role', { required: true })}
+                props={register('role', {
+                  required: true,
+                  pattern: /^(Admin|Cleaner|Viewer|Risk-Manager)$/i, // Regex pattern for allowed values
+                })}
               />
+              {errors.role && errors.role.type === 'pattern' && (
+                <span className="text-red-500">
+                  Please enter a valid role (Admin, Cleaner, Viewer,
+                  Risk-Manager).
+                </span>
+              )}
             </div>
           </div>
           <div className="flex gap-x-4 mb-4">
             <Button
               type="button"
-              className="bg-black"
+              className="bg-primary"
               onClick={() => {
                 onClose(), reset();
               }}
@@ -106,10 +157,12 @@ const AddUser: FC<ClientDataProps> = ({ onClose, isOpen, data, refresh }) => {
             </Button>
             <Button
               type="submit"
-              className="bg-black"
+              className="bg-primary"
               onClick={() => {
                 onClose();
               }}
+              disabled={!isValid}
+              style={{ opacity: isValid ? 1 : 0.5 }}
             >
               Save User
             </Button>
