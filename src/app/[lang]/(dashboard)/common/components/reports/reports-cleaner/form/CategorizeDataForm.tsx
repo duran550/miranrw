@@ -8,8 +8,9 @@ import Checkbox from '../../../forms/radio/Checkbox';
 import { AdminContext } from '../../../../context/AdminContext';
 import { DataCategorizationOptionType } from '@/app/[lang]/(dashboard)/dashboard/reports/reportSummaryType';
 import CategoryService from '@/services/categoryService';
-
-type AnyInputType = any;
+type AnyInputType = {
+  options:string[]
+};
 type categoryType = {
   category: {
     _id: string;
@@ -66,13 +67,13 @@ const CategorizeDataForm: React.FC<{ option?: any }> = () => {
     <div className="border rounded-xl p-4 border-gray-300 w-full mb-6">
       <h1 className="font-bold text-xl opacity-80 my-4">Categorize Data</h1>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <div className="py-4 flex flex-col gap-4 h-[500px] overflow-y-scroll">
+        <div className="py-4 flex flex-col gap-4 max-h-[50vh] overflow-y-scroll">
           {cat &&
             cat.length > 0 &&
-            cat?.map((reportCard) => {
+            cat?.map((reportCard, index) => {
               return (
                 <div
-                  key={reportCard?.category._id}
+                  key={index}
                   className="border rounded-xl p-4 border-gray-300 w-full"
                 >
                   <h1>{reportCard?.category.name}</h1>
@@ -85,14 +86,14 @@ const CategorizeDataForm: React.FC<{ option?: any }> = () => {
                             label={option?.name}
                             id={option?._id}
                             value={option?._id}
-                            props={register(reportCard?.category.name, {
-                              required: false,
+                            props={register('options', {
+                              required: true,
                             })}
                           />
-                          {/* <div className="absolute w-[250px] bg-white p-4 hidden group-hover:block group-hover:rounded-xl z-10 border">
+                          <div className="absolute w-[250px] bg-white p-4 hidden group-hover:block group-hover:rounded-xl z-10 border">
                             <h2>{option?.name}</h2>
-                            <p className="text-[10px]">{option?.name}</p>
-                          </div> */}
+                            <p className="text-[10px] ">{option?.name}</p>
+                          </div>
                         </div>
                       );
                     })}
@@ -102,14 +103,14 @@ const CategorizeDataForm: React.FC<{ option?: any }> = () => {
             })}
         </div>
 
-        {/* <div className="w-full flex justify-end">
+        <div className="w-full flex justify-end ">
           <Button
             className={`mt-7 rounded-lg text-sm sm:text-xl  ${
-              !isValid || isLoading ? 'opacity-100' : ' opacity-50'
+              !isValid || isLoading ? 'opacity-50' : ' opacity-100'
             } bg-greenDisable w-[30%]`}
-            variant={
-              !isValid || isLoading ? 'primary' : 'saveCategorizationDisabled'
-            }
+            // variant={
+            //   !isValid || isLoading ? 'primary' : 'saveCategorizationDisabled'
+            // }
             type="submit"
             disabled={!isValid || isLoading ? true : false}
           >
@@ -122,7 +123,7 @@ const CategorizeDataForm: React.FC<{ option?: any }> = () => {
               <span className="text-sm font-bold">Save Categorization</span>
             )}
           </Button>
-        </div> */}
+        </div>
       </form>
     </div>
   );
