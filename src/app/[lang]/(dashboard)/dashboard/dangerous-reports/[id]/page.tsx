@@ -43,11 +43,11 @@ const Page = () => {
            // if (report[0].status!=='pending') {
            //   window.location.href='dashboard/clean-data'
            // }
-           if (report[0].status == 'cleaned') {
-             setReport2(report[0]);
-           } else {
-             setReport2(undefined);
-           }
+          //  if (report[0].status == 'cleaned') {
+          //    setReport2(report[0]);
+          //  } else {
+          //    setReport2(undefined);
+          //  }
            setReport(report[0]);
            setRefreshCurrent(false);
            //  setReports(result.data.reports);

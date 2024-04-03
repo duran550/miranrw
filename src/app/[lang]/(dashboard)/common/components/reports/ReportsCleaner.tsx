@@ -57,10 +57,17 @@ const ReportsCleaner = () => {
       await axios
         .request(options).then((result) => {
           console.log('report', result.data.reports);
-          const report = result.data.reports.filter(
-            (item: reportType) =>
-              item.status == 'pending' || item.status == 'cleaned' || item.status=='Irrelevant'
-          );
+          const report = result.data.reports.filter((item: reportType) => {
+            if (
+              !item.updatereport ||
+              (item.updatereport &&
+                (item.updatereport.status == 'pending' ||
+                  item.updatereport.status == 'cleaned' ||
+                  item.updatereport.status == 'Irrelevant'))
+            ) {
+              return item;
+            }
+          });
           setReport(report.reverse());
           //  setReports(result.data.reports);
           //  setReports();
@@ -79,7 +86,7 @@ const ReportsCleaner = () => {
       if (!refresh) {
         setTimeout(() => {
           setRefresh(true);
-        }, 5000);
+        }, 9000);
       }
     }, [refresh]);
   return (
@@ -94,36 +101,38 @@ const ReportsCleaner = () => {
             reports.map((item, index) => {
 
               if (status==Category.Raw) {
-               if (item.status=='pending') {
+               if (
+                 !item.updatereport ||
+                 (item.updatereport && item.updatereport.status == 'pending')
+               ) {
                  return (
                    <ReportCard
                      key={item._id}
                      title={item._id ? item._id : 'PT0124'}
                      date={item.createdAt ? item.createdAt : ''}
                      href={`/en/dashboard/clean-data/${item._id}`}
-                     reportType={
-                       item.status == 'pending'
-                         ? Category.Raw
-                         : Category.Cleaned
-                     }
+                     reportType={Category.Raw}
                    />
                  );
                }
               } else {
-                if (item.status!=='pending') {
-                   return (
-                     <ReportCard
-                       key={item._id}
-                       title={item._id ? item._id : 'PT0124'}
-                       date={item.createdAt ? item.createdAt : ''}
-                       href={`/en/dashboard/clean-data/${item._id}`}
-                       reportType={
-                         item.status == 'cleaned'
-                           ? Category.Cleaned
-                           : Category.Irrelevant
-                       }
-                     />
-                   );
+                if (
+                  item.updatereport &&
+                  item.updatereport.status !== 'pending'
+                ) {
+                  return (
+                    <ReportCard
+                      key={item._id}
+                      title={item._id ? item._id : 'PT0124'}
+                      date={item.createdAt ? item.createdAt : ''}
+                      href={`/en/dashboard/clean-data/${item._id}`}
+                      reportType={
+                        item.updatereport.status == 'cleaned'
+                          ? Category.Cleaned
+                          : Category.Irrelevant
+                      }
+                    />
+                  );
                 }
               }
             })}
