@@ -12,4 +12,4 @@ const UpdateReportSchema = new Schema({
 );
 // UpdateReportSchema.set('timestamps', true);
 // const UpdateReport =  model('updatereport', UpdateReportSchema);
-export default mongoose.model('UpdateReport', UpdateReportSchema); 
+export default mongoose.models.UpdateReport || mongoose.model('UpdateReport', UpdateReportSchema); 
