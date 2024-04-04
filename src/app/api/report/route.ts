@@ -3,7 +3,7 @@ import dbConnect from '../lib/dbConnect';
 import { Report } from '../models/Report';
 import { NextResponse } from 'next/server';
 import { reportType } from '@/utils/shared-types';
-import { middleware_1 } from '@/middleware/middleware';
+// import { middleware_1 } from '@/middleware/middleware';
 import { authenticate } from '../utils/decode';
 import { rateLimitMiddleware } from '../utils/limiter';
 
