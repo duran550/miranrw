@@ -15,11 +15,11 @@ export const createToken= (tokenData:any, time:string) => {
     return jwt.sign(tokenData, process.env.JWT_SECRET as string, { expiresIn: time });
 }
 
-export const authenticate = async (req: NextApiRequest) => {
+export const authenticate = async (req: NextApiRequest): Promise<any> => {
     return new Promise<boolean>((resolve, reject) => {
       // const accessToken = req.headers['authorization'];
       const accessToken = headers().get('authorization');
-      // console.log('accessToken', accessToken);
+      
       
   // const refreshToken = req.cookies['refreshToken'];
   if (!accessToken) {
@@ -28,22 +28,10 @@ export const authenticate = async (req: NextApiRequest) => {
   }
 
   try {
-    const decoded = verify(accessToken);
-   resolve(true)
+    const decoded:any = verify(accessToken);
+   resolve(decoded)
   } catch (error) {
     resolve(false)
-    // if (!refreshToken) {
-    //     resolve(false)
-    //     // return NextResponse.json({ status: 'Error', message: 'Access Denied. No refresh token provided.' }, { status: 401 });
-    // }
-
-    // try {
-    //   const decoded = verify(refreshToken);
-    //   resolve(true)
-    // } catch (error) {
-    //     // return NextResponse.json({ status: 'Error', message: 'Access Denied. Invalid Token.' }, { status: 400 });
-    //     resolve(false)
-    // }
   }
     
     })

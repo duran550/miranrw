@@ -26,25 +26,19 @@ export async function POST(request: any) {
 }
 
 export async function GET(request: any) {
-  let pass = await rateLimitMiddleware(request);
-  if (!pass)
-    return NextResponse.json(
-      { status: 'Error', message: 'Too Many Requests.' },
-      { status: 400 }
-    );
-  let flag = await authenticate(request)
-  if (!flag) return NextResponse.json({ status: 'Error', message: 'Access Denied. Invalid Token.' }, { status: 400 });
+  // let pass= await rateLimitMiddleware(request)
+  // if (!pass) return NextResponse.json({ status: 'Error', message: 'Too Many Requests.' }, { status: 400 });
+  // let flag = await authenticate(request)
+  // if (!flag) return NextResponse.json({ status: 'Error', message: 'Access Denied. Invalid Token.' }, { status: 400 });
   await dbConnect();
   let categorys: any[] = await Category.find()
   let arr:any=[]
   let obj:any={}
   if (categorys.length) {
     for await (let category of categorys) {
+      
       let options = await CategoryOption.find({ category: category._id })
-     
-      obj['category']=category
-      obj['options']=options
-      arr.push(obj)
+      arr.push({ 'category': category, 'options': options })
     }
     return NextResponse.json({ 'categorys': arr });
   }else{
@@ -67,3 +61,16 @@ export async function DELETE(request: any) {
   await Category.findByIdAndDelete(id);
   return NextResponse.json({ message: 'Category deleted' }, { status: 200 });
 }
+
+// let reports: reportType[] = await Report.find({})
+// let arr:any=[]
+// if (reports.length) {
+//   for await (let report of reports) {
+    
+//     let options = await UpdateReport.find({ _id: report.updatereport})
+//     arr.push({ 'report': report, 'reportupdate': options })
+//   }
+//   return NextResponse.json({ 'reports': arr });
+// }else{
+//   return NextResponse.json({ reports});
+// }
