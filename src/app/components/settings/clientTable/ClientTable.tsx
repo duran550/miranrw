@@ -217,9 +217,6 @@ export default function ClientTable() {
 
   const updatedUsers = replaceRoleNames(sortedItems);
 
-  console.log(sortedItems, 'this is my sorted items');
-  console.log(updatedUsers, 'this is my updated users');
-
   const renderCell = React.useCallback((user: User, columnKey: React.Key) => {
     const cellValue = user[columnKey as keyof User];
 
