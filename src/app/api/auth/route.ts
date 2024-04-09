@@ -66,3 +66,4 @@ export async function GET() {
     return NextResponse.json({ status: 'Error', message: 'something wrong' }, { status: 500});
   }
 }
+
