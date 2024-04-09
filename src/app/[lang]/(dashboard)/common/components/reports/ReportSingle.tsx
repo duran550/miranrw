@@ -35,8 +35,11 @@ const ReportSingle = () => {
   const { state, dispatch } = useContext(AdminContext);
 
   const [send, setsend] = useState(false);
+
   const refreshHandler = () => {
+    // alert('ok')
     setRefresh(true);
+    setRefreshRaw(true);
   };
 
   const refreshCurrentHandler = () => {
@@ -48,7 +51,7 @@ const ReportSingle = () => {
       const response = new ReportService()
         .getAllReport()
         .then((result) => {
-          console.log('report', result.data.reports);
+          // console.log('report', result.data.reports);
           const report = result.data.reports.filter(
             (item) => item._id == urlSplit[urlSplit.length - 1]
           );
@@ -74,13 +77,13 @@ const ReportSingle = () => {
       const response = new ReportService()
         .getAllReport()
         .then((result) => {
-          console.log('report', result.data.reports);
+          // console.log('report', result.data.reports);
           //  console.log(pathname.split('/'));
 
           const report = result.data.reports.filter(
             (item) => item._id == urlSplit[urlSplit.length - 1]
           );
-          console.log('report', report);
+          // console.log('report', report);
 
           setReport2(report[0]);
           setRefresh(false);
@@ -91,7 +94,8 @@ const ReportSingle = () => {
           console.log(error);
         });
     }
-  }, [reports, refresh, refreshCurrent]);
+  }, [reports, refresh, refreshCurrent, refreshRaw]);
+  // console.log('refreshRaw',refreshRaw);
 
   const irrelevant = state.isIrrelevant;
   const dangerous = state.isDangerous;
