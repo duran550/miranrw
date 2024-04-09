@@ -5,29 +5,28 @@ import { NextResponse } from 'next/server';
 import { reportType } from '@/utils/shared-types';
 import { authenticate } from '../../utils/decode';
 import { rateLimitMiddleware } from '../../utils/limiter';
+import UpdateReport  from '../../models/UpdateReport';
 
 export async function PUT(request: any, { params }: any) {
-  let pass = await rateLimitMiddleware(request);
-  if (!pass)
-    return NextResponse.json(
-      { status: 'Error', message: 'Too Many Requests.' },
-      { status: 400 }
-    );
-  let flag = await authenticate(request);
-  if (!flag)
+  let pass= await rateLimitMiddleware(request)
+  if (!pass) return NextResponse.json({ status: 'Error', message: 'Too Many Requests.' }, { status: 400 });
+  let user = await authenticate(request);
+  if (!user)
     return NextResponse.json(
       { status: 'Error', message: 'Access Denied. Invalid Token.' },
       { status: 400 }
     );
+  let role= user.role
+  if(role==2){
+    return NextResponse.json({ status: 'Error', message: 'Access Denied. Invalid Token.' }, { status: 400 });
+  }
   const { id } = params;
 
-  const report: reportType = await request.json();
+  let report: any = await request.json();
+  report['reportID']= id
   await dbConnect();
-  // console.log(id);
-  // console.log(report);
-  // console.log('request', params);
-
-  await Report.findByIdAndUpdate(id, report);
+  const update_report= await UpdateReport.create(report);
+  await Report.findByIdAndUpdate(id, {updatereport: update_report._id, status: report.status});
   return NextResponse.json({ message: 'Report updated' }, { status: 200 });
 }
 
@@ -42,6 +41,6 @@ export async function GET(request: any, { params }: any) {
   if (!flag) return NextResponse.json({ status: 'Error', message: 'Access Denied. Invalid Token.' }, { status: 400 });
   const { id } = params;
   await dbConnect();
-  const report = await Report.findOne({ _id: id }).populate('updatereport');
+  const report = await Report.findOne({ _id: id })
   return NextResponse.json({ report }, { status: 200 });
 }

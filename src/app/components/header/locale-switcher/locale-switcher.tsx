@@ -15,7 +15,7 @@ export default function LocaleSwitcher() {
   const [toggle, setToggle] = useState<boolean>(false);
   const pathName = usePathname();
   const selectedLanguage: any = pathName.split('/');
-  console.log(selectedLanguage);
+
   
   const redirectedPathName = (locale: string) => {
     // clearFormCookies()

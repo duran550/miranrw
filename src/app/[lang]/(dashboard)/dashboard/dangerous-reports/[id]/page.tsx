@@ -36,8 +36,8 @@ const Page = () => {
        const response = new ReportService()
          .getAllReport()
          .then((result) => {
-           console.log('report', result.data.reports);
-           const report = result.data.reports.filter(
+         
+           const report = result.data.filter(
              (item) => item._id == urlSplit[urlSplit.length - 1]
            );
            // if (report[0].status!=='pending') {
@@ -62,13 +62,13 @@ const Page = () => {
        const response = new ReportService()
          .getAllReport()
          .then((result) => {
-           console.log('report', result.data.reports);
+          
            //  console.log(pathname.split('/'));
 
-           const report = result.data.reports.filter(
+           const report = result.data.filter(
              (item) => item._id == urlSplit[urlSplit.length - 1]
            );
-           console.log('report', report);
+         
 
            setReport2(report[0]);
            setRefresh(false);

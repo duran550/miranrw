@@ -64,7 +64,7 @@ const FourthStep: React.FC<FourthStepProps> = ({
    formValues = getFormCookies(FIFTH_FORM);
  } else {
    formValues = getFormCookies(THIRD_FORM);
-   console.log('organization', formValues);
+
  }
   // dispatch({ type: FORM_ERRORS, payload: true });
   // Scroll on top
@@ -77,10 +77,9 @@ let check: any = datePeriod;
 
    
 
-    console.log(dateRange, 'range');
-    console.log(check, 'check');
+  
     if (valueDate == null && !datePeriod) {
-       console.log('help');
+     
         dispatch({ type: FORM_ERRORS, payload: true });
     } else {
        if (datePeriod && !dateRange) {
@@ -193,7 +192,7 @@ let check: any = datePeriod;
     setDateRange(date);
    if (!date) {
     setChecked(1);
-    console.log(date, 'nulllllllllllllllllllll');
+    
     dispatch({ type: FORM_ERRORS, payload: true });
    }
       

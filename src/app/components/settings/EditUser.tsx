@@ -12,13 +12,14 @@ import { useContext } from 'react';
 import { AdminContext } from '@/app/[lang]/(dashboard)/common/context/AdminContext';
 import toast, { Toaster } from 'react-hot-toast';
 import { useAuth } from '@/app/hooks/useAuth';
+import TableSelect from './TableSelect';
 
 interface IFormInput {
   createdAt: string;
   email: string;
   fullname: string;
   password: string;
-  role: number;
+  role: number | any;
   updatedAt: string;
   __v: number;
   _id: string;
@@ -30,6 +31,9 @@ interface EditUserPros {
 }
 
 function EditUser({ lang, refresh }: EditUserPros) {
+  const { state } = useContext(AdminContext);
+  const { clientInfo } = state;
+
   const [openModal, setOpenModal] = useState<boolean>(false);
   const [getClientInfo, setGetClientInfo] = useState<IFormInput | any>();
   const { user } = useAuth();
@@ -43,15 +47,64 @@ function EditUser({ lang, refresh }: EditUserPros) {
     setValue,
   } = useForm<IFormInput>();
 
-  const { state } = useContext(AdminContext);
-  const { clientInfo } = state;
+  const watchedRole = watch('role');
+
+  function replaceRoleWithValue(user: IFormInput | any) {
+    switch (user?.role) {
+      case 1:
+        user.role = 'Admin';
+        break;
+      case 2:
+        user.role = 'Viewer';
+        break;
+      case 3:
+        user.role = 'Cleaner';
+        break;
+      case 4:
+        user.role = 'Risk-manager';
+        break;
+      default:
+        // Do nothing if role doesn't match any of the specified roles
+        break;
+    }
+    return user;
+  }
+
+  const updatedUserObject = replaceRoleWithValue(clientInfo);
+  // This is to handle my selected option
+  const [selectedOption, setSelectedOption] = useState<string>('');
+  // const [selectedOption, setSelectedOption] = useState('jamesro');
+
   useEffect(() => {
     setValue('fullname', clientInfo?.fullname!);
     setValue('email', clientInfo?.email!);
     setValue('role', clientInfo?.role!);
   }, [clientInfo]);
 
+  function replaceRoleWithXtr(user: IFormInput | any) {
+    switch (user?.role) {
+      case 'Admin':
+        user.role = 1;
+        break;
+      case 'Viewer':
+        user.role = 2;
+        break;
+      case 'Cleaner':
+        user.role = 3;
+        break;
+      case 'Risk-manager':
+        user.role = 4;
+        break;
+      default:
+        // Do nothing if role doesn't match any of the specified roles
+        break;
+    }
+    return user;
+  }
+
   const onSubmit: SubmitHandler<IFormInput> = async (data) => {
+    const updatedData = replaceRoleWithXtr(data);
+    console.log(updatedData, 'this is my data');
     try {
       const response = await fetch(`/api/user/${clientInfo?._id}`, {
         method: 'PUT',
@@ -59,7 +112,7 @@ function EditUser({ lang, refresh }: EditUserPros) {
           'Content-Type': 'application/json',
           authorization: user?.token!,
         },
-        body: JSON.stringify(data),
+        body: JSON.stringify(updatedData),
       });
       if (response.ok) {
         toast.success(`This user was Succesfully Updated`);
@@ -73,7 +126,9 @@ function EditUser({ lang, refresh }: EditUserPros) {
     }
   };
 
-  console.log(clientInfo, 'this is my client info');
+  const options = ['Admin', 'Viewer', 'Cleaner', 'Risk-manager'];
+
+  // console.log(watchedRole, 'this is my role');
 
   return (
     <div>
@@ -104,16 +159,30 @@ function EditUser({ lang, refresh }: EditUserPros) {
               />
             </div>
             <div>
-              <h1 className="font-bold">Role</h1>
-              <InputField
+              <TableSelect
+                options={options}
                 name="role"
-                type="number"
+                // defaultValue={selectedOption}
+                // val={selectedOption}
+                // setSelectedOption={setSelectedOption}
                 props={register('role', { required: true })}
               />
             </div>
+            {/* <div>
+              <h1 className="font-bold">Role</h1>
+              <InputField
+                name="role"
+                type="text"
+                props={register('role', { required: true })}
+              />
+            </div> */}
           </div>
           <div className="flex gap-x-4 mb-4">
-            <Button className="bg-primary" type="button">
+            <Button
+              className="bg-primary"
+              type="button"
+              onClick={() => setOpenModal(false)}
+            >
               Cancel
             </Button>
             <Button className="bg-primary" onClick={() => setOpenModal(false)}>

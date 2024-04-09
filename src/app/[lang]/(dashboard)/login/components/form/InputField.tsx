@@ -35,7 +35,7 @@ const InputField: React.FC<InputFieldProps> = ({
   change,
 }) => {
   return (
-    <div className="mt-3">
+    <div className="">
       {change && (
         <>
           <label className="text-sm font-bold text-gray-700 mb-2" htmlFor={id}>

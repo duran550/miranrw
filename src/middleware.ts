@@ -86,7 +86,7 @@ export function middleware(request: NextRequest, response: any, next: any) {
   //    `/${locale}`,
   //    `/${locale}/about-us`,
   //  ];
-console.log('okk');
+
   const allPaths = [
     `/${locale}/datenschutz`,
     `/${locale}/disclaimer`,
@@ -105,7 +105,7 @@ console.log('okk');
     request.cookies.get('user_data') &&
     publicPath.includes(pathname)
   ) {
-    console.log('ok7');
+   
     //  let user = JSON.parse(request.cookies.get('user_data')?.value!);
     return NextResponse.redirect(new URL(`/${locale}/dashboard`, request.url));
   } else if (
@@ -114,14 +114,14 @@ console.log('okk');
     !pathname.includes('/dashboard')
   ) {
 // console.log('ok');
-console.log('ok8');
+
     return NextResponse.redirect(new URL(`/${locale}/dashboard`, request.url));
   } else if (
     request.cookies.get('user_data') &&
     !allPaths.includes(pathname) &&
     !pathname.includes('/dashboard')
   ) {
-    console.log('ok4');
+  
     return NextResponse.redirect(new URL(`/${locale}/dashboard`, request.url));
   } else if (
     
@@ -162,7 +162,7 @@ console.log('ok8');
       !allPaths.includes(pathname)
     ) {
     // refreshToken(user.token);
-      console.log('ok1');
+     
       return NextResponse.redirect(
         new URL(`/${locale}/dashboard`, request.url)
       );

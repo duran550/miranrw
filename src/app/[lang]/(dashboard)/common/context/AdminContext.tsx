@@ -12,7 +12,7 @@ type AdminType = {
   reportsCardTableUncategorized: AllReportsType;
   isIrrelevant: boolean;
   isDangerous: boolean;
-  clientInfo: ClientInfoProps | null;
+  clientInfo: ClientInfoProps | null | any;
   cleanData: boolean;
 };
 
