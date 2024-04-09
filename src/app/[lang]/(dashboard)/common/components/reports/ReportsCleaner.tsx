@@ -191,17 +191,7 @@ const ReportsCleaner = () => {
             })}
         </div>
 
-        {/* {status == Category.Raw ? (
-          <ReportContainCard
-            href="/dashboard/clean-data"
-            data={reportsDataRaw}
-          />
-        ) : (
-          <ReportContainCard
-            href="/dashboard/clean-data"
-            data={reportsDataCleaned}
-          />
-        )} */}
+      
       </div>
 
       <div className="flex w-fit fixed bottom-8  mt-14 ">

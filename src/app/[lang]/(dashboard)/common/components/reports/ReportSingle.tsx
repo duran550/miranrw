@@ -35,6 +35,8 @@ const ReportSingle = () => {
 
 
   const [load, setLoad] = useState(true);
+  const [error, setError] = useState(false);
+
 
   const refreshHandler = () => {
     setRefresh(true);
@@ -128,6 +130,7 @@ const ReportSingle = () => {
         .then((error) => {
           console.log(error);
           setLoad(false);
+          setError(true)
         });
     }
 
@@ -164,6 +167,8 @@ const ReportSingle = () => {
         .then((error) => {
           console.log(error);
           setLoad(false);
+          setError(true);
+
         });
     }
   }, [reports, refresh, refreshCurrent, refreshRaw]);
@@ -183,7 +188,7 @@ const ReportSingle = () => {
         <Header href="/dangerous-reports" title="Data Info" />
       )}
 
-      {!load && (
+      {!load && !error && (
         <div className="flex  gap-x-6 h-full">
           <ReportSummary
             report={reports}
@@ -216,7 +221,14 @@ const ReportSingle = () => {
       )}
 
       {load && (
-        <p className="flex items-center justify-center text-5xl">loading...</p>
+        <p className="flex items-center justify-center text-5xl h-full">
+          loading...
+        </p>
+      )}
+      {error && !load && (
+        <p className="flex items-center justify-center text-5xl h-full">
+          Something wrong try later...
+        </p>
       )}
     </div>
   );

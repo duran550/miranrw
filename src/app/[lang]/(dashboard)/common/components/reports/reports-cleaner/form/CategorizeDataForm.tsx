@@ -192,15 +192,15 @@ const CategorizeDataForm: React.FC<{
               return (
                 <div
                   key={index}
-                  className="border rounded-xl p-4 border-gray-300 w-full"
+                  className="border rounded-xl p-4 border-gray-300 w-full font-bold"
                 >
-                  <h1>{item}</h1>
+                  <h1 className="text-[#828B8C] text-lg">{item}</h1>
                   <div className="grid grid-cols-[repeat(auto-fit,minmax(50px,150px))]">
                     {report.category2?.map((item2: string) => {
                       if (item2.split('/')[1] == item) {
                         return (
-                          <div key={item2} className="relative group">
-                            <span>{item2.split('/')[2]}</span>
+                          <div key={item2} className="relative group font-semibold">
+                            <span>{'-' + item2.split('/')[2]}</span>
                           </div>
                         );
                       }
