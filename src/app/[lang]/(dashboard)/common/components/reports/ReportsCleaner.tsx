@@ -20,26 +20,24 @@ import { reportType, reportType2 } from '@/utils/shared-types';
 import Link from 'next/link';
 import { UseReport } from '@/app/hooks/useReports';
 import { AuthContext } from '@/app/context/AuthContext';
-import { removeUserCookies } from '@/cookies/cookies';
+import { removeUserCookies, setUserCookies } from '@/cookies/cookies';
 import AuthService from '@/services/authService';
 import axios from 'axios';
 import { useAuth } from '@/app/hooks/useAuth';
+import { DecodeToken } from '../../../login/components/DecodeToken';
 
 const ReportsCleaner = () => {
   const { user } = useAuth();
-  const [token, setToken] = useState<string | undefined>();
+
   const [refresh, setRefresh] = useState(true);
 
   const [status, setStatut] = useState(Category.Raw);
   const [reports, setReport] = useState<reportType2[]>([]);
-  const { report, setReports } = UseReport();
+ 
+  const [token, setToken] = useState('');
+
   const ctx = useContext(AuthContext);
-  // useEffect(() => {
-  //   const response = new AuthService().refreshToken().catch((error) => {
-  //     console.log('error', error);
-  //     // removeUserCookies();
-  //   });
-  // }, []);
+
   const getReport = async (token: string) => {
     const options = {
       method: 'GET',
@@ -56,7 +54,7 @@ const ReportsCleaner = () => {
       await axios
         .request(options)
         .then((result) => {
-          // console.log('report', result);
+         
           const report = result.data.filter((item: reportType) => {
             if (
               !item.updatereport ||
@@ -74,14 +72,11 @@ const ReportsCleaner = () => {
                   item.updatereport[0].status?.toLocaleLowerCase() ==
                     'irrelevant')
               ) {
-                 console.log('item', item._id);
-                // console.log('ok', item.updatereport[0].status);
+               
 
-                // console.log();
+                const item2 = { ...item };
+               
 
-                const item2 = {...item} ;
-                // console.log('item2',item2?.updatereport);
-                
                 delete item.updatereport;
                 report1.push({
                   ...item,
@@ -105,11 +100,10 @@ const ReportsCleaner = () => {
                       ? [...item2.updatereport[0].category]
                       : undefined,
                 });
-              
               }
             }
           });
-          // console.log('report1', report1);
+       
 
           setReport(report1.reverse());
         })
@@ -119,18 +113,39 @@ const ReportsCleaner = () => {
     } catch (error) {}
   };
   useEffect(() => {
-    if (refresh) {
-      //  console.log(1);
-      getReport(user?.token!);
-      setRefresh(false);
-      //  getReport();
+    if (token.length == 0 && refresh) {
+      const response = new AuthService()
+        .refreshToken()
+        .then((result) => {
+          if (result.status === 201) {
+            const user = DecodeToken(result.headers.authorization);
+            setToken(result.headers.authorization);
+
+            user.then((result1) => {
+              if (typeof result1 == 'object') {
+                setUserCookies({
+                  ...result1,
+                  token: result.headers.authorization,
+                });
+              }
+            });
+          }
+        })
+        .catch((error) => {
+          removeUserCookies();
+          window.location.href = '/en/login';
+        });
     }
-    if (!refresh) {
+    if (refresh && token.length > 0) {
+      getReport(token);
+      setRefresh(false);
+    }
+    if (!refresh && token.length > 0) {
       setTimeout(() => {
         setRefresh(true);
       }, 10000);
     }
-  }, [refresh]);
+  }, [refresh, token]);
   return (
     <div className="w-full relative  h-fit">
       <h1 className="text-2xl font-bold my-8">All reports</h1>

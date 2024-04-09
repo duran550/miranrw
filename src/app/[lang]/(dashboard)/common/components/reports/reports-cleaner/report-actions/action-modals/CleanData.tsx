@@ -42,10 +42,10 @@ const CleanData: FC<ClientDataProps> = ({
 
   const handleUpdateCleanerDes = () => {
     setCleanerDes(cleanDataDynamicVal);
-    // onClose();
+  
   };
 
-  // Dynamic hints description
+
   const {
     register,
     handleSubmit,
@@ -77,22 +77,21 @@ const CleanData: FC<ClientDataProps> = ({
       .catch((error) => {
         console.log('error', error);
 
-        alert('ok');
+        
       });
   };
-  // Define custom classnames
+ 
   const customClassName = 'border border-gray-400 bg-gray-100';
 
-  // const watchAllFields = watch();
+
 
   useEffect(() => {
-    // alert('ok')
-    // setCleanerDes(cleanDataDynamicVal);
+   
     if (text && text.length > 0) {
       setValue('description', text);
     }
 
-    // console.log('text', text);
+   
   }, []);
 
   const handleChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
@@ -119,8 +118,7 @@ const CleanData: FC<ClientDataProps> = ({
               type="string"
               props={register('description')}
               placeholder={text!}
-              // val={cleanDataDynamicVal}
-              // handleChange={handleChange}
+             
               className={customClassName}
             ></TextArea>
             <div className="flex justify-end gap-x-3 mt-10 mb-2">

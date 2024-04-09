@@ -17,23 +17,18 @@ import { useAuth } from '@/app/hooks/useAuth';
 import AuthService from '@/services/authService';
 import axios from 'axios';
 import ReportCard from '../report-card/ReportCard';
+import { DecodeToken } from '../../../login/components/DecodeToken';
+import { removeUserCookies, setUserCookies } from '@/cookies/cookies';
 
 const ReportsViewerAndAdmin = () => {
   const [status, setStatut] = useState(Category.Uncategorized);
   const { user } = useAuth();
-  const [token, setToken] = useState<string | undefined>();
+  const [token, setToken] = useState('');
   const [refresh, setRefresh] = useState(true);
 
-  // const [status, setStatut] = useState(Category.Raw);
+ 
   const [reports, setReport] = useState<reportType2[]>([]);
-  // const { report, setReports } = UseReport();
-  // const ctx = useContext(AuthContext);
-  // useEffect(() => {
-  //   const response = new AuthService().refreshToken().catch((error) => {
-  //     console.log('error', error);
-  //     // removeUserCookies();
-  //   });
-  // }, []);
+
   const getReport = async (token: string) => {
     const options = {
       method: 'GET',
@@ -89,18 +84,39 @@ const ReportsViewerAndAdmin = () => {
     } catch (error) {}
   };
   useEffect(() => {
-    if (refresh) {
-      
-      getReport(user?.token!);
-      setRefresh(false);
-    
+    if (token.length == 0 && refresh) {
+      const response = new AuthService()
+        .refreshToken()
+        .then((result) => {
+          if (result.status === 201) {
+            const user = DecodeToken(result.headers.authorization);
+            setToken(result.headers.authorization);
+
+            user.then((result1) => {
+              if (typeof result1 == 'object') {
+                setUserCookies({
+                  ...result1,
+                  token: result.headers.authorization,
+                });
+              }
+            });
+          }
+        })
+        .catch((error) => {
+          removeUserCookies();
+          window.location.href = '/en/login';
+        });
     }
-    if (!refresh) {
+    if (refresh && token.length > 0) {
+      getReport(token);
+      setRefresh(false);
+    }
+    if (!refresh && token.length > 0) {
       setTimeout(() => {
         setRefresh(true);
       }, 10000);
     }
-  }, [refresh]);
+  }, [refresh, token]);
   return (
     <div className="w-full relative  h-fit">
       <h1 className="text-2xl font-bold my-8">All reports</h1>

@@ -69,7 +69,7 @@ const CategorizeDataForm: React.FC<{
             setTimeout(() => {
               setIsLoading(false);
               setIsEdit(false);
-              // setStateAction(status);
+             
             }, 1000);
           }
         })

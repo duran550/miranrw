@@ -32,22 +32,18 @@ const ReportSingle = () => {
   const [refreshRaw, setRefreshRaw] = useState(false);
 
   const [refreshCurrent, setRefreshCurrent] = useState(false);
-  // const { state, dispatch } = useContext(AdminContext);
 
-  const [load, setLoad] = useState(false);
+
+  const [load, setLoad] = useState(true);
 
   const refreshHandler = () => {
-    // alert('ok')
     setRefresh(true);
     setRefreshRaw(false);
-    
   };
 
   const refreshCurrentHandler = () => {
     setRefreshCurrent(true);
     setRefreshRaw(true);
-
-    // alert('ok');
   };
   useEffect(() => {
     if (!reports || refreshCurrent) {
@@ -55,7 +51,6 @@ const ReportSingle = () => {
       const response = new ReportService()
         .getAllReport()
         .then((result) => {
-          // console.log('report', result.data);
           const report1 = result.data.filter(
             (item) => item._id == urlSplit[urlSplit.length - 1]
           );
@@ -68,11 +63,8 @@ const ReportSingle = () => {
             report1[0].updatereport[0].status == 'cleaned' &&
             user?.role == 3
           ) {
-            // console.log('report1',report1[0].updatereport);
-
             const report = { ...report1[0] };
             delete report1[0].updatereport;
-            // console.log('report1', report?.updatereport[0].status!);
 
             setReport2({
               ...report1[0],
@@ -108,9 +100,6 @@ const ReportSingle = () => {
             setReport2(undefined);
           }
           const report = { ...report1[0] };
-          //  report1[0] &&
-          //    report1[0].updatereport &&
-          //    delete report1[0].updatereport;
 
           setReport({
             ...report1[0],
@@ -179,12 +168,7 @@ const ReportSingle = () => {
     }
   }, [reports, refresh, refreshCurrent, refreshRaw]);
 
-  // const irrelevant = state.isIrrelevant;
-  // const dangerous = state.isDangerous;
-  // const cleanDataboolean = state.cleanData;
-  // console.log(irrelevant, 'irrelevant');
-  // console.log(dangerous, 'dangerous');
-  // console.log(cleanDataboolean, 'report status');
+
 
   return (
     <div className="mb-[2rem]">
@@ -206,8 +190,6 @@ const ReportSingle = () => {
             incidentDescription={
               uncategorizedData?.summary?.incidentDescription
             }
-            // update={refreshRaw}
-            // role={user?.role}
             color={reports2 ? true : false}
           />
           {user?.role === Role.CLEANER && reports && (
@@ -230,13 +212,11 @@ const ReportSingle = () => {
               refreshCurrent={refreshCurrentHandler}
             />
           )}
-          {/* : (
-        <CategorizeDataForm />) */}
         </div>
       )}
 
       {load && (
-       <p className='flex items-center justify-center text-5xl'>loading...</p>
+        <p className="flex items-center justify-center text-5xl">loading...</p>
       )}
     </div>
   );

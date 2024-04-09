@@ -18,23 +18,18 @@ import { reportType, reportType2 } from '@/utils/shared-types';
 import AuthService from '@/services/authService';
 import { useAuth } from '@/app/hooks/useAuth';
 import ReportCard from '../report-card/ReportCard';
+import { DecodeToken } from '../../../login/components/DecodeToken';
+import { removeUserCookies, setUserCookies } from '@/cookies/cookies';
 
 const ReportsRiskManager = () => {
   const [status, setStatut] = useState(Category.Dangerous);
   const { user } = useAuth();
-  const [token, setToken] = useState<string | undefined>();
+  const [token, setToken] = useState('');
   const [refresh, setRefresh] = useState(true);
 
 
   const [reports, setReport] = useState<reportType2[]>([]);
-  // const { report, setReports } = UseReport();
-  // const ctx = useContext(AuthContext);
-  //  useEffect(() => {
-  //    const response = new AuthService().refreshToken().catch((error) => {
-  //      console.log('error', error);
-  //      // removeUserCookies();
-  //    });
-  //  }, []);
+
   const getReport = async (token: string) => {
     const options = {
       method: 'GET',
@@ -88,19 +83,40 @@ const ReportsRiskManager = () => {
         });
     } catch (error) {}
   };
-  useEffect(() => {
-    if (refresh) {
-      
-      getReport(user?.token!);
-      setRefresh(false);
-     
-    }
-    if (!refresh) {
-      setTimeout(() => {
-        setRefresh(true);
-      }, 10000);
-    }
-  }, [refresh]);
+ useEffect(() => {
+   if (token.length == 0 && refresh) {
+     const response = new AuthService()
+       .refreshToken()
+       .then((result) => {
+         if (result.status === 201) {
+           const user = DecodeToken(result.headers.authorization);
+           setToken(result.headers.authorization);
+
+           user.then((result1) => {
+             if (typeof result1 == 'object') {
+               setUserCookies({
+                 ...result1,
+                 token: result.headers.authorization,
+               });
+             }
+           });
+         }
+       })
+       .catch((error) => {
+         removeUserCookies();
+         window.location.href = '/en/login';
+       });
+   }
+   if (refresh && token.length > 0) {
+     getReport(token);
+     setRefresh(false);
+   }
+   if (!refresh && token.length > 0) {
+     setTimeout(() => {
+       setRefresh(true);
+     }, 10000);
+   }
+ }, [refresh, token]);
   return (
     <div className="w-full relative  h-fit">
       <h1 className="text-2xl font-bold my-8">All reports</h1>
