@@ -38,7 +38,7 @@ const Home = () => {
         .request(options)
         .then(function (response) {
           const { data } = response;
-          console.log('data', data);
+          
           let report1: reportType2[] = [];
           if (user?.role === 3 && data.length > 0) {
             const report = data.reverse().filter((item: reportType) => {
@@ -75,7 +75,7 @@ const Home = () => {
                 }
               }
             });
-            console.log('report.reverse()', report1);
+           
 
             if (report1.length < 6 && report1.length > 0) {
               setReport(report1);
@@ -95,7 +95,7 @@ const Home = () => {
                   (item.updatereport[0].category &&
                     item.updatereport[0].category.length == 0))
               ) {
-                console.log('okir', item._id);
+               
 
                 const item2 = { ...item };
                 delete item.updatereport;
@@ -158,7 +158,7 @@ const Home = () => {
           }
         })
         .catch(function (error) {
-          console.error(error);
+         
         
         });
     } catch (error) {
@@ -191,9 +191,15 @@ const Home = () => {
           }
         })
         .catch((error) => {
+         if (typeof error.response.data.message == 'string') {
+           if (error.response.data.message !== 'Too Many Requests.') {
+             removeUserCookies();
+             window.location.href = '/en/login';
+           }
+         }
+          // console.log(error.response.data.message);
           
-          removeUserCookies();
-          window.location.href = '/en/login';
+       
         });
     }
     if (refresh && token.length > 0) {

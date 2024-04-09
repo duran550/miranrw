@@ -76,7 +76,7 @@ const ReportActions: React.FC<ReportActionProps> = (whatHappened) => {
   };
   // to be used
   // const Toastify = () => toast('Here is your toast.');
-  console.log(whatHappened.text);
+
 
   // Toggle isDangerous
   const toggleIsDangerous = () => {

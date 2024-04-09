@@ -194,7 +194,7 @@ const CategorizeDataForm: React.FC<{
                   key={index}
                   className="border rounded-xl p-4 border-gray-300 w-full font-bold"
                 >
-                  <h1 className="text-[#828B8C] text-lg">{item}</h1>
+                  <h1 className="text-[#828B8C] text-lg mb-4">{item}</h1>
                   <div className="grid grid-cols-[repeat(auto-fit,minmax(50px,150px))]">
                     {report.category2?.map((item2: string) => {
                       if (item2.split('/')[1] == item) {

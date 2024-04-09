@@ -19,7 +19,9 @@ export async function POST(request: any) {
   // Validate the request body
   let pass= await rateLimitMiddleware(request)
   if (!pass) return NextResponse.json({ status: 'Error', message: 'Too Many Requests.' }, { status: 400 });
-  const {error, value} = await user_login_schema.validate(await request.json())
+  const { error, value } = await user_login_schema.validate(await request.json())
+  console.log('error',error);
+  
   if(error) return NextResponse.json({ message: error.details[0].message }, { status: 400 });
   
   let { password, email} = value;

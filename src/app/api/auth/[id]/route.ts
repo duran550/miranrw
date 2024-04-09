@@ -26,7 +26,7 @@ export async function GET(request: any) {
       response.headers.set('Authorization', token)
       return response
   } catch (error) {
-      console.log('accessToken222', error);
+    
     
       return NextResponse.json({ status: 'Error', message: 'Invalid refresh token.' }, { status: 400 });
     }

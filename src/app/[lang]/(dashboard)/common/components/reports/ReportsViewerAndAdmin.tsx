@@ -26,7 +26,9 @@ const ReportsViewerAndAdmin = () => {
   const [token, setToken] = useState('');
   const [refresh, setRefresh] = useState(true);
 
- 
+ const [load, setLoad] = useState(true);
+ const [error, setError] = useState(false);
+ const [errorMessage, setErrorMessage] = useState('');
   const [reports, setReport] = useState<reportType2[]>([]);
 
   const getReport = async (token: string) => {
@@ -46,14 +48,14 @@ const ReportsViewerAndAdmin = () => {
       await axios
         .request(options)
         .then((result) => {
-          console.log('report', result.data);
+          
           const report = result.data.filter((item: reportType) => {
            if (
              item.updatereport &&
              item.updatereport.length > 0 &&
              (item.updatereport[0].status?.toLocaleLowerCase() == 'cleaned')
            ) {
-             console.log(item.updatereport);
+            
              
              const item2 = {...item};
              delete item.updatereport;
@@ -76,10 +78,14 @@ const ReportsViewerAndAdmin = () => {
           });
           
           setReport(report1.reverse());
+           setLoad(false);
+           setError(false);
          
         })
         .catch((error) => {
           console.log(error);
+           setLoad(false);
+           setError(true);
         });
     } catch (error) {}
   };
@@ -100,11 +106,20 @@ const ReportsViewerAndAdmin = () => {
                 });
               }
             });
+            setError(false)
           }
         })
         .catch((error) => {
-          removeUserCookies();
-          window.location.href = '/en/login';
+            setLoad(false);
+            setErrorMessage(error.response.data.message);
+            setError(true);
+
+            if (typeof error.response.data.message == 'string') {
+              if (error.response.data.message !== 'Too Many Requests.') {
+                removeUserCookies();
+                window.location.href = '/en/login';
+              }
+            }
         });
     }
     if (refresh && token.length > 0) {
@@ -123,44 +138,52 @@ const ReportsViewerAndAdmin = () => {
       <h2 className="font-bold  opacity-80">{`${status} Data`}</h2>
       <p className="text-sm opacity-70">Click to view data details</p>
       <div className="mt-8">
-        <div className="grid grid-cols-3 gap-5 max-h-[60vh] overflow-y-auto overscroll-none no-scrollbar">
-          {reports.length > 0 &&
-            reports.map((item, index) => {
-              if (status == Category.Uncategorized) {
-                if (
-                 
-                  item.category2 &&
-                  item.category2.length == 0
-                ) {
-                  return (
-                    <ReportCard
-                      key={item._id}
-                      title={item._id ? item._id : 'PT0124'}
-                      date={item.createdAt ? item.createdAt : ''}
-                      href={`/dashboard/cleaned-reports/${item._id}`}
-                      reportType={Category.Uncategorized}
-                    />
-                  );
+        {!load && !error && (
+          <div className="grid grid-cols-3 gap-5 max-h-[60vh] overflow-y-auto overscroll-none no-scrollbar">
+            {reports.length > 0 &&
+              reports.map((item, index) => {
+                if (status == Category.Uncategorized) {
+                  if (item.category2 && item.category2.length == 0) {
+                    return (
+                      <ReportCard
+                        key={item._id}
+                        title={item._id ? item._id : 'PT0124'}
+                        date={item.createdAt ? item.createdAt : ''}
+                        href={`/dashboard/cleaned-reports/${item._id}`}
+                        reportType={Category.Uncategorized}
+                      />
+                    );
+                  }
+                } else {
+                  if (item.category2 && item.category2.length > 0) {
+                    return (
+                      <ReportCard
+                        key={item._id}
+                        title={item._id ? item._id : 'PT0124'}
+                        date={item.createdAt ? item.createdAt : ''}
+                        href={
+                          user && user?.role == 1
+                            ? `/dashboard/cleaned-reports/${item._id}`
+                            : '#'
+                        }
+                        reportType={Category.Categorized}
+                      />
+                    );
+                  }
                 }
-              } else {
-                if (item.category2 && item.category2.length > 0) {
-                  return (
-                    <ReportCard
-                      key={item._id}
-                      title={item._id ? item._id : 'PT0124'}
-                      date={item.createdAt ? item.createdAt : ''}
-                      href={
-                        user && user?.role == 1
-                          ? `/dashboard/cleaned-reports/${item._id}`
-                          : '#'
-                      }
-                      reportType={Category.Categorized}
-                    />
-                  );
-                }
-              }
-            })}
-        </div>
+              })}
+          </div>
+        )}
+        {load && (
+          <p className="flex items-center justify-center text-5xl h-full">
+            loading...
+          </p>
+        )}
+        {error && !load && (
+          <p className="flex items-center justify-center text-5xl h-full">
+            {errorMessage + ' waite a few moments for retry'}
+          </p>
+        )}
         {/* {status == Category.Uncategorized ? (
           <ReportContainCard
             href="/dashboard/cleaned-reports"

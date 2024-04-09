@@ -36,6 +36,7 @@ const ReportSingle = () => {
 
   const [load, setLoad] = useState(true);
   const [error, setError] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
 
 
   const refreshHandler = () => {
@@ -83,21 +84,7 @@ const ReportSingle = () => {
                   ? [...report.updatereport[0].category]
                   : undefined,
             });
-            console.log('reports2', {
-              ...report1[0],
-              status2:
-                report.updatereport && report.updatereport[0].status
-                  ? report.updatereport[0].status
-                  : 'pending',
-              description2:
-                report.updatereport && report.updatereport[0].description
-                  ? report.updatereport[0].description
-                  : undefined,
-              category2:
-                report.updatereport && report.updatereport[0].category
-                  ? [...report.updatereport[0].category]
-                  : undefined,
-            });
+         
           } else {
             setReport2(undefined);
           }
@@ -127,10 +114,11 @@ const ReportSingle = () => {
           setRefreshCurrent(false);
           setLoad(false);
         })
-        .then((error) => {
+        .catch((error:any) => {
           console.log(error);
           setLoad(false);
           setError(true)
+          setErrorMessage(error.response.data.message);
         });
     }
 
@@ -164,11 +152,11 @@ const ReportSingle = () => {
           setRefresh(false);
           setLoad(false);
         })
-        .then((error) => {
+        .catch((error: any) => {
           console.log(error);
           setLoad(false);
           setError(true);
-
+          setErrorMessage(error.response.data.message);
         });
     }
   }, [reports, refresh, refreshCurrent, refreshRaw]);
@@ -227,7 +215,7 @@ const ReportSingle = () => {
       )}
       {error && !load && (
         <p className="flex items-center justify-center text-5xl h-full">
-          Something wrong try later...
+          {errorMessage+' waite a few moments for retry'}
         </p>
       )}
     </div>

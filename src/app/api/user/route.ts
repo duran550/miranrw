@@ -8,15 +8,13 @@ import { authenticate } from '../utils/decode';
 import { rateLimitMiddleware } from '../utils/limiter';
 
 export async function POST(request: any) {
-  let pass = await rateLimitMiddleware(request);
-  if (!pass)
-    return NextResponse.json(
-      { status: 'Error', message: 'Too Many Requests.' },
-      { status: 400 }
-    );
+  let pass= await rateLimitMiddleware(request)
+  if (!pass) return NextResponse.json({ status: 'Error', message: 'Too Many Requests.' }, { status: 400 });
   let flag = await authenticate(request)
   if (!flag) return NextResponse.json({ status: 'Error', message: 'Access Denied. Invalid Token.' }, { status: 400 });
   const {error, value} = await create_user_schema.validate(await request.json())
+  console.log(error);
+  
   if(error) return NextResponse.json({ message: error.details[0].message }, { status: 400 });
   let { fullname, password, email, role } = value;
   await dbConnect();

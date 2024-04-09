@@ -57,7 +57,7 @@ const CleanData: FC<ClientDataProps> = ({
   let description: string = watch('description');
 
   const updateReport = () => {
-    console.log(description);
+  
 
     const report = new ReportService()
       .updateReport(urlSplit[urlSplit.length - 1], {
