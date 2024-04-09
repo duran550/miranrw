@@ -12,7 +12,7 @@ export default class ReportService extends DataService {
   };
 
   getAllReport = (): Promise<{
-    data: { reports: reportType[] };
+    data:  reportType[] ;
     status: number;
   }> => {
     return this.get('/api/report');

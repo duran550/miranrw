@@ -15,7 +15,7 @@ import { getAllUsers } from '@/services/userService';
 import { useAuth } from '@/app/hooks/useAuth';
 import { Role } from '@/utils/utils';
 import ReportService from '@/services/reportService';
-import { reportType } from '@/utils/shared-types';
+import { reportType, reportType2 } from '@/utils/shared-types';
 import ReportSummaryCleanData from './reports-cleaner/report-summary/ReportSummaryCleanData';
 import { AdminContext } from '../../context/AdminContext';
 
@@ -25,21 +25,22 @@ const ReportSingle = () => {
 
   const { uncategorizedData } = useFindReport();
   const { user } = useAuth();
-  const [reports, setReport] = useState<reportType | undefined>();
-  const [reports2, setReport2] = useState<reportType | undefined>();
+  const [reports, setReport] = useState<reportType2 | undefined>();
+  const [reports2, setReport2] = useState<reportType2 | undefined>();
 
   const [refresh, setRefresh] = useState(false);
   const [refreshRaw, setRefreshRaw] = useState(false);
 
   const [refreshCurrent, setRefreshCurrent] = useState(false);
-  const { state, dispatch } = useContext(AdminContext);
+  // const { state, dispatch } = useContext(AdminContext);
 
-  const [send, setsend] = useState(false);
+  const [load, setLoad] = useState(false);
 
   const refreshHandler = () => {
     // alert('ok')
     setRefresh(true);
     setRefreshRaw(false);
+    
   };
 
   const refreshCurrentHandler = () => {
@@ -50,62 +51,140 @@ const ReportSingle = () => {
   };
   useEffect(() => {
     if (!reports || refreshCurrent) {
+      setLoad(true);
       const response = new ReportService()
         .getAllReport()
         .then((result) => {
-          // console.log('report', result.data.reports);
-          const report = result.data.reports.filter(
+          // console.log('report', result.data);
+          const report1 = result.data.filter(
             (item) => item._id == urlSplit[urlSplit.length - 1]
           );
-          // if (report[0].status!=='pending') {
-          //   window.location.href='dashboard/clean-data'
-          // }
-          if (report[0] && report[0].status == 'cleaned') {
-            setReport2(report[0]);
+
+          if (
+            report1[0] &&
+            report1[0].updatereport &&
+            report1[0].updatereport.length > 0 &&
+            report1[0].updatereport[0].status &&
+            report1[0].updatereport[0].status == 'cleaned' &&
+            user?.role == 3
+          ) {
+            // console.log('report1',report1[0].updatereport);
+
+            const report = { ...report1[0] };
+            delete report1[0].updatereport;
+            // console.log('report1', report?.updatereport[0].status!);
+
+            setReport2({
+              ...report1[0],
+              status2:
+                report.updatereport && report.updatereport[0].status
+                  ? report.updatereport[0].status
+                  : 'pending',
+              description2:
+                report.updatereport && report.updatereport[0].description
+                  ? report.updatereport[0].description
+                  : undefined,
+              category2:
+                report.updatereport && report.updatereport[0].category
+                  ? [...report.updatereport[0].category]
+                  : undefined,
+            });
+            console.log('reports2', {
+              ...report1[0],
+              status2:
+                report.updatereport && report.updatereport[0].status
+                  ? report.updatereport[0].status
+                  : 'pending',
+              description2:
+                report.updatereport && report.updatereport[0].description
+                  ? report.updatereport[0].description
+                  : undefined,
+              category2:
+                report.updatereport && report.updatereport[0].category
+                  ? [...report.updatereport[0].category]
+                  : undefined,
+            });
           } else {
             setReport2(undefined);
           }
-          setReport(report[0]);
+          const report = { ...report1[0] };
+          //  report1[0] &&
+          //    report1[0].updatereport &&
+          //    delete report1[0].updatereport;
+
+          setReport({
+            ...report1[0],
+            status2:
+              report.updatereport &&
+              report.updatereport.length > 0 &&
+              report.updatereport[0].status
+                ? report.updatereport[0].status
+                : 'pending',
+            description2:
+              report.updatereport &&
+              report.updatereport.length > 0 &&
+              report.updatereport[0].description
+                ? report.updatereport[0].description
+                : undefined,
+            category2:
+              report.updatereport &&
+              report.updatereport.length > 0 &&
+              report.updatereport[0].category
+                ? [...report.updatereport[0].category]
+                : [],
+          });
           setRefreshCurrent(false);
-          //  setReports(result.data.reports);
-          //  setReports();
+          setLoad(false);
         })
         .then((error) => {
           console.log(error);
+          setLoad(false);
         });
     }
 
     if (refresh) {
+      setLoad(true);
+
       const response = new ReportService()
         .getAllReport()
         .then((result) => {
-          // console.log('report', result.data.reports);
-          //  console.log(pathname.split('/'));
-
-          const report = result.data.reports.filter(
+          const report1 = result.data.filter(
             (item) => item._id == urlSplit[urlSplit.length - 1]
           );
-          // console.log('report', report);
+          const report = { ...report1[0] };
+          report1[0].updatereport && delete report1[0].updatereport;
 
-          setReport2(report[0]);
+          setReport2({
+            ...report1[0],
+            status2:
+              report.updatereport && report.updatereport[0].status
+                ? report.updatereport[0].status
+                : 'pending',
+            description2:
+              report.updatereport && report.updatereport[0].description
+                ? report.updatereport[0].description
+                : undefined,
+            category2:
+              report.updatereport && report.updatereport[0].category
+                ? [...report.updatereport[0].category]
+                : undefined,
+          });
           setRefresh(false);
-          //  setReports(result.data.reports);
-          //  setReports();
+          setLoad(false);
         })
         .then((error) => {
           console.log(error);
+          setLoad(false);
         });
     }
-   
-  }, [reports, refresh, refreshCurrent,refreshRaw]);
-  // console.log('refreshRaw',refreshRaw);
+  }, [reports, refresh, refreshCurrent, refreshRaw]);
 
-  const irrelevant = state.isIrrelevant;
-  const dangerous = state.isDangerous;
-  const cleanDataboolean = state.cleanData;
-  console.log(irrelevant, 'irrelevant');
-  console.log(dangerous, 'dangerous');
-  console.log(cleanDataboolean, 'report status');
+  // const irrelevant = state.isIrrelevant;
+  // const dangerous = state.isDangerous;
+  // const cleanDataboolean = state.cleanData;
+  // console.log(irrelevant, 'irrelevant');
+  // console.log(dangerous, 'dangerous');
+  // console.log(cleanDataboolean, 'report status');
 
   return (
     <div className="mb-[2rem]">
@@ -120,32 +199,45 @@ const ReportSingle = () => {
         <Header href="/dangerous-reports" title="Data Info" />
       )}
 
-      <div className="flex  gap-x-6 h-full">
-        <ReportSummary
-          report={reports}
-          incidentDescription={uncategorizedData?.summary?.incidentDescription}
-          // update={refreshRaw}
-          // role={user?.role}
-          color={reports2 ? true : false}
-        />
-        {user?.role === Role.CLEANER && reports && (
-          <ReportActions
-            text={
-              !reports2?.description
-                ? reports?.description
-                : reports2.description
+      {!load && (
+        <div className="flex  gap-x-6 h-full">
+          <ReportSummary
+            report={reports}
+            incidentDescription={
+              uncategorizedData?.summary?.incidentDescription
             }
-            WhatHappened={uncategorizedData?.summary.incidentDescription}
-            report={reports2}
-            refresh={refreshHandler}
-            refreshCurrent={refreshCurrentHandler}
-            action={reports ? reports.status : 'pending'}
+            // update={refreshRaw}
+            // role={user?.role}
+            color={reports2 ? true : false}
           />
-        )}
-        {user?.role == Role.ADMIN && <CategorizeDataForm report={reports} />}
-        {/* : (
+          {user?.role === Role.CLEANER && reports && (
+            <ReportActions
+              text={
+                !reports2?.description
+                  ? reports?.description
+                  : reports2.description
+              }
+              WhatHappened={uncategorizedData?.summary.incidentDescription}
+              report={reports2}
+              refresh={refreshHandler}
+              refreshCurrent={refreshCurrentHandler}
+              action={reports.status2 ? reports.status2 : 'pending'}
+            />
+          )}
+          {user?.role == Role.ADMIN && (
+            <CategorizeDataForm
+              report={reports}
+              refreshCurrent={refreshCurrentHandler}
+            />
+          )}
+          {/* : (
         <CategorizeDataForm />) */}
-      </div>
+        </div>
+      )}
+
+      {load && (
+       <p className='flex items-center justify-center text-5xl'>loading...</p>
+      )}
     </div>
   );
 };

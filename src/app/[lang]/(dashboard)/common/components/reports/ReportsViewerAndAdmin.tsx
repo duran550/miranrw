@@ -12,7 +12,7 @@ import {
   reportsCardTableUncategorized,
 } from '../../../dashboard/reports/reportsCardDatas';
 import { Category } from '../report-card/reportCard.d';
-import { reportType } from '@/utils/shared-types';
+import { reportType, reportType2 } from '@/utils/shared-types';
 import { useAuth } from '@/app/hooks/useAuth';
 import AuthService from '@/services/authService';
 import axios from 'axios';
@@ -25,7 +25,7 @@ const ReportsViewerAndAdmin = () => {
   const [refresh, setRefresh] = useState(true);
 
   // const [status, setStatut] = useState(Category.Raw);
-  const [reports, setReport] = useState<reportType[]>([]);
+  const [reports, setReport] = useState<reportType2[]>([]);
   // const { report, setReports } = UseReport();
   // const ctx = useContext(AuthContext);
   // useEffect(() => {
@@ -46,18 +46,42 @@ const ReportsViewerAndAdmin = () => {
     };
 
     try {
+      let report1: reportType2[] = [];
+
       await axios
         .request(options)
         .then((result) => {
-          console.log('report', result.data.reports);
-          const report = result.data.reports.filter((item: reportType) => {
-            if (item && item.status == 'cleaned') {
-              return item;
-            }
+          console.log('report', result.data);
+          const report = result.data.filter((item: reportType) => {
+           if (
+             item.updatereport &&
+             item.updatereport.length > 0 &&
+             (item.updatereport[0].status?.toLocaleLowerCase() == 'cleaned')
+           ) {
+             console.log(item.updatereport);
+             
+             const item2 = {...item};
+             delete item.updatereport;
+             report1.push({
+               ...item,
+               status2:
+                 item2.updatereport && item2.updatereport[0].status
+                   ? item2.updatereport[0].status
+                   : 'pending',
+               description2:
+                 item2.updatereport && item2.updatereport[0].description
+                   ? item2.updatereport[0].description
+                   : undefined,
+               category2:
+                 item2.updatereport && item2.updatereport[0].category
+                   ? [...item2.updatereport[0].category]
+                   : [],
+             });
+           }
           });
-          setReport(report.reverse());
-          //  setReports(result.data.reports);
-          //  setReports();
+          
+          setReport(report1.reverse());
+         
         })
         .catch((error) => {
           console.log(error);
@@ -66,10 +90,10 @@ const ReportsViewerAndAdmin = () => {
   };
   useEffect(() => {
     if (refresh) {
-      //  console.log(1);
+      
       getReport(user?.token!);
       setRefresh(false);
-      //  getReport();
+    
     }
     if (!refresh) {
       setTimeout(() => {
@@ -88,9 +112,9 @@ const ReportsViewerAndAdmin = () => {
             reports.map((item, index) => {
               if (status == Category.Uncategorized) {
                 if (
-                  item &&
-                  item.category &&
-                  item.category.length == 0
+                 
+                  item.category2 &&
+                  item.category2.length == 0
                 ) {
                   return (
                     <ReportCard
@@ -103,11 +127,7 @@ const ReportsViewerAndAdmin = () => {
                   );
                 }
               } else {
-                if (
-                  item &&
-                  item.category &&
-                  item.category.length > 0
-                ) {
+                if (item.category2 && item.category2.length > 0) {
                   return (
                     <ReportCard
                       key={item._id}

@@ -26,11 +26,18 @@ export async function GET(request: any) {
  let data: any = await UpdateReport.find();
  let role= user.role
  if(role==4){
-  let reports: reportType[] = await Report.find({status: 'dangerous'}).populate('updatereport');
+  let reports: reportType[] = await Report.find({status: 'Dangerous'}).populate('updatereport');
   return NextResponse.json(reports);
  }
  if(role==3){
-  let reports: reportType[] = await Report.find({$or: [{status: 'pending'}, {status: 'irrelevant'}]})
+  let reports: reportType[] = await Report.find({
+    $or: [
+      { status: 'pending' },
+      { status: 'Irrelevant' },
+      { status: 'cleaned' },
+      { status: 'Dangerous' },
+    ],
+  }).populate('updatereport');
   return NextResponse.json(reports);
  }
 
