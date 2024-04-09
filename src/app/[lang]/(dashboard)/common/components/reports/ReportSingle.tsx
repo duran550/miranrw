@@ -162,7 +162,6 @@ const ReportSingle = () => {
   }, [reports, refresh, refreshCurrent, refreshRaw]);
 
 
-
   return (
     <div className="mb-[2rem]">
       {user && user.role == 3 && (
