@@ -14,10 +14,10 @@ export const create_user_schema = Joi.object({
 
 
 export const user_login_schema = Joi.object({
-    password: Joi.string()
-        .pattern(new RegExp('^(?=.*\d)(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z]).{8,}$')),
+    password: Joi.string(),
+        // .pattern(new RegExp('^(?=.*\d)(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z]).{8,}$')),
     email: Joi.string()
-        .email({ minDomainSegments: 2, tlds: { allow: ['com', 'net'] } })
+        // .email({ minDomainSegments: 2, tlds: { allow: ['com', 'net'] } })
 })
 
 
