@@ -37,8 +37,8 @@ function DeleteUser({ lang, refresh }: DelUserPros) {
   const { state } = useContext(AdminContext);
   const { clientInfo } = state;
 
-  console.log(clientInfo?._id, 'this is my client info');
-  console.log('user_user', user);
+  // console.log(clientInfo?._id, 'this is my client info');
+  // console.log('user_user', user);
 
   // get All Clients
   useEffect(() => {
@@ -56,7 +56,6 @@ function DeleteUser({ lang, refresh }: DelUserPros) {
 
   // code to delete user
   const deleteUser = async (userId: any) => {
-    console.log(userId, 'this is my userId');
     try {
       const response = await fetch(`/api/user/${userId}`, {
         method: 'DELETE',

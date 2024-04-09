@@ -41,7 +41,7 @@ let organizationTypeFreeField: string= watch('organizationTypeFreeField')
   useScrollOnTop();
 
   useEffect(() => {
-    console.log(organizationTypeFreeField, 'orga');
+   
 
     if (
       !organizationType ||

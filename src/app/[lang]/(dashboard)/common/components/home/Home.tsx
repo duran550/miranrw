@@ -10,142 +10,218 @@ import AuthService from '@/services/authService';
 import { Result } from 'postcss';
 import ReportService, { getAllReport } from '@/services/reportService';
 import { ReportType } from '../../../dashboard/reports/reportSummaryType';
-import { reportType } from '@/utils/shared-types';
+import { reportType, reportType2 } from '@/utils/shared-types';
 import { error } from 'console';
-import { removeUserCookies } from '@/cookies/cookies';
+import { removeUserCookies, setUserCookies } from '@/cookies/cookies';
 import axios from 'axios';
+import { DecodeToken } from '../../../login/components/DecodeToken';
 
 const Home = () => {
   const { user } = useAuth();
-  const [refresh,setRefresh]=useState(true)
-  const [report, setReport] = useState<reportType[]>([])
+  const [refresh, setRefresh] = useState(true);
+  const [token, setToken] = useState('');
+  const [report, setReport] = useState<reportType2[]>([]);
+
   const getReport = async (token: string) => {
-      const options = {
-        method: 'GET',
-        url: '/api/report',
+    const options = {
+      method: 'GET',
+      url: '/api/report',
 
-        headers: {
-          Authorization: `${token}`,
-          'content-type': 'application/json',
-        },
-      };
+      headers: {
+        Authorization: `${token}`,
+        'content-type': 'application/json',
+      },
+    };
 
-      try {
-        await axios
-          .request(options)
-          .then(function (response) {
-            const { data } = response;
-            console.log('data', data.reports);
-             if (user?.role === 3 && data.reports.length > 0) {
-               const report = data.reports
-                 .reverse()
-                 .filter((item: reportType) => {
-                   if (
-                     
-                     (item &&
-                       item.status == 'pending')
-                   ) {
-                     return item;
-                   }
-                 });
-               console.log('report.reverse()', report);
-
-               if (report.length < 6 && report.length > 0) {
-                 setReport(report);
-               } else {
-                 setReport(report.slice(0, 5));
-               }
-             }
-
-             if (
-               (user?.role === 1 || user?.role == 2) &&
-               data.reports.length > 0
-             ) {
-               const report = data.reports
-                 .reverse()
-                 .filter((item: reportType) => {
-                   if (
-                     item &&
-                     item.status == 'cleaned'
-                   ) {
-                     return item;
-                   }
-                 });
-               if (report.length < 6 && report.length > 0) {
-                 setReport(report);
-               } else {
-                 setReport(report.slice(0, 5));
-               }
-             }
-
-             if (user?.role === 4 && data.reports.length > 0) {
-               const report = data.reports
-                 .reverse()
-                 .filter((item: reportType) => {
-                   if (
-                     item &&
-                     item.status == 'Dangerous'
-                   ) {
-                     return item;
-                   }
-                 });
-               if (report.length < 6 && report.length > 0) {
-                 setReport(report);
-               } else {
-                 setReport(report.slice(0, 5));
-               }
-             }
+    try {
+      await axios
+        .request(options)
+        .then(function (response) {
+          const { data } = response;
+          
+          let report1: reportType2[] = [];
+          if (user?.role === 3 && data.length > 0) {
+            const report = data.reverse().filter((item: reportType) => {
+              if (
+                item.updatereport &&
+                item.updatereport.length > 0 &&
+                item.updatereport[0].status &&
+                item.updatereport[0].status == 'pending'
+              ) {
+                const item2 = { ...item };
+                delete item.updatereport;
+                report1.push({
+                  ...item,
+                  status2:
+                    item2.updatereport && item2.updatereport[0].status
+                      ? item2.updatereport[0].status
+                      : 'pending',
+                  description2:
+                    item2.updatereport && item2.updatereport[0].description
+                      ? item2.updatereport[0].description
+                      : undefined,
+                  category2:
+                    item2.updatereport && item2.updatereport[0].category
+                      ? [...item2.updatereport[0].category]
+                      : undefined,
+                });
+              } else {
+                if (
+                  !item.updatereport ||
+                  (item.updatereport && item.updatereport.length === 0)
+                ) {
+                  delete item.updatereport;
+                  report1.push({ ...item });
+                }
+              }
+            });
            
-          })
-          .catch(function (error) {
-            console.error(error);
-            //  setIsLoad(false);
-          });
-      } catch (error) {
-        // setIsLoad(false);
-      }
-   
-    setRefresh(false)
-   
-  }
 
-  // useEffect(() => {
-  //   const response = new AuthService().refreshToken().catch((error) => {
-  //     console.log('error', error);
-  //     //  removeUserCookies()
+            if (report1.length < 6 && report1.length > 0) {
+              setReport(report1);
+            } else {
+              setReport(report1.slice(0, 5));
+            }
+          }
 
-      
-  //   })
- 
+          if ((user?.role === 1 || user?.role == 2) && data.length > 0) {
+            const report = data.reverse().filter((item: reportType) => {
+              if (
+                item.updatereport &&
+                item.updatereport.length > 0 &&
+                item.updatereport[0].status &&
+                item.updatereport[0].status == 'cleaned' &&
+                (!item.updatereport[0].category ||
+                  (item.updatereport[0].category &&
+                    item.updatereport[0].category.length == 0))
+              ) {
+               
 
-  // },[])
- 
-  useEffect(() => {
-    if (refresh) {
+                const item2 = { ...item };
+                delete item.updatereport;
+                report1.push({
+                  ...item,
+                  status2:
+                    item2.updatereport && item2.updatereport[0].status
+                      ? item2.updatereport[0].status
+                      : 'pending',
+                  description2:
+                    item2.updatereport && item2.updatereport[0].description
+                      ? item2.updatereport[0].description
+                      : undefined,
+                  category2:
+                    item2.updatereport && item2.updatereport[0].category
+                      ? [...item2.updatereport[0].category]
+                      : [],
+                });
+              }
+            });
+            if (report1.length < 6 && report1.length > 0) {
+              setReport(report1);
+            } else {
+              setReport(report1.slice(0, 5));
+            }
+          }
+
+          if (user?.role === 4 && data.length > 0) {
+            const report = data.reverse().filter((item: reportType) => {
+              if (
+                item.updatereport &&
+                item.updatereport.length > 0 &&
+                item.updatereport[0].status &&
+                item.updatereport[0].status == 'Dangerous'
+              ) {
+                const item2 = { ...item };
+                delete item.updatereport;
+                report1.push({
+                  ...item,
+                  status2:
+                    item2.updatereport && item2.updatereport[0].status
+                      ? item2.updatereport[0].status
+                      : 'pending',
+                  description2:
+                    item2.updatereport && item2.updatereport[0].description
+                      ? item2.updatereport[0].description
+                      : undefined,
+                  category2:
+                    item2.updatereport && item2.updatereport[0].category
+                      ? [...item2.updatereport[0].category]
+                      : undefined,
+                });
+              }
+            });
+            if (report1.length < 6 && report1.length > 0) {
+              setReport(report1);
+            } else {
+              setReport(report1.slice(0, 5));
+            }
+          }
+        })
+        .catch(function (error) {
+         
+        
+        });
+    } catch (error) {
     
-       getReport(user?.token!)
-  setRefresh(false)
-  
     }
-    if (!refresh) {
+
+    setRefresh(false);
+  };
+
+ 
+
+  useEffect(() => {
+    if (token.length == 0 && refresh) {
+      const response = new AuthService()
+        .refreshToken()
+        .then((result) => {
+          if (result.status === 201) {
+            const user = DecodeToken(result.headers.authorization);
+            setToken(result.headers.authorization);
+
+            user.then((result1) => {
+              if (typeof result1 == 'object') {
+                
+                setUserCookies({
+                  ...result1,
+                  token: result.headers.authorization,
+                });
+              }
+            });
+          }
+        })
+        .catch((error) => {
+         if (typeof error.response.data.message == 'string') {
+           if (error.response.data.message !== 'Too Many Requests.') {
+             removeUserCookies();
+             window.location.href = '/en/login';
+           }
+         }
+          // console.log(error.response.data.message);
+          
+       
+        });
+    }
+    if (refresh && token.length > 0) {
+      getReport(token);
+      setRefresh(false);
+    }
+    if (!refresh && token.length > 0) {
       setTimeout(() => {
-        setRefresh(true)
-      }, 10000)
+        setRefresh(true);
+      }, 10000);
     }
-   
-   
-   
-  },[refresh])
+  }, [refresh, token]);
   return (
     <>
       {user?.role === Role.ADMIN ? (
         <HomeViewerAndAdmin report={report} />
       ) : user?.role === Role.VIEWER ? (
-        <HomeViewerAndAdmin report={report}/>
+        <HomeViewerAndAdmin report={report} />
       ) : user?.role === Role.CLEANER ? (
         <HomeCleaner report={report} />
       ) : (
-        user && <HomeRiskManager report={report}/>
+        user && <HomeRiskManager report={report} />
       )}
     </>
   );

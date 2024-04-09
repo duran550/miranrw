@@ -7,10 +7,10 @@ import TotalReportsIcon from '../../../../../../../public/icons/dashboard/totalR
 import NewReportsIcon from '../../../../../../../public/icons/dashboard/newReportsIcon.svg';
 import RecentActivitiesIcon from '../../../../../../../public/icons/dashboard/recentActivitiesIcon.svg';
 import { Category } from '../report-card/reportCard.d';
-import { reportType } from '@/utils/shared-types';
+import { reportType, reportType2 } from '@/utils/shared-types';
 import { useAuth } from '@/app/hooks/useAuth';
 
-const HomeViewerAndAdmin: React.FC<{ report?: reportType[] }> = ({
+const HomeViewerAndAdmin: React.FC<{ report?: reportType2[] }> = ({
   report,
 }) => {
   const { user } = useAuth();

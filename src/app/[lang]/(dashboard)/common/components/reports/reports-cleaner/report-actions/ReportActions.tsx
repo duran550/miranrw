@@ -15,7 +15,7 @@ import Image from 'next/image';
 import toast, { Toaster } from 'react-hot-toast';
 import Irrelevant from './action-modals/Irrelevant';
 import Dangerous from './action-modals/Dangerous';
-import { reportType } from '@/utils/shared-types';
+import { reportType, reportType2 } from '@/utils/shared-types';
 import ReportService from '@/services/reportService';
 import { usePathname } from 'next/navigation';
 
@@ -23,7 +23,7 @@ interface ReportActionProps {
   WhatHappened: string | any;
   refresh?: any;
   refreshCurrent?: any;
-  report?: reportType;
+  report?: reportType2;
   text?: string;
   action?: string;
 }
@@ -69,14 +69,14 @@ const ReportActions: React.FC<ReportActionProps> = (whatHappened) => {
       })
       .catch((error) => {
         console.log('error', error);
-        setIsload(true);
+        setIsload(false);
 
         // alert('ok');
       });
   };
   // to be used
   // const Toastify = () => toast('Here is your toast.');
-  console.log(whatHappened.text);
+
 
   // Toggle isDangerous
   const toggleIsDangerous = () => {
