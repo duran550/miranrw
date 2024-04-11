@@ -1,4 +1,6 @@
-import React, { FC, useState } from 'react';
+'use client';
+
+import React, { FC, useEffect, useState } from 'react';
 import CustomModal from '@/app/components/modal/Modal';
 import AnimateClick from '@/app/components/animate-click/AnimateClick';
 import { useFindReport } from '@/app/hooks/useFindReport';
@@ -11,12 +13,15 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 import AuthService from '@/services/authService';
 import toast, { Toaster } from 'react-hot-toast';
 import Password from 'antd/es/input/Password';
+import { getAllUsers } from '@/services/userService';
+import { useAuth } from '@/app/hooks/useAuth';
 
 interface ClientDataProps {
   onClose: () => void;
   isOpen: boolean;
   data?: string | any;
   refresh?: any;
+  addUser?: any;
 }
 
 interface IFormInput {
@@ -26,7 +31,24 @@ interface IFormInput {
   role: any;
 }
 
-const AddUser: FC<ClientDataProps> = ({ onClose, isOpen, data, refresh }) => {
+interface ClientInfoProps {
+  createdAt: string;
+  email: string;
+  fullname: string;
+  password: string;
+  role: number;
+  updatedAt: string;
+  __v: number;
+  _id: string;
+}
+
+const AddUser: FC<ClientDataProps> = ({
+  onClose,
+  isOpen,
+  data,
+  refresh,
+  addUser,
+}) => {
   const {
     watch,
     formState: { errors, isSubmitting, isDirty, isValid },
@@ -34,16 +56,22 @@ const AddUser: FC<ClientDataProps> = ({ onClose, isOpen, data, refresh }) => {
     reset,
     register,
   } = useForm<IFormInput>({ mode: 'onChange' || 'onBlur' || 'onSubmit' });
+  const [getUsers, setGetUsers] = useState<ClientInfoProps[] | any>([]);
+  const { user } = useAuth();
 
   const validatePassword = (value: any) => {
     if (!value) {
       return 'Password is required';
     }
-    if (!/^[a-zA-Z0-9]+$/.test(value)) {
-      return 'Password must be alphanumeric';
+    if (
+      !/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/.test(
+        value
+      )
+    ) {
+      return 'Password must contain at least one uppercase letter, one lowercase letter, one number, one special character, and be at least 8 characters long';
     }
     if (value.length < 5) {
-      return 'Password must be at least 5 characters long';
+      return 'Password must be at least 8 characters long';
     }
     return true;
   };
@@ -70,19 +98,54 @@ const AddUser: FC<ClientDataProps> = ({ onClose, isOpen, data, refresh }) => {
     return user;
   }
 
+  useEffect(() => {
+    async function fetchUsers(token: string) {
+      try {
+        const usersData = await getAllUsers(token);
+        setGetUsers(usersData.users);
+      } catch (error) {
+        console.error('Error fetching users:', error);
+      }
+    }
+
+    if (refresh || getUsers.length < 1) {
+      fetchUsers(user?.token!);
+      //  setRefresh(false);
+    }
+    // setClientInfo(selectedCell);
+  }, [getUsers]);
+
+  console.log(getUsers, 'this is my allUsers');
+
   const onSubmit: SubmitHandler<IFormInput> = async (data) => {
     const updatedUserObject = replaceRoleWithValue(data);
-    const response = new AuthService().register(updatedUserObject);
-    try {
-      const result = await response;
-      if (result.status === 201) {
-        refresh();
-        toast.success(`This user was Succesfully Added`);
-      }
-    } catch (error) {
-      console.log(error, 'this is an error');
-      toast.error(`This user was Could not be added`);
-    }
+    const response = new AuthService()
+      .register(updatedUserObject)
+      .then((result) => {
+        if (result.status === 201) {
+          // refresh();
+          console.log(result?.data.result, 'this is my response');
+          toast.success(`This user was Succesfully Added`);
+          addUser(result?.data.result);
+          // setGetUsers([...result?.data.result]);
+        }
+      })
+      .catch((error) => {
+        console.log(error, 'this is an error');
+        toast.error(`This user was Could not be added`);
+      });
+    // console.log(data, 'this is my submit data');
+    // try {
+    //   const result = await response;
+    //   if (result.status === 201) {
+    //     // refresh();
+    //     console.log(response, 'this is my response');
+    //     toast.success(`This user was Succesfully Added`);
+    //   }
+    // } catch (error) {
+    //   console.log(error, 'this is an error');
+    //   toast.error(`This user was Could not be added`);
+    // }
     reset();
   };
 
