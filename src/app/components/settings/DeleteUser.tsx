@@ -25,11 +25,12 @@ interface ClientInfoProps {
 interface DelUserPros {
   lang?: any;
   refresh?: any;
+  deleteUserHandler?: any;
 }
 
-function DeleteUser({ lang, refresh }: DelUserPros) {
+function DeleteUser({ lang, refresh, deleteUserHandler }: DelUserPros) {
   const [openModal, setOpenModal] = useState<boolean>(false);
-  const [getUsers, setGetUsers] = useState<ClientInfoProps[] | any>([]);
+  // const [getUsers, setGetUsers] = useState<ClientInfoProps[] | any>([]);
   const [deletedUserId, setDeletedUserId] = useState(null);
   const { user } = useAuth();
 
@@ -41,18 +42,18 @@ function DeleteUser({ lang, refresh }: DelUserPros) {
   // console.log('user_user', user);
 
   // get All Clients
-  useEffect(() => {
-    async function fetchUsers(token: string) {
-      try {
-        const usersData = await getAllUsers(token);
-        setGetUsers(usersData.users);
-      } catch (error) {
-        console.error('Error fetching users:', error);
-      }
-    }
+  // useEffect(() => {
+  //   async function fetchUsers(token: string) {
+  //     try {
+  //       const usersData = await getAllUsers(token);
+  //       setGetUsers(usersData.users);
+  //     } catch (error) {
+  //       console.error('Error fetching users:', error);
+  //     }
+  //   }
 
-    fetchUsers(user?.token!);
-  }, [deletedUserId]);
+  //   fetchUsers(user?.token!);
+  // }, [deletedUserId]);
 
   // code to delete user
   const deleteUser = async (userId: any) => {
@@ -66,10 +67,10 @@ function DeleteUser({ lang, refresh }: DelUserPros) {
 
       if (response.ok) {
         toast.success(`This user was Succesfully Deleted!`);
-        setGetUsers(
-          getUsers.filter((user: ClientInfoProps) => user._id !== userId)
-        );
-        refresh();
+        // setGetUsers(
+        //   getUsers.filter((user: ClientInfoProps) => user._id !== userId)
+        // );
+        deleteUserHandler(userId);
       } else {
         throw (
           (new Error('Failed to delete user'),

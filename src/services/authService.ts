@@ -28,7 +28,7 @@ export default class AuthService extends DataService {
   register = (
     data: { fullname: string; password: string; email: string; role: number },
     config?: any
-  ): Promise<{ data: { message: string }; status: number }> => {
+  ): Promise<{ data: { message: string; result: any }; status: number }> => {
     return this.post('/api/user/', data);
   };
 
