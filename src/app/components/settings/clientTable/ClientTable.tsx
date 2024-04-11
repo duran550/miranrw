@@ -107,7 +107,7 @@ export default function ClientTable() {
 
   const addUserHandler = (item: ClientInfoProps) => {
     const addUser = [...getUsers, item];
-    // addUser.push(item);
+    
     setGetUsers(addUser);
   };
 

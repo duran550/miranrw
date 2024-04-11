@@ -124,7 +124,7 @@ const AddUser: FC<ClientDataProps> = ({
       .then((result) => {
         if (result.status === 201) {
           // refresh();
-          console.log(result?.data.result, 'this is my response');
+          // console.log(result?.data.result, 'this is my response');
           toast.success(`This user was Succesfully Added`);
           addUser(result?.data.result);
           // setGetUsers([...result?.data.result]);

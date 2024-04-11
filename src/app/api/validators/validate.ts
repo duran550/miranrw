@@ -18,7 +18,7 @@ export const user_login_schema = Joi.object({
   ),
   email: Joi.string().email({
     minDomainSegments: 2,
-    tlds: { allow: ['com', 'net'] },
+    tlds: { allow: ['com', 'net', 'nrw'] },
   }),
 });
 
@@ -35,7 +35,7 @@ export const category_schema = Joi.object({
     .min(3)
     .max(30)
     .required()
-    .email({ minDomainSegments: 2, tlds: { allow: ['com', 'net'] } }),
+    .email({ minDomainSegments: 2, tlds: { allow: ['com', 'net', 'nrw'] } }),
 });
 
 export const category_option_schema = Joi.object({
@@ -45,7 +45,7 @@ export const category_option_schema = Joi.object({
     .min(3)
     .max(100)
     .required()
-    .email({ minDomainSegments: 2, tlds: { allow: ['com', 'net'] } }),
+    .email({ minDomainSegments: 2, tlds: { allow: ['com', 'net', 'nrw'] } }),
 });
 
 export const reset_password_schema = Joi.object({
