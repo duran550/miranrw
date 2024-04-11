@@ -38,18 +38,55 @@ const ReportSingle = () => {
   const [error, setError] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
 
+  const updateReport = (status: string) => {
+    reports?.status2 && delete reports.status2;
+    reports?.description2 && delete reports.description2;
+    reports?.category2 && delete reports.category2;
 
-  const refreshHandler = () => {
-    setRefresh(true);
-    setRefreshRaw(false);
-  };
+    setReport({
+      ...reports,
+      status2: status,
+      description2: undefined,
+      category2: [],
+    });
+      setReport2(undefined);
 
-  const refreshCurrentHandler = () => {
-    setRefreshCurrent(true);
-    setRefreshRaw(true);
   };
+   const CleanReport = (description: string) => {
+     reports?.status2 && delete reports.status2;
+     reports?.description2 && delete reports.description2;
+     reports?.category2 && delete reports.category2;
+
+     setReport2({
+       ...reports,
+       status2: 'cleaned',
+       description2: description,
+       category2: [],
+     });
+   };
+    const categorizeReport = (description: string, categorise:any[]) => {
+      reports?.status2 && delete reports.status2;
+      reports?.description2 && delete reports.description2;
+      reports?.category2 && delete reports.category2;
+
+      setReport({
+        ...reports,
+        status2: 'cleaned',
+        description2: description,
+        category2: categorise,
+      });
+    };
+  // const refreshHandler = () => {
+  //   setRefresh(true);
+  //   setRefreshRaw(false);
+  // };
+
+  // const refreshCurrentHandler = () => {
+  //   setRefreshCurrent(true);
+  //   setRefreshRaw(true);
+  // };
   useEffect(() => {
-    if (!reports || refreshCurrent) {
+    if (!reports) {
       setLoad(true);
       const response = new ReportService()
         .getAllReport()
@@ -84,7 +121,6 @@ const ReportSingle = () => {
                   ? [...report.updatereport[0].category]
                   : undefined,
             });
-         
           } else {
             setReport2(undefined);
           }
@@ -114,44 +150,6 @@ const ReportSingle = () => {
           setRefreshCurrent(false);
           setLoad(false);
         })
-        .catch((error:any) => {
-          console.log(error);
-          setLoad(false);
-          setError(true)
-          setErrorMessage(error.response.data.message);
-        });
-    }
-
-    if (refresh) {
-      setLoad(true);
-
-      const response = new ReportService()
-        .getAllReport()
-        .then((result) => {
-          const report1 = result.data.filter(
-            (item) => item._id == urlSplit[urlSplit.length - 1]
-          );
-          const report = { ...report1[0] };
-          report1[0].updatereport && delete report1[0].updatereport;
-
-          setReport2({
-            ...report1[0],
-            status2:
-              report.updatereport && report.updatereport[0].status
-                ? report.updatereport[0].status
-                : 'pending',
-            description2:
-              report.updatereport && report.updatereport[0].description
-                ? report.updatereport[0].description
-                : undefined,
-            category2:
-              report.updatereport && report.updatereport[0].category
-                ? [...report.updatereport[0].category]
-                : undefined,
-          });
-          setRefresh(false);
-          setLoad(false);
-        })
         .catch((error: any) => {
           console.log(error);
           setLoad(false);
@@ -159,7 +157,45 @@ const ReportSingle = () => {
           setErrorMessage(error.response.data.message);
         });
     }
-  }, [reports, refresh, refreshCurrent, refreshRaw]);
+
+    // if (refresh) {
+    //   setLoad(true);
+
+    //   const response = new ReportService()
+    //     .getAllReport()
+    //     .then((result) => {
+    //       const report1 = result.data.filter(
+    //         (item) => item._id == urlSplit[urlSplit.length - 1]
+    //       );
+    //       const report = { ...report1[0] };
+    //       report1[0].updatereport && delete report1[0].updatereport;
+
+    //       setReport2({
+    //         ...report1[0],
+    //         status2:
+    //           report.updatereport && report.updatereport[0].status
+    //             ? report.updatereport[0].status
+    //             : 'pending',
+    //         description2:
+    //           report.updatereport && report.updatereport[0].description
+    //             ? report.updatereport[0].description
+    //             : undefined,
+    //         category2:
+    //           report.updatereport && report.updatereport[0].category
+    //             ? [...report.updatereport[0].category]
+    //             : undefined,
+    //       });
+    //       setRefresh(false);
+    //       setLoad(false);
+    //     })
+    //     .catch((error: any) => {
+    //       console.log(error);
+    //       setLoad(false);
+    //       setError(true);
+    //       setErrorMessage(error.response.data.message);
+    //     });
+    // }
+  }, [reports, urlSplit, user?.role]);
 
 
   return (
@@ -193,15 +229,18 @@ const ReportSingle = () => {
               }
               WhatHappened={uncategorizedData?.summary.incidentDescription}
               report={reports2}
-              refresh={refreshHandler}
-              refreshCurrent={refreshCurrentHandler}
+              // refresh={refreshHandler}
+              // refreshCurrent={refreshCurrentHandler}
               action={reports.status2 ? reports.status2 : 'pending'}
+              updateReport={updateReport}
+              cleanReport={CleanReport}
             />
           )}
           {user?.role == Role.ADMIN && (
             <CategorizeDataForm
               report={reports}
-              refreshCurrent={refreshCurrentHandler}
+              // refreshCurrent={refreshCurrentHandler}
+              categoriseReport={categorizeReport}
             />
           )}
         </div>
