@@ -34,15 +34,16 @@ export async function GET(request: any) {
     $or: [
       { status: 'pending' },
       { status: 'Irrelevant' },
-      { status: 'cleaned' },
-      { status: 'Dangerous' },
+      { status: 'cleaned' }
     ],
   }).populate('updatereport');
   return NextResponse.json(reports);
  }
 
  if(role==1 || role==2){
-  let reports: reportType[] = await Report.find({$nor: [{status: 'pending'}]}).populate('updatereport');
+  let reports: reportType[] = await Report.find({
+    $nor: [{ status: 'pending' }],
+  }).populate('updatereport');
   return NextResponse.json(reports);
  }
  return NextResponse.json({ status: 'Error', message: 'Access Denied.' }, { status: 400 });
