@@ -26,6 +26,8 @@ interface ReportActionProps {
   report?: reportType2;
   text?: string;
   action?: string;
+  updateReport?: any;
+  cleanReport?: any;
 }
 
 const ReportActions: React.FC<ReportActionProps> = (whatHappened) => {
@@ -54,7 +56,10 @@ const ReportActions: React.FC<ReportActionProps> = (whatHappened) => {
       })
       .then((result) => {
         if (result.status == 200 || result.status == 201) {
-          whatHappened.refreshCurrent();
+         
+          
+          
+          whatHappened.updateReport(status);
           setTimeout(() => {
             if (status == 'Irrelevant') {
               setOpenIrrelevant(true), toggleIsIrrelevant();
@@ -102,6 +107,7 @@ const ReportActions: React.FC<ReportActionProps> = (whatHappened) => {
           setvisible={() => setVisible(true)}
           text={whatHappened.text}
           refresh={whatHappened.refresh}
+          cleanReport={whatHappened.cleanReport}
         />
       )}
       <Irrelevant
@@ -109,14 +115,12 @@ const ReportActions: React.FC<ReportActionProps> = (whatHappened) => {
           setOpenIrrelevant(false), setMarkedAsIrrelevant(true);
         }}
         isOpen={openIrrelevant}
-        refresh={whatHappened.refreshCurrent}
       />
       <Dangerous
         onClose={() => {
           setOpenDangerous(false), setMarkedAsDangerous(true);
         }}
         isOpen={openDangerous}
-        refresh={whatHappened.refreshCurrent}
       />
       {!whatHappened.report ? (
         <div>
@@ -182,7 +186,6 @@ const ReportActions: React.FC<ReportActionProps> = (whatHappened) => {
                     className="text-xs"
                     disabled={isLoad}
                     variant={isLoad ? 'disabled' : 'outlineWarning'}
-                    // variant="outlineWarning"
                     icon={DangerousIcon}
                     onClick={() => {
                       updateReport('Dangerous');
@@ -215,8 +218,7 @@ const ReportActions: React.FC<ReportActionProps> = (whatHappened) => {
               disabled={isLoad}
               icon={DangerousIcon}
               onClick={() => {
-                // setOpenDangerous(true),
-                //   toggleIsDangerous(),
+              
                 updateReport('Dangerous');
                 setMutateContent(false);
               }}
@@ -229,8 +231,6 @@ const ReportActions: React.FC<ReportActionProps> = (whatHappened) => {
               icon={IrrelevantIcon}
               disabled={isLoad}
               onClick={() => {
-                // setOpenIrrelevant(true),
-                //   toggleIsIrrelevant(),
                 updateReport('Irrelevant');
 
                 setMutateContent(false);

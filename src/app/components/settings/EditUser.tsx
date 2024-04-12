@@ -28,9 +28,10 @@ interface IFormInput {
 interface EditUserPros {
   lang?: any;
   refresh?: any;
+  editUser?: any;
 }
 
-function EditUser({ lang, refresh }: EditUserPros) {
+function EditUser({ lang, refresh, editUser }: EditUserPros) {
   const { state } = useContext(AdminContext);
   const { clientInfo } = state;
 
@@ -47,7 +48,10 @@ function EditUser({ lang, refresh }: EditUserPros) {
     setValue,
   } = useForm<IFormInput>();
 
-  const watchedRole = watch('role');
+  // const watchedRole = watch('role');
+  const email = watch('email');
+  const fullname = watch('fullname');
+  const role = watch('role');
 
   function replaceRoleWithValue(user: IFormInput | any) {
     switch (user?.role) {
@@ -115,8 +119,19 @@ function EditUser({ lang, refresh }: EditUserPros) {
         body: JSON.stringify(updatedData),
       });
       if (response.ok) {
+        const newUser = {
+          createdAt: clientInfo?.createdAt,
+          email: email,
+          fullname: fullname,
+          password: clientInfo?.password,
+          role: role,
+          updatedAt: clientInfo?.updatedAt,
+          __v: clientInfo?.__v,
+          _id: clientInfo?._id,
+        };
+        editUser(newUser);
         toast.success(`This user was Succesfully Updated`);
-        refresh();
+        // refresh();
       } else {
         throw new Error(`Failed to update ${clientInfo?.fullname}`);
       }
@@ -127,8 +142,6 @@ function EditUser({ lang, refresh }: EditUserPros) {
   };
 
   const options = ['Admin', 'Viewer', 'Cleaner', 'Risk-manager'];
-
-  // console.log(watchedRole, 'this is my role');
 
   return (
     <div>

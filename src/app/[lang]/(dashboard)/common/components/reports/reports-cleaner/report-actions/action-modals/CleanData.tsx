@@ -18,6 +18,7 @@ interface ClientDataProps {
   setvisible: () => void;
   text?: string;
   refresh?: any;
+  cleanReport?: any;
 }
 
 interface ClientDataFormValues {
@@ -32,19 +33,19 @@ const CleanData: FC<ClientDataProps> = ({
   setvisible,
   text,
   refresh,
+  cleanReport,
 }) => {
   const pathname = usePathname();
   const urlSplit = pathname.split('/');
   const { uncategorizedData } = useFindReport();
   const [cleanDataDynamicVal, setCleanDataDynamicVal] = useState(text!);
+  const [load, setLoad] = useState(false);
   const { setCleanerDes } = useContext(AdminContext);
   const { state, dispatch } = useContext(AdminContext);
 
   const handleUpdateCleanerDes = () => {
     setCleanerDes(cleanDataDynamicVal);
-  
   };
-
 
   const {
     register,
@@ -57,41 +58,40 @@ const CleanData: FC<ClientDataProps> = ({
   let description: string = watch('description');
 
   const updateReport = () => {
-  
+    try {
+      setLoad(true);
+      const report = new ReportService()
+        .updateReport(urlSplit[urlSplit.length - 1], {
+          description: description,
+          status: 'cleaned',
+        })
+        .then((result) => {
+          if (result.status == 200 || result.status == 201) {
+            // refresh();
+            cleanReport(description);
+            setTimeout(() => {
+              onClose();
 
-    const report = new ReportService()
-      .updateReport(urlSplit[urlSplit.length - 1], {
-        description: description,
-        status: 'cleaned',
-      })
-      .then((result) => {
-        if (result.status == 200 || result.status == 201) {
-          refresh();
-          setTimeout(() => {
-            onClose();
-
-            setvisible();
-          }, 3000);
-        }
-      })
-      .catch((error) => {
-        console.log('error', error);
-
-        
-      });
+              setvisible();
+              setLoad(false);
+            }, 1000);
+          }
+        })
+        .catch((error) => {
+          setLoad(false);
+          console.log('error', error);
+        });
+    } catch (error) {
+      setLoad(false);
+    }
   };
- 
+
   const customClassName = 'border border-gray-400 bg-gray-100';
 
-
-
   useEffect(() => {
-   
     if (text && text.length > 0) {
       setValue('description', text);
     }
-
-   
   }, []);
 
   const handleChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
@@ -118,7 +118,6 @@ const CleanData: FC<ClientDataProps> = ({
               type="string"
               props={register('description')}
               placeholder={text!}
-             
               className={customClassName}
             ></TextArea>
             <div className="flex justify-end gap-x-3 mt-10 mb-2">
@@ -132,7 +131,8 @@ const CleanData: FC<ClientDataProps> = ({
               </AnimateClick>
               <AnimateClick>
                 <button
-                  className="border py-4 px-6 w-fit bg-[#2B8049] rounded-lg text-white"
+                  disabled={load}
+                  className={`border py-4 px-6 w-fit bg-[#2B8049] rounded-lg text-white ${load ? 'opacity-80':'opacity-100'}`}
                   onClick={() => {
                     updateReport(), toggleCleanData();
                     // handleUpdateCleanerDes(), setMutated(), setvisible();

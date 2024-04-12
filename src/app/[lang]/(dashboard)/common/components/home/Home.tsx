@@ -19,8 +19,12 @@ import { DecodeToken } from '../../../login/components/DecodeToken';
 const Home = () => {
   const { user } = useAuth();
   const [refresh, setRefresh] = useState(true);
+  const [get, setGet] = useState(false);
   const [token, setToken] = useState('');
   const [report, setReport] = useState<reportType2[]>([]);
+  const [total, setTotal] = useState(0);
+  const [totalWeek, setTotalWeek] = useState(0);
+  // const [dangerous, setDangerous] = useState(0);
 
   const getReport = async (token: string) => {
     const options = {
@@ -34,20 +38,31 @@ const Home = () => {
     };
 
     try {
+      let total = 0;
+      let total_week = 0;
+
       await axios
         .request(options)
         .then(function (response) {
           const { data } = response;
-          
+
           let report1: reportType2[] = [];
           if (user?.role === 3 && data.length > 0) {
             const report = data.reverse().filter((item: reportType) => {
+              const differenceDate =
+                new Date().getTime() - new Date(item.createdAt!).getTime();
               if (
                 item.updatereport &&
                 item.updatereport.length > 0 &&
                 item.updatereport[0].status &&
                 item.updatereport[0].status == 'pending'
               ) {
+                total++;
+               // console.log(Math.round(differenceDate / (1000 * 3600 * 24)));
+
+                if (Math.round(differenceDate / (1000 * 3600 * 24)) <= 7) {
+                  total_week++;
+                }
                 const item2 = { ...item };
                 delete item.updatereport;
                 report1.push({
@@ -72,10 +87,16 @@ const Home = () => {
                 ) {
                   delete item.updatereport;
                   report1.push({ ...item });
+
+                   total++;
+                  // console.log(Math.round(differenceDate / (1000 * 3600 * 24)));
+
+                   if (Math.round(differenceDate / (1000 * 3600 * 24)) <= 7) {
+                     total_week++;
+                   }
                 }
               }
             });
-           
 
             if (report1.length < 6 && report1.length > 0) {
               setReport(report1);
@@ -86,6 +107,23 @@ const Home = () => {
 
           if ((user?.role === 1 || user?.role == 2) && data.length > 0) {
             const report = data.reverse().filter((item: reportType) => {
+              const differenceDate =
+                new Date().getTime() - new Date(item.createdAt!).getTime();
+
+              if (
+                item.updatereport &&
+                item.updatereport.length > 0 &&
+                item.updatereport[0].status &&
+                item.updatereport[0].status == 'cleaned'
+              ) {
+               // console.log(Math.round(differenceDate / (1000 * 3600 * 24)));
+
+                total++;
+                if (Math.round(differenceDate / (1000 * 3600 * 24)) <= 7) {
+                  total_week++;
+                }
+              }
+
               if (
                 item.updatereport &&
                 item.updatereport.length > 0 &&
@@ -95,8 +133,6 @@ const Home = () => {
                   (item.updatereport[0].category &&
                     item.updatereport[0].category.length == 0))
               ) {
-               
-
                 const item2 = { ...item };
                 delete item.updatereport;
                 report1.push({
@@ -125,12 +161,22 @@ const Home = () => {
 
           if (user?.role === 4 && data.length > 0) {
             const report = data.reverse().filter((item: reportType) => {
+              const differenceDate =
+                new Date().getTime() - new Date(item.createdAt!).getTime();
+
               if (
                 item.updatereport &&
                 item.updatereport.length > 0 &&
                 item.updatereport[0].status &&
                 item.updatereport[0].status == 'Dangerous'
               ) {
+               // console.log(Math.round(differenceDate / (1000 * 3600 * 24)));
+                
+                if (Math.round(differenceDate / (1000 * 3600 * 24)) <= 7) {
+                  total_week++;
+                }
+                total++;
+
                 const item2 = { ...item };
                 delete item.updatereport;
                 report1.push({
@@ -156,19 +202,14 @@ const Home = () => {
               setReport(report1.slice(0, 5));
             }
           }
+          setTotal(total);
+          setTotalWeek(total_week);
         })
-        .catch(function (error) {
-         
-        
-        });
-    } catch (error) {
-    
-    }
+        .catch(function (error) {});
+    } catch (error) {}
 
     setRefresh(false);
   };
-
- 
 
   useEffect(() => {
     if (token.length == 0 && refresh) {
@@ -181,7 +222,6 @@ const Home = () => {
 
             user.then((result1) => {
               if (typeof result1 == 'object') {
-                
                 setUserCookies({
                   ...result1,
                   token: result.headers.authorization,
@@ -191,15 +231,12 @@ const Home = () => {
           }
         })
         .catch((error) => {
-         if (typeof error.response.data.message == 'string') {
-           if (error.response.data.message !== 'Too Many Requests.') {
-             removeUserCookies();
-             window.location.href = '/en/login';
-           }
-         }
-          // console.log(error.response.data.message);
-          
-       
+          if (typeof error.response.data.message == 'string') {
+            if (error.response.data.message !== 'Too Many Requests.') {
+              removeUserCookies();
+              window.location.href = '/en/login';
+            }
+          }
         });
     }
     if (refresh && token.length > 0) {
@@ -211,17 +248,31 @@ const Home = () => {
         setRefresh(true);
       }, 10000);
     }
-  }, [refresh, token]);
+  }, [refresh, token, get]);
   return (
     <>
       {user?.role === Role.ADMIN ? (
-        <HomeViewerAndAdmin report={report} />
+        <HomeViewerAndAdmin
+          report={report}
+          total={total}
+          total_week={totalWeek}
+        />
       ) : user?.role === Role.VIEWER ? (
-        <HomeViewerAndAdmin report={report} />
+        <HomeViewerAndAdmin
+          report={report}
+          total={total}
+          total_week={totalWeek}
+        />
       ) : user?.role === Role.CLEANER ? (
-        <HomeCleaner report={report} />
+        <HomeCleaner report={report} total={total} total_week={totalWeek} />
       ) : (
-        user && <HomeRiskManager report={report} />
+        user && (
+          <HomeRiskManager
+            report={report}
+            total={total}
+            total_week={totalWeek}
+          />
+        )
       )}
     </>
   );

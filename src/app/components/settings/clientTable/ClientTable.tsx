@@ -105,6 +105,36 @@ export default function ClientTable() {
     setRefresh(true);
   };
 
+  const addUserHandler = (item: ClientInfoProps) => {
+    const addUser = [...getUsers, item];
+    
+    setGetUsers(addUser);
+  };
+
+  const updateUserHandler = (user: ClientInfoProps) => {
+    let addUser = getUsers.filter(
+      (item: ClientInfoProps) => item._id !== user._id
+    );
+    addUser = [...addUser, user];
+    // addUser.push(item);
+    let filteredUsers: ClientInfoProps[] = addUser.sort(
+      (
+        a: { createdAt: string | number | Date },
+        b: { createdAt: string | number | Date }
+      ) => {
+        const dateA = new Date(a.createdAt);
+        const dateB = new Date(b.createdAt);
+        return dateA.getTime() - dateB.getTime();
+      }
+    );
+    setGetUsers(filteredUsers);
+  };
+
+  const deleteUserHandler = (user: string) => {
+    let addUser = getUsers.filter((item: ClientInfoProps) => item._id !== user);
+    setGetUsers(addUser);
+  };
+
   // get All Clients
   useEffect(() => {
     async function fetchUsers(token: string) {
@@ -261,8 +291,11 @@ export default function ClientTable() {
           <div className="">
             <div className="flex gap-x-2">
               <SeeDetails />
-              <EditUser refresh={refreshHandler} />
-              <DeleteUser refresh={refreshHandler} />
+              <EditUser refresh={refreshHandler} editUser={updateUserHandler} />
+              <DeleteUser
+                refresh={refreshHandler}
+                deleteUserHandler={deleteUserHandler}
+              />
             </div>
           </div>
         );
@@ -480,6 +513,7 @@ export default function ClientTable() {
         }}
         isOpen={addUser}
         refresh={refreshHandler}
+        addUser={addUserHandler}
       />
       <Table
         aria-label="Example table with custom cells, pagination and sorting"
