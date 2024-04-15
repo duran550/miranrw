@@ -58,7 +58,7 @@ const ReportsViewerAndAdmin = () => {
           //  setReports();
         })
         .catch((error) => {
-          console.log(error);
+          // console.log(error);
         });
     } catch (error) {}
   };

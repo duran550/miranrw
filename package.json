@@ -9,7 +9,9 @@
     "lint": "next lint",
     "prettier": "prettier --write .",
     "prepare": "husky install",
-    "test": "jest"
+    "test": "jest",
+    "coverage": "jest --coverage",
+    "test:watch": "jest --watch"
   },
   "dependencies": {
     "@commitlint/cli": "^17.7.2",
@@ -30,7 +32,6 @@
     "antd": "^5.8.6",
     "autoprefixer": "10.4.15",
     "axios": "^1.4.0",
-    "babel-jest": "^29.7.0",
     "bcrypt": "^5.1.1",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.0",
@@ -72,10 +73,9 @@
     "typescript": "5.1.6"
   },
   "devDependencies": {
-    "@babel/core": "^7.24.4",
     "@playwright/test": "^1.39.0",
     "@testing-library/jest-dom": "^6.4.2",
-    "@testing-library/react": "^15.0.1",
+    "@testing-library/react": "^15.0.2",
     "@types/bcrypt": "^5.0.2",
     "@types/jest": "^29.5.12",
     "@types/jsonwebtoken": "^9.0.6",
