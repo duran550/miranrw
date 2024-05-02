@@ -141,12 +141,12 @@ const NavBar: React.FC<NavBarProps> = ({ navigation, lang }) => {
                     <Link href={`/${lang}/about-us/#news`} className="py-2">
                       {navigation.aboutUs?.news}
                     </Link>
-                    <Link href="/about-us/#referalCounseling">
+                    {/* <Link href="/about-us/#referalCounseling">
                       {navigation.aboutUs?.referalCounseling}
                     </Link>
                     <Link href={`/${lang}/about-us/#publications`}>
                       {navigation.aboutUs?.publications}
-                    </Link>
+                    </Link> */}
                   </ul>
                 )}
               </li>
@@ -253,7 +253,7 @@ const NavBar: React.FC<NavBarProps> = ({ navigation, lang }) => {
                     >
                       {navigation.aboutUs?.news}
                     </Link>
-                    <Link
+                    {/* <Link
                       className="hover:font-bold "
                       href="/about-us/#referalCounseling"
                     >
@@ -264,7 +264,7 @@ const NavBar: React.FC<NavBarProps> = ({ navigation, lang }) => {
                       href="/about-us/#publications"
                     >
                       {navigation.aboutUs?.publications}
-                    </Link>
+                    </Link> */}
                   </ul>
                 }
               </li>
