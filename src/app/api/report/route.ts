@@ -24,9 +24,16 @@ export async function GET(request: any) {
   if (!user) return NextResponse.json({ status: 'Error', message: 'Access Denied. Invalid Token.' }, { status: 400 });
   await dbConnect();
  let data: any = await UpdateReport.find();
- let role= user.role
- if(role==4){
-  let reports: reportType[] = await Report.find({status: 'Dangerous'}).populate('updatereport');
+  let role = user.role
+  //  let reports: reportType[] = await Report.
+  if (role == 4) {
+   
+    let reports: reportType[] = await Report.find(
+    { $or:[ { status: 'Dangerous' },
+      { status: 'Managed' }],}
+    ).populate('updatereport');
+  
+    
   return NextResponse.json(reports);
  }
  if(role==3){

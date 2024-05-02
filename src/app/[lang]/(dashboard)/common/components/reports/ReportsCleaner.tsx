@@ -57,6 +57,7 @@ const getReport = async (token: string) => {
       .request(options)
       .then((result) => {
         const report = result.data.filter((item: reportType) => {
+          
           if (
             !item.updatereport ||
             (item.updatereport && item.updatereport.length == 0)

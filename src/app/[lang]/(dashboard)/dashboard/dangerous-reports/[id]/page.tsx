@@ -7,6 +7,7 @@ import { usePathname } from 'next/navigation';
 import { useFindReport } from '@/app/hooks/useFindReport';
 import { useAuth } from '@/app/hooks/useAuth';
 import { reportType } from '@/utils/shared-types';
+import ReportSingle from '../../../common/components/reports/ReportSingle';
 
 const Page = () => {
    const pathname = usePathname();
@@ -82,7 +83,8 @@ const Page = () => {
    }, [reports, refresh, refreshCurrent]);
   return (
     <div>
-      <ReportSummary report={reports} />
+      <ReportSingle/>
+      {/* <ReportSummary report={reports} /> */}
       {/* <CategorizeDataForm /> */}
     </div>
   );

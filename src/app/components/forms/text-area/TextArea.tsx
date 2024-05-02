@@ -20,7 +20,7 @@ const TextArea: React.FC<TextAreaProps> = ({
   handleChange,
   className,
 }) => {
-  const defaultClassName = `block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-md focus:ring-blue-500`;
+  const defaultClassName = `block p-2.5 w-full text-sm text-gray-900 border border-[red] focus:ring-[red]`;
   // focus:border border focus:border-primaryColor border-primaryColor
   const combinedClassName = className
     ? `${defaultClassName} ${className}`
