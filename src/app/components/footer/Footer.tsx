@@ -48,12 +48,12 @@ const Footer: React.FC<FooterProps> = ({ footer, lang }) => {
         </div>
 
         <div className=" flex  md:pt-7">
-          <Link target="_blank" href="facebook.com">
+          <a target="_blank" href="https://www.facebook.com/">
             <Image src={FacebookIcon} alt="" className="h-8 w-8 text-withe  " />
-          </Link>
-          <Link target="_blank" className="ml-2" href="instagram.com">
+          </a>
+          <a target="_blank" className="ml-2" href="https://www.instagram.com/">
             <Image src={InstagramIcon} alt="" className="h-8 w-8 text-withe" />
-          </Link>
+          </a>
         </div>
       </div>
 

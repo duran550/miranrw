@@ -8,6 +8,7 @@ import ReportSummary from '../../report-summary/ReportSummary';
 import { useFindReport } from '@/app/hooks/useFindReport';
 import ReportService from '@/services/reportService';
 import { usePathname } from 'next/navigation';
+import TextArea2 from '@/app/components/forms/text-area/TextArea2';
 
 interface ClientDataProps {
   onClose: () => void;
@@ -112,14 +113,14 @@ const CleanData: FC<ClientDataProps> = ({
       <div>
         <form onSubmit={handleSubmit(onSubmit)}>
           <div>
-            <TextArea
+            <TextArea2
               title="What Happened"
               name="clean_data_des"
               type="string"
               props={register('description')}
               placeholder={text!}
               className={customClassName}
-            ></TextArea>
+            ></TextArea2>
             <div className="flex justify-end gap-x-3 mt-10 mb-2">
               <AnimateClick>
                 <button
@@ -131,8 +132,16 @@ const CleanData: FC<ClientDataProps> = ({
               </AnimateClick>
               <AnimateClick>
                 <button
-                  disabled={load}
-                  className={`border py-4 px-6 w-fit bg-[#2B8049] rounded-lg text-white ${load ? 'opacity-80':'opacity-100'}`}
+                  disabled={
+                    load || (text && description && text.length < description.length)
+                      ? true
+                      : false
+                  }
+                  className={`border py-4 px-6 w-fit bg-[#2B8049] rounded-lg text-white ${
+                    load || (text && description && text.length < description.length)
+                      ? 'opacity-60'
+                      : 'opacity-100 '
+                  }`}
                   onClick={() => {
                     updateReport(), toggleCleanData();
                     // handleUpdateCleanerDes(), setMutated(), setvisible();

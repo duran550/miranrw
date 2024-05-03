@@ -195,7 +195,7 @@ const ReportSingle = () => {
     //       setErrorMessage(error.response.data.message);
     //     });
     // }
-  }, [reports, urlSplit, user?.role]);
+  }, [reports, user?.role]);
 
 
   return (
@@ -220,7 +220,7 @@ const ReportSingle = () => {
             }
             color={reports2 ? true : false}
           />
-          {user?.role === Role.CLEANER && reports && (
+          {(user?.role === Role.CLEANER || user?.role===Role.RISK_MANAGER) && reports && (
             <ReportActions
               text={
                 !reports2?.description

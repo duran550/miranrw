@@ -10,9 +10,9 @@ export type NavBarProps = {
     };
     aboutUs: {
       title: string;
-      referalCounseling: string;
+    
       news: string;
-      publications: string;
+     
       team: string;
       partners: string;
     };

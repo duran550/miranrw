@@ -28,6 +28,7 @@ import { useAuth } from '@/app/hooks/useAuth';
 import { DecodeToken } from '../DecodeToken';
 import InputField from './InputField';
 import Link from 'next/link';
+import InputField2 from '@/app/components/forms/text-field/InputField2';
 // import { verify } from '@/app/api/utils/decode';
 
 interface IFormInput {
@@ -55,7 +56,7 @@ const LoginForm = () => {
     reset,
   } = useForm<IFormInput>({ mode: 'onChange' || 'onBlur' || 'onSubmit' });
   const { loginUser, user } = useAuth();
-  removeRefreshToken();
+  // removeRefreshToken();
 
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
@@ -126,7 +127,7 @@ const LoginForm = () => {
           <form onSubmit={handleSubmit(onSubmit)}>
             <h1 className="text-3xl sm:text-4xl mb-4"></h1>
             <div className="w-full ">
-              <InputField
+              <InputField2
                 name="email"
                 type="email"
                 id="email"
@@ -141,7 +142,7 @@ const LoginForm = () => {
               />
             </div>
             <div className="w-full my-4 relative">
-              <InputField
+              <InputField2
                 name="password"
                 type={isPasswordVisible ? 'text' : 'password'}
                 id="password"
