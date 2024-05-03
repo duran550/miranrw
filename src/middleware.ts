@@ -95,7 +95,7 @@ export function middleware(request: NextRequest, response: any, next: any) {
     `/${locale}/queerphobia`,
     `/${locale}/report`,
     `/${locale}/statement`,
-    `/${locale}`,
+    `/${locale}/`,
     `/${locale}/about-us`,
   ];
 

@@ -10,9 +10,9 @@
     },
     "aboutUs": {
       "title": "Über uns",
-      "referalCounseling": "Verweisberatung",
+
       "news": "Aktuelles",
-      "publications": "Publikationen",
+
       "team": "Team",
       "partners": "Verbund & Kooperationen"
     },
@@ -294,7 +294,7 @@
         },
         "fourthStepOrganization": {
           "title": "Wie viele Personen sind in der Organisation/Institution tätig?",
-          "subTitle": "Haupt- oder ehrenamtlich, oder in freier Mitarbeit",
+          "subTitle": "Haupt- oder ehrenamtlich oder in freier Mitarbeit",
           "mandatory": "* Pflichtfeld",
           "data": [
             {
@@ -338,7 +338,7 @@
             "label": "Es ist online passiert."
           },
           "secondOption": {
-            "title": "Stadt",
+            "title": "Ort",
             "name": "online",
             "value": "freeField",
             "id": "place"
@@ -860,13 +860,6 @@
             "title": "Einwilligung",
             "description": "Mehrfachnennung möglich",
             "data": [
-              {
-                "id": "validate1",
-                "name": "validation",
-                "label": "Ich willige ein, dass meine Eingaben im Falle von Mehrfachdiskriminierung anonymisiert mit den zuständigen Meldestellen (Hyperlink zu Auflistung) geteilt werden.",
-                "value": "Ich willige ein, dass meine Eingaben im Falle von Mehrfachdiskriminierung anonymisiert mit den zuständigen Meldestellen (Hyperlink zu Auflistung) geteilt werden.",
-                "checked": false
-              },
               {
                 "id": "validation2",
                 "name": "validation",

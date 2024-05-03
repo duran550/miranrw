@@ -51,12 +51,20 @@ const ReportsCleaner = () => {
       },
     };
 
-    try {
-      let report1: reportType2[] = [];
-      await axios
-        .request(options)
-        .then((result) => {
-          const report = result.data.filter((item: reportType) => {
+  try {
+    let report1: reportType2[] = [];
+    await axios
+      .request(options)
+      .then((result) => {
+        const report = result.data.filter((item: reportType) => {
+          
+          if (
+            !item.updatereport ||
+            (item.updatereport && item.updatereport.length == 0)
+          ) {
+            delete item.updatereport;
+            report1.push({ ...item });
+          } else {
             if (
               !item.updatereport ||
               (item.updatereport && item.updatereport.length == 0)
@@ -69,9 +77,9 @@ const ReportsCleaner = () => {
                 (item.updatereport[0].status?.toLocaleLowerCase() ==
                   'pending' ||
                   item.updatereport[0].status?.toLocaleLowerCase() ==
-                    'cleaned' ||
+                  'cleaned' ||
                   item.updatereport[0].status?.toLocaleLowerCase() ==
-                    'irrelevant')
+                  'irrelevant')
               ) {
                 const item2 = { ...item };
 
@@ -80,27 +88,28 @@ const ReportsCleaner = () => {
                   ...item,
                   status2:
                     item2.updatereport &&
-                    item2.updatereport.length > 0 &&
-                    item2.updatereport[0].status
+                      item2.updatereport.length > 0 &&
+                      item2.updatereport[0].status
                       ? item2.updatereport[0].status
                       : undefined,
 
                   description2:
                     item2.updatereport &&
-                    item2.updatereport.length > 0 &&
-                    item2.updatereport[0].description
+                      item2.updatereport.length > 0 &&
+                      item2.updatereport[0].description
                       ? item2.updatereport[0].description
                       : undefined,
                   category2:
                     item2.updatereport &&
-                    item2.updatereport.length > 0 &&
-                    item2.updatereport[0].category
+                      item2.updatereport.length > 0 &&
+                      item2.updatereport[0].category
                       ? [...item2.updatereport[0].category]
                       : undefined,
                 });
               }
             }
-          });
+          }
+        });
 
           setReport(report1.reverse());
           setLoad(false);

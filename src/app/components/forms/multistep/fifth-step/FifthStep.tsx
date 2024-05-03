@@ -190,12 +190,12 @@ const FifthStep: React.FC<FifthStepProps> = ({ fifthStepTranslation, id }) => {
 
   // Handle on search
 
-  const handleOnSearch = (string: string, results: any) => {
-    // onSearch will have as the first callback parameter
-    // the string searched and for the second the results.
-    setSearchedText(string);
+  const handleOnSearch = (keyword: string, item: any) => {
+    // the item selected
+    
+      setLocation(keyword);
+    
   };
-
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
@@ -207,15 +207,6 @@ const FifthStep: React.FC<FifthStepProps> = ({ fifthStepTranslation, id }) => {
         subTitle={fifthStepTranslation?.description}
       />
       <p className="text-sm -mt-12 mb-8">{fifthStepTranslation?.mandatory}</p>
-      <div>
-        <RadioSingle
-          id={fifthStepTranslation?.firstOption?.id}
-          label={fifthStepTranslation?.firstOption?.label}
-          name="locationOnline"
-          props={register('locationOnline', { required: true })}
-          value={fifthStepTranslation?.firstOption?.value}
-        />
-      </div>
       <div className="flex flex-col ">
         <RadioSingle
           value={fifthStepTranslation?.secondOption?.value}
@@ -246,6 +237,15 @@ const FifthStep: React.FC<FifthStepProps> = ({ fifthStepTranslation, id }) => {
             </>
           )}
         </div>
+      </div>
+      <div>
+        <RadioSingle
+          id={fifthStepTranslation?.firstOption?.id}
+          label={fifthStepTranslation?.firstOption?.label}
+          name="locationOnline"
+          props={register('locationOnline', { required: true })}
+          value={fifthStepTranslation?.firstOption?.value}
+        />
       </div>
     </form>
   );

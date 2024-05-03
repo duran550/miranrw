@@ -18,6 +18,7 @@ type ReportSummaryProps = {
   update?: boolean;
   role?: boolean;
   color?: boolean;
+  status?:string
 };
 
 const ReportSummary: React.FC<ReportSummaryProps> = ({
@@ -31,6 +32,7 @@ const ReportSummary: React.FC<ReportSummaryProps> = ({
   update,
   role,
   color,
+  status
 }) => {
   // const { user } = useAuth();
 
@@ -71,9 +73,13 @@ const ReportSummary: React.FC<ReportSummaryProps> = ({
             <div className="rounded-full bg-opacity-20 px-4 py-2 w-fit opacity-[0.7] bg-[#199A46] font-bold text-[#199A46]">
               Categorized
             </div>
-          ) : report?.status2 && report.status2 == 'Dangerous' ? (
-            <div className="rounded-full bg-opacity-20 px-4 py-2 w-fit opacity-[0.7] bg-[#E00034] font-bold text-[#E00034]">
-              !Dangerous
+          ) : user?.role == 4 && status == 'Managed' ? (
+            <div className="rounded-full bg-opacity-20 px-4 py-2 w-fit opacity-[0.7] bg-[#199A46] font-bold text-[#199A46]">
+              Managed
+            </div>
+          ) : user?.role == 4 && status == 'Pending' ? (
+            <div className="rounded-full bg-opacity-20 px-4 py-2 w-fit opacity-[0.7] bg-[#F36D38] font-bold text-[#F36D38]">
+              Relevant
             </div>
           ) : report?.status2 && report.status2 == 'Irrelevant' ? (
             <div className="rounded-full bg-opacity-20 px-4 py-2 w-fit opacity-[0.7] bg-[#F36D38] font-bold text-[#F36D38]">

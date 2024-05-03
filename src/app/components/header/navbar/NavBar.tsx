@@ -107,7 +107,7 @@ const NavBar: React.FC<NavBarProps> = ({ navigation, lang }) => {
                   {navigation.aboutQueer?.title}
                 </div>
                 {toggle1 && (
-                  <ul className="bg-white py-3 px-6 -left-6 w-[15rem] flex flex-col shadow-xl absolute top-6 z-10">
+                  <ul className="pl-3 flex flex-col ">
                     <Link
                       href={`/${lang}/queerphobia/#whatIsQueerphobia`}
                       className="py-2"
@@ -131,9 +131,9 @@ const NavBar: React.FC<NavBarProps> = ({ navigation, lang }) => {
                   </Link>
                 </div>
                 {toggle && (
-                  <ul className="bg-white py-3 px-6 -left-6 w-[15rem] flex flex-col shadow-xl absolute top-6 z-10">
+                  <ul className="pl-3 flex flex-col ">
                     <Link href={`/${lang}/about-us/#team`} className="py-2">
-                      MIQ NRW
+                      Unsere Arbeit
                     </Link>
                     <Link href={`/${lang}/about-us/#partners`}>
                       {navigation.aboutUs?.partners}
@@ -141,12 +141,12 @@ const NavBar: React.FC<NavBarProps> = ({ navigation, lang }) => {
                     <Link href={`/${lang}/about-us/#news`} className="py-2">
                       {navigation.aboutUs?.news}
                     </Link>
-                    <Link href="/about-us/#referalCounseling">
+                    {/* <Link href="/about-us/#referalCounseling">
                       {navigation.aboutUs?.referalCounseling}
                     </Link>
                     <Link href={`/${lang}/about-us/#publications`}>
                       {navigation.aboutUs?.publications}
-                    </Link>
+                    </Link> */}
                   </ul>
                 )}
               </li>
@@ -239,7 +239,7 @@ const NavBar: React.FC<NavBarProps> = ({ navigation, lang }) => {
                       className="hover:font-bold py-3"
                       href="/about-us/#team"
                     >
-                      MIQ NRW
+                      Unsere Arbeit
                     </Link>
                     <Link
                       className="hover:font-bold"
@@ -253,7 +253,7 @@ const NavBar: React.FC<NavBarProps> = ({ navigation, lang }) => {
                     >
                       {navigation.aboutUs?.news}
                     </Link>
-                    <Link
+                    {/* <Link
                       className="hover:font-bold "
                       href="/about-us/#referalCounseling"
                     >
@@ -264,7 +264,7 @@ const NavBar: React.FC<NavBarProps> = ({ navigation, lang }) => {
                       href="/about-us/#publications"
                     >
                       {navigation.aboutUs?.publications}
-                    </Link>
+                    </Link> */}
                   </ul>
                 }
               </li>

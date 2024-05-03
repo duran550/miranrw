@@ -604,7 +604,7 @@ const EleventhStep: React.FC<EleventhStepProps> = ({
       {/* Captcha check */}
       {validation &&
         validation?.includes(
-          eleventhStepTranslation?.validation?.data[1]?.value
+          eleventhStepTranslation?.validation?.data[0]?.value
         ) && (
           <div className="w-full mb-4">
             <CaptchaCheckbox
