@@ -12,7 +12,7 @@ export default class ReportService extends DataService {
   };
 
   getAllReport = (): Promise<{
-    data: { reports: reportType[] };
+    data:  reportType[] ;
     status: number;
   }> => {
     return this.get('/api/report');
@@ -20,25 +20,6 @@ export default class ReportService extends DataService {
 }
 
 export async function getAllReport(token:string) {
-  // try {
-  //   const response = await fetch('/api/report', {
-  //     method: 'GET',
-  //     headers: {
-  //       Authorization: `${token}`,
-  //       'content-type': 'application/json',
-  //     },
-  //   }).then((result) => {
-  //     if (result.status === 200 || result.status == 2001) {
-  //       console.log('result',result);
-        
-  //       return result.json()
-  //     }
-  //   });
-   
-  // } catch (error) {
-  //   console.error('Error fetching users:', error);
-  //   throw error; // Re-throw the error to handle it in the component
-  // }
 
 
 

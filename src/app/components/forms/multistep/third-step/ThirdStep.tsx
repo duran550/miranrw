@@ -47,12 +47,12 @@ const ThirdStep: React.FC<ThirdStepProps> = ({ thirdStepTranslation, id }) => {
   useEffect(() => {
      let formValues: { description: string; question: string } =
        getFormCookies(SECOND_FORM);
-     console.log('formValues', isValid);
+   
 
      if (id && id == 'fourthForm') {
        formValues = getFormCookies(FOURTH_FORM);
      }
-    console.log(description);
+ 
     
     dispatch({ type: FORM_ERRORS, payload: true });
     if (description && description?.length >= 50) {

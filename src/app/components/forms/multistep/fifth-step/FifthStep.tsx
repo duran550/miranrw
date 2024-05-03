@@ -48,9 +48,7 @@ const FifthStep: React.FC<FifthStepProps> = ({ fifthStepTranslation, id }) => {
     if ( id === 'sixthForm') {
       formValues = getFormCookies(SIXTH_FORM);
     }
-    console.log(formErrors, 'probleme');
-    // dispatch({ type: FORM_ERRORS, payload: true });
-    console.log(locationOnline, 'location');
+   
     dispatch({ type: FORM_ERRORS, payload: true });
 
     // Validating fields

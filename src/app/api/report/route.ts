@@ -3,7 +3,7 @@ import dbConnect from '../lib/dbConnect';
 import { Report } from '../models/Report';
 import { NextResponse } from 'next/server';
 import { reportType } from '@/utils/shared-types';
-import { middleware_1 } from '@/middleware/middleware';
+// import { middleware_1 } from '@/middleware/middleware';
 import { authenticate } from '../utils/decode';
 import {rateLimitMiddleware} from '../utils/limiter';
 import UpdateReport from '../models/UpdateReport';
@@ -26,16 +26,24 @@ export async function GET(request: any) {
  let data: any = await UpdateReport.find();
  let role= user.role
  if(role==4){
-  let reports: reportType[] = await Report.find({status: 'dangerous'}).populate('updatereport');
+  let reports: reportType[] = await Report.find({status: 'Dangerous'}).populate('updatereport');
   return NextResponse.json(reports);
  }
  if(role==3){
-  let reports: reportType[] = await Report.find({$or: [{status: 'pending'}, {status: 'irrelevant'}]})
+  let reports: reportType[] = await Report.find({
+    $or: [
+      { status: 'pending' },
+      { status: 'Irrelevant' },
+      { status: 'cleaned' }
+    ],
+  }).populate('updatereport');
   return NextResponse.json(reports);
  }
 
  if(role==1 || role==2){
-  let reports: reportType[] = await Report.find({$nor: [{status: 'pending'}]}).populate('updatereport');
+  let reports: reportType[] = await Report.find({
+    $nor: [{ status: 'pending' }],
+  }).populate('updatereport');
   return NextResponse.json(reports);
  }
  return NextResponse.json({ status: 'Error', message: 'Access Denied.' }, { status: 400 });

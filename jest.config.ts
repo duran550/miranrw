@@ -203,6 +203,9 @@ const config: Config = {
 
   testEnvironment: 'jsdom',
   setupFilesAfterEnv: ['./jest.setup.js'],
+  testEnvironmentOptions: {
+    customExportConditions: [''],
+  },
 };
 
 export default createJestConfig(config);

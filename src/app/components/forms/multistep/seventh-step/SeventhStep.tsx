@@ -40,7 +40,7 @@ const SeventhStep: React.FC<SeventhStepProps> = ({
     } = getFormCookies(FIFTH_FORM);
 
    
- console.log('typeOfDiscrimination', typeOfDiscrimination);
+
 
     dispatch({ type: FORM_ERRORS, payload: true });
 
@@ -98,11 +98,6 @@ const SeventhStep: React.FC<SeventhStepProps> = ({
       dispatch({ type: FORM_ERRORS, payload: false });
     }
 
-    console.log(
-      'end',
-      seventhStepTranslation.choices[seventhStepTranslation.choices.length - 1]
-        .value
-    );
     
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [typeOfDiscrimination, typeOfDiscriminationFreeField]);

@@ -16,32 +16,30 @@ import {
 } from '../../../dashboard/reports/reportsDataCleanedAndRaw';
 import ReportService from '@/services/reportService';
 import ReportCard from '../report-card/ReportCard';
-import { reportType } from '@/utils/shared-types';
+import { reportType, reportType2 } from '@/utils/shared-types';
 import Link from 'next/link';
 import { UseReport } from '@/app/hooks/useReports';
 import { AuthContext } from '@/app/context/AuthContext';
-import { removeUserCookies } from '@/cookies/cookies';
+import { removeUserCookies, setUserCookies } from '@/cookies/cookies';
 import AuthService from '@/services/authService';
 import axios from 'axios';
 import { useAuth } from '@/app/hooks/useAuth';
+import { DecodeToken } from '../../../login/components/DecodeToken';
 
 const ReportsCleaner = () => {
+  const { user } = useAuth();
 
-
-  const { user }=useAuth()
-  const [token,setToken]=useState<string|undefined>()
   const [refresh, setRefresh] = useState(true);
 
   const [status, setStatut] = useState(Category.Raw);
-  const [reports, setReport] = useState<reportType[]>([]);
-  const { report, setReports } = UseReport()
-  const ctx=useContext(AuthContext)
-  useEffect(() => {
-    const response = new AuthService().refreshToken().catch((error) => {
-      console.log('error', error);
-      // removeUserCookies();
-    });
-  }, []);
+  const [reports, setReport] = useState<reportType2[]>([]);
+
+  const [token, setToken] = useState('');
+  const [load, setLoad] = useState(true);
+  const [error, setError] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
+  const ctx = useContext(AuthContext);
+
   const getReport = async (token: string) => {
     const options = {
       method: 'GET',
@@ -54,92 +52,168 @@ const ReportsCleaner = () => {
     };
 
     try {
+      let report1: reportType2[] = [];
       await axios
-        .request(options).then((result) => {
-          console.log('report', result.data.reports);
-          const report = result.data.reports.filter(
-            (item: reportType) =>
-              item.status == 'pending' || item.status == 'cleaned' || item.status=='Irrelevant'
-          );
-          setReport(report.reverse());
-          //  setReports(result.data.reports);
-          //  setReports();
+        .request(options)
+        .then((result) => {
+          const report = result.data.filter((item: reportType) => {
+            if (
+              !item.updatereport ||
+              (item.updatereport && item.updatereport.length == 0)
+            ) {
+              delete item.updatereport;
+              report1.push({ ...item });
+            } else {
+              if (
+                item.updatereport.length > 0 &&
+                (item.updatereport[0].status?.toLocaleLowerCase() ==
+                  'pending' ||
+                  item.updatereport[0].status?.toLocaleLowerCase() ==
+                    'cleaned' ||
+                  item.updatereport[0].status?.toLocaleLowerCase() ==
+                    'irrelevant')
+              ) {
+                const item2 = { ...item };
+
+                delete item.updatereport;
+                report1.push({
+                  ...item,
+                  status2:
+                    item2.updatereport &&
+                    item2.updatereport.length > 0 &&
+                    item2.updatereport[0].status
+                      ? item2.updatereport[0].status
+                      : undefined,
+
+                  description2:
+                    item2.updatereport &&
+                    item2.updatereport.length > 0 &&
+                    item2.updatereport[0].description
+                      ? item2.updatereport[0].description
+                      : undefined,
+                  category2:
+                    item2.updatereport &&
+                    item2.updatereport.length > 0 &&
+                    item2.updatereport[0].category
+                      ? [...item2.updatereport[0].category]
+                      : undefined,
+                });
+              }
+            }
+          });
+
+          setReport(report1.reverse());
+          setLoad(false);
+          setError(false);
         })
         .catch((error) => {
-          // console.log(error);
+          console.log(error);
+          setLoad(false);
+          setError(true);
+          setErrorMessage(error.response.data.message);
         });
-    } catch(error){}}
-    useEffect(() => {
-      if (refresh) {
-        //  console.log(1);
-        getReport(user?.token!);
-        setRefresh(false);
-        //  getReport();
-      }
-      if (!refresh) {
-        setTimeout(() => {
-          setRefresh(true);
-        }, 5000);
-      }
-    }, [refresh]);
+    } catch (error) {}
+  };
+  useEffect(() => {
+    if (token.length == 0 && refresh) {
+      setLoad(true);
+      const response = new AuthService()
+        .refreshToken()
+        .then((result) => {
+          if (result.status === 201) {
+            const user = DecodeToken(result.headers.authorization);
+            setToken(result.headers.authorization);
+
+            user.then((result1) => {
+              if (typeof result1 == 'object') {
+                setUserCookies({
+                  ...result1,
+                  token: result.headers.authorization,
+                });
+              }
+            });
+            setError(false);
+          }
+        })
+        .catch((error) => {
+          setLoad(false);
+          setErrorMessage(error.response.data.message);
+          setError(true);
+
+          if (typeof error.response.data.message == 'string') {
+            if (error.response.data.message !== 'Too Many Requests.') {
+              removeUserCookies();
+              window.location.href = '/en/login';
+            }
+          }
+        });
+    }
+    if (refresh && token.length > 0) {
+      getReport(token);
+      setRefresh(false);
+    }
+    if (!refresh && token.length > 0) {
+      setTimeout(() => {
+        setRefresh(true);
+      }, 10000);
+    }
+  }, [refresh, token]);
   return (
     <div className="w-full relative  h-fit">
       <h1 className="text-2xl font-bold my-8">All reports</h1>
       <h2 className="font-bold  opacity-80">{`${status} Data`}</h2>
       <p className="text-sm opacity-70">Click to view data details</p>
       <div className="mt-8">
-        <div className="grid grid-cols-3 gap-5 max-h-[60vh] overflow-y-auto overscroll-none no-scrollbar">
-          {' '}
-          {reports.length > 0 &&
-            reports.map((item, index) => {
-
-              if (status==Category.Raw) {
-               if (item.status=='pending') {
-                 return (
-                   <ReportCard
-                     key={item._id}
-                     title={item._id ? item._id : 'PT0124'}
-                     date={item.createdAt ? item.createdAt : ''}
-                     href={`/en/dashboard/clean-data/${item._id}`}
-                     reportType={
-                       item.status == 'pending'
-                         ? Category.Raw
-                         : Category.Cleaned
-                     }
-                   />
-                 );
-               }
-              } else {
-                if (item.status!=='pending') {
-                   return (
-                     <ReportCard
-                       key={item._id}
-                       title={item._id ? item._id : 'PT0124'}
-                       date={item.createdAt ? item.createdAt : ''}
-                       href={`/en/dashboard/clean-data/${item._id}`}
-                       reportType={
-                         item.status == 'cleaned'
-                           ? Category.Cleaned
-                           : Category.Irrelevant
-                       }
-                     />
-                   );
+        {!load && !error && (
+          <div className="grid grid-cols-3 gap-5 max-h-[60vh] overflow-y-auto overscroll-none no-scrollbar">
+            {' '}
+            {reports.length > 0 &&
+              reports.map((item, index) => {
+                if (status == Category.Raw) {
+                  if (
+                    !item.status2 ||
+                    (item.status2 && item.status2 == 'pending')
+                  ) {
+                    return (
+                      <ReportCard
+                        key={item._id}
+                        title={item._id ? item._id : 'PT0124'}
+                        date={item.createdAt ? item.createdAt : ''}
+                        href={`/en/dashboard/clean-data/${item._id}`}
+                        reportType={Category.Raw}
+                      />
+                    );
+                  }
+                } else {
+                  if (item.status2 && item.status2 !== 'pending') {
+                    return (
+                      <ReportCard
+                        key={item._id}
+                        title={item._id ? item._id : 'PT0124'}
+                        date={item.createdAt ? item.createdAt : ''}
+                        href={`/en/dashboard/clean-data/${item._id}`}
+                        reportType={
+                          item.status2 == 'cleaned'
+                            ? Category.Cleaned
+                            : Category.Irrelevant
+                        }
+                      />
+                    );
+                  }
                 }
-              }
-            })}
-        </div>
-
-        {/* {status == Category.Raw ? (
-          <ReportContainCard
-            href="/dashboard/clean-data"
-            data={reportsDataRaw}
-          />
-        ) : (
-          <ReportContainCard
-            href="/dashboard/clean-data"
-            data={reportsDataCleaned}
-          />
-        )} */}
+              })}
+          </div>
+        )}
+        {load && (
+          <p className="flex items-center justify-center text-5xl h-full">
+            loading...
+          </p>
+        )}
+        {error && !load && (
+          <p className="flex items-center justify-center text-5xl h-full">
+            {errorMessage + ' waite a few moments for retry'}
+          </p>
+        )}
       </div>
 
       <div className="flex w-fit fixed bottom-8  mt-14 ">

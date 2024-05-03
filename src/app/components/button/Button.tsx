@@ -11,7 +11,9 @@ interface ButtonProps
     VariantProps<typeof buttonVariants> {
   href?: string;
   icon?: any;
-  disabeld?:boolean
+  disabeld?: boolean;
+  role?: string; // Add role attribute
+  name?: string; // Add name attribute
 }
 
 const buttonVariants = cva(
@@ -21,7 +23,7 @@ const buttonVariants = cva(
     variants: {
       variant: {
         default: 'bg-primaryColor w-full text-white hover:opacity-90',
-        saveCategorizationDisabled: 'bg-greenDisable w-full text-white', 
+        saveCategorizationDisabled: 'bg-greenDisable w-full text-white',
         primary: 'bg-primaryColor hover:opacity-90',
         outlinePrimary:
           'text-[#2B8049] border border-[#2B8049] hover:opacity-90',
@@ -46,6 +48,8 @@ const Button: FC<ButtonProps> = ({
   href,
   icon,
   children,
+  role,
+  name,
   ...props
 }) => {
   if (href) {
@@ -78,7 +82,12 @@ const Button: FC<ButtonProps> = ({
   }
   return (
     // <AnimateClick>
-    <button {...props} className={cn(buttonVariants({ variant, className }))}>
+    <button
+      {...props}
+      className={cn(buttonVariants({ variant, className }))}
+      role={role}
+      name={name}
+    >
       <div className="flex items-center">
         <span className="mr-2">
           {icon ? <Image src={icon} alt={'Icon'} /> : ''}
