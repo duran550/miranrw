@@ -18,26 +18,14 @@ export async function POST(request: any) {
 }
 
 export async function GET(request: any) {
-  let pass= await rateLimitMiddleware(request)
-  if (!pass) return NextResponse.json({ status: 'Error', message: 'Too Many Requests.' }, { status: 400 });
-  let user:any = await authenticate(request)
-  if (!user) return NextResponse.json({ status: 'Error', message: 'Access Denied. Invalid Token.' }, { status: 400 });
+  // let pass= await rateLimitMiddleware(request)
+  // if (!pass) return NextResponse.json({ status: 'Error', message: 'Too Many Requests.' }, { status: 400 });
+  // let user:any = await authenticate(request)
+  // if (!user) return NextResponse.json({ status: 'Error', message: 'Access Denied. Invalid Token.' }, { status: 400 });
   await dbConnect();
  let data: any = await UpdateReport.find();
-  let role = user.role
-  //  let reports: reportType[] = await Report.
-  if (role == 4) {
-   
-    let reports: reportType[] = await Report.find(
-    { $or:[ { status: 'Dangerous' },
-      { status: 'Managed' }],}
-    ).populate('updatereport');
-  
-    
-  return NextResponse.json(reports);
- }
- if(role==3){
-  let reports: reportType[] = await Report.find({
+  // let role = user.role
+   let reports: reportType[] = await Report.find({
     $or: [
       { status: 'pending' },
       { status: 'Irrelevant' },
@@ -45,14 +33,34 @@ export async function GET(request: any) {
     ],
   }).populate('updatereport');
   return NextResponse.json(reports);
- }
+  //  let reports: reportType[] = await Report.
+//   if (role == 4) {
+   
+//     let reports: reportType[] = await Report.find(
+//     { $or:[ { status: 'Dangerous' },
+//       { status: 'Managed' }],}
+//     ).populate('updatereport');
+  
+    
+//   return NextResponse.json(reports);
+//  }
+//  if(role==3){
+//   let reports: reportType[] = await Report.find({
+//     $or: [
+//       { status: 'pending' },
+//       { status: 'Irrelevant' },
+//       { status: 'cleaned' }
+//     ],
+//   }).populate('updatereport');
+//   return NextResponse.json(reports);
+//  }
 
- if(role==1 || role==2){
-  let reports: reportType[] = await Report.find({
-    $nor: [{ status: 'pending' }],
-  }).populate('updatereport');
-  return NextResponse.json(reports);
- }
+//  if(role==1 || role==2){
+//   let reports: reportType[] = await Report.find({
+//     $nor: [{ status: 'pending' }],
+//   }).populate('updatereport');
+//   return NextResponse.json(reports);
+//  }
  return NextResponse.json({ status: 'Error', message: 'Access Denied.' }, { status: 400 });
  
 }
