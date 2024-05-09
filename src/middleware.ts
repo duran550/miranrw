@@ -46,12 +46,12 @@ export function middleware(request: NextRequest, response: any, next: any) {
   const locale = getLocale(request);
 
   const privateAdminPaths = [
-    `/${locale}/dashboard`,
-    `/${locale}/dashboard/reports`,
-    `/${locale}/dashboard/quantitative`,
-    `/${locale}/dashboard/qualitative`,
-    `/${locale}/dashboard/compare-data`,
-    `/${locale}/dashboard/clean-data`,
+    // `/${locale}/dashboard`,
+    // `/${locale}/dashboard/reports`,
+    // `/${locale}/dashboard/quantitative`,
+    // `/${locale}/dashboard/qualitative`,
+    // `/${locale}/dashboard/compare-data`,
+    // `/${locale}/dashboard/clean-data`,
     `/${locale}/dashboard/settings`,
   ];
 
@@ -136,11 +136,11 @@ export function middleware(request: NextRequest, response: any, next: any) {
       user?.role &&
       user?.role == 1 &&
       !privateAdminPaths.includes(pathname) &&
-      !pathname.includes('/dashboard/cleaned-reports') &&
+      // !pathname.includes('/dashboard/cleaned-reports') &&
       !allPaths.includes(pathname)
     ) {
       return NextResponse.redirect(
-        new URL(`/${locale}/dashboard`, request.url)
+        new URL(`/${locale}/dashboard/settings`, request.url)
       );
     } else if (
       user &&
