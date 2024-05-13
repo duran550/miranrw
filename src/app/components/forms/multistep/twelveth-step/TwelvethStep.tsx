@@ -3,13 +3,15 @@ import { Button } from '@/app/components/button/Button';
 import { clearFormCookies } from '@/cookies/cookies';
 import { useScrollOnTop } from '@/app/hooks/useScrollOnTop';
 import { TwelvethStepProps } from './twelvethStep';
+import { usePathname } from 'next/navigation';
 
 const TwelvethStep: React.FC<TwelvethStepProps> = ({
   twelvethStepTranslation,
 }) => {
+  const pathname = usePathname();
   const handleClickButton = () => {
     clearFormCookies();
-    window?.location?.reload();
+    window.location.href = '/' + pathname.split('/')[1] + '/about-us';
   };
 
   useScrollOnTop();
