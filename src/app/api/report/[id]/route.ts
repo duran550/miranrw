@@ -17,7 +17,7 @@ export async function PUT(request: any, { params }: any) {
       { status: 400 }
     );
   let role= user.role
-  if(role==2){
+  if(role==1){
     return NextResponse.json({ status: 'Error', message: 'Access Denied. Invalid Token.' }, { status: 400 });
   }
   const { id } = params;

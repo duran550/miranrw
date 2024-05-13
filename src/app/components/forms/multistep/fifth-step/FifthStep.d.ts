@@ -29,5 +29,5 @@ export type FifthStepProps = {
 
 export type FifthFormValues = {
   locationOnline: string;
-  stadtteil: string;
+  // stadtteil: string;
 };
