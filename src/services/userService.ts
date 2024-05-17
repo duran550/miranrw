@@ -1,5 +1,5 @@
 export async function getAllUsers(token: string) {
-  // console.log('token55555555',token);
+  console.log('token55555555', token);
 
   try {
     const response = await fetch('/api/user/', {

@@ -15,6 +15,7 @@ import toast, { Toaster } from 'react-hot-toast';
 import Password from 'antd/es/input/Password';
 import { getAllUsers } from '@/services/userService';
 import { useAuth } from '@/app/hooks/useAuth';
+import TableSelect from '../TableSelect';
 
 interface ClientDataProps {
   onClose: () => void;
@@ -29,6 +30,7 @@ interface IFormInput {
   password: string;
   email: string;
   role: any;
+  // roleChar: string;
 }
 
 interface ClientInfoProps {
@@ -58,6 +60,7 @@ const AddUser: FC<ClientDataProps> = ({
   } = useForm<IFormInput>({ mode: 'onChange' || 'onBlur' || 'onSubmit' });
   const [getUsers, setGetUsers] = useState<ClientInfoProps[] | any>([]);
   const { user } = useAuth();
+  const role = watch('role');
 
   const validatePassword = (value: any) => {
     if (!value) {
@@ -98,31 +101,37 @@ const AddUser: FC<ClientDataProps> = ({
     return user;
   }
 
-  useEffect(() => {
-    async function fetchUsers(token: string) {
-      try {
-        const usersData = await getAllUsers(token);
-        setGetUsers(usersData.users);
-      } catch (error) {
-        // console.error('Error fetching users:', error);
-      }
-    }
-
-    if (refresh || getUsers.length < 1) {
-      fetchUsers(user?.token!);
-      //  setRefresh(false);
-    }
-    // setClientInfo(selectedCell);
-  }, [getUsers]);
+  // useEffect(() => {
+  // async function fetchUsers(token: string) {
+  //   try {
+  //     const usersData = await getAllUsers(token);
+  //     setGetUsers(usersData.users);
+  //   } catch (error) {
+  //     console.error('Error fetching users:', error);
+  //   }
+  // }
+  // if (refresh || getUsers.length < 1) {
+  //   fetchUsers(user?.token!);
+  //   //  setRefresh(false);
+  // }  should uncomment
+  // setClientInfo(selectedCell);
+  // }, [getUsers]);
 
   console.log(getUsers, 'this is my allUsers');
 
   const onSubmit: SubmitHandler<IFormInput> = async (data) => {
-    const updatedUserObject = replaceRoleWithValue(data);
+    const newData = {
+      ...data,
+      fullname: data.fullname.split(' ').join(''),
+    };
+
+    const updatedUserObject = replaceRoleWithValue(newData);
+    console.log(updatedUserObject, 'data');
     const response = new AuthService()
       .register(updatedUserObject)
       .then((result) => {
         if (result.status === 201) {
+          console.log(response, 'data');
           // refresh();
           // console.log(result?.data.result, 'this is my response');
           toast.success(`This user was Succesfully Added`);
@@ -149,6 +158,8 @@ const AddUser: FC<ClientDataProps> = ({
     reset();
   };
 
+  const options = ['Admin', 'Viewer', 'Cleaner', 'Risk-manager'];
+
   return (
     <div>
       <Toaster position="top-center" reverseOrder={false} />
@@ -167,8 +178,13 @@ const AddUser: FC<ClientDataProps> = ({
                 title="Full Name"
                 name="username"
                 type="text"
-                props={register('fullname', { required: true })}
+                props={register('fullname', { required: true, minLength: 8 })}
               />
+              {errors.fullname && (
+                <p className="text-red-600 font-bold">
+                  Wir benötigen mindestens 8 Zeichen
+                </p>
+              )}
             </div>
             <div>
               {/* <h1 className="font-bold">Email</h1> */}
@@ -197,10 +213,8 @@ const AddUser: FC<ClientDataProps> = ({
               )}
             </div>
             <div>
-              {/* <h1 className="font-bold">Role</h1> */}
-              <InputField
-                id="role"
-                title="Role"
+              <h1 className="font-bold">Role</h1>
+              {/* <InputField
                 name="role"
                 type="text"
                 props={register('role', {
@@ -213,7 +227,15 @@ const AddUser: FC<ClientDataProps> = ({
                   Please enter a valid role (Admin, Cleaner, Viewer,
                   Risk-Manager).
                 </span>
-              )}
+              )} */}
+              <TableSelect
+                options={options}
+                name="role"
+                // defaultValue={selectedOption}
+                // val={selectedOption}
+                // setSelectedOption={setSelectedOption}
+                props={register('role', { required: true })}
+              />
             </div>
           </div>
           <div className="flex gap-x-4 mb-4">
