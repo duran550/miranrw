@@ -236,7 +236,7 @@ const ReportSingle = () => {
               cleanReport={CleanReport}
             />
           )}
-          {user?.role == Role.ADMIN && (
+          {user?.role == Role.VIEWER && (
             <CategorizeDataForm
               report={reports}
               // refreshCurrent={refreshCurrentHandler}

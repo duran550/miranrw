@@ -26,9 +26,9 @@ const ReportsViewerAndAdmin = () => {
   const [token, setToken] = useState('');
   const [refresh, setRefresh] = useState(true);
 
- const [load, setLoad] = useState(true);
- const [error, setError] = useState(false);
- const [errorMessage, setErrorMessage] = useState('');
+  const [load, setLoad] = useState(true);
+  const [error, setError] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
   const [reports, setReport] = useState<reportType2[]>([]);
 
   const getReport = async (token: string) => {
@@ -48,44 +48,40 @@ const ReportsViewerAndAdmin = () => {
       await axios
         .request(options)
         .then((result) => {
-          
           const report = result.data.filter((item: reportType) => {
-           if (
-             item.updatereport &&
-             item.updatereport.length > 0 &&
-             (item.updatereport[0].status?.toLocaleLowerCase() == 'cleaned')
-           ) {
-            
-             
-             const item2 = {...item};
-             delete item.updatereport;
-             report1.push({
-               ...item,
-               status2:
-                 item2.updatereport && item2.updatereport[0].status
-                   ? item2.updatereport[0].status
-                   : 'pending',
-               description2:
-                 item2.updatereport && item2.updatereport[0].description
-                   ? item2.updatereport[0].description
-                   : undefined,
-               category2:
-                 item2.updatereport && item2.updatereport[0].category
-                   ? [...item2.updatereport[0].category]
-                   : [],
-             });
-           }
+            if (
+              item.updatereport &&
+              item.updatereport.length > 0 &&
+              item.updatereport[0].status?.toLocaleLowerCase() == 'cleaned'
+            ) {
+              const item2 = { ...item };
+              delete item.updatereport;
+              report1.push({
+                ...item,
+                status2:
+                  item2.updatereport && item2.updatereport[0].status
+                    ? item2.updatereport[0].status
+                    : 'pending',
+                description2:
+                  item2.updatereport && item2.updatereport[0].description
+                    ? item2.updatereport[0].description
+                    : undefined,
+                category2:
+                  item2.updatereport && item2.updatereport[0].category
+                    ? [...item2.updatereport[0].category]
+                    : [],
+              });
+            }
           });
-          
+
           setReport(report1.reverse());
-           setLoad(false);
-           setError(false);
-         
+          setLoad(false);
+          setError(false);
         })
         .catch((error) => {
           console.log(error);
-           setLoad(false);
-           setError(true);
+          setLoad(false);
+          setError(true);
         });
     } catch (error) {}
   };
@@ -106,20 +102,20 @@ const ReportsViewerAndAdmin = () => {
                 });
               }
             });
-            setError(false)
+            setError(false);
           }
         })
         .catch((error) => {
-            setLoad(false);
-            setErrorMessage(error.response.data.message);
-            setError(true);
+          setLoad(false);
+          setErrorMessage(error.response.data.message);
+          setError(true);
 
-            if (typeof error.response.data.message == 'string') {
-              if (error.response.data.message !== 'Too Many Requests.') {
-                removeUserCookies();
-                window.location.href = '/en/login';
-              }
+          if (typeof error.response.data.message == 'string') {
+            if (error.response.data.message !== 'Too Many Requests.') {
+              removeUserCookies();
+              window.location.href = '/en/login';
             }
+          }
         });
     }
     if (refresh && token.length > 0) {
@@ -162,7 +158,7 @@ const ReportsViewerAndAdmin = () => {
                         title={item._id ? item._id : 'PT0124'}
                         date={item.createdAt ? item.createdAt : ''}
                         href={
-                          user && user?.role == 1
+                          user && user?.role == 2
                             ? `/dashboard/cleaned-reports/${item._id}`
                             : '#'
                         }

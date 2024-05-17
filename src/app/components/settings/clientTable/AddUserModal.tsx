@@ -141,7 +141,7 @@ const AddUser: FC<ClientDataProps> = ({
       })
       .catch((error) => {
         console.log(error, 'this is an error');
-        toast.error(`This user was Could not be added`);
+        toast.error(`This user Could not be added`);
       });
     // console.log(data, 'this is my submit data');
     // try {
@@ -172,8 +172,10 @@ const AddUser: FC<ClientDataProps> = ({
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="space-y-5 pb-5 mt-10">
             <div className="">
-              <h1 className="font-bold">Full Name</h1>
+              {/* <h1 className="font-bold">Full Name</h1> */}
               <InputField
+                id="name"
+                title="Full Name"
                 name="username"
                 type="text"
                 props={register('fullname', { required: true, minLength: 8 })}
@@ -185,16 +187,20 @@ const AddUser: FC<ClientDataProps> = ({
               )}
             </div>
             <div>
-              <h1 className="font-bold">Email</h1>
+              {/* <h1 className="font-bold">Email</h1> */}
               <InputField
+                id="email"
+                title="Email"
                 name="email"
                 type="email"
                 props={register('email', { required: true })}
               />
             </div>
             <div>
-              <h1 className="font-bold">Password</h1>
+              {/* <h1 className="font-bold">Password</h1> */}
               <InputField
+                id="password"
+                title="Password"
                 name="password"
                 type="password"
                 props={register('password', {
@@ -243,6 +249,8 @@ const AddUser: FC<ClientDataProps> = ({
               Cancel
             </Button>
             <Button
+              role="button"
+              name="Add User"
               type="submit"
               className="bg-primary"
               onClick={() => {

@@ -250,7 +250,7 @@ const MultiStepForm: React.FC<MultiStepFormProps> = ({
                         </Button>
                         <Button
                           form={`${'tenthForm'}`}
-                          className="w-full lg:mr-auto lg:w-72 rounded-full py-4 font-bold"
+                          className="w-fit  rounded-full py-4 font-bold"
                           disabled={formErrors && true}
                           variant={`${formErrors ? 'disabled' : 'primary'}`}
                         >
@@ -270,7 +270,7 @@ const MultiStepForm: React.FC<MultiStepFormProps> = ({
                             </Button>
                             <Button
                               form={`${'tenthForm'}`}
-                              className="w-full lg:mr-auto lg:w-72 rounded-full py-4 font-bold"
+                              className="w-fit rounded-full py-4 font-bold"
                               disabled={formErrors && true}
                               variant={`${formErrors ? 'disabled' : 'primary'}`}
                             >
