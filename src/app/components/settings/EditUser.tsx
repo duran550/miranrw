@@ -29,9 +29,10 @@ interface EditUserPros {
   lang?: any;
   refresh?: any;
   editUser?: any;
+  users?: any[];
 }
 
-function EditUser({ lang, refresh, editUser }: EditUserPros) {
+function EditUser({ lang, refresh, editUser, users }: EditUserPros) {
   const { state } = useContext(AdminContext);
   const { clientInfo } = state;
 
@@ -129,7 +130,7 @@ function EditUser({ lang, refresh, editUser }: EditUserPros) {
           __v: clientInfo?.__v,
           _id: clientInfo?._id,
         };
-        editUser(newUser);
+        editUser();
         toast.success(`This user was Succesfully Updated`);
         // refresh();
       } else {
