@@ -185,7 +185,7 @@ const FifthStep: React.FC<FifthStepProps> = ({ fifthStepTranslation, id }) => {
   };
 
   const handleOnSelect = (item: any) => {
-    // the item selected
+    // the item selected ok
     setLocation(item?.name);
   };
 
