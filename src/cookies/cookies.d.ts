@@ -1,4 +1,5 @@
 export const USER_DATA = 'user_data';
+export const SHOW = 'show';
 export const REFRESH_TOKEN = 'REFRESH_TOKEN';
 
 export const FORM_STEP = 'FORM_STEP_MIQ';
