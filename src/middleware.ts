@@ -99,90 +99,120 @@ export function middleware(request: NextRequest, response: any, next: any) {
     `/${locale}/about-us`,
   ];
 
-  if (!request.cookies.get('user_data') && pathname.includes('/dashboard')) {
-    return NextResponse.redirect(new URL(`/${locale}/login`, request.url));
-  } else if (
-    request.cookies.get('user_data') &&
-    publicPath.includes(pathname)
-  ) {
-   
-    //  let user = JSON.parse(request.cookies.get('user_data')?.value!);
-    return NextResponse.redirect(new URL(`/${locale}/dashboard`, request.url));
-  } else if (
-    request.cookies.get('user_data') &&
-    !allPaths.includes(pathname) &&
-    !pathname.includes('/dashboard')
-  ) {
-// console.log('ok');
+  const hiddePath = [`/${locale}/hidde`];
 
-    return NextResponse.redirect(new URL(`/${locale}/dashboard`, request.url));
-  } else if (
-    request.cookies.get('user_data') &&
-    !allPaths.includes(pathname) &&
-    !pathname.includes('/dashboard')
-  ) {
-  
-    return NextResponse.redirect(new URL(`/${locale}/dashboard`, request.url));
-  } else if (
-    
-    request.cookies.get('user_data') &&
-    !publicPath.includes(pathname)
-  ) {
-    // console.log('ok3');
-    let user = JSON.parse(request.cookies.get('user_data')?.value!);
-    // refreshToken(user.token);
-    if (
-      user &&
-      user?.role &&
-      user?.role == 1 &&
-      !privateAdminPaths.includes(pathname) &&
-      // !pathname.includes('/dashboard/cleaned-reports') &&
-      !allPaths.includes(pathname)
-    ) {
-      return NextResponse.redirect(
-        new URL(`/${locale}/dashboard/settings`, request.url)
-      );
+
+  if (!request.cookies.get('show') && !hiddePath.includes(pathname)) {
+    console.log(1);
+
+    return NextResponse.redirect(new URL(`/${locale}/hidde`, request.url));
+  } else if (request.cookies.get('show') && hiddePath.includes(pathname)) {
+    return NextResponse.redirect(new URL(`/${locale}`, request.url));
+  } else if (request.cookies.get('show') && !hiddePath.includes(pathname)) {
+    if (!request.cookies.get('user_data') && pathname.includes('/dashboard')) {
+      return NextResponse.redirect(new URL(`/${locale}/login`, request.url));
     } else if (
-      user &&
-      user?.role &&
-      user?.role == 2 &&
-      !privateViewerPaths.includes(pathname) &&
-      !pathname.includes('/dashboard/cleaned-reports') &&
-      !allPaths.includes(pathname)
+      request.cookies.get('user_data') &&
+      publicPath.includes(pathname)
     ) {
+      //  let user = JSON.parse(request.cookies.get('user_data')?.value!);
       return NextResponse.redirect(
         new URL(`/${locale}/dashboard`, request.url)
       );
     } else if (
-      user &&
-      user?.role &&
-      user?.role == 3 &&
-      !privateCleanerPaths.includes(pathname) &&
-      !pathname.includes('/dashboard/clean-data') &&
-      !allPaths.includes(pathname)
-    ) {
-    // refreshToken(user.token);
-     
-      return NextResponse.redirect(
-        new URL(`/${locale}/dashboard`, request.url)
-      );
-    } else if (
-      user &&
-      user?.role &&
-      user?.role == 4 &&
-      !privateRiskPaths.includes(pathname) &&
+      request.cookies.get('user_data') &&
       !allPaths.includes(pathname) &&
-      !pathname.includes('/dashboard/dangerous-reports')
+      !pathname.includes('/dashboard')
+    ) {
+      // console.log('ok');
+
+      return NextResponse.redirect(
+        new URL(`/${locale}/dashboard`, request.url)
+      );
+    } else if (
+      request.cookies.get('user_data') &&
+      !allPaths.includes(pathname) &&
+      !pathname.includes('/dashboard')
     ) {
       return NextResponse.redirect(
         new URL(`/${locale}/dashboard`, request.url)
       );
-    }
-  } else {
-// console.log('ok');
+    } else if (
+      request.cookies.get('user_data') &&
+      !publicPath.includes(pathname)
+    ) {
+      // console.log('ok3');
+      let user = JSON.parse(request.cookies.get('user_data')?.value!);
+      // refreshToken(user.token);
+      if (
+        user &&
+        user?.role &&
+        user?.role == 1 &&
+        !privateAdminPaths.includes(pathname) &&
+        // !pathname.includes('/dashboard/cleaned-reports') &&
+        !allPaths.includes(pathname)
+      ) {
+        return NextResponse.redirect(
+          new URL(`/${locale}/dashboard/settings`, request.url)
+        );
+      } else if (
+        user &&
+        user?.role &&
+        user?.role == 2 &&
+        !privateViewerPaths.includes(pathname) &&
+        !pathname.includes('/dashboard/cleaned-reports') &&
+        !allPaths.includes(pathname)
+      ) {
+        return NextResponse.redirect(
+          new URL(`/${locale}/dashboard`, request.url)
+        );
+      } else if (
+        user &&
+        user?.role &&
+        user?.role == 3 &&
+        !privateCleanerPaths.includes(pathname) &&
+        !pathname.includes('/dashboard/clean-data') &&
+        !allPaths.includes(pathname)
+      ) {
+        // refreshToken(user.token);
 
-    return NextResponse.next();
+        return NextResponse.redirect(
+          new URL(`/${locale}/dashboard`, request.url)
+        );
+      } else if (
+        user &&
+        user?.role &&
+        user?.role == 4 &&
+        !privateRiskPaths.includes(pathname) &&
+        !allPaths.includes(pathname) &&
+        !pathname.includes('/dashboard/dangerous-reports')
+      ) {
+        return NextResponse.redirect(
+          new URL(`/${locale}/dashboard`, request.url)
+        );
+      }
+    } else {
+      // console.log('ok');
+
+      return NextResponse.next();
+    }
   }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   
 }
 
 export const config = {
