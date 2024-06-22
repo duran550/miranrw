@@ -102,13 +102,13 @@ export function middleware(request: NextRequest, response: any, next: any) {
   const hiddePath = [`/${locale}/hidde`];
 
 
-  // if (!request.cookies.get('show') && !hiddePath.includes(pathname)) {
-  //   console.log(1);
+  if (!request.cookies.get('show') && !hiddePath.includes(pathname)) {
+    console.log(1);
 
-  //   return NextResponse.redirect(new URL(`/${locale}/hidde`, request.url));
-  // } else if (request.cookies.get('show') && hiddePath.includes(pathname)) {
-  //   return NextResponse.redirect(new URL(`/${locale}`, request.url));
-  // } else if (request.cookies.get('show') && !hiddePath.includes(pathname)) {
+    return NextResponse.redirect(new URL(`/${locale}/hidde`, request.url));
+  } else if (request.cookies.get('show') && hiddePath.includes(pathname)) {
+    return NextResponse.redirect(new URL(`/${locale}`, request.url));
+  } else if (request.cookies.get('show') && !hiddePath.includes(pathname)) {
     if (!request.cookies.get('user_data') && pathname.includes('/dashboard')) {
       return NextResponse.redirect(new URL(`/${locale}/login`, request.url));
     } else if (
@@ -213,7 +213,7 @@ export function middleware(request: NextRequest, response: any, next: any) {
 
 
    
-
+}
 
 export const config = {
   // Matcher ignoring `/_next/` and `/api/`
