@@ -47,7 +47,7 @@ export async function GET(request: any) {
   return NextResponse.json(reports);
  }
 
- if(role==1 || role==2){
+ if( role==2){
   let reports: reportType[] = await Report.find({
     $nor: [{ status: 'pending' }],
   }).populate('updatereport');

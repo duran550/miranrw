@@ -12,6 +12,7 @@ import { usePathname } from 'next/navigation';
 import { reportType, reportType2 } from '@/utils/shared-types';
 import Item from 'antd/es/list/Item';
 import ReportService from '@/services/reportService';
+import { Spinner } from '@nextui-org/react';
 type AnyInputType = {
   options: string[];
 };
@@ -194,7 +195,7 @@ const CategorizeDataForm: React.FC<{
           </form>
         )}
 
-      {isLoad && <div className='text-center text-4xl'>loading...</div>}
+      {isLoad && <Spinner label="Loading . . . " color="primary" size="lg" />}
 
       {report?.category2 &&
         report.category2.length > 0 &&
