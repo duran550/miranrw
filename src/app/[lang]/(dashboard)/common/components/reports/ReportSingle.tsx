@@ -18,6 +18,7 @@ import ReportService from '@/services/reportService';
 import { reportType, reportType2 } from '@/utils/shared-types';
 import ReportSummaryCleanData from './reports-cleaner/report-summary/ReportSummaryCleanData';
 import { AdminContext } from '../../context/AdminContext';
+import { Spinner } from '@nextui-org/react';
 
 const ReportSingle = () => {
   const pathname = usePathname();
@@ -220,22 +221,23 @@ const ReportSingle = () => {
             }
             color={reports2 ? true : false}
           />
-          {(user?.role === Role.CLEANER || user?.role===Role.RISK_MANAGER) && reports && (
-            <ReportActions
-              text={
-                !reports2?.description
-                  ? reports?.description
-                  : reports2.description
-              }
-              WhatHappened={uncategorizedData?.summary.incidentDescription}
-              report={reports2}
-              // refresh={refreshHandler}
-              // refreshCurrent={refreshCurrentHandler}
-              action={reports.status2 ? reports.status2 : 'pending'}
-              updateReport={updateReport}
-              cleanReport={CleanReport}
-            />
-          )}
+          {(user?.role === Role.CLEANER || user?.role === Role.RISK_MANAGER) &&
+            reports && (
+              <ReportActions
+                text={
+                  !reports2?.description
+                    ? reports?.description
+                    : reports2.description
+                }
+                WhatHappened={uncategorizedData?.summary.incidentDescription}
+                report={reports2}
+                // refresh={refreshHandler}
+                // refreshCurrent={refreshCurrentHandler}
+                action={reports.status2 ? reports.status2 : 'pending'}
+                updateReport={updateReport}
+                cleanReport={CleanReport}
+              />
+            )}
           {user?.role == Role.VIEWER && (
             <CategorizeDataForm
               report={reports}
@@ -247,13 +249,14 @@ const ReportSingle = () => {
       )}
 
       {load && (
-        <p className="flex items-center justify-center text-5xl h-full">
-          loading...
-        </p>
+        <div className="text-center text-2xl h-[70vh] flex place-items-center w-full justify-center">
+          {/* <p>chargement patientez...</p> */}
+          <Spinner label="Loading . . . " color="primary" size="lg" />
+        </div>
       )}
       {error && !load && (
         <p className="flex items-center justify-center text-5xl h-full">
-          {errorMessage+' waite a few moments for retry'}
+          {errorMessage + ' waite a few moments for retry'}
         </p>
       )}
     </div>

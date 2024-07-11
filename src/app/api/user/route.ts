@@ -49,6 +49,8 @@ export async function POST(request: any) {
 }
 
 export async function GET(request: any) {
+  console.log(1);
+  
   let pass = await rateLimitMiddleware(request);
   if (!pass)
     return NextResponse.json(

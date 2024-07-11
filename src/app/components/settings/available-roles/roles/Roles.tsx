@@ -5,7 +5,7 @@ const Roles = () => {
   return (
     <div>
       <div>
-        <RolesCart />
+        <RolesCart users={[]}/>
       </div>
     </div>
   );

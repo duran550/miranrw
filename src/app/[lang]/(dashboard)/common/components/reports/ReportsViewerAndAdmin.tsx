@@ -19,6 +19,7 @@ import axios from 'axios';
 import ReportCard from '../report-card/ReportCard';
 import { DecodeToken } from '../../../login/components/DecodeToken';
 import { removeUserCookies, setUserCookies } from '@/cookies/cookies';
+import { Spinner } from '@nextui-org/react';
 
 const ReportsViewerAndAdmin = () => {
   const [status, setStatut] = useState(Category.Uncategorized);
@@ -171,9 +172,10 @@ const ReportsViewerAndAdmin = () => {
           </div>
         )}
         {load && (
-          <p className="flex items-center justify-center text-5xl h-full">
-            loading...
-          </p>
+          <div className="text-center text-2xl h-[70vh] flex place-items-center w-full justify-center">
+            {/* <p>chargement patientez...</p> */}
+            <Spinner label="Loading . . . " color="primary" size="lg" />
+          </div>
         )}
         {error && !load && (
           <p className="flex items-center justify-center text-5xl h-full">

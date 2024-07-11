@@ -105,7 +105,7 @@ const Home = () => {
             }
           }
 
-          if ((user?.role === 1 || user?.role == 2) && data.length > 0) {
+          if (( user?.role == 2) && data.length > 0) {
             const report = data.reverse().filter((item: reportType) => {
               const differenceDate =
                 new Date().getTime() - new Date(item.createdAt!).getTime();
@@ -251,13 +251,7 @@ const Home = () => {
   }, [refresh, token, get]);
   return (
     <>
-      {user?.role === Role.ADMIN ? (
-        <HomeViewerAndAdmin
-          report={report}
-          total={total}
-          total_week={totalWeek}
-        />
-      ) : user?.role === Role.VIEWER ? (
+      { user?.role === Role.VIEWER ? (
         <HomeViewerAndAdmin
           report={report}
           total={total}
