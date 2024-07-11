@@ -1,11 +1,13 @@
+import { Spinner } from '@nextui-org/react';
 import React from 'react';
 
-const Loading = () => {
+const loading = () => {
   return (
-    <div className="w-full h-[60vh] flex flex-col gap-y-5">
-      <div className="h-full rounded-xl w-full bg-slate-100 animate-pulse"></div>
+    <div className="text-center text-2xl h-[70vh] flex place-items-center w-full justify-center">
+      {/* <p>chargement patientez...</p> */}
+      <Spinner label="Loading . . . " color="primary" size="lg" />
     </div>
   );
 };
 
-export default Loading;
+export default loading;
