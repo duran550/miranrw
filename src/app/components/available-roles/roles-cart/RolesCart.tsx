@@ -40,18 +40,18 @@ const roleData = [
 
 const RolesCart = () => {
   const [getUsers, setGetUsers] = useState<clientInfoProps[] | any>([]);
-  const { user }=useAuth()
+  const { user } = useAuth();
   // get All Clients
   useEffect(() => {
-    async function fetchUsers() {
-      try {
-        const usersData = await getAllUsers(user?.token!);
-        setGetUsers(usersData.users);
-      } catch (error) {
-        console.error('Error fetching users:', error);
-      }
-    }
-    fetchUsers();
+    // async function fetchUsers() {
+    //   try {
+    //     const usersData = await getAllUsers(user?.token!);
+    //     setGetUsers(usersData.users);
+    //   } catch (error) {
+    //     console.error('Error fetching users:', error);
+    //   }
+    // }
+    // fetchUsers();  should uncomment
   }, []);
 
   // filter array based on roles.

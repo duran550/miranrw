@@ -39,6 +39,7 @@ import { AdminContext } from '@/app/[lang]/(dashboard)/common/context/AdminConte
 import { useContext } from 'react';
 import AddUser from './AddUserModal';
 import { useAuth } from '@/app/hooks/useAuth';
+import { clientInfoProps } from '../available-roles/roles-cart/RolesCart';
 
 interface ClientInfoProps {
   createdAt: string;
@@ -67,7 +68,16 @@ const INITIAL_VISIBLE_COLUMNS = [
 
 type User = (typeof users)[0];
 
-export default function ClientTable() {
+async function fetchUsersDelete(token: string) {
+  try {
+    const usersData = await getAllUsers(token);
+    // setGetUsers(usersData.users);
+    return usersData.users;
+  } catch (error) {
+    console.error('Error fetching users:', error);
+  }
+}
+const ClientTable: React.FC<{ getUserHandler: any }> = ({ getUserHandler }) => {
   const { user } = useAuth();
 
   const [filterValue, setFilterValue] = React.useState('');
@@ -84,6 +94,7 @@ export default function ClientTable() {
     direction: 'ascending',
   });
   const [getUsers, setGetUsers] = useState<ClientInfoProps[] | any>([]);
+  const [getUsers2, setGetUsers2] = useState<any[]>([]);
   const [selectedCell, setSelectedCell] = useState<ClientInfoProps | any>();
   // modal states
   const [openModal, setOpenModal] = useState<boolean>(false);
@@ -107,33 +118,11 @@ export default function ClientTable() {
 
   const addUserHandler = (item: ClientInfoProps) => {
     const addUser = [...getUsers, item];
-    
+
     setGetUsers(addUser);
   };
 
-  const updateUserHandler = (user: ClientInfoProps) => {
-    let addUser = getUsers.filter(
-      (item: ClientInfoProps) => item._id !== user._id
-    );
-    addUser = [...addUser, user];
-    // addUser.push(item);
-    let filteredUsers: ClientInfoProps[] = addUser.sort(
-      (
-        a: { createdAt: string | number | Date },
-        b: { createdAt: string | number | Date }
-      ) => {
-        const dateA = new Date(a.createdAt);
-        const dateB = new Date(b.createdAt);
-        return dateA.getTime() - dateB.getTime();
-      }
-    );
-    setGetUsers(filteredUsers);
-  };
-
-  const deleteUserHandler = (user: string) => {
-    let addUser = getUsers.filter((item: ClientInfoProps) => item._id !== user);
-    setGetUsers(addUser);
-  };
+  console.log(getUsers, 'getusers');
 
   // get All Clients
   useEffect(() => {
@@ -141,17 +130,30 @@ export default function ClientTable() {
       try {
         const usersData = await getAllUsers(token);
         setGetUsers(usersData.users);
+        // return usersData.users;
       } catch (error) {
         console.error('Error fetching users:', error);
       }
     }
 
-    if (refresh || getUsers.length < 1) {
-      fetchUsers(user?.token!);
-      setRefresh(false);
-    }
+    fetchUsers(user?.token!);
+    // setRefresh(false);
+
     // setClientInfo(selectedCell);
-  }, [refresh, getUsers]);
+  }, []);
+  // refresh, getUsers;
+
+  // useEffect(() => {}, [getUsers, getUsers2]);
+
+  const deleteUserHandler = async (userId: string) => {
+    // let addUser = filteredItems.filter(
+    //   (item: ClientInfoProps) => item._id !== userId
+    // );
+
+    const addUser = await fetchUsersDelete(user?.token!);
+    setGetUsers(addUser);
+    setGetUsers2(addUser);
+  };
 
   // date variable
   const dateFormat = 'DD-MM-YYYY';
@@ -179,6 +181,7 @@ export default function ClientTable() {
   }, [visibleColumns]);
 
   const filteredItems = React.useMemo(() => {
+    getUserHandler(getUsers);
     let filteredUsers = [...getUsers];
 
     if (hasSearchFilter) {
@@ -206,7 +209,6 @@ export default function ClientTable() {
   const items = React.useMemo(() => {
     const start = (page - 1) * rowsPerPage;
     const end = start + rowsPerPage;
-
     return filteredItems.slice(start, end);
   }, [page, filteredItems, rowsPerPage]);
 
@@ -247,8 +249,32 @@ export default function ClientTable() {
 
   const updatedUsers = replaceRoleNames(sortedItems);
 
-  
+  const updateUserHandler = async () => {
+    const usersData = await getAllUsers(user?.token!);
+    setGetUsers(usersData.users);
 
+    // console.log(filteredItems, 'getusers');
+    // console.log(user, 'users');
+    // console.log(users, 'getusersprops');
+    // let addUser = filteredItems.filter(
+    //   (item: ClientInfoProps) => item._id !== user._id
+    // );
+    // addUser = [...addUser, user];
+    // // addUser.push(item);
+    // let filteredUsers: ClientInfoProps[] = addUser.sort(
+    //   (
+    //     a: { createdAt: string | number | Date },
+    //     b: { createdAt: string | number | Date }
+    //   ) => {
+    //     const dateA = new Date(a.createdAt);
+    //     const dateB = new Date(b.createdAt);
+    //     return dateA.getTime() - dateB.getTime();
+    //   }
+    // );
+    // console.log(filteredUsers, 'filtereduser');
+    // console.log(addUser, 'filtereduser');
+    // setGetUsers(filteredUsers);
+  };
   const renderCell = React.useCallback((user: User, columnKey: React.Key) => {
     const cellValue = user[columnKey as keyof User];
 
@@ -291,7 +317,11 @@ export default function ClientTable() {
           <div className="">
             <div className="flex gap-x-2">
               <SeeDetails />
-              <EditUser refresh={refreshHandler} editUser={updateUserHandler} />
+              <EditUser
+                refresh={refreshHandler}
+                editUser={updateUserHandler}
+                users={getUsers}
+              />
               <DeleteUser
                 refresh={refreshHandler}
                 deleteUserHandler={deleteUserHandler}
@@ -541,7 +571,10 @@ export default function ClientTable() {
             </TableColumn>
           )}
         </TableHeader>
-        <TableBody emptyContent={'Loading Users...'} items={updatedUsers}>
+        <TableBody
+          // emptyContent={sortedItems.length === 0 ? 'loading...' : ''}
+          items={updatedUsers}
+        >
           {(item: any) => (
             <TableRow
               key={item._id}
@@ -561,4 +594,6 @@ export default function ClientTable() {
       </Table>
     </div>
   );
-}
+};
+
+export default ClientTable;
