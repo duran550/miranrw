@@ -25,6 +25,7 @@ import AuthService from '@/services/authService';
 import axios from 'axios';
 import { useAuth } from '@/app/hooks/useAuth';
 import { DecodeToken } from '../../../login/components/DecodeToken';
+import { Spinner } from '@nextui-org/react';
 
 const ReportsCleaner = () => {
   const { user } = useAuth();
@@ -214,9 +215,10 @@ const ReportsCleaner = () => {
           </div>
         )}
         {load && (
-          <p className="flex items-center justify-center text-5xl h-full">
-            loading...
-          </p>
+          <div className="text-center text-2xl h-[70vh] flex place-items-center w-full justify-center">
+            {/* <p>chargement patientez...</p> */}
+            <Spinner label="Loading . . . " color="primary" size="lg" />
+          </div>
         )}
         {error && !load && (
           <p className="flex items-center justify-center text-5xl h-full">

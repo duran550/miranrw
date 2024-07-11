@@ -1,12 +1,17 @@
-import React from 'react';
+'use client'
+import React, { useState } from 'react';
 import ClientTable from './clientTable/ClientTable';
-import RolesCart from './available-roles/roles-cart/RolesCart';
+import RolesCart, { clientInfoProps } from './available-roles/roles-cart/RolesCart';
 
 const Settings = () => {
+  const [users, setUsers] = useState<clientInfoProps[]>([]);
+  const getUserHandler = (users: clientInfoProps[]) => {
+    setUsers(users);
+  };
   return (
     <div>
-      <RolesCart />
-      <ClientTable />
+      <RolesCart users={users} />
+      <ClientTable getUserHandler={getUserHandler} />
     </div>
   );
 };

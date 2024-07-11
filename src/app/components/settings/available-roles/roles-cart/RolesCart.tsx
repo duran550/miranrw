@@ -4,7 +4,7 @@ import React, { useEffect, useState } from 'react';
 import { PersonSubtract, PersonAvailable, Glasses, PersonStar } from './icons';
 import { getAllUsers } from '@/services/userService';
 import { useAuth } from '@/app/hooks/useAuth';
-interface clientInfoProps {
+export interface clientInfoProps {
   _id: string;
   fullname: string;
   email: string;
@@ -38,10 +38,10 @@ const roleData = [
   },
 ];
 
-const RolesCart = () => {
+const RolesCart: React.FC<{ users: clientInfoProps[] }> = ({ users }) => {
   const { user } = useAuth();
 
-  const [getUsers, setGetUsers] = useState<clientInfoProps[] | any>([]);
+  const [getUsers, setGetUsers] = useState<clientInfoProps[] | any>(users);
 
   // get All Clients
   useEffect(() => {
@@ -57,7 +57,7 @@ const RolesCart = () => {
   }, []);
 
   // filter array based on roles.
-  const roles: number[] = getUsers.map((user: any) => user.role);
+  const roles: number[] = users.map((user: any) => user.role);
   // get superAdmin role
   const superAdmin: number[] = roles.filter((role) => role === 1);
   // get Viewers role

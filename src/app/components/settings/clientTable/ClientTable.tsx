@@ -39,6 +39,7 @@ import { AdminContext } from '@/app/[lang]/(dashboard)/common/context/AdminConte
 import { useContext } from 'react';
 import AddUser from './AddUserModal';
 import { useAuth } from '@/app/hooks/useAuth';
+import { clientInfoProps } from '../available-roles/roles-cart/RolesCart';
 
 interface ClientInfoProps {
   createdAt: string;
@@ -76,7 +77,7 @@ async function fetchUsersDelete(token: string) {
     console.error('Error fetching users:', error);
   }
 }
-export default function ClientTable() {
+const ClientTable: React.FC<{ getUserHandler: any }> = ({ getUserHandler }) => {
   const { user } = useAuth();
 
   const [filterValue, setFilterValue] = React.useState('');
@@ -142,7 +143,7 @@ export default function ClientTable() {
   }, []);
   // refresh, getUsers;
 
-  useEffect(() => {}, [getUsers, getUsers2]);
+  // useEffect(() => {}, [getUsers, getUsers2]);
 
   const deleteUserHandler = async (userId: string) => {
     // let addUser = filteredItems.filter(
@@ -180,6 +181,7 @@ export default function ClientTable() {
   }, [visibleColumns]);
 
   const filteredItems = React.useMemo(() => {
+    getUserHandler(getUsers);
     let filteredUsers = [...getUsers];
 
     if (hasSearchFilter) {
@@ -592,4 +594,6 @@ export default function ClientTable() {
       </Table>
     </div>
   );
-}
+};
+
+export default ClientTable;
