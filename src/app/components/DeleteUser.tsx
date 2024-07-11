@@ -33,32 +33,27 @@ function DeleteUser({ lang, refresh }: DelUserPros) {
   const [openModal, setOpenModal] = useState<boolean>(false);
   const [getUsers, setGetUsers] = useState<ClientInfoProps[] | any>([]);
   const [deletedUserId, setDeletedUserId] = useState(null);
-  const { user }=useAuth()
+  const { user } = useAuth();
 
   // get unique user id
   const { state } = useContext(AdminContext);
   const { clientInfo } = state;
 
-
-
   // get All Clients
   useEffect(() => {
-    
-    async function fetchUsers(token:string) {
-      try {
-        const usersData = await getAllUsers(token);
-        setGetUsers(usersData.users);
-      } catch (error) {
-        console.error('Error fetching users:', error);
-      }
-    }
-
-    fetchUsers(user?.token!);
+    // async function fetchUsers(token:string) {
+    //   try {
+    //     const usersData = await getAllUsers(token);
+    //     setGetUsers(usersData.users);
+    //   } catch (error) {
+    //     console.error('Error fetching users:', error);
+    //   }
+    // }
+    // fetchUsers(user?.token!);
   }, [deletedUserId]);
 
   // code to delete user
   const deleteUser = async (userId: any) => {
-   
     try {
       const response = await fetch(`/api/user/${userId}`, {
         method: 'DELETE',

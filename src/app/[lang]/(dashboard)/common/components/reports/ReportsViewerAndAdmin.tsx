@@ -158,7 +158,7 @@ const ReportsViewerAndAdmin = () => {
                         title={item._id ? item._id : 'PT0124'}
                         date={item.createdAt ? item.createdAt : ''}
                         href={
-                          user && user?.role == 1
+                          user && user?.role == 2
                             ? `/dashboard/cleaned-reports/${item._id}`
                             : '#'
                         }

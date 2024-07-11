@@ -11,7 +11,8 @@ import {
   SIXTH_FORM,
   THIRD_FORM,
   USER_DATA,
-  REFRESH_TOKEN
+  REFRESH_TOKEN,
+  SHOW
 } from './cookies.d';
 
 
@@ -43,6 +44,21 @@ export const getUserCookies = () => {
 
 export const removeUserCookies = () => {
   cookies.remove(USER_DATA);
+};
+
+// export const getUserCookies = () => {
+//   const data = cookies.get(USER_DATA);
+//   console.log('data', data);
+
+//   return data ? JSON.parse(data) : undefined;
+// };
+export const setShow = (data: string) => {
+  console.log('data', data);
+
+  cookies.set(SHOW, data);
+};
+export const removeShow = () => {
+  cookies.remove(SHOW);
 };
 
 // Setting FORM steps

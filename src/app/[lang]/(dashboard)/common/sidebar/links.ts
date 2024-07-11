@@ -13,31 +13,31 @@ export const adminLinks: Array<{
   icon: any;
   targetSegment: null | string;
 }> = [
-  {
-    name: 'Dashboard',
-    href: '/dashboard',
-    icon: HomeIcon,
-    targetSegment: null,
-  },
-  {
-    name: 'Reports',
-    href: '/dashboard/cleaned-reports',
-    icon: ReportsIcon,
-    targetSegment: 'cleaned-reports',
-  },
+  // {
+  //   name: 'Dashboard',
+  //   href: '/dashboard',
+  //   icon: HomeIcon,
+  //   targetSegment: null,
+  // },
+  // {
+  //   name: 'Reports',
+  //   href: '/dashboard/cleaned-reports',
+  //   icon: ReportsIcon,
+  //   targetSegment: 'cleaned-reports',
+  // },
 
-  {
-    name: 'Quantitative',
-    href: 'dashboard/quantitative',
-    icon: QuantitativeIcon,
-    targetSegment: 'quantitative',
-  },
-  {
-    name: 'Qualitative',
-    href: '/dashboard/qualitative',
-    icon: QualitativeIcon,
-    targetSegment: 'qualitative',
-  },
+  // {
+  //   name: 'Quantitative',
+  //   href: 'dashboard/quantitative',
+  //   icon: QuantitativeIcon,
+  //   targetSegment: 'quantitative',
+  // },
+  // {
+  //   name: 'Qualitative',
+  //   href: '/dashboard/qualitative',
+  //   icon: QualitativeIcon,
+  //   targetSegment: 'qualitative',
+  // },
   {
     name: 'settings',
     href: '/dashboard/settings',
