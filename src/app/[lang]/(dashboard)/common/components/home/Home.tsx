@@ -111,7 +111,7 @@ const Home = () => {
           if (user?.role == 2 && data.length > 0) {
             const report = data.reverse().filter((item: reportType) => {
               const differenceDate =
-                new Date().getTime() - new Date(item.createdAt!).getTime();
+                new Date().getTime() - new Date(item.updatedAt!).getTime();
 
               if (
                 item.updatereport &&
@@ -165,7 +165,7 @@ const Home = () => {
           if (user?.role === 4 && data.length > 0) {
             const report = data.reverse().filter((item: reportType) => {
               const differenceDate =
-                new Date().getTime() - new Date(item.createdAt!).getTime();
+                new Date().getTime() - new Date(item.updatedAt!).getTime();
 
               if (
                 item.updatereport &&

@@ -30,6 +30,8 @@ export type reportType = {
   createdAt?: string;
   status?: string;
   category?: any[];
+  updatedAt?: string;
+
   updatereport?: {
     category?: any[];
 
@@ -69,6 +71,7 @@ export type reportType2 = {
   sexualOrientation?: string[];
   sexualOrientationFreeField?: string;
   createdAt?: string;
+  updatedAt?: string;
   status2?: string;
   category2?: any[];
   status?: string;
