@@ -15,8 +15,11 @@ import { error } from 'console';
 import { removeUserCookies, setUserCookies } from '@/cookies/cookies';
 import axios from 'axios';
 import { DecodeToken } from '../../../login/components/DecodeToken';
+import { Spinner } from '@nextui-org/react';
 
 const Home = () => {
+  const [load, setLoad] = useState(true);
+
   const { user } = useAuth();
   const [refresh, setRefresh] = useState(true);
   const [get, setGet] = useState(false);
@@ -58,7 +61,7 @@ const Home = () => {
                 item.updatereport[0].status == 'pending'
               ) {
                 total++;
-               // console.log(Math.round(differenceDate / (1000 * 3600 * 24)));
+                // console.log(Math.round(differenceDate / (1000 * 3600 * 24)));
 
                 if (Math.round(differenceDate / (1000 * 3600 * 24)) <= 7) {
                   total_week++;
@@ -88,12 +91,12 @@ const Home = () => {
                   delete item.updatereport;
                   report1.push({ ...item });
 
-                   total++;
+                  total++;
                   // console.log(Math.round(differenceDate / (1000 * 3600 * 24)));
 
-                   if (Math.round(differenceDate / (1000 * 3600 * 24)) <= 7) {
-                     total_week++;
-                   }
+                  if (Math.round(differenceDate / (1000 * 3600 * 24)) <= 7) {
+                    total_week++;
+                  }
                 }
               }
             });
@@ -105,7 +108,7 @@ const Home = () => {
             }
           }
 
-          if (( user?.role == 2) && data.length > 0) {
+          if (user?.role == 2 && data.length > 0) {
             const report = data.reverse().filter((item: reportType) => {
               const differenceDate =
                 new Date().getTime() - new Date(item.createdAt!).getTime();
@@ -116,7 +119,7 @@ const Home = () => {
                 item.updatereport[0].status &&
                 item.updatereport[0].status == 'cleaned'
               ) {
-               // console.log(Math.round(differenceDate / (1000 * 3600 * 24)));
+                // console.log(Math.round(differenceDate / (1000 * 3600 * 24)));
 
                 total++;
                 if (Math.round(differenceDate / (1000 * 3600 * 24)) <= 7) {
@@ -170,8 +173,8 @@ const Home = () => {
                 item.updatereport[0].status &&
                 item.updatereport[0].status == 'Dangerous'
               ) {
-               // console.log(Math.round(differenceDate / (1000 * 3600 * 24)));
-                
+                // console.log(Math.round(differenceDate / (1000 * 3600 * 24)));
+
                 if (Math.round(differenceDate / (1000 * 3600 * 24)) <= 7) {
                   total_week++;
                 }
@@ -206,7 +209,10 @@ const Home = () => {
           setTotalWeek(total_week);
         })
         .catch(function (error) {});
-    } catch (error) {}
+    } catch (error) {
+    } finally {
+      setLoad(false);
+    }
 
     setRefresh(false);
   };
@@ -251,7 +257,12 @@ const Home = () => {
   }, [refresh, token, get]);
   return (
     <>
-      { user?.role === Role.VIEWER ? (
+      {load ? (
+        <div className="text-center text-2xl h-[70vh] flex place-items-center w-full justify-center">
+          {/* <p>chargement patientez...</p> */}
+          <Spinner label="Loading . . . " color="primary" size="lg" />
+        </div>
+      ) : user?.role === Role.VIEWER ? (
         <HomeViewerAndAdmin
           report={report}
           total={total}
