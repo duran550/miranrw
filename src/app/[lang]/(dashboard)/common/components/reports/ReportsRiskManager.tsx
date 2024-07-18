@@ -150,7 +150,7 @@ useEffect(() => {
                       <ReportCard
                         key={item._id}
                         title={item._id ? item._id : 'PT0124'}
-                        date={item.createdAt ? item.createdAt : ''}
+                        date={item.updatedAt ? item.updatedAt : ''}
                         href={`/dashboard/dangerous-reports/${item._id}`}
                         reportType={Category.Dangerous}
                       />
@@ -165,7 +165,7 @@ useEffect(() => {
                       <ReportCard
                         key={item._id}
                         title={item._id ? item._id : 'PT0124'}
-                        date={item.createdAt ? item.createdAt : ''}
+                        date={item.updatedAt ? item.updatedAt : ''}
                         href={`/dashboard/dangerous-reports/${item._id}`}
                         reportType={Category.Managed}
                       />
