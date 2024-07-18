@@ -145,7 +145,7 @@ const ReportsViewerAndAdmin = () => {
                       <ReportCard
                         key={item._id}
                         title={item._id ? item._id : 'PT0124'}
-                        date={item.createdAt ? item.createdAt : ''}
+                        date={item.updatedAt ? item.updatedAt : ''}
                         href={`/dashboard/cleaned-reports/${item._id}`}
                         reportType={Category.Uncategorized}
                       />
@@ -157,7 +157,7 @@ const ReportsViewerAndAdmin = () => {
                       <ReportCard
                         key={item._id}
                         title={item._id ? item._id : 'PT0124'}
-                        date={item.createdAt ? item.createdAt : ''}
+                        date={item.updatedAt ? item.updatedAt : ''}
                         href={
                           user && user?.role == 2
                             ? `/dashboard/cleaned-reports/${item._id}`
