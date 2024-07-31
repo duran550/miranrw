@@ -5,7 +5,7 @@ import {
   LoginParams,
   UserDataType,
 } from './types';
-import { useRouter } from 'next/router';
+import { useRouter } from 'next/navigation';
 import {
   getUserCookies,
   removeUserCookies,
@@ -22,9 +22,15 @@ const defaultProvider: AuthValuesType = {
   login: () => {},
   logout: () => {},
   setLoading: () => Boolean,
+  IshowHandler: () => {},
+  reportsRecents: [],
+  setReportsRecent: () => {},
   reports: [],
-  setReports:()=>{}
-  
+  setReports: () => {},
+  isShow: false,
+  total: 0,
+  totalWeek: 0,
+  setNumbers: () => {},
 };
 
 const AuthContext = createContext(defaultProvider);
@@ -39,7 +45,12 @@ const AuthProvider = ({ children }: Props) => {
   const [report, setReport] = useState<reportType[]>(
    []
   );
-
+const [recents, setRecents] = useState<reportType[]>(
+  defaultProvider.reportsRecents
+);
+const [show, setShow] = useState(false);
+const [totals, setTotals] = useState(0);
+const [weeks, setWeeks] = useState(0);
   const [loading, setLoading] = useState<boolean>(defaultProvider.loading);
 
   // ** Hooks
@@ -58,9 +69,21 @@ const AuthProvider = ({ children }: Props) => {
     initAuth();
   }, []);
 
-  const handlerReport = (report:reportType[]) => {
-  setReport(report)
-}
+  const handlerReport = (report: reportType[]) => {
+    setReport(report);
+  };
+  const handlerReportRecent = (report: reportType[]) => {
+    setRecents(report);
+  };
+
+  const handleShow = () => {
+    setShow(!show);
+  };
+
+  const setNumbersHandler = (val1: number, val2: number) => {
+    setTotals(val1);
+    setWeeks(val2);
+  };
 
 
   const handleLogin = (
@@ -101,15 +124,22 @@ setUserCookies(user)
     router.push('/login');
   };
 
-  const values: any = {
+  const values: AuthValuesType = {
     user,
     loading,
     setUser,
-    setLoading,
+    // setLoading,
+    IshowHandler: handleShow,
     login: handleLogin,
     logout: handleLogout,
-    reports:report,
+    reports: report,
     setReports: handlerReport,
+    isShow: show,
+    total: totals,
+    totalWeek: weeks,
+    setNumbers: setNumbersHandler,
+    reportsRecents: recents,
+    setReportsRecent: handlerReportRecent,
   };
 
   return <AuthContext.Provider value={values}>{children}</AuthContext.Provider>;

@@ -44,6 +44,7 @@
     "eslint-config-next": "^14.0.3",
     "express-rate-limit": "^7.2.0",
     "framer-motion": "^10.18.0",
+    "friendly-challenge": "^0.9.16",
     "handlebars": "^4.7.8",
     "husky": "^8.0.3",
     "joi": "^17.12.2",

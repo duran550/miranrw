@@ -1,7 +1,7 @@
 'use client';
 import { useAuth } from '@/app/hooks/useAuth';
 import { Role } from '@/utils/utils';
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useRef, useState } from 'react';
 import HomeViewerAndAdmin from './HomeViewerAndAdmin';
 import HomeCleaner from './HomeCleaner';
 import HomeRiskManager from './HomeRiskManager';
@@ -16,17 +16,25 @@ import { removeUserCookies, setUserCookies } from '@/cookies/cookies';
 import axios from 'axios';
 import { DecodeToken } from '../../../login/components/DecodeToken';
 import { Spinner } from '@nextui-org/react';
+import { AuthContext } from '@/app/context/AuthContext';
 
 const Home = () => {
-  const [load, setLoad] = useState(true);
-
+  const {
+    reports,
+    setReports,
+    total,
+    totalWeek,
+    setNumbers,
+    isShow,
+    IshowHandler,
+  } = useContext(AuthContext);
+  const hasMounted = useRef(false);
+  const [load, setLoad] = useState(reports.length == 0);
   const { user } = useAuth();
-  const [refresh, setRefresh] = useState(true);
+  const [refresh, setRefresh] = useState(0);
   const [get, setGet] = useState(false);
   const [token, setToken] = useState('');
-  const [report, setReport] = useState<reportType2[]>([]);
-  const [total, setTotal] = useState(0);
-  const [totalWeek, setTotalWeek] = useState(0);
+  const [report, setReport] = useState<reportType2[]>(reports.slice(0, 5));
   // const [dangerous, setDangerous] = useState(0);
 
   const getReport = async (token: string) => {
@@ -199,32 +207,43 @@ const Home = () => {
                 });
               }
             });
-            if (report1.length < 6 && report1.length > 0) {
-              setReport(report1);
-            } else {
-              setReport(report1.slice(0, 5));
-            }
+            setReports(report1);
+            // if (report1.length < 6 && report1.length > 0) {
+            //   setReports(report1);
+            // } else {
+            setReport(report1.slice(0, 5));
+            // }
           }
-          setTotal(total);
-          setTotalWeek(total_week);
+          setNumbers(total, total_week);
+          setTimeout(() => {
+            setRefresh((preview) => preview + 1);
+          }, 60000);
+          // setTotal(total);
+          // setTotalWeek(total_week);
         })
-        .catch(function (error) {});
+        .catch(function (error) {
+          console.log(error);
+        });
     } catch (error) {
     } finally {
       setLoad(false);
     }
 
-    setRefresh(false);
+    // setRefresh(false);
   };
 
   useEffect(() => {
-    if (token.length == 0 && refresh) {
+    if (!hasMounted.current) {
+      console.log('Effect executed');
+      // Votre requête ici
+      isShow && IshowHandler();
       const response = new AuthService()
         .refreshToken()
-        .then((result) => {
+        .then(async (result) => {
           if (result.status === 201) {
             const user = DecodeToken(result.headers.authorization);
             setToken(result.headers.authorization);
+            await getReport(result.headers.authorization);
 
             user.then((result1) => {
               if (typeof result1 == 'object') {
@@ -232,6 +251,7 @@ const Home = () => {
                   ...result1,
                   token: result.headers.authorization,
                 });
+                setRefresh(1);
               }
             });
           }
@@ -244,24 +264,28 @@ const Home = () => {
             }
           }
         });
+      hasMounted.current = true;
     }
-    if (refresh && token.length > 0) {
+  }, []);
+
+  useEffect(() => {
+    if (refresh >= 2) {
       getReport(token);
-      setRefresh(false);
     }
-    if (!refresh && token.length > 0) {
-      setTimeout(() => {
-        setRefresh(true);
-      }, 10000);
-    }
-  }, [refresh, token, get]);
+  }, [refresh]);
   return (
-    <>
+    <div className="w-full overflow-x-hidden overflow-y-hidden h-screen">
       {load ? (
         <div className="text-center text-2xl h-[70vh] flex place-items-center w-full justify-center">
           {/* <p>chargement patientez...</p> */}
           <Spinner label="Loading . . . " color="primary" size="lg" />
         </div>
+      ) : user?.role === Role.ADMIN ? (
+        <HomeViewerAndAdmin
+          report={report}
+          total={total}
+          total_week={totalWeek}
+        />
       ) : user?.role === Role.VIEWER ? (
         <HomeViewerAndAdmin
           report={report}
@@ -279,7 +303,7 @@ const Home = () => {
           />
         )
       )}
-    </>
+    </div>
   );
 };
 

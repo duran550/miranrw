@@ -2,7 +2,7 @@
 // import RadioSingle from '@/app/[lang]/(dashboard)/dashboard/cleaned-reports/components/radio/RadioSingle';
 import { dataCategorizationOptions } from '@/app/[lang]/(dashboard)/dashboard/reports/reportsCardDatas';
 import { Button } from '@/app/components/button/Button';
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect, useRef, useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import Checkbox from '../../../forms/radio/Checkbox';
 import { AdminContext } from '../../../../context/AdminContext';
@@ -41,6 +41,7 @@ const CategorizeDataForm: React.FC<{
   const [isLoad, setIsLoad] = useState<boolean>(false);
   const [isEdit, setIsEdit] = useState<boolean>(false);
   const [categoryTable, setCategoryTable] = useState<string[]>([]);
+  const hasMounted = useRef(false);
 
   const [cat, setCat] = useState<categoryType>([]);
   const pathname = usePathname();
@@ -88,17 +89,20 @@ const CategorizeDataForm: React.FC<{
     }
   };
   useEffect(() => {
-    setIsLoad(true);
+    if (!hasMounted.current) {
+      setIsLoad(true);
 
-    const response = new CategoryService()
-      .getAllCategory()
-      .then((result) => {
-        if (result.status == 200 || result.status == 201) {
-          setCat(result.data.categorys);
-          setIsLoad(false);
-        }
-      })
-      .catch((error) => setIsLoad(false));
+      const response = new CategoryService()
+        .getAllCategory()
+        .then((result) => {
+          if (result.status == 200 || result.status == 201) {
+            setCat(result.data.categorys);
+            setIsLoad(false);
+          }
+        })
+        .catch((error) => setIsLoad(false));
+      hasMounted.current = true;
+    }
   }, []);
 
   useEffect(() => {
@@ -121,13 +125,13 @@ const CategorizeDataForm: React.FC<{
   };
 
   return (
-    <div className="border rounded-xl p-4 border-gray-300 w-full mb-6 max-h-[70vh] overflow-y-auto overscroll-none no-scrollbar">
+    <div className="border bg-white rounded-xl p-4 border-gray-300 w-full mb-6 max-h-[70vh] overflow-y-auto overscroll-none no-scrollbar">
       <h1 className="font-bold text-xl opacity-80 my-4">Categorize Data</h1>
       {((report?.category2 && report.category2.length == 0) ||
         (report?.category2 && report.category2.length > 0 && isEdit)) &&
         !isLoad && (
           <form onSubmit={handleSubmit(onSubmit)}>
-            <div className="py-4 flex flex-col gap-4 max-h-[50vh] overflow-y-scroll">
+            <div className="py-4 flex flex-col gap-4 max-h-[50vh] overflow-y-auto ">
               {cat &&
                 cat.length > 0 &&
                 cat?.map((reportCard, index) => {

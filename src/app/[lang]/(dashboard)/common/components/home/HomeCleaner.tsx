@@ -35,7 +35,7 @@ const HomeCleaner: React.FC<{
         />
       </div>
 
-      <div className="mt-8">
+      <div className="mt-8 h-[calc(100vh-400px)] overflow-y-auto">
         <h1 className="text-xl mb-4 font-bold">Recent reports</h1>
         <div className="w-full gap-y-4 flex flex-col">
           {report &&
