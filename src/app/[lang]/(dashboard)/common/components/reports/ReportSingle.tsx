@@ -1,5 +1,5 @@
 'use client';
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect, useRef, useState } from 'react';
 import Header from './Header';
 import ReportSummary from './reports-cleaner/report-summary/ReportSummary';
 import ReportActions from './reports-cleaner/report-actions/ReportActions';
@@ -16,67 +16,102 @@ import { useAuth } from '@/app/hooks/useAuth';
 import { Role } from '@/utils/utils';
 import ReportService from '@/services/reportService';
 import { reportType, reportType2 } from '@/utils/shared-types';
-import ReportSummaryCleanData from './reports-cleaner/report-summary/ReportSummaryCleanData';
+// import ReportSummaryCleanData from './reports-cleaner/report-summary/ReportSummaryCleanData';
 import { AdminContext } from '../../context/AdminContext';
 import { Spinner } from '@nextui-org/react';
+import { AuthContext } from '@/app/context/AuthContext';
 
 const ReportSingle = () => {
+  const { reports, setReports, IshowHandler, isShow } = useContext(AuthContext);
+  const hasMounted = useRef(false);
+
   const pathname = usePathname();
   const urlSplit = pathname.split('/');
 
   const { uncategorizedData } = useFindReport();
   const { user } = useAuth();
-  const [reports, setReport] = useState<reportType2 | undefined>();
+  const [reports1, setReport] = useState<reportType2 | undefined>();
   const [reports2, setReport2] = useState<reportType2 | undefined>();
 
-  const [refresh, setRefresh] = useState(false);
-  const [refreshRaw, setRefreshRaw] = useState(false);
-
   const [refreshCurrent, setRefreshCurrent] = useState(false);
-
 
   const [load, setLoad] = useState(true);
   const [error, setError] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
 
   const updateReport = (status: string) => {
-    reports?.status2 && delete reports.status2;
-    reports?.description2 && delete reports.description2;
-    reports?.category2 && delete reports.category2;
-
+    reports1?.status2 && delete reports1.status2;
+    reports1?.description2 && delete reports1.description2;
+    reports1?.category2 && delete reports1.category2;
+    const array = reports.map((items) => {
+      if (items._id == reports1?._id) {
+        return {
+          ...reports1,
+          status2: status,
+          description2: undefined,
+          category2: [],
+        };
+      } else {
+        return items;
+      }
+    });
+    setReports(array);
     setReport({
-      ...reports,
+      ...reports1,
       status2: status,
       description2: undefined,
       category2: [],
     });
-      setReport2(undefined);
-
+    setReport2(undefined);
   };
-   const CleanReport = (description: string) => {
-     reports?.status2 && delete reports.status2;
-     reports?.description2 && delete reports.description2;
-     reports?.category2 && delete reports.category2;
-
-     setReport2({
-       ...reports,
-       status2: 'cleaned',
-       description2: description,
-       category2: [],
-     });
-   };
-    const categorizeReport = (description: string, categorise:any[]) => {
-      reports?.status2 && delete reports.status2;
-      reports?.description2 && delete reports.description2;
-      reports?.category2 && delete reports.category2;
-
-      setReport({
-        ...reports,
-        status2: 'cleaned',
-        description2: description,
-        category2: categorise,
-      });
-    };
+  const CleanReport = (description: string) => {
+    reports1?.status2 && delete reports1.status2;
+    reports1?.description2 && delete reports1.description2;
+    reports1?.category2 && delete reports1.category2;
+    const array = reports.map((items) => {
+      if (items._id == reports1?._id) {
+        return {
+          ...reports1,
+          status2: 'cleaned',
+          description2: description,
+          category2: [],
+        };
+      } else {
+        return items;
+      }
+    });
+    setReports(array);
+    setReport2({
+      ...reports1,
+      status2: 'cleaned',
+      description2: description,
+      category2: [],
+    });
+  };
+  const categorizeReport = (description: string, categorise: any[]) => {
+    reports1?.status2 && delete reports1.status2;
+    reports1?.description2 && delete reports1.description2;
+    reports1?.category2 && delete reports1.category2;
+    const array = reports.map((items) => {
+      if (items._id == reports1?._id) {
+        return {
+          ...reports1,
+          status2: 'cleaned',
+          description2: description,
+          category2: categorise,
+        };
+      } else {
+        return items;
+      }
+    });
+    setReports(array);
+    setReport({
+      ...reports1,
+      status2: 'cleaned',
+      description2: description,
+      category2: categorise,
+    });
+  };
   // const refreshHandler = () => {
   //   setRefresh(true);
   //   setRefreshRaw(false);
@@ -87,8 +122,10 @@ const ReportSingle = () => {
   //   setRefreshRaw(true);
   // };
   useEffect(() => {
-    if (!reports) {
-      setLoad(true);
+    if (!hasMounted.current) {
+      isShow && IshowHandler();
+
+      //   setLoad(true);
       const response = new ReportService()
         .getAllReport()
         .then((result) => {
@@ -157,6 +194,7 @@ const ReportSingle = () => {
           setError(true);
           setErrorMessage(error.response.data.message);
         });
+      hasMounted.current = true;
     }
 
     // if (refresh) {
@@ -196,11 +234,10 @@ const ReportSingle = () => {
     //       setErrorMessage(error.response.data.message);
     //     });
     // }
-  }, [reports, user?.role]);
-
+  }, []);
 
   return (
-    <div className="mb-[2rem]">
+    <div className="pb-[2rem] sm:h-screen h-[calc(100vh-80px)] overflow-x-auto ">
       {user && user.role == 3 && (
         <Header href="/clean-data" title="Data Info" />
       )}
@@ -213,35 +250,32 @@ const ReportSingle = () => {
       )}
 
       {!load && !error && (
-        <div className="flex  gap-x-6 h-full">
+        <div className="flex lg:flex-row   flex-col-reverse gap-6 ">
           <ReportSummary
-            report={reports}
+            report={reports1}
             incidentDescription={
               uncategorizedData?.summary?.incidentDescription
             }
             color={reports2 ? true : false}
           />
           {(user?.role === Role.CLEANER || user?.role === Role.RISK_MANAGER) &&
-            reports && (
+            reports1 && (
               <ReportActions
                 text={
                   !reports2?.description
-                    ? reports?.description
+                    ? reports1?.description
                     : reports2.description
                 }
                 WhatHappened={uncategorizedData?.summary.incidentDescription}
                 report={reports2}
-                // refresh={refreshHandler}
-                // refreshCurrent={refreshCurrentHandler}
-                action={reports.status2 ? reports.status2 : 'pending'}
+                action={reports1.status2 ? reports1.status2 : 'pending'}
                 updateReport={updateReport}
                 cleanReport={CleanReport}
               />
             )}
           {user?.role == Role.VIEWER && (
             <CategorizeDataForm
-              report={reports}
-              // refreshCurrent={refreshCurrentHandler}
+              report={reports1}
               categoriseReport={categorizeReport}
             />
           )}
@@ -250,7 +284,6 @@ const ReportSingle = () => {
 
       {load && (
         <div className="text-center text-2xl h-[70vh] flex place-items-center w-full justify-center">
-          {/* <p>chargement patientez...</p> */}
           <Spinner label="Loading . . . " color="primary" size="lg" />
         </div>
       )}

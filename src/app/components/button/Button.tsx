@@ -17,7 +17,7 @@ interface ButtonProps
 }
 
 const buttonVariants = cva(
-  'w-full py-3 text-white font-medium  flex justify-center px-4 rounded focus:outline-none focus:shadow-outline',
+  'w-full md:py-3 py-1 text-white font-medium  flex justify-center px-4 rounded items-center gap-2 focus:outline-none focus:shadow-outline',
 
   {
     variants: {
@@ -62,7 +62,7 @@ const Button: FC<ButtonProps> = ({
             href={href}
             className={cn(buttonVariants({ variant, className }))}
           >
-            <span className="mr-2">
+            <span className="">
               {icon ? <Image src={icon} alt={'Icon'} /> : ''}
             </span>
             {children}
@@ -89,7 +89,7 @@ const Button: FC<ButtonProps> = ({
       name={name}
     >
       <div className="flex items-center">
-        <span className="mr-2">
+        <span className="">
           {icon ? <Image src={icon} alt={'Icon'} /> : ''}
         </span>
         {children}

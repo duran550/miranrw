@@ -5,12 +5,15 @@ import React from 'react';
 import { Providers } from '../components/captcha/providers';
 import { Locale } from '@/i18n.config';
 import { FormProvider } from '../context/FormContext';
+import { AuthProvider } from '../context/AuthContext';
 
 const LayoutComponent = ({ children }: { children: React.ReactNode }) => {
   return (
     <NextUIProvider>
       <Providers>
-        <FormProvider>{children}</FormProvider>
+        <FormProvider>
+          <AuthProvider>{children}</AuthProvider>
+        </FormProvider>
       </Providers>
     </NextUIProvider>
   );

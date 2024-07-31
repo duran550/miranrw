@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { EleventhFormValues, EleventhStepProps } from './eleventhStep';
 import { useFormContext } from '@/app/hooks/useFormContext';
 import { clearFormCookies, getFormCookies } from '@/cookies/cookies';
@@ -26,7 +26,7 @@ import { verifyCaptchaAction } from '@/app/components/captcha/Captcha';
 import CaptchaCheckbox from '@/app/components/captcha/captcha-checkbox/CaptchaCheckbox';
 import { error } from 'console';
 import { identity } from '../first-step/firstFormData';
-
+import { WidgetInstance } from 'friendly-challenge';
 const EleventhStep: React.FC<EleventhStepProps> = ({
   eleventhStepTranslation,
   secondStepTranslation
@@ -38,7 +38,32 @@ const EleventhStep: React.FC<EleventhStepProps> = ({
   const { dispatch, reportingPerson } = useFormContext();
   const [captchLoading, setCaptchaLoading] = useState<boolean>(true);
   const [verified, setVerified] = useState<any>(false);
+  const container = useRef(null);
+  const widget = useRef<any>(null);
 
+  const doneCallback = (solution:any) => {
+    console.log('Captcha was solved. The form can be submitted.');
+    console.log(solution);
+  };
+
+  const errorCallback = (err:any) => {
+    console.log('There was an error when trying to solve the Captcha.');
+    console.log(err);
+  };
+
+  useEffect(() => {
+    if (!widget.current && container.current) {
+      widget.current = new WidgetInstance(container.current, {
+        startMode: 'auto',
+        doneCallback: doneCallback,
+        errorCallback: errorCallback,
+      });
+    }
+
+    return () => {
+      if (widget.current != undefined) widget.current.reset();
+    };
+  }, [container]);
   const {
     register,
     watch,
@@ -600,6 +625,12 @@ const EleventhStep: React.FC<EleventhStepProps> = ({
             ))}
           </form>
         </div>
+
+        <div
+          ref={container}
+          // className="frc-captcha"
+          data-sitekey="YOUR_SITE_KEY"
+        />
       </div>
       {/* Captcha check */}
       {validation &&

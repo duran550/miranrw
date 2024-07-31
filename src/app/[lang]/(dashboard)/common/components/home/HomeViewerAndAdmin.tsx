@@ -13,10 +13,9 @@ import { useAuth } from '@/app/hooks/useAuth';
 const HomeViewerAndAdmin: React.FC<{
   report?: reportType2[];
   total: number;
-  total_week:number
-}> = ({ report, total , total_week}) => {
+  total_week: number;
+}> = ({ report, total, total_week }) => {
   // const { user } = useAuth();
-
 
   return (
     <div className="mt-8">
@@ -39,7 +38,7 @@ const HomeViewerAndAdmin: React.FC<{
         />
       </div>
 
-      <div className="mt-8">
+      <div className="mt-8 h-[calc(100vh-400px)] overflow-y-auto">
         <h1 className="text-xl mb-4 font-bold">Recent reports</h1>
         <div className="w-full gap-y-4 flex flex-col">
           {report &&
@@ -52,8 +51,6 @@ const HomeViewerAndAdmin: React.FC<{
                 reportType={Category.Uncategorized}
               />
             ))}
-
-    
         </div>
       </div>
     </div>

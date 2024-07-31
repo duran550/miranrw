@@ -11,9 +11,7 @@ const Reports = () => {
 
   return (
     <>
-      {user?.role === Role.ADMIN ? (
-        <ReportsViewerAndAdmin />
-      ) : user?.role === Role.VIEWER ? (
+      { user?.role === Role.VIEWER ? (
         <ReportsViewerAndAdmin />
       ) : user?.role === Role.CLEANER ? (
         <ReportsCleaner />
