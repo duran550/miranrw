@@ -57,7 +57,10 @@ const LoginForm = () => {
   } = useForm<IFormInput>({ mode: 'onChange' || 'onBlur' || 'onSubmit' });
   const { loginUser, user } = useAuth();
   // removeRefreshToken();
-
+   const { isShow, IshowHandler, setReports } = useContext(AuthContext);
+   useEffect(() => {
+     setReports([]);
+   }, []);
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const pathname = usePathname();
