@@ -56,9 +56,9 @@ jobs:
           password: ${{ secrets.SSH_PASSWORD }}
           script: |
             cd /home/antid
-            echo "${{ secrets.TOKEN }}" | sudo docker login ghcr.io -u "${{ secrets.USERNAME }}" --password-stdin
+            echo "${{ secrets.TOKEN }}" |  docker login ghcr.io -u "${{ secrets.USERNAME }}" --password-stdin
             docker pull ${{ env.IMAGE_NAME_MIRA }}
-            docker rm -f miq
+            docker rm -f mik
             docker run -d \
               -p 0:3000 \
               --name mik \
