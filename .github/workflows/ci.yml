@@ -1,21 +1,68 @@
-name: CI Pipeline
+name: CI/CD Pipeline
 
 on:
- push:
-   branches: [ "main" ]
+  push:
+    branches: [ "main" ]
+
+env:
+  IMAGE_NAME_MIRA: ghcr.io/kaeyros-analytics/mira:latest  
+  CONTAINER_NAME_MIRA: mira_container
+
+defaults:
+  run:
+    shell: bash
 
 jobs:
- build:
-   runs-on: ubuntu-latest
-   steps:
-     - uses: actions/checkout@v3
-     - name: Login Dockerhub
-       env:
-         DOCKER_USERNAME: ${{secrets.DOCKER_USERNAME}}
-         DOCKER_PASSWORD: ${{secrets.DOCKER_PASSWORD}}
-       run: docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
-     - name: Build the Docker image 
-       run: docker build -t ezekielkaeyros/miq .
-     - name: Push to Dockerhub
-       run: docker push ezekielkaeyros/miq:latest
-   
+  ci:
+    name: Continuous Integration
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Login to GitHub Container Registry
+        run: |
+          echo "${{ secrets.TOKEN }}" | docker login ghcr.io -u "${{ secrets.USERNAME }}" --password-stdin
+
+      - name: Create .env file for frontend
+        run: |
+          touch .env && \
+          echo "NEXT_PUBLIC_API_URL=ht" >> .env
+
+      - name: Build the Docker image for frontend
+        run: |
+          docker build -t ${{ env.IMAGE_NAME_MIRA }} .
+
+      - name: Push frontend image to GitHub Container Registry
+        run: |
+          docker push ${{ env.IMAGE_NAME_MIRA }}
+
+  cd:
+    name: Continuous Deployment
+    runs-on: ubuntu-latest
+    needs: ci
+    environment: production
+
+    steps:
+      - name: Checkout the code
+        uses: actions/checkout@v4
+
+      - name: Deploy to my dedicated server
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.SERVER_IP }}
+          username: ${{ secrets.SSH_USERNAME }}
+          password: ${{ secrets.SSH_PASSWORD }}
+          script: |
+            cd /home/antid
+            echo "${{ secrets.TOKEN }}" | sudo docker login ghcr.io -u "${{ secrets.USERNAME }}" --password-stdin
+            docker pull ${{ env.IMAGE_NAME_MIRA }}
+            docker rm -f miq
+            docker run -d \
+              -p 0:3000 \
+              --name mik \
+              --label 'traefik.enable=true' \
+              --label 'traefik.http.services.miqfrontend.loadbalancer.server.port=3000' \
+              --label 'traefik.http.routers.miqfrontend.rule=Host(`miq.nrw`) || Host(`www.miq.nrw`)' \
+              ezekielkaeyros/miq:latest
