@@ -5,8 +5,8 @@ on:
     branches: [ "main" ]
 
 env:
-  IMAGE_NAME_MIRA: ghcr.io/kaeyros-analytics/mira:latest  
-  CONTAINER_NAME_MIRA: mira_container
+  IMAGE_NAME_MIQ: ghcr.io/kaeyros-analytics/miq:latest  
+  CONTAINER_NAME_MIRQ: mira_container
 
 defaults:
   run:
@@ -34,7 +34,7 @@ jobs:
         run: |
           docker build -t ${{ env.IMAGE_NAME_MIRA }} .
 
-      - name: Push frontend image to GitHub Container Registry
+      - name: Push  image to GitHub Container Registry
         run: |
           docker push ${{ env.IMAGE_NAME_MIRA }}
 
