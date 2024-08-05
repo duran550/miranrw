@@ -6,7 +6,7 @@ on:
 
 env:
   IMAGE_NAME_MIQ: ghcr.io/kaeyros-analytics/miq:latest  
-  CONTAINER_NAME_MIRQ: mira_container
+  CONTAINER_NAME_MIQ: miq_container
 
 defaults:
   run:
@@ -32,11 +32,11 @@ jobs:
 
       - name: Build the Docker image for frontend
         run: |
-          docker build -t ${{ env.IMAGE_NAME_MIRA }} .
+          docker build -t ${{ env.IMAGE_NAME_MIQ }} .
 
       - name: Push  image to GitHub Container Registry
         run: |
-          docker push ${{ env.IMAGE_NAME_MIRA }}
+          docker push ${{ env.IMAGE_NAME_MIQ }}
 
   cd:
     name: Continuous Deployment
@@ -57,7 +57,7 @@ jobs:
           script: |
             cd /home/antid
             echo "${{ secrets.TOKEN }}" |  docker login ghcr.io -u "${{ secrets.USERNAME }}" --password-stdin
-            docker pull ${{ env.IMAGE_NAME_MIRA }}
+            docker pull ${{ env.IMAGE_NAME_MIQ }}
             docker rm -f mik
             docker run -d \
               -p 0:3000 \
@@ -65,4 +65,4 @@ jobs:
               --label 'traefik.enable=true' \
               --label 'traefik.http.services.miqfrontend.loadbalancer.server.port=3000' \
               --label 'traefik.http.routers.miqfrontend.rule=Host(`miq.nrw`) || Host(`www.miq.nrw`)' \
-              ezekielkaeyros/miq:latest
+              ghcr.io/kaeyros-analytics/miq:latest
