@@ -6,7 +6,7 @@ import RubikonLogo from '../../../../public/images/secondImage.png';
 import NGVTLogo from '../../../../public/images/fourthImg.svg';
 import LSVDLogo from '../../../../public/images/thirdImg.svg';
 import LSVDLogo2 from '../../../../public/images/thirdImg.svg';
-import MinisteriumLogo from '../../../../public/images/BG + Footer Image.svg';
+import MinisteriumLogo from '../../../../public/images/misnisteruim01.svg';
 import QNWLogo from '../../../../public/images/fifthLogo.svg';
 
 type CopyrightProps = {

@@ -101,7 +101,7 @@ const SixthStep: React.FC<SixthStepProps> = ({ sixthStepTranslation, id }) => {
         title={sixthStepTranslation?.title}
         subTitle={sixthStepTranslation?.description}
       />
-      {sixthStepTranslation?.choices?.map((choice: any) => (
+      {sixthStepTranslation?.choices?.sort((a, b) => a.label.localeCompare(b.label)).map((choice: any) => (
         <Checkbox
           key={choice.iD}
           props={register('formOfQueerphobia')}

@@ -127,7 +127,7 @@ setFormCookies(dataWithQuestion, FIFTH_FORM);
         title={seventhStepTranslation?.title}
         subTitle={seventhStepTranslation?.description}
       />
-      {seventhStepTranslation?.choices?.map((choice: any) => (
+      {seventhStepTranslation.choices?.sort((a, b) => a.label.localeCompare(b.label)).map((choice: any) => (
         <Checkbox
           key={choice.iD}
           props={register('typeOfDiscrimination')}

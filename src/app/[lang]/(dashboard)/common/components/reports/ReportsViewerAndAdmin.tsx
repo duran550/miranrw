@@ -1,6 +1,6 @@
 'use client';
 import ReportContainCard from '@/app/components/dashboard/reports/ReportContainCard';
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useRef, useState } from 'react';
 
 import { Button } from '@/app/components/button/Button';
 import imgcatActive from '../../../../../../../public/images/Checkmark Starburst (1).svg';
@@ -20,19 +20,26 @@ import ReportCard from '../report-card/ReportCard';
 import { DecodeToken } from '../../../login/components/DecodeToken';
 import { removeUserCookies, setUserCookies } from '@/cookies/cookies';
 import { Spinner } from '@nextui-org/react';
+import { AuthContext } from '@/app/context/AuthContext';
 
 const ReportsViewerAndAdmin = () => {
+  const { reports, setReports, IshowHandler, isShow } = useContext(AuthContext);
+  const hasMounted = useRef(false);
+
   const [status, setStatut] = useState(Category.Uncategorized);
   const { user } = useAuth();
   const [token, setToken] = useState('');
-  const [refresh, setRefresh] = useState(true);
+  const [refresh, setRefresh] = useState(0);
 
-  const [load, setLoad] = useState(true);
+  const [load, setLoad] = useState(reports.length == 0);
   const [error, setError] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
-  const [reports, setReport] = useState<reportType2[]>([]);
+  // const [reports, setReport] = useState<reportType2[]>([]);
 
   const getReport = async (token: string) => {
+    console.log();
+    console.log('refresh1', refresh);
+
     const options = {
       method: 'GET',
       url: '/api/report',
@@ -75,9 +82,12 @@ const ReportsViewerAndAdmin = () => {
             }
           });
 
-          setReport(report1.reverse());
+          setReports(report1.reverse());
           setLoad(false);
           setError(false);
+          setTimeout(async () => {
+            setRefresh((preview) => preview + 1);
+          }, 60000);
         })
         .catch((error) => {
           console.log(error);
@@ -87,13 +97,17 @@ const ReportsViewerAndAdmin = () => {
     } catch (error) {}
   };
   useEffect(() => {
-    if (token.length == 0 && refresh) {
+    if (!hasMounted.current) {
+      console.log('Effect executed');
+      // Votre requête ici
+      isShow && IshowHandler();
       const response = new AuthService()
         .refreshToken()
-        .then((result) => {
+        .then(async (result) => {
           if (result.status === 201) {
             const user = DecodeToken(result.headers.authorization);
             setToken(result.headers.authorization);
+            await getReport(result.headers.authorization);
 
             user.then((result1) => {
               if (typeof result1 == 'object') {
@@ -101,16 +115,12 @@ const ReportsViewerAndAdmin = () => {
                   ...result1,
                   token: result.headers.authorization,
                 });
+                setRefresh(1);
               }
             });
-            setError(false);
           }
         })
         .catch((error) => {
-          setLoad(false);
-          setErrorMessage(error.response.data.message);
-          setError(true);
-
           if (typeof error.response.data.message == 'string') {
             if (error.response.data.message !== 'Too Many Requests.') {
               removeUserCookies();
@@ -118,25 +128,22 @@ const ReportsViewerAndAdmin = () => {
             }
           }
         });
+      hasMounted.current = true;
     }
-    if (refresh && token.length > 0) {
+  }, []);
+  useEffect(() => {
+    if (refresh >= 2) {
       getReport(token);
-      setRefresh(false);
     }
-    if (!refresh && token.length > 0) {
-      setTimeout(() => {
-        setRefresh(true);
-      }, 10000);
-    }
-  }, [refresh, token]);
+  }, [refresh]);
   return (
     <div className="w-full relative  h-fit">
-      <h1 className="text-2xl font-bold my-8">All reports</h1>
+      <h1 className="text-2xl font-bold sm:my-8">All reports</h1>
       <h2 className="font-bold  opacity-80">{`${status} Data`}</h2>
       <p className="text-sm opacity-70">Click to view data details</p>
       <div className="mt-8">
         {!load && !error && (
-          <div className="grid grid-cols-3 gap-5 max-h-[60vh] overflow-y-auto overscroll-none no-scrollbar">
+          <div className="flex  flex-wrap gap-5 md:h-[calc(100vh-350px)] h-[calc(100vh-310px)] mb-5 overflow-y-auto  no-scrollbar ">
             {reports.length > 0 &&
               reports.map((item, index) => {
                 if (status == Category.Uncategorized) {
@@ -172,37 +179,26 @@ const ReportsViewerAndAdmin = () => {
           </div>
         )}
         {load && (
-          <div className="text-center text-2xl h-[70vh] flex place-items-center w-full justify-center">
+          <div className="text-center text-2xl md:h-[calc(100vh-350px)] h-[calc(100vh-310px)] flex place-items-center w-full justify-center">
             {/* <p>chargement patientez...</p> */}
             <Spinner label="Loading . . . " color="primary" size="lg" />
           </div>
         )}
         {error && !load && (
-          <p className="flex items-center justify-center text-5xl h-full">
+          <p className="flex items-center justify-center md:h-[calc(100vh-350px)] h-[calc(100vh-310px)] text-5xl ">
             {errorMessage + ' waite a few moments for retry'}
           </p>
         )}
-        {/* {status == Category.Uncategorized ? (
-          <ReportContainCard
-            href="/dashboard/cleaned-reports"
-            data={reportsCardTableUncategorized}
-          />
-        ) : (
-          <ReportContainCard
-            href="/dashboard/cleaned-reports"
-            data={reportsCardTableCategorized}
-          />
-        )} */}
       </div>
 
-      <div className="flex w-fit fixed bottom-8  mt-14 ">
+      <div className="flex w-fit h-16 sm:text-sm text-xs   ">
         <Button
           icon={
             status == Category.Uncategorized
               ? imgUncatActive
               : imgUncatDesactive
           }
-          className={`w-auto ${
+          className={`w-auto  ${
             status == Category.Uncategorized
               ? 'bg-black rounded-xl text-white font-semibold'
               : 'text-[#828B8C]  bg-transparent'
