@@ -64,6 +64,11 @@ input:checked + div svg {
 
 .css-jgls56-MuiButtonBase-root-MuiPickersDay-root:not(.Mui-selected) {
   /* border: 1px solid rgba(0, 0, 0, 0.6); prev border col */
+  border:1px solid #F81A1A !important;
+}
+
+.css-jgls56-MuiButtonBase-root-MuiPickersDay-root:not(.Mui-selected) {
+  /* border: 1px solid rgba(0, 0, 0, 0.6); prev border col */
   border: 1px solid #F81A1A !important;
 }
 
