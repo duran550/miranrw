@@ -50,17 +50,22 @@ const SeventhStep: React.FC<SeventhStepProps> = ({
     ) {
       dispatch({ type: FORM_ERRORS, payload: false });
     } else {
-      if (typeOfDiscrimination && typeOfDiscrimination.length > 0 && typeOfDiscrimination.includes(seventhStepTranslation.choices[seventhStepTranslation.choices.length - 1].value)) {
-        dispatch({ type: FORM_ERRORS, payload: true });
-        if ((typeOfDiscriminationFreeField && typeOfDiscriminationFreeField.length > 3)) {
-          dispatch({ type: FORM_ERRORS, payload: false });
-        } else {
-          dispatch({ type: FORM_ERRORS, payload: true });
-        }
-      }
+       if (
+      (typeOfDiscrimination &&
+        typeOfDiscrimination?.includes('Anderes, und zwar') &&
+        typeOfDiscriminationFreeField?.length <= 3) ||
+      (typeOfDiscrimination &&
+        typeOfDiscrimination?.includes('Other, specify') &&
+        typeOfDiscriminationFreeField?.length <= 3)
+    ) {
+      dispatch({ type: FORM_ERRORS, payload: true });
+    } else {
+      dispatch({ type: FORM_ERRORS, payload: false });
+    }
       if (
         typeOfDiscrimination &&
         typeOfDiscrimination.length > 0 &&
+        typeOfDiscriminationFreeField?.length >= 3 &&
         !typeOfDiscrimination.includes(
           seventhStepTranslation.choices[
             seventhStepTranslation.choices.length - 1
@@ -131,8 +136,6 @@ const SeventhStep: React.FC<SeventhStepProps> = ({
         subTitle={seventhStepTranslation?.description}
       />
       {seventhStepTranslation.choices?.sort((a, b) => a.label.localeCompare(b.label)).map((choice: any, index) => {
-        console.log(lang === 'en' && index === 3, 'lang==en')
-        console.log(lang === 'de' && index === 0, 'lang==de')
         return (
           <div key={choice.iD}>
             <Checkbox

@@ -14,7 +14,6 @@ import { useScrollOnTop } from '@/app/hooks/useScrollOnTop';
 const EightStep: React.FC<EightStepProps> = ({ eightStepTranslation, id }) => {
   const { dispatch, isEditing, reportingPerson, formErrors, formValue } = useFormContext();
   const [question] = useState<string>(eightStepTranslation?.title);
-console.log(eightStepTranslation, 'oooooooooooooooooo');
 
   const {
     register,
@@ -172,8 +171,7 @@ console.log(eightStepTranslation, 'oooooooooooooooooo');
             <p className="text-xs">{eightStepTranslation?.mandatory}</p>
           )}
           {formOfDisc === eightStepTranslation?.data?.options[1].value &&
-            eightStepTranslation?.data?.optionsYes?.map((element: any) => {
-              (
+            eightStepTranslation?.data?.optionsYes?.map((element: any) => (
               <Checkbox
                 key={element?.name}
                 id={element?.id}
@@ -182,8 +180,7 @@ console.log(eightStepTranslation, 'oooooooooooooooooo');
                 value={element?.value}
                 label={element?.label}
               />
-            )
-          })}
+            ))}
 
           <div className="ml-4">
             {formOfDisc &&  formOfDisc === eightStepTranslation?.data?.options[1].value &&  formOfDiscYes &&
@@ -191,6 +188,7 @@ console.log(eightStepTranslation, 'oooooooooooooooooo');
                 eightStepTranslation?.data?.optionsYes[9].value
               ) && (
                 <div className="w-full pb-4 ">
+                  {' '}
                   <InputField
                     name="formOfDiscYesFreeField"
                     props={register('formOfDiscYesFreeField', {

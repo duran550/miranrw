@@ -91,8 +91,6 @@ const SixthStep: React.FC<SixthStepProps> = ({ sixthStepTranslation, id, lang })
     //   : dispatch({ type: NEXT_STEP, payload: '' });
   };
 
-  console.log(lang, 'mylang')
-
   return (
     <form
       id={id && id == 'seventhForm' ? 'seventhForm' : 'sixthForm'}
