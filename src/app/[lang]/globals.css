@@ -69,7 +69,7 @@ input:checked + div svg {
 
 /* border: 1px solid rgba(0, 0, 0, 0.6); */
 .css-15a0tn7:not(.Mui-selected) {
-  border: none;
+  border: none !important;
 }
 
 /* Autocomplte search icon */
