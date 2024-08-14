@@ -20,17 +20,17 @@ input:checked + div svg {
   @apply block;
 }
 
-.MuiButtonBase-root
+/* .MuiButtonBase-root
   .MuiPickersDay-root
   .Mui-selected
   .MuiPickersDay-dayWithMargin
   .css-qa7bje-MuiButtonBase-root-MuiPickersDay-root {
-  background-color: #463980 !important;
-  color: #463980 !important;
+  background-color: #F81A1A !important;
+  color: #F81A1A !important;
 }
 
 .css-qa7bje-MuiButtonBase-root-MuiPickersDay-root.Mui-selected {
-  background-color: #463980 !important;
+  background-color: #F81A1A !important;
 }
 
 
@@ -41,12 +41,12 @@ input:checked + div svg {
   .MuiPickersDay-today
   .css-1jsy6pn-MuiButtonBase-root-MuiPickersDay-root {
   color: white !important;
-  background-color: #463980 !important;
-}
+  background-color: #F81A1A !important;
+} */
 
 /* AntD datepicker */
 
-.ant-picker-focused {
+/* .ant-picker-focused {
   border-color: none;
 }
 
@@ -60,10 +60,11 @@ input:checked + div svg {
 
 .ant-picker-cell-today .ant-picker-cell-inner::before {
   border-color: none !important;
-}
+} */
 
 .css-jgls56-MuiButtonBase-root-MuiPickersDay-root:not(.Mui-selected) {
   border: none !important;
+  /* background-color: #F81A1A; */
 }
 
 /* Autocomplte search icon */
