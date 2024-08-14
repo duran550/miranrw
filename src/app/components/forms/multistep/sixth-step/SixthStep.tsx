@@ -101,17 +101,38 @@ const SixthStep: React.FC<SixthStepProps> = ({ sixthStepTranslation, id }) => {
         title={sixthStepTranslation?.title}
         subTitle={sixthStepTranslation?.description}
       />
-      {sixthStepTranslation?.choices?.sort((a, b) => a.label.localeCompare(b.label)).map((choice: any) => (
-        <Checkbox
-          key={choice.iD}
-          props={register('formOfQueerphobia')}
-          name={choice.name}
-          id={choice.id}
-          value={choice.value}
-          label={choice.label}
-        />
-      ))}
-      {(formOfQueerphobia &&
+      {sixthStepTranslation?.choices?.sort((a, b) => a.label.localeCompare(b.label)).map((choice: any, index) => {
+        return (
+          <div key={choice.iD}>
+            <Checkbox
+              props={register('formOfQueerphobia')}
+              name={choice.name}
+              id={choice.id}
+              value={choice.value}
+              label={choice.label}
+            />
+            {index == 1 && (formOfQueerphobia &&
+        formOfQueerphobia?.includes('Anderes, und zwar')) ||
+      (formOfQueerphobia && formOfQueerphobia?.includes('Other, specify')) ? (
+        <div className="w-full pb-4 ml-8">
+          <InputField
+            name="otherformOfQueerphobiaFreeField"
+            props={register('otherformOfQueerphobiaFreeField', {
+              required: true,
+            })}
+          />
+          {formErrors && otherformOfQueerphobiaFreeField?.length !== 0 && (
+            <label className="text-red-500 text-xs pb-3">
+              {sixthStepTranslation?.minCharacters}
+            </label>
+          )}
+        </div>
+      ) : (
+        ''
+      )}
+          </div>
+      )})}
+      {/* {(formOfQueerphobia &&
         formOfQueerphobia?.includes('Anderes, und zwar')) ||
       (formOfQueerphobia && formOfQueerphobia?.includes('Other, specify')) ? (
         <div className="w-full pb-4">
@@ -129,7 +150,7 @@ const SixthStep: React.FC<SixthStepProps> = ({ sixthStepTranslation, id }) => {
         </div>
       ) : (
         ''
-      )}
+      )} */}
       {/* <div>
         {formErrors && otherformOfQueerphobiaFreeField?.length !== 0 && (
           <label className="text-red-500 text-xs pb-3">
