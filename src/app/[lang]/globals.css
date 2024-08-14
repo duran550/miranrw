@@ -47,7 +47,7 @@ input:checked + div svg {
 /* AntD datepicker */
 
 .ant-picker-focused {
-  border-color: #463980;
+  border-color: none;
 }
 
 .ant-picker:hover:hover {
@@ -59,7 +59,7 @@ input:checked + div svg {
 }
 
 .ant-picker-cell-today .ant-picker-cell-inner::before {
-  border-color: #463980 !important;
+  border-color: none !important;
 }
 
 .css-jgls56-MuiButtonBase-root-MuiPickersDay-root:not(.Mui-selected) {
