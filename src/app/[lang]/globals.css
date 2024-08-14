@@ -67,8 +67,8 @@ input:checked + div svg {
   /* background-color: #F81A1A; */
 }
 
+/* border: 1px solid rgba(0, 0, 0, 0.6); */
 .css-15a0tn7:not(.Mui-selected) {
-  /* border: 1px solid rgba(0, 0, 0, 0.6); */
   border: none;
 }
 
