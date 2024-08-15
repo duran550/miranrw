@@ -122,7 +122,7 @@ if (!description || (description && description.length<50)) {
         </p>
       </form>
 
-      <div className="mt-16 w-full md:max-w-md lg:mt-8  2xl:mt-0 2xl:absolute  lg:-top-0 lg:-right-[38rem]">
+      <div className="mt-16 w-full md:max-w-md lg:mt-8  2xl:mt-0 2xl:absolute  lg:-top-0 lg:-right-[34rem]">
         <FormHeader title={thirdStepTranslation?.hints?.title}>
           {reportingPerson !== 'onBehalf' ? (
             <ul className="list-disc pl-8">
