@@ -14,7 +14,6 @@ import { useScrollOnTop } from '@/app/hooks/useScrollOnTop';
 const EightStep: React.FC<EightStepProps> = ({ eightStepTranslation, id }) => {
   const { dispatch, isEditing, reportingPerson, formErrors, formValue } = useFormContext();
   const [question] = useState<string>(eightStepTranslation?.title);
-console.log(eightStepTranslation, 'oooooooooooooooooo');
 
   const {
     register,

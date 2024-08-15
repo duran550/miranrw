@@ -53,10 +53,29 @@ const TenthStep: React.FC<TenthStepProps> = ({ tenthStepTranslation }) => {
 
     dispatch({ type: FORM_ERRORS, payload: true });
 
-    (reportingPerson === 'organization' && !validation) ||
-    validation?.length === 0
-      ? dispatch({ type: FORM_ERRORS, payload: true })
-      : dispatch({ type: FORM_ERRORS, payload: false });
+
+    if((reportingPerson === 'organization' && !validation) ||
+    validation?.length === 0) {
+      dispatch({ type: FORM_ERRORS, payload: true })
+    } else if (
+      sexualOrientation?.length > 0 &&
+      sexualOrientation?.includes(tenthStepTranslation?.secondBlock.data[11]?.label) && sexualOrientationFreeField?.length <= 3
+    ) {
+      dispatch({ type: FORM_ERRORS, payload: true })
+    }else if (
+      gender?.length > 0 &&
+      gender?.includes(tenthStepTranslation?.firstBlock.data[7]?.label) && genderFreeField?.length <= 3
+    ) {
+      dispatch({ type: FORM_ERRORS, payload: true })
+    }
+     else {
+      dispatch({ type: FORM_ERRORS, payload: false })
+    }
+
+    // (reportingPerson === 'organization' && !validation) ||
+    // validation?.length === 0
+    //   ? dispatch({ type: FORM_ERRORS, payload: true })
+    //   : dispatch({ type: FORM_ERRORS, payload: false });
 
     // Setting default values if the data are available in cookies
     if (formValues) {

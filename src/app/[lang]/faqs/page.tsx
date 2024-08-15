@@ -16,7 +16,7 @@ export default async function faqs({
   return (
     <div className="">
       <Header lang={lang} />
-      <div className="md:mt-16 h-full  py-16 px-4 sm:px-4 lg:px-12  ">
+      <div className="md:mt-0 h-full  py-16 px-4 sm:px-4 lg:px-12">
         <SinglePageLayout
           lang={lang}
           buttonTitle={page.home?.heroSection?.buttonText}
