@@ -47,9 +47,7 @@ const SecondStep: React.FC<SecondStepProps> = ({ secondStepTranslation }) => {
             ? 'myself'
             : identity === secondStepTranslation?.options[1].value
             ? 'andere'
-            : identity === secondStepTranslation?.options[2].value
-            ? 'onBehalf'
-            : 'organization',
+            : 'organization'
       });
 
       // Setting default values if exists in cookies
@@ -91,14 +89,14 @@ const SecondStep: React.FC<SecondStepProps> = ({ secondStepTranslation }) => {
           options={secondStepTranslation?.options}
         />
       </form>
-      {identity === secondStepTranslation?.options[2].value && (
+      {/* {identity === secondStepTranslation?.options[2].value && (
         <div className="mt-4 max-w-lg lg:absolute lg:mt-0 lg:-right-[40rem]">
           <FormHeader
             title={secondStepTranslation?.onBehalfHints?.title}
             subTitle={secondStepTranslation?.onBehalfHints?.description}
           />
         </div>
-      )}
+      )} */}
     </div>
   );
 };

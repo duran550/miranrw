@@ -178,29 +178,22 @@
             {
               "id": "age1",
               "name": "identity",
-              "label": "Myself",
-              "value": "Myself",
+              "label": "I am affected myself",
+              "value": "I am affected myself",
               "checked": false
             },
             {
               "id": "identity2",
               "name": "identity",
-              "label": "Another person",
-              "value": "Another person",
+              "label": "Other person(s). I report as a witness",
+              "value": "Other person(s). I report as a witness",
               "checked": false
             },
             {
               "id": "identity3",
               "name": "identity",
-              "label": "I'm reporting on behalf of the affected person",
-              "value": "I'm reporting on behalf of the affected person",
-              "checked": false
-            },
-            {
-              "id": "identity4",
-              "name": "identity",
-              "label": "An organization/institution",
-              "value": "An organization/institution",
+              "label": "An organization/institution is affected",
+              "value": "An organization/institution is affected",
               "checked": false
             }
           ],
