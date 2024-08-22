@@ -160,7 +160,8 @@ const EightStep: React.FC<EightStepProps> = ({ eightStepTranslation, id }) => {
       id={id === 'eighthForm' ? 'eighthForm' : 'seventhForm'}
       className="lg:w-[35rem]"
     >
-      <FormHeader title={eightStepTranslation?.title} />
+      <FormHeader title={eightStepTranslation?.title} subTitle={eightStepTranslation.subTitle}/>
+
       <div>
         <RadioGroup
           options={eightStepTranslation?.data?.options}

@@ -12,7 +12,7 @@ import {
   REPORTING_PERSON,
   SUBMIT_FORM,
   FORM_VALUE,
-  ID_FORM
+  ID_FORM,
 } from './actions';
 import { getFormStep, setFormStep } from '@/cookies/cookies';
 
@@ -38,7 +38,7 @@ const initialState: FormType = {
   isEditing: false,
   formErrors: true,
   formValue:'',
-  id:''
+  id:'',
 };
 
 const reducer = (initialState: FormType, action: ActionType) => {

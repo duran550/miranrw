@@ -11,6 +11,9 @@ export type EleventhStepProps = {
     captcha: string;
   };
 
+  open:boolean;
+  setOpen:() => void;
+
   secondStepTranslation: {
     title: string;
     mandatory: string;
