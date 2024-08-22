@@ -113,7 +113,9 @@ const FourthStep: React.FC<FourthStepProps> = ({
       }
     }
 
-    console.log(!!errors.yearitHappenedFreeField, 'yearitHappened')
+    console.log(errors.yearitHappenedFreeField, 'yearitHappened')
+    // console.log(yearitHappenedFreeField?.length 
+    //   == 4 && !!errors.yearitHappenedFreeField, 'yearitHappenedGreat')
 
 
     if (valueDate == null && !datePeriod) {
@@ -132,7 +134,7 @@ const FourthStep: React.FC<FourthStepProps> = ({
       if (valueDate && !datePeriod) {
         dispatch({ type: FORM_ERRORS, payload: false });
       }
-      if (yearitHappened && yearitHappenedFreeField?.length < 1 ) {
+      if (yearitHappened && yearitHappenedFreeField?.length < 4 ) {
         dispatch({ type: FORM_ERRORS, payload: true });
       }
     }
@@ -162,7 +164,7 @@ const FourthStep: React.FC<FourthStepProps> = ({
           //    setDateRange(formValues.dateRangeState)
           // }
         }
-      } else if (yearitHappened && yearitHappenedFreeField?.length > 1 && !!errors.yearitHappenedFreeField) {
+      } else if (yearitHappened && yearitHappenedFreeField?.length > 3) {
         dispatch({ type: FORM_ERRORS, payload: false });
       }
     }
@@ -197,8 +199,8 @@ const FourthStep: React.FC<FourthStepProps> = ({
       // if (formValues.datePeriod && formValues.datePeriod.length > 0 && formValues.forgetful && formValues.forgetfulFreeField.length > 0) {
       datePeriod !== formValues?.datePeriod &&
         setValue('datePeriod', formValues?.datePeriod);
-      setDateRange(formValues.dateRangeState);
-      setValueDate(null);
+        setDateRange(formValues.dateRangeState);
+        setValueDate(null);
       // } else {
       formValues?.valueDate !== valueDate &&
         setValueDate(dayjs(formValues?.valueDate));
@@ -360,6 +362,7 @@ const FourthStep: React.FC<FourthStepProps> = ({
                       required: 'Year is required'
                     })}
                     title=""
+                    type='number'
                   />
                   {errors.yearitHappenedFreeField && (
                     <p className="error-text text-red-800 font-semibold">{errors.yearitHappenedFreeField.message}</p>
