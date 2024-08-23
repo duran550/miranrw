@@ -17,7 +17,7 @@ const HiddeComponen = () => {
     <div className="flex flex-col justify-center items-center p-5 gap-3 sm:w-[500px] w-full">
       <h1 className="font-bold lg:text-xl text-center">Password</h1>
       <input
-        type="text"
+        type="password"
         className="h-14 w-full border-2 rounded-xl ms:text-sm  px-5 text-center"
         onChange={(e: any) => {
           setCode(e.target.value);

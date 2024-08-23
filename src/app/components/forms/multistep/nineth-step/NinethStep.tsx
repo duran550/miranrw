@@ -71,15 +71,15 @@ const NinethStep: React.FC<NinethStepProps> = ({
 
     //   Setting values in the fields
 
-    if (haveYouReported === ninethStepTranslation?.data?.options[1].value) {
+    if (haveYouReported === ninethStepTranslation?.data?.options[2]?.value) {
       dispatch({ type: FORM_ERRORS, payload: true });
       if (haveYouReported &&
         haveYouReportedYes?.length > 0 &&
         !haveYouReportedYes?.includes(
-          ninethStepTranslation?.data?.optionsYes[3].value
+          ninethStepTranslation?.data?.optionsYes[4].value
         ) &&
         !haveYouReportedYes?.includes(
-          ninethStepTranslation?.data?.optionsYes[2].value
+          ninethStepTranslation?.data?.optionsYes[3].value
         )
       ) {
         dispatch({ type: FORM_ERRORS, payload: false });
@@ -88,7 +88,7 @@ const NinethStep: React.FC<NinethStepProps> = ({
           haveYouReported &&
           haveYouReportedYes?.length > 0 &&
           haveYouReportedYes?.includes(
-            ninethStepTranslation?.data?.optionsYes[2].value
+            ninethStepTranslation?.data?.optionsYes[3].value
           )
         ) {
           dispatch({ type: FORM_ERRORS, payload: true });
@@ -101,7 +101,7 @@ const NinethStep: React.FC<NinethStepProps> = ({
         } else if (
           haveYouReportedYes?.length > 0 &&
           haveYouReportedYes?.includes(
-            ninethStepTranslation?.data?.optionsYes[3].value
+            ninethStepTranslation?.data?.optionsYes[4].value
           )
         ) {
           dispatch({ type: FORM_ERRORS, payload: true });
@@ -114,10 +114,10 @@ const NinethStep: React.FC<NinethStepProps> = ({
         } else if (
           haveYouReportedYes?.length > 0 &&
           haveYouReportedYes?.includes(
-            ninethStepTranslation?.data?.optionsYes[3].value
+            ninethStepTranslation?.data?.optionsYes[4].value
           ) &&
           haveYouReportedYes?.includes(
-            ninethStepTranslation?.data?.optionsYes[2].value
+            ninethStepTranslation?.data?.optionsYes[3].value
           )
         ) {
           dispatch({ type: FORM_ERRORS, payload: true });
@@ -259,12 +259,22 @@ const NinethStep: React.FC<NinethStepProps> = ({
                   value={ninethStepTranslation?.data?.optionsYes[2]?.value}
                   label={ninethStepTranslation?.data?.optionsYes[2]?.label}
                 />
+              </div>
+              <div>
+                <Checkbox
+                  key={ninethStepTranslation?.data?.optionsYes[3]?.iD}
+                  id={ninethStepTranslation?.data?.optionsYes[3]?.id}
+                  name={ninethStepTranslation?.data?.optionsYes[3]?.name}
+                  props={register('haveYouReportedYes', { required: true })}
+                  value={ninethStepTranslation?.data?.optionsYes[3]?.value}
+                  label={ninethStepTranslation?.data?.optionsYes[3]?.label}
+                />
                 {/* First freeText field */}
                 {haveYouReported ===
                   ninethStepTranslation?.data?.options[1].value &&
                   haveYouReportedYes &&
                   haveYouReportedYes?.includes(
-                    ninethStepTranslation?.data?.optionsYes[2].value
+                    ninethStepTranslation?.data?.optionsYes[3].value
                   ) && (
                     <div className="lg:ml-16 -mt-6 mb-4">
                       <InputField
@@ -284,12 +294,12 @@ const NinethStep: React.FC<NinethStepProps> = ({
               </div>
               <div>
                 <Checkbox
-                  key={ninethStepTranslation?.data?.optionsYes[3]?.iD}
-                  id={ninethStepTranslation?.data?.optionsYes[3]?.id}
-                  name={ninethStepTranslation?.data?.optionsYes[3]?.name}
+                  key={ninethStepTranslation?.data?.optionsYes[4]?.iD}
+                  id={ninethStepTranslation?.data?.optionsYes[4]?.id}
+                  name={ninethStepTranslation?.data?.optionsYes[4]?.name}
                   props={register('haveYouReportedYes', { required: true })}
-                  value={ninethStepTranslation?.data?.optionsYes[3]?.value}
-                  label={ninethStepTranslation?.data?.optionsYes[3]?.label}
+                  value={ninethStepTranslation?.data?.optionsYes[4]?.value}
+                  label={ninethStepTranslation?.data?.optionsYes[4]?.label}
                 />
               </div>
             </>
@@ -300,7 +310,7 @@ const NinethStep: React.FC<NinethStepProps> = ({
           {haveYouReported ===
             ninethStepTranslation?.data?.options[1].value&&haveYouReportedYes &&
             haveYouReportedYes?.includes(
-              ninethStepTranslation?.data?.optionsYes[3].value
+              ninethStepTranslation?.data?.optionsYes[4].value
             ) && (
               <div className="lg:ml-16 -mt-6">
                 <InputField

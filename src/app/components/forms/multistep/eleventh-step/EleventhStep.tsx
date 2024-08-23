@@ -27,26 +27,29 @@ import CaptchaCheckbox from '@/app/components/captcha/captcha-checkbox/CaptchaCh
 import { error } from 'console';
 import { identity } from '../first-step/firstFormData';
 import { WidgetInstance } from 'friendly-challenge';
+import SubmitModal from '../submitModal';
 const EleventhStep: React.FC<EleventhStepProps> = ({
   eleventhStepTranslation,
-  secondStepTranslation
+  secondStepTranslation,
+  open,
+  setOpen
 }) => {
   // Scroll on top
   useScrollOnTop();
   const { executeRecaptcha } = useGoogleReCaptcha();
 
-  const { dispatch, reportingPerson } = useFormContext();
+  const { dispatch,formErrors, reportingPerson } = useFormContext();
   const [captchLoading, setCaptchaLoading] = useState<boolean>(true);
   const [verified, setVerified] = useState<any>(false);
   const container = useRef(null);
   const widget = useRef<any>(null);
 
-  const doneCallback = (solution:any) => {
+  const doneCallback = (solution: any) => {
     console.log('Captcha was solved. The form can be submitted.');
     console.log(solution);
   };
 
-  const errorCallback = (err:any) => {
+  const errorCallback = (err: any) => {
     console.log('There was an error when trying to solve the Captcha.');
     console.log(err);
   };
@@ -81,8 +84,7 @@ const EleventhStep: React.FC<EleventhStepProps> = ({
     organizationTypeFreeField: string;
   } = getFormCookies(SECOND_FORM);
 
-  console.log('secondForm',secondForm);
-  
+
   let secondFormOrganization: {
     question: string;
     step: number;
@@ -90,32 +92,32 @@ const EleventhStep: React.FC<EleventhStepProps> = ({
     organizationType: string[];
     organizationTypeFreeField: string;
   } = getFormCookies(SECOND_FORM);
-   let thirdForm: {
-     question: string;
-     step: number;
-     valueDate: string;
-     dateRangeState: string;
-     datePeriod: boolean;
-     numberOfEmployees: string;
-   } = getFormCookies(THIRD_FORM);
-   let thirdFormOrganization: {
-     question: string;
-     step: number;
-     valueDate: string;
-     dateRangeState: string;
-     datePeriod: boolean;
-     numberOfEmployees: string;
-   } = getFormCookies(THIRD_FORM);
-   let fourthForm: {
-     question: string;
-     step: number;
-     location: string;
-     locationOnline: string;
-     stadtteil: string;
-   } = getFormCookies(FOURTH_FORM);
+  let thirdForm: {
+    question: string;
+    step: number;
+    valueDate: string;
+    dateRangeState: string;
+    datePeriod: boolean;
+    numberOfEmployees: string;
+  } = getFormCookies(THIRD_FORM);
+  let thirdFormOrganization: {
+    question: string;
+    step: number;
+    valueDate: string;
+    dateRangeState: string;
+    datePeriod: boolean;
+    numberOfEmployees: string;
+  } = getFormCookies(THIRD_FORM);
+  let fourthForm: {
+    question: string;
+    step: number;
+    location: string;
+    locationOnline: string;
+    stadtteil: string;
+  } = getFormCookies(FOURTH_FORM);
 
- 
- 
+
+
 
   let fifthForm: {
     question: string;
@@ -123,8 +125,8 @@ const EleventhStep: React.FC<EleventhStepProps> = ({
     formOfQueerphobia: any;
     otherformOfQueerphobiaFreeField: string;
   } = getFormCookies(SIXTH_FORM);
-  console.log('fifthForm',fifthForm);
-  
+  // console.log('fifthForm', fifthForm);
+
   let sixthForm: {
     question: string;
     step: number;
@@ -161,33 +163,23 @@ const EleventhStep: React.FC<EleventhStepProps> = ({
     step: number;
   } = getFormCookies(NINETH_FORM);
 
-
-
-
-
-
-
-
-
-
-
-    if (
-      firstForm.identity ===
-      secondStepTranslation?.options[secondStepTranslation.options.length - 1]
-        .value
-    ) {
-      thirdForm = getFormCookies(FIFTH_FORM);
-      fourthForm = getFormCookies(SIXTH_FORM);
-      fifthForm = getFormCookies(SEVENTH_FORM);
-      seventhForm = getFormCookies(EIGTH_FORM)
-      eighthForm = getFormCookies(NINETH_FORM)
-      secondForm=getFormCookies(FOURTH_FORM)
-    } 
+  if (
+    firstForm.identity ===
+    secondStepTranslation?.options[secondStepTranslation.options.length - 1]
+      .value
+  ) {
+    thirdForm = getFormCookies(FIFTH_FORM);
+    fourthForm = getFormCookies(SIXTH_FORM);
+    fifthForm = getFormCookies(SEVENTH_FORM);
+    seventhForm = getFormCookies(EIGTH_FORM)
+    eighthForm = getFormCookies(NINETH_FORM)
+    secondForm = getFormCookies(FOURTH_FORM)
+  }
 
   // Listening to fields
 
   let validation: string[] = watch('validation');
-  let captcha: string = watch('captcha');
+  let captcha: string = watch('captcha')
 
   const handleCaptcha = async () => {
     // Captcha verification
@@ -224,11 +216,11 @@ const EleventhStep: React.FC<EleventhStepProps> = ({
       organizationType: string[];
       organizationTypeFreeField: string;
     } = getFormCookies(SECOND_FORM);
-     let secondFormOrganization: {
-       description: string;
-       organizationType: string[];
-       organizationTypeFreeField: string;
-     } = getFormCookies(SECOND_FORM);
+    let secondFormOrganization: {
+      description: string;
+      organizationType: string[];
+      organizationTypeFreeField: string;
+    } = getFormCookies(SECOND_FORM);
 
     let thirdForm: {
       valueDate: string;
@@ -236,12 +228,12 @@ const EleventhStep: React.FC<EleventhStepProps> = ({
       datePeriod: boolean;
       numberOfEmployees: string;
     } = getFormCookies(THIRD_FORM);
-     let thirdFormOrganization: {
-       valueDate: string;
-       dateRangeState: string;
-       datePeriod: boolean;
-       numberOfEmployees: string;
-     } = getFormCookies(THIRD_FORM);
+    let thirdFormOrganization: {
+      valueDate: string;
+      dateRangeState: string;
+      datePeriod: boolean;
+      numberOfEmployees: string;
+    } = getFormCookies(THIRD_FORM);
 
     let fourthForm: {
       location: string;
@@ -281,19 +273,19 @@ const EleventhStep: React.FC<EleventhStepProps> = ({
       sexualOrientation: string[];
       sexualOrientationFreeField: string;
     } = getFormCookies(NINETH_FORM);
-      if (
-        firstForm.identity ===
-        secondStepTranslation?.options[secondStepTranslation.options.length - 1]
-          .value
-      ) {
-        
-        thirdForm = getFormCookies(FIFTH_FORM);
-        fourthForm = getFormCookies(SIXTH_FORM);
-        fifthForm = getFormCookies(SEVENTH_FORM);
-        seventhForm = getFormCookies(EIGTH_FORM);
-        eighthForm = getFormCookies(NINETH_FORM);
-        secondForm = getFormCookies(FOURTH_FORM);
-      } 
+    if (
+      firstForm.identity ===
+      secondStepTranslation?.options[secondStepTranslation.options.length - 1]
+        .value
+    ) {
+
+      thirdForm = getFormCookies(FIFTH_FORM);
+      fourthForm = getFormCookies(SIXTH_FORM);
+      fifthForm = getFormCookies(SEVENTH_FORM);
+      seventhForm = getFormCookies(EIGTH_FORM);
+      eighthForm = getFormCookies(NINETH_FORM);
+      secondForm = getFormCookies(FOURTH_FORM);
+    }
 
     // Getting exact values
 
@@ -362,44 +354,43 @@ const EleventhStep: React.FC<EleventhStepProps> = ({
     };
 
     console.log('report', report);
-    
+
 
     try {
       dispatch({ type: FORM_ERRORS, payload: true });
       //  if (verified) {
-        setCaptchaLoading(false);
-        // Here you would send the input data to a database, and
-        // reset the form UI, display success message logic etc.
+      setCaptchaLoading(false);
+      // Here you would send the input data to a database, and
+      // reset the form UI, display success message logic etc.
       // Sending data to API
       console.log('report', report);
-      
-        const response = await new ReportService().sendReport(report).then((result)=>{
-          if (result.status===201 || result.status===200) {
-            console.log('Successfull');
-            dispatch({ type: FORM_ERRORS, payload: false });
-            clearFormCookies();
-            dispatch({ type: NEXT_STEP, payload: 'DATA 1' });
-          }else{
-            console.log('failed');
-            setCaptchaLoading(false);
-            dispatch({ type: FORM_ERRORS, payload: false });
 
-            throw new Error('Fetching error occured, please reload');
-          }
-        }).catch((error)=>{console.log("error")
+      const response = await new ReportService().sendReport(report).then((result) => {
+        if (result.status === 201 || result.status === 200) {
+          console.log('Successfull');
+          dispatch({ type: FORM_ERRORS, payload: false });
+          clearFormCookies();
+          dispatch({ type: NEXT_STEP, payload: 'DATA 1' });
+        } else {
+          console.log('failed');
           setCaptchaLoading(false);
-          console.log('verify error captcha2', error);
-            dispatch({ type: FORM_ERRORS, payload: false });
-          
-          throw new Error('Fetching error occured, please reload');}
-        );
+          dispatch({ type: FORM_ERRORS, payload: false });
 
-     
+          throw new Error('Fetching error occured, please reload');
+        }
+      }).catch((error) => {
+        console.log("error")
+        setCaptchaLoading(false);
+        console.log('verify error captcha2', error);
+        dispatch({ type: FORM_ERRORS, payload: false });
 
-       
+        throw new Error('Fetching error occured, please reload');
+      }
+      );
+
       //  }
     } catch (error) {
-            dispatch({ type: FORM_ERRORS, payload: false });
+      dispatch({ type: FORM_ERRORS, payload: false });
 
       console.log('verify error captcha', error);
       setCaptchaLoading(false);
@@ -408,19 +399,21 @@ const EleventhStep: React.FC<EleventhStepProps> = ({
     // End captcha verification
   };
 
+  // console.log(submitCheck, 'submitCheck')
+
   useEffect(() => {
     dispatch({ type: FORM_ERRORS, payload: true });
 
-    if (captcha && captcha.length>0 && captcha.includes('captcha')) {
+    if (captcha && captcha.length > 0 && captcha.includes('captcha')) {
       dispatch({ type: FORM_ERRORS, payload: false })
-       console.log(captcha, 'capchatccccccc');
+      console.log(captcha, 'capchatccccccc');
     }
     if (!captcha) {
       dispatch({ type: FORM_ERRORS, payload: true });
     }
 
-   
-    
+
+
     // if (isValid===false) {
     //   dispatch({ type: FORM_ERRORS, payload: true });
     // }else{
@@ -434,6 +427,55 @@ const EleventhStep: React.FC<EleventhStepProps> = ({
 
   return (
     <div>
+      <SubmitModal
+        onClose={setOpen}
+        formErrors={formErrors}
+        isOpen={open}
+        Modaldes={'jason jamse'}
+        modalBtn={'Meldung abschicken'}
+      >
+        <div className="">
+        <FormHeader title={eleventhStepTranslation?.validation?.title} subTitle='Pflichtfeld*'/>
+        <div className="-mt-20">
+          <form onSubmit={handleSubmit(onSubmit)} id="tenthForm">
+            <h1 className="hidden">title</h1>
+            {eleventhStepTranslation?.validation?.data?.map((element: any) => (
+              <Checkbox
+                key={element?.id}
+                id={element?.id}
+                name={element?.name}
+                props={register('validation')}
+                value={element?.value}
+                label={element?.label}
+              />
+            ))}
+          </form>
+        </div>
+
+        <div
+          ref={container}
+          // className="frc-captcha"
+          data-sitekey="YOUR_SITE_KEY"
+        />
+      </div>
+      {/* Captcha check */}
+      {validation &&
+        validation?.includes(
+          eleventhStepTranslation?.validation?.data[0]?.value
+        ) && (
+          <div className="w-full mb-4">
+            <CaptchaCheckbox
+              id="captcha"
+              loading={captchLoading}
+              // checked={captcha ? true : false}
+              name="captcha"
+              props={register('captcha', { required: true })}
+              value="captcha"
+              label={eleventhStepTranslation?.captcha}
+            />
+          </div>
+        )}
+      </SubmitModal>
       <div>
         <h1 className="font-bold text-2xl mb-4">
           {eleventhStepTranslation?.verification}
@@ -484,8 +526,8 @@ const EleventhStep: React.FC<EleventhStepProps> = ({
               thirdForm?.datePeriod
                 ? thirdForm?.dateRangeState
                 : dayjs(thirdForm?.valueDate).format(
-                    'DD.MM.YYYY T HH:mm:ssZ[Z]'
-                  ),
+                  'DD.MM.YYYY T HH:mm:ssZ[Z]'
+                ),
               thirdForm?.numberOfEmployees,
             ]}
           />
@@ -579,76 +621,35 @@ const EleventhStep: React.FC<EleventhStepProps> = ({
           secondStepTranslation?.options[
             secondStepTranslation.options.length - 1
           ].value && (
-          <>
-            {ninethForm && ninethForm?.gender && (
-              <EditBlock
-                step={ninethForm?.step}
-                question={ninethForm?.question1}
-                answer={[...ninethForm?.gender, ninethForm?.genderFreeField]}
-              />
-            )}
-            {ninethForm && ninethForm?.sexualOrientation && (
-              <EditBlock
-                step={ninethForm?.step}
-                question={ninethForm?.question2}
-                answer={[
-                  ...ninethForm?.sexualOrientation,
-                  ninethForm?.sexualOrientationFreeField,
-                ]}
-              />
-            )}
+            <>
+              {ninethForm && ninethForm?.gender && (
+                <EditBlock
+                  step={ninethForm?.step}
+                  question={ninethForm?.question1}
+                  answer={[...ninethForm?.gender, ninethForm?.genderFreeField]}
+                />
+              )}
+              {ninethForm && ninethForm?.sexualOrientation && (
+                <EditBlock
+                  step={ninethForm?.step}
+                  question={ninethForm?.question2}
+                  answer={[
+                    ...ninethForm?.sexualOrientation,
+                    ninethForm?.sexualOrientationFreeField,
+                  ]}
+                />
+              )}
 
-            {ninethForm && (
-              <EditBlock
-                step={ninethForm?.step}
-                question={ninethForm?.question3}
-                answer={ninethForm?.age}
-              />
-            )}
-          </>
-        )}
+              {ninethForm && (
+                <EditBlock
+                  step={ninethForm?.step}
+                  question={ninethForm?.question3}
+                  answer={ninethForm?.age}
+                />
+              )}
+            </>
+          )}
       </div>
-      <div className="mt-8">
-        <FormHeader title={eleventhStepTranslation?.validation?.title} />
-        <div className="-mt-8">
-          <form onSubmit={handleSubmit(onSubmit)} id="tenthForm">
-            <h1 className="hidden">title</h1>
-            {eleventhStepTranslation?.validation?.data?.map((element: any) => (
-              <Checkbox
-                key={element?.id}
-                id={element?.id}
-                name={element?.name}
-                props={register('validation')}
-                value={element?.value}
-                label={element?.label}
-              />
-            ))}
-          </form>
-        </div>
-
-        <div
-          ref={container}
-          // className="frc-captcha"
-          data-sitekey="YOUR_SITE_KEY"
-        />
-      </div>
-      {/* Captcha check */}
-      {validation &&
-        validation?.includes(
-          eleventhStepTranslation?.validation?.data[0]?.value
-        ) && (
-          <div className="w-full mb-4">
-            <CaptchaCheckbox
-              id="captcha"
-              loading={captchLoading}
-              // checked={captcha ? true : false}
-              name="captcha"
-              props={register('captcha', { required: true })}
-              value="captcha"
-              label={eleventhStepTranslation?.captcha}
-            />
-          </div>
-        )}
     </div>
   );
 };

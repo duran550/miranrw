@@ -14,4 +14,6 @@ export type ModalPropsType = {
   positon: string | any;
   hideCloseButton?: boolean;
   modalClass?: string;
+  isDismissable?:any;
+  size?:string;
 };

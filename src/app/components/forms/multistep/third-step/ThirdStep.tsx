@@ -17,7 +17,7 @@ type ThirdStepProps = {
     disclaimer: string;
     mandatory: string;
     minCharacters: string;
-    hints: { title: string; list: string[] };
+    hints: { title: string; list: string[], unKnownInfo:string };
   };
   id?: string;
 };
@@ -125,11 +125,14 @@ if (!description || (description && description.length<50)) {
       <div className="mt-16 w-full md:max-w-md lg:mt-8  2xl:mt-0 2xl:absolute  lg:-top-0 lg:-right-[34rem]">
         <FormHeader title={thirdStepTranslation?.hints?.title}>
           {reportingPerson !== 'onBehalf' ? (
-            <ul className="list-disc pl-8">
-              {thirdStepTranslation?.hints?.list.map((element: string) => (
-                <li key={`${element}`}>{element}</li>
-              ))}
-            </ul>
+            <div>
+              <ul className="list-disc pl-8">
+                {thirdStepTranslation?.hints?.list.map((element: string) => (
+                  <li key={`${element}`}>{element}</li>
+                ))}
+              </ul>
+              <h3 className='pt-6'>{thirdStepTranslation.hints.unKnownInfo}</h3>
+            </div>
           ) : (
             <ul className="list-disc pl-8">
               {thirdStepTranslation?.hints?.list

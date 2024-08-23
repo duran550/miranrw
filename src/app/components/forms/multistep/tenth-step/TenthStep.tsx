@@ -120,7 +120,7 @@ const TenthStep: React.FC<TenthStepProps> = ({ tenthStepTranslation }) => {
     <form
       onSubmit={handleSubmit(onSubmit)}
       id="ninethForm"
-      className="lg:w-[35rem]"
+      className="lg:w-[32rem]"
     >
       {reportingPerson !== 'organization' && (
         <>
@@ -150,7 +150,7 @@ const TenthStep: React.FC<TenthStepProps> = ({ tenthStepTranslation }) => {
               <div className="ml-4">
                 {gender &&
                   gender?.includes(
-                    tenthStepTranslation?.firstBlock?.data[7]?.value
+                    tenthStepTranslation?.firstBlock?.data[11]?.value
                   ) && (
                     <InputField
                       name="genderFreeField"
@@ -159,7 +159,7 @@ const TenthStep: React.FC<TenthStepProps> = ({ tenthStepTranslation }) => {
                   )}
                 {gender?.length > 0 &&
                   gender?.includes(
-                    tenthStepTranslation?.firstBlock?.data[7]?.value
+                    tenthStepTranslation?.firstBlock?.data[11]?.value
                   ) &&
                   genderFreeField?.length !== 0 &&
                   formErrors && (
@@ -197,7 +197,7 @@ const TenthStep: React.FC<TenthStepProps> = ({ tenthStepTranslation }) => {
                 <div className="ml-4">
                   {sexualOrientation &&
                     sexualOrientation?.includes(
-                      tenthStepTranslation?.secondBlock?.data[11]?.value
+                      tenthStepTranslation?.secondBlock?.data[13]?.value
                     ) && (
                       <InputField
                         name=""
@@ -206,7 +206,7 @@ const TenthStep: React.FC<TenthStepProps> = ({ tenthStepTranslation }) => {
                     )}
                   {sexualOrientation?.length > 0 &&
                     sexualOrientation?.includes(
-                      tenthStepTranslation?.secondBlock?.data[11]?.value
+                      tenthStepTranslation?.secondBlock?.data[13]?.value
                     ) &&
                     sexualOrientationFreeField?.length !== 0 &&
                     formErrors && (

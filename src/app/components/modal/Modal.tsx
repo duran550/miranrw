@@ -24,15 +24,20 @@ const CustomModal: React.FC<ModalPropsType & ModalProps> = ({
   positon,
   hideCloseButton,
   modalClass,
+  isDismissable,
+  size
 }) => {
   return (
     <Modal
       className={classStyle}
-      backdrop="blur"
       isOpen={isOpen}
       onClose={onClose}
       placement={positon}
+      backdrop="blur"
+      size={size}
       hideCloseButton={hideCloseButton}
+      isKeyboardDismissDisabled={false}
+      isDismissable={isDismissable}
     >
       <ModalContent>
         {(onClose) => (
@@ -46,16 +51,6 @@ const CustomModal: React.FC<ModalPropsType & ModalProps> = ({
 
             {showFooter ? (
               <ModalFooter>
-                {/* {closeButtonTitle && (
-                    <Button variant="secondary" onClick={onClose}>
-                      {closeButtonTitle}
-                    </Button>
-                  )}
-                  {validateButtonTitle && (
-                    <Button onClick={onValidateButton}>
-                      {validateButtonTitle}
-                    </Button>
-                  )} */}
                 <Button
                   // disabled={  }
                   // variant={'mainColor'}
@@ -64,7 +59,6 @@ const CustomModal: React.FC<ModalPropsType & ModalProps> = ({
                   // leftIcon={ true }
                   // iconSize={30}
                   onClick={onClose}
-                  className="w-[15%]"
                 >
                   {validateButtonTitle}
                 </Button>

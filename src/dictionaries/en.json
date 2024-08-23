@@ -10,9 +10,7 @@
     },
     "aboutUs": {
       "title": "About us",
-     
       "news": "News",
-      
       "team": "Team",
       "partners": "Networks and Partners"
     },
@@ -178,29 +176,22 @@
             {
               "id": "age1",
               "name": "identity",
-              "label": "Myself",
-              "value": "Myself",
+              "label": "I am affected myself",
+              "value": "I am affected myself",
               "checked": false
             },
             {
               "id": "identity2",
               "name": "identity",
-              "label": "Another person",
-              "value": "Another person",
+              "label": "Other person(s). I report as a witness",
+              "value": "Other person(s). I report as a witness",
               "checked": false
             },
             {
               "id": "identity3",
               "name": "identity",
-              "label": "I'm reporting on behalf of the affected person",
-              "value": "I'm reporting on behalf of the affected person",
-              "checked": false
-            },
-            {
-              "id": "identity4",
-              "name": "identity",
-              "label": "An organization/institution",
-              "value": "An organization/institution",
+              "label": "An organization/institution is affected",
+              "value": "An organization/institution is affected",
               "checked": false
             }
           ],
@@ -217,14 +208,13 @@
           "disclaimer": "For data protection reasons we ask you not to enter names of other persons here.",
           "minCharacters": "A minimum of 50 Characters is expected",
           "hints": {
-            "title": "Possible Relevant Information",
+            "title": "Relevant information may be:",
+            "unKnownInfo": "We ask that you do not write any personally identifiable information here, such as names, addresses, telephone numbers or license plate numbers.",
             "list": [
-              "Where did the discrimination occur?",
-              "How was the discrimination manifested?",
-              "Who was the perpetrator of the attack?",
-              "How did other individuals react?",
-              "What made the incident queerphobic?",
-              "What impact did the incident have on you (e.g., emotional, physical, social, or financial) ?"
+              "How was discrimination committed?",
+              "How did other people react?",
+              "What do you think was anti-queer about the incident?",
+              "What impact did the incident have on the organization/institution (e.g. social, emotional, material or financial)?"
             ]
           }
         },
@@ -289,7 +279,10 @@
           "title": "When did the incident occur ?*",
           "mandatory": "* Mandatory field",
           "description": "Please select a date. If it occurred over an extended period, you can select that too.",
-          "happenedOverALongPeriod": "It happened over a long period of time."
+          "happenedOverALongPeriod": "It happened over a long period of time.",
+          "forgetful": "I can't remember exactly when it happened.",
+          "yearitHappened": "In what year did it happen?",
+          "selectYear": "(Auswahl Jahr) Jahreszahl"
         },
         "fourthStepOrganization": {
           "title": "How many individuals are active in the organization/institution?",
@@ -483,6 +476,7 @@
           "title": "Is it another form of discrimination ?",
           "mandatory": "* Mandatory field",
           "minCharacters": "A minimum of 4 Characters is expected",
+          "subTitle": "Multiple answers possible",
           "data": {
             "options": [
               {
@@ -564,7 +558,6 @@
                 "id": "Queerphobia",
                 "label": "Queerphobia"
               },
-
               {
                 "iD": 10,
                 "name": "formOfDiscYes",
@@ -601,35 +594,41 @@
               {
                 "iD": 1,
                 "name": "haveYouReportedYes",
-                "value": "I reached out to family/friends",
+                "value": "I talked to family and/or friends about it.",
                 "id": "hav1",
-                "label": "I reached out to family/friends"
+                "label": "I talked to family and/or friends about it."
               },
               {
                 "iD": 2,
                 "name": "haveYouReportedYes",
-                "value": "I reported the case to the police",
+                "value": "I reported the case to the police.",
                 "id": "hav2",
-                "label": "I reported the case to the police"
+                "label": "I reported the case to the police."
               },
               {
                 "iD": 3,
                 "name": "haveYouReportedYes",
-                "value": "I reported the case to another reporting agency, specifically:",
+                "value": "I sought help from a counseling center.",
                 "id": "hav3",
-                "label": "I reported the case to another reporting agency, specifically:"
+                "label": "I sought help from a counseling center."
               },
               {
                 "iD": 4,
                 "name": "haveYouReportedYes",
-                "value": "Other, specify:",
+                "value": "The case was reported to another reporting agency, namely:",
                 "id": "hav4",
-                "label": "Other, specify:"
+                "label": "The case was reported to another reporting agency, namely:"
+              },
+              {
+                "iD": 5,
+                "name": "haveYouReportedYes",
+                "value": "Other, namely:",
+                "id": "hav5",
+                "label": "Other, namely:"
               }
             ]
           }
         },
-
         "tenthStep": {
           "mainTitle": "Personal Information",
           "minCharacters": "A minimum of 4 Characters is expected",
@@ -642,54 +641,82 @@
               {
                 "id": "gender",
                 "name": "gender",
-                "label": "agender",
-                "value": "agender",
+                "label": "agender / I do not identify with any gender",
+                "value": "agender / I do not identify with any gender",
                 "checked": false
               },
               {
                 "id": "gender2",
                 "name": "gender",
-                "label": "intersex",
-                "value": "intersex",
+                "label": "cis",
+                "value": "cis",
                 "checked": false
               },
               {
                 "id": "gender3",
+                "name": "gender",
+                "label": "gender questioning / I am in the process of finding my gender",
+                "value": "gender questioning / I am in the process of finding my gender",
+                "checked": false
+              },
+              {
+                "id": "gender4",
+                "name": "gender",
+                "label": "inter*",
+                "value": "inter*",
+                "checked": false
+              },
+              {
+                "id": "gender5",
                 "name": "gender",
                 "label": "male",
                 "value": "male",
                 "checked": false
               },
               {
-                "id": "gender4",
+                "id": "gender6",
                 "name": "gender",
                 "label": "non-binary",
                 "value": "non-binary",
                 "checked": false
               },
               {
-                "id": "gender5",
+                "id": "gender7",
+                "name": "gender",
+                "label": "person with variations of sex development",
+                "value": "person with variations of sex development",
+                "checked": false
+              },
+              {
+                "id": "gender8",
                 "name": "gender",
                 "label": "queer",
                 "value": "queer",
                 "checked": false
               },
               {
-                "id": "gender6",
+                "id": "gender9",
                 "name": "gender",
                 "label": "trans*",
                 "value": "trans*",
                 "checked": false
               },
               {
-                "id": "gender7",
+                "id": "gender10",
                 "name": "gender",
                 "label": "female",
                 "value": "female",
                 "checked": false
               },
               {
-                "id": "gender8",
+                "id": "gender11",
+                "name": "gender",
+                "label": "don't know / prefer not to say",
+                "value": "don't know / prefer not to say",
+                "checked": false
+              },
+              {
+                "id": "gender12",
                 "name": "gender",
                 "label": "Self-identification:",
                 "value": "Self-identification:",
@@ -705,15 +732,22 @@
               {
                 "id": "sexualOrientation",
                 "name": "sexualOrientation",
-                "label": "lesbian",
-                "value": "lesbian",
+                "label": "aromantic",
+                "value": "aromantic",
+                "checked": false
+              },
+              {
+                "id": "sexualOrientation1",
+                "name": "sexualOrientation",
+                "label": "asexual",
+                "value": "asexual",
                 "checked": false
               },
               {
                 "id": "sexualOrientation2",
                 "name": "sexualOrientation",
-                "label": "gay",
-                "value": "gay",
+                "label": "bi+romantic",
+                "value": "bi+romantic",
                 "checked": false
               },
               {
@@ -726,61 +760,68 @@
               {
                 "id": "sexualOrientation4",
                 "name": "sexualOrientation",
-                "label": "asexual",
-                "value": "asexual",
-                "checked": false
-              },
-              {
-                "id": "sexualOrientation5",
-                "name": "sexualOrientation",
-                "label": "queer",
-                "value": "queer",
-                "checked": false
-              },
-              {
-                "id": "sexualOrientation6",
-                "name": "sexualOrientation",
-                "label": "pansexual",
-                "value": "pansexual",
-                "checked": false
-              },
-              {
-                "id": "sexualOrientation7",
-                "name": "sexualOrientation",
                 "label": "heterosexual",
                 "value": "heterosexual",
                 "checked": false
               },
               {
-                "id": "sexualOrientation8",
-                "name": "sexualOrientation",
-                "label": "aromantic",
-                "value": "aromantic",
-                "checked": false
-              },
-              {
-                "id": "sexualOrientation9",
-                "name": "sexualOrientation",
-                "label": "bi+romantic",
-                "value": "bi+romantic",
-                "checked": false
-              },
-              {
-                "id": "sexualOrientation10",
+                "id": "sexualOrientation5",
                 "name": "sexualOrientation",
                 "label": "homoromantic",
                 "value": "homoromantic",
                 "checked": false
               },
               {
-                "id": "sexualOrientation11",
+                "id": "sexualOrientation6",
+                "name": "sexualOrientation",
+                "label": "lesbian",
+                "value": "lesbian",
+                "checked": false
+              },
+              {
+                "id": "sexualOrientation7",
                 "name": "sexualOrientation",
                 "label": "panromantic",
                 "value": "panromantic",
                 "checked": false
               },
               {
+                "id": "sexualOrientation8",
+                "name": "sexualOrientation",
+                "label": "pansexual",
+                "value": "pansexual",
+                "checked": false
+              },
+              {
+                "id": "sexualOrientation9",
+                "name": "sexualOrientation",
+                "label": "queer",
+                "value": "queer",
+                "checked": false
+              },
+              {
+                "id": "sexualOrientation10",
+                "name": "sexualOrientation",
+                "label": "questioning / I am in the process of finding my orientation",
+                "value": "questioning / I am in the process of finding my orientation",
+                "checked": false
+              },
+              {
+                "id": "sexualOrientation11",
+                "name": "sexualOrientation",
+                "label": "gay",
+                "value": "gay",
+                "checked": false
+              },
+              {
                 "id": "sexualOrientation12",
+                "name": "sexualOrientation",
+                "label": "don't know / prefer not to say",
+                "value": "don't know / prefer not to say",
+                "checked": false
+              },
+              {
+                "id": "sexualOrientation13",
                 "name": "sexualOrientation",
                 "label": "Self-identification:",
                 "value": "Self-identification:",
@@ -861,7 +902,6 @@
             "title": "Consent",
             "description": "Multiple choices possible",
             "data": [
-             
               {
                 "id": "validation2",
                 "name": "validation",
@@ -888,14 +928,12 @@
         "save": "Save"
       }
     },
-
     "cookiesConsent": {
       "title": "Your privacy",
       "content": "For the operation of our portal, we exclusively use cookies that are necessary for operation. Further information can be found in the",
       "datenschutz": "privacy policy.",
       "accept": "Yes, understood"
     },
-
     "about": {
       "title": "About Us",
       "description": "This is the About page.",

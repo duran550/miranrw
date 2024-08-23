@@ -179,29 +179,22 @@
             {
               "id": "age1",
               "name": "identity",
-              "label": "Ich selbst",
-              "value": "Ich selbst",
+              "label": "Ich bin selbst betroffen",
+              "value": "Ich bin selbst betroffen",
               "checked": false
             },
             {
               "id": "identity2",
               "name": "identity",
-              "label": "Eine andere Person",
-              "value": "Eine andere Person",
+              "label": "Andere Person(en). Ich melde als Zeug*in",
+              "value": "Andere Person(en). Ich melde als Zeug*in",
               "checked": false
             },
             {
               "id": "identity3",
               "name": "identity",
-              "label": "Ich melde in Vertretung für die betroffene Person",
-              "value": "Ich melde in Vertretung für die betroffene Person",
-              "checked": false
-            },
-            {
-              "id": "identity4",
-              "name": "identity",
-              "label": "Eine Organisation/Institution",
-              "value": "Eine Organisation/Institution",
+              "label": "Eine Organisation/ Institution ist betroffen",
+              "value": "Eine Organisation/ Institution ist betroffen",
               "checked": false
             }
           ],
@@ -218,14 +211,13 @@
           "disclaimer": "Aus Gründen des Datenschutzes bitten wir dich, hier keine Namen anderer Personen anzugeben.",
           "minCharacters": "Ein Minimum von 50 Zeichen wird erwartet",
           "hints": {
-            "title": "Mögliche relevante Informationen",
+            "title": "Relevante Informationen können sein:",
+            "unKnownInfo":"Wir bitten dich, hier keine Angaben mit Personenbezug zu schreiben, wie z.B. Namen, Adressen, Telefonnummern oder Autokennzeichen. ",
             "list": [
-              "Wo fand die Diskriminierung statt?",
               "Wie wurde diskriminiert?",
-              "Von wem ging der Angriff aus?",
-              "Wie haben andere Personen reagiert?",
-              "Was war an dem Vorfall queerfeindlich?",
-              "Welche Auswirkungen hatte der Vorfall für dich (z.B. emotionale, körperliche, soziale oder finanzielle)?"
+              "Wie haben andere Personen reagiert? ",
+              "Was war deiner Meinung nach an dem Vorfall queerfeindlich?",
+              "Welche Auswirkungen hatte der Vorfall für die Organisation/Institution (z.B. soziale, emotionale, materielle oder finanzielle)?"
             ]
           }
         },
@@ -290,7 +282,10 @@
           "title": "Wann fand der Vorfall statt?*",
           "mandatory": "* Pflichtfeld",
           "description": "Bitte wähle ein Datum aus. Falls es sich um einen längeren Zeitraum handelt, kannst du auch diesen auch auswählen",
-          "happenedOverALongPeriod": "Es ist über einen längeren Zeitraum passiert."
+          "happenedOverALongPeriod": "Es ist über einen längeren Zeitraum passiert.",
+           "forgetful":"Ich kann mich nicht genau erinnern, wann es passiert ist.",
+           "yearitHappened":"In welchem Jahr ist es passiert?",
+           "selectYear":"(Auswahl Jahr) Jahreszahl"
         },
         "fourthStepOrganization": {
           "title": "Wie viele Personen sind in der Organisation/Institution tätig?",
@@ -477,6 +472,13 @@
               "value": "Anderes, und zwar",
               "id": "Anderes",
               "label": "Anderes, und zwar"
+            },
+            {
+              "iD": 10,
+              "name": "formOfDisc",
+              "value": "weiß nicht / keine Angabe",
+              "id": "weiß nicht",
+              "label": "weiß nicht / keine Angabe"
             }
           ]
         },
@@ -484,6 +486,7 @@
           "title": "Handelt es sich um noch eine weitere Form der Diskriminierung?",
           "mandatory": "* Pflichtfeld",
           "minCharacters": "Es wird eine Mindestanzahl von 4 Zeichen erwartet",
+          "subTitle":"Mehrfachnennung möglich",
           "data": {
             "options": [
               {
@@ -602,9 +605,9 @@
               {
                 "iD": 1,
                 "name": "haveYouReportedYes",
-                "value": "Ich habe mich an Familie/Freunde gewendet",
+                "value": "Ich habe mit Familie und/oder Freund*innen darüber gesprochen.",
                 "id": "hav1",
-                "label": "Ich habe mich an Familie/Freunde gewendet"
+                "label": "Ich habe mit Familie und/oder Freund*innen darüber gesprochen."
               },
               {
                 "iD": 2,
@@ -616,15 +619,22 @@
               {
                 "iD": 3,
                 "name": "haveYouReportedYes",
-                "value": "Ich habe den Fall bei einer anderen Meldestelle angezeigt, und zwar: ",
+                "value": "Ich habe eine Beratungsstelle aufgesucht.",
                 "id": "hav3",
-                "label": "Ich habe den Fall bei einer anderen Meldestelle angezeigt, und zwar: "
+                "label": "Ich habe eine Beratungsstelle aufgesucht."
               },
               {
                 "iD": 4,
                 "name": "haveYouReportedYes",
-                "value": "Anderes, und zwar:",
+                "value": "Der Fall wurde bei einer anderen Meldestelle, gemeldet, und zwar: ",
                 "id": "hav4",
+                "label": "Der Fall wurde bei einer anderen Meldestelle, gemeldet, und zwar: "
+              },
+              {
+                "iD": 5,
+                "name": "haveYouReportedYes",
+                "value": "Anderes, und zwar:",
+                "id": "hav5",
                 "label": "Anderes, und zwar:"
               }
             ]
@@ -642,54 +652,82 @@
               {
                 "id": "gender",
                 "name": "gender",
-                "label": "agender",
-                "value": "agender",
+                "label": "agender/ Ich ordne mich keiner geschlechtlichen dentität zu",
+                "value": "agender/ Ich ordne mich keiner geschlechtlichen dentität zu",
                 "checked": false
               },
               {
                 "id": "gender2",
+                "name": "gender",
+                "label": "cis",
+                "value": "cis",
+                "checked": false
+              },
+              {
+                "id": "gender3",
+                "name": "gender",
+                "label": "gender questioning / ich befinde mich im Findungsprozess",
+                "value": "gender questioning / ich befinde mich im Findungsprozess",
+                "checked": false
+              },
+              {
+                "id": "gender4",
                 "name": "gender",
                 "label": "inter*",
                 "value": "inter*",
                 "checked": false
               },
               {
-                "id": "gender3",
+                "id": "gender5",
                 "name": "gender",
                 "label": "männlich",
                 "value": "männlich",
                 "checked": false
               },
               {
-                "id": "gender4",
+                "id": "gender6",
                 "name": "gender",
                 "label": "nichtbinär",
                 "value": "nichtbinär",
                 "checked": false
               },
               {
-                "id": "gender5",
+                "id": "gender7",
+                "name": "gender",
+                "label": "Person mit Variationen der Geschlechts-entwicklung",
+                "value": "Person mit Variationen der Geschlechts-entwicklung",
+                "checked": false
+              },
+              {
+                "id": "gender8",
                 "name": "gender",
                 "label": "queer",
                 "value": "queer",
                 "checked": false
               },
               {
-                "id": "gender6",
+                "id": "gender9",
                 "name": "gender",
                 "label": "trans*",
                 "value": "trans*",
                 "checked": false
               },
               {
-                "id": "gender7",
+                "id": "gender10",
                 "name": "gender",
                 "label": "weiblich",
                 "value": "weiblich",
                 "checked": false
               },
               {
-                "id": "gender8",
+                "id": "gender11",
+                "name": "gender",
+                "label": "weiß nicht / keine Angabe",
+                "value": "weiß nicht / keine Angabe",
+                "checked": false
+              },
+              {
+                "id": "gender12",
                 "name": "gender",
                 "label": "Selbstbezeichung:",
                 "value": "Selbstbezeichung:",
@@ -705,15 +743,22 @@
               {
                 "id": "sexualOrientation",
                 "name": "sexualOrientation",
-                "label": "lesbisch",
-                "value": "lesbisch",
+                "label": "aromantisch",
+                "value": "aromantisch",
+                "checked": false
+              },
+              {
+                "id": "sexualOrientation1",
+                "name": "sexualOrientation",
+                "label": "asexuell",
+                "value": "asexuell",
                 "checked": false
               },
               {
                 "id": "sexualOrientation2",
                 "name": "sexualOrientation",
-                "label": "schwul",
-                "value": "schwul",
+                "label": "bi+romantisch",
+                "value": "bi+romantisch",
                 "checked": false
               },
               {
@@ -726,61 +771,68 @@
               {
                 "id": "sexualOrientation4",
                 "name": "sexualOrientation",
-                "label": "asexuell",
-                "value": "asexuell",
-                "checked": false
-              },
-              {
-                "id": "sexualOrientation5",
-                "name": "sexualOrientation",
-                "label": "queer",
-                "value": "queer",
-                "checked": false
-              },
-              {
-                "id": "sexualOrientation6",
-                "name": "sexualOrientation",
-                "label": "pansexuell",
-                "value": "pansexuell",
-                "checked": false
-              },
-              {
-                "id": "sexualOrientation7",
-                "name": "sexualOrientation",
                 "label": "heterosexuell",
                 "value": "heterosexuell",
                 "checked": false
               },
               {
-                "id": "sexualOrientation8",
-                "name": "sexualOrientation",
-                "label": "aromantisch",
-                "value": "aromantisch",
-                "checked": false
-              },
-              {
-                "id": "sexualOrientation9",
-                "name": "sexualOrientation",
-                "label": "bi+romantisch",
-                "value": "bi+romantisch",
-                "checked": false
-              },
-              {
-                "id": "sexualOrientation10",
+                "id": "sexualOrientation5",
                 "name": "sexualOrientation",
                 "label": "homoromantisch",
                 "value": "homoromantisch",
                 "checked": false
               },
               {
-                "id": "sexualOrientation11",
+                "id": "sexualOrientation6",
+                "name": "sexualOrientation",
+                "label": "lesbisch",
+                "value": "lesbisch",
+                "checked": false
+              },
+              {
+                "id": "sexualOrientation7",
                 "name": "sexualOrientation",
                 "label": "panromantisch",
                 "value": "panromantisch",
                 "checked": false
               },
               {
+                "id": "sexualOrientation8",
+                "name": "sexualOrientation",
+                "label": "pansexuell",
+                "value": "pansexuell",
+                "checked": false
+              },
+              {
+                "id": "sexualOrientation9",
+                "name": "sexualOrientation",
+                "label": "queer",
+                "value": "queer",
+                "checked": false
+              },
+              {
+                "id": "sexualOrientation10",
+                "name": "sexualOrientation",
+                "label": "questioning / Ich befinde mich im Findungsprozess",
+                "value": "questioning / Ich befinde mich im Findungsprozess",
+                "checked": false
+              },
+              {
+                "id": "sexualOrientation11",
+                "name": "sexualOrientation",
+                "label": "schwul",
+                "value": "schwul",
+                "checked": false
+              },
+              {
                 "id": "sexualOrientation12",
+                "name": "sexualOrientation",
+                "label": "weiß nicht / keine Angabe",
+                "value": "weiß nicht / keine Angabe",
+                "checked": false
+              },
+              {
+                "id": "sexualOrientation13",
                 "name": "sexualOrientation",
                 "label": "Selbstbezeichung:",
                 "value": "Selbstbezeichung:",
