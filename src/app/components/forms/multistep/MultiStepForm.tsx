@@ -32,9 +32,6 @@ const MultiStepForm: React.FC<MultiStepFormProps> = ({
   const [open, setOpen] = useState<boolean>(false)
   let stepFromCookies = getFormStep();
 
-  console.log(stepFromCookies, 'stepFromCookies')
-  console.log(reportingPerson, 'reportingPerson')
-
   return (
     <div>
       <div className="lg:flex lg:w-full lg:justify-between">

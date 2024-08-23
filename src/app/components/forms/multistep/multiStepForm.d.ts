@@ -15,7 +15,7 @@ export type MultiStepFormValuesProps = {
     tenthStep: any;
     eleventhStep: any;
     twelvethStep: any;
-    thirtinthStep
+    thirtinthStep:any;
   };
   button: {
     start: string;
@@ -24,6 +24,7 @@ export type MultiStepFormValuesProps = {
     submit: string;
     save: string;
   };
+  formFields:any;
 };
 
 export type MultiStepFormProps = {
