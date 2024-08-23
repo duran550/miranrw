@@ -927,6 +927,135 @@
           "title": "Vielen Dank für deine Meldung.",
           "description": "Hier gelangst Du zu unserer Seite mit Links zur Beratung.",
           "button": "Verweisberatung"
+        },
+        "thirtinthStep": {
+          "title": "In welchem Bereich fand die Diskriminierung statt?",
+          "description": " Mehrfachnennung möglich",
+          "mandatory": "* Pflichtfeld",
+          "choices": [
+            {
+              "iD": 1,
+              "name": "whereDisHappened",
+              "value": "Ämter und Behörden",
+              "id": "Ämter",
+              "label": "Ämter und Behörden"
+            },
+
+            {
+              "iD": 2,
+              "name": "whereDisHappened",
+              "value": "Analoge Medien",
+              "id": "Analoge",
+              "label": "Analoge Medien"
+            },
+            {
+              "iD": 3,
+              "name": "whereDisHappened",
+              "value": "Arbeit",
+              "id": "Arbeit ",
+              "label": "Arbeit "
+            },
+            {
+              "iD": 4,
+              "name": "whereDisHappened",
+              "value": "Bildung",
+              "id": "Bildung",
+              "label": "Bildung"
+            },
+            {
+              "iD": 5,
+              "name": "whereDisHappened",
+              "value": "digitaler Raum ",
+              "id": "digitaler",
+              "label": "digitaler Raum "
+            },
+            {
+              "iD": 6,
+              "name": "whereDisHappened",
+              "value": "Einsatzorganisationen ",
+              "id": "Einsatzorganisationen ",
+              "label": "Einsatzorganisationen "
+            },
+
+            {
+              "iD": 7,
+              "name": "whereDisHappened",
+              "value": "Einzelhandel und Dienstleistungen ",
+              "id": "Einzelhandel",
+              "label": "Einzelhandel und Dienstleistungen "
+            },
+            {
+              "iD": 8,
+              "name": "whereDisHappened",
+              "value": "Freizeit",
+              "id": "Freizeit",
+              "label": "Freizeit"
+            },
+            {
+              "iD": 9,
+              "name": "whereDisHappened",
+              "value": "Gesundheit ",
+              "id": "Gesundheit ",
+              "label": "Gesundheit "
+            },
+            {
+              "iD": 10,
+              "name": "whereDisHappened",
+              "value": "Justiz",
+              "id": "Justiz",
+              "label": "Justiz"
+            },
+            {
+              "iD": 11,
+              "name": "whereDisHappened",
+              "value": "Öffentlicher Raum ",
+              "id": "Öffentlicher",
+              "label": "Öffentlicher Raum "
+            },
+
+            {
+              "iD": 12,
+              "name": "whereDisHappened",
+              "value": "Persönliches Umfeld/Privatleben ",
+              "id": "Persönliches",
+              "label": "Persönliches Umfeld/Privatleben "
+            },
+            {
+              "iD": 13,
+              "name": "whereDisHappened",
+              "value": "Polizei",
+              "id": "Polizei",
+              "label": "Polizei"
+            },
+            {
+              "iD": 14,
+              "name": "whereDisHappened",
+              "value": "Soziale Dienste",
+              "id": "Soziale Dienste",
+              "label": "Soziale Dienste"
+            },
+            {
+              "iD": 15,
+              "name": "whereDisHappened",
+              "value": "Verkehr ",
+              "id": "Verkehr ",
+              "label": "Verkehr"
+            },
+            {
+              "iD": 16,
+              "name": "whereDisHappened",
+              "value": "Wohnen",
+              "id": "Wohnen",
+              "label": "Wohnen"
+            },
+            {
+              "iD": 17,
+              "name": "typeOfDisc",
+              "value": "Anderes, und zwar",
+              "id": "anderes",
+              "label": "Anderes, und zwar"
+            }
+          ]
         }
       },
       "formFields": {},

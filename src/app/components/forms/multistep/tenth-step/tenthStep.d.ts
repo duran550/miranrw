@@ -22,6 +22,7 @@ export type TenthStepProps = {
     thirdBlock: BlockDataType;
     fourthBlock: BlockDataType;
   };
+  id?:string;
 };
 
 export type TenthFormValues = {

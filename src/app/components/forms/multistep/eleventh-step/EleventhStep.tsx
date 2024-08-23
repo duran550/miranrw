@@ -164,7 +164,7 @@ const EleventhStep: React.FC<EleventhStepProps> = ({
   } = getFormCookies(NINETH_FORM);
 
   if (
-    firstForm.identity ===
+    firstForm?.identity ===
     secondStepTranslation?.options[secondStepTranslation.options.length - 1]
       .value
   ) {

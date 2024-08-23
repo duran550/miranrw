@@ -11,7 +11,7 @@ import { clearFormCookiesStep, getFormCookies, getFormStep, setFormCookies } fro
 import { NINETH_FORM } from '@/cookies/cookies.d';
 import { useScrollOnTop } from '@/app/hooks/useScrollOnTop';
 
-const TenthStep: React.FC<TenthStepProps> = ({ tenthStepTranslation }) => {
+const TenthStep: React.FC<TenthStepProps> = ({ tenthStepTranslation }, id) => {
   const { dispatch, reportingPerson, isEditing, formErrors } = useFormContext();
   const [question1] = useState<string>(tenthStepTranslation?.firstBlock?.title);
   const [question2] = useState<string>(
@@ -119,7 +119,8 @@ const TenthStep: React.FC<TenthStepProps> = ({ tenthStepTranslation }) => {
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      id="ninethForm"
+      // id="ninethForm"
+      id={id === 'fourthForm' ? 'fourthForm' : 'secondForm'}
       className="lg:w-[32rem]"
     >
       {reportingPerson !== 'organization' && (

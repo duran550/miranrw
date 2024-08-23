@@ -248,16 +248,13 @@ const FourthStep: React.FC<FourthStepProps> = ({
 
       dispatch({ type: FORM_ERRORS, payload: true });
     }
-
   }
-
-  console.log(!forgetful, 'forgetful')
-  console.log(!yearitHappenedFreeField, 'forgetful1')
 
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      id={id === 'fifthForm' ? 'fifthForm' : 'thirdForm'}
+      // id={id === 'fifthForm' ? 'fifthForm' : 'thirdForm'}
+      id={(reportingPerson === 'myself' || reportingPerson === 'organization') ? 'fifthForm' : 'thirdForm'}
       className="flex flex-col relative"
     >
       <div className="">

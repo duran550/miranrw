@@ -8,7 +8,7 @@ import { FORM_ERRORS, LAST_STEP, NEXT_STEP } from '@/app/context/actions';
 import InputField from '../../text-field/InputField';
 import { clearFormCookiesStep, getFormCookies, getFormStep, setFormCookies } from '@/cookies/cookies';
 import { useScrollOnTop } from '@/app/hooks/useScrollOnTop';
-import { EIGTH_FORM, NINETH_FORM, SEVENTH_FORM } from '@/cookies/cookies.d';
+import { EIGTH_FORM, NINETH_FORM, SEVENTH_FORM, TENTH_FORM } from '@/cookies/cookies.d';
 import { NinethFormValues, NinethStepProps } from './ninethStep';
 import SeventhStep from '../seventh-step/SeventhStep';
 
@@ -190,14 +190,14 @@ const NinethStep: React.FC<NinethStepProps> = ({
              };
              // dispatch({ type: ID_FORM, payload: id });
              //  dispatch({ type: FORM_VALUE, payload: dataWithQuestion });
-             id === 'ninethForm'
-               ? setFormCookies(dataWithQuestion, NINETH_FORM)
+             id === 'tenthForm'
+               ? setFormCookies(dataWithQuestion, TENTH_FORM)
                : setFormCookies(dataWithQuestion, EIGTH_FORM);
            } else {
             
              let dataWithQuestion = { question, step, ...data };
-             id === 'ninethForm'
-               ? setFormCookies(dataWithQuestion, NINETH_FORM)
+             id === 'tenthForm'
+               ? setFormCookies(dataWithQuestion, TENTH_FORM)
                : setFormCookies(dataWithQuestion, EIGTH_FORM);
            }
       
@@ -211,7 +211,8 @@ const NinethStep: React.FC<NinethStepProps> = ({
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      id={id === 'ninethForm' ? 'ninethForm' : 'eighthForm'}
+      // id={id === 'tenthForm' ? 'tenthForm' : 'eighthForm'}
+      id={reportingPerson == 'myself' ? 'tenthForm' : reportingPerson == 'andere' ? 'eighthForm' : 'ninethForm'}
       className="lg:w-[35rem]"
     >
       <FormHeader

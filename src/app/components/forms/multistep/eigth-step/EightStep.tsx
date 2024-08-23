@@ -8,7 +8,7 @@ import { useFormContext } from '@/app/hooks/useFormContext';
 import { FORM_ERRORS, LAST_STEP, NEXT_STEP, FORM_VALUE, ID_FORM } from '@/app/context/actions';
 import InputField from '../../text-field/InputField';
 import { clearFormCookiesStep, getFormCookies, getFormStep, setFormCookies } from '@/cookies/cookies';
-import { EIGTH_FORM, SEVENTH_FORM } from '@/cookies/cookies.d';
+import { EIGTH_FORM, NINETH_FORM, SEVENTH_FORM } from '@/cookies/cookies.d';
 import { useScrollOnTop } from '@/app/hooks/useScrollOnTop';
 
 const EightStep: React.FC<EightStepProps> = ({ eightStepTranslation, id }) => {
@@ -39,8 +39,8 @@ const EightStep: React.FC<EightStepProps> = ({ eightStepTranslation, id }) => {
       question: string;
     } = getFormCookies(SEVENTH_FORM);
 
-    if (id && id === 'eighthForm') {
-      formValues = getFormCookies(EIGTH_FORM);
+    if (id && id === 'ninethForm') {
+      formValues = getFormCookies(NINETH_FORM);
     }
 
     dispatch({ type: FORM_ERRORS, payload: false });
@@ -129,35 +129,38 @@ const EightStep: React.FC<EightStepProps> = ({ eightStepTranslation, id }) => {
          };
          // dispatch({ type: ID_FORM, payload: id });
          dispatch({ type: FORM_VALUE, payload: dataWithQuestion });
-          id === 'eighthForm'
-            ? setFormCookies(dataWithQuestion, EIGTH_FORM)
-            : setFormCookies(dataWithQuestion, SEVENTH_FORM);
+          // id === 'ninethForm'
+          //   ? setFormCookies(dataWithQuestion, NINETH_FORM)
+          //   : setFormCookies(dataWithQuestion, SEVENTH_FORM);
+          if(reportingPerson === 'myself') {
+            setFormCookies(dataWithQuestion, EIGTH_FORM)
+           } else if(reportingPerson === 'andere') {
+            setFormCookies(dataWithQuestion, NINETH_FORM)
+          }
     }else{
        let step = getFormStep();
        let dataWithQuestion = { question, step, ...data };
        // dispatch({ type: ID_FORM, payload: id });
        dispatch({ type: FORM_VALUE, payload: dataWithQuestion });
-        id === 'eighthForm'
-          ? setFormCookies(dataWithQuestion, EIGTH_FORM)
-          : setFormCookies(dataWithQuestion, SEVENTH_FORM);
+       if(reportingPerson === 'myself') {
+        setFormCookies(dataWithQuestion, EIGTH_FORM)
+       } else if(reportingPerson === 'andere') {
+        setFormCookies(dataWithQuestion, NINETH_FORM)
+      }
     }
-   
- 
-     
-
      
 
      dispatch({ type: NEXT_STEP, payload: 'DATA 1' });
     // isEditing && reportingPerson === 'myself'
     //   ? dispatch({ type: LAST_STEP, payload: 11 })
     //   : dispatch({ type: NEXT_STEP, payload: 'DATA 1' });
- 
   };
 
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      id={id === 'eighthForm' ? 'eighthForm' : 'seventhForm'}
+      // id={id === 'ninethForm' ? 'ninethForm' : 'seventhForm'}
+      id={(reportingPerson === 'myself' || reportingPerson === 'andere') ? 'ninethForm' : 'eighthForm'}
       className="lg:w-[35rem]"
     >
       <FormHeader title={eightStepTranslation?.title} subTitle={eightStepTranslation.subTitle}/>

@@ -6,7 +6,7 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 import { useFormContext } from '@/app/hooks/useFormContext';
 import { FORM_ERRORS, LAST_STEP, NEXT_STEP } from '@/app/context/actions';
 import { clearFormCookiesStep, getFormCookies, getFormStep, setFormCookies } from '@/cookies/cookies';
-import { FOURTH_FORM, SIXTH_FORM } from '@/cookies/cookies.d';
+import { FOURTH_FORM, SEVENTH_FORM, SIXTH_FORM } from '@/cookies/cookies.d';
 import { useScrollOnTop } from '@/app/hooks/useScrollOnTop';
 import AutoComplete from '../../auto-complete/AutoComplete';
 import InputField from '../../text-field/InputField';
@@ -167,8 +167,8 @@ const FifthStep: React.FC<FifthStepProps> = ({ fifthStepTranslation, id }) => {
         ? ''
         : location;
     let dataWithQuestion = { question, location: city, step, ...data };
-    id === 'sixthForm'
-      ? setFormCookies(dataWithQuestion, SIXTH_FORM)
+    id === 'seventhForm'
+      ? setFormCookies(dataWithQuestion, SEVENTH_FORM)
       : setFormCookies(dataWithQuestion, FOURTH_FORM);
 
     dispatch({ type: NEXT_STEP, payload: 'DATA 1' });
@@ -200,10 +200,15 @@ const FifthStep: React.FC<FifthStepProps> = ({ fifthStepTranslation, id }) => {
 
     setLocation(keyword);
   };
+
+  // seventhForm
+
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      id={id === 'sixthForm' ? 'sixthForm' : 'fourthForm'}
+      // id={id === 'sixthForm' ? 'sixthForm' : 'fourthForm'}
+      // id={id === 'seventhForm' ? 'seventhForm' : 'fourthForm'}
+      id={reportingPerson == 'myself' ? 'seventhForm' : reportingPerson == 'andere' ? 'fourthForm' : 'sixthForm'}
       className="lg:w-[35rem]"
     >
       <FormHeader

@@ -6,7 +6,7 @@ import { FORM_ERRORS, LAST_STEP, NEXT_STEP } from '@/app/context/actions';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { ThirdFormValues } from './thirdStep.d';
 import { clearFormCookiesStep, getFormCookies, getFormStep, setFormCookies } from '@/cookies/cookies';
-import { FOURTH_FORM, SECOND_FORM, THIRD_FORM } from '@/cookies/cookies.d';
+import { FOURTH_FORM, SECOND_FORM, SIXTH_FORM, THIRD_FORM, THIRTINTH_FORM } from '@/cookies/cookies.d';
 import { useScrollOnTop } from '@/app/hooks/useScrollOnTop';
 
 type ThirdStepProps = {
@@ -19,7 +19,7 @@ type ThirdStepProps = {
     minCharacters: string;
     hints: { title: string; list: string[], unKnownInfo:string };
   };
-  id?: string;
+  id: string;
 };
 
 const ThirdStep: React.FC<ThirdStepProps> = ({ thirdStepTranslation, id }) => {
@@ -49,8 +49,8 @@ const ThirdStep: React.FC<ThirdStepProps> = ({ thirdStepTranslation, id }) => {
        getFormCookies(SECOND_FORM);
    
 
-     if (id && id == 'fourthForm') {
-       formValues = getFormCookies(FOURTH_FORM);
+     if (id && id == 'sixthForm') {
+       formValues = getFormCookies(SIXTH_FORM);
      }
  
     
@@ -79,13 +79,12 @@ if (!description || (description && description.length<50)) {
 
   // Triggered when submitting form
   const onSubmit: SubmitHandler<ThirdFormValues> = (data) => {
-    
     let step = getFormStep();
     let dataWithQuestion = { question, step, ...data };
 
-     id !== 'fourthForm'
+     id !== 'sixthForm'
       ? setFormCookies(dataWithQuestion, SECOND_FORM)
-      : setFormCookies(dataWithQuestion, FOURTH_FORM);
+      : setFormCookies(dataWithQuestion, SIXTH_FORM);
 
     dispatch({ type: NEXT_STEP, payload: 'DATA 1' });
     // isEditing && reportingPerson === 'myself'
@@ -97,7 +96,11 @@ if (!description || (description && description.length<50)) {
     <div className="relative w-full">
       <form
         onSubmit={handleSubmit(onSubmit)}
-        id={id === 'fourthForm' ? 'fourthForm' : 'secondForm'}
+        // id={id === 'fourthForm' ? 'fourthForm' : 'secondForm'}
+        // id={id === 'sixthForm' ? 'sixthForm' : 'secondForm'}
+        // id={id === 'sixthForm' ? 'sixthForm' : 'secondForm'}
+        // id={(reportingPerson === 'myself' || reportingPerson === 'organization') ? 'sixthForm' : 'secondForm'}
+        id={reportingPerson === 'myself' ? 'sixthForm' : reportingPerson === 'andere' ? 'secondForm' : 'fourthForms'}
         className="h-full lg:w-[35rem]"
       >
         <FormHeader

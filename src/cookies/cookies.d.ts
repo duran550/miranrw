@@ -12,3 +12,5 @@ export const SIXTH_FORM = 'SIXTH_FORM_MIQ';
 export const SEVENTH_FORM = 'SEVENTH_FORM_MIQ';
 export const EIGTH_FORM = 'EIGTH_FORM_MIQ';
 export const NINETH_FORM = 'NINETH_FORM_MIQ';
+export const TENTH_FORM = 'TENTH_FORM';
+export const THIRTINTH_FORM = 'THIRTINTH_FORM_MIQ';
