@@ -74,12 +74,17 @@ const FourthStep: React.FC<FourthStepProps> = ({
   };
   // Getting form cookies
   // alert(id)
-  if (id && id === 'fifthForm') {
-    formValues = getFormCookies(FIFTH_FORM);
-  } else {
-    formValues = getFormCookies(THIRD_FORM);
+  // if (id && id === 'fifthForm') {
+  //   formValues = getFormCookies(FIFTH_FORM);
+  // } else {
+  //   formValues = getFormCookies(THIRD_FORM);
 
-  }
+  // }
+
+  (reportingPerson === 'myself' || reportingPerson === 'organization')
+  ? formValues = getFormCookies(FIFTH_FORM)
+  : formValues = getFormCookies(THIRD_FORM);
+
   // dispatch({ type: FORM_ERRORS, payload: true });
   // Scroll on top
 
@@ -223,7 +228,11 @@ const FourthStep: React.FC<FourthStepProps> = ({
     let step = getFormStep();
     let dataWithQuestion = { question, step, ...dataWithDate };
 
-    id && id === 'fifthForm'
+    // id && id === 'fifthForm'
+    //   ? setFormCookies(dataWithQuestion, FIFTH_FORM)
+    //   : setFormCookies(dataWithQuestion, THIRD_FORM);
+
+    (reportingPerson === 'myself' || reportingPerson === 'organization')
       ? setFormCookies(dataWithQuestion, FIFTH_FORM)
       : setFormCookies(dataWithQuestion, THIRD_FORM);
 

@@ -32,6 +32,9 @@ const MultiStepForm: React.FC<MultiStepFormProps> = ({
   const [open, setOpen] = useState<boolean>(false)
   let stepFromCookies = getFormStep();
 
+  console.log(stepFromCookies, 'myStepFormCookies')
+  console.log(reportingPerson, 'reportingPerson')
+
   return (
     <div>
       <div className="lg:flex lg:w-full lg:justify-between">
@@ -89,6 +92,7 @@ const MultiStepForm: React.FC<MultiStepFormProps> = ({
                     />
                   ) : step === 5 ? (
                     <FifthStep
+                    id='seventhForm'
                       fifthStepTranslation={formTranslation?.stepper?.fifthStep}
                     />
                   ) : step === 6 ? (
@@ -420,7 +424,7 @@ const MultiStepForm: React.FC<MultiStepFormProps> = ({
                                       : stepFromCookies === 4
                                         ? 'fifthForm'
                                         : stepFromCookies === 5
-                                          ? 'fourthForm'
+                                          ? 'seventhForm'
                                           : stepFromCookies === 6
                                             // ? 'fifthForm'
                                             ? 'thirtinthForm'
@@ -564,7 +568,7 @@ const MultiStepForm: React.FC<MultiStepFormProps> = ({
                                                 ? 'sixthForm'
                                                 // ? 'thirtinthForm'
                                                 : stepFromCookies === 7
-                                                  ? 'fourthForms'
+                                                  ? 'fourthForm'
                                                   // ? 'thirtinthForm'
                                                   : stepFromCookies === 8
                                                     ? 'seventhForm'

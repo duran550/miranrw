@@ -123,8 +123,6 @@ const SeventhStep: React.FC<SeventhStepProps> = ({
     //   : dispatch({ type: NEXT_STEP, payload: 'DATA 1' });
   };
 
-  console.log(lang, 'mylang')
-
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}

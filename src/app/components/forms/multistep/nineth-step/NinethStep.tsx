@@ -16,7 +16,6 @@ const NinethStep: React.FC<NinethStepProps> = ({
   ninethStepTranslation,
   id,
 }) => {
-  console.log(ninethStepTranslation);
 
   const { dispatch, isEditing, reportingPerson, formErrors, id_, formValue } = useFormContext();
   const [question] = useState<string>(ninethStepTranslation?.title);
@@ -64,9 +63,10 @@ const NinethStep: React.FC<NinethStepProps> = ({
       question: string;
     } = getFormCookies(EIGTH_FORM);
 
-    if (id && id === 'ninethForm') {
-      formValues = getFormCookies(NINETH_FORM);
+    if (reportingPerson == 'myself' || reportingPerson == 'andere') {
+      formValues = getFormCookies(TENTH_FORM);
     }
+
     dispatch({ type: FORM_ERRORS, payload: true });
 
     //   Setting values in the fields
@@ -190,13 +190,14 @@ const NinethStep: React.FC<NinethStepProps> = ({
              };
              // dispatch({ type: ID_FORM, payload: id });
              //  dispatch({ type: FORM_VALUE, payload: dataWithQuestion });
-             id === 'tenthForm'
-               ? setFormCookies(dataWithQuestion, TENTH_FORM)
-               : setFormCookies(dataWithQuestion, EIGTH_FORM);
+             (reportingPerson == 'myself' || reportingPerson == 'andere')
+             ? setFormCookies(dataWithQuestion, TENTH_FORM)
+             : setFormCookies(dataWithQuestion, EIGTH_FORM);
            } else {
             
              let dataWithQuestion = { question, step, ...data };
-             id === 'tenthForm'
+            //  id === 'tenthForm'
+            (reportingPerson == 'myself' || reportingPerson == 'andere')
                ? setFormCookies(dataWithQuestion, TENTH_FORM)
                : setFormCookies(dataWithQuestion, EIGTH_FORM);
            }
@@ -212,7 +213,7 @@ const NinethStep: React.FC<NinethStepProps> = ({
     <form
       onSubmit={handleSubmit(onSubmit)}
       // id={id === 'tenthForm' ? 'tenthForm' : 'eighthForm'}
-      id={reportingPerson == 'myself' ? 'tenthForm' : reportingPerson == 'andere' ? 'eighthForm' : 'ninethForm'}
+      id={(reportingPerson == 'myself' || reportingPerson == 'andere') ? 'tenthForm' : 'ninethForm'}
       className="lg:w-[35rem]"
     >
       <FormHeader

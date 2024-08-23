@@ -46,13 +46,14 @@ const ThirdStep: React.FC<ThirdStepProps> = ({ thirdStepTranslation, id }) => {
 
   useEffect(() => {
      let formValues: { description: string; question: string } =
-       getFormCookies(SECOND_FORM);
-   
+     (reportingPerson == 'myself' || reportingPerson == 'andere') ?
+       getFormCookies(SIXTH_FORM) : getFormCookies(SIXTH_FORM)
 
-     if (id && id == 'sixthForm') {
-       formValues = getFormCookies(SIXTH_FORM);
-     }
+    //  if (id && id == 'sixthForm') {
+    //    formValues = getFormCookies(SIXTH_FORM);
+    //  }
  
+    // i ended here in thirdStep
     
     dispatch({ type: FORM_ERRORS, payload: true });
     if (description && description?.length >= 50) {
@@ -82,9 +83,13 @@ if (!description || (description && description.length<50)) {
     let step = getFormStep();
     let dataWithQuestion = { question, step, ...data };
 
-     id !== 'sixthForm'
-      ? setFormCookies(dataWithQuestion, SECOND_FORM)
-      : setFormCookies(dataWithQuestion, SIXTH_FORM);
+    //  id !== 'sixthForm'
+    //   ? setFormCookies(dataWithQuestion, SECOND_FORM)
+    //   : setFormCookies(dataWithQuestion, SIXTH_FORM);
+
+      (reportingPerson == 'myself' || reportingPerson == 'andere') ? 
+        setFormCookies(dataWithQuestion, SIXTH_FORM) :
+        setFormCookies(dataWithQuestion, SECOND_FORM)
 
     dispatch({ type: NEXT_STEP, payload: 'DATA 1' });
     // isEditing && reportingPerson === 'myself'
@@ -97,10 +102,7 @@ if (!description || (description && description.length<50)) {
       <form
         onSubmit={handleSubmit(onSubmit)}
         // id={id === 'fourthForm' ? 'fourthForm' : 'secondForm'}
-        // id={id === 'sixthForm' ? 'sixthForm' : 'secondForm'}
-        // id={id === 'sixthForm' ? 'sixthForm' : 'secondForm'}
-        // id={(reportingPerson === 'myself' || reportingPerson === 'organization') ? 'sixthForm' : 'secondForm'}
-        id={reportingPerson === 'myself' ? 'sixthForm' : reportingPerson === 'andere' ? 'secondForm' : 'fourthForms'}
+        id={reportingPerson === 'myself' ? 'sixthForm' : reportingPerson === 'andere' ? 'sixthForm' : 'fourthForm'}
         className="h-full lg:w-[35rem]"
       >
         <FormHeader

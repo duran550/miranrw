@@ -39,10 +39,13 @@ const SixthStep: React.FC<SixthStepProps> = ({ sixthStepTranslation, id, lang })
       formOfQueerphobia: string[];
       otherformOfQueerphobiaFreeField: string;
       question: string;
-    } = getFormCookies(SIXTH_FORM);
-    if (id && id === 'seventhForm') {
-      formValues = getFormCookies(SEVENTH_FORM);
-    }
+    } = getFormCookies(EIGTH_FORM);
+    // if (id && id === 'seventhForm') {
+    //   formValues = getFormCookies(SEVENTH_FORM);
+    // }
+
+    reportingPerson == 'organization' && getFormCookies(SEVENTH_FORM);
+
     // dispatch({ type: FORM_ERRORS, payload: false });
     // if (formOfQueerphobia.length<0) {
     //   dispatch({ type: FORM_ERRORS, payload: true });
@@ -82,9 +85,14 @@ const SixthStep: React.FC<SixthStepProps> = ({ sixthStepTranslation, id, lang })
     //   ? setFormCookies(dataWithQuestion, SEVENTH_FORM)
     //   : setFormCookies(dataWithQuestion, SIXTH_FORM);
 
-    id && id === 'eighthForm'
-      && setFormCookies(dataWithQuestion, EIGTH_FORM)
-      // : setFormCookies(dataWithQuestion, SIXTH_FORM);
+    // id && id === 'eighthForm'
+    //   && setFormCookies(dataWithQuestion, EIGTH_FORM)
+    //   : setFormCookies(dataWithQuestion, SIXTH_FORM);
+
+    (reportingPerson === 'myself' || reportingPerson === 'andere')
+      ? setFormCookies(dataWithQuestion, EIGTH_FORM)
+      : setFormCookies(dataWithQuestion, SEVENTH_FORM);
+      
     dispatch({ type: NEXT_STEP, payload: '' });
     // isEditing && reportingPerson === 'myself'
     //   ? dispatch({ type: LAST_STEP, payload: 11 })

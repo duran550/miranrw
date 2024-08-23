@@ -538,7 +538,7 @@ const EleventhStep: React.FC<EleventhStepProps> = ({
           answer={[
             fourthForm?.location,
             fourthForm?.location ? '' : fourthForm?.locationOnline,
-            fourthForm.stadtteil && fourthForm.stadtteil,
+            fourthForm?.stadtteil && fourthForm.stadtteil,
           ]}
         />
         {fifthForm && fifthForm?.formOfQueerphobia && (

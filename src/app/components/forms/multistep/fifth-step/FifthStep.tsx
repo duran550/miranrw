@@ -49,6 +49,13 @@ const FifthStep: React.FC<FifthStepProps> = ({ fifthStepTranslation, id }) => {
       formValues = getFormCookies(SIXTH_FORM);
     }
 
+    if (reportingPerson === 'myself') {
+      getFormCookies(SEVENTH_FORM)
+    } else if (reportingPerson === 'organization') {
+      getFormCookies(SIXTH_FORM)
+
+    }
+
     dispatch({ type: FORM_ERRORS, payload: true });
 
     // Validating fields
@@ -167,9 +174,18 @@ const FifthStep: React.FC<FifthStepProps> = ({ fifthStepTranslation, id }) => {
         ? ''
         : location;
     let dataWithQuestion = { question, location: city, step, ...data };
-    id === 'seventhForm'
-      ? setFormCookies(dataWithQuestion, SEVENTH_FORM)
-      : setFormCookies(dataWithQuestion, FOURTH_FORM);
+
+    if (reportingPerson === 'myself') {
+      setFormCookies(dataWithQuestion, SEVENTH_FORM)
+    } else if (reportingPerson === 'andere') {
+      setFormCookies(dataWithQuestion, FOURTH_FORM)
+    } else {
+      setFormCookies(dataWithQuestion, SIXTH_FORM)
+    }
+
+    // id === 'seventhForm'
+    //   ? setFormCookies(dataWithQuestion, SEVENTH_FORM)
+    //   : setFormCookies(dataWithQuestion, FOURTH_FORM);
 
     dispatch({ type: NEXT_STEP, payload: 'DATA 1' });
     // isEditing && reportingPerson === 'myself'
@@ -208,7 +224,7 @@ const FifthStep: React.FC<FifthStepProps> = ({ fifthStepTranslation, id }) => {
       onSubmit={handleSubmit(onSubmit)}
       // id={id === 'sixthForm' ? 'sixthForm' : 'fourthForm'}
       // id={id === 'seventhForm' ? 'seventhForm' : 'fourthForm'}
-      id={reportingPerson == 'myself' ? 'seventhForm' : reportingPerson == 'andere' ? 'fourthForm' : 'sixthForm'}
+      id={reportingPerson === 'myself' ? 'seventhForm' : reportingPerson === 'andere' ? 'fourthForm' : 'sixthForm'}
       className="lg:w-[35rem]"
     >
       <FormHeader
