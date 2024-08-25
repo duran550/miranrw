@@ -70,7 +70,7 @@ const FourthStepOrganization: React.FC<FourthStepOrganizationProps> = ({
       id="thirdForm"
       className="flex flex-col relative"
     >
-      <div className="lg:w-[35rem]">
+      <div className="lg:w-[25rem]">
         <FormHeader
           title={fourthStepOrganizationTranslation?.title}
           subTitle={fourthStepOrganizationTranslation?.subTitle}

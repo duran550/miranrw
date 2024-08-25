@@ -105,7 +105,7 @@ let organizationTypeFreeField: string= watch('organizationTypeFreeField')
       <form
         onSubmit={handleSubmit(onSubmit)}
         id="secondForm"
-        className="lg:w-[35rem]"
+        className="lg:w-[25rem]"
       >
         <FormHeader
           title={thirdStepOrganizationTranslation?.title}

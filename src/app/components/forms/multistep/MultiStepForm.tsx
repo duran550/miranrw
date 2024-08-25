@@ -51,7 +51,7 @@ const MultiStepForm: React.FC<MultiStepFormProps> = ({
 
               {reportingPerson == 'myself' ?
 
-                step === 1 || step === 12 || step == 13 ? (
+                step === 1 || step === 12 || step == 13 || step == 14 ? (
                   ''
                 ) : (
                   <Stepper
