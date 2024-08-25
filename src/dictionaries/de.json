@@ -654,7 +654,7 @@
           "mandatory": "* Pflichtfeld",
           "firstBlock": {
             "title": "Was ist deine geschlechtliche Identität?",
-            "titleOnBehalf": "Was ist die geschlechtliche Identität der betroffenen Person?",
+            "titleOnBehalf": "Was ist deine geschlechtliche Identität?",
             "description": "Mehrfachnennung möglich",
             "secondTitle":"Warum fragen wir nach persönlichen Angaben?",
             "data": [

@@ -22,7 +22,7 @@ const CaptchaCheckbox: React.FC<CaptchaCheckbox> = ({
   props,
 }) => {
   return (
-    <div key={id} className="p-4 mt-4 flex items-center">
+    <div key={id} className="p-4 flex items-center">
       <div className="flex items-center mr-4">
         <input
           key={id}

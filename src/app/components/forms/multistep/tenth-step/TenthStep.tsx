@@ -132,9 +132,9 @@ const TenthStep: React.FC<TenthStepProps> = ({ tenthStepTranslation }, id) => {
   };
 
   return (
-    <div className='relative lg:w-[25rem]'>
-     {reportingPerson === 'andere' && <div className='w-[30vw] xl:absolute xl:left-[35rem] xl:top-10'>
-        <div className='lg:bg-white mb-8 md:mb-12 border-primaryColor border-2 rounded-md p-4 h-[170px]'>
+    <div className='relative lg:w-[23rem]'>
+     {reportingPerson === 'andere' && <div className='w-full xl:w-[22vw] xl:absolute xl:left-[35rem] xl:top-10'>
+        <div className='lg:bg-white mb-8 md:mb-12 border-primaryColor border-2 rounded-md p-4 h-[142px]'>
           <h1 className=" font-Rubik font-black text-2xl mb-2">
           {tenthStepTranslation.firstBlock.secondTitle}
         </h1>
@@ -250,7 +250,7 @@ const TenthStep: React.FC<TenthStepProps> = ({ tenthStepTranslation }, id) => {
             )}
 
             <div className="mt-8">
-              <div className='w-[25rem]'>
+              <div className=''>
                 <FormHeader
                   title={
                     reportingPerson !== 'myself'

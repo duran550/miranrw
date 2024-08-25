@@ -122,7 +122,12 @@ const ThirdStep: React.FC<ThirdStepProps> = ({ thirdStepTranslation, id }) => {
             type="text"
           />
         </div>
-        {formErrors && description?.length !== 0 && (
+        {/* {formErrors && description?.length !== 0 && (
+          <label className="text-red-500 text-xs pl-2">
+            {thirdStepTranslation?.minCharacters}
+          </label>
+        )} */}
+        {formErrors && description?.length !== 0 && description.length < 50 && (
           <label className="text-red-500 text-xs pl-2">
             {thirdStepTranslation?.minCharacters}
           </label>
@@ -133,7 +138,7 @@ const ThirdStep: React.FC<ThirdStepProps> = ({ thirdStepTranslation, id }) => {
         </p>
       </form>
 
-      <div className="mt-16 w-full md:max-w-md lg:mt-8  2xl:mt-0 2xl:absolute  lg:-top-0 lg:-right-[30rem]">
+      <div className="mt-16 w-full md:max-w-md lg:mt-8  2xl:mt-0 2xl:absolute  lg:top-8 lg:-right-[30rem]">
         <FormHeader title={thirdStepTranslation?.hints?.title}>
           {reportingPerson !== 'onBehalf' ? (
             <div>

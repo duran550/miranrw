@@ -44,6 +44,18 @@ const EleventhStep: React.FC<EleventhStepProps> = ({
 }) => {
   // Scroll on top
   useScrollOnTop();
+
+  console.log(submitPage, 'page')
+
+  //scroll to top if submitPage is true
+  useEffect(() => {
+    // Scroll to the top whenever isOpen changes
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth', // Adds a smooth scrolling animation
+    });
+  }, [submitPage]);
+
   const { executeRecaptcha } = useGoogleReCaptcha();
 
   const { dispatch, formErrors, reportingPerson } = useFormContext();
@@ -54,12 +66,11 @@ const EleventhStep: React.FC<EleventhStepProps> = ({
 
   const doneCallback = (solution: any) => {
     console.log('Captcha was solved. The form can be submitted.');
-    console.log(solution);
   };
 
   const errorCallback = (err: any) => {
-    console.log('There was an error when trying to solve the Captcha.');
-    console.log(err);
+    // console.log('There was an error when trying to solve the Captcha.');
+    // console.log(err);
   };
 
   useEffect(() => {
@@ -533,7 +544,7 @@ const EleventhStep: React.FC<EleventhStepProps> = ({
           validation?.includes(
             eleventhStepTranslation?.validation?.data[0]?.value
           ) && (
-            <div className="w-full mb-4">
+            <div className="w-full border mt-2">
               <CaptchaCheckbox
                 id="captcha"
                 loading={captchLoading}

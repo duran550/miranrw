@@ -65,6 +65,16 @@ input:checked + div svg {
   border-color: none !important;
 } */
 
+/* rang picker border */
+:where(.css-dev-only-do-not-override-1g853jt).ant-picker-focused.ant-picker {
+  border-color: red !important;
+}
+
+/* range picker active bottom border */
+:where(.css-dev-only-do-not-override-1g853jt).ant-picker-range .ant-picker-active-bar {
+  background: none !important;
+}
+
 .css-jgls56-MuiButtonBase-root-MuiPickersDay-root:not(.Mui-selected) {
   border: 1px solid rgba(0, 0, 0, 0.6) !important;
   /* background-color: #F81A1A; */

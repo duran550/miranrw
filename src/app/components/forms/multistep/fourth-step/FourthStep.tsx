@@ -334,7 +334,7 @@ const FourthStep: React.FC<FourthStepProps> = ({
                             ]
                             : null
                         }
-                        className="w-full py-3 border border-gray-300 ml-14"
+                        className="w-full py-3 border border-red-300 ml-14 hover:border-red-300 focus:border-red-300"
                       />
                     </div>
                   )}

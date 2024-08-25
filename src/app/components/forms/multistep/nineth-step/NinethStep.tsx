@@ -284,7 +284,7 @@ const NinethStep: React.FC<NinethStepProps> = ({
                   haveYouReportedYes?.includes(
                     ninethStepTranslation?.data?.optionsYes[3].value
                   ) && (
-                    <div className="lg:ml-16 -mt-6 mb-4">
+                    <div className="lg:ml-16 mb-4">
                       <InputField
                         name="haveYouReportedYesFreeField1"
                         props={register('haveYouReportedYesFreeField1', {
@@ -320,7 +320,7 @@ const NinethStep: React.FC<NinethStepProps> = ({
             haveYouReportedYes?.includes(
               ninethStepTranslation?.data?.optionsYes[4].value
             ) && (
-              <div className="lg:ml-16 -mt-6">
+              <div className="lg:ml-16">
                 <InputField
                   name="haveYouReportedYesFreeField2"
                   props={register('haveYouReportedYesFreeField2', {

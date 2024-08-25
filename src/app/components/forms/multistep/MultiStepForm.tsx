@@ -22,6 +22,7 @@ import { MultiStepFormProps } from './multiStepForm';
 import NinethStep from './nineth-step/NinethStep';
 import SubmitModal from './submitModal';
 import ThirtinthStep from './thirtinth-step/ThirtinthStep';
+import AnimateClick from '../../animate-click/AnimateClick';
 
 const MultiStepForm: React.FC<MultiStepFormProps> = ({
   formTranslation,
@@ -421,94 +422,25 @@ const MultiStepForm: React.FC<MultiStepFormProps> = ({
                     <div>
                       {
                         reportingPerson === 'myself' ? (
-                          <div className={`${step !== 12 && 'flex'}`}>
+                          <div className={`${step !== 12 && 'flex justify-between'}`}>
                             {step && step !== 12 && step !== 13 && (
                               <>
-                                <Button
-                                  className="w-32 mr-auto justify-self-start font-bold"
-                                  variant="primary"
-                                  onClick={() => dispatch({ type: PREV_STEP })}
-                                >
-                                  {formTranslation.button.prev}
-                                </Button>
+                                <AnimateClick>
+
+                                  <Button
+                                    className="w-32 mr-auto justify-self-start font-bold"
+                                    variant="primary"
+                                    onClick={() => dispatch({ type: PREV_STEP })}
+                                  >
+                                    {formTranslation.button.prev}
+                                  </Button>
+                                </AnimateClick>
                               </>
                             )}
                             <div>
                               {step === 12 && !submitPage &&
-                                <div className='flex w-full'>
-                                  <Button
-                                    className="w-32 mr-auto justify-self-start font-bold"
-                                    variant="primary"
-                                    onClick={() => dispatch({ type: PREV_STEP })}
-                                  >
-                                    {formTranslation.button.prev}
-                                  </Button>
-                                  <Button
-                                    // form={`${'tenthForm'}`}
-                                    className="w-fit py-4 font-bold"
-                                    onClick={() => {
-                                      console.log(submitPage, 'seueyeeuwye')
-                                      // setOpen(true),
-                                      setSubmitPage(true)
-                                    }}
-                                  // disabled={formErrors && true}
-                                  // variant={`${formErrors ? 'disabled' : 'primary'}`}
-                                  >
-                                    {/* {formTranslation.button.submit} */}
-                                    Erledigt
-                                  </Button>
-                                </div>}
-                              {step !== 12 && step !== 13 &&
-                                <Button
-                                  // onClick={() => console.log('james jay')}
-                                  form={`${stepFromCookies === 2
-                                    ? 'firstForm'
-                                    : stepFromCookies === 3
-                                      ? 'secondForm'
-                                      : stepFromCookies === 4
-                                        ? 'fifthForm'
-                                        : stepFromCookies === 5
-                                          ? 'seventhForm'
-                                          : stepFromCookies === 6
-                                            // ? 'fifthForm'
-                                            ? 'thirtinthForm'
-                                            : stepFromCookies === 7
-                                              ? 'sixthForm'
-                                              : stepFromCookies === 8
-                                                // ? 'seventhForm'
-                                                ? 'fifthForm'
-                                                : stepFromCookies === 9
-                                                  ? 'eighthForm'
-                                                  : stepFromCookies === 10 ? 'ninethForm'
-                                                    : 'tenthForm'
-                                    }`}
-                                  className="w-32 font-bold ml-auto"
-                                  disabled={formErrors && true}
-                                  variant={`${formErrors ? 'disabled' : 'primary'
-                                    }`}
-                                >
-                                  {formTranslation.button.next}
-                                </Button>
-                              }
-                            </div>
-                          </div>
-                        )
-                          : reportingPerson === 'andere' ? (
-                            <div className={`${step !== 11 && 'flex'}`}>
-                              {step !== 11 && step !== 12 && step !== 13 && (
-                                <>
-                                  <Button
-                                    className="w-32 mr-auto justify-self-start font-bold"
-                                    variant="primary"
-                                    onClick={() => dispatch({ type: PREV_STEP })}
-                                  >
-                                    {formTranslation.button.prev}
-                                  </Button>
-                                </>
-                              )}
-                              <div>
-                                {step === 11 &&
-                                  <div className='flex'>
+                                <div className='flex justify-between w-full'>
+                                  <AnimateClick>
                                     <Button
                                       className="w-32 mr-auto justify-self-start font-bold"
                                       variant="primary"
@@ -516,18 +448,26 @@ const MultiStepForm: React.FC<MultiStepFormProps> = ({
                                     >
                                       {formTranslation.button.prev}
                                     </Button>
+                                  </AnimateClick>
+                                  <AnimateClick>
                                     <Button
                                       // form={`${'tenthForm'}`}
                                       className="w-fit py-4 font-bold"
-                                      onClick={() => setOpen(true)}
+                                      onClick={() => {
+                                        console.log(submitPage, 'page00')
+                                        // setOpen(true),
+                                        setSubmitPage(true)
+                                      }}
                                     // disabled={formErrors && true}
                                     // variant={`${formErrors ? 'disabled' : 'primary'}`}
                                     >
                                       {/* {formTranslation.button.submit} */}
                                       Erledigt
                                     </Button>
-                                  </div>}
-                                {step !== 11 && step !== 12 &&
+                                  </AnimateClick>
+                                </div>}
+                              {step !== 12 && step !== 13 &&
+                                <AnimateClick>
                                   <Button
                                     // onClick={() => console.log('james jay')}
                                     form={`${stepFromCookies === 2
@@ -535,9 +475,9 @@ const MultiStepForm: React.FC<MultiStepFormProps> = ({
                                       : stepFromCookies === 3
                                         ? 'secondForm'
                                         : stepFromCookies === 4
-                                          ? 'thirdForm'
+                                          ? 'fifthForm'
                                           : stepFromCookies === 5
-                                            ? 'fourthForm'
+                                            ? 'seventhForm'
                                             : stepFromCookies === 6
                                               // ? 'fifthForm'
                                               ? 'thirtinthForm'
@@ -547,8 +487,9 @@ const MultiStepForm: React.FC<MultiStepFormProps> = ({
                                                   // ? 'seventhForm'
                                                   ? 'fifthForm'
                                                   : stepFromCookies === 9
-                                                    ? 'ninethForm'
-                                                    : 'tenthForm'
+                                                    ? 'eighthForm'
+                                                    : stepFromCookies === 10 ? 'ninethForm'
+                                                      : 'tenthForm'
                                       }`}
                                     className="w-32 font-bold ml-auto"
                                     disabled={formErrors && true}
@@ -557,15 +498,17 @@ const MultiStepForm: React.FC<MultiStepFormProps> = ({
                                   >
                                     {formTranslation.button.next}
                                   </Button>
-                                }
-                              </div>
+
+                                </AnimateClick>
+                              }
                             </div>
-                          )
-                            :
-                            (
-                              <div className={`${step !== 11 && 'flex'}`}>
-                                {step !== 11 && step !== 12 && step !== 13 && (
-                                  <>
+                          </div>
+                        )
+                          : reportingPerson === 'andere' ? (
+                            <div className={`${step !== 11 && 'flex justify-between'}`}>
+                              {step !== 11 && step !== 12 && step !== 13 && (
+                                <>
+                                  <AnimateClick>
                                     <Button
                                       className="w-32 mr-auto justify-self-start font-bold"
                                       variant="primary"
@@ -573,11 +516,13 @@ const MultiStepForm: React.FC<MultiStepFormProps> = ({
                                     >
                                       {formTranslation.button.prev}
                                     </Button>
-                                  </>
-                                )}
-                                <div>
-                                  {step === 11 &&
-                                    <div className='flex'>
+                                  </AnimateClick>
+                                </>
+                              )}
+                              <div>
+                                {step === 11 && !submitPage &&
+                                  <div className='flex justify-between'>
+                                    <AnimateClick>
                                       <Button
                                         className="w-32 mr-auto justify-self-start font-bold"
                                         variant="primary"
@@ -585,18 +530,26 @@ const MultiStepForm: React.FC<MultiStepFormProps> = ({
                                       >
                                         {formTranslation.button.prev}
                                       </Button>
+                                    </AnimateClick>
+                                    <AnimateClick>
                                       <Button
                                         // form={`${'tenthForm'}`}
                                         className="w-fit py-4 font-bold"
-                                        onClick={() => setOpen(true)}
+                                        onClick={() => {
+                                          console.log(submitPage, 'page00')
+                                          // setOpen(true),
+                                          setSubmitPage(true)
+                                        }}
                                       // disabled={formErrors && true}
                                       // variant={`${formErrors ? 'disabled' : 'primary'}`}
                                       >
                                         {/* {formTranslation.button.submit} */}
                                         Erledigt
                                       </Button>
-                                    </div>}
-                                  {step !== 11 && step !== 12 &&
+                                    </AnimateClick>
+                                  </div>}
+                                {step !== 11 && step !== 12 &&
+                                  <AnimateClick>
                                     <Button
                                       // onClick={() => console.log('james jay')}
                                       form={`${stepFromCookies === 2
@@ -606,20 +559,18 @@ const MultiStepForm: React.FC<MultiStepFormProps> = ({
                                           : stepFromCookies === 4
                                             ? 'thirdForm'
                                             : stepFromCookies === 5
-                                              ? 'fifthForm'
+                                              ? 'fourthForm'
                                               : stepFromCookies === 6
                                                 // ? 'fifthForm'
-                                                ? 'sixthForm'
-                                                // ? 'thirtinthForm'
+                                                ? 'thirtinthForm'
                                                 : stepFromCookies === 7
-                                                  ? 'fourthForm'
-                                                  // ? 'thirtinthForm'
+                                                  ? 'sixthForm'
                                                   : stepFromCookies === 8
-                                                    ? 'seventhForm'
+                                                    // ? 'seventhForm'
+                                                    ? 'fifthForm'
                                                     : stepFromCookies === 9
-                                                      ? 'eighthForm'
-                                                      : stepFromCookies === 10 ? 'ninethForm'
-                                                        : 'tenthForm'
+                                                      ? 'ninethForm'
+                                                      : 'tenthForm'
                                         }`}
                                       className="w-32 font-bold ml-auto"
                                       disabled={formErrors && true}
@@ -628,6 +579,94 @@ const MultiStepForm: React.FC<MultiStepFormProps> = ({
                                     >
                                       {formTranslation.button.next}
                                     </Button>
+
+                                  </AnimateClick>
+                                }
+                              </div>
+                            </div>
+                          )
+                            :
+                            (
+                              <div className={`${step !== 11 && 'flex justify-between'}`}>
+                                {step !== 11 && step !== 12 && step !== 13 && (
+                                  <>
+                                    <AnimateClick>
+                                      <Button
+                                        className="w-32 mr-auto justify-self-start font-bold"
+                                        variant="primary"
+                                        onClick={() => dispatch({ type: PREV_STEP })}
+                                      >
+                                        {formTranslation.button.prev}
+                                      </Button>
+
+                                    </AnimateClick>
+                                  </>
+                                )}
+                                <div>
+                                  {step === 11 && !submitPage &&
+                                    <div className='flex justify-between'>
+                                      <AnimateClick>
+                                        <Button
+                                          className="w-32 mr-auto justify-self-start font-bold"
+                                          variant="primary"
+                                          onClick={() => dispatch({ type: PREV_STEP })}
+                                        >
+                                          {formTranslation.button.prev}
+                                        </Button>
+                                      </AnimateClick>
+
+                                      <AnimateClick>
+                                        <Button
+                                          // form={`${'tenthForm'}`}
+                                          className="w-fit py-4 font-bold"
+                                          onClick={() => {
+                                            console.log(submitPage, 'page00')
+                                            // setOpen(true),
+                                            setSubmitPage(true)
+                                          }}
+                                        // disabled={formErrors && true}
+                                        // variant={`${formErrors ? 'disabled' : 'primary'}`}
+                                        >
+                                          {/* {formTranslation.button.submit} */}
+                                          Erledigt
+                                        </Button>
+                                      </AnimateClick>
+                                    </div>}
+                                  {step !== 11 && step !== 12 &&
+                                    <AnimateClick>
+                                      <Button
+                                        // onClick={() => console.log('james jay')}
+                                        form={`${stepFromCookies === 2
+                                          ? 'firstForm'
+                                          : stepFromCookies === 3
+                                            ? 'secondForm'
+                                            : stepFromCookies === 4
+                                              ? 'thirdForm'
+                                              : stepFromCookies === 5
+                                                ? 'fifthForm'
+                                                : stepFromCookies === 6
+                                                  // ? 'fifthForm'
+                                                  ? 'sixthForm'
+                                                  // ? 'thirtinthForm'
+                                                  : stepFromCookies === 7
+                                                    ? 'fourthForm'
+                                                    // ? 'thirtinthForm'
+                                                    : stepFromCookies === 8
+                                                      ? 'seventhForm'
+                                                      : stepFromCookies === 9
+                                                        ? 'eighthForm'
+                                                        : stepFromCookies === 10 ? 'ninethForm'
+                                                          : 'tenthForm'
+                                          }`}
+                                        className="w-32 font-bold ml-auto"
+                                        disabled={formErrors && true}
+                                        variant={`${formErrors ? 'disabled' : 'primary'
+                                          }`}
+                                      >
+                                        {formTranslation.button.next}
+                                      </Button>
+
+                                    </AnimateClick>
                                   }
                                 </div>
                               </div>

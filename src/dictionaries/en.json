@@ -649,7 +649,7 @@
           "mandatory": "* Mandatory field",
           "firstBlock": {
             "title": "What is your gender identity ?",
-            "titleOnBehalf": "What is the gender identity of the affected person ?",
+            "titleOnBehalf": "What is your gender identity?",
             "description": "Multiple selections possible",
             "secondTitle":"Why do we ask for personal information?",
             "data": [

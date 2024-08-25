@@ -14,6 +14,7 @@ import { clearFormCookiesStep, getFormCookies, getFormStep, setFormCookies } fro
 import { SEVENTH_FORM, SIXTH_FORM, THIRTINTH_FORM } from '@/cookies/cookies.d';
 import { useScrollOnTop } from '@/app/hooks/useScrollOnTop';
 import { ThirtinthStepProp, ThirtinthStepValues } from './thirtinthStep';
+import CheckboxWithQ from '../../checkbox/CheckboxWithQ';
 
 const ThirtinthStep: React.FC<ThirtinthStepProp> = ({ thirtinthStepTranslation, id, lang }) => {
   const { dispatch, isEditing, reportingPerson, formErrors } = useFormContext();
@@ -108,7 +109,7 @@ const ThirtinthStep: React.FC<ThirtinthStepProp> = ({ thirtinthStepTranslation, 
 
         return (
           <div key={choice.iD}>
-            <Checkbox
+            <CheckboxWithQ
               props={register('disciminationArea')}
               name={choice.name}
               id={choice.id}
