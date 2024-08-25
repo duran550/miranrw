@@ -2,6 +2,7 @@ export type FourthFormValues = {
   datePeriod: string;
   dateRange: string;
   forgetful:string;
-  yearitHappenedFreeField:string;
+  forgetfulFreeField:string;
   yearitHappened:string;
+  datePeriodOptions:string;
 };

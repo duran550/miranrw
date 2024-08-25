@@ -35,7 +35,7 @@ const InputField: React.FC<InputFieldProps> = ({
   change,
 }) => {
   return (
-    <div className="mt-3">
+    <div className="mt-0">
       {change && (
         <>
           <label className="text-sm font-bold text-gray-700 mb-2" htmlFor={id}>
@@ -117,7 +117,7 @@ const InputField: React.FC<InputFieldProps> = ({
                 isValid
                   ? 'border-red-600 '
                   : 'boder-[#E9ECEF]  '
-              } pl-8 sm:py-4 py-3 text-base focus:outline-none focus:ring-1 sm:text-sm focus:ring-[red] text-gray-900 border border-[red] block w-full  p-2.5 placeholder:text-sm sm:placeholder:text-lg appearance-none	`}
+              } pl-8 sm:py-2 py-3 text-base focus:outline-none focus:ring-1 sm:text-sm focus:ring-[red] text-gray-900 border border-[red] rounded-md block w-full  p-2.5 placeholder:text-sm sm:placeholder:text-lg appearance-none	`}
               placeholder={placeholder}
               // required
               min={min ? min : ''}

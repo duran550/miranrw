@@ -6,7 +6,7 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 import { useFormContext } from '@/app/hooks/useFormContext';
 import { FORM_ERRORS, LAST_STEP, NEXT_STEP } from '@/app/context/actions';
 import { clearFormCookiesStep, getFormCookies, getFormStep, setFormCookies } from '@/cookies/cookies';
-import { FOURTH_FORM, SEVENTH_FORM, SIXTH_FORM } from '@/cookies/cookies.d';
+import { FIFTH_FORM, FOURTH_FORM, SEVENTH_FORM, SIXTH_FORM } from '@/cookies/cookies.d';
 import { useScrollOnTop } from '@/app/hooks/useScrollOnTop';
 import AutoComplete from '../../auto-complete/AutoComplete';
 import InputField from '../../text-field/InputField';
@@ -43,18 +43,12 @@ const FifthStep: React.FC<FifthStepProps> = ({ fifthStepTranslation, id }) => {
       location: string;
       question: string;
       // stadtteil: string;
-    } = getFormCookies(FOURTH_FORM);
-
-    if (id === 'sixthForm') {
-      formValues = getFormCookies(SIXTH_FORM);
-    }
-
-    if (reportingPerson === 'myself') {
-      getFormCookies(SEVENTH_FORM)
-    } else if (reportingPerson === 'organization') {
-      getFormCookies(SIXTH_FORM)
-
-    }
+    } = 
+    reportingPerson === 'myself' ? getFormCookies(FIFTH_FORM) : reportingPerson == 'andere' ? getFormCookies(FOURTH_FORM) : getFormCookies(SIXTH_FORM)
+    // getFormCookies(FOURTH_FORM);
+    // if (id === 'sixthForm') {
+    //   formValues = getFormCookies(SIXTH_FORM);
+    // }
 
     dispatch({ type: FORM_ERRORS, payload: true });
 
@@ -70,7 +64,7 @@ const FifthStep: React.FC<FifthStepProps> = ({ fifthStepTranslation, id }) => {
 
     if (!locationOnline && !formValues) {
       dispatch({ type: FORM_ERRORS, payload: true });
-      console.log('bouyakaaa5');
+
     } else {
       if (locationOnline) {
         if (
@@ -153,6 +147,7 @@ const FifthStep: React.FC<FifthStepProps> = ({ fifthStepTranslation, id }) => {
     }
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
+    console.log(formValues, 'formValues')
   }, [
     location?.length,
     locationOnline,
@@ -176,7 +171,7 @@ const FifthStep: React.FC<FifthStepProps> = ({ fifthStepTranslation, id }) => {
     let dataWithQuestion = { question, location: city, step, ...data };
 
     if (reportingPerson === 'myself') {
-      setFormCookies(dataWithQuestion, SEVENTH_FORM)
+      setFormCookies(dataWithQuestion, FIFTH_FORM)
     } else if (reportingPerson === 'andere') {
       setFormCookies(dataWithQuestion, FOURTH_FORM)
     } else {
@@ -225,22 +220,27 @@ const FifthStep: React.FC<FifthStepProps> = ({ fifthStepTranslation, id }) => {
       // id={id === 'sixthForm' ? 'sixthForm' : 'fourthForm'}
       // id={id === 'seventhForm' ? 'seventhForm' : 'fourthForm'}
       id={reportingPerson === 'myself' ? 'seventhForm' : reportingPerson === 'andere' ? 'fourthForm' : 'sixthForm'}
-      className="lg:w-[35rem]"
+      className="lg:w-[25rem]"
     >
-      <FormHeader
-        title={fifthStepTranslation?.title}
-        subTitle={fifthStepTranslation?.description}
-      />
-      <p className="text-sm -mt-12 mb-8">{fifthStepTranslation?.mandatory}</p>
-      <div className="flex flex-col ">
-        <RadioSingle
-          value={fifthStepTranslation?.secondOption?.value}
-          id={fifthStepTranslation?.secondOption.id}
-          label={fifthStepTranslation?.secondOption?.title}
-          name="locationOnline"
-          props={register('locationOnline')}
+      <div className=''>
+        <FormHeader
+          title={fifthStepTranslation?.title}
+          subTitle={fifthStepTranslation?.description}
+          mandatory={fifthStepTranslation?.mandatory}
         />
-        <div className="w-full pl-8 my-4">
+      </div>
+      {/* <p className="text-sm -mt-12 mb-8">{fifthStepTranslation?.mandatory}</p> */}
+      <div className="flex flex-col">
+        <div className=''>
+          <RadioSingle
+            value={fifthStepTranslation?.secondOption?.value}
+            id={fifthStepTranslation?.secondOption.id}
+            label={fifthStepTranslation?.secondOption?.title}
+            name="locationOnline"
+            props={register('locationOnline')}
+          />
+        </div>
+        <div className="w-full pl-8">
           {locationOnline === fifthStepTranslation?.secondOption?.value && (
             <>
               <AutoComplete

@@ -11,6 +11,7 @@ type BlockDataType = {
   titleOnBehalf: string;
   description: string;
   data: ArrayType;
+  secondTitle:string;
 };
 
 export type TenthStepProps = {

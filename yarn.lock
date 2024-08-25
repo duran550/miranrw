@@ -767,6 +767,11 @@
   resolved "https://registry.npmjs.org/@floating-ui/utils/-/utils-0.1.6.tgz"
   integrity sha512-OfX7E2oUDYxtBvsuS4e/jSn4Q9Qb6DzgeYtsAdkPZ47znpoNsMgZw0+tVijiv3uGNR6dgNlty6r9rzIzHjtd/A==
 
+"@fontsource/rubik@^5.0.21":
+  version "5.0.21"
+  resolved "https://registry.npmjs.org/@fontsource/rubik/-/rubik-5.0.21.tgz"
+  integrity sha512-llUikt1/wbKL+PG73KyAFJEBnvZDiqVn8vTjV6ce7QP91IRmpgIoE4vJj4a0udacQtGaN9dxjmb7MbSxHvw5iA==
+
 "@formatjs/ecma402-abstract@1.18.2":
   version "1.18.2"
   resolved "https://registry.npmjs.org/@formatjs/ecma402-abstract/-/ecma402-abstract-1.18.2.tgz"

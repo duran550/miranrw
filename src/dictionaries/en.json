@@ -282,7 +282,21 @@
           "happenedOverALongPeriod": "It happened over a long period of time.",
           "forgetful": "I can't remember exactly when it happened.",
           "yearitHappened": "In what year did it happen?",
-          "selectYear": "(Auswahl Jahr) Jahreszahl"
+          "selectYear": "(Auswahl Jahr) Jahreszahl",
+          "options":[
+            {
+              "label": "In which year did it happen?",
+              "name": "datePeriod",
+              "value": "In which year did it happen?",
+              "id": "datePeriod"
+            },
+            {
+              "name": "forgetful",
+              "id": "forgetful",
+              "value": "I can't remember exactly when it happened.",
+              "label": "I can't remember exactly when it happened."
+            }
+          ]
         },
         "fourthStepOrganization": {
           "title": "How many individuals are active in the organization/institution?",
@@ -637,6 +651,7 @@
             "title": "What is your gender identity ?",
             "titleOnBehalf": "What is the gender identity of the affected person ?",
             "description": "Multiple selections possible",
+            "secondTitle":"Why do we ask for personal information?",
             "data": [
               {
                 "id": "gender",

@@ -10,9 +10,7 @@
     },
     "aboutUs": {
       "title": "Über uns",
-
       "news": "Aktuelles",
-
       "team": "Team",
       "partners": "Verbund & Kooperationen"
     },
@@ -59,7 +57,6 @@
             "question": "Was kann ich melden?",
             "answer": "Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text"
           },
-
           {
             "id": 2,
             "question": "Auf welchen Sprachen kann ich eine Meldung tätigen? ",
@@ -212,7 +209,7 @@
           "minCharacters": "Ein Minimum von 50 Zeichen wird erwartet",
           "hints": {
             "title": "Relevante Informationen können sein:",
-            "unKnownInfo":"Wir bitten dich, hier keine Angaben mit Personenbezug zu schreiben, wie z.B. Namen, Adressen, Telefonnummern oder Autokennzeichen. ",
+            "unKnownInfo": "Wir bitten dich, hier keine Angaben mit Personenbezug zu schreiben, wie z.B. Namen, Adressen, Telefonnummern oder Autokennzeichen. ",
             "list": [
               "Wie wurde diskriminiert?",
               "Wie haben andere Personen reagiert? ",
@@ -233,7 +230,6 @@
               "id": "Nichtregierungsorganisation",
               "label": "Nichtregierungsorganisation (NGO)"
             },
-
             {
               "iD": 2,
               "name": "organizationType",
@@ -283,9 +279,23 @@
           "mandatory": "* Pflichtfeld",
           "description": "Bitte wähle ein Datum aus. Falls es sich um einen längeren Zeitraum handelt, kannst du auch diesen auch auswählen",
           "happenedOverALongPeriod": "Es ist über einen längeren Zeitraum passiert.",
-           "forgetful":"Ich kann mich nicht genau erinnern, wann es passiert ist.",
-           "yearitHappened":"In welchem Jahr ist es passiert?",
-           "selectYear":"(Auswahl Jahr) Jahreszahl"
+          "forgetful": "Ich kann mich nicht genau erinnern, wann es passiert ist.",
+          "yearitHappened": "In welchem Jahr ist es passiert?",
+          "selectYear": "(Auswahl Jahr) Jahreszahl",
+          "options": [
+            {
+              "label": "In welchem Jahr ist es passiert?",
+              "name": "datePeriod",
+              "value": "In welchem Jahr ist es passiert?",
+              "id": "datePeriod"
+            },
+            {
+              "name": "forgetful",
+              "id": "forgetful",
+              "value": "Ich kann mich nicht genau erinnern, wann es passiert ist.",
+              "label": "Ich kann mich nicht genau erinnern, wann es passiert ist."
+            }
+          ]
         },
         "fourthStepOrganization": {
           "title": "Wie viele Personen sind in der Organisation/Institution tätig?",
@@ -359,7 +369,6 @@
               "id": "identitate",
               "label": "Geschlechtliche Identität"
             },
-
             {
               "iD": 2,
               "name": "typeOfDisc",
@@ -486,7 +495,7 @@
           "title": "Handelt es sich um noch eine weitere Form der Diskriminierung?",
           "mandatory": "* Pflichtfeld",
           "minCharacters": "Es wird eine Mindestanzahl von 4 Zeichen erwartet",
-          "subTitle":"Mehrfachnennung möglich",
+          "subTitle": "Mehrfachnennung möglich",
           "data": {
             "options": [
               {
@@ -578,7 +587,6 @@
             ]
           }
         },
-
         "ninethStep": {
           "title": "Hast du bereits andere Maßnahmen ergriffen?",
           "description": "Mehrfachnennung möglich",
@@ -648,6 +656,7 @@
             "title": "Was ist deine geschlechtliche Identität?",
             "titleOnBehalf": "Was ist die geschlechtliche Identität der betroffenen Person?",
             "description": "Mehrfachnennung möglich",
+            "secondTitle":"Warum fragen wir nach persönlichen Angaben?",
             "data": [
               {
                 "id": "gender",
@@ -687,8 +696,8 @@
               {
                 "id": "gender6",
                 "name": "gender",
-                "label": "nichtbinär",
-                "value": "nichtbinär",
+                "label": "nichtbinär / nonbinary / enby",
+                "value": "nichtbinär / nonbinary / enby",
                 "checked": false
               },
               {
@@ -940,7 +949,6 @@
               "id": "Ämter",
               "label": "Ämter und Behörden"
             },
-
             {
               "iD": 2,
               "name": "whereDisHappened",
@@ -976,7 +984,6 @@
               "id": "Einsatzorganisationen ",
               "label": "Einsatzorganisationen "
             },
-
             {
               "iD": 7,
               "name": "whereDisHappened",
@@ -1012,7 +1019,6 @@
               "id": "Öffentlicher",
               "label": "Öffentlicher Raum "
             },
-
             {
               "iD": 12,
               "name": "whereDisHappened",

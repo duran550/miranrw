@@ -30,6 +30,7 @@ const MultiStepForm: React.FC<MultiStepFormProps> = ({
   const { step, dispatch, formErrors, reportingPerson, isEditing } =
     useFormContext();
   const [open, setOpen] = useState<boolean>(false)
+  const [submitPage, setSubmitPage] = useState<boolean>(false);
   let stepFromCookies = getFormStep();
 
   console.log(stepFromCookies, 'myStepFormCookies')
@@ -46,31 +47,63 @@ const MultiStepForm: React.FC<MultiStepFormProps> = ({
             />
           ) : (
             <div>
-              {step === 1 || step === 10 || step === 11 || step === 12 ? (
-                ''
-              ) : (
-                <Stepper
-                  progress={
-                    step === 2
-                      ? 10
-                      : step === 3
-                        ? 20
-                        : step === 4
-                          ? 30
-                          : step === 5
-                            ? 40
-                            : step === 6
-                              ? 50
-                              : step === 7
-                                ? 70
-                                : step === 8
-                                  ? 80
-                                  : step === 9
-                                    ? 90
-                                    : 100
-                  }
-                />
-              )}
+
+
+              {reportingPerson == 'myself' ?
+
+                step === 1 || step === 12 || step == 13 ? (
+                  ''
+                ) : (
+                  <Stepper
+                    progress={
+                      step === 2
+                        ? 10
+                        : step === 3
+                          ? 20
+                          : step === 4
+                            ? 30
+                            : step === 5
+                              ? 40
+                              : step === 6
+                                ? 50
+                                : step === 7
+                                  ? 70
+                                  : step === 8
+                                    ? 75
+                                    : step === 9
+                                      ? 80
+                                      : step === 10 ? 90 : 100
+                    }
+                  />
+                )
+                : (reportingPerson == 'andere' || reportingPerson == 'organization') ?
+                  step === 1 ||
+                    step === 11 || step === 12 || step == 13 ? (
+                    ''
+                  ) : (
+                    <Stepper
+                      progress={
+                        step === 2
+                          ? 10
+                          : step === 3
+                            ? 20
+                            : step === 4
+                              ? 30
+                              : step === 5
+                                ? 40
+                                : step === 6
+                                  ? 50
+                                  : step === 7
+                                    ? 70
+                                    : step === 8
+                                      ? 80
+                                      : step === 9
+                                        ? 90
+                                        : 100
+                      }
+                    />
+                  ) : ''
+              }
 
               {reportingPerson == 'myself' ? (
                 <div className="mb-16">
@@ -83,6 +116,7 @@ const MultiStepForm: React.FC<MultiStepFormProps> = ({
                     //   thirdStepTranslation={formTranslation?.stepper?.thirdStep}
                     // />
                     <TenthStep
+                      id={'secondForm'}
                       tenthStepTranslation={formTranslation?.stepper?.tenthStep}
                     />
                   ) : step === 4 ? (
@@ -92,7 +126,7 @@ const MultiStepForm: React.FC<MultiStepFormProps> = ({
                     />
                   ) : step === 5 ? (
                     <FifthStep
-                    id='seventhForm'
+                      id='seventhForm'
                       fifthStepTranslation={formTranslation?.stepper?.fifthStep}
                     />
                   ) : step === 6 ? (
@@ -105,7 +139,6 @@ const MultiStepForm: React.FC<MultiStepFormProps> = ({
                       thirtinthStepTranslation={formTranslation?.stepper?.thirtinthStep}
                       lang={lang}
                     />
-
                   ) : step === 7 ? (
                     // <SixthStep
                     //   sixthStepTranslation={formTranslation?.stepper?.seventhStep}
@@ -158,6 +191,8 @@ const MultiStepForm: React.FC<MultiStepFormProps> = ({
                         secondStepTranslation={formTranslation?.stepper?.secondStep}
                         open={open}
                         setOpen={() => setOpen(false)}
+                        setSubmitPage={() => setSubmitPage}
+                        submitPage={submitPage}
                       />
                     ) : (
                       <TwelvethStep
@@ -179,6 +214,7 @@ const MultiStepForm: React.FC<MultiStepFormProps> = ({
                     //   thirdStepTranslation={formTranslation?.stepper?.thirdStep}
                     // />
                     <TenthStep
+                      id='secondForm'
                       tenthStepTranslation={formTranslation?.stepper?.tenthStep}
                     />
                   ) : step === 4 ? (
@@ -247,6 +283,8 @@ const MultiStepForm: React.FC<MultiStepFormProps> = ({
                         secondStepTranslation={formTranslation?.stepper?.secondStep}
                         open={open}
                         setOpen={() => setOpen(false)}
+                        setSubmitPage={() => setSubmitPage}
+                        submitPage={submitPage}
                       />
                     ) : (
                       <TwelvethStep
@@ -327,6 +365,8 @@ const MultiStepForm: React.FC<MultiStepFormProps> = ({
                         secondStepTranslation={formTranslation?.stepper?.secondStep}
                         open={open}
                         setOpen={() => setOpen(false)}
+                        setSubmitPage={() => setSubmitPage}
+                        submitPage={submitPage}
                       />
                     ) : (
                       <TwelvethStep
@@ -394,7 +434,7 @@ const MultiStepForm: React.FC<MultiStepFormProps> = ({
                               </>
                             )}
                             <div>
-                              {step === 12 &&
+                              {step === 12 && !submitPage &&
                                 <div className='flex w-full'>
                                   <Button
                                     className="w-32 mr-auto justify-self-start font-bold"
@@ -406,7 +446,11 @@ const MultiStepForm: React.FC<MultiStepFormProps> = ({
                                   <Button
                                     // form={`${'tenthForm'}`}
                                     className="w-fit py-4 font-bold"
-                                    onClick={() => setOpen(true)}
+                                    onClick={() => {
+                                      console.log(submitPage, 'seueyeeuwye')
+                                      // setOpen(true),
+                                      setSubmitPage(true)
+                                    }}
                                   // disabled={formErrors && true}
                                   // variant={`${formErrors ? 'disabled' : 'primary'}`}
                                   >

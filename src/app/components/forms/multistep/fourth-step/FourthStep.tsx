@@ -51,7 +51,7 @@ const FourthStep: React.FC<FourthStepProps> = ({
 
   let datePeriod: string = watch('datePeriod');
   let forgetful: string = watch('forgetful')
-  let yearitHappenedFreeField: string = watch('yearitHappenedFreeField')
+  let forgetfulFreeField: string = watch('forgetfulFreeField')
   let yearitHappened: string = watch('yearitHappened')
   let formValues: {
     datePeriod: string;
@@ -60,7 +60,7 @@ const FourthStep: React.FC<FourthStepProps> = ({
     valueDate: any;
     dateRangeState: any;
     forgetful: string;
-    yearitHappenedFreeField: string;
+    forgetfulFreeField: string;
     yearitHappened: string;
   } = {
     datePeriod: '',
@@ -69,7 +69,7 @@ const FourthStep: React.FC<FourthStepProps> = ({
     valueDate: '',
     dateRangeState: '',
     forgetful: '',
-    yearitHappenedFreeField: '',
+    forgetfulFreeField: '',
     yearitHappened: '',
   };
   // Getting form cookies
@@ -82,8 +82,8 @@ const FourthStep: React.FC<FourthStepProps> = ({
   // }
 
   (reportingPerson === 'myself' || reportingPerson === 'organization')
-  ? formValues = getFormCookies(FIFTH_FORM)
-  : formValues = getFormCookies(THIRD_FORM);
+    ? formValues = getFormCookies(FIFTH_FORM)
+    : formValues = getFormCookies(THIRD_FORM);
 
   // dispatch({ type: FORM_ERRORS, payload: true });
   // Scroll on top
@@ -97,28 +97,33 @@ const FourthStep: React.FC<FourthStepProps> = ({
     }
 
     if (forgetful) {
-      setValue('yearitHappened', '')
+      // setValue('yearitHappened', '')
       setValue('datePeriod', '')
     }
-        // yearitHappened && setValue('datePeriod', '')
+
+    if (datePeriod) {
+      setValue('forgetful', '')
+    }
+
+    // yearitHappened && setValue('datePeriod', '')
     // datePeriod && setValue('yearitHappened', '')
 
-    if (yearitHappenedFreeField) {
+    if (forgetfulFreeField) {
       const currentYear = new Date().getFullYear();
-      const year = parseInt(yearitHappenedFreeField, 10);
+      const year = parseInt(forgetfulFreeField, 10);
 
       if (isNaN(year)) {
-        setError('yearitHappenedFreeField', { type: 'manual', message: 'Please enter a valid number' });
-      } else if (yearitHappenedFreeField.length !== 4) {
-        setError('yearitHappenedFreeField', { type: 'manual', message: 'Year must be exactly 4 digits' });
+        setError('forgetfulFreeField', { type: 'manual', message: 'Please enter a valid number' });
+      } else if (forgetfulFreeField.length !== 4) {
+        setError('forgetfulFreeField', { type: 'manual', message: 'Year must be exactly 4 digits' });
       } else if (year < 1980 || year > currentYear) {
-        setError('yearitHappenedFreeField', { type: 'manual', message: `Year must be between 1980 and ${currentYear}` });
+        setError('forgetfulFreeField', { type: 'manual', message: `Year must be between 1980 and ${currentYear}` });
       } else {
-        clearErrors('yearitHappenedFreeField'); // Clear errors if valid
+        clearErrors('forgetfulFreeField'); // Clear errors if valid
       }
     }
 
-    console.log(errors.yearitHappenedFreeField, 'yearitHappened')
+    console.log(errors.forgetfulFreeField, 'yearitHappened')
     // console.log(yearitHappenedFreeField?.length 
     //   == 4 && !!errors.yearitHappenedFreeField, 'yearitHappenedGreat')
 
@@ -139,7 +144,7 @@ const FourthStep: React.FC<FourthStepProps> = ({
       if (valueDate && !datePeriod) {
         dispatch({ type: FORM_ERRORS, payload: false });
       }
-      if (yearitHappened && yearitHappenedFreeField?.length < 4 ) {
+      if (forgetful && forgetfulFreeField?.length < 4) {
         dispatch({ type: FORM_ERRORS, payload: true });
       }
     }
@@ -169,7 +174,7 @@ const FourthStep: React.FC<FourthStepProps> = ({
           //    setDateRange(formValues.dateRangeState)
           // }
         }
-      } else if (yearitHappened && yearitHappenedFreeField?.length > 3) {
+      } else if (yearitHappened && forgetfulFreeField?.length > 3) {
         dispatch({ type: FORM_ERRORS, payload: false });
       }
     }
@@ -184,15 +189,15 @@ const FourthStep: React.FC<FourthStepProps> = ({
     }
 
 
-    if (formValues && datePeriod === undefined && !yearitHappenedFreeField && !forgetful && !yearitHappened) {
+    if (formValues && datePeriod === undefined && !forgetfulFreeField && !forgetful && !yearitHappened) {
       // if (formValues) {
       forgetful !== formValues?.forgetful &&
         setValue('forgetful', formValues?.forgetful);
 
-      formValues?.yearitHappenedFreeField &&
+      formValues?.forgetfulFreeField &&
         setValue(
-          'yearitHappenedFreeField',
-          formValues?.yearitHappenedFreeField
+          'forgetfulFreeField',
+          formValues?.forgetfulFreeField
         );
 
       formValues?.yearitHappened &&
@@ -204,8 +209,8 @@ const FourthStep: React.FC<FourthStepProps> = ({
       // if (formValues.datePeriod && formValues.datePeriod.length > 0 && formValues.forgetful && formValues.forgetfulFreeField.length > 0) {
       datePeriod !== formValues?.datePeriod &&
         setValue('datePeriod', formValues?.datePeriod);
-        setDateRange(formValues.dateRangeState);
-        setValueDate(null);
+      setDateRange(formValues.dateRangeState);
+      setValueDate(null);
       // } else {
       formValues?.valueDate !== valueDate &&
         setValueDate(dayjs(formValues?.valueDate));
@@ -214,7 +219,7 @@ const FourthStep: React.FC<FourthStepProps> = ({
     }
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [datePeriod, dateRange, valueDate, setValueDate, checked, forgetful, yearitHappenedFreeField, yearitHappened]);
+  }, [datePeriod, dateRange, valueDate, setValueDate, checked, forgetful, forgetfulFreeField, yearitHappened]);
 
   // Triggered when submitting form
   const onSubmit: SubmitHandler<FourthFormValues> = (data) => {
@@ -264,118 +269,125 @@ const FourthStep: React.FC<FourthStepProps> = ({
       onSubmit={handleSubmit(onSubmit)}
       // id={id === 'fifthForm' ? 'fifthForm' : 'thirdForm'}
       id={(reportingPerson === 'myself' || reportingPerson === 'organization') ? 'fifthForm' : 'thirdForm'}
-      className="flex flex-col relative"
+      className="flex flex-col xl:w-[25rem]"
     >
       <div className="">
-        <div className='lg:w-[35rem]'>
+        {/* <div className='lg:w-[31rem]'>
           <FormHeader
             title={fourthStepTranslation?.title}
             subTitle={fourthStepTranslation?.description}
+            mandatory={fourthStepTranslation.mandatory}
           />
-          <p className="text-sm -mt-12 mb-8">
-            {fourthStepTranslation?.mandatory}
-          </p>
-        </div>
-        <div className='grid grid-cols-1 xl:grid-cols-2 gap-10 xl:gap-32 xl:w-[65vw]'>
-          <div className="border border-primaryColor rounded-md mb-4">
-            <LocalizationProvider adapterLocale="de" dateAdapter={AdapterDayjs}>
-              <DateCalendar
-                sx={{
-                  width: '100%',
-                  '& .Mui-selected, & .Mui-selected:focus, & .Mui-selected:hover':
-                  {
-
-                    backgroundColor: `#F81A1A !important`,
-                    // backgroundColor: `#463980 !important`,
-                  },
-                }}
-                value={valueDate}
-                // defaultValue={valueDate}
-                disabled={datePeriod || forgetful || yearitHappened ? true : false}
-                maxDate={dayjs()}
-                views={['year', 'month', 'day']}
-                onChange={(newValue) => setValueDate(newValue)}
-              />
-            </LocalizationProvider>
-          </div>
+        </div> */}
+        <div>
           <div className=''>
-            {
-              <div>
-                <Checkbox
-                  props={register('datePeriod')}
-                  name="datePeriod"
-                  value={fourthStepTranslation?.happenedOverALongPeriod}
-                  label={fourthStepTranslation?.happenedOverALongPeriod}
-                  id="datePeriod"
+            <FormHeader
+              title={fourthStepTranslation?.title}
+              subTitle={fourthStepTranslation?.description}
+              mandatory={fourthStepTranslation.mandatory}
+            />
+          </div>
+          <div className='grid grid-cols-1 xl:grid-cols-2 gap-10 xl:gap-22 xl:w-[54vw]'>
+            <div className="border border-primaryColor rounded-md mb-4">
+              <LocalizationProvider adapterLocale="de" dateAdapter={AdapterDayjs}>
+                <DateCalendar
+                  sx={{
+                    width: '100%',
+                    '& .Mui-selected, & .Mui-selected:focus, & .Mui-selected:hover':
+                    {
+
+                      backgroundColor: `#F81A1A !important`,
+                      // backgroundColor: `#463980 !important`,
+                    },
+                  }}
+                  value={valueDate}
+                  // defaultValue={valueDate}
+                  disabled={datePeriod || forgetful || yearitHappened ? true : false}
+                  maxDate={dayjs()}
+                  views={['year', 'month', 'day']}
+                  onChange={(newValue) => setValueDate(newValue)}
                 />
-                {datePeriod && (
-                  <div className="mt-2 mb-8">
-                    <RangePicker
-                      locale={locale}
-                      onChange={onDateRangeChange}
-                      disabled={forgetful ? true : false}
-                      disabledDate={disabledDate}
-                      defaultValue={
-                        dateRange !== null && formValues?.dateRangeState
-                          ? [
-                            dayjs(formValues?.dateRangeState[0]),
-                            dayjs(formValues?.dateRangeState[1]),
-                          ]
-                          : null
-                      }
-                      className="w-full py-3 border border-gray-300 ml-6"
-                    />
-                  </div>
-                )}
-              </div>
-            }
-            {/* <div className={`${datePeriod ? 'mt-40': 'mt-20'} xl:absolute xl:-right-[30rem] 2xl:-right-[46.2rem]`}> */}
-            <div className=''>
-              <Checkbox
-                props={register('forgetful')}
-                name="forgetful"
-                value={fourthStepTranslation?.forgetful}
-                label={fourthStepTranslation?.forgetful}
-                id="forgetful"
-              />
+              </LocalizationProvider>
             </div>
             <div className=''>
-              <Checkbox
-                props={register('yearitHappened')}
-                name="yearitHappened"
-                value={fourthStepTranslation?.yearitHappened}
-                label={fourthStepTranslation?.yearitHappened}
-                id="yearitHappened"
-              />
-
-              {yearitHappened &&
-                // <div className='ml-8'>
-                //   <InputField
-                //     name="yearitHappenedFreeField"
-                //     placeholder={fourthStepTranslation.selectYear}
-                //     props={register('yearitHappenedFreeField', {
-                //       required: true,
-                //     })}
-                //     title=""
-                //   />
-                // </div>
-
-                <div className='ml-8'>
-                  <InputField
-                    name="yearitHappenedFreeField"
-                    placeholder={fourthStepTranslation.selectYear}
-                    props={register('yearitHappenedFreeField', {
-                      required: 'Year is required'
-                    })}
-                    title=""
-                    type='number'
+              {
+                <div>
+                  <Checkbox
+                    props={register('datePeriod')}
+                    name="datePeriod"
+                    value={fourthStepTranslation?.happenedOverALongPeriod}
+                    label={fourthStepTranslation?.happenedOverALongPeriod}
+                    id="datePeriod"
                   />
-                  {errors.yearitHappenedFreeField && (
-                    <p className="error-text text-red-800 font-semibold">{errors.yearitHappenedFreeField.message}</p>
+                  {datePeriod && (
+                    <div className="mt-2 mb-8">
+                      <RangePicker
+                        locale={locale}
+                        onChange={onDateRangeChange}
+                        disabled={forgetful ? true : false}
+                        disabledDate={disabledDate}
+                        defaultValue={
+                          dateRange !== null && formValues?.dateRangeState
+                            ? [
+                              dayjs(formValues?.dateRangeState[0]),
+                              dayjs(formValues?.dateRangeState[1]),
+                            ]
+                            : null
+                        }
+                        className="w-full py-3 border border-gray-300 ml-14"
+                      />
+                    </div>
                   )}
                 </div>
-
               }
+              {/* <div className={`${datePeriod ? 'mt-40': 'mt-20'} xl:absolute xl:-right-[30rem] 2xl:-right-[46.2rem]`}> */}
+              <div className=''>
+                <Checkbox
+                  props={register('forgetful')}
+                  name="forgetful"
+                  value={fourthStepTranslation?.forgetful}
+                  label={fourthStepTranslation?.forgetful}
+                  id="forgetful"
+                />
+              </div>
+              <div className=''>
+                {/* <Checkbox
+                  props={register('yearitHappened')}
+                  name="yearitHappened"
+                  value={fourthStepTranslation?.yearitHappened}
+                  label={fourthStepTranslation?.yearitHappened}
+                  id="yearitHappened"
+                /> */}
+                {forgetful &&
+                  // <div className='ml-8'>
+                  //   <InputField
+                  //     name="yearitHappenedFreeField"
+                  //     placeholder={fourthStepTranslation.selectYear}
+                  //     props={register('yearitHappenedFreeField', {
+                  //       required: true,
+                  //     })}
+                  //     title=""
+                  //   />
+                  // </div>
+
+                  <div className='ml-14'>
+                    <h1>{fourthStepTranslation.yearitHappened}</h1>
+                    <InputField
+                      name="forgetfulFreeField"
+                      placeholder={fourthStepTranslation.selectYear}
+                      props={register('forgetfulFreeField', {
+                        required: 'Year is required'
+                      })}
+                      title=""
+                      type='number'
+                    />
+                    {errors.forgetfulFreeField && (
+                      <p className="error-text text-red-800 font-semibold">{errors.forgetfulFreeField.message}</p>
+                    )}
+                  </div>
+
+                }
+              </div>
             </div>
           </div>
         </div>

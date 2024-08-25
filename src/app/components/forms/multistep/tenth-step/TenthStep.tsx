@@ -8,7 +8,7 @@ import { useFormContext } from '@/app/hooks/useFormContext';
 import { FORM_ERRORS, LAST_STEP, NEXT_STEP } from '@/app/context/actions';
 import InputField from '../../text-field/InputField';
 import { clearFormCookiesStep, getFormCookies, getFormStep, setFormCookies } from '@/cookies/cookies';
-import { NINETH_FORM } from '@/cookies/cookies.d';
+import { FOURTH_FORM, NINETH_FORM, SECOND_FORM, THIRD_FORM } from '@/cookies/cookies.d';
 import { useScrollOnTop } from '@/app/hooks/useScrollOnTop';
 
 const TenthStep: React.FC<TenthStepProps> = ({ tenthStepTranslation }, id) => {
@@ -49,26 +49,31 @@ const TenthStep: React.FC<TenthStepProps> = ({ tenthStepTranslation }, id) => {
       sexualOrientationFreeField: string[];
       age: string;
       genderFreeField: string;
-    } = getFormCookies(NINETH_FORM);
+    } = getFormCookies(THIRD_FORM)
+    // id === 'fourthForm' ?
+    // getFormCookies(FOURTH_FORM)
+    // :
+    // getFormCookies(FOURTH_FORM)
+
+    // getFormCookies(NINETH_FORM);
 
     dispatch({ type: FORM_ERRORS, payload: true });
 
-
-    if((reportingPerson === 'organization' && !validation) ||
-    validation?.length === 0) {
+    if ((reportingPerson === 'organization' && !validation) ||
+      validation?.length === 0) {
       dispatch({ type: FORM_ERRORS, payload: true })
     } else if (
       sexualOrientation?.length > 0 &&
       sexualOrientation?.includes(tenthStepTranslation?.secondBlock.data[11]?.label) && sexualOrientationFreeField?.length <= 3
     ) {
       dispatch({ type: FORM_ERRORS, payload: true })
-    }else if (
+    } else if (
       gender?.length > 0 &&
       gender?.includes(tenthStepTranslation?.firstBlock.data[7]?.label) && genderFreeField?.length <= 3
     ) {
       dispatch({ type: FORM_ERRORS, payload: true })
     }
-     else {
+    else {
       dispatch({ type: FORM_ERRORS, payload: false })
     }
 
@@ -94,122 +99,97 @@ const TenthStep: React.FC<TenthStepProps> = ({ tenthStepTranslation }, id) => {
       genderFreeField !== formValues?.genderFreeField &&
         setValue('genderFreeField', formValues?.genderFreeField);
     }
+
+    console.log(formValues, 'formValues10')
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [
-    gender,
+    // gender,
     genderFreeField,
     sexualOrientationFreeField,
-    sexualOrientation,
+    // sexualOrientation,
     validation,
   ]);
 
   // Triggered when submitting form
   const onSubmit: SubmitHandler<TenthFormValues> = (data) => {
-     
+
     let step = getFormStep();
     let dataWithQuestion = { question1, question2, question3, step, ...data };
-    setFormCookies(dataWithQuestion, NINETH_FORM);
 
-    dispatch({type:NEXT_STEP,payload:''})
+    // if(id === 'fourthForm') {
+    //   setFormCookies(dataWithQuestion, FOURTH_FORM)
+    // } else {
+    //   setFormCookies(dataWithQuestion, SECOND_FORM)
+    // }
+    setFormCookies(dataWithQuestion, THIRD_FORM)
+
+    // setFormCookies(dataWithQuestion, NINETH_FORM);
+
+    dispatch({ type: NEXT_STEP, payload: '' })
     // isEditing && reportingPerson === 'myself'
     //   ? dispatch({ type: LAST_STEP, payload: 11 })
     //   : dispatch({ type: NEXT_STEP, payload: '' });
   };
 
   return (
-    <form
-      onSubmit={handleSubmit(onSubmit)}
-      // id="ninethForm"
-      id={id === 'fourthForm' ? 'fourthForm' : 'secondForm'}
-      className="lg:w-[32rem]"
-    >
-      {reportingPerson !== 'organization' && (
-        <>
-          <h1 className="font-bold text-3xl mb-4">
-            {tenthStepTranslation?.mainTitle}
-          </h1>
-          <div className="mt-8">
-            <FormHeader
-              title={
-                reportingPerson !== 'myself'
-                  ? tenthStepTranslation?.firstBlock?.titleOnBehalf
-                  : tenthStepTranslation?.firstBlock?.title
-              }
-              subTitle={tenthStepTranslation?.firstBlock?.description}
-            />
-            <div className="-mt-8">
-              {tenthStepTranslation?.firstBlock?.data?.map((element: any) => (
-                <Checkbox
-                  key={element?.iD}
-                  id={element?.id}
-                  name={element?.name}
-                  props={register('gender')}
-                  value={element?.value}
-                  label={element?.label}
-                />
-              ))}
-              <div className="ml-4">
-                {gender &&
-                  gender?.includes(
-                    tenthStepTranslation?.firstBlock?.data[11]?.value
-                  ) && (
-                    <InputField
-                      name="genderFreeField"
-                      props={register('genderFreeField')}
-                    />
-                  )}
-                {gender?.length > 0 &&
-                  gender?.includes(
-                    tenthStepTranslation?.firstBlock?.data[11]?.value
-                  ) &&
-                  genderFreeField?.length !== 0 &&
-                  formErrors && (
-                    <label className="text-red-500 text-xs">
-                      {tenthStepTranslation?.minCharacters}
-                    </label>
-                  )}
-              </div>
-            </div>
-          </div>
-          {reportingPerson !== 'andere' && (
-            <div className="mt-8">
-              <FormHeader
-                title={
-                  reportingPerson !== 'myself'
-                    ? tenthStepTranslation?.secondBlock?.titleOnBehalf
-                    : tenthStepTranslation?.secondBlock?.title
-                }
-                subTitle={tenthStepTranslation?.secondBlock?.description}
-              />
-              <div className="-mt-8">
-                {tenthStepTranslation?.secondBlock?.data?.map(
-                  (element: any) => (
-                    <Checkbox
-                      key={element?.iD}
-                      id={element?.id}
-                      name={element?.name}
-                      props={register('sexualOrientation')}
-                      value={element?.value}
-                      label={element?.label}
-                    />
-                  )
-                )}
+    <div className='relative lg:w-[25rem]'>
+     {reportingPerson === 'andere' && <div className='w-[30vw] xl:absolute xl:left-[35rem] xl:top-10'>
+        <div className='lg:bg-white mb-8 md:mb-12 border-primaryColor border-2 rounded-md p-4 h-[170px]'>
+          <h1 className=" font-Rubik font-black text-2xl mb-2">
+          {tenthStepTranslation.firstBlock.secondTitle}
+        </h1>
+        </div>
+      </div>}
+      <form
+        onSubmit={handleSubmit(onSubmit)}
+        // id="ninethForm"
+        // id={id === 'fourthForm' ? 'fourthForm' : 'secondForm'}
+        id={'secondForm'}
+        className=""
+      >
 
-                <div className="ml-4">
-                  {sexualOrientation &&
-                    sexualOrientation?.includes(
-                      tenthStepTranslation?.secondBlock?.data[13]?.value
+        {reportingPerson !== 'organization' && (
+          <>
+            <h1 className="font-bold text-3xl mb-2 ">
+              {tenthStepTranslation?.mainTitle}
+            </h1>
+            <div className="mt-0">
+              <div className=''>
+                <FormHeader
+                  title={
+                    reportingPerson !== 'myself'
+                      ? tenthStepTranslation?.firstBlock?.titleOnBehalf
+                      : tenthStepTranslation?.firstBlock?.title
+                  }
+                  subTitle={tenthStepTranslation?.firstBlock?.description}
+                />
+              </div>
+              <div className="-mt-8">
+                {tenthStepTranslation?.firstBlock?.data?.map((element: any) => (
+                  <Checkbox
+                    key={element?.iD}
+                    id={element?.id}
+                    name={element?.name}
+                    props={register('gender')}
+                    value={element?.value}
+                    label={element?.label}
+                  />
+                ))}
+                <div className="ml-14">
+                  {gender &&
+                    gender?.includes(
+                      tenthStepTranslation?.firstBlock?.data[11]?.value
                     ) && (
                       <InputField
-                        name=""
-                        props={register('sexualOrientationFreeField')}
+                        name="genderFreeField"
+                        props={register('genderFreeField')}
                       />
                     )}
-                  {sexualOrientation?.length > 0 &&
-                    sexualOrientation?.includes(
-                      tenthStepTranslation?.secondBlock?.data[13]?.value
+                  {gender?.length > 0 &&
+                    gender?.includes(
+                      tenthStepTranslation?.firstBlock?.data[11]?.value
                     ) &&
-                    sexualOrientationFreeField?.length !== 0 &&
+                    genderFreeField?.length !== 0 &&
                     formErrors && (
                       <label className="text-red-500 text-xs">
                         {tenthStepTranslation?.minCharacters}
@@ -218,47 +198,99 @@ const TenthStep: React.FC<TenthStepProps> = ({ tenthStepTranslation }, id) => {
                 </div>
               </div>
             </div>
-          )}
+            {reportingPerson !== 'andere' && (
+              <div className="mt-8">
+                <div className='lg:w-[25.99rem]'>
+                  <FormHeader
+                    title={
+                      reportingPerson !== 'myself'
+                        ? tenthStepTranslation?.secondBlock?.titleOnBehalf
+                        : tenthStepTranslation?.secondBlock?.title
+                    }
+                    subTitle={tenthStepTranslation?.secondBlock?.description}
+                  />
+                </div>
+                <div className="-mt-8">
+                  {tenthStepTranslation?.secondBlock?.data?.map(
+                    (element: any) => (
+                      <Checkbox
+                        key={element?.iD}
+                        id={element?.id}
+                        name={element?.name}
+                        props={register('sexualOrientation')}
+                        value={element?.value}
+                        label={element?.label}
+                      />
+                    )
+                  )}
 
-          <div className="mt-8">
-            <FormHeader
-              title={
-                reportingPerson !== 'myself'
-                  ? tenthStepTranslation?.thirdBlock?.titleOnBehalf
-                  : tenthStepTranslation?.thirdBlock?.title
-              }
-            />
-            <div className="-mt-8">
-              {
-                <RadioGroup
-                  options={tenthStepTranslation?.thirdBlock?.data}
-                  props={register('age')}
-                  title=""
+                  <div className="ml-14">
+                    {sexualOrientation &&
+                      sexualOrientation?.includes(
+                        tenthStepTranslation?.secondBlock?.data[13]?.value
+                      ) && (
+                        <InputField
+                          name=""
+                          props={register('sexualOrientationFreeField')}
+                        />
+                      )}
+                    {sexualOrientation?.length > 0 &&
+                      sexualOrientation?.includes(
+                        tenthStepTranslation?.secondBlock?.data[13]?.value
+                      ) &&
+                      sexualOrientationFreeField?.length !== 0 &&
+                      formErrors && (
+                        <label className="text-red-500 text-xs">
+                          {tenthStepTranslation?.minCharacters}
+                        </label>
+                      )}
+                  </div>
+                </div>
+              </div>
+            )}
+
+            <div className="mt-8">
+              <div className='w-[25rem]'>
+                <FormHeader
+                  title={
+                    reportingPerson !== 'myself'
+                      ? tenthStepTranslation?.thirdBlock?.titleOnBehalf
+                      : tenthStepTranslation?.thirdBlock?.title
+                  }
                 />
-              }
+              </div>
+              <div className="-mt-8">
+                {
+                  <RadioGroup
+                    options={tenthStepTranslation?.thirdBlock?.data}
+                    props={register('age')}
+                    title=""
+                  />
+                }
+              </div>
+            </div>
+          </>
+        )}
+
+        {reportingPerson === 'organization' && (
+          <div className="mt-8">
+            <FormHeader title={tenthStepTranslation?.fourthBlock?.title} />
+            <div className="-mt-8">
+              {tenthStepTranslation?.fourthBlock?.data?.map((element: any) => (
+                <Checkbox
+                  key={element?.iD}
+                  id={element?.id}
+                  name={element?.name}
+                  props={register('validation')}
+                  value={element?.value}
+                  label={element?.label}
+                />
+              ))}
             </div>
           </div>
-        </>
-      )}
-
-      {reportingPerson === 'organization' && (
-        <div className="mt-8">
-          <FormHeader title={tenthStepTranslation?.fourthBlock?.title} />
-          <div className="-mt-8">
-            {tenthStepTranslation?.fourthBlock?.data?.map((element: any) => (
-              <Checkbox
-                key={element?.iD}
-                id={element?.id}
-                name={element?.name}
-                props={register('validation')}
-                value={element?.value}
-                label={element?.label}
-              />
-            ))}
-          </div>
-        </div>
-      )}
-    </form>
+        )}
+      </form>
+    </div>
   );
 };
 

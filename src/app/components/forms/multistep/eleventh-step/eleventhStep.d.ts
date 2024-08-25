@@ -13,6 +13,8 @@ export type EleventhStepProps = {
 
   open:boolean;
   setOpen:() => void;
+  submitPage:boolean,
+  setSubmitPage:() => void
 
   secondStepTranslation: {
     title: string;

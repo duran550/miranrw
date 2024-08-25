@@ -12,7 +12,9 @@ import {
   THIRD_FORM,
   USER_DATA,
   REFRESH_TOKEN,
-  SHOW
+  SHOW,
+  TENTH_FORM,
+  ELEVENTH_STEP
 } from './cookies.d';
 
 
@@ -98,6 +100,8 @@ export const clearFormCookies = () => {
   cookies.remove(SEVENTH_FORM);
   cookies.remove(EIGTH_FORM);
   cookies.remove(NINETH_FORM);
+  cookies.remove(TENTH_FORM);
+  cookies.remove(ELEVENTH_STEP);
 };
 
 export const clearFormCookiesStep = (step:string) => {

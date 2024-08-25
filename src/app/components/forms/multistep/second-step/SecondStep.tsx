@@ -14,7 +14,7 @@ import { clearFormCookiesStep, getFormCookies, getFormStep, setFormCookies } fro
 import { FIRST_FORM } from '@/cookies/cookies.d';
 import { useScrollOnTop } from '@/app/hooks/useScrollOnTop';
 
-const SecondStep: React.FC<SecondStepProps> = ({ secondStepTranslation }) => {
+const SecondStep: React.FC<SecondStepProps> = ({ secondStepTranslation }, id) => {
   const { dispatch, reportingPerson, isEditing } = useFormContext();
   const [question] = useState<string>(secondStepTranslation?.title);
   const {
@@ -59,6 +59,7 @@ const SecondStep: React.FC<SecondStepProps> = ({ secondStepTranslation }) => {
     }
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
+    console.log(formValues, 'formvalue')
   }, [identity, formValues?.identity]);
 
   // Triggered when submitting form
@@ -78,16 +79,18 @@ const SecondStep: React.FC<SecondStepProps> = ({ secondStepTranslation }) => {
       <form
         onSubmit={handleSubmit(onSubmit)}
         id="firstForm"
-        className="h-full lg:w-[35rem]"
+        className="h-full lg:w-[25rem]"
       >
-        <FormHeader title={secondStepTranslation?.title} />
-        <p className="text-sm -mt-12 mb-8">
-          {secondStepTranslation?.mandatory}
-        </p>
-        <RadioGroup
-          props={register('identity', { required: true })}
-          options={secondStepTranslation?.options}
-        />
+        <div className=''>
+          <FormHeader title={secondStepTranslation?.title} mandatory={secondStepTranslation?.mandatory}/>
+        </div>
+
+        <div className=''>
+          <RadioGroup
+            props={register('identity', { required: true })}
+            options={secondStepTranslation?.options}
+          />
+        </div>
       </form>
       {/* {identity === secondStepTranslation?.options[2].value && (
         <div className="mt-4 max-w-lg lg:absolute lg:mt-0 lg:-right-[40rem]">

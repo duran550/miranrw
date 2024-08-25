@@ -6,7 +6,7 @@ import { FORM_ERRORS, LAST_STEP, NEXT_STEP } from '@/app/context/actions';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { ThirdFormValues } from './thirdStep.d';
 import { clearFormCookiesStep, getFormCookies, getFormStep, setFormCookies } from '@/cookies/cookies';
-import { FOURTH_FORM, SECOND_FORM, SIXTH_FORM, THIRD_FORM, THIRTINTH_FORM } from '@/cookies/cookies.d';
+import { FOURTH_FORM, SECOND_FORM, SEVENTH_FORM, SIXTH_FORM, THIRD_FORM, THIRTINTH_FORM } from '@/cookies/cookies.d';
 import { useScrollOnTop } from '@/app/hooks/useScrollOnTop';
 
 type ThirdStepProps = {
@@ -17,7 +17,7 @@ type ThirdStepProps = {
     disclaimer: string;
     mandatory: string;
     minCharacters: string;
-    hints: { title: string; list: string[], unKnownInfo:string };
+    hints: { title: string; list: string[], unKnownInfo: string };
   };
   id: string;
 };
@@ -39,22 +39,22 @@ const ThirdStep: React.FC<ThirdStepProps> = ({ thirdStepTranslation, id }) => {
   // const watchAllFields = watch();
   let description: string = watch('description');
   // Getting form cookies
- 
+
 
   // Scroll on top
   useScrollOnTop();
 
   useEffect(() => {
-     let formValues: { description: string; question: string } =
-     (reportingPerson == 'myself' || reportingPerson == 'andere') ?
-       getFormCookies(SIXTH_FORM) : getFormCookies(SIXTH_FORM)
+    let formValues: { description: string; question: string } =
+      (reportingPerson == 'myself' || reportingPerson == 'andere') ?
+        getFormCookies(SEVENTH_FORM) : getFormCookies(FOURTH_FORM)
 
     //  if (id && id == 'sixthForm') {
     //    formValues = getFormCookies(SIXTH_FORM);
     //  }
- 
+
     // i ended here in thirdStep
-    
+
     dispatch({ type: FORM_ERRORS, payload: true });
     if (description && description?.length >= 50) {
       dispatch({ type: FORM_ERRORS, payload: false });
@@ -63,19 +63,20 @@ const ThirdStep: React.FC<ThirdStepProps> = ({ thirdStepTranslation, id }) => {
     }
 
     // Setting default values if exists in cookies
-if (!description || (description && description.length<50)) {
-   dispatch({ type: FORM_ERRORS, payload: true });
-}else{
-   dispatch({ type: FORM_ERRORS, payload: false });
-}
+    if (!description || (description && description.length < 50)) {
+      dispatch({ type: FORM_ERRORS, payload: true });
+    } else {
+      dispatch({ type: FORM_ERRORS, payload: false });
+    }
 
 
     if (formValues && !description) {
       description !== formValues?.description &&
         setValue('description', formValues?.description);
-     
+
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
+    console.log(formValues, 'thirdStep')
   }, [description]);
 
   // Triggered when submitting form
@@ -87,9 +88,9 @@ if (!description || (description && description.length<50)) {
     //   ? setFormCookies(dataWithQuestion, SECOND_FORM)
     //   : setFormCookies(dataWithQuestion, SIXTH_FORM);
 
-      (reportingPerson == 'myself' || reportingPerson == 'andere') ? 
-        setFormCookies(dataWithQuestion, SIXTH_FORM) :
-        setFormCookies(dataWithQuestion, SECOND_FORM)
+    (reportingPerson == 'myself' || reportingPerson == 'andere') ?
+      setFormCookies(dataWithQuestion, SEVENTH_FORM) :
+      setFormCookies(dataWithQuestion, FOURTH_FORM)
 
     dispatch({ type: NEXT_STEP, payload: 'DATA 1' });
     // isEditing && reportingPerson === 'myself'
@@ -103,19 +104,24 @@ if (!description || (description && description.length<50)) {
         onSubmit={handleSubmit(onSubmit)}
         // id={id === 'fourthForm' ? 'fourthForm' : 'secondForm'}
         id={reportingPerson === 'myself' ? 'sixthForm' : reportingPerson === 'andere' ? 'sixthForm' : 'fourthForm'}
-        className="h-full lg:w-[35rem]"
+        className="h-full lg:w-[27rem]"
       >
-        <FormHeader
-          title={thirdStepTranslation?.title}
-          subTitle={thirdStepTranslation?.description}
-        />
-        <p className="text-sm -mt-12 mb-8">{thirdStepTranslation?.mandatory}</p>
-        <TextArea
-          name="vorfall"
-          props={register('description',{required:true, minLength:50})}
-          placeholder={thirdStepTranslation?.placeholder}
-          type="text"
-        />
+        <div>
+          <FormHeader
+            title={thirdStepTranslation?.title}
+            subTitle={thirdStepTranslation?.description}
+            mandatory={thirdStepTranslation.mandatory}
+          />
+        </div>
+        {/* <p className="text-sm -mt-12 mb-8">{thirdStepTranslation?.mandatory}</p> */}
+        <div className='lg:-mt-5 xl:h-[430px]'>
+          <TextArea
+            name="vorfall"
+            props={register('description', { required: true, minLength: 50 })}
+            placeholder={thirdStepTranslation?.placeholder}
+            type="text"
+          />
+        </div>
         {formErrors && description?.length !== 0 && (
           <label className="text-red-500 text-xs pl-2">
             {thirdStepTranslation?.minCharacters}
@@ -127,7 +133,7 @@ if (!description || (description && description.length<50)) {
         </p>
       </form>
 
-      <div className="mt-16 w-full md:max-w-md lg:mt-8  2xl:mt-0 2xl:absolute  lg:-top-0 lg:-right-[34rem]">
+      <div className="mt-16 w-full md:max-w-md lg:mt-8  2xl:mt-0 2xl:absolute  lg:-top-0 lg:-right-[30rem]">
         <FormHeader title={thirdStepTranslation?.hints?.title}>
           {reportingPerson !== 'onBehalf' ? (
             <div>

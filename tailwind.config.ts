@@ -16,6 +16,10 @@ const config: Config = {
           'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
       },
 
+      fontFamily: {
+        rubik: ['Rubik', 'sans-serif'],
+      },
+
       colors: {
         primaryColor: '#E30303',
         greenDisable: '#2B8049', 

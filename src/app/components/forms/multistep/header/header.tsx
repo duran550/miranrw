@@ -16,6 +16,7 @@ type FormHeaderProps = {
     explanation: string;
   };
   subTitle?: string;
+  mandatory?:string;
 };
 
 const FormHeader: React.FC<FormHeaderProps> = ({
@@ -24,10 +25,17 @@ const FormHeader: React.FC<FormHeaderProps> = ({
   description,
   lang,
   children,
+  mandatory
 }) => {
+
+  console.log(mandatory, 'mandatory')
+
   return (
-    <div className="lg:bg-white mb-8 md:mb-16 border-primaryColor rounded-md p-4">
-      <h1 className=" font-extrabold text-2xl mb-2">{title}</h1>
+    <div className="lg:bg-white mb-8 md:mb-12 border-primaryColor border-2 rounded-md p-4">
+      <h1 className=" font-Rubik font-black text-2xl mb-2">
+        {title}
+        {/* {mandatory ? <span className='font-bold'>{mandatory}</span> : ''} */}
+        </h1>
       {children}
       {description && (
         <div className="text-sm mt-2">
@@ -46,7 +54,11 @@ const FormHeader: React.FC<FormHeaderProps> = ({
           </div>
         </div>
       )}
-      {subTitle ? <div className="my-2">{subTitle}</div> : ''}
+
+      <div className="my-2">
+      {subTitle ? <span className='font-base'>{subTitle}</span> : ''}
+      {mandatory ? <span className='font-black text-sm'>{mandatory}</span> : ''}
+      </div>
     </div>
   );
 };

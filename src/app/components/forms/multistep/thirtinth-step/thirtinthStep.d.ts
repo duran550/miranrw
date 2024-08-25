@@ -10,7 +10,7 @@ export type ThirtinthStepProp = {
   };
   
   export type ThirtinthStepValues = {
-    formOfQueerphobia: string[];
-    otherformOfQueerphobiaFreeField: string;
+    disciminationArea: string[];
+    otherformOfDiscriminationAreaFreeField: string;
   };
   

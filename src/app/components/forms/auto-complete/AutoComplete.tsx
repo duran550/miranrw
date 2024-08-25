@@ -66,8 +66,8 @@ const AutoComplete: React.FC<AutoCompleteProps> = ({
       // autoFocus
       formatResult={formatResult}
       styling={{
-        height: '44px',
-        border: '1px solid #dfe1e5',
+        height: '34px',
+        border: '1px solid red',
         borderRadius: '0.4rem',
         zIndex: 20,
         boxShadow: 'rgba(32, 33, 36, 0) 0px 1px 6px 0px',

@@ -21,7 +21,8 @@ const RadioGroup: React.FC<RadioGroupProps> = ({ options, title, props }) => {
               type="radio"
               value={radioElement.value}
               name={radioElement.name}
-              className="w-6 h-6 text-primaryColor bg-gray-100 focus:ring-PrimaryColor  dark:ring-offset-gray-800 focus:ring-2 "
+              // className="w-6 h-6 text-primaryColor bg-gray-100 focus:ring-PrimaryColor  dark:ring-offset-gray-800 focus:ring-2 "
+              className='w-6 h-6 text-primaryColor bg-gray-100 accent-primaryColor focus:ring-primaryColor'
             />
             <label
               htmlFor={radioElement.id}
