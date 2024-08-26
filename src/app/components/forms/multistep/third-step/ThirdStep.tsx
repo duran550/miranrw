@@ -46,8 +46,7 @@ const ThirdStep: React.FC<ThirdStepProps> = ({ thirdStepTranslation, id }) => {
 
   useEffect(() => {
     let formValues: { description: string; question: string } =
-      (reportingPerson == 'myself' || reportingPerson == 'andere') ?
-        getFormCookies(SEVENTH_FORM) : getFormCookies(FOURTH_FORM)
+    getFormCookies(SEVENTH_FORM)
 
     //  if (id && id == 'sixthForm') {
     //    formValues = getFormCookies(SIXTH_FORM);
@@ -87,11 +86,7 @@ const ThirdStep: React.FC<ThirdStepProps> = ({ thirdStepTranslation, id }) => {
     //  id !== 'sixthForm'
     //   ? setFormCookies(dataWithQuestion, SECOND_FORM)
     //   : setFormCookies(dataWithQuestion, SIXTH_FORM);
-
-    (reportingPerson == 'myself' || reportingPerson == 'andere') ?
-      setFormCookies(dataWithQuestion, SEVENTH_FORM) :
-      setFormCookies(dataWithQuestion, FOURTH_FORM)
-
+    setFormCookies(dataWithQuestion, SEVENTH_FORM)
     dispatch({ type: NEXT_STEP, payload: 'DATA 1' });
     // isEditing && reportingPerson === 'myself'
     //   ? dispatch({ type: LAST_STEP, payload: 11 })
@@ -127,7 +122,7 @@ const ThirdStep: React.FC<ThirdStepProps> = ({ thirdStepTranslation, id }) => {
             {thirdStepTranslation?.minCharacters}
           </label>
         )} */}
-        {formErrors && description?.length !== 0 && description.length < 50 && (
+        {formErrors && description?.length !== 0 && description?.length < 50 && (
           <label className="text-red-500 text-xs pl-2">
             {thirdStepTranslation?.minCharacters}
           </label>

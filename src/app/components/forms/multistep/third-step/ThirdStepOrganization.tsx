@@ -10,7 +10,7 @@ import FormHeader from '../header/header';
 import Checkbox from '../../checkbox/Checkbox';
 import InputField from '../../text-field/InputField';
 import { clearFormCookiesStep, getFormCookies, getFormStep, setFormCookies } from '@/cookies/cookies';
-import { SECOND_FORM } from '@/cookies/cookies.d';
+import { SECOND_FORM, THIRD_FORM } from '@/cookies/cookies.d';
 import { useScrollOnTop } from '@/app/hooks/useScrollOnTop';
 
 const ThirdStepOrganization: React.FC<ThirdStepOrganizationProps> = ({
@@ -35,7 +35,7 @@ let organizationTypeFreeField: string= watch('organizationTypeFreeField')
     organizationType: string[];
     organizationTypeFreeField: string;
     question: string;
-  } = getFormCookies(SECOND_FORM);
+  } = getFormCookies(THIRD_FORM);
 
   // Scroll on top
   useScrollOnTop();
@@ -93,7 +93,7 @@ let organizationTypeFreeField: string= watch('organizationTypeFreeField')
      
     let step = getFormStep();
     let dataWithQuestion = { question, step, ...data };
-    setFormCookies(dataWithQuestion, SECOND_FORM);
+    setFormCookies(dataWithQuestion, THIRD_FORM);
 
     isEditing && reportingPerson === 'myself'
       ? dispatch({ type: LAST_STEP, payload: 11 })

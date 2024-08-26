@@ -62,8 +62,8 @@ const NinethStep: React.FC<NinethStepProps> = ({
       haveYouReportedYesFreeField2: string;
       question: string;
     } = 
-    (reportingPerson == 'myself' || reportingPerson == 'andere') ? 
-    getFormCookies(ELEVENTH_STEP) : getFormCookies(EIGTH_FORM)
+    (reportingPerson == 'myself') ? 
+    getFormCookies(ELEVENTH_STEP) : reportingPerson == 'andere' ? getFormCookies(TENTH_FORM) : getFormCookies(TENTH_FORM)
 
     // (reportingPerson == 'myself' || reportingPerson == 'andere')
     //          ? setFormCookies(dataWithQuestion, TENTH_FORM)
@@ -192,16 +192,16 @@ const NinethStep: React.FC<NinethStepProps> = ({
              };
              // dispatch({ type: ID_FORM, payload: id });
              //  dispatch({ type: FORM_VALUE, payload: dataWithQuestion });
-             (reportingPerson == 'myself' || reportingPerson == 'andere')
-             ? setFormCookies(dataWithQuestion, ELEVENTH_STEP)
-             : setFormCookies(dataWithQuestion, EIGTH_FORM);
+             (reportingPerson == 'myself')
+               ? setFormCookies(dataWithQuestion, ELEVENTH_STEP)
+               : reportingPerson === 'andere' ? setFormCookies(dataWithQuestion, TENTH_FORM) : setFormCookies(dataWithQuestion, TENTH_FORM);
            } else {
             
              let dataWithQuestion = { question, step, ...data };
             //  id === 'tenthForm'
-            (reportingPerson == 'myself' || reportingPerson == 'andere')
+            (reportingPerson == 'myself')
                ? setFormCookies(dataWithQuestion, ELEVENTH_STEP)
-               : setFormCookies(dataWithQuestion, EIGTH_FORM);
+               : reportingPerson === 'andere' ? setFormCookies(dataWithQuestion, TENTH_FORM) : setFormCookies(dataWithQuestion, TENTH_FORM);
            }
       
   

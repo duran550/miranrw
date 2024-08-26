@@ -37,7 +37,7 @@ const EightStep: React.FC<EightStepProps> = ({ eightStepTranslation, id }) => {
       formOfDiscYes: string[];
       formOfDiscYesFreeField: string;
       question: string;
-    } = (reportingPerson === 'myself' || reportingPerson === 'andere') ? getFormCookies(TENTH_FORM) : getFormCookies(EIGTH_FORM)
+    } = (reportingPerson === 'myself') ? getFormCookies(TENTH_FORM) : reportingPerson === 'organization' ? getFormCookies(NINETH_FORM) : getFormCookies(NINETH_FORM)
     
     
     // getFormCookies(NINETH_FORM)
@@ -138,9 +138,11 @@ const EightStep: React.FC<EightStepProps> = ({ eightStepTranslation, id }) => {
           //   ? setFormCookies(dataWithQuestion, NINETH_FORM)
           //   : setFormCookies(dataWithQuestion, SEVENTH_FORM);
           if(reportingPerson === 'organization') {
-            setFormCookies(dataWithQuestion, EIGTH_FORM)
-           } else if(reportingPerson === 'myself' || reportingPerson === 'andere') {
+            setFormCookies(dataWithQuestion, NINETH_FORM)
+           } else if(reportingPerson === 'myself') {
             setFormCookies(dataWithQuestion, TENTH_FORM)
+          } else {
+            setFormCookies(dataWithQuestion, NINETH_FORM)
           }
     }else{
        let step = getFormStep();
@@ -148,9 +150,11 @@ const EightStep: React.FC<EightStepProps> = ({ eightStepTranslation, id }) => {
        // dispatch({ type: ID_FORM, payload: id });
        dispatch({ type: FORM_VALUE, payload: dataWithQuestion });
        if(reportingPerson === 'organization') {
-        setFormCookies(dataWithQuestion, EIGTH_FORM)
-       } else if(reportingPerson === 'myself' || reportingPerson === 'andere') {
+        setFormCookies(dataWithQuestion, NINETH_FORM)
+       } else if(reportingPerson === 'myself') {
         setFormCookies(dataWithQuestion, TENTH_FORM)
+      } else {
+        setFormCookies(dataWithQuestion, NINETH_FORM)
       }
     }
      

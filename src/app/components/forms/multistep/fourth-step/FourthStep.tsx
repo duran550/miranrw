@@ -11,7 +11,7 @@ import Checkbox from '../../checkbox/Checkbox';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { FourthFormValues } from './fourthStep';
 import { clearFormCookiesStep, getFormCookies, getFormStep, setFormCookies } from '@/cookies/cookies';
-import { FIFTH_FORM, THIRD_FORM } from '@/cookies/cookies.d';
+import { FIFTH_FORM, FOURTH_FORM, THIRD_FORM } from '@/cookies/cookies.d';
 import { DatePicker } from 'antd';
 import { useScrollOnTop } from '@/app/hooks/useScrollOnTop';
 import InputField from '../../text-field/InputField';
@@ -81,9 +81,9 @@ const FourthStep: React.FC<FourthStepProps> = ({
 
   // }
 
-  (reportingPerson === 'myself' || reportingPerson === 'organization')
-    ? formValues = getFormCookies(FIFTH_FORM)
-    : formValues = getFormCookies(THIRD_FORM);
+  (reportingPerson === 'myself')
+    ? formValues = getFormCookies(FOURTH_FORM)
+    :  reportingPerson === 'organization' ? formValues = getFormCookies(FIFTH_FORM) : formValues = getFormCookies(THIRD_FORM);
 
   // dispatch({ type: FORM_ERRORS, payload: true });
   // Scroll on top
@@ -237,9 +237,9 @@ const FourthStep: React.FC<FourthStepProps> = ({
     //   ? setFormCookies(dataWithQuestion, FIFTH_FORM)
     //   : setFormCookies(dataWithQuestion, THIRD_FORM);
 
-    (reportingPerson === 'myself' || reportingPerson === 'organization')
-      ? setFormCookies(dataWithQuestion, FIFTH_FORM)
-      : setFormCookies(dataWithQuestion, THIRD_FORM);
+    (reportingPerson === 'myself')
+      ? setFormCookies(dataWithQuestion, FOURTH_FORM)
+      : reportingPerson == 'organization' ? setFormCookies(dataWithQuestion, FIFTH_FORM) : setFormCookies(dataWithQuestion, THIRD_FORM);
 
     dispatch({ type: NEXT_STEP, payload: 'DATA 1' });
     // isEditing && reportingPerson === 'myself'

@@ -39,9 +39,9 @@ const SixthStep: React.FC<SixthStepProps> = ({ sixthStepTranslation, id, lang })
       formOfQueerphobia: string[];
       otherformOfQueerphobiaFreeField: string;
       question: string;
-    } = 
-    (reportingPerson === 'myself' || reportingPerson === 'andere') ? getFormCookies(NINETH_FORM) :
-    getFormCookies(SEVENTH_FORM) 
+    } =
+      (reportingPerson === 'myself' || reportingPerson === 'andere') ? getFormCookies(NINETH_FORM) :
+        getFormCookies(EIGTH_FORM)
 
 
     // if (id && id === 'seventhForm') {
@@ -74,9 +74,6 @@ const SixthStep: React.FC<SixthStepProps> = ({ sixthStepTranslation, id, lang })
     } else {
       dispatch({ type: FORM_ERRORS, payload: false });
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-
-    console.log(formValues, 'log00')
   }, [formOfQueerphobia, otherformOfQueerphobiaFreeField]);
 
   // Triggered when submitting form
@@ -94,9 +91,9 @@ const SixthStep: React.FC<SixthStepProps> = ({ sixthStepTranslation, id, lang })
     //   : setFormCookies(dataWithQuestion, SIXTH_FORM);
 
     (reportingPerson === 'myself' || reportingPerson === 'andere')
-    ? setFormCookies(dataWithQuestion, NINETH_FORM)
-    : setFormCookies(dataWithQuestion, SEVENTH_FORM);
-      
+      ? setFormCookies(dataWithQuestion, NINETH_FORM)
+      : setFormCookies(dataWithQuestion, EIGTH_FORM);
+
     dispatch({ type: NEXT_STEP, payload: '' });
     // isEditing && reportingPerson === 'myself'
     //   ? dispatch({ type: LAST_STEP, payload: 11 })
@@ -123,6 +120,9 @@ const SixthStep: React.FC<SixthStepProps> = ({ sixthStepTranslation, id, lang })
       </div>
       {sixthStepTranslation?.choices?.sort((a, b) => a.label.localeCompare(b.label)).map((choice: any, index) => {
 
+        console.log(choice.iD === 9, 'log00')
+        console.log(lang, 'log01')
+
         return (
           <div key={choice.iD}>
             <Checkbox
@@ -133,11 +133,12 @@ const SixthStep: React.FC<SixthStepProps> = ({ sixthStepTranslation, id, lang })
               label={choice.label}
             />
 
-            {(
-              ((lang === 'en' && choice.iD === 9) || (lang === 'de' && index === 1)) &&
+{
+              
+              choice.iD === 9   &&
               (formOfQueerphobia &&
                 (formOfQueerphobia.includes('Anderes, und zwar') ||
-                  formOfQueerphobia.includes('Other, specify')))
+                  formOfQueerphobia.includes('Other, specify'))
             ) ? (
               <div className="w-full pb-4 ml-8">
                 <InputField

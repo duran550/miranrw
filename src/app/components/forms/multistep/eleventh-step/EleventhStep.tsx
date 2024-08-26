@@ -106,7 +106,7 @@ const EleventhStep: React.FC<EleventhStepProps> = ({
     getFormCookies(NINETH_FORM), 'ninthForm',
     getFormCookies(TENTH_FORM), 'tenthForm',
     getFormCookies(ELEVENTH_STEP), 'elevenForm',
-    getFormCookies(THIRTINTH_FORM), 'eleventhForm',
+    getFormCookies(THIRTINTH_FORM), 'thirtinthForm',
   )
 
   let firstForm: { question: string; step: number; identity: string } =
@@ -131,31 +131,37 @@ const EleventhStep: React.FC<EleventhStepProps> = ({
     description: string;
     organizationType: string[];
     organizationTypeFreeField: string;
-  } = getFormCookies(SECOND_FORM);
+  } = getFormCookies(THIRD_FORM);
 
   let thirdForm: {
     question: string;
-    step: number;
+    step: number | any;
     valueDate: string;
     dateRangeState: string;
     datePeriod: boolean;
     numberOfEmployees: string;
-  } =  (reportingPerson === 'myself' || reportingPerson === 'organization')
+  } =  (reportingPerson === 'myself')
   ? getFormCookies(FOURTH_FORM)
-  : getFormCookies(THIRD_FORM);
+  :  reportingPerson === 'organization' ? getFormCookies(FIFTH_FORM) : getFormCookies(THIRD_FORM);
   
   
   // getFormCookies(THIRD_FORM);
 
 
+  // let thirdFormOrganization: {
+  //   question: string;
+  //   step: number;
+  //   valueDate: string;
+  //   dateRangeState: string;
+  //   datePeriod: boolean;
+  //   numberOfEmployees: string;
+  // } = getFormCookies(THIRD_FORM);
+
   let thirdFormOrganization: {
-    question: string;
     step: number;
-    valueDate: string;
-    dateRangeState: string;
-    datePeriod: boolean;
     numberOfEmployees: string;
-  } = getFormCookies(THIRD_FORM);
+    question: string;
+  } = getFormCookies(FOURTH_FORM);
 
   let fourthForm: {
     question: string;
@@ -163,7 +169,7 @@ const EleventhStep: React.FC<EleventhStepProps> = ({
     location: string;
     locationOnline: string;
     stadtteil: string;
-  } =  reportingPerson === 'myself' ? getFormCookies(FIFTH_FORM) : reportingPerson == 'andere' ? getFormCookies(FOURTH_FORM) : getFormCookies(SIXTH_FORM)
+  } =   reportingPerson === 'myself' ? getFormCookies(FIFTH_FORM) : reportingPerson == 'andere' ? getFormCookies(FIFTH_FORM) : getFormCookies(SIXTH_FORM)
 
   // getFormCookies(FOURTH_FORM);
 
@@ -174,7 +180,7 @@ const EleventhStep: React.FC<EleventhStepProps> = ({
     formOfQueerphobia: any;
     otherformOfQueerphobiaFreeField: string;
   } = (reportingPerson === 'myself' || reportingPerson === 'andere') ? getFormCookies(NINETH_FORM) :
-  getFormCookies(SEVENTH_FORM) 
+  getFormCookies(EIGTH_FORM) 
   
   // getFormCookies(SIXTH_FORM);
 
@@ -199,7 +205,7 @@ const EleventhStep: React.FC<EleventhStepProps> = ({
     formOfDisc: string;
     formOfDiscYes: string[];
     formOfDiscYesFreeField: string;
-  } = (reportingPerson === 'myself' || reportingPerson === 'andere') ? getFormCookies(TENTH_FORM) : getFormCookies(EIGTH_FORM)
+  } = (reportingPerson === 'myself') ? getFormCookies(TENTH_FORM) : reportingPerson === 'organization' ? getFormCookies(NINETH_FORM) : getFormCookies(NINETH_FORM)
   // getFormCookies(SEVENTH_FORM);
 
   let eighthForm: {
@@ -209,8 +215,8 @@ const EleventhStep: React.FC<EleventhStepProps> = ({
     haveYouReportedYes: string[];
     haveYouReportedYesFreeField1: string;
     haveYouReportedYesFreeField2: string;
-  } =  (reportingPerson == 'myself' || reportingPerson == 'andere') ? 
-  getFormCookies(ELEVENTH_STEP) : getFormCookies(EIGTH_FORM)
+  } =  (reportingPerson == 'myself') ? 
+  getFormCookies(ELEVENTH_STEP) : reportingPerson == 'andere' ? getFormCookies(TENTH_FORM) : getFormCookies(TENTH_FORM)
   
   // getFormCookies(EIGTH_FORM);
 
@@ -224,20 +230,20 @@ const EleventhStep: React.FC<EleventhStepProps> = ({
     sexualOrientation: string[];
     sexualOrientationFreeField: string;
     step: number;
-  } = getFormCookies(NINETH_FORM);
+  } = getFormCookies(THIRD_FORM)
 
-  if (
-    firstForm.identity ===
-    secondStepTranslation?.options[secondStepTranslation.options.length - 1]
-      .value
-  ) {
-    thirdForm = getFormCookies(FIFTH_FORM);
-    fourthForm = getFormCookies(SIXTH_FORM);
-    fifthForm = getFormCookies(SEVENTH_FORM);
-    seventhForm = getFormCookies(EIGTH_FORM)
-    eighthForm = getFormCookies(NINETH_FORM)
-    secondForm = getFormCookies(FOURTH_FORM)
-  }
+  // if (
+  //   firstForm.identity ===
+  //   secondStepTranslation?.options[secondStepTranslation.options.length - 1]
+  //     .value
+  // ) {
+  //   thirdForm = getFormCookies(FIFTH_FORM);
+  //   fourthForm = getFormCookies(SIXTH_FORM);
+  //   fifthForm = getFormCookies(SEVENTH_FORM);
+  //   seventhForm = getFormCookies(EIGTH_FORM)
+  //   eighthForm = getFormCookies(NINETH_FORM)
+  //   secondForm = getFormCookies(FOURTH_FORM)
+  // }
 
   // Listening to fields
 
@@ -272,96 +278,196 @@ const EleventhStep: React.FC<EleventhStepProps> = ({
 
   const onSubmit: SubmitHandler<any> = async () => {
     // Getting values to be sent
-    let firstForm: { identity: string } = getFormCookies(FIRST_FORM);
+    // let firstForm: { identity: string } = getFormCookies(FIRST_FORM);
 
-    let secondForm: {
-      description: string;
-      organizationType: string[];
-      organizationTypeFreeField: string;
-    } = getFormCookies(SECOND_FORM);
+    // let secondForm: {
+    //   description: string;
+    //   organizationType: string[];
+    //   organizationTypeFreeField: string;
+    // } = getFormCookies(SECOND_FORM);
 
-    let secondFormOrganization: {
-      description: string;
-      organizationType: string[];
-      organizationTypeFreeField: string;
-    } = getFormCookies(SECOND_FORM);
+    // let secondFormOrganization: {
+    //   description: string;
+    //   organizationType: string[];
+    //   organizationTypeFreeField: string;
+    // } = getFormCookies(SECOND_FORM);
 
-    let thirdForm: {
-      valueDate: string;
-      dateRangeState: string;
-      datePeriod: boolean;
-      numberOfEmployees: string;
-    } = (reportingPerson == 'myself' || reportingPerson == 'andere') ?
-    getFormCookies(SEVENTH_FORM) : getFormCookies(FOURTH_FORM)
+    // let thirdForm: {
+    //   step:number;
+    //   valueDate: string;
+    //   dateRangeState: string;
+    //   datePeriod: boolean;
+    //   numberOfEmployees: string;
+    // } = (reportingPerson == 'myself' || reportingPerson == 'andere') ?
+    // getFormCookies(SEVENTH_FORM) : getFormCookies(FOURTH_FORM)
     
-    // getFormCookies(THIRD_FORM);
+    // // getFormCookies(THIRD_FORM);
 
 
-    let thirdFormOrganization: {
-      valueDate: string;
-      dateRangeState: string;
-      datePeriod: boolean;
-      numberOfEmployees: string;
-    } = getFormCookies(THIRD_FORM);
+    // let thirdFormOrganization: {
+    //   valueDate: string;
+    //   dateRangeState: string;
+    //   datePeriod: boolean;
+    //   numberOfEmployees: string;
+    // } = getFormCookies(THIRD_FORM);
 
-    let fourthForm: {
-      location: string;
-      locationOnline: string;
-      stadtteil: string;
-    } = getFormCookies(FOURTH_FORM);
+    // let fourthForm: {
+    //   location: string;
+    //   locationOnline: string;
+    //   stadtteil: string;
+    // } = getFormCookies(FOURTH_FORM);
 
-    let fifthForm: {
-      formOfQueerphobia: string[];
-      otherformOfQueerphobiaFreeField: string;
-    } = getFormCookies(SIXTH_FORM);
+    // let fifthForm: {
+    //   formOfQueerphobia: string[];
+    //   otherformOfQueerphobiaFreeField: string;
+    // } = getFormCookies(SIXTH_FORM);
 
-    let thirtinthStep: {
-      question: string;
-      step: number;
-      disciminationArea: any;
-      otherformOfDiscriminationAreaFreeField: string;
-    } = getFormCookies(SIXTH_FORM)
+    // let thirtinthStep: {
+    //   question: string;
+    //   step: number;
+    //   disciminationArea: any;
+    //   otherformOfDiscriminationAreaFreeField: string;
+    // } = getFormCookies(SIXTH_FORM)
 
-    let sixthForm: {
-      typeOfDiscriminationFreeField: string;
-      typeOfDiscrimination: string[];
-    } = getFormCookies(FIFTH_FORM);
+    // let sixthForm: {
+    //   typeOfDiscriminationFreeField: string;
+    //   typeOfDiscrimination: string[];
+    // } = getFormCookies(FIFTH_FORM);
 
-    let seventhForm: {
-      formOfDisc: string;
-      formOfDiscYes: string[];
-      formOfDiscYesFreeField: string;
-    } = getFormCookies(SIXTH_FORM);
+    // let seventhForm: {
+    //   formOfDisc: string;
+    //   formOfDiscYes: string[];
+    //   formOfDiscYesFreeField: string;
+    // } = getFormCookies(SIXTH_FORM);
 
-    let eighthForm: {
-      haveYouReported: string;
-      haveYouReportedYes: string[];
-      haveYouReportedYesFreeField1: string;
-      haveYouReportedYesFreeField2: string;
-    } = getFormCookies(EIGTH_FORM);
+    // let eighthForm: {
+    //   haveYouReported: string;
+    //   haveYouReportedYes: string[];
+    //   haveYouReportedYesFreeField1: string;
+    //   haveYouReportedYesFreeField2: string;
+    // } = getFormCookies(EIGTH_FORM);
 
-    // n
+    // // n
 
-    let ninethForm: {
-      gender: string[];
-      genderFreeField: string;
-      age: string;
-      sexualOrientation: string[];
-      sexualOrientationFreeField: string;
-    } = getFormCookies(NINETH_FORM);
-    if (
-      firstForm.identity ===
-      secondStepTranslation?.options[secondStepTranslation.options.length - 1]
-        .value
-    ) {
+    // let ninethForm: {
+    //   gender: string[];
+    //   genderFreeField: string;
+    //   age: string;
+    //   sexualOrientation: string[];
+    //   sexualOrientationFreeField: string;
+    // } = getFormCookies(NINETH_FORM);
+    // if (
+    //   firstForm.identity ===
+    //   secondStepTranslation?.options[secondStepTranslation.options.length - 1]
+    //     .value
+    // ) {
 
-      thirdForm = getFormCookies(FIFTH_FORM);
-      fourthForm = getFormCookies(SIXTH_FORM);
-      fifthForm = getFormCookies(SEVENTH_FORM);
-      seventhForm = getFormCookies(EIGTH_FORM);
-      eighthForm = getFormCookies(NINETH_FORM);
-      secondForm = getFormCookies(FOURTH_FORM);
-    }
+    //   thirdForm = getFormCookies(FIFTH_FORM);
+    //   fourthForm = getFormCookies(SIXTH_FORM);
+    //   fifthForm = getFormCookies(SEVENTH_FORM);
+    //   seventhForm = getFormCookies(EIGTH_FORM);
+    //   eighthForm = getFormCookies(NINETH_FORM);
+    //   secondForm = getFormCookies(FOURTH_FORM);
+    // }
+
+
+    let firstForm: { question: string; step: number; identity: string } =
+    getFormCookies(FIRST_FORM);
+    
+  let secondForm: {
+    question: string;
+    step: number;
+    description: string;
+    organizationType: string[];
+    organizationTypeFreeField: string;
+  } = (reportingPerson == 'myself' || reportingPerson == 'andere') ?
+  getFormCookies(SEVENTH_FORM) : getFormCookies(FOURTH_FORM)
+
+
+  let secondFormOrganization: {
+    question: string;
+    step: number;
+    description: string;
+    organizationType: string[];
+    organizationTypeFreeField: string;
+  } = getFormCookies(THIRD_FORM);
+
+  let thirdForm: {
+    question: string;
+    step: number | any;
+    valueDate: string;
+    dateRangeState: string;
+    datePeriod: boolean;
+    numberOfEmployees: string;
+  } =  (reportingPerson === 'myself')
+  ? getFormCookies(FOURTH_FORM)
+  :  reportingPerson === 'organization' ? getFormCookies(FIFTH_FORM) : getFormCookies(THIRD_FORM);
+
+  let thirdFormOrganization: {
+    step: number;
+    numberOfEmployees: string;
+    question: string;
+  } = getFormCookies(FOURTH_FORM);
+
+  let fourthForm: {
+    question: string;
+    step: number;
+    location: string;
+    locationOnline: string;
+    stadtteil: string;
+  } =   reportingPerson === 'myself' ? getFormCookies(FIFTH_FORM) : reportingPerson == 'andere' ? getFormCookies(FIFTH_FORM) : getFormCookies(SIXTH_FORM)
+
+  let fifthForm: {
+    question: string;
+    step: number;
+    formOfQueerphobia: any;
+    otherformOfQueerphobiaFreeField: string;
+  } = (reportingPerson === 'myself' || reportingPerson === 'andere') ? getFormCookies(NINETH_FORM) :
+  getFormCookies(EIGTH_FORM) 
+
+  let thirtinthStep: {
+    question: string;
+    step: number;
+    disciminationArea: any;
+    otherformOfDiscriminationAreaFreeField: string;
+  } = getFormCookies(SIXTH_FORM);
+
+  let sixthForm: {
+    question: string;
+    step: number;
+    typeOfDiscriminationFreeField: string;
+    typeOfDiscrimination: string[];
+  } = getFormCookies(EIGTH_FORM)
+
+  let seventhForm: {
+    question: string;
+    step: number;
+    formOfDisc: string;
+    formOfDiscYes: string[];
+    formOfDiscYesFreeField: string;
+  } = (reportingPerson === 'myself') ? getFormCookies(TENTH_FORM) : reportingPerson === 'organization' ? getFormCookies(NINETH_FORM) : getFormCookies(NINETH_FORM)
+
+  let eighthForm: {
+    question: string;
+    step: number;
+    haveYouReported: string | any;
+    haveYouReportedYes: string[];
+    haveYouReportedYesFreeField1: string;
+    haveYouReportedYesFreeField2: string;
+  } =  (reportingPerson == 'myself') ? 
+  getFormCookies(ELEVENTH_STEP) : reportingPerson == 'andere' ? getFormCookies(TENTH_FORM) : getFormCookies(TENTH_FORM)
+
+  let ninethForm: {
+    question1: string;
+    question2: string;
+    question3: string;
+    gender: string[];
+    genderFreeField: string;
+    age: string;
+    sexualOrientation: string[];
+    sexualOrientationFreeField: string;
+    step: number;
+  } = getFormCookies(THIRD_FORM)
 
     // Getting exact values
 
@@ -429,6 +535,8 @@ const EleventhStep: React.FC<EleventhStepProps> = ({
       age,
       sexualOrientation,
       sexualOrientationFreeField,
+      disciminationArea,
+      otherformOfDiscriminationAreaFreeField
     };
 
     console.log('report', report);
@@ -584,10 +692,11 @@ const EleventhStep: React.FC<EleventhStepProps> = ({
           answer={firstForm?.identity}
         />
 
-        {reportingPerson ===
-          secondStepTranslation?.options[
-            secondStepTranslation.options.length - 1
-          ].value &&
+        {reportingPerson === 'organization'
+          // secondStepTranslation?.options[
+          //   secondStepTranslation.options.length - 1
+          // ].value 
+          &&
           secondFormOrganization &&
           secondFormOrganization?.organizationType && (
             <EditBlock
@@ -702,8 +811,8 @@ const EleventhStep: React.FC<EleventhStepProps> = ({
           )}
 
         {eighthForm && eighthForm?.haveYouReported && 
-        eighthForm?.haveYouReported == 'Nein' &&
-        eighthForm?.haveYouReported == 'No' &&
+        eighthForm?.haveYouReported &&
+        eighthForm?.haveYouReported &&
         (
           <EditBlock
             step={eighthForm?.step}
@@ -728,10 +837,12 @@ const EleventhStep: React.FC<EleventhStepProps> = ({
           )}
 
         {/* When Nein is chosen don't display */}
-        {reportingPerson !==
-          secondStepTranslation?.options[
-            secondStepTranslation.options.length - 1
-          ].value && (
+        {reportingPerson !== 'organization'
+          // secondStepTranslation?.options[
+          //   secondStepTranslation.options.length - 1
+          // ].value 
+     
+          &&  (
             <>
               {ninethForm && ninethForm?.gender && (
                 <EditBlock

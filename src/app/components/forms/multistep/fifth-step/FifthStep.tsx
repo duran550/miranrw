@@ -44,7 +44,7 @@ const FifthStep: React.FC<FifthStepProps> = ({ fifthStepTranslation, id }) => {
       question: string;
       // stadtteil: string;
     } = 
-    reportingPerson === 'myself' ? getFormCookies(FIFTH_FORM) : reportingPerson == 'andere' ? getFormCookies(FOURTH_FORM) : getFormCookies(SIXTH_FORM)
+    reportingPerson === 'myself' ? getFormCookies(FIFTH_FORM) : reportingPerson == 'andere' ? getFormCookies(FIFTH_FORM) : getFormCookies(SIXTH_FORM)
     // getFormCookies(FOURTH_FORM);
     // if (id === 'sixthForm') {
     //   formValues = getFormCookies(SIXTH_FORM);
@@ -173,7 +173,7 @@ const FifthStep: React.FC<FifthStepProps> = ({ fifthStepTranslation, id }) => {
     if (reportingPerson === 'myself') {
       setFormCookies(dataWithQuestion, FIFTH_FORM)
     } else if (reportingPerson === 'andere') {
-      setFormCookies(dataWithQuestion, FOURTH_FORM)
+      setFormCookies(dataWithQuestion, FIFTH_FORM)
     } else {
       setFormCookies(dataWithQuestion, SIXTH_FORM)
     }

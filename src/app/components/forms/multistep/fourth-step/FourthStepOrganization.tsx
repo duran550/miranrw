@@ -7,7 +7,7 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 import { useFormContext } from '@/app/hooks/useFormContext';
 import { FORM_ERRORS, LAST_STEP, NEXT_STEP } from '@/app/context/actions';
 import { clearFormCookiesStep, getFormCookies, getFormStep, setFormCookies } from '@/cookies/cookies';
-import { THIRD_FORM } from '@/cookies/cookies.d';
+import { FOURTH_FORM, THIRD_FORM } from '@/cookies/cookies.d';
 import { useScrollOnTop } from '@/app/hooks/useScrollOnTop';
 
 const FourthStepOrganization: React.FC<FourthStepOrganizationProps> = ({
@@ -30,7 +30,7 @@ const FourthStepOrganization: React.FC<FourthStepOrganizationProps> = ({
   let formValues: {
     numberOfEmployees: string;
     question: string;
-  } = getFormCookies(THIRD_FORM);
+  } = getFormCookies(FOURTH_FORM);
 
   // Scroll on top
   useScrollOnTop();
@@ -57,7 +57,8 @@ const FourthStepOrganization: React.FC<FourthStepOrganizationProps> = ({
   
     let step = getFormStep();
     let dataWithQuestion = { question, step, ...data };
-    setFormCookies(dataWithQuestion, THIRD_FORM);
+    // setFormCookies(dataWithQuestion, THIRD_FORM);
+    setFormCookies(dataWithQuestion, FOURTH_FORM);
 
     isEditing && reportingPerson === 'myself'
       ? dispatch({ type: LAST_STEP, payload: 11 })
