@@ -52,7 +52,7 @@ const MultiStepForm: React.FC<MultiStepFormProps> = ({
 
               {reportingPerson == 'myself' ?
 
-                step === 1 || step === 12 || step == 13 || step == 14 ? (
+                step === 1 || step === 12 || step === 3 || step == 13 || step == 14 ? (
                   ''
                 ) : (
                   <Stepper
@@ -77,9 +77,9 @@ const MultiStepForm: React.FC<MultiStepFormProps> = ({
                     }
                   />
                 )
-                : (reportingPerson == 'andere' || reportingPerson == 'organization') ?
+                : (reportingPerson == 'andere') ?
                   step === 1 ||
-                    step === 11 || step === 12 || step == 13 ? (
+                    step === 11 || step === 3 || step === 12 || step == 13 ? (
                     ''
                   ) : (
                     <Stepper
@@ -103,7 +103,32 @@ const MultiStepForm: React.FC<MultiStepFormProps> = ({
                                         : 100
                       }
                     />
-                  ) : ''
+                  ) : step === 1 ||
+                  step === 11 || step === 12 || step == 13 ? (
+                  ''
+                ) : (
+                  <Stepper
+                    progress={
+                      step === 2
+                        ? 10
+                        : step === 3
+                          ? 20
+                          : step === 4
+                            ? 30
+                            : step === 5
+                              ? 40
+                              : step === 6
+                                ? 50
+                                : step === 7
+                                  ? 70
+                                  : step === 8
+                                    ? 80
+                                    : step === 9
+                                      ? 90
+                                      : 100
+                    }
+                  />
+                ) 
               }
 
               {reportingPerson == 'myself' ? (
@@ -426,9 +451,8 @@ const MultiStepForm: React.FC<MultiStepFormProps> = ({
                             {step && step !== 12 && step !== 13 && (
                               <>
                                 <AnimateClick>
-
                                   <Button
-                                    className="w-32 mr-auto justify-self-start font-bold"
+                                    className="w-20 mr-auto justify-self-start font-bold"
                                     variant="primary"
                                     onClick={() => dispatch({ type: PREV_STEP })}
                                   >
@@ -442,7 +466,7 @@ const MultiStepForm: React.FC<MultiStepFormProps> = ({
                                 <div className='flex justify-between w-full'>
                                   <AnimateClick>
                                     <Button
-                                      className="w-32 mr-auto justify-self-start font-bold"
+                                      className="w-20 mr-auto justify-self-start font-bold"
                                       variant="primary"
                                       onClick={() => dispatch({ type: PREV_STEP })}
                                     >
@@ -491,7 +515,7 @@ const MultiStepForm: React.FC<MultiStepFormProps> = ({
                                                     : stepFromCookies === 10 ? 'ninethForm'
                                                       : 'tenthForm'
                                       }`}
-                                    className="w-32 font-bold ml-auto"
+                                    className="w-20 font-bold ml-auto"
                                     disabled={formErrors && true}
                                     variant={`${formErrors ? 'disabled' : 'primary'
                                       }`}
@@ -510,7 +534,7 @@ const MultiStepForm: React.FC<MultiStepFormProps> = ({
                                 <>
                                   <AnimateClick>
                                     <Button
-                                      className="w-32 mr-auto justify-self-start font-bold"
+                                      className="w-20 mr-auto justify-self-start font-bold"
                                       variant="primary"
                                       onClick={() => dispatch({ type: PREV_STEP })}
                                     >
@@ -524,7 +548,7 @@ const MultiStepForm: React.FC<MultiStepFormProps> = ({
                                   <div className='flex justify-between'>
                                     <AnimateClick>
                                       <Button
-                                        className="w-32 mr-auto justify-self-start font-bold"
+                                        className="w-20 mr-auto justify-self-start font-bold"
                                         variant="primary"
                                         onClick={() => dispatch({ type: PREV_STEP })}
                                       >
@@ -572,7 +596,7 @@ const MultiStepForm: React.FC<MultiStepFormProps> = ({
                                                       ? 'ninethForm'
                                                       : 'tenthForm'
                                         }`}
-                                      className="w-32 font-bold ml-auto"
+                                      className="w-20 font-bold ml-auto"
                                       disabled={formErrors && true}
                                       variant={`${formErrors ? 'disabled' : 'primary'
                                         }`}
@@ -592,7 +616,7 @@ const MultiStepForm: React.FC<MultiStepFormProps> = ({
                                   <>
                                     <AnimateClick>
                                       <Button
-                                        className="w-32 mr-auto justify-self-start font-bold"
+                                        className="w-20 mr-auto justify-self-start font-bold"
                                         variant="primary"
                                         onClick={() => dispatch({ type: PREV_STEP })}
                                       >
@@ -607,7 +631,7 @@ const MultiStepForm: React.FC<MultiStepFormProps> = ({
                                     <div className='flex justify-between'>
                                       <AnimateClick>
                                         <Button
-                                          className="w-32 mr-auto justify-self-start font-bold"
+                                          className="w-20 mr-auto justify-self-start font-bold"
                                           variant="primary"
                                           onClick={() => dispatch({ type: PREV_STEP })}
                                         >
@@ -658,7 +682,7 @@ const MultiStepForm: React.FC<MultiStepFormProps> = ({
                                                         : stepFromCookies === 10 ? 'ninethForm'
                                                           : 'tenthForm'
                                           }`}
-                                        className="w-32 font-bold ml-auto"
+                                        className="w-20 font-bold ml-auto"
                                         disabled={formErrors && true}
                                         variant={`${formErrors ? 'disabled' : 'primary'
                                           }`}

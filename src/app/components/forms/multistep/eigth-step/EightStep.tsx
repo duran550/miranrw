@@ -163,7 +163,6 @@ const EightStep: React.FC<EightStepProps> = ({ eightStepTranslation, id }) => {
     // isEditing && reportingPerson === 'myself'
     //   ? dispatch({ type: LAST_STEP, payload: 11 })
     //   : dispatch({ type: NEXT_STEP, payload: 'DATA 1' });
-    console.log(formValue, 'eightstep')
   };
 
   return (
@@ -174,7 +173,8 @@ const EightStep: React.FC<EightStepProps> = ({ eightStepTranslation, id }) => {
       className="lg:w-[25rem]"
     >
       <div className=''>
-        <FormHeader title={eightStepTranslation?.title} subTitle={eightStepTranslation.subTitle}/>
+        <FormHeader title={eightStepTranslation?.title} subTitle={eightStepTranslation.subTitle} paddingHorizontal={3}
+          paddingTop={1}/>
       </div>
 
       <div>

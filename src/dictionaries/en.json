@@ -219,7 +219,7 @@
           }
         },
         "thirdStepOrganization": {
-          "title": "What type of organization/institution is affected?",
+          "title": "What type of organization/ Institution is affected?",
           "mandatory": "* Mandatory field",
           "subTitle": "Multiple selections possible",
           "minCharacters": "A minimum of 4 Characters is expected",
@@ -283,7 +283,7 @@
           "forgetful": "I can't remember exactly when it happened.",
           "yearitHappened": "In what year did it happen?",
           "selectYear": "(Auswahl Jahr) Jahreszahl",
-          "options":[
+          "options": [
             {
               "label": "In which year did it happen?",
               "name": "datePeriod",
@@ -640,6 +640,36 @@
                 "id": "hav5",
                 "label": "Other, namely:"
               }
+            ],
+            "optionsYesOrganization": [
+              {
+                "iD": 1,
+                "name": "haveYouReportedYesOrganization",
+                "value": "The case was reported to the police.",
+                "id": "hav1",
+                "label": "The case was reported to the police."
+              },
+              {
+                "iD": 2,
+                "name": "haveYouReportedYesOrganization",
+                "value": "A counseling center was consulted.",
+                "id": "hav2",
+                "label": "A counseling center was consulted."
+              },
+              {
+                "iD": 3,
+                "name": "haveYouReportedYesOrganization",
+                "value": "The case was reported to another reporting office, namely:",
+                "id": "hav4",
+                "label": "The case was reported to another reporting office, namely:"
+              },
+              {
+                "iD": 4,
+                "name": "haveYouReportedYesOrganization",
+                "value": "Other, namely:",
+                "id": "hav5",
+                "label": "Other, namely:"
+              }
             ]
           }
         },
@@ -651,7 +681,7 @@
             "title": "What is your gender identity ?",
             "titleOnBehalf": "What is your gender identity?",
             "description": "Multiple selections possible",
-            "secondTitle":"Why do we ask for personal information?",
+            "secondTitle": "Why do we ask for personal information?",
             "data": [
               {
                 "id": "gender",
@@ -943,119 +973,136 @@
               "name": "whereDisHappened",
               "value": "Public offices and authorities",
               "id": "Ämter",
-              "label": "Public offices and authorities"
+              "label": "Public offices and authorities",
+              "examples": "e.g. Social Welfare Office | Job Center | Immigration Office"
             },
             {
               "iD": 2,
               "name": "whereDisHappened",
               "value": "Analog media",
               "id": "Analoge",
-              "label": "Analog media"
+              "label": "Analog media",
+              "examples": "e.g. Social Welfare Office | Job Center | Immigration Office"
             },
             {
               "iD": 3,
               "name": "whereDisHappened",
               "value": "Work",
               "id": "Arbeit",
-              "label": "Work"
+              "label": "Work",
+              "examples": "e.g. Social Welfare Office | Job Center | Immigration Office"
             },
             {
               "iD": 4,
               "name": "whereDisHappened",
               "value": "Education",
               "id": "Bildung",
-              "label": "Education"
+              "label": "Education",
+              "examples": "e.g. Social Welfare Office | Job Center | Immigration Office"
             },
             {
               "iD": 5,
               "name": "whereDisHappened",
               "value": "Digital space",
               "id": "digitaler",
-              "label": "Digital space"
+              "label": "Digital space",
+              "examples": "e.g. Social Welfare Office | Job Center | Immigration Office"
             },
             {
               "iD": 6,
               "name": "whereDisHappened",
               "value": "Emergency services",
               "id": "Einsatzorganisationen",
-              "label": "Emergency services"
+              "label": "Emergency services",
+              "examples": "e.g. Social Welfare Office | Job Center | Immigration Office"
             },
             {
               "iD": 7,
               "name": "whereDisHappened",
               "value": "Retail and services",
               "id": "Einzelhandel",
-              "label": "Retail and services"
+              "label": "Retail and services",
+              "examples": "e.g. Social Welfare Office | Job Center | Immigration Office"
             },
             {
               "iD": 8,
               "name": "whereDisHappened",
               "value": "Leisure",
               "id": "Freizeit",
-              "label": "Leisure"
+              "label": "Leisure",
+              "examples": "e.g. Social Welfare Office | Job Center | Immigration Office"
             },
             {
               "iD": 9,
               "name": "whereDisHappened",
               "value": "Health",
               "id": "Gesundheit",
-              "label": "Health"
+              "label": "Health",
+              "examples": "e.g. Social Welfare Office | Job Center | Immigration Office"
             },
             {
               "iD": 10,
               "name": "whereDisHappened",
               "value": "Justice",
               "id": "Justiz",
-              "label": "Justice"
+              "label": "Justice",
+              "examples": "e.g. Social Welfare Office | Job Center | Immigration Office"
             },
             {
               "iD": 11,
               "name": "whereDisHappened",
               "value": "Public space",
               "id": "Öffentlicher",
-              "label": "Public space"
+              "label": "Public space",
+              "examples": "e.g. Social Welfare Office | Job Center | Immigration Office"
             },
             {
               "iD": 12,
               "name": "whereDisHappened",
               "value": "Personal environment/private life",
               "id": "Persönliches",
-              "label": "Personal environment/private life"
+              "label": "Personal environment/private life",
+              "examples": "e.g. Social Welfare Office | Job Center | Immigration Office"
             },
             {
               "iD": 13,
               "name": "whereDisHappened",
               "value": "Police",
               "id": "Polizei",
-              "label": "Police"
+              "label": "Police",
+              "examples": "e.g. Social Welfare Office | Job Center | Immigration Office"
             },
             {
               "iD": 14,
               "name": "whereDisHappened",
               "value": "Social services",
               "id": "Soziale Dienste",
-              "label": "Social services"
+              "label": "Social services",
+              "examples": "e.g. Social Welfare Office | Job Center | Immigration Office"
             },
             {
               "iD": 15,
               "name": "whereDisHappened",
               "value": "Transportation",
               "id": "Verkehr",
-              "label": "Transportation"
+              "label": "Transportation",
+              "examples": "e.g. Social Welfare Office | Job Center | Immigration Office"
             },
             {
               "iD": 16,
               "name": "whereDisHappened",
               "value": "Housing",
               "id": "Wohnen",
-              "label": "Housing"
+              "label": "Housing",
+              "examples": "e.g. Social Welfare Office | Job Center | Immigration Office"
             },
             {
               "iD": 17,
               "name": "typeOfDisc",
               "value": "Other, specify",
               "id": "anderes",
-              "label": "Other, specify"
+              "label": "Other, specify",
+              "examples": "e.g. Social Welfare Office | Job Center | Immigration Office"
             }
           ]
         }

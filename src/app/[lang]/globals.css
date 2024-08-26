@@ -23,6 +23,32 @@ input:checked + div svg {
   @apply block;
 }
 
+@font-face {
+  font-family: "Rubik";
+  src: url("/fonts/Rubik/Rubik.ttk") format("opentype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "work_sans";
+  src: url("/fonts/work_sans/work_sans.ttk") format("opentype");
+}
+
+@font-face {
+  font-family: "Rubik-bold";
+  src: url("/fonts/Rubik/Rubik-Bold.ttf") format("opentype");
+}
+@font-face {
+  font-family: "work_sans-medium";
+  src: url("/fonts/work_sans/WorkSans-Medium.ttf") format("opentype");
+}
+
+@font-face {
+  font-family: "work-sans-bold";
+  src: url("/fonts/work_sans/WorkSans-Bold.ttf") format("opentype");
+}
+
 /* .MuiButtonBase-root
   .MuiPickersDay-root
   .Mui-selected

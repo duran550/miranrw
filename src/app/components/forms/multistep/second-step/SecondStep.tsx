@@ -79,13 +79,13 @@ const SecondStep: React.FC<SecondStepProps> = ({ secondStepTranslation }, id) =>
       <form
         onSubmit={handleSubmit(onSubmit)}
         id="firstForm"
-        className="h-full lg:w-[25rem]"
+        className="h-[full] lg:w-[24rem]"
       >
         <div className=''>
-          <FormHeader title={secondStepTranslation?.title} mandatory={secondStepTranslation?.mandatory}/>
+          <FormHeader title={secondStepTranslation?.title} mandatory={secondStepTranslation?.mandatory} paddingHorizontal={4} paddingTop={2}/>
         </div>
 
-        <div className=''>
+        <div className='-ml-3'>
           <RadioGroup
             props={register('identity', { required: true })}
             options={secondStepTranslation?.options}

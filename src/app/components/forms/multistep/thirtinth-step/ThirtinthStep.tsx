@@ -103,6 +103,8 @@ const ThirtinthStep: React.FC<ThirtinthStepProp> = ({ thirtinthStepTranslation, 
         <FormHeader
           title={thirtinthStepTranslation?.title}
           subTitle={thirtinthStepTranslation?.description}
+          paddingHorizontal={3}
+          paddingTop={1}
         />
       </div>
       {thirtinthStepTranslation?.choices?.sort((a, b) => a.label.localeCompare(b.label)).map((choice: any, index) => {
@@ -110,9 +112,11 @@ const ThirtinthStep: React.FC<ThirtinthStepProp> = ({ thirtinthStepTranslation, 
         return (
           <div key={choice.iD}>
             <CheckboxWithQ
+            variant="black"
               props={register('disciminationArea')}
               name={choice.name}
               id={choice.id}
+              examples={choice?.examples}
               value={choice.value}
               label={choice.label}
             />

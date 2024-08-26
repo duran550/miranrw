@@ -132,12 +132,15 @@ const TenthStep: React.FC<TenthStepProps> = ({ tenthStepTranslation }, id) => {
   };
 
   return (
-    <div className='relative lg:w-[23rem]'>
-     {reportingPerson === 'andere' && <div className='w-full xl:w-[22vw] xl:absolute xl:left-[35rem] xl:top-10'>
-        <div className='lg:bg-white mb-8 md:mb-12 border-primaryColor border-2 rounded-md p-4 h-[142px]'>
-          <h1 className=" font-Rubik font-black text-2xl mb-2">
-          {tenthStepTranslation.firstBlock.secondTitle}
-        </h1>
+    <div className='relative lg:w-[30rem]'>
+      <h1 className="font-rubik font-black xl:text-[28px] mb-4 ml-[105px] scale-150">
+        {tenthStepTranslation?.mainTitle}
+      </h1>
+      {reportingPerson === 'andere' && <div className='w-full xl:w-[22vw] xl:absolute xl:left-[34rem] xl:top-14'>
+        <div className='lg:bg-white mb-8 md:mb-12 border-primaryColor border-2 rounded-md p-4 h-[116px]'>
+          <h1 className=" font-rubik font-black text-2xl mb-2">
+            {tenthStepTranslation.firstBlock.secondTitle}
+          </h1>
         </div>
       </div>}
       <form
@@ -147,98 +150,48 @@ const TenthStep: React.FC<TenthStepProps> = ({ tenthStepTranslation }, id) => {
         id={'secondForm'}
         className=""
       >
-
-        {reportingPerson !== 'organization' && (
-          <>
-            <h1 className="font-bold text-3xl mb-2 ">
-              {tenthStepTranslation?.mainTitle}
-            </h1>
-            <div className="mt-0">
-              <div className=''>
-                <FormHeader
-                  title={
-                    reportingPerson !== 'myself'
-                      ? tenthStepTranslation?.firstBlock?.titleOnBehalf
-                      : tenthStepTranslation?.firstBlock?.title
-                  }
-                  subTitle={tenthStepTranslation?.firstBlock?.description}
-                />
-              </div>
-              <div className="-mt-8">
-                {tenthStepTranslation?.firstBlock?.data?.map((element: any) => (
-                  <Checkbox
-                    key={element?.iD}
-                    id={element?.id}
-                    name={element?.name}
-                    props={register('gender')}
-                    value={element?.value}
-                    label={element?.label}
-                  />
-                ))}
-                <div className="ml-14">
-                  {gender &&
-                    gender?.includes(
-                      tenthStepTranslation?.firstBlock?.data[11]?.value
-                    ) && (
-                      <InputField
-                        name="genderFreeField"
-                        props={register('genderFreeField')}
-                      />
-                    )}
-                  {gender?.length > 0 &&
-                    gender?.includes(
-                      tenthStepTranslation?.firstBlock?.data[11]?.value
-                    ) &&
-                    genderFreeField?.length !== 0 &&
-                    formErrors && (
-                      <label className="text-red-500 text-xs">
-                        {tenthStepTranslation?.minCharacters}
-                      </label>
-                    )}
-                </div>
-              </div>
-            </div>
-            {reportingPerson !== 'andere' && (
-              <div className="mt-8">
-                <div className='lg:w-[25.99rem]'>
+        <div className='lg:w-[24rem]'>
+          {reportingPerson !== 'organization' && (
+            <div className=''>
+              <div className="mt-0">
+                <div className='xl:w-[23rem]'>
                   <FormHeader
                     title={
                       reportingPerson !== 'myself'
-                        ? tenthStepTranslation?.secondBlock?.titleOnBehalf
-                        : tenthStepTranslation?.secondBlock?.title
+                        ? tenthStepTranslation?.firstBlock?.titleOnBehalf
+                        : tenthStepTranslation?.firstBlock?.title
                     }
-                    subTitle={tenthStepTranslation?.secondBlock?.description}
+                    subTitle={tenthStepTranslation?.firstBlock?.description}
+                    paddingHorizontal={3}
+                    paddingTop={1}
                   />
                 </div>
                 <div className="-mt-8">
-                  {tenthStepTranslation?.secondBlock?.data?.map(
-                    (element: any) => (
-                      <Checkbox
-                        key={element?.iD}
-                        id={element?.id}
-                        name={element?.name}
-                        props={register('sexualOrientation')}
-                        value={element?.value}
-                        label={element?.label}
-                      />
-                    )
-                  )}
-
+                  {tenthStepTranslation?.firstBlock?.data?.map((element: any) => (
+                    <Checkbox
+                      key={element?.iD}
+                      id={element?.id}
+                      name={element?.name}
+                      props={register('gender')}
+                      value={element?.value}
+                      label={element?.label}
+                    />
+                  ))}
                   <div className="ml-14">
-                    {sexualOrientation &&
-                      sexualOrientation?.includes(
-                        tenthStepTranslation?.secondBlock?.data[13]?.value
+                    {gender &&
+                      gender?.includes(
+                        tenthStepTranslation?.firstBlock?.data[11]?.value
                       ) && (
                         <InputField
-                          name=""
-                          props={register('sexualOrientationFreeField')}
+                          name="genderFreeField"
+                          props={register('genderFreeField')}
                         />
                       )}
-                    {sexualOrientation?.length > 0 &&
-                      sexualOrientation?.includes(
-                        tenthStepTranslation?.secondBlock?.data[13]?.value
+                    {gender?.length > 0 &&
+                      gender?.includes(
+                        tenthStepTranslation?.firstBlock?.data[11]?.value
                       ) &&
-                      sexualOrientationFreeField?.length !== 0 &&
+                      genderFreeField?.length !== 0 &&
                       formErrors && (
                         <label className="text-red-500 text-xs">
                           {tenthStepTranslation?.minCharacters}
@@ -247,48 +200,102 @@ const TenthStep: React.FC<TenthStepProps> = ({ tenthStepTranslation }, id) => {
                   </div>
                 </div>
               </div>
-            )}
+              {reportingPerson !== 'andere' && (
+                <div className="mt-8">
+                  <div className='xl:w-[24rem]'>
+                    <FormHeader
+                      title={
+                        reportingPerson !== 'myself'
+                          ? tenthStepTranslation?.secondBlock?.titleOnBehalf
+                          : tenthStepTranslation?.secondBlock?.title
+                      }
+                      subTitle={tenthStepTranslation?.secondBlock?.description}
+                      paddingHorizontal={3}
+                    paddingTop={1}
+                    />
+                  </div>
+                  <div className="-mt-8">
+                    {tenthStepTranslation?.secondBlock?.data?.map(
+                      (element: any) => (
+                        <Checkbox
+                          key={element?.iD}
+                          id={element?.id}
+                          name={element?.name}
+                          props={register('sexualOrientation')}
+                          value={element?.value}
+                          label={element?.label}
+                        />
+                      )
+                    )}
 
-            <div className="mt-8">
-              <div className=''>
-                <FormHeader
-                  title={
-                    reportingPerson !== 'myself'
-                      ? tenthStepTranslation?.thirdBlock?.titleOnBehalf
-                      : tenthStepTranslation?.thirdBlock?.title
-                  }
-                />
-              </div>
-              <div className="-mt-8">
-                {
-                  <RadioGroup
-                    options={tenthStepTranslation?.thirdBlock?.data}
-                    props={register('age')}
-                    title=""
+                    <div className="ml-14">
+                      {sexualOrientation &&
+                        sexualOrientation?.includes(
+                          tenthStepTranslation?.secondBlock?.data[13]?.value
+                        ) && (
+                          <InputField
+                            name=""
+                            props={register('sexualOrientationFreeField')}
+                          />
+                        )}
+                      {sexualOrientation?.length > 0 &&
+                        sexualOrientation?.includes(
+                          tenthStepTranslation?.secondBlock?.data[13]?.value
+                        ) &&
+                        sexualOrientationFreeField?.length !== 0 &&
+                        formErrors && (
+                          <label className="text-red-500 text-xs">
+                            {tenthStepTranslation?.minCharacters}
+                          </label>
+                        )}
+                    </div>
+                  </div>
+                </div>
+              )}
+
+              <div className="mt-8">
+                <div className=''>
+                  <FormHeader
+                    title={
+                      reportingPerson !== 'myself'
+                        ? tenthStepTranslation?.thirdBlock?.titleOnBehalf
+                        : tenthStepTranslation?.thirdBlock?.title
+                    }
+                    paddingHorizontal={3}
+                    paddingTop={1}
                   />
-                }
+                </div>
+                <div className="-mt-8">
+                  {
+                    <RadioGroup
+                      options={tenthStepTranslation?.thirdBlock?.data}
+                      props={register('age')}
+                      title=""
+                    />
+                  }
+                </div>
+              </div>
+            </ div>
+          )}
+
+          {reportingPerson === 'organization' && (
+            <div className="mt-8">
+              <FormHeader title={tenthStepTranslation?.fourthBlock?.title} />
+              <div className="-mt-8">
+                {tenthStepTranslation?.fourthBlock?.data?.map((element: any) => (
+                  <Checkbox
+                    key={element?.iD}
+                    id={element?.id}
+                    name={element?.name}
+                    props={register('validation')}
+                    value={element?.value}
+                    label={element?.label}
+                  />
+                ))}
               </div>
             </div>
-          </>
-        )}
-
-        {reportingPerson === 'organization' && (
-          <div className="mt-8">
-            <FormHeader title={tenthStepTranslation?.fourthBlock?.title} />
-            <div className="-mt-8">
-              {tenthStepTranslation?.fourthBlock?.data?.map((element: any) => (
-                <Checkbox
-                  key={element?.iD}
-                  id={element?.id}
-                  name={element?.name}
-                  props={register('validation')}
-                  value={element?.value}
-                  label={element?.label}
-                />
-              ))}
-            </div>
-          </div>
-        )}
+          )}
+        </div>
       </form>
     </div>
   );

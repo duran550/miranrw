@@ -15,7 +15,7 @@ interface onBehalfModalProps {
     onClose: () => void;
     isOpen: boolean;
     Modaldes: string;
-    modalBtn: string;
+    modalBtn?: string;
     formErrors?: any;
     children?: any;
 }
@@ -31,33 +31,22 @@ function SubmitModal({
     modalBtn,
     formErrors,
     children
-}: onBehalfModalProps) {
+  }: onBehalfModalProps) {
     return (
-        <div>
-            <CustomModal
-                onClose={onClose}
-                isOpen={isOpen}
-                positon="center"
-                hideCloseButton={false}
-                isDismissable={false}
-                size='2xl'
-            >
-                {children}
-                <AnimateClick>
-                    <Button
-                        form={`${'tenthForm'}`}
-                        //   onClick={onClose}
-                        type='submit'
-                        disabled={formErrors && true}
-                        variant={`${formErrors ? 'disabled' : 'primary'}`}
-                        className="font-bold w-fit rounded-full mb-6"
-                    >
-                        {modalBtn}
-                    </Button>
-                </AnimateClick>
-            </CustomModal>
-        </div>
+      <div>
+        <CustomModal
+          onClose={onClose}
+          isOpen={isOpen}
+          positon="center"
+          hideCloseButton={true}
+          isDismissable={false}
+          size='sm'
+        >
+          {children}
+        </CustomModal>
+      </div>
     );
-}
+  }
+  
 
 export default SubmitModal;

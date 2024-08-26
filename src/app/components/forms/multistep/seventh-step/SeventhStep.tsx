@@ -126,13 +126,15 @@ const SeventhStep: React.FC<SeventhStepProps> = ({
     <form
       onSubmit={handleSubmit(onSubmit)}
       id={'fifthForm'}
-      className="lg:w-[25rem]"
+      className="lg:w-[24rem]"
     >
 
       <div className=''>
         <FormHeader
           title={seventhStepTranslation?.title}
           subTitle={seventhStepTranslation?.description}
+          paddingHorizontal={3}
+          paddingTop={1}
         />
       </div>
 

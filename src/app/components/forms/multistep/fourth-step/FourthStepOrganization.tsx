@@ -71,10 +71,12 @@ const FourthStepOrganization: React.FC<FourthStepOrganizationProps> = ({
       id="thirdForm"
       className="flex flex-col relative"
     >
-      <div className="lg:w-[25rem]">
+      <div className="lg:w-[24rem]">
         <FormHeader
           title={fourthStepOrganizationTranslation?.title}
           subTitle={fourthStepOrganizationTranslation?.subTitle}
+          paddingHorizontal={3}
+          paddingTop={1}
         />
         <div className="">
           <RadioGroup

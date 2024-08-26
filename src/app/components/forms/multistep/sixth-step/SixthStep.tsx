@@ -110,18 +110,17 @@ const SixthStep: React.FC<SixthStepProps> = ({ sixthStepTranslation, id, lang })
       // id={'eighthForm'}
       id={(reportingPerson === 'myself' || reportingPerson === 'andere') ? 'eighthForm' : 'seventhForm'}
       onSubmit={handleSubmit(onSubmit)}
-      className="lg:w-[25rem]"
+      className="lg:w-[23.8rem]"
     >
       <div className=''>
         <FormHeader
           title={sixthStepTranslation?.title}
           subTitle={sixthStepTranslation?.description}
+          paddingHorizontal={3}
+          paddingTop={1}
         />
       </div>
       {sixthStepTranslation?.choices?.sort((a, b) => a.label.localeCompare(b.label)).map((choice: any, index) => {
-
-        console.log(choice.iD === 9, 'log00')
-        console.log(lang, 'log01')
 
         return (
           <div key={choice.iD}>

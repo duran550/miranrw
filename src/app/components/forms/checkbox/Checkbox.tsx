@@ -20,7 +20,7 @@ const Checkbox: React.FC<CheckboxProps> = ({
 }) => {
   return (
     <div key={id} className="p-2">
-      <div className="flex items-center mr-4 mb-2">
+      <div className="flex items-center mr-4">
         <input
           key={id}
           type="checkbox"
@@ -48,7 +48,7 @@ const Checkbox: React.FC<CheckboxProps> = ({
             />
           </svg>
         </div>
-        <label htmlFor={id} className="select-none ml-2 font-normal">
+        <label htmlFor={id} className="select-none ml-2 font-normal text-sm font-worksans">
           {label}
         </label>
       </div>

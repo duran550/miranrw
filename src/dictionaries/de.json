@@ -219,7 +219,7 @@
           }
         },
         "thirdStepOrganization": {
-          "title": "Was für eine Organisation/Institution ist betroffen?",
+          "title": "Was für eine Organisation/ Institution ist betroffen?",
           "subTitle": "Mehrfachnennung möglich",
           "minCharacters": "Ein Minimum von 4 Zeichen wird erwartet",
           "data": [
@@ -589,6 +589,7 @@
         },
         "ninethStep": {
           "title": "Hast du bereits andere Maßnahmen ergriffen?",
+          "organizationTitle":"Wurden bereits andere Maßnahmen ergriffen?",
           "description": "Mehrfachnennung möglich",
           "minCharacters": "Es sind mindestens drei Zeichen erforderlich.",
           "mandatory": "* Pflichtfeld",
@@ -641,6 +642,36 @@
               {
                 "iD": 5,
                 "name": "haveYouReportedYes",
+                "value": "Anderes, und zwar:",
+                "id": "hav5",
+                "label": "Anderes, und zwar:"
+              }
+            ],
+            "optionsYesOrganization": [
+              {
+                "iD": 1,
+                "name": "haveYouReportedYesOrganization",
+                "value": "Der Fall wurde bei der Polizei angezeigt.",
+                "id": "hav1",
+                "label": "Der Fall wurde bei der Polizei angezeigt."
+              },
+              {
+                "iD": 2,
+                "name": "haveYouReportedYesOrganization",
+                "value": "Es wurde eine Beratungsstelle aufgesucht.",
+                "id": "hav2",
+                "label": "Es wurde eine Beratungsstelle aufgesucht."
+              },
+              {
+                "iD": 3,
+                "name": "haveYouReportedYesOrganization",
+                "value": "Der Fall wurde bei einer anderen Meldestelle, gemeldet, und zwar: ",
+                "id": "hav4",
+                "label": "Der Fall wurde bei einer anderen Meldestelle, gemeldet, und zwar: "
+              },
+              {
+                "iD": 4,
+                "name": "haveYouReportedYesOrganization",
                 "value": "Anderes, und zwar:",
                 "id": "hav5",
                 "label": "Anderes, und zwar:"
@@ -745,7 +776,7 @@
             ]
           },
           "secondBlock": {
-            "title": "Was ist deine sexuelle und/oder romantische Orientierung?",
+            "title": "Was ist deine sexuelle und/ oder romantische Orientierung?",
             "titleOnBehalf": "Was ist die sexuelle und/oder romantische Orientierung der betroffenen Person?",
             "description": "Mehrfachnennung möglich",
             "data": [
@@ -947,119 +978,148 @@
               "name": "whereDisHappened",
               "value": "Ämter und Behörden",
               "id": "Ämter",
-              "label": "Ämter und Behörden"
+              "label": "Ämter und Behörden",
+              "examples": "z.B. Sozialamt | Jobcenter | Ausländerbehörde"
             },
             {
               "iD": 2,
               "name": "whereDisHappened",
               "value": "Analoge Medien",
               "id": "Analoge",
-              "label": "Analoge Medien"
+              "label": "Analoge Medien",
+              "examples": "z.B. Sozialamt | Jobcenter | Ausländerbehörde"
+
             },
             {
               "iD": 3,
               "name": "whereDisHappened",
               "value": "Arbeit",
               "id": "Arbeit ",
-              "label": "Arbeit "
+              "label": "Arbeit ",
+              "examples": "z.B. Sozialamt | Jobcenter | Ausländerbehörde"
             },
             {
               "iD": 4,
               "name": "whereDisHappened",
               "value": "Bildung",
               "id": "Bildung",
-              "label": "Bildung"
+              "label": "Bildung",
+              "examples": "z.B. Sozialamt | Jobcenter | Ausländerbehörde"
+
             },
             {
               "iD": 5,
               "name": "whereDisHappened",
               "value": "digitaler Raum ",
               "id": "digitaler",
-              "label": "digitaler Raum "
+              "label": "digitaler Raum ",
+              "examples": "z.B. Sozialamt | Jobcenter | Ausländerbehörde"
             },
             {
               "iD": 6,
               "name": "whereDisHappened",
               "value": "Einsatzorganisationen ",
               "id": "Einsatzorganisationen ",
-              "label": "Einsatzorganisationen "
+              "label": "Einsatzorganisationen ",
+              "examples": "z.B. Sozialamt | Jobcenter | Ausländerbehörde"
+
             },
             {
               "iD": 7,
               "name": "whereDisHappened",
               "value": "Einzelhandel und Dienstleistungen ",
               "id": "Einzelhandel",
-              "label": "Einzelhandel und Dienstleistungen "
+              "label": "Einzelhandel und Dienstleistungen ",
+              "examples": "z.B. Sozialamt | Jobcenter | Ausländerbehörde"
+
             },
             {
               "iD": 8,
               "name": "whereDisHappened",
               "value": "Freizeit",
               "id": "Freizeit",
-              "label": "Freizeit"
+              "label": "Freizeit",
+              "examples": "z.B. Sozialamt | Jobcenter | Ausländerbehörde"
             },
             {
               "iD": 9,
               "name": "whereDisHappened",
               "value": "Gesundheit ",
               "id": "Gesundheit ",
-              "label": "Gesundheit "
+              "label": "Gesundheit ",
+              "examples": "z.B. Sozialamt | Jobcenter | Ausländerbehörde"
+
             },
             {
               "iD": 10,
               "name": "whereDisHappened",
               "value": "Justiz",
               "id": "Justiz",
-              "label": "Justiz"
+              "label": "Justiz",
+              "examples": "z.B. Sozialamt | Jobcenter | Ausländerbehörde"
+
             },
             {
               "iD": 11,
               "name": "whereDisHappened",
               "value": "Öffentlicher Raum ",
               "id": "Öffentlicher",
-              "label": "Öffentlicher Raum "
+              "label": "Öffentlicher Raum ",
+              "examples": "z.B. Sozialamt | Jobcenter | Ausländerbehörde"
+
             },
             {
               "iD": 12,
               "name": "whereDisHappened",
               "value": "Persönliches Umfeld/Privatleben ",
               "id": "Persönliches",
-              "label": "Persönliches Umfeld/Privatleben "
+              "label": "Persönliches Umfeld/Privatleben ",
+              "examples": "z.B. Sozialamt | Jobcenter | Ausländerbehörde"
+
             },
             {
               "iD": 13,
               "name": "whereDisHappened",
               "value": "Polizei",
               "id": "Polizei",
-              "label": "Polizei"
+              "label": "Polizei",
+              "examples": "z.B. Sozialamt | Jobcenter | Ausländerbehörde"
+
             },
             {
               "iD": 14,
               "name": "whereDisHappened",
               "value": "Soziale Dienste",
               "id": "Soziale Dienste",
-              "label": "Soziale Dienste"
+              "label": "Soziale Dienste",
+              "examples": "z.B. Sozialamt | Jobcenter | Ausländerbehörde"
+
             },
             {
               "iD": 15,
               "name": "whereDisHappened",
               "value": "Verkehr ",
               "id": "Verkehr ",
-              "label": "Verkehr"
+              "label": "Verkehr",
+              "examples": "z.B. Sozialamt | Jobcenter | Ausländerbehörde"
+
             },
             {
               "iD": 16,
               "name": "whereDisHappened",
               "value": "Wohnen",
               "id": "Wohnen",
-              "label": "Wohnen"
+              "label": "Wohnen",
+              "examples": "z.B. Sozialamt | Jobcenter | Ausländerbehörde"
+
             },
             {
               "iD": 17,
               "name": "typeOfDisc",
               "value": "Anderes, und zwar",
               "id": "anderes",
-              "label": "Anderes, und zwar"
+              "label": "Anderes, und zwar",
+              "examples": "z.B. Sozialamt | Jobcenter | Ausländerbehörde"
             }
           ]
         }

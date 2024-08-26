@@ -3,7 +3,7 @@ export type ThirtinthStepProp = {
       title: string;
       description: string;
       mandatory: string;
-      choices: Array<{ iD: number; id: string; value: string; label: string }>;
+      choices: Array<{ iD: number; id: string; value: string; label: string, examples:string }>;
     };
     id?: string;
     lang?:any;

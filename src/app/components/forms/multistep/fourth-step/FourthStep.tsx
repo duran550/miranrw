@@ -285,6 +285,8 @@ const FourthStep: React.FC<FourthStepProps> = ({
               title={fourthStepTranslation?.title}
               subTitle={fourthStepTranslation?.description}
               mandatory={fourthStepTranslation.mandatory}
+              paddingHorizontal={3}
+                    paddingTop={1}
             />
           </div>
           <div className='grid grid-cols-1 xl:grid-cols-2 gap-10 xl:gap-22 xl:w-[54vw]'>

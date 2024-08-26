@@ -18,6 +18,7 @@ const config: Config = {
 
       fontFamily: {
         rubik: ['Rubik', 'sans-serif'],
+        worksans: ['work_sans', 'sans-serif']
       },
 
       colors: {

@@ -18,7 +18,7 @@ const NinethStep: React.FC<NinethStepProps> = ({
 }) => {
 
   const { dispatch, isEditing, reportingPerson, formErrors, id_, formValue } = useFormContext();
-  const [question] = useState<string>(ninethStepTranslation?.title);
+  const [question] = useState<string>(reportingPerson === 'organization' ? ninethStepTranslation.organizationTitle : ninethStepTranslation.title);
 
   // useEffect(()=>{
   //   if (formValue && formValue!=='') {
@@ -27,7 +27,7 @@ const NinethStep: React.FC<NinethStepProps> = ({
   //       : setFormCookies(formValue, SEVENTH_FORM);
 
   //       console.log(formValue, 'valueeeeeeeeeee');
-        
+
   //   }
   // },[])
 
@@ -52,7 +52,7 @@ const NinethStep: React.FC<NinethStepProps> = ({
   useScrollOnTop();
 
   useEffect(() => {
-   
+
     dispatch({ type: FORM_ERRORS, payload: false });
     // Getting values from the form
     let formValues: {
@@ -61,9 +61,9 @@ const NinethStep: React.FC<NinethStepProps> = ({
       haveYouReportedYesFreeField1: string;
       haveYouReportedYesFreeField2: string;
       question: string;
-    } = 
-    (reportingPerson == 'myself') ? 
-    getFormCookies(ELEVENTH_STEP) : reportingPerson == 'andere' ? getFormCookies(TENTH_FORM) : getFormCookies(TENTH_FORM)
+    } =
+      (reportingPerson == 'myself') ?
+        getFormCookies(ELEVENTH_STEP) : reportingPerson == 'andere' ? getFormCookies(TENTH_FORM) : getFormCookies(TENTH_FORM)
 
     // (reportingPerson == 'myself' || reportingPerson == 'andere')
     //          ? setFormCookies(dataWithQuestion, TENTH_FORM)
@@ -122,16 +122,16 @@ const NinethStep: React.FC<NinethStepProps> = ({
           )
         ) {
           dispatch({ type: FORM_ERRORS, payload: true });
-        
+
         }
       }
-        if (!isValid) {
-          dispatch({ type: FORM_ERRORS, payload: true });
-        } else {
-          dispatch({ type: FORM_ERRORS, payload: false });
-        }
+      if (!isValid) {
+        dispatch({ type: FORM_ERRORS, payload: true });
+      } else {
+        dispatch({ type: FORM_ERRORS, payload: false });
+      }
 
-      
+
 
       // Clear field when no selected
     } else {
@@ -172,40 +172,40 @@ const NinethStep: React.FC<NinethStepProps> = ({
 
   // Triggered when submitting form
   const onSubmit: SubmitHandler<NinethFormValues> = (data) => {
-      // let formValues: {
-      //   formOfDisc: string;
-      //   formOfDiscYes: string[];
-      //   formOfDiscYesFreeField: string;
-      //   question: string;
-      // } = getFormCookies(EIGTH_FORM);
+    // let formValues: {
+    //   formOfDisc: string;
+    //   formOfDiscYes: string[];
+    //   formOfDiscYesFreeField: string;
+    //   question: string;
+    // } = getFormCookies(EIGTH_FORM);
 
-      // if (formValues) {
-        // clearFormCookiesStep(EIGTH_FORM);
-          let step = getFormStep();
-           if (data.haveYouReported && data.haveYouReported.length < 5) {
-            
-             let dataWithQuestion = {
-               question,
-               step,
-               haveYouReported: data.haveYouReported,
-               haveYouReportedYes: [],
-             };
-             // dispatch({ type: ID_FORM, payload: id });
-             //  dispatch({ type: FORM_VALUE, payload: dataWithQuestion });
-             (reportingPerson == 'myself')
-               ? setFormCookies(dataWithQuestion, ELEVENTH_STEP)
-               : reportingPerson === 'andere' ? setFormCookies(dataWithQuestion, TENTH_FORM) : setFormCookies(dataWithQuestion, TENTH_FORM);
-           } else {
-            
-             let dataWithQuestion = { question, step, ...data };
-            //  id === 'tenthForm'
-            (reportingPerson == 'myself')
-               ? setFormCookies(dataWithQuestion, ELEVENTH_STEP)
-               : reportingPerson === 'andere' ? setFormCookies(dataWithQuestion, TENTH_FORM) : setFormCookies(dataWithQuestion, TENTH_FORM);
-           }
-      
-  
-   dispatch({ type: NEXT_STEP, payload: 'DATA 1' });
+    // if (formValues) {
+    // clearFormCookiesStep(EIGTH_FORM);
+    let step = getFormStep();
+    if (data.haveYouReported && data.haveYouReported.length < 5) {
+
+      let dataWithQuestion = {
+        question,
+        step,
+        haveYouReported: data.haveYouReported,
+        haveYouReportedYes: [],
+      };
+      // dispatch({ type: ID_FORM, payload: id });
+      //  dispatch({ type: FORM_VALUE, payload: dataWithQuestion });
+      (reportingPerson == 'myself')
+        ? setFormCookies(dataWithQuestion, ELEVENTH_STEP)
+        : reportingPerson === 'andere' ? setFormCookies(dataWithQuestion, TENTH_FORM) : setFormCookies(dataWithQuestion, TENTH_FORM);
+    } else {
+
+      let dataWithQuestion = { question, step, ...data };
+      //  id === 'tenthForm'
+      (reportingPerson == 'myself')
+        ? setFormCookies(dataWithQuestion, ELEVENTH_STEP)
+        : reportingPerson === 'andere' ? setFormCookies(dataWithQuestion, TENTH_FORM) : setFormCookies(dataWithQuestion, TENTH_FORM);
+    }
+
+
+    dispatch({ type: NEXT_STEP, payload: 'DATA 1' });
     // isEditing && reportingPerson === 'myself'
     //   ? dispatch({ type: LAST_STEP, payload: 11 })
     //   : dispatch({ type: NEXT_STEP, payload: 'DATA 1' });
@@ -218,12 +218,14 @@ const NinethStep: React.FC<NinethStepProps> = ({
       onSubmit={handleSubmit(onSubmit)}
       // id={id === 'tenthForm' ? 'tenthForm' : 'eighthForm'}
       id={(reportingPerson == 'myself' || reportingPerson == 'andere') ? 'tenthForm' : 'ninethForm'}
-      className="lg:w-[25rem]"
+      className="lg:w-[24rem]"
     >
       <div className=''>
         <FormHeader
-          title={ninethStepTranslation?.title}
+          title={reportingPerson !== 'organization' ? ninethStepTranslation?.title : ninethStepTranslation.organizationTitle}
           subTitle={ninethStepTranslation?.description}
+          paddingHorizontal={3}
+          paddingTop={1}
         />
       </div>
       <div>
@@ -234,89 +236,160 @@ const NinethStep: React.FC<NinethStepProps> = ({
         <div className="ml-8">
           {haveYouReported ===
             ninethStepTranslation?.data?.options[1]?.value && (
-            <>
-              {haveYouReported && (
-                <p className="text-xs">{ninethStepTranslation?.mandatory}</p>
-              )}
-              <div>
-                <Checkbox
-                  key={ninethStepTranslation?.data?.optionsYes[0]?.iD}
-                  id={ninethStepTranslation?.data?.optionsYes[0]?.id}
-                  name={ninethStepTranslation?.data?.optionsYes[0]?.name}
-                  props={register('haveYouReportedYes', { required: true })}
-                  value={ninethStepTranslation?.data?.optionsYes[0]?.value}
-                  label={ninethStepTranslation?.data?.optionsYes[0]?.label}
-                />
-              </div>
-              <div>
-                <Checkbox
-                  key={ninethStepTranslation?.data?.optionsYes[1]?.iD}
-                  id={ninethStepTranslation?.data?.optionsYes[1]?.id}
-                  name={ninethStepTranslation?.data?.optionsYes[1]?.name}
-                  props={register('haveYouReportedYes', { required: true })}
-                  value={ninethStepTranslation?.data?.optionsYes[1]?.value}
-                  label={ninethStepTranslation?.data?.optionsYes[1]?.label}
-                />
-              </div>
-              <div>
-                <Checkbox
-                  key={ninethStepTranslation?.data?.optionsYes[2]?.iD}
-                  id={ninethStepTranslation?.data?.optionsYes[2]?.id}
-                  name={ninethStepTranslation?.data?.optionsYes[2]?.name}
-                  props={register('haveYouReportedYes', { required: true })}
-                  value={ninethStepTranslation?.data?.optionsYes[2]?.value}
-                  label={ninethStepTranslation?.data?.optionsYes[2]?.label}
-                />
-              </div>
-              <div>
-                <Checkbox
-                  key={ninethStepTranslation?.data?.optionsYes[3]?.iD}
-                  id={ninethStepTranslation?.data?.optionsYes[3]?.id}
-                  name={ninethStepTranslation?.data?.optionsYes[3]?.name}
-                  props={register('haveYouReportedYes', { required: true })}
-                  value={ninethStepTranslation?.data?.optionsYes[3]?.value}
-                  label={ninethStepTranslation?.data?.optionsYes[3]?.label}
-                />
-                {/* First freeText field */}
-                {haveYouReported ===
-                  ninethStepTranslation?.data?.options[1].value &&
-                  haveYouReportedYes &&
-                  haveYouReportedYes?.includes(
-                    ninethStepTranslation?.data?.optionsYes[3].value
-                  ) && (
-                    <div className="lg:ml-16 mb-4">
-                      <InputField
-                        name="haveYouReportedYesFreeField1"
-                        props={register('haveYouReportedYesFreeField1', {
-                          required: true,
-                          minLength: 3,
-                        })}
-                      />
-                      <p className="text-xs my-4 text-red-600">
-                        {haveYouReportedYesFreeField1 &&
-                          haveYouReportedYesFreeField1.length < 3 &&
-                          ninethStepTranslation?.minCharacters}
-                      </p>
-                    </div>
+
+              reportingPerson !== 'organization' ? <>
+                {haveYouReported && (
+                  <p className="text-xs">{ninethStepTranslation?.mandatory}</p>
+                )}
+                <div>
+                  <Checkbox
+                    key={ninethStepTranslation?.data?.optionsYes[0]?.iD}
+                    id={ninethStepTranslation?.data?.optionsYes[0]?.id}
+                    name={ninethStepTranslation?.data?.optionsYes[0]?.name}
+                    props={register('haveYouReportedYes', { required: true })}
+                    value={ninethStepTranslation?.data?.optionsYes[0]?.value}
+                    label={ninethStepTranslation?.data?.optionsYes[0]?.label}
+                  />
+                </div>
+                <div>
+                  <Checkbox
+                    key={ninethStepTranslation?.data?.optionsYes[1]?.iD}
+                    id={ninethStepTranslation?.data?.optionsYes[1]?.id}
+                    name={ninethStepTranslation?.data?.optionsYes[1]?.name}
+                    props={register('haveYouReportedYes', { required: true })}
+                    value={ninethStepTranslation?.data?.optionsYes[1]?.value}
+                    label={ninethStepTranslation?.data?.optionsYes[1]?.label}
+                  />
+                </div>
+                <div>
+                  <Checkbox
+                    key={ninethStepTranslation?.data?.optionsYes[2]?.iD}
+                    id={ninethStepTranslation?.data?.optionsYes[2]?.id}
+                    name={ninethStepTranslation?.data?.optionsYes[2]?.name}
+                    props={register('haveYouReportedYes', { required: true })}
+                    value={ninethStepTranslation?.data?.optionsYes[2]?.value}
+                    label={ninethStepTranslation?.data?.optionsYes[2]?.label}
+                  />
+                </div>
+                <div>
+                  <Checkbox
+                    key={ninethStepTranslation?.data?.optionsYes[3]?.iD}
+                    id={ninethStepTranslation?.data?.optionsYes[3]?.id}
+                    name={ninethStepTranslation?.data?.optionsYes[3]?.name}
+                    props={register('haveYouReportedYes', { required: true })}
+                    value={ninethStepTranslation?.data?.optionsYes[3]?.value}
+                    label={ninethStepTranslation?.data?.optionsYes[3]?.label}
+                  />
+                  {/* First freeText field */}
+                  {haveYouReported ===
+                    ninethStepTranslation?.data?.options[1].value &&
+                    haveYouReportedYes &&
+                    haveYouReportedYes?.includes(
+                      ninethStepTranslation?.data?.optionsYes[3].value
+                    ) && (
+                      <div className="lg:ml-16 mb-4">
+                        <InputField
+                          name="haveYouReportedYesFreeField1"
+                          props={register('haveYouReportedYesFreeField1', {
+                            required: true,
+                            minLength: 3,
+                          })}
+                        />
+                        <p className="text-xs my-4 text-red-600">
+                          {haveYouReportedYesFreeField1 &&
+                            haveYouReportedYesFreeField1.length < 3 &&
+                            ninethStepTranslation?.minCharacters}
+                        </p>
+                      </div>
+                    )}
+                </div>
+                <div>
+                  <Checkbox
+                    key={ninethStepTranslation?.data?.optionsYes[4]?.iD}
+                    id={ninethStepTranslation?.data?.optionsYes[4]?.id}
+                    name={ninethStepTranslation?.data?.optionsYes[4]?.name}
+                    props={register('haveYouReportedYes', { required: true })}
+                    value={ninethStepTranslation?.data?.optionsYes[4]?.value}
+                    label={ninethStepTranslation?.data?.optionsYes[4]?.label}
+                  />
+                </div>
+              </> :
+
+                <>
+                  {haveYouReported && (
+                    <p className="text-xs">{ninethStepTranslation?.mandatory}</p>
                   )}
-              </div>
-              <div>
-                <Checkbox
-                  key={ninethStepTranslation?.data?.optionsYes[4]?.iD}
-                  id={ninethStepTranslation?.data?.optionsYes[4]?.id}
-                  name={ninethStepTranslation?.data?.optionsYes[4]?.name}
-                  props={register('haveYouReportedYes', { required: true })}
-                  value={ninethStepTranslation?.data?.optionsYes[4]?.value}
-                  label={ninethStepTranslation?.data?.optionsYes[4]?.label}
-                />
-              </div>
-            </>
-          )}
+                  <div>
+                    <Checkbox
+                      key={ninethStepTranslation?.data?.optionsYesOrganization[0]?.iD}
+                      id={ninethStepTranslation?.data?.optionsYesOrganization[0]?.id}
+                      name={ninethStepTranslation?.data?.optionsYesOrganization[0]?.name}
+                      props={register('haveYouReportedYes', { required: true })}
+                      value={ninethStepTranslation?.data?.optionsYesOrganization[0]?.value}
+                      label={ninethStepTranslation?.data?.optionsYesOrganization[0]?.label}
+                    />
+                  </div>
+                  <div>
+                    <Checkbox
+                      key={ninethStepTranslation?.data?.optionsYesOrganization[1]?.iD}
+                      id={ninethStepTranslation?.data?.optionsYesOrganization[1]?.id}
+                      name={ninethStepTranslation?.data?.optionsYesOrganization[1]?.name}
+                      props={register('haveYouReportedYes', { required: true })}
+                      value={ninethStepTranslation?.data?.optionsYesOrganization[1]?.value}
+                      label={ninethStepTranslation?.data?.optionsYesOrganization[1]?.label}
+                    />
+                  </div>
+                  <div>
+                    <Checkbox
+                      key={ninethStepTranslation?.data?.optionsYesOrganization[2]?.iD}
+                      id={ninethStepTranslation?.data?.optionsYesOrganization[2]?.id}
+                      name={ninethStepTranslation?.data?.optionsYesOrganization[2]?.name}
+                      props={register('haveYouReportedYes', { required: true })}
+                      value={ninethStepTranslation?.data?.optionsYesOrganization[2]?.value}
+                      label={ninethStepTranslation?.data?.optionsYesOrganization[2]?.label}
+                    />
+
+                     {/* First freeText field */}
+                     {haveYouReported ===
+                      ninethStepTranslation?.data?.options[1].value &&
+                      haveYouReportedYes &&
+                      haveYouReportedYes?.includes(
+                        ninethStepTranslation?.data?.optionsYesOrganization[2].value
+                      ) && (
+                        <div className="lg:ml-16 mb-4">
+                          <InputField
+                            name="haveYouReportedYesFreeField1"
+                            props={register('haveYouReportedYesFreeField1', {
+                              required: true,
+                              minLength: 3,
+                            })}
+                          />
+                          <p className="text-xs my-4 text-red-600">
+                            {haveYouReportedYesFreeField1 &&
+                              haveYouReportedYesFreeField1.length < 3 &&
+                              ninethStepTranslation?.minCharacters}
+                          </p>
+                        </div>
+                      )}
+                  </div>
+                  <div>
+                    <Checkbox
+                      key={ninethStepTranslation?.data?.optionsYesOrganization[3]?.iD}
+                      id={ninethStepTranslation?.data?.optionsYesOrganization[3]?.id}
+                      name={ninethStepTranslation?.data?.optionsYesOrganization[3]?.name}
+                      props={register('haveYouReportedYes', { required: true })}
+                      value={ninethStepTranslation?.data?.optionsYesOrganization[3]?.value}
+                      label={ninethStepTranslation?.data?.optionsYesOrganization[3]?.label}
+                    />
+                  </div>
+                </>
+
+            )}
 
           {/* Second freeText field */}
 
-          {haveYouReported ===
-            ninethStepTranslation?.data?.options[1].value&&haveYouReportedYes &&
+          {reportingPerson !== 'organization' ? haveYouReported ===
+            ninethStepTranslation?.data?.options[1].value && haveYouReportedYes &&
             haveYouReportedYes?.includes(
               ninethStepTranslation?.data?.optionsYes[4].value
             ) && (
@@ -334,7 +407,28 @@ const NinethStep: React.FC<NinethStepProps> = ({
                     ninethStepTranslation?.minCharacters}
                 </p>
               </div>
-            )}
+            ) : 
+            haveYouReported ===
+            ninethStepTranslation?.data?.options[1].value && haveYouReportedYes &&
+            haveYouReportedYes?.includes(
+              ninethStepTranslation?.data?.optionsYesOrganization[3].value
+            ) && (
+              <div className="lg:ml-16">
+                <InputField
+                  name="haveYouReportedYesFreeField2"
+                  props={register('haveYouReportedYesFreeField2', {
+                    required: true,
+                    minLength: 3,
+                  })}
+                />
+                <p className="text-xs my-4 text-red-600">
+                  {haveYouReportedYesFreeField2 &&
+                    haveYouReportedYesFreeField2.length < 3 &&
+                    ninethStepTranslation?.minCharacters}
+                </p>
+              </div>
+            )
+            }
         </div>
       </div>
     </form>

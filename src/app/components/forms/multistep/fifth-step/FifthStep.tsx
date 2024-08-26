@@ -43,8 +43,8 @@ const FifthStep: React.FC<FifthStepProps> = ({ fifthStepTranslation, id }) => {
       location: string;
       question: string;
       // stadtteil: string;
-    } = 
-    reportingPerson === 'myself' ? getFormCookies(FIFTH_FORM) : reportingPerson == 'andere' ? getFormCookies(FIFTH_FORM) : getFormCookies(SIXTH_FORM)
+    } =
+      reportingPerson === 'myself' ? getFormCookies(FIFTH_FORM) : reportingPerson == 'andere' ? getFormCookies(FIFTH_FORM) : getFormCookies(SIXTH_FORM)
     // getFormCookies(FOURTH_FORM);
     // if (id === 'sixthForm') {
     //   formValues = getFormCookies(SIXTH_FORM);
@@ -220,13 +220,15 @@ const FifthStep: React.FC<FifthStepProps> = ({ fifthStepTranslation, id }) => {
       // id={id === 'sixthForm' ? 'sixthForm' : 'fourthForm'}
       // id={id === 'seventhForm' ? 'seventhForm' : 'fourthForm'}
       id={reportingPerson === 'myself' ? 'seventhForm' : reportingPerson === 'andere' ? 'fourthForm' : 'sixthForm'}
-      className="lg:w-[25rem]"
+      className="lg:w-[24rem]"
     >
       <div className=''>
         <FormHeader
           title={fifthStepTranslation?.title}
           subTitle={fifthStepTranslation?.description}
           mandatory={fifthStepTranslation?.mandatory}
+          paddingHorizontal={3}
+          paddingTop={1}
         />
       </div>
       {/* <p className="text-sm -mt-12 mb-8">{fifthStepTranslation?.mandatory}</p> */}

@@ -26,7 +26,7 @@ const RadioGroup: React.FC<RadioGroupProps> = ({ options, title, props }) => {
             />
             <label
               htmlFor={radioElement.id}
-              className="w-full py-3 ml-2 text-sm font-medium text-gray-900 "
+              className="w-full py-3 ml-2 text-gray-900 font-normal font-worksans text-sm"
             >
               {radioElement.label}
             </label>

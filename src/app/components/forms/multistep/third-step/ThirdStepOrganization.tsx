@@ -110,6 +110,8 @@ let organizationTypeFreeField: string= watch('organizationTypeFreeField')
         <FormHeader
           title={thirdStepOrganizationTranslation?.title}
           subTitle={thirdStepOrganizationTranslation?.subTitle}
+          paddingHorizontal={3}
+          paddingTop={1}
         />
         <div className="">
           {thirdStepOrganizationTranslation?.data?.map((value: any) => (
@@ -122,7 +124,7 @@ let organizationTypeFreeField: string= watch('organizationTypeFreeField')
               value={value?.value}
             />
           ))}
-          <div className="ml-4">
+          <div className="ml-10">
             {organizationType &&
               organizationType?.includes(
                 thirdStepOrganizationTranslation?.data[6]?.value

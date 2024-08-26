@@ -99,17 +99,19 @@ const ThirdStep: React.FC<ThirdStepProps> = ({ thirdStepTranslation, id }) => {
         onSubmit={handleSubmit(onSubmit)}
         // id={id === 'fourthForm' ? 'fourthForm' : 'secondForm'}
         id={reportingPerson === 'myself' ? 'sixthForm' : reportingPerson === 'andere' ? 'sixthForm' : 'fourthForm'}
-        className="h-full lg:w-[27rem]"
+        className="h-full xl:w-[25rem]"
       >
         <div>
           <FormHeader
             title={thirdStepTranslation?.title}
             subTitle={thirdStepTranslation?.description}
             mandatory={thirdStepTranslation.mandatory}
+            paddingHorizontal={3}
+            paddingTop={1}
           />
         </div>
         {/* <p className="text-sm -mt-12 mb-8">{thirdStepTranslation?.mandatory}</p> */}
-        <div className='lg:-mt-5 xl:h-[430px]'>
+        <div className='lg:-mt-5 xl:h-[350px]'>
           <TextArea
             name="vorfall"
             props={register('description', { required: true, minLength: 50 })}
@@ -123,29 +125,30 @@ const ThirdStep: React.FC<ThirdStepProps> = ({ thirdStepTranslation, id }) => {
           </label>
         )} */}
         {formErrors && description?.length !== 0 && description?.length < 50 && (
-          <label className="text-red-500 text-xs pl-2">
+          <label className="text-red-500 pl-2 font-normal font-worksans text-sm">
             {thirdStepTranslation?.minCharacters}
           </label>
         )}
-        <p className="flex items-center mt-4 text-xs text-red-600 pb-3  pl-0">
+        <p className="flex items-center mt-4 text-red-600 pb-3  pl-0 font-normal font-worksans text-sm">
           <span className="mr-2"></span>
           {thirdStepTranslation?.disclaimer}
         </p>
       </form>
 
-      <div className="mt-16 w-full md:max-w-md lg:mt-8  2xl:mt-0 2xl:absolute  lg:top-8 lg:-right-[30rem]">
-        <FormHeader title={thirdStepTranslation?.hints?.title}>
+      <div className="mt-16 w-full md:max-w-md lg:mt-8  2xl:mt-0 2xl:absolute  lg:top-8 lg:-right-[28rem]">
+        <FormHeader title={thirdStepTranslation?.hints?.title}  paddingHorizontal={3}
+          paddingTop={1}>
           {reportingPerson !== 'onBehalf' ? (
             <div>
-              <ul className="list-disc pl-8">
+              <ul className="list-disc pl-8 font-normal font-worksans text-sm">
                 {thirdStepTranslation?.hints?.list.map((element: string) => (
                   <li key={`${element}`}>{element}</li>
                 ))}
               </ul>
-              <h3 className='pt-6'>{thirdStepTranslation.hints.unKnownInfo}</h3>
+              <h3 className='pt-6 font-normal font-worksans text-sm'>{thirdStepTranslation.hints.unKnownInfo}</h3>
             </div>
           ) : (
-            <ul className="list-disc pl-8">
+            <ul className="list-disc pl-8 font-normal font-worksans text-sm">
               {thirdStepTranslation?.hints?.list
                 ?.slice(0, thirdStepTranslation?.hints?.list?.length - 1)
                 ?.map((element: string) => (

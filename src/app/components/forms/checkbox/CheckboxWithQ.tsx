@@ -9,6 +9,8 @@ type CheckboxWithQProps = {
   label?: string;
   checked?: boolean;
   props: any;
+  examples?:any;
+  variant: 'black' | 'asian' | 'other';
 };
 
 const CheckboxWithQ: React.FC<CheckboxWithQProps> = ({
@@ -18,6 +20,8 @@ const CheckboxWithQ: React.FC<CheckboxWithQProps> = ({
   label,
   checked,
   props,
+  examples,
+  variant
 }) => {
   return (
     <div key={id} className="p-2">
@@ -30,7 +34,14 @@ const CheckboxWithQ: React.FC<CheckboxWithQProps> = ({
           value={value}
           checked={checked}
           {...props}
-          className="opacity-0 absolute h-6 w-6"
+          // className="opacity-0 absolute h-6 w-6"
+          className={`${
+            variant === 'black'
+              ? 'text-blackColor'
+              : variant === 'asian'
+              ? 'text-asianColor'
+              : 'text-OtherColor'
+          } opacity-0 absolute h-6 w-6`}
         />
         <div className="bg-white border border-primaryColor w-6 h-6 flex flex-shrink-0 justify-center items-center mr-2 focus-within:border-blue-500">
           <svg
@@ -49,11 +60,25 @@ const CheckboxWithQ: React.FC<CheckboxWithQProps> = ({
             />
           </svg>
         </div>
-        <label htmlFor={id} className="select-none ml-2 font-normal">
-            <div className='flex gap-2'>
-                {label}
-                <Image src={questionMark} alt='questionmark' />
-            </div>
+        <label
+          htmlFor={id}
+          className="relative [&>*]:hover:flex ml-2 text-sm font-medium text-gray-900"
+        >
+          {examples && (
+            <span className="absolute z-50 bg-gray-100 hidden w-96 -right-[27rem] -top-0 shadow-lg p-2 rounded-md">
+              {examples}
+            </span>
+          )}
+          <div className="flex cursor-pointer font-normal font-worksans text-sm">
+            {label}
+            {examples && (
+              <Image
+                src={questionMark}
+                alt="Question mark icon"
+                className="ml-2  "
+              />
+            )}
+          </div>
         </label>
       </div>
     </div>
