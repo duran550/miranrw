@@ -7,6 +7,7 @@ import { useRouter, usePathname } from 'next/navigation';
 import AnimateClick from '@/app/components/animate-click/AnimateClick';
 import forwardArrow from '@/../public/images/forwardarrow.svg'
 import Image from 'next/image';
+import { removeReportingPerson } from '@/cookies/cookies';
 
 const TwelvethStepComponent = () => {
   const pathname = usePathname();

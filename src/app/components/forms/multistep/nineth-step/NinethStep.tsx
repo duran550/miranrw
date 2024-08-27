@@ -6,7 +6,7 @@ import Checkbox from '../../checkbox/Checkbox';
 import { useFormContext } from '@/app/hooks/useFormContext';
 import { FORM_ERRORS, LAST_STEP, NEXT_STEP } from '@/app/context/actions';
 import InputField from '../../text-field/InputField';
-import { clearFormCookiesStep, getFormCookies, getFormStep, setFormCookies } from '@/cookies/cookies';
+import { clearFormCookiesStep, getFormCookies, getFormStep, getReportingPerson, setFormCookies } from '@/cookies/cookies';
 import { useScrollOnTop } from '@/app/hooks/useScrollOnTop';
 import { EIGTH_FORM, ELEVENTH_STEP, NINETH_FORM, SEVENTH_FORM, TENTH_FORM } from '@/cookies/cookies.d';
 import { NinethFormValues, NinethStepProps } from './ninethStep';
@@ -17,7 +17,8 @@ const NinethStep: React.FC<NinethStepProps> = ({
   id,
 }) => {
 
-  const { dispatch, isEditing, reportingPerson, formErrors, id_, formValue } = useFormContext();
+  const { dispatch, isEditing, formErrors, id_, formValue } = useFormContext();
+  const reportingPerson = getReportingPerson()
   const [question] = useState<string>(reportingPerson === 'organization' ? ninethStepTranslation.organizationTitle : ninethStepTranslation.title);
 
   // useEffect(()=>{
@@ -63,7 +64,7 @@ const NinethStep: React.FC<NinethStepProps> = ({
       question: string;
     } =
       (reportingPerson == 'myself') ?
-        getFormCookies(ELEVENTH_STEP) : reportingPerson == 'andere' ? getFormCookies(TENTH_FORM) : getFormCookies(TENTH_FORM)
+        getFormCookies(ELEVENTH_STEP) : getFormCookies(TENTH_FORM)
 
     // (reportingPerson == 'myself' || reportingPerson == 'andere')
     //          ? setFormCookies(dataWithQuestion, TENTH_FORM)
@@ -183,7 +184,6 @@ const NinethStep: React.FC<NinethStepProps> = ({
     // clearFormCookiesStep(EIGTH_FORM);
     let step = getFormStep();
     if (data.haveYouReported && data.haveYouReported.length < 5) {
-
       let dataWithQuestion = {
         question,
         step,
@@ -192,16 +192,20 @@ const NinethStep: React.FC<NinethStepProps> = ({
       };
       // dispatch({ type: ID_FORM, payload: id });
       //  dispatch({ type: FORM_VALUE, payload: dataWithQuestion });
-      (reportingPerson == 'myself')
-        ? setFormCookies(dataWithQuestion, ELEVENTH_STEP)
-        : reportingPerson === 'andere' ? setFormCookies(dataWithQuestion, TENTH_FORM) : setFormCookies(dataWithQuestion, TENTH_FORM);
+      if (reportingPerson == 'myself') {
+        setFormCookies(dataWithQuestion, ELEVENTH_STEP)
+      } else {
+        setFormCookies(dataWithQuestion, TENTH_FORM)
+      }
     } else {
 
       let dataWithQuestion = { question, step, ...data };
       //  id === 'tenthForm'
-      (reportingPerson == 'myself')
-        ? setFormCookies(dataWithQuestion, ELEVENTH_STEP)
-        : reportingPerson === 'andere' ? setFormCookies(dataWithQuestion, TENTH_FORM) : setFormCookies(dataWithQuestion, TENTH_FORM);
+      if (reportingPerson == 'myself') {
+        setFormCookies(dataWithQuestion, ELEVENTH_STEP)
+      } else {
+        setFormCookies(dataWithQuestion, TENTH_FORM)
+      }
     }
 
 
@@ -209,8 +213,6 @@ const NinethStep: React.FC<NinethStepProps> = ({
     // isEditing && reportingPerson === 'myself'
     //   ? dispatch({ type: LAST_STEP, payload: 11 })
     //   : dispatch({ type: NEXT_STEP, payload: 'DATA 1' });
-
-    console.log(formValue, 'ninethstep')
   };
 
   return (

@@ -36,6 +36,7 @@ import AnimateClick from '@/app/components/animate-click/AnimateClick';
 import { Button } from '@/app/components/button/Button';
 import TwelvethStep from '../twelveth-step/TwelvethStep';
 import TwelvethStepComponent from '../twelveth-step/twelvestepComp';
+import { getReportingPerson } from '@/cookies/cookies';
 
 const EleventhStep: React.FC<EleventhStepProps> = ({
   eleventhStepTranslation,
@@ -61,12 +62,14 @@ const EleventhStep: React.FC<EleventhStepProps> = ({
 
   const { executeRecaptcha } = useGoogleReCaptcha();
 
-  const { dispatch, formErrors, reportingPerson } = useFormContext();
+  const { dispatch, formErrors } = useFormContext();
   const [captchLoading, setCaptchaLoading] = useState<boolean>(true);
   const [verified, setVerified] = useState<any>(false);
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false)
+  const [loading, setIsLoading] = useState<boolean>(false)
   const container = useRef(null);
   const widget = useRef<any>(null);
+  const reportingPerson = getReportingPerson()
 
   const doneCallback = (solution: any) => {
     console.log('Captcha was solved. The form can be submitted.');
@@ -146,7 +149,7 @@ const EleventhStep: React.FC<EleventhStepProps> = ({
     numberOfEmployees: string;
   } = (reportingPerson === 'myself')
       ? getFormCookies(FOURTH_FORM)
-      : reportingPerson === 'organization' ? getFormCookies(FIFTH_FORM) : getFormCookies(THIRD_FORM);
+      : reportingPerson === 'organization' ? getFormCookies(FIFTH_FORM) : getFormCookies(FOURTH_FORM);
 
 
   // getFormCookies(THIRD_FORM);
@@ -553,9 +556,11 @@ const EleventhStep: React.FC<EleventhStepProps> = ({
       // reset the form UI, display success message logic etc.
       // Sending data to API
       // console.log('report', report);
+      setIsLoading(true)
       const response = await new ReportService().sendReport(report).then((result) => {
         if (result.status === 201 || result.status === 200) {
           clearFormCookies();
+          setIsLoading(false)
           setIsModalOpen(true)
           console.log('Successfull');
           dispatch({ type: FORM_ERRORS, payload: false });
@@ -563,11 +568,13 @@ const EleventhStep: React.FC<EleventhStepProps> = ({
         } else {
           console.log('failed');
           setCaptchaLoading(false);
+          setIsLoading(false)
           dispatch({ type: FORM_ERRORS, payload: false });
           throw new Error('Fetching error occured, please reload');
         }
       }).catch((error) => {
         console.log("error")
+        setIsLoading(false)
         setCaptchaLoading(false);
         console.log('verify error captcha2', error);
         dispatch({ type: FORM_ERRORS, payload: false });
@@ -610,6 +617,8 @@ const EleventhStep: React.FC<EleventhStepProps> = ({
     //   : dispatch({ type: FORM_ERRORS, payload: false });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [verified, captcha, isValid]);
+
+  console.log(thirdForm, 'mythirdFormCredentials')
 
   return (
     <div>
@@ -673,12 +682,12 @@ const EleventhStep: React.FC<EleventhStepProps> = ({
               form={`${'tenthForm'}`}
               //   onClick={onClose}
               type='submit'
-              disabled={formErrors && true}
-              variant={`${formErrors ? 'disabled' : 'primary'}`}
+              disabled={formErrors && loading && true}
+              variant={`${formErrors || loading ? 'disabled' : 'primary'}`}
               className="font-bold w-fit rounded-full mb-6"
             >
               {/* {modalBtn} */}
-              Meldung abschicken
+              {loading ? 'Laden...' :  'Meldung abschicken'}
             </Button>
           </AnimateClick>
         </div>
@@ -712,7 +721,8 @@ const EleventhStep: React.FC<EleventhStepProps> = ({
                 secondFormOrganization?.organizationTypeFreeField,
               ]}
             />
-          )}
+          )
+        }
 
         {thirdFormOrganization?.numberOfEmployees && (
           <EditBlock
@@ -723,16 +733,6 @@ const EleventhStep: React.FC<EleventhStepProps> = ({
         )}
 
         {/* When Nein is chosen don't display */}
-
-        {reportingPerson !== 'organization' && seventhForm &&
-          seventhForm?.formOfDiscYes &&
-          seventhForm?.formOfDisc.length < 6 && (
-            <EditBlock
-              step={seventhForm?.step}
-              question={seventhForm?.question}
-              answer={[seventhForm?.formOfDisc]}
-            />
-          )}
 
         {/* {eighthForm &&
           eighthForm?.haveYouReportedYes &&
@@ -750,10 +750,10 @@ const EleventhStep: React.FC<EleventhStepProps> = ({
           )} */}
 
         {/* When Nein is chosen don't display */}
-        {reportingPerson !== 'organization'
-          // secondStepTranslation?.options[
-          //   secondStepTranslation.options.length - 1
-          // ].value 
+        {reportingPerson !== 'organization' &&
+          secondStepTranslation?.options[
+            secondStepTranslation.options.length - 1
+          ].value && (ninethForm?.gender || ninethForm?.genderFreeField || ninethForm?.sexualOrientation || ninethForm?.sexualOrientationFreeField || ninethForm?.age)
 
           && (
             <>
@@ -870,7 +870,8 @@ const EleventhStep: React.FC<EleventhStepProps> = ({
             </>
           )}
 
-        {reportingPerson === 'organization' &&
+
+        {
           seventhForm &&
           seventhForm?.formOfDiscYes &&
           seventhForm?.formOfDisc.length < 6 && (
@@ -885,12 +886,13 @@ const EleventhStep: React.FC<EleventhStepProps> = ({
 
         {eighthForm && eighthForm?.haveYouReported &&
           eighthForm?.haveYouReported &&
-          eighthForm?.haveYouReported &&
+          eighthForm?.haveYouReported && (eighthForm?.haveYouReportedYes || eighthForm?.haveYouReportedYesFreeField1 ||eighthForm?.haveYouReportedYesFreeField2 ) &&
           (
             <EditBlock
               step={eighthForm?.step}
               question={eighthForm?.question}
               answer={[
+                eighthForm?.haveYouReported,
                 ...eighthForm?.haveYouReportedYes,
                 eighthForm?.haveYouReportedYesFreeField1,
                 eighthForm?.haveYouReportedYesFreeField2,

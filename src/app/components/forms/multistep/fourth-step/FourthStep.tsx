@@ -10,7 +10,7 @@ import { FORM_ERRORS, LAST_STEP, NEXT_STEP } from '@/app/context/actions';
 import Checkbox from '../../checkbox/Checkbox';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { FourthFormValues } from './fourthStep';
-import { clearFormCookiesStep, getFormCookies, getFormStep, setFormCookies } from '@/cookies/cookies';
+import { clearFormCookiesStep, getFormCookies, getFormStep, getReportingPerson, setFormCookies } from '@/cookies/cookies';
 import { FIFTH_FORM, FOURTH_FORM, THIRD_FORM } from '@/cookies/cookies.d';
 import { DatePicker } from 'antd';
 import { useScrollOnTop } from '@/app/hooks/useScrollOnTop';
@@ -34,7 +34,9 @@ const FourthStep: React.FC<FourthStepProps> = ({
   fourthStepTranslation,
   id,
 }) => {
-  const { dispatch, reportingPerson, isEditing, formErrors } = useFormContext();
+  const { dispatch, isEditing, formErrors } = useFormContext();
+  // const { dispatch, reportingPerson, isEditing, formErrors } = useFormContext();
+  const reportingPerson = getReportingPerson()
   const [valueDate, setValueDate] = React.useState<Dayjs | null>(null);
   const [question] = useState<string>(fourthStepTranslation?.title);
   const [dateRange, setDateRange] = useState<any>();
@@ -83,7 +85,7 @@ const FourthStep: React.FC<FourthStepProps> = ({
 
   (reportingPerson === 'myself')
     ? formValues = getFormCookies(FOURTH_FORM)
-    :  reportingPerson === 'organization' ? formValues = getFormCookies(FIFTH_FORM) : formValues = getFormCookies(THIRD_FORM);
+    :  reportingPerson === 'organization' ? formValues = getFormCookies(FIFTH_FORM) : formValues = getFormCookies(FOURTH_FORM);
 
   // dispatch({ type: FORM_ERRORS, payload: true });
   // Scroll on top
@@ -239,7 +241,7 @@ const FourthStep: React.FC<FourthStepProps> = ({
 
     (reportingPerson === 'myself')
       ? setFormCookies(dataWithQuestion, FOURTH_FORM)
-      : reportingPerson == 'organization' ? setFormCookies(dataWithQuestion, FIFTH_FORM) : setFormCookies(dataWithQuestion, THIRD_FORM);
+      : reportingPerson == 'organization' ? setFormCookies(dataWithQuestion, FIFTH_FORM) : setFormCookies(dataWithQuestion, FOURTH_FORM);
 
     dispatch({ type: NEXT_STEP, payload: 'DATA 1' });
     // isEditing && reportingPerson === 'myself'

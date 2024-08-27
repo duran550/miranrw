@@ -9,14 +9,15 @@ import { FORM_ERRORS, LAST_STEP, NEXT_STEP } from '@/app/context/actions';
 import FormHeader from '../header/header';
 import Checkbox from '../../checkbox/Checkbox';
 import InputField from '../../text-field/InputField';
-import { clearFormCookiesStep, getFormCookies, getFormStep, setFormCookies } from '@/cookies/cookies';
+import { clearFormCookiesStep, getFormCookies, getFormStep, getReportingPerson, setFormCookies } from '@/cookies/cookies';
 import { SECOND_FORM, THIRD_FORM } from '@/cookies/cookies.d';
 import { useScrollOnTop } from '@/app/hooks/useScrollOnTop';
 
 const ThirdStepOrganization: React.FC<ThirdStepOrganizationProps> = ({
   thirdStepOrganizationTranslation,
 }) => {
-  const { dispatch, isEditing, reportingPerson } = useFormContext();
+  const { dispatch, isEditing } = useFormContext();
+  const reportingPerson = getReportingPerson()
   const [question] = useState<string>(thirdStepOrganizationTranslation?.title);
 console.log(thirdStepOrganizationTranslation, 'third');
 

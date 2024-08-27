@@ -10,13 +10,14 @@ import {
   NEXT_STEP,
 } from '@/app/context/actions';
 import InputField from '../../text-field/InputField';
-import { clearFormCookiesStep, getFormCookies, getFormStep, setFormCookies } from '@/cookies/cookies';
+import { clearFormCookiesStep, getFormCookies, getFormStep, getReportingPerson, setFormCookies } from '@/cookies/cookies';
 import { EIGTH_FORM, FIFTH_FORM, NINETH_FORM, SEVENTH_FORM, SIXTH_FORM } from '@/cookies/cookies.d';
 import { useScrollOnTop } from '@/app/hooks/useScrollOnTop';
 import { SixthStepProps, SixthStepValues } from './sixthStep';
 
 const SixthStep: React.FC<SixthStepProps> = ({ sixthStepTranslation, id, lang }) => {
-  const { dispatch, isEditing, reportingPerson, formErrors } = useFormContext();
+  const { dispatch, isEditing, formErrors } = useFormContext();
+  const reportingPerson = getReportingPerson()
   const [question] = useState<string>(sixthStepTranslation?.title);
 
   const {

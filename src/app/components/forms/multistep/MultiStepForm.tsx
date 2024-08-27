@@ -23,18 +23,21 @@ import NinethStep from './nineth-step/NinethStep';
 import SubmitModal from './submitModal';
 import ThirtinthStep from './thirtinth-step/ThirtinthStep';
 import AnimateClick from '../../animate-click/AnimateClick';
+import { getReportingPerson } from '@/cookies/cookies';
 
 const MultiStepForm: React.FC<MultiStepFormProps> = ({
   formTranslation,
   lang,
 }) => {
-  const { step, dispatch, formErrors, reportingPerson, isEditing } =
+  const { step, dispatch, formErrors, isEditing } =
     useFormContext();
   const [open, setOpen] = useState<boolean>(false)
   const [submitPage, setSubmitPage] = useState<boolean>(false);
   let stepFromCookies = getFormStep();
+  const reportingPerson = getReportingPerson()
 
   console.log(stepFromCookies, 'myStepFormCookies')
+  // console.log(reportingPerson, 'reportingPerson')
   console.log(reportingPerson, 'reportingPerson')
 
   return (
@@ -48,8 +51,6 @@ const MultiStepForm: React.FC<MultiStepFormProps> = ({
             />
           ) : (
             <div>
-
-
               {reportingPerson == 'myself' ?
 
                 step === 1 || step === 12 || step === 3 || step == 13 || step == 14 ? (

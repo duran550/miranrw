@@ -7,13 +7,14 @@ import Checkbox from '../../checkbox/Checkbox';
 import { useFormContext } from '@/app/hooks/useFormContext';
 import { FORM_ERRORS, LAST_STEP, NEXT_STEP, FORM_VALUE, ID_FORM } from '@/app/context/actions';
 import InputField from '../../text-field/InputField';
-import { clearFormCookiesStep, getFormCookies, getFormStep, setFormCookies } from '@/cookies/cookies';
+import { clearFormCookiesStep, getFormCookies, getFormStep, getReportingPerson, setFormCookies } from '@/cookies/cookies';
 import { EIGTH_FORM, NINETH_FORM, SEVENTH_FORM, TENTH_FORM } from '@/cookies/cookies.d';
 import { useScrollOnTop } from '@/app/hooks/useScrollOnTop';
 
 const EightStep: React.FC<EightStepProps> = ({ eightStepTranslation, id }) => {
-  const { dispatch, isEditing, reportingPerson, formErrors, formValue } = useFormContext();
+  const { dispatch, isEditing, formErrors, formValue } = useFormContext();
   const [question] = useState<string>(eightStepTranslation?.title);
+  const reportingPerson = getReportingPerson()
 
   const {
     register,
@@ -37,7 +38,7 @@ const EightStep: React.FC<EightStepProps> = ({ eightStepTranslation, id }) => {
       formOfDiscYes: string[];
       formOfDiscYesFreeField: string;
       question: string;
-    } = (reportingPerson === 'myself') ? getFormCookies(TENTH_FORM) : reportingPerson === 'organization' ? getFormCookies(NINETH_FORM) : getFormCookies(NINETH_FORM)
+    } = (reportingPerson === 'myself') ? getFormCookies(TENTH_FORM) : getFormCookies(NINETH_FORM)
     
     
     // getFormCookies(NINETH_FORM)
@@ -105,6 +106,8 @@ const EightStep: React.FC<EightStepProps> = ({ eightStepTranslation, id }) => {
     // }
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
+
+    console.log(formValue, 'formValue10step')
   }, [formOfDiscYes, formOfDiscYesFreeField, formOfDisc]);
 
   // Triggered when submitting form

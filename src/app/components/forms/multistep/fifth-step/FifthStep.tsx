@@ -5,16 +5,17 @@ import RadioSingle from '../../radio/RadioSingle';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { useFormContext } from '@/app/hooks/useFormContext';
 import { FORM_ERRORS, LAST_STEP, NEXT_STEP } from '@/app/context/actions';
-import { clearFormCookiesStep, getFormCookies, getFormStep, setFormCookies } from '@/cookies/cookies';
+import { clearFormCookiesStep, getFormCookies, getFormStep, getReportingPerson, setFormCookies } from '@/cookies/cookies';
 import { FIFTH_FORM, FOURTH_FORM, SEVENTH_FORM, SIXTH_FORM } from '@/cookies/cookies.d';
 import { useScrollOnTop } from '@/app/hooks/useScrollOnTop';
 import AutoComplete from '../../auto-complete/AutoComplete';
 import InputField from '../../text-field/InputField';
 
 const FifthStep: React.FC<FifthStepProps> = ({ fifthStepTranslation, id }) => {
-  const { dispatch, reportingPerson, isEditing, formErrors } = useFormContext();
+  const { dispatch, isEditing, formErrors } = useFormContext();
   const [question] = useState<string>(fifthStepTranslation?.title);
   const [location, setLocation] = useState<string>('');
+  const reportingPerson = getReportingPerson()
   const [searchedText, setSearchedText] = useState<string | undefined>(
     undefined
   );

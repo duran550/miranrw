@@ -7,12 +7,13 @@ import Checkbox from '../../checkbox/Checkbox';
 import { useFormContext } from '@/app/hooks/useFormContext';
 import { FORM_ERRORS, LAST_STEP, NEXT_STEP } from '@/app/context/actions';
 import InputField from '../../text-field/InputField';
-import { clearFormCookiesStep, getFormCookies, getFormStep, setFormCookies } from '@/cookies/cookies';
+import { clearFormCookiesStep, getFormCookies, getFormStep, getReportingPerson, setFormCookies } from '@/cookies/cookies';
 import { FOURTH_FORM, NINETH_FORM, SECOND_FORM, THIRD_FORM } from '@/cookies/cookies.d';
 import { useScrollOnTop } from '@/app/hooks/useScrollOnTop';
 
 const TenthStep: React.FC<TenthStepProps> = ({ tenthStepTranslation }, id) => {
-  const { dispatch, reportingPerson, isEditing, formErrors } = useFormContext();
+  const { dispatch, isEditing, formErrors } = useFormContext();
+  const reportingPerson = getReportingPerson()
   const [question1] = useState<string>(tenthStepTranslation?.firstBlock?.title);
   const [question2] = useState<string>(
     tenthStepTranslation?.secondBlock?.title
@@ -100,7 +101,7 @@ const TenthStep: React.FC<TenthStepProps> = ({ tenthStepTranslation }, id) => {
         setValue('genderFreeField', formValues?.genderFreeField);
     }
 
-    console.log(formValues, 'formValues10')
+    console.log(formValues, 'formValuesthirdStep')
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [
     // gender,

@@ -6,7 +6,7 @@ import { FourthStepOrganizationFormValues } from './fourthStepOrganization';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { useFormContext } from '@/app/hooks/useFormContext';
 import { FORM_ERRORS, LAST_STEP, NEXT_STEP } from '@/app/context/actions';
-import { clearFormCookiesStep, getFormCookies, getFormStep, setFormCookies } from '@/cookies/cookies';
+import { clearFormCookiesStep, getFormCookies, getFormStep, getReportingPerson, setFormCookies } from '@/cookies/cookies';
 import { FOURTH_FORM, THIRD_FORM } from '@/cookies/cookies.d';
 import { useScrollOnTop } from '@/app/hooks/useScrollOnTop';
 
@@ -15,7 +15,8 @@ const FourthStepOrganization: React.FC<FourthStepOrganizationProps> = ({
 }) => {
   const [question] = useState<string>(fourthStepOrganizationTranslation?.title);
 
-  const { dispatch, reportingPerson, isEditing } = useFormContext();
+  const { dispatch, isEditing } = useFormContext();
+  const reportingPerson = getReportingPerson()
 
   const {
     register,

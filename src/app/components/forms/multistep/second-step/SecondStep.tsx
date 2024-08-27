@@ -10,7 +10,7 @@ import {
   NEXT_STEP,
   REPORTING_PERSON,
 } from '@/app/context/actions';
-import { clearFormCookiesStep, getFormCookies, getFormStep, setFormCookies } from '@/cookies/cookies';
+import { clearFormCookiesStep, getFormCookies, getFormStep, removeReportingPerson, setFormCookies, setReportingPerson } from '@/cookies/cookies';
 import { FIRST_FORM } from '@/cookies/cookies.d';
 import { useScrollOnTop } from '@/app/hooks/useScrollOnTop';
 
@@ -40,18 +40,23 @@ const SecondStep: React.FC<SecondStepProps> = ({ secondStepTranslation }, id) =>
       dispatch({ type: FORM_ERRORS, payload: true });
     } else {
       dispatch({ type: FORM_ERRORS, payload: false });
-      dispatch({
-        type: REPORTING_PERSON,
-        payload:
-          identity === secondStepTranslation?.options[0].value
-            ? 'myself'
-            : identity === secondStepTranslation?.options[1].value
-            ? 'andere'
-            : 'organization'
-      });
+      const reportingPersonType =
+      identity === secondStepTranslation?.options[0].value
+        ? 'myself'
+        : identity === secondStepTranslation?.options[1].value
+        ? 'andere'
+        : 'organization';
+
+    // Reset the cookie if a different option is selected
+    removeReportingPerson();
+    setReportingPerson(reportingPersonType);
+
+    dispatch({
+      type: REPORTING_PERSON,
+      payload: reportingPersonType,
+    });
 
       // Setting default values if exists in cookies
-
       if (formValues && !identity) {
         identity !== formValues?.identity &&
           setValue('identity', formValues?.identity);
@@ -60,7 +65,7 @@ const SecondStep: React.FC<SecondStepProps> = ({ secondStepTranslation }, id) =>
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
     console.log(formValues, 'formvalue')
-  }, [identity, formValues?.identity]);
+  }, [identity, formValues?.identity, dispatch, setValue]);
 
   // Triggered when submitting form
   const onSubmit: SubmitHandler<SecondFormValues> = (data) => {

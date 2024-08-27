@@ -5,7 +5,7 @@ import { useFormContext } from '@/app/hooks/useFormContext';
 import { FORM_ERRORS, LAST_STEP, NEXT_STEP } from '@/app/context/actions';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { ThirdFormValues } from './thirdStep.d';
-import { clearFormCookiesStep, getFormCookies, getFormStep, setFormCookies } from '@/cookies/cookies';
+import { clearFormCookiesStep, getFormCookies, getFormStep, getReportingPerson, setFormCookies } from '@/cookies/cookies';
 import { FOURTH_FORM, SECOND_FORM, SEVENTH_FORM, SIXTH_FORM, THIRD_FORM, THIRTINTH_FORM } from '@/cookies/cookies.d';
 import { useScrollOnTop } from '@/app/hooks/useScrollOnTop';
 
@@ -23,7 +23,8 @@ type ThirdStepProps = {
 };
 
 const ThirdStep: React.FC<ThirdStepProps> = ({ thirdStepTranslation, id }) => {
-  const { dispatch, reportingPerson, isEditing, formErrors } = useFormContext();
+  const { dispatch, isEditing, formErrors } = useFormContext();
+  const reportingPerson = getReportingPerson()
   const [question] = useState<string>(thirdStepTranslation?.title);
 
   // Dynamic hints description

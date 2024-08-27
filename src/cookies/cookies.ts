@@ -16,6 +16,7 @@ import {
   TENTH_FORM,
   ELEVENTH_STEP
 } from './cookies.d';
+const REPORTING_PERSON = 'ReportingPerson';
 
 
 export const setRefreshToken = (data: any) => {
@@ -102,9 +103,25 @@ export const clearFormCookies = () => {
   cookies.remove(NINETH_FORM);
   cookies.remove(TENTH_FORM);
   cookies.remove(ELEVENTH_STEP);
+  cookies.remove(REPORTING_PERSON);
 };
 
 export const clearFormCookiesStep = (step:string) => {
   cookies.remove(step);
 
 }
+
+export const setReportingPerson = (identity: string) => {
+  const value = identity === 'myself' ? 'myself' : identity === 'andere' ? 'andere' : 'organization';
+  cookies.set(REPORTING_PERSON, value);
+  console.log(`ReportingPerson set to ${value}`);
+};
+
+export const getReportingPerson = () => {
+  return cookies.get(REPORTING_PERSON);
+};
+
+
+export const removeReportingPerson = () => {
+  cookies.remove(REPORTING_PERSON);
+};
