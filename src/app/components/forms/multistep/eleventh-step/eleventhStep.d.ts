@@ -10,6 +10,7 @@ export type EleventhStepProps = {
     };
     captcha: string;
   };
+  id?:any;
 
   open:boolean;
   setOpen:() => void;
@@ -31,6 +32,25 @@ export type EleventhStepProps = {
       value: string;
       checked: boolean;
     }>;
+  };
+
+  ninethStepTranslation?: {
+    title: string;
+    organizationTitle:string;
+    description: string;
+    minCharacters: string;
+    mandatory: string;
+    data: {
+      options: any;
+      optionsYes: any;
+      optionsYesOrganization:{
+        iD:number;
+        name:string;
+        value:string;
+        id:string;
+        label:string;
+      }[];
+    };
   };
 };
 

@@ -41,6 +41,7 @@ import { getReportingPerson } from '@/cookies/cookies';
 const EleventhStep: React.FC<EleventhStepProps> = ({
   eleventhStepTranslation,
   secondStepTranslation,
+  ninethStepTranslation,
   open,
   setOpen,
   submitPage,
@@ -60,13 +61,15 @@ const EleventhStep: React.FC<EleventhStepProps> = ({
     });
   }, [submitPage]);
 
+  console.log(ninethStepTranslation?.data.optionsYes[3].label, 'dataeiek')
+
   const { executeRecaptcha } = useGoogleReCaptcha();
 
   const { dispatch, formErrors } = useFormContext();
   const [captchLoading, setCaptchaLoading] = useState<boolean>(true);
   const [verified, setVerified] = useState<any>(false);
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false)
-  const [loading, setIsLoading] = useState<boolean>(false)
+  const [loading, setIsLoading] = useState<boolean>()
   const container = useRef(null);
   const widget = useRef<any>(null);
   const reportingPerson = getReportingPerson()
@@ -147,7 +150,7 @@ const EleventhStep: React.FC<EleventhStepProps> = ({
     dateRangeState: string;
     datePeriod: boolean;
     numberOfEmployees: string;
-    forgetfulFreeField:string;
+    forgetfulFreeField: string;
   } = (reportingPerson === 'myself')
       ? getFormCookies(FOURTH_FORM)
       : reportingPerson === 'organization' ? getFormCookies(FIFTH_FORM) : getFormCookies(FOURTH_FORM);
@@ -285,6 +288,14 @@ const EleventhStep: React.FC<EleventhStepProps> = ({
   captcha && handleCaptcha();
 
   const onSubmit: SubmitHandler<any> = async () => {
+    dispatch({ type: FORM_ERRORS, payload: true });
+    //  if (verified) {
+    // Here you would send the input data to a database, and
+    // reset the form UI, display success message logic etc.
+    // Sending data to API
+    // console.log('report', report);
+    setIsLoading(true)
+
     // Getting values to be sent
     // let firstForm: { identity: string } = getFormCookies(FIRST_FORM);
 
@@ -547,22 +558,15 @@ const EleventhStep: React.FC<EleventhStepProps> = ({
       otherformOfDiscriminationAreaFreeField
     };
 
-
     try {
-      dispatch({ type: FORM_ERRORS, payload: true });
-      //  if (verified) {
-      // Here you would send the input data to a database, and
-      // reset the form UI, display success message logic etc.
-      // Sending data to API
-      // console.log('report', report);
-      setIsLoading(true)
       const response = await new ReportService().sendReport(report).then((result) => {
         if (result.status === 201 || result.status === 200) {
           setIsModalOpen(true)
+          console.log(result.status, 'resultstatus')
           console.log('isModalopen', isModalOpen);
-          clearFormCookies();
-          setIsLoading(false)
-          dispatch({ type: FORM_ERRORS, payload: false });
+          // clearFormCookies();
+          // setIsLoading(false)
+          // dispatch({ type: FORM_ERRORS, payload: false });
           // dispatch({ type: NEXT_STEP, payload: 'DATA 1' });
         } else {
           console.log('failed');
@@ -618,6 +622,76 @@ const EleventhStep: React.FC<EleventhStepProps> = ({
   }, [verified, captcha, isValid]);
 
   console.log(thirdForm, 'mythirdFormCredentials')
+
+  const isReportingPersonOrganization = reportingPerson === 'organization';
+
+  // const excludedLabels = [
+  //   ninethStepTranslation?.data.optionsYes[2].label,
+  //   ninethStepTranslation?.data.optionsYes[3].label
+  // ];
+
+  // const reportedInfo = isReportingPersonOrganization
+  //   ? [
+  //       eighthForm?.haveYouReported,
+  //       !eighthForm.haveYouReportedYes.includes(ninethStepTranslation?.data.optionsYesOrganization[2].label as any || ninethStepTranslation?.data.optionsYesOrganization[3].label as any) && eighthForm.haveYouReportedYes,
+
+
+  //       eighthForm.haveYouReportedYes.includes(ninethStepTranslation?.data.optionsYesOrganization[3].label as any) && `${ninethStepTranslation?.data.optionsYesOrganization[3].label} ${eighthForm.haveYouReportedYesFreeField1}`,
+  //       eighthForm.haveYouReportedYes.includes(ninethStepTranslation?.data.optionsYesOrganization[4].label as any) &&
+  //         `${ninethStepTranslation?.data.optionsYesOrganization[4].label} ${eighthForm.haveYouReportedYesFreeField2}`,
+  //     ].filter(Boolean)
+  //   : 
+  //   [
+  //     eighthForm?.haveYouReported,
+  //     !eighthForm.haveYouReportedYes.includes(ninethStepTranslation?.data.optionsYes[2].label|| ninethStepTranslation?.data.optionsYes[3].label) && eighthForm.haveYouReportedYes,
+
+
+  //     eighthForm.haveYouReportedYes.includes(ninethStepTranslation?.data.optionsYes[3].label) && `${ninethStepTranslation?.data.optionsYes[3].label} ${eighthForm.haveYouReportedYesFreeField1}`,
+  //     eighthForm.haveYouReportedYes.includes(ninethStepTranslation?.data.optionsYes[4].label ) &&
+  //       `${ninethStepTranslation?.data.optionsYes[4].label} ${eighthForm.haveYouReportedYesFreeField2}`,
+  //   ].filter(Boolean)
+  //   ;
+
+  const excludedLabelsOrganization = [
+    ninethStepTranslation?.data.optionsYesOrganization[2].label,
+    ninethStepTranslation?.data.optionsYesOrganization[3].label,
+  ];
+
+  const filteredReportedInfoOrganization = eighthForm.haveYouReportedYes.filter(
+    (item) => !excludedLabelsOrganization.includes(item)
+  ).map((item) => <div key={item}>{item}</div>)
+
+  const excludedLabels = [
+    ninethStepTranslation?.data.optionsYes[3].label,
+    ninethStepTranslation?.data.optionsYes[4].label,
+  ];
+
+  const filteredReportedInfo = eighthForm.haveYouReportedYes.filter(
+    (item) => !excludedLabels.includes(item)
+  ).map((item) => <div key={item}>{item}</div>)
+
+  const reportedInfo = isReportingPersonOrganization
+    ? [
+      eighthForm?.haveYouReported,
+      filteredReportedInfoOrganization,
+
+      eighthForm.haveYouReportedYes?.includes(ninethStepTranslation?.data.optionsYesOrganization[2].label as any) &&
+      `${ninethStepTranslation?.data.optionsYesOrganization[2].label} ${eighthForm.haveYouReportedYesFreeField1}`,
+      eighthForm.haveYouReportedYes?.includes(ninethStepTranslation?.data.optionsYesOrganization[3].label as any) &&
+      `${ninethStepTranslation?.data.optionsYesOrganization[3].label} ${eighthForm.haveYouReportedYesFreeField2}`,
+    ].filter(Boolean)
+    : [
+      eighthForm?.haveYouReported,
+      filteredReportedInfo,
+
+      eighthForm.haveYouReportedYes.includes(ninethStepTranslation?.data.optionsYes[3].label) &&
+      `${ninethStepTranslation?.data.optionsYes[3].label} ${eighthForm.haveYouReportedYesFreeField1}`,
+      eighthForm.haveYouReportedYes.includes(ninethStepTranslation?.data.optionsYes[4].label) &&
+      `${ninethStepTranslation?.data.optionsYes[4].label} ${eighthForm.haveYouReportedYesFreeField2}`,
+    ].filter(Boolean);
+
+
+
 
   return (
     <div>
@@ -685,7 +759,7 @@ const EleventhStep: React.FC<EleventhStepProps> = ({
               className="font-bold w-fit rounded-full mb-6"
             >
               {/* {modalBtn} */}
-              {loading ? 'Laden...' :  'Meldung abschicken'}
+              {loading ? 'Laden...' : 'Meldung abschicken'}
             </Button>
           </AnimateClick>
         </div>
@@ -788,11 +862,11 @@ const EleventhStep: React.FC<EleventhStepProps> = ({
           <EditBlock
             step={thirdForm.step}
             question={thirdForm?.question}
-            answer={ 
+            answer={
               thirdForm?.datePeriod && !thirdForm.forgetfulFreeField ?
-              [thirdForm.dateRangeState[0], thirdForm.dateRangeState[1]] : thirdForm?.forgetfulFreeField ? thirdForm.forgetfulFreeField : dayjs(thirdForm?.valueDate).format(
-              'DD.MM.YYYY T HH:mm:ssZ[Z]'
-            )}
+                [thirdForm.dateRangeState[0], thirdForm.dateRangeState[1]] : thirdForm?.forgetfulFreeField ? thirdForm.forgetfulFreeField : dayjs(thirdForm?.valueDate).format(
+                  'DD.MM.YYYY T HH:mm:ssZ[Z]'
+                )}
           />
         )}
 
@@ -881,24 +955,41 @@ const EleventhStep: React.FC<EleventhStepProps> = ({
 
         {eighthForm && eighthForm?.haveYouReported &&
           eighthForm?.haveYouReported &&
-          eighthForm?.haveYouReported && (eighthForm?.haveYouReportedYes || eighthForm?.haveYouReportedYesFreeField1 ||eighthForm?.haveYouReportedYesFreeField2 ) &&
+          eighthForm?.haveYouReported && (eighthForm?.haveYouReportedYes || eighthForm?.haveYouReportedYesFreeField1 || eighthForm?.haveYouReportedYesFreeField2) &&
           (
             <EditBlock
               step={eighthForm?.step}
               question={eighthForm?.question}
-              answer={
-              //   [
-              //   eighthForm?.haveYouReported,
-              //   ...eighthForm?.haveYouReportedYes,
-              //   eighthForm?.haveYouReportedYesFreeField1,
-              //   eighthForm?.haveYouReportedYesFreeField2,
-              // ],
-             [eighthForm?.haveYouReported,
-              eighthForm.haveYouReportedYes[0] && eighthForm.haveYouReportedYes[0],
-              eighthForm.haveYouReportedYes[1] && eighthForm.haveYouReportedYes[1],
-             eighthForm.haveYouReportedYes[2] && `${ eighthForm.haveYouReportedYes[2] + ' ' + eighthForm.haveYouReportedYesFreeField1}`,
-             eighthForm.haveYouReportedYes[2] && `${ eighthForm.haveYouReportedYes[3] + ' ' + eighthForm.haveYouReportedYesFreeField2}`]
-            }
+              answer={reportedInfo}
+
+            // {
+
+            //   [
+            //   eighthForm?.haveYouReported,
+            //   ...eighthForm?.haveYouReportedYes,
+            //   eighthForm?.haveYouReportedYesFreeField1,
+            //   eighthForm?.haveYouReportedYesFreeField2,
+            // ]
+
+            // reportingPerson == 'organization' ?
+            //  [eighthForm?.haveYouReported,
+            //   eighthForm.haveYouReportedYes[0] && eighthForm.haveYouReportedYes[0],
+            //   eighthForm.haveYouReportedYes[1] && eighthForm.haveYouReportedYes[1],
+            //  eighthForm.haveYouReportedYes[2] && `${ eighthForm.haveYouReportedYes[2] + ' ' + eighthForm.haveYouReportedYesFreeField1}`,
+            //  eighthForm.haveYouReportedYes[2] && `${ eighthForm.haveYouReportedYes[3] + ' ' + eighthForm.haveYouReportedYesFreeField2}`] 
+
+            // ()
+            //  : 
+
+            //  ()
+
+            //  [
+            //   eighthForm?.haveYouReported,
+            //   eighthForm.haveYouReportedYes.includes(ninethStepTranslation?.data.optionsYes[3].label || ninethStepTranslation?.data.optionsYes[3].label) && eighthForm.haveYouReportedYes,
+            //  eighthForm.haveYouReportedYes.includes(ninethStepTranslation?.data.optionsYes[3].label) && `${ ninethStepTranslation?.data.optionsYes[3].label + ' ' + eighthForm.haveYouReportedYesFreeField1}`,
+            //  eighthForm.haveYouReportedYes.includes(ninethStepTranslation?.data.optionsYes[4].label) && `${ ninethStepTranslation?.data.optionsYes[4].label + ' ' + eighthForm.haveYouReportedYesFreeField2}`
+            // ] 
+            // }
             />
           )}
       </div>}

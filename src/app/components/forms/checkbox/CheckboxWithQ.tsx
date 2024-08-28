@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import questionMark from '@/../public/icons/questionmark.svg';
+import questionMark from '@/../public/icons/Question MarkSecond.svg';
 import Image from 'next/image';
 
 type CheckboxWithQProps = {
@@ -75,7 +75,7 @@ const CheckboxWithQ: React.FC<CheckboxWithQProps> = ({
               <Image
                 src={questionMark}
                 alt="Question mark icon"
-                className="ml-2  "
+                className="ml-2"
               />
             )}
           </div>

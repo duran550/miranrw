@@ -212,6 +212,7 @@ const MultiStepForm: React.FC<MultiStepFormProps> = ({
                       />
                     ) : step === 12 ? (
                       <EleventhStep
+                      ninethStepTranslation={formTranslation?.stepper?.ninethStep}
                         eleventhStepTranslation={
                           formTranslation?.stepper?.eleventhStep
                         }
@@ -307,6 +308,7 @@ const MultiStepForm: React.FC<MultiStepFormProps> = ({
                         eleventhStepTranslation={
                           formTranslation?.stepper?.eleventhStep
                         }
+                        ninethStepTranslation={formTranslation?.stepper?.ninethStep}
                         secondStepTranslation={formTranslation?.stepper?.secondStep}
                         open={open}
                         setOpen={() => setOpen(false)}
@@ -390,6 +392,7 @@ const MultiStepForm: React.FC<MultiStepFormProps> = ({
                           formTranslation?.stepper?.eleventhStep
                         }
                         secondStepTranslation={formTranslation?.stepper?.secondStep}
+                        ninethStepTranslation={formTranslation?.stepper?.ninethStep}
                         open={open}
                         setOpen={() => setOpen(false)}
                         setSubmitPage={() => setSubmitPage}
