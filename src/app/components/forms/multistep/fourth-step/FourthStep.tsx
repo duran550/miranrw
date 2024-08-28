@@ -124,8 +124,6 @@ const FourthStep: React.FC<FourthStepProps> = ({
         clearErrors('forgetfulFreeField'); // Clear errors if valid
       }
     }
-
-    console.log(errors.forgetfulFreeField, 'yearitHappened')
     // console.log(yearitHappenedFreeField?.length 
     //   == 4 && !!errors.yearitHappenedFreeField, 'yearitHappenedGreat')
 
@@ -146,10 +144,26 @@ const FourthStep: React.FC<FourthStepProps> = ({
       if (valueDate && !datePeriod) {
         dispatch({ type: FORM_ERRORS, payload: false });
       }
-      if (forgetful && forgetfulFreeField?.length < 4) {
+    }
+
+    if (valueDate == null && !datePeriod && !forgetful) {
+
+      dispatch({ type: FORM_ERRORS, payload: true });
+    } else {
+      if (forgetful && !forgetfulFreeField) {
         dispatch({ type: FORM_ERRORS, payload: true });
+      } else {
+        if (forgetful && forgetfulFreeField) {
+          dispatch({ type: FORM_ERRORS, payload: false });
+        }
+
+        // dispatch({ type: FORM_ERRORS, payload: false });
+      }
+      if (valueDate && !forgetful) {
+        dispatch({ type: FORM_ERRORS, payload: false });
       }
     }
+
     // dispatch({ type: FORM_ERRORS, payload: false });
     // if (datePeriod && !dateRange) {
     //   dispatch({ type: FORM_ERRORS, payload: true });
@@ -288,7 +302,7 @@ const FourthStep: React.FC<FourthStepProps> = ({
               subTitle={fourthStepTranslation?.description}
               mandatory={fourthStepTranslation.mandatory}
               paddingHorizontal={3}
-                    paddingTop={1}
+              paddingTop={1}
             />
           </div>
           <div className='grid grid-cols-1 xl:grid-cols-2 gap-10 xl:gap-22 xl:w-[54vw]'>

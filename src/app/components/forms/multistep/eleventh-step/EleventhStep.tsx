@@ -147,6 +147,7 @@ const EleventhStep: React.FC<EleventhStepProps> = ({
     dateRangeState: string;
     datePeriod: boolean;
     numberOfEmployees: string;
+    forgetfulFreeField:string;
   } = (reportingPerson === 'myself')
       ? getFormCookies(FOURTH_FORM)
       : reportingPerson === 'organization' ? getFormCookies(FIFTH_FORM) : getFormCookies(FOURTH_FORM);
@@ -546,8 +547,6 @@ const EleventhStep: React.FC<EleventhStepProps> = ({
       otherformOfDiscriminationAreaFreeField
     };
 
-    console.log('report', report);
-
 
     try {
       dispatch({ type: FORM_ERRORS, payload: true });
@@ -559,10 +558,10 @@ const EleventhStep: React.FC<EleventhStepProps> = ({
       setIsLoading(true)
       const response = await new ReportService().sendReport(report).then((result) => {
         if (result.status === 201 || result.status === 200) {
+          setIsModalOpen(true)
+          console.log('isModalopen', isModalOpen);
           clearFormCookies();
           setIsLoading(false)
-          setIsModalOpen(true)
-          console.log('Successfull');
           dispatch({ type: FORM_ERRORS, payload: false });
           // dispatch({ type: NEXT_STEP, payload: 'DATA 1' });
         } else {
@@ -631,14 +630,13 @@ const EleventhStep: React.FC<EleventhStepProps> = ({
           <div className="">
             <form onSubmit={handleSubmit(onSubmit)} id="tenthForm">
               <div>
-                <SubmitModal
+                {<SubmitModal
                   isOpen={isModalOpen}
                   onClose={() => setIsModalOpen(false)}
                   Modaldes={'Submission Successful'}
-                  // modalBtn={'none'}
                 >
                   <TwelvethStepComponent />
-                </SubmitModal>
+                </SubmitModal>}
               </div>
               {eleventhStepTranslation?.validation?.data?.map((element: any) => (
                 <Checkbox
@@ -790,14 +788,11 @@ const EleventhStep: React.FC<EleventhStepProps> = ({
           <EditBlock
             step={thirdForm.step}
             question={thirdForm?.question}
-            answer={[
-              thirdForm?.datePeriod
-                ? thirdForm?.dateRangeState
-                : dayjs(thirdForm?.valueDate).format(
-                  'DD.MM.YYYY T HH:mm:ssZ[Z]'
-                ),
-              thirdForm?.numberOfEmployees,
-            ]}
+            answer={ 
+              thirdForm?.datePeriod && !thirdForm.forgetfulFreeField ?
+              [thirdForm.dateRangeState[0], thirdForm.dateRangeState[1]] : thirdForm?.forgetfulFreeField ? thirdForm.forgetfulFreeField : dayjs(thirdForm?.valueDate).format(
+              'DD.MM.YYYY T HH:mm:ssZ[Z]'
+            )}
           />
         )}
 
@@ -891,16 +886,21 @@ const EleventhStep: React.FC<EleventhStepProps> = ({
             <EditBlock
               step={eighthForm?.step}
               question={eighthForm?.question}
-              answer={[
-                eighthForm?.haveYouReported,
-                ...eighthForm?.haveYouReportedYes,
-                eighthForm?.haveYouReportedYesFreeField1,
-                eighthForm?.haveYouReportedYesFreeField2,
-              ]}
+              answer={
+              //   [
+              //   eighthForm?.haveYouReported,
+              //   ...eighthForm?.haveYouReportedYes,
+              //   eighthForm?.haveYouReportedYesFreeField1,
+              //   eighthForm?.haveYouReportedYesFreeField2,
+              // ],
+             [eighthForm?.haveYouReported,
+              eighthForm.haveYouReportedYes[0] && eighthForm.haveYouReportedYes[0],
+              eighthForm.haveYouReportedYes[1] && eighthForm.haveYouReportedYes[1],
+             eighthForm.haveYouReportedYes[2] && `${ eighthForm.haveYouReportedYes[2] + ' ' + eighthForm.haveYouReportedYesFreeField1}`,
+             eighthForm.haveYouReportedYes[2] && `${ eighthForm.haveYouReportedYes[3] + ' ' + eighthForm.haveYouReportedYesFreeField2}`]
+            }
             />
           )}
-
-
       </div>}
 
     </div>

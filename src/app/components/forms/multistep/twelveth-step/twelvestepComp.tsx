@@ -17,6 +17,11 @@ const TwelvethStepComponent = () => {
     window.location.href = '/' + pathname.split('/')[1] + '/about-us';
   };
 
+  const redirectHome = () => {
+    clearFormCookies();
+    window.location.href = '/'
+  }
+
   useScrollOnTop();
   return (
     <div className="">
@@ -35,7 +40,7 @@ const TwelvethStepComponent = () => {
               </Button>
             </AnimateClick>
             <AnimateClick>
-              <Button onClick={() => {router.push('/'), clearFormCookies()}} className='group w-fit h-10 bg-white bg-red text-red border-red-500 border-2 hover:bg-red-500'>
+              <Button onClick={() => redirectHome()} className='group w-fit h-10 bg-white bg-red text-red border-red-500 border-2 hover:bg-red-500'>
                 {/* <Image src={forwardArrow} alt='forward arrow' className='w-8 mr-2'/> */}
                 <span className='text-xs font-worksans text-red-500 font-bold group-hover:text-white'>Fertig</span>
               </Button>

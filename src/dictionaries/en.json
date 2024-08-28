@@ -971,138 +971,138 @@
             {
               "iD": 1,
               "name": "whereDisHappened",
-              "value": "Public offices and authorities",
-              "id": "Ämter",
-              "label": "Public offices and authorities",
-              "examples": "e.g. Social Welfare Office | Job Center | Immigration Office"
+              "value": "Offices and Authorities",
+              "id": "Offices",
+              "label": "Offices and Authorities",
+              "examples": "e.g. Social Office | Job Center | Immigration Office"
             },
             {
               "iD": 2,
               "name": "whereDisHappened",
-              "value": "Analog media",
-              "id": "Analoge",
-              "label": "Analog media",
-              "examples": "e.g. Social Welfare Office | Job Center | Immigration Office"
+              "value": "Analog Media",
+              "id": "Analog",
+              "label": "Analog Media",
+              "examples": "e.g. Social Office | Job Center | Immigration Office"
             },
             {
               "iD": 3,
               "name": "whereDisHappened",
               "value": "Work",
-              "id": "Arbeit",
+              "id": "Work",
               "label": "Work",
-              "examples": "e.g. Social Welfare Office | Job Center | Immigration Office"
+              "examples": "e.g. Social Office | Job Center | Immigration Office"
             },
             {
               "iD": 4,
               "name": "whereDisHappened",
               "value": "Education",
-              "id": "Bildung",
+              "id": "Education",
               "label": "Education",
-              "examples": "e.g. Social Welfare Office | Job Center | Immigration Office"
+              "examples": "e.g. Social Office | Job Center | Immigration Office"
             },
             {
               "iD": 5,
               "name": "whereDisHappened",
-              "value": "Digital space",
-              "id": "digitaler",
-              "label": "Digital space",
-              "examples": "e.g. Social Welfare Office | Job Center | Immigration Office"
+              "value": "Digital Space",
+              "id": "Digital",
+              "label": "Digital Space",
+              "examples": "e.g. Social Office | Job Center | Immigration Office"
             },
             {
               "iD": 6,
               "name": "whereDisHappened",
-              "value": "Emergency services",
-              "id": "Einsatzorganisationen",
-              "label": "Emergency services",
-              "examples": "e.g. Social Welfare Office | Job Center | Immigration Office"
+              "value": "Emergency Services",
+              "id": "Emergency Services",
+              "label": "Emergency Services",
+              "examples": "e.g. Social Office | Job Center | Immigration Office"
             },
             {
               "iD": 7,
               "name": "whereDisHappened",
-              "value": "Retail and services",
-              "id": "Einzelhandel",
-              "label": "Retail and services",
-              "examples": "e.g. Social Welfare Office | Job Center | Immigration Office"
+              "value": "Retail and Services",
+              "id": "Retail",
+              "label": "Retail and Services",
+              "examples": "e.g. Social Office | Job Center | Immigration Office"
             },
             {
               "iD": 8,
               "name": "whereDisHappened",
               "value": "Leisure",
-              "id": "Freizeit",
+              "id": "Leisure",
               "label": "Leisure",
-              "examples": "e.g. Social Welfare Office | Job Center | Immigration Office"
+              "examples": "e.g. Social Office | Job Center | Immigration Office"
             },
             {
               "iD": 9,
               "name": "whereDisHappened",
               "value": "Health",
-              "id": "Gesundheit",
+              "id": "Health",
               "label": "Health",
-              "examples": "e.g. Social Welfare Office | Job Center | Immigration Office"
+              "examples": "e.g. Social Office | Job Center | Immigration Office"
             },
             {
               "iD": 10,
               "name": "whereDisHappened",
               "value": "Justice",
-              "id": "Justiz",
+              "id": "Justice",
               "label": "Justice",
-              "examples": "e.g. Social Welfare Office | Job Center | Immigration Office"
+              "examples": "e.g. Social Office | Job Center | Immigration Office"
             },
             {
               "iD": 11,
               "name": "whereDisHappened",
-              "value": "Public space",
-              "id": "Öffentlicher",
-              "label": "Public space",
-              "examples": "e.g. Social Welfare Office | Job Center | Immigration Office"
+              "value": "Public Space",
+              "id": "Public",
+              "label": "Public Space",
+              "examples": "e.g. Social Office | Job Center | Immigration Office"
             },
             {
               "iD": 12,
               "name": "whereDisHappened",
-              "value": "Personal environment/private life",
-              "id": "Persönliches",
-              "label": "Personal environment/private life",
-              "examples": "e.g. Social Welfare Office | Job Center | Immigration Office"
+              "value": "Personal Environment/Private Life",
+              "id": "Personal",
+              "label": "Personal Environment/Private Life",
+              "examples": "e.g. Social Office | Job Center | Immigration Office"
             },
             {
               "iD": 13,
               "name": "whereDisHappened",
               "value": "Police",
-              "id": "Polizei",
+              "id": "Police",
               "label": "Police",
-              "examples": "e.g. Social Welfare Office | Job Center | Immigration Office"
+              "examples": "e.g. Social Office | Job Center | Immigration Office"
             },
             {
               "iD": 14,
               "name": "whereDisHappened",
-              "value": "Social services",
-              "id": "Soziale Dienste",
-              "label": "Social services",
-              "examples": "e.g. Social Welfare Office | Job Center | Immigration Office"
+              "value": "Social Services",
+              "id": "Social Services",
+              "label": "Social Services",
+              "examples": "e.g. Social Office | Job Center | Immigration Office"
             },
             {
               "iD": 15,
               "name": "whereDisHappened",
               "value": "Transportation",
-              "id": "Verkehr",
+              "id": "Transportation",
               "label": "Transportation",
-              "examples": "e.g. Social Welfare Office | Job Center | Immigration Office"
+              "examples": "e.g. Social Office | Job Center | Immigration Office"
             },
             {
               "iD": 16,
               "name": "whereDisHappened",
               "value": "Housing",
-              "id": "Wohnen",
+              "id": "Housing",
               "label": "Housing",
-              "examples": "e.g. Social Welfare Office | Job Center | Immigration Office"
+              "examples": "e.g. Social Office | Job Center | Immigration Office"
             },
             {
               "iD": 17,
               "name": "typeOfDisc",
-              "value": "Other, specify",
-              "id": "anderes",
-              "label": "Other, specify",
-              "examples": "e.g. Social Welfare Office | Job Center | Immigration Office"
+              "value": "Other, namely",
+              "id": "Other",
+              "label": "Other, namely",
+              "examples": "e.g. Social Office | Job Center | Immigration Office"
             }
           ]
         }
