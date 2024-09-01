@@ -39,6 +39,9 @@ export type reportType = {
 
     status?: string;
   }[];
+  categoryandreports?: {
+    _id: string;
+  }[];
 };
 
 export type reportType2 = {
@@ -77,4 +80,36 @@ export type reportType2 = {
   status?: string;
   category?: any[];
   description2?: string;
+  updatereport?: {
+    category?: any[];
+
+    description?: string;
+
+    status?: string;
+  }[];
+  categoryandreports?: {
+    _id: string;
+  }[];
+};
+
+export type ReportAndCategoryType = {
+  _id?: string;
+  report?: reportType;
+  text: string;
+  category: {
+    _id: string;
+    name: string;
+  };
+  level: string;
+};
+
+export type CategoryType = {
+  name: string;
+  level: string;
+  parent: {
+    _id: string;
+    name: string;
+  };
+  childre: [];
+  _id: string;
 };

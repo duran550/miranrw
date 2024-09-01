@@ -27,7 +27,7 @@ export default function LocaleSwitcher() {
   };
 
   return (
-    <div className="w-fit ml-auto lg:ml-0 lg:w-full mr-4 lg:mr-12 xl:mr-0">
+    <div className="w-fit  2xl:w-fit lg:w-full 2xl:mr-0 mr-4 ">
       <ul className="flex   lg:flex-row space-x-6 lg:space-x-0 xl:ml-24 text-slate-900 md:ml-0 md:space-y-0 justify-between items-center w-full  md:w-fit">
         {i18n.locales.map((locale) => (
           <AnimateClick key={locale}>
@@ -37,7 +37,7 @@ export default function LocaleSwitcher() {
                   ? '/' + locale +'/'+ selectedLanguage[2]
                   : '/' + locale 
               }
-              className="text-slate-900 w-fit"
+              className="text-slate-900 "
             >
               {locale === 'en' ? (
                 <div

@@ -1,4 +1,4 @@
-import { reportType, reportType2 } from '@/utils/shared-types';
+import { CategoryType, ReportAndCategoryType, reportType, reportType2 } from '@/utils/shared-types';
 
 export type LoginParams = {
   email: string;
@@ -14,7 +14,37 @@ export type UserDataType = {
   role: number;
   token: string;
 };
+export type CategorizeType = {
+  arraySave: { text: string; level: string; category: string; id: string }[];
+  addarraySave: (data: {
+    text: string;
+    level: string;
+    category: string;
+    id: string;
+  }) => void;
+  text: string;
+  setTextHandler: (value: string) => void;
+  isShow: boolean;
+  arrayIdCate: CategoryType[];
+  arrayId: string[];
+  resetHandler: () => void;
+  addId: (id: string) => void;
+  arrayDefaultCat: { ebene1?: string; ebene2?: string; ebene3?: string }[];
+  addDefaulCat: (val: string[]) => void;
+  addcategory: (id: CategoryType[]) => void;
+  fillReportCategory: (id: ReportAndCategoryType[]) => void;
+  fillArraySave: (
+    valu: {
+      text: string;
+      level: string;
+      category: string;
+    }[]
+  ) => void;
+  addReportCategory: (id: ReportAndCategoryType) => void;
 
+  arrayReportAndCategory: ReportAndCategoryType[];
+  IshowHandler: (value: boolean) => void;
+};
 export type AuthValuesType = {
   reports: reportType2[];
   reportsRecents: reportType2[];

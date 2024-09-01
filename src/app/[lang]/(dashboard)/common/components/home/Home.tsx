@@ -29,7 +29,7 @@ const Home = () => {
     IshowHandler,
   } = useContext(AuthContext);
   const hasMounted = useRef(false);
-  const [load, setLoad] = useState(reports.length == 0);
+  const [load, setLoad] = useState(true);
   const { user } = useAuth();
   const [refresh, setRefresh] = useState(0);
   const [get, setGet] = useState(false);
@@ -125,7 +125,8 @@ const Home = () => {
                 item.updatereport &&
                 item.updatereport.length > 0 &&
                 item.updatereport[0].status &&
-                item.updatereport[0].status == 'cleaned'
+                item.updatereport[0].status == 'cleaned' &&
+                item.categoryandreports && item.categoryandreports.length==0
               ) {
                 // console.log(Math.round(differenceDate / (1000 * 3600 * 24)));
 

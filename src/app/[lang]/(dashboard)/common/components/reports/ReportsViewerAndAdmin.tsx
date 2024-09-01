@@ -82,12 +82,12 @@ const ReportsViewerAndAdmin = () => {
             }
           });
 
-          setReports(report1.reverse());
+      setReports(report1.reverse());
           setLoad(false);
           setError(false);
-          setTimeout(async () => {
-            setRefresh((preview) => preview + 1);
-          }, 60000);
+            setTimeout(async () => {
+              setRefresh((preview) => preview + 1);
+            }, 120000);
         })
         .catch((error) => {
           console.log(error);
@@ -136,95 +136,104 @@ const ReportsViewerAndAdmin = () => {
       getReport(token);
     }
   }, [refresh]);
-  return (
-    <div className="w-full relative  h-fit">
-      <h1 className="text-2xl font-bold sm:my-8">All reports</h1>
-      <h2 className="font-bold  opacity-80">{`${status} Data`}</h2>
-      <p className="text-sm opacity-70">Click to view data details</p>
-      <div className="mt-8">
-        {!load && !error && (
-          <div className="flex  flex-wrap gap-5 md:h-[calc(100vh-350px)] h-[calc(100vh-310px)] mb-5 overflow-y-auto  no-scrollbar ">
-            {reports.length > 0 &&
-              reports.map((item, index) => {
-                if (status == Category.Uncategorized) {
-                  if (item.category2 && item.category2.length == 0) {
-                    return (
-                      <ReportCard
-                        key={item._id}
-                        title={item._id ? item._id : 'PT0124'}
-                        date={item.updatedAt ? item.updatedAt : ''}
-                        href={`/dashboard/cleaned-reports/${item._id}`}
-                        reportType={Category.Uncategorized}
-                      />
-                    );
-                  }
-                } else {
-                  if (item.category2 && item.category2.length > 0) {
-                    return (
-                      <ReportCard
-                        key={item._id}
-                        title={item._id ? item._id : 'PT0124'}
-                        date={item.updatedAt ? item.updatedAt : ''}
-                        href={
-                          user && user?.role == 2
-                            ? `/dashboard/cleaned-reports/${item._id}`
-                            : '#'
-                        }
-                        reportType={Category.Categorized}
-                      />
-                    );
-                  }
-                }
-              })}
-          </div>
-        )}
-        {load && (
-          <div className="text-center text-2xl md:h-[calc(100vh-350px)] h-[calc(100vh-310px)] flex place-items-center w-full justify-center">
-            {/* <p>chargement patientez...</p> */}
-            <Spinner label="Loading . . . " color="primary" size="lg" />
-          </div>
-        )}
-        {error && !load && (
-          <p className="flex items-center justify-center md:h-[calc(100vh-350px)] h-[calc(100vh-310px)] text-5xl ">
-            {errorMessage + ' waite a few moments for retry'}
-          </p>
-        )}
-      </div>
+   return (
+     <div className="w-full relative  h-fit">
+       <h1 className="text-2xl font-bold sm:my-8">All reports</h1>
+       <h2 className="font-bold  opacity-80">{`${status} Data`}</h2>
+       <p className="text-sm opacity-70">Click to view data details</p>
+       <div className="mt-8">
+         {!load && !error && (
+           <div className="grid 2xl:grid-cols-3 xl:grid-cols-2  gap-5 md:max-h-[calc(100vh-350px)] max-h-[calc(100vh-310px)] mb-5 overflow-y-auto overscroll-none no-scrollbar ">
+             {reports.length > 0 &&
+               reports.map((item, index) => {
+                 if (status == Category.Uncategorized) {
+                   if (
+                     item.categoryandreports &&
+                     item.categoryandreports.length == 0
+                   ) {
+                     return (
+                       <ReportCard
+                         key={item._id}
+                         title={item._id ? item._id : 'PT0124'}
+                         date={item.updatedAt ? item.updatedAt : ''}
+                         href={`/dashboard/cleaned-reports/${item._id}`}
+                         reportType={Category.Uncategorized}
+                       />
+                     );
+                   }
+                 } else {
+                   if (
+                     item.categoryandreports &&
+                     item.categoryandreports.length > 0
+                     
+                   ) {
+                     return (
+                       <ReportCard
+                         key={item._id}
+                         title={item._id ? item._id : 'PT0124'}
+                         date={item.updatedAt ? item.updatedAt : ''}
+                         href={
+                           user && user?.role == 2
+                             ? `/dashboard/cleaned-reports/${item._id}`
+                             : '#'
+                         }
+                         reportType={Category.Categorized}
+                       />
+                     );
+                   }
+                 }
+               })}
+           </div>
+         )}
+         {load && (
+           <div className="text-center text-2xl md:h-[calc(100vh-350px)] h-[calc(100vh-310px)] flex place-items-center w-full justify-center">
+             {/* <p>chargement patientez...</p> */}
+             <Spinner label="Loading . . . " color="primary" size="lg" />
+           </div>
+         )}
+         {error && !load && (
+           <p className="flex items-center justify-center md:h-[calc(100vh-350px)] h-[calc(100vh-310px)] text-5xl ">
+             {errorMessage + ' waite a few moments for retry'}
+           </p>
+         )}
+       </div>
 
-      <div className="flex w-fit h-16 sm:text-sm text-xs   ">
-        <Button
-          icon={
-            status == Category.Uncategorized
-              ? imgUncatActive
-              : imgUncatDesactive
-          }
-          className={`w-auto  ${
-            status == Category.Uncategorized
-              ? 'bg-black rounded-xl text-white font-semibold'
-              : 'text-[#828B8C]  bg-transparent'
-          }`}
-          onClick={() => {
-            setStatut(Category.Uncategorized);
-          }}
-        >
-          {Category.Uncategorized}
-        </Button>
-        <Button
-          icon={status == Category.Categorized ? imgcatActive : imgcatDesactive}
-          className={`w-auto ${
-            status == Category.Categorized
-              ? 'bg-black rounded-xl text-white font-semibold'
-              : 'text-[#828B8C] bg-transparent'
-          }`}
-          onClick={() => {
-            setStatut(Category.Categorized);
-          }}
-        >
-          {Category.Categorized}
-        </Button>
-      </div>
-    </div>
-  );
+       <div className="flex w-fit h-16 sm:text-sm text-xs   ">
+         <Button
+           icon={
+             status == Category.Uncategorized
+               ? imgUncatActive
+               : imgUncatDesactive
+           }
+           className={`w-auto  ${
+             status == Category.Uncategorized
+               ? 'bg-black rounded-xl text-white font-semibold'
+               : 'text-[#828B8C]  bg-transparent'
+           }`}
+           onClick={() => {
+             setStatut(Category.Uncategorized);
+           }}
+         >
+           {Category.Uncategorized}
+         </Button>
+         <Button
+           icon={
+             status == Category.Categorized ? imgcatActive : imgcatDesactive
+           }
+           className={`w-auto ${
+             status == Category.Categorized
+               ? 'bg-black rounded-xl text-white font-semibold'
+               : 'text-[#828B8C] bg-transparent'
+           }`}
+           onClick={() => {
+             setStatut(Category.Categorized);
+           }}
+         >
+           {Category.Categorized}
+         </Button>
+       </div>
+     </div>
+   );
 };
 
 export default ReportsViewerAndAdmin;

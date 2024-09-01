@@ -92,7 +92,7 @@ const LoginForm = () => {
         }
       })
       .catch((error) => {
-        console.log('error', error);
+        console.log('error', error.response);
 
         toast.error('Something went wrong, try again');
         setIsLoading(false);

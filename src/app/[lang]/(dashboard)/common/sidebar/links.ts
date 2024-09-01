@@ -7,6 +7,7 @@ import QuantitativeIcon from './icons/QuantitativeIcon';
 import ReportsIcon from './icons/ReportsIcon';
 import ReportsWarningIcon from './icons/ReportsWarningIcon';
 import SettingsIcon from './icons/SettingsIcon';
+
 export const adminLinks: Array<{
   name: string;
   href: string;
@@ -21,14 +22,14 @@ export const adminLinks: Array<{
   // },
   // {
   //   name: 'Reports',
-  //   href: '/dashboard/cleaned-reports',
+  //   href: '/dashboard/reports',
   //   icon: ReportsIcon,
-  //   targetSegment: 'cleaned-reports',
+  //   targetSegment: 'reports',
   // },
 
   // {
   //   name: 'Quantitative',
-  //   href: 'dashboard/quantitative',
+  //   href: '/dashboard/quantitative',
   //   icon: QuantitativeIcon,
   //   targetSegment: 'quantitative',
   // },
@@ -37,6 +38,12 @@ export const adminLinks: Array<{
   //   href: '/dashboard/qualitative',
   //   icon: QualitativeIcon,
   //   targetSegment: 'qualitative',
+  // },
+  // {
+  //   name: 'Compare data',
+  //   href: '/dashboard/compare-data',
+  //   icon: CompareIcon,
+  //   targetSegment: 'compare-data',
   // },
   {
     name: 'settings',
@@ -55,7 +62,7 @@ export const cleanerLinks: Array<{
 }> = [
   {
     name: 'Home',
-    href: 'dashboard',
+    href: '/dashboard',
     icon: HomeIcon,
     targetSegment: null,
   },
@@ -94,12 +101,17 @@ export const viewerLinks: any = [
     icon: QualitativeIcon,
     targetSegment: 'qualitative',
   },
-  ,
   {
     name: 'Compare data',
     href: '/dashboard/compare-data',
     icon: CompareIcon,
     targetSegment: 'compare-data',
+  },
+  {
+    name: 'settings',
+    href: '/dashboard/settings',
+    icon: SettingsIcon,
+    targetSegment: 'settings',
   },
 ];
 

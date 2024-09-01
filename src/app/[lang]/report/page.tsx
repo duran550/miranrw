@@ -16,7 +16,7 @@ export default async function report({
   return (
     <div className="">
       <Header lang={lang} /> 
-      <div className="md:mt-5 h-full  pb-16 pt-6 px-4 sm:px-[40px] lg:px-14 border-2">
+      <div className="md:mt-5 h-full 2xl:w-[1335px] 2xl:px-0 2xl:mx-auto  pb-16 pt-6 px-4 sm:px-[40px] lg:px-14 ">
         <MultiStepForm lang={lang} formTranslation={page.melden as MultiStepFormValuesProps} />
       </div>
       <div className="mt-0">

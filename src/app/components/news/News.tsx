@@ -74,14 +74,14 @@ const News: React.FC<NewsProps> = ({ newsTranslation }) => {
         </p>
         <p className="md:text-xl text-base ">{newsTranslation?.block3?.p}</p>
       </div>
-      <div className="w-full mt-8 lg:mt-0 h-[25vh] md:pr-3 xl:ml-16">
+      <div className="w-full mt-8 lg:mt-0 2xl:h-[288px] h-[25vh] md:pr-3 xl:ml-16">
         <Image src={img2} alt="" className=" object-cover h-full w-full" />
       </div>
     </div>
   );
 
   return (
-    <div className="mx-16 ">
+    <div className="2xl:w-[1035px] 2xl:mx-auto mx-16 ">
       <Slider className="space-x-8 h-fit" {...settings}>
         <div>{slide1}</div>
         <div>{slide1}</div>
