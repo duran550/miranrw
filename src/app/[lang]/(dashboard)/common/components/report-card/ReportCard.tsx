@@ -33,7 +33,7 @@ const ReportCard: React.FC<ReportCardProps> = ({
   return (
     <Link
       href={href ? `${href}` : ''}
-      className="border bg-white h-fit flex items-center  justify-between xl:p-3 p-2 rounded-xl  border-gray-300 2xl:w-[450px] xl:w-[500px] lg:w-[360px] sm:w-[300px] w-full  gap-3"
+      className="border bg-white h-fit flex items-center  justify-between xl:p-3 p-2 rounded-xl  border-gray-300  w-full  gap-3"
     >
       <div className=" sm:max-w-none max-w-[130px]">
         <h1 className="font-bold mb-2 2xl:text-base s truncate lg:text-sm  text-xs">

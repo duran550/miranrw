@@ -1,76 +1,122 @@
+import { NextApiRequest } from 'next';
 import dbConnect from '../lib/dbConnect';
+// import { Category, categoryType } from '../models/category';
 import { NextResponse } from 'next/server';
-import { authenticate } from '../utils/decode';
-import { Category } from '../models/Category';
-import { category_schema } from '../validators/validate';
-import { CategoryOption } from '../models/Category_Options';
-import { rateLimitMiddleware } from '../utils/limiter';
-
+import { categoryType, Category } from '../models/Category';
+import {
+  CategoryAndReport,
+  ReportAndCategoryType,
+} from '../models/ReportAndCategory';
+import { promises } from 'dns';
+import mongoose from 'mongoose';
+// import { Category } from '../models/Category';
 export async function POST(request: any) {
-  let pass = await rateLimitMiddleware(request);
-  if (!pass)
-    return NextResponse.json(
-      { status: 'Error', message: 'Too Many Requests.' },
-      { status: 400 }
-    );
-  let flag = await authenticate(request)
-  if (!flag) return NextResponse.json({ status: 'Error', message: 'Access Denied. Invalid Token.' }, { status: 400 });
-  const {error, value} = await category_schema.validate(await request.json())
-  if(error) return NextResponse.json({ message: error.details[0].message }, { status: 400 });
-  let category: any = value;
+  console.log('cat');
+
+  let category: categoryType = await request.json();
   await dbConnect();
-  let exist = await Category.find({ 'name': category.name })
-  if (exist.length) return NextResponse.json({ status: 'Error', message: 'Category already exist.' }, { status: 400 });
-  await Category.create(category);
-  return NextResponse.json({ message: 'Category Created' }, { status: 201 });
+  const existingCategory = await Category.findOne({ name: category.name, status:true });
+
+  if (existingCategory) {
+    // Si la catégorie existe, renvoyer une erreur
+    return NextResponse.json(
+      { message: 'Category with this name already exists' },
+      { status: 409 } // 409 Conflict
+    );
+  }
+  const newCategorie = await Category.create(category);
+  return NextResponse.json(newCategorie, { status: 201 });
 }
 
-export async function GET(request: any) {
-  // let pass= await rateLimitMiddleware(request)
-  // if (!pass) return NextResponse.json({ status: 'Error', message: 'Too Many Requests.' }, { status: 400 });
-  // let flag = await authenticate(request)
-  // if (!flag) return NextResponse.json({ status: 'Error', message: 'Access Denied. Invalid Token.' }, { status: 400 });
+export async function GET() {
+  console.log(1234);
+
   await dbConnect();
-  let categorys: any[] = await Category.find()
-  let arr:any=[]
-  let obj:any={}
-  if (categorys.length) {
-    for await (let category of categorys) {
-      
-      let options = await CategoryOption.find({ category: category._id })
-      arr.push({ 'category': category, 'options': options })
-    }
-    return NextResponse.json({ 'categorys': arr });
-  }else{
-    return NextResponse.json({ categorys});
-  }
+  let categorys: categoryType[] = await Category.find({status:true})
+    .populate('parent')
+    .populate('children')
+    .exec();
+  console.log(categorys);
   
+  return NextResponse.json({ categorys });
 }
 
 export async function DELETE(request: any) {
-  let pass = await rateLimitMiddleware(request);
-  if (!pass)
-    return NextResponse.json(
-      { status: 'Error', message: 'Too Many Requests.' },
-      { status: 400 }
-    );
-  let flag = await authenticate(request)
-  if (!flag) return NextResponse.json({ status: 'Error', message: 'Access Denied. Invalid Token.' }, { status: 400 });
   const id = request.nextUrl.searchParams.get('id');
   await dbConnect();
-  await Category.findByIdAndDelete(id);
-  return NextResponse.json({ message: 'Category deleted' }, { status: 200 });
-}
 
-// let reports: reportType[] = await Report.find({})
-// let arr:any=[]
-// if (reports.length) {
-//   for await (let report of reports) {
-    
-//     let options = await UpdateReport.find({ _id: report.updatereport})
-//     arr.push({ 'report': report, 'reportupdate': options })
-//   }
-//   return NextResponse.json({ 'reports': arr });
-// }else{
-//   return NextResponse.json({ reports});
-// }
+  const session = await mongoose.startSession();
+  session.startTransaction();
+
+  try {
+    let categorys: categoryType[] = await Category.find({ parent: id })
+      .session(session)
+      .exec();
+    if (categorys.length > 0) {
+      await Promise.all(
+        categorys.map(async (item) => {
+          let categorys2: categoryType[] = await Category.find({
+            parent: item._id,
+          })
+            .session(session)
+            .exec();
+          if (categorys2.length > 0) {
+            await Promise.all(
+              categorys2.map(async (items2) => {
+              //   await CategoryAndReport.updateMany({
+                 
+                //  })
+                 await CategoryAndReport.updateMany(
+                   { category: items2._id! },
+                   { $set: { status: false } }
+                 ).session(session);
+                // await CategoryAndReport.deleteMany({
+                //   category: items2._id!,
+                // }).session(session);
+                // await Category.findByIdAndDelete(items2._id).session(session);
+              })
+            );
+            // await Category.deleteMany({ parent: item._id }).session(session);
+             await Category.updateMany(
+               { parent: item._id },
+               { $set: { status: false } }
+             ).session(session);
+            
+          }
+           await CategoryAndReport.updateMany(
+             { category: item._id! },
+             { $set: { status: false } }
+           ).session(session);
+          // await CategoryAndReport.deleteMany({ category: item._id }).session(
+          //   session
+          // );
+        })
+      );
+      // await Category.deleteMany({ parent: id }).session(session);
+       await Category.updateMany(
+         { parent: id },
+         { $set: { status: false } }
+       ).session(session);
+    }
+ await CategoryAndReport.updateMany(
+   { category: id },
+   { $set: { status: false } }
+ ).session(session);
+    // await CategoryAndReport.deleteMany({ category: id }).session(session);
+    await Category.findByIdAndUpdate(id, { $set: { status: false } }).session(
+      session
+    );
+
+    await session.commitTransaction();
+    session.endSession();
+
+    return NextResponse.json({ message: 'category deleted' }, { status: 200 });
+  } catch (error) {
+    await session.abortTransaction();
+    session.endSession();
+    return NextResponse.json(
+      { message: 'An error occurred during deletion', error: error },
+      { status: 500 }
+    );
+  }
+}

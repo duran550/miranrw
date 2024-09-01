@@ -20,6 +20,8 @@ const FirstStep: React.FC<FirstStepProps> = ({
         title={firstStepTranslation?.title}
         description={firstStepTranslation?.description}
         lang={lang}
+        paddingHorizontal={3}
+        paddingTop={1}
       />
       <Button
         onClick={() => dispatch({ type: NEXT_STEP, payload: '' })}

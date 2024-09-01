@@ -5,16 +5,17 @@ import RadioSingle from '../../radio/RadioSingle';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { useFormContext } from '@/app/hooks/useFormContext';
 import { FORM_ERRORS, LAST_STEP, NEXT_STEP } from '@/app/context/actions';
-import { clearFormCookiesStep, getFormCookies, getFormStep, setFormCookies } from '@/cookies/cookies';
-import { FOURTH_FORM, SIXTH_FORM } from '@/cookies/cookies.d';
+import { clearFormCookiesStep, getFormCookies, getFormStep, getReportingPerson, setFormCookies } from '@/cookies/cookies';
+import { FIFTH_FORM, FOURTH_FORM, SEVENTH_FORM, SIXTH_FORM } from '@/cookies/cookies.d';
 import { useScrollOnTop } from '@/app/hooks/useScrollOnTop';
 import AutoComplete from '../../auto-complete/AutoComplete';
 import InputField from '../../text-field/InputField';
 
 const FifthStep: React.FC<FifthStepProps> = ({ fifthStepTranslation, id }) => {
-  const { dispatch, reportingPerson, isEditing, formErrors } = useFormContext();
+  const { dispatch, isEditing, formErrors } = useFormContext();
   const [question] = useState<string>(fifthStepTranslation?.title);
   const [location, setLocation] = useState<string>('');
+  const reportingPerson = getReportingPerson()
   const [searchedText, setSearchedText] = useState<string | undefined>(
     undefined
   );
@@ -43,11 +44,12 @@ const FifthStep: React.FC<FifthStepProps> = ({ fifthStepTranslation, id }) => {
       location: string;
       question: string;
       // stadtteil: string;
-    } = getFormCookies(FOURTH_FORM);
-
-    if (id === 'sixthForm') {
-      formValues = getFormCookies(SIXTH_FORM);
-    }
+    } =
+      reportingPerson === 'myself' ? getFormCookies(FIFTH_FORM) : reportingPerson == 'andere' ? getFormCookies(FIFTH_FORM) : getFormCookies(SIXTH_FORM)
+    // getFormCookies(FOURTH_FORM);
+    // if (id === 'sixthForm') {
+    //   formValues = getFormCookies(SIXTH_FORM);
+    // }
 
     dispatch({ type: FORM_ERRORS, payload: true });
 
@@ -63,7 +65,7 @@ const FifthStep: React.FC<FifthStepProps> = ({ fifthStepTranslation, id }) => {
 
     if (!locationOnline && !formValues) {
       dispatch({ type: FORM_ERRORS, payload: true });
-      console.log('bouyakaaa5');
+
     } else {
       if (locationOnline) {
         if (
@@ -146,6 +148,7 @@ const FifthStep: React.FC<FifthStepProps> = ({ fifthStepTranslation, id }) => {
     }
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
+    console.log(formValues, 'formValues')
   }, [
     location?.length,
     locationOnline,
@@ -167,9 +170,18 @@ const FifthStep: React.FC<FifthStepProps> = ({ fifthStepTranslation, id }) => {
         ? ''
         : location;
     let dataWithQuestion = { question, location: city, step, ...data };
-    id === 'sixthForm'
-      ? setFormCookies(dataWithQuestion, SIXTH_FORM)
-      : setFormCookies(dataWithQuestion, FOURTH_FORM);
+
+    if (reportingPerson === 'myself') {
+      setFormCookies(dataWithQuestion, FIFTH_FORM)
+    } else if (reportingPerson === 'andere') {
+      setFormCookies(dataWithQuestion, FIFTH_FORM)
+    } else {
+      setFormCookies(dataWithQuestion, SIXTH_FORM)
+    }
+
+    // id === 'seventhForm'
+    //   ? setFormCookies(dataWithQuestion, SEVENTH_FORM)
+    //   : setFormCookies(dataWithQuestion, FOURTH_FORM);
 
     dispatch({ type: NEXT_STEP, payload: 'DATA 1' });
     // isEditing && reportingPerson === 'myself'
@@ -200,26 +212,38 @@ const FifthStep: React.FC<FifthStepProps> = ({ fifthStepTranslation, id }) => {
 
     setLocation(keyword);
   };
+
+  // seventhForm
+
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      id={id === 'sixthForm' ? 'sixthForm' : 'fourthForm'}
-      className="lg:w-[35rem]"
+      // id={id === 'sixthForm' ? 'sixthForm' : 'fourthForm'}
+      // id={id === 'seventhForm' ? 'seventhForm' : 'fourthForm'}
+      id={reportingPerson === 'myself' ? 'seventhForm' : reportingPerson === 'andere' ? 'fourthForm' : 'sixthForm'}
+      className="lg:w-[24rem]"
     >
-      <FormHeader
-        title={fifthStepTranslation?.title}
-        subTitle={fifthStepTranslation?.description}
-      />
-      <p className="text-sm -mt-12 mb-8">{fifthStepTranslation?.mandatory}</p>
-      <div className="flex flex-col ">
-        <RadioSingle
-          value={fifthStepTranslation?.secondOption?.value}
-          id={fifthStepTranslation?.secondOption.id}
-          label={fifthStepTranslation?.secondOption?.title}
-          name="locationOnline"
-          props={register('locationOnline')}
+      <div className=''>
+        <FormHeader
+          title={fifthStepTranslation?.title}
+          subTitle={fifthStepTranslation?.description}
+          mandatory={fifthStepTranslation?.mandatory}
+          paddingHorizontal={3}
+          paddingTop={1}
         />
-        <div className="w-full pl-8 my-4">
+      </div>
+      {/* <p className="text-sm -mt-12 mb-8">{fifthStepTranslation?.mandatory}</p> */}
+      <div className="flex flex-col">
+        <div className=''>
+          <RadioSingle
+            value={fifthStepTranslation?.secondOption?.value}
+            id={fifthStepTranslation?.secondOption.id}
+            label={fifthStepTranslation?.secondOption?.title}
+            name="locationOnline"
+            props={register('locationOnline')}
+          />
+        </div>
+        <div className="w-full pl-8">
           {locationOnline === fifthStepTranslation?.secondOption?.value && (
             <>
               <AutoComplete

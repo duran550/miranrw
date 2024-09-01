@@ -21,20 +21,22 @@ export default async function faqs({
           lang={lang}
           buttonTitle={page.home?.heroSection?.buttonText}
         >
-          <h1 className="font-bold text-3xl mb-16">FAQs</h1>
-          <div className="w-full lg:max-w-2xl">
-            <Faq
-              title={page?.faqs.group1.title}
-              faqs={page?.faqs?.group1.faqs}
-            />
-            <Faq
-              title={page?.faqs.group2.title}
-              faqs={page?.faqs?.group2.faqs}
-            />
-            <Faq
-              title={page?.faqs.group3.title}
-              faqs={page?.faqs?.group3.faqs}
-            />
+          <div className='2xl:w-[1335px] 2xl:mx-auto'>
+            <h1 className="font-bold text-3xl mb-16">FAQs</h1>
+            <div className="w-full lg:max-w-2xl">
+              <Faq
+                title={page?.faqs.group1.title}
+                faqs={page?.faqs?.group1.faqs}
+              />
+              <Faq
+                title={page?.faqs.group2.title}
+                faqs={page?.faqs?.group2.faqs}
+              />
+              <Faq
+                title={page?.faqs.group3.title}
+                faqs={page?.faqs?.group3.faqs}
+              />
+            </div>
           </div>
         </SinglePageLayout>
       </div>

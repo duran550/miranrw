@@ -219,7 +219,7 @@
           }
         },
         "thirdStepOrganization": {
-          "title": "What type of organization/institution is affected?",
+          "title": "What type of organization/ Institution is affected?",
           "mandatory": "* Mandatory field",
           "subTitle": "Multiple selections possible",
           "minCharacters": "A minimum of 4 Characters is expected",
@@ -282,7 +282,21 @@
           "happenedOverALongPeriod": "It happened over a long period of time.",
           "forgetful": "I can't remember exactly when it happened.",
           "yearitHappened": "In what year did it happen?",
-          "selectYear": "(Auswahl Jahr) Jahreszahl"
+          "selectYear": "(Auswahl Jahr) Jahreszahl",
+          "options": [
+            {
+              "label": "In which year did it happen?",
+              "name": "datePeriod",
+              "value": "In which year did it happen?",
+              "id": "datePeriod"
+            },
+            {
+              "name": "forgetful",
+              "id": "forgetful",
+              "value": "I can't remember exactly when it happened.",
+              "label": "I can't remember exactly when it happened."
+            }
+          ]
         },
         "fourthStepOrganization": {
           "title": "How many individuals are active in the organization/institution?",
@@ -626,6 +640,36 @@
                 "id": "hav5",
                 "label": "Other, namely:"
               }
+            ],
+            "optionsYesOrganization": [
+              {
+                "iD": 1,
+                "name": "haveYouReportedYesOrganization",
+                "value": "The case was reported to the police.",
+                "id": "hav1",
+                "label": "The case was reported to the police."
+              },
+              {
+                "iD": 2,
+                "name": "haveYouReportedYesOrganization",
+                "value": "A counseling center was consulted.",
+                "id": "hav2",
+                "label": "A counseling center was consulted."
+              },
+              {
+                "iD": 3,
+                "name": "haveYouReportedYesOrganization",
+                "value": "The case was reported to another reporting office, namely:",
+                "id": "hav4",
+                "label": "The case was reported to another reporting office, namely:"
+              },
+              {
+                "iD": 4,
+                "name": "haveYouReportedYesOrganization",
+                "value": "Other, namely:",
+                "id": "hav5",
+                "label": "Other, namely:"
+              }
             ]
           }
         },
@@ -635,8 +679,9 @@
           "mandatory": "* Mandatory field",
           "firstBlock": {
             "title": "What is your gender identity ?",
-            "titleOnBehalf": "What is the gender identity of the affected person ?",
+            "titleOnBehalf": "What is your gender identity?",
             "description": "Multiple selections possible",
+            "secondTitle": "Why do we ask for personal information?",
             "data": [
               {
                 "id": "gender",
@@ -917,6 +962,149 @@
           "title": "Thank you for your report.",
           "description": "You can access our page with links to counseling here.",
           "button": "Reference Counseling"
+        },
+        "thirtinthStep": {
+          "title": "In which area did the discrimination occur?",
+          "description": "Multiple selections possible",
+          "mandatory": "* Required field",
+          "choices": [
+            {
+              "iD": 1,
+              "name": "whereDisHappened",
+              "value": "Offices and Authorities",
+              "id": "Offices",
+              "label": "Offices and Authorities",
+              "examples": "e.g. Social Office | Job Center | Immigration Office"
+            },
+            {
+              "iD": 2,
+              "name": "whereDisHappened",
+              "value": "Analog Media",
+              "id": "Analog",
+              "label": "Analog Media",
+              "examples": "e.g. Social Office | Job Center | Immigration Office"
+            },
+            {
+              "iD": 3,
+              "name": "whereDisHappened",
+              "value": "Work",
+              "id": "Work",
+              "label": "Work",
+              "examples": "e.g. Social Office | Job Center | Immigration Office"
+            },
+            {
+              "iD": 4,
+              "name": "whereDisHappened",
+              "value": "Education",
+              "id": "Education",
+              "label": "Education",
+              "examples": "e.g. Social Office | Job Center | Immigration Office"
+            },
+            {
+              "iD": 5,
+              "name": "whereDisHappened",
+              "value": "Digital Space",
+              "id": "Digital",
+              "label": "Digital Space",
+              "examples": "e.g. Social Office | Job Center | Immigration Office"
+            },
+            {
+              "iD": 6,
+              "name": "whereDisHappened",
+              "value": "Emergency Services",
+              "id": "Emergency Services",
+              "label": "Emergency Services",
+              "examples": "e.g. Social Office | Job Center | Immigration Office"
+            },
+            {
+              "iD": 7,
+              "name": "whereDisHappened",
+              "value": "Retail and Services",
+              "id": "Retail",
+              "label": "Retail and Services",
+              "examples": "e.g. Social Office | Job Center | Immigration Office"
+            },
+            {
+              "iD": 8,
+              "name": "whereDisHappened",
+              "value": "Leisure",
+              "id": "Leisure",
+              "label": "Leisure",
+              "examples": "e.g. Social Office | Job Center | Immigration Office"
+            },
+            {
+              "iD": 9,
+              "name": "whereDisHappened",
+              "value": "Health",
+              "id": "Health",
+              "label": "Health",
+              "examples": "e.g. Social Office | Job Center | Immigration Office"
+            },
+            {
+              "iD": 10,
+              "name": "whereDisHappened",
+              "value": "Justice",
+              "id": "Justice",
+              "label": "Justice",
+              "examples": "e.g. Social Office | Job Center | Immigration Office"
+            },
+            {
+              "iD": 11,
+              "name": "whereDisHappened",
+              "value": "Public Space",
+              "id": "Public",
+              "label": "Public Space",
+              "examples": "e.g. Social Office | Job Center | Immigration Office"
+            },
+            {
+              "iD": 12,
+              "name": "whereDisHappened",
+              "value": "Personal Environment/Private Life",
+              "id": "Personal",
+              "label": "Personal Environment/Private Life",
+              "examples": "e.g. Social Office | Job Center | Immigration Office"
+            },
+            {
+              "iD": 13,
+              "name": "whereDisHappened",
+              "value": "Police",
+              "id": "Police",
+              "label": "Police",
+              "examples": "e.g. Social Office | Job Center | Immigration Office"
+            },
+            {
+              "iD": 14,
+              "name": "whereDisHappened",
+              "value": "Social Services",
+              "id": "Social Services",
+              "label": "Social Services",
+              "examples": "e.g. Social Office | Job Center | Immigration Office"
+            },
+            {
+              "iD": 15,
+              "name": "whereDisHappened",
+              "value": "Transportation",
+              "id": "Transportation",
+              "label": "Transportation",
+              "examples": "e.g. Social Office | Job Center | Immigration Office"
+            },
+            {
+              "iD": 16,
+              "name": "whereDisHappened",
+              "value": "Housing",
+              "id": "Housing",
+              "label": "Housing",
+              "examples": "e.g. Social Office | Job Center | Immigration Office"
+            },
+            {
+              "iD": 17,
+              "name": "typeOfDisc",
+              "value": "Other, namely",
+              "id": "Other",
+              "label": "Other, namely",
+              "examples": "e.g. Social Office | Job Center | Immigration Office"
+            }
+          ]
         }
       },
       "formFields": {},

@@ -6,7 +6,7 @@ import Checkbox from '../../checkbox/Checkbox';
 import FormHeader from '../header/header';
 import InputField from '../../text-field/InputField';
 import { clearFormCookiesStep, getFormCookies, getFormStep, setFormCookies } from '@/cookies/cookies';
-import { SEVENTH_FORM, SIXTH_FORM, FIFTH_FORM } from '@/cookies/cookies.d';
+import { SEVENTH_FORM, SIXTH_FORM, FIFTH_FORM, EIGTH_FORM } from '@/cookies/cookies.d';
 import { useScrollOnTop } from '@/app/hooks/useScrollOnTop';
 import { SeventhStepProps, SeventhStepValues } from './seventhStep';
 
@@ -38,10 +38,7 @@ const SeventhStep: React.FC<SeventhStepProps> = ({
       typeOfDiscrimination: string[];
       typeOfDiscriminationFreeField: string;
       question: string;
-    } = getFormCookies(FIFTH_FORM);
-
-
-
+    } = getFormCookies(EIGTH_FORM);
 
     dispatch({ type: FORM_ERRORS, payload: true });
 
@@ -50,18 +47,18 @@ const SeventhStep: React.FC<SeventhStepProps> = ({
     ) {
       dispatch({ type: FORM_ERRORS, payload: false });
     } else {
-       if (
-      (typeOfDiscrimination &&
-        typeOfDiscrimination?.includes('Anderes, und zwar') &&
-        typeOfDiscriminationFreeField?.length <= 3) ||
-      (typeOfDiscrimination &&
-        typeOfDiscrimination?.includes('Other, specify') &&
-        typeOfDiscriminationFreeField?.length <= 3)
-    ) {
-      dispatch({ type: FORM_ERRORS, payload: true });
-    } else {
-      dispatch({ type: FORM_ERRORS, payload: false });
-    }
+      if (
+        (typeOfDiscrimination &&
+          typeOfDiscrimination?.includes('Anderes, und zwar') &&
+          typeOfDiscriminationFreeField?.length <= 3) ||
+        (typeOfDiscrimination &&
+          typeOfDiscrimination?.includes('Other, specify') &&
+          typeOfDiscriminationFreeField?.length <= 3)
+      ) {
+        dispatch({ type: FORM_ERRORS, payload: true });
+      } else {
+        dispatch({ type: FORM_ERRORS, payload: false });
+      }
       if (
         typeOfDiscrimination &&
         typeOfDiscrimination.length > 0 &&
@@ -106,6 +103,8 @@ const SeventhStep: React.FC<SeventhStepProps> = ({
 
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
+
+    console.log(formValues, 'log00')
   }, [typeOfDiscrimination, typeOfDiscriminationFreeField]);
 
   // Triggered when submitting form
@@ -113,7 +112,7 @@ const SeventhStep: React.FC<SeventhStepProps> = ({
 
     let step = getFormStep();
     let dataWithQuestion = { question, step, ...data };
-    setFormCookies(dataWithQuestion, FIFTH_FORM);
+    setFormCookies(dataWithQuestion, EIGTH_FORM);
     //  console.log('step',step);
 
 
@@ -123,18 +122,22 @@ const SeventhStep: React.FC<SeventhStepProps> = ({
     //   : dispatch({ type: NEXT_STEP, payload: 'DATA 1' });
   };
 
-  console.log(lang, 'mylang')
-
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
       id={'fifthForm'}
-      className="lg:w-[38rem]"
+      className="lg:w-[24rem]"
     >
-      <FormHeader
-        title={seventhStepTranslation?.title}
-        subTitle={seventhStepTranslation?.description}
-      />
+
+      <div className=''>
+        <FormHeader
+          title={seventhStepTranslation?.title}
+          subTitle={seventhStepTranslation?.description}
+          paddingHorizontal={3}
+          paddingTop={1}
+        />
+      </div>
+
       {seventhStepTranslation.choices?.sort((a, b) => a.label.localeCompare(b.label)).map((choice: any, index) => {
         return (
           <div key={choice.iD}>

@@ -11,6 +11,7 @@ type BlockDataType = {
   titleOnBehalf: string;
   description: string;
   data: ArrayType;
+  secondTitle:string;
 };
 
 export type TenthStepProps = {
@@ -22,6 +23,7 @@ export type TenthStepProps = {
     thirdBlock: BlockDataType;
     fourthBlock: BlockDataType;
   };
+  id?:string;
 };
 
 export type TenthFormValues = {

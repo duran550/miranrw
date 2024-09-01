@@ -7,13 +7,14 @@ import Checkbox from '../../checkbox/Checkbox';
 import { useFormContext } from '@/app/hooks/useFormContext';
 import { FORM_ERRORS, LAST_STEP, NEXT_STEP, FORM_VALUE, ID_FORM } from '@/app/context/actions';
 import InputField from '../../text-field/InputField';
-import { clearFormCookiesStep, getFormCookies, getFormStep, setFormCookies } from '@/cookies/cookies';
-import { EIGTH_FORM, SEVENTH_FORM } from '@/cookies/cookies.d';
+import { clearFormCookiesStep, getFormCookies, getFormStep, getReportingPerson, setFormCookies } from '@/cookies/cookies';
+import { EIGTH_FORM, NINETH_FORM, SEVENTH_FORM, TENTH_FORM } from '@/cookies/cookies.d';
 import { useScrollOnTop } from '@/app/hooks/useScrollOnTop';
 
 const EightStep: React.FC<EightStepProps> = ({ eightStepTranslation, id }) => {
-  const { dispatch, isEditing, reportingPerson, formErrors, formValue } = useFormContext();
+  const { dispatch, isEditing, formErrors, formValue } = useFormContext();
   const [question] = useState<string>(eightStepTranslation?.title);
+  const reportingPerson = getReportingPerson()
 
   const {
     register,
@@ -37,11 +38,13 @@ const EightStep: React.FC<EightStepProps> = ({ eightStepTranslation, id }) => {
       formOfDiscYes: string[];
       formOfDiscYesFreeField: string;
       question: string;
-    } = getFormCookies(SEVENTH_FORM);
-
-    if (id && id === 'eighthForm') {
-      formValues = getFormCookies(EIGTH_FORM);
-    }
+    } = (reportingPerson === 'myself') ? getFormCookies(TENTH_FORM) : getFormCookies(NINETH_FORM)
+    
+    
+    // getFormCookies(NINETH_FORM)
+    // if(reportingPerson === 'organization') {
+    //   formValues = getFormCookies(EIGTH_FORM);
+    // }
 
     dispatch({ type: FORM_ERRORS, payload: false });
 
@@ -103,6 +106,8 @@ const EightStep: React.FC<EightStepProps> = ({ eightStepTranslation, id }) => {
     // }
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
+
+    console.log(formValue, 'formValue10step')
   }, [formOfDiscYes, formOfDiscYesFreeField, formOfDisc]);
 
   // Triggered when submitting form
@@ -127,40 +132,53 @@ const EightStep: React.FC<EightStepProps> = ({ eightStepTranslation, id }) => {
            formOfDisc: data.formOfDisc,
            formOfDiscYes:[],
          };
+
+         console.log(dataWithQuestion, 'log03')
+         console.log(reportingPerson, 'reportingperson')
          // dispatch({ type: ID_FORM, payload: id });
          dispatch({ type: FORM_VALUE, payload: dataWithQuestion });
-          id === 'eighthForm'
-            ? setFormCookies(dataWithQuestion, EIGTH_FORM)
-            : setFormCookies(dataWithQuestion, SEVENTH_FORM);
+          // id === 'ninethForm'
+          //   ? setFormCookies(dataWithQuestion, NINETH_FORM)
+          //   : setFormCookies(dataWithQuestion, SEVENTH_FORM);
+          if(reportingPerson === 'organization') {
+            setFormCookies(dataWithQuestion, NINETH_FORM)
+           } else if(reportingPerson === 'myself') {
+            setFormCookies(dataWithQuestion, TENTH_FORM)
+          } else {
+            setFormCookies(dataWithQuestion, NINETH_FORM)
+          }
     }else{
        let step = getFormStep();
        let dataWithQuestion = { question, step, ...data };
        // dispatch({ type: ID_FORM, payload: id });
        dispatch({ type: FORM_VALUE, payload: dataWithQuestion });
-        id === 'eighthForm'
-          ? setFormCookies(dataWithQuestion, EIGTH_FORM)
-          : setFormCookies(dataWithQuestion, SEVENTH_FORM);
+       if(reportingPerson === 'organization') {
+        setFormCookies(dataWithQuestion, NINETH_FORM)
+       } else if(reportingPerson === 'myself') {
+        setFormCookies(dataWithQuestion, TENTH_FORM)
+      } else {
+        setFormCookies(dataWithQuestion, NINETH_FORM)
+      }
     }
-   
- 
-     
-
      
 
      dispatch({ type: NEXT_STEP, payload: 'DATA 1' });
     // isEditing && reportingPerson === 'myself'
     //   ? dispatch({ type: LAST_STEP, payload: 11 })
     //   : dispatch({ type: NEXT_STEP, payload: 'DATA 1' });
- 
   };
 
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      id={id === 'eighthForm' ? 'eighthForm' : 'seventhForm'}
-      className="lg:w-[35rem]"
+      // id={id === 'ninethForm' ? 'ninethForm' : 'seventhForm'}
+      id={(reportingPerson === 'myself' || reportingPerson === 'andere') ? 'ninethForm' : 'eighthForm'}
+      className="lg:w-[25rem]"
     >
-      <FormHeader title={eightStepTranslation?.title} subTitle={eightStepTranslation.subTitle}/>
+      <div className=''>
+        <FormHeader title={eightStepTranslation?.title} subTitle={eightStepTranslation.subTitle} paddingHorizontal={3}
+          paddingTop={1}/>
+      </div>
 
       <div>
         <RadioGroup

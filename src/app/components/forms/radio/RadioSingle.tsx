@@ -6,6 +6,7 @@ type RadioSingleProps = {
   value: string;
   label: string;
   name: string;
+  disabled?:boolean;
 };
 
 const RadioSingle: React.FC<RadioSingleProps> = ({
@@ -14,6 +15,7 @@ const RadioSingle: React.FC<RadioSingleProps> = ({
   label,
   props,
   value,
+  disabled
 }) => {
   return (
     <div key={id} className="flex items-center pl-4 ">
@@ -23,12 +25,13 @@ const RadioSingle: React.FC<RadioSingleProps> = ({
         type="radio"
         value={value}
         name={name}
-        className={` w-6 h-6 text-primaryColor bg-gray-100 focus:ring-PrimaryColor  dark:ring-offset-gray-800 focus:ring-2`}
+        className={`w-6 h-6 text-primaryColor bg-gray-100 accent-primaryColor focus:ring-primaryColor`}
+        disabled={disabled}
       />
       {label && (
         <label
           htmlFor={id}
-          className="w-full py-3 ml-4 text-sm font-medium text-gray-900 "
+          className="w-full py-3 ml-4 text-gray-900 font-normal font-worksans text-sm"
         >
           {label}
         </label>
@@ -38,3 +41,49 @@ const RadioSingle: React.FC<RadioSingleProps> = ({
 };
 
 export default RadioSingle;
+
+
+
+// import React from 'react';
+
+// type RadioSingleProps = {
+//   id: string;
+//   props: any;
+//   value: string;
+//   label: string;
+//   name: string;
+//   disabled?: boolean;
+// };
+
+// const RadioSingle: React.FC<RadioSingleProps> = ({
+//   name,
+//   id,
+//   label,
+//   props,
+//   value,
+//   disabled,
+// }) => {
+//   return (
+//     <div key={id} className="flex items-center pl-4">
+//       <input
+//         {...props}
+//         id={`${id}`}
+//         type="radio"
+//         value={value}
+//         name={name}
+//         className={`w-6 h-6 text-primaryColor bg-gray-100 accent-primaryColor focus:ring-primaryColor`}
+//         disabled={disabled}
+//       />
+//       {label && (
+//         <label
+//           htmlFor={id}
+//           className="w-full py-3 ml-4 text-sm font-medium text-gray-900"
+//         >
+//           {label}
+//         </label>
+//       )}
+//     </div>
+//   );
+// };
+
+// export default RadioSingle;

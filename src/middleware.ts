@@ -66,6 +66,7 @@ export function middleware(request: NextRequest, response: any, next: any) {
     `/${locale}/dashboard/quantitative`,
     `/${locale}/dashboard/qualitative`,
     `/${locale}/dashboard/compare-data`,
+    `/${locale}/dashboard/settings`,
   ];
 
   const privateRiskPaths = [
@@ -95,7 +96,7 @@ export function middleware(request: NextRequest, response: any, next: any) {
     `/${locale}/queerphobia`,
     `/${locale}/report`,
     `/${locale}/statement`,
-    `/${locale}/`,
+    `/${locale}`,
     `/${locale}/about-us`,
   ];
 
@@ -179,18 +180,19 @@ export function middleware(request: NextRequest, response: any, next: any) {
         return NextResponse.redirect(
           new URL(`/${locale}/dashboard`, request.url)
         );
-      } else if (
-        user &&
-        user?.role &&
-        user?.role == 4 &&
-        !privateRiskPaths.includes(pathname) &&
-        !allPaths.includes(pathname) &&
-        !pathname.includes('/dashboard/dangerous-reports')
-      ) {
-        return NextResponse.redirect(
-          new URL(`/${locale}/dashboard`, request.url)
-        );
       }
+      // else if (
+      //   user &&
+      //   user?.role &&
+      //   user?.role == 4 &&
+      //   !privateRiskPaths.includes(pathname) &&
+      //   !allPaths.includes(pathname) &&
+      //   !pathname.includes('/dashboard/dangerous-reports')
+      // ) {
+      //   return NextResponse.redirect(
+      //     new URL(`/${locale}/dashboard`, request.url)
+      //   );
+      // }
     } else {
       // console.log('ok');
 

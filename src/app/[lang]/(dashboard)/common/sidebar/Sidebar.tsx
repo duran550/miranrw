@@ -81,7 +81,7 @@ const Sidebar: FC<SidebarProps> = ({ lang }) => {
               lang={lang}
             />
           ))}
-        {user &&
+        {/* {user &&
           user.role == 4 &&
           riskManagerLinks?.map((nav: any) => (
             <NavLink
@@ -92,7 +92,7 @@ const Sidebar: FC<SidebarProps> = ({ lang }) => {
               targetSegment={nav.targetSegment}
               lang={lang}
             />
-          ))}
+          ))} */}
       </div>
 
       <div

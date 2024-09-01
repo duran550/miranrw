@@ -1,10 +1,11 @@
 'use client';
 import { ReportSummaryType } from '@/app/[lang]/(dashboard)/dashboard/reports/reportSummaryType';
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { AdminContext } from '../../../../context/AdminContext';
 import { useFindReport } from '@/app/hooks/useFindReport';
-import { reportType } from '@/utils/shared-types';
+import { ReportAndCategoryType, reportType } from '@/utils/shared-types';
 import { Span } from 'next/dist/trace';
+import { useAuth } from '@/app/hooks/useAuth';
 
 type ReportSummaryProps = {
   className?: string;
@@ -15,6 +16,10 @@ type ReportSummaryProps = {
   markedAsDangerous?: boolean;
   report?: reportType;
   update?: boolean;
+  role?: boolean;
+  color?: boolean;
+  status?: string;
+  array?: ReportAndCategoryType[];
 };
 
 const ReportSummaryCleanData: React.FC<ReportSummaryProps> = ({
@@ -26,13 +31,18 @@ const ReportSummaryCleanData: React.FC<ReportSummaryProps> = ({
   markedAsIrrelevant,
   report,
   update,
+  role,
+  color,
+  status,
+  array,
 }) => {
-  const { state } = useContext(AdminContext);
-
-  const defaultClassName = `border rounded-xl p-4 border-gray-300 w-full max-h-[70vh] overflow-y-auto overscroll-none no-scrollbar`;
-  const combinedClassName = className ? `${className}` : defaultClassName;
-  const { uncategorizedData } = useFindReport();
-  console.log(report);
+ const { state } = useContext(AdminContext);
+ const { user } = useAuth();
+ const [viewAll, setViewAll] = useState(false);
+ const defaultClassName = `bg-white border rounded-xl p-4 border-gray-300 w-full max-h-[70vh] overflow-y-auto overscroll-none no-scrollbar`;
+ const combinedClassName = className ? `${className}` : defaultClassName;
+ const { uncategorizedData } = useFindReport();
+ console.log(report, 'logloglog5');
 
   return (
     <div className={combinedClassName}>
