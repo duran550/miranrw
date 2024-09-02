@@ -218,7 +218,7 @@ const Home = () => {
           setNumbers(total, total_week);
           setTimeout(() => {
             setRefresh((preview) => preview + 1);
-          }, 60000);
+          }, 300000);
           // setTotal(total);
           // setTotalWeek(total_week);
         })

@@ -115,7 +115,7 @@ const ReportsCleaner = () => {
           setError(false);
           setTimeout(async () => {
             setRefresh((preview) => preview + 1);
-          }, 60000);
+          }, 300000);
         })
         .catch((error) => {
           console.log(error);
