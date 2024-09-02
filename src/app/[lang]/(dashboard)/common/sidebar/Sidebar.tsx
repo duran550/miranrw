@@ -16,7 +16,7 @@ import { removeUserCookies } from '@/cookies/cookies';
 import Link from 'next/link';
 import { AuthContext } from '@/app/context/AuthContext';
 
-const Sidebar = () => {
+const Sidebar:React.FC<{lang:string}> = () => {
   const { isShow, IshowHandler, setReports } = useContext(AuthContext);
   const { push } = useRouter();
   const { user } = useAuth();
