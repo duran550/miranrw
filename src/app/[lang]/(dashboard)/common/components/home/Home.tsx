@@ -129,40 +129,30 @@ const Home = () => {
                 item.categoryandreports && item.categoryandreports.length==0
               ) {
                 // console.log(Math.round(differenceDate / (1000 * 3600 * 24)));
-
+                    const item2 = { ...item };
+                    delete item.updatereport;
+                    report1.push({
+                      ...item,
+                      status2:
+                        item2.updatereport && item2.updatereport[0].status
+                          ? item2.updatereport[0].status
+                          : 'pending',
+                      description2:
+                        item2.updatereport && item2.updatereport[0].description
+                          ? item2.updatereport[0].description
+                          : undefined,
+                      category2:
+                        item2.updatereport && item2.updatereport[0].category
+                          ? [...item2.updatereport[0].category]
+                          : [],
+                    });
                 total++;
                 if (Math.round(differenceDate / (1000 * 3600 * 24)) <= 7) {
                   total_week++;
                 }
               }
 
-              if (
-                item.updatereport &&
-                item.updatereport.length > 0 &&
-                item.updatereport[0].status &&
-                item.updatereport[0].status == 'cleaned' &&
-                (!item.updatereport[0].category ||
-                  (item.updatereport[0].category &&
-                    item.updatereport[0].category.length == 0))
-              ) {
-                const item2 = { ...item };
-                delete item.updatereport;
-                report1.push({
-                  ...item,
-                  status2:
-                    item2.updatereport && item2.updatereport[0].status
-                      ? item2.updatereport[0].status
-                      : 'pending',
-                  description2:
-                    item2.updatereport && item2.updatereport[0].description
-                      ? item2.updatereport[0].description
-                      : undefined,
-                  category2:
-                    item2.updatereport && item2.updatereport[0].category
-                      ? [...item2.updatereport[0].category]
-                      : [],
-                });
-              }
+           
             });
             if (report1.length < 6 && report1.length > 0) {
               setReport(report1);
@@ -218,7 +208,7 @@ const Home = () => {
           setNumbers(total, total_week);
           setTimeout(() => {
             setRefresh((preview) => preview + 1);
-          }, 60000);
+          }, 300000);
           // setTotal(total);
           // setTotalWeek(total_week);
         })

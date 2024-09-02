@@ -87,7 +87,7 @@ const ReportsViewerAndAdmin = () => {
           setError(false);
             setTimeout(async () => {
               setRefresh((preview) => preview + 1);
-            }, 120000);
+            }, 300000);
         })
         .catch((error) => {
           console.log(error);

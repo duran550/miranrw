@@ -115,7 +115,7 @@ const ReportsCleaner = () => {
           setError(false);
           setTimeout(async () => {
             setRefresh((preview) => preview + 1);
-          }, 60000);
+          }, 300000);
         })
         .catch((error) => {
           console.log(error);
@@ -184,7 +184,7 @@ const ReportsCleaner = () => {
                        <ReportCard
                          key={item._id}
                          title={item._id ? item._id : 'PT0124'}
-                         date={item.createdAt ? item.createdAt : ''}
+                         date={item.updatedAt ? item.updatedAt : ''}
                          href={`/en/dashboard/clean-data/${item._id}`}
                          reportType={Category.Raw}
                        />
@@ -196,7 +196,7 @@ const ReportsCleaner = () => {
                        <ReportCard
                          key={item._id}
                          title={item._id ? item._id : 'PT0124'}
-                         date={item.createdAt ? item.createdAt : ''}
+                         date={item.updatedAt ? item.updatedAt : ''}
                          href={`/en/dashboard/clean-data/${item._id}`}
                          reportType={
                            item.status2 == 'cleaned'
