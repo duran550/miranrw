@@ -2,14 +2,13 @@
 import clsx from 'clsx';
 import Link from 'next/link';
 import { usePathname, useSelectedLayoutSegment } from 'next/navigation';
-import { ReactNode } from 'react';
+import { ReactNode, useEffect, useState } from 'react';
 
 type NavLinkProps = {
   name: string;
   href: string;
   icon?: ReactNode;
   targetSegment?: string | null;
-  lang: string;
 };
 
 const NavLink: React.FC<NavLinkProps> = ({
@@ -17,11 +16,13 @@ const NavLink: React.FC<NavLinkProps> = ({
   href,
   icon,
   targetSegment,
-  lang,
 }) => {
   const activeSegment = useSelectedLayoutSegment();
+  const [isClient, setIsClient] = useState(false);
 
-  console.log(activeSegment, 'this is my active segment');
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
 
   return (
     <Link
@@ -29,12 +30,14 @@ const NavLink: React.FC<NavLinkProps> = ({
       href={href}
       className={clsx(
         `flex py-2 ${
-          (activeSegment === targetSegment && 'hover:bg-primary text-white') ||
+          (isClient &&
+            activeSegment === targetSegment &&
+            'hover:bg-primary text-white') ||
           'hover:bg-gray-50 hover:text-primary'
-        } my-1 grow items-center sm:justify-center gap-2 rounded-md   p-4 text-sm font-medium   lg:flex-none lg:justify-start md:p-2 lg:px-3 px-3`,
+        } my-1 grow items-center sm:justify-center gap-2 rounded-md p-4 text-sm font-medium lg:flex-none lg:justify-start md:p-2 xl:px-3 px-3`,
         {
-          'bg-primary text-white hover:text-white  cursor-default':
-            activeSegment === targetSegment,
+          'bg-primary text-white hover:text-white cursor-default':
+            isClient && activeSegment === targetSegment,
         }
       )}
     >

@@ -352,7 +352,7 @@ getHandler()
             color={reports2 ? true : false}
             array={arrayCategorize}
           />
-          {(user?.role === Role.CLEANER || user?.role === Role.RISK_MANAGER) &&
+          {(user?.role === Role.CLEANER ) &&
             reports1 &&
             !error2 && (
               <ReportActions

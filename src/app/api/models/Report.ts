@@ -1,5 +1,6 @@
 import mongoose, { Schema, model } from 'mongoose';
 import { CategoryAndReport } from './ReportAndCategory';
+import UpdateReport from './UpdateReport';
 interface reportType {
   identity?: string;
   description?: string;
@@ -66,7 +67,9 @@ const ReportSchema = new Schema<reportType>({
   sexualOrientationFreeField: { type: String, required: false },
   status: { type: String, required: false, default: 'pending' },
   category: { type: Array<object>, required: false },
-  updatereport: [{ type: mongoose.Schema.Types.ObjectId, ref: 'UpdateReport' }],
+  updatereport: [
+    { type: mongoose.Schema.Types.ObjectId, ref: UpdateReport.modelName },
+  ],
   disciminationArea: { type: Array<string>, required: false },
   otherformOfDiscriminationAreaFreeField: { type: String, required: false },
   categoryandreports: [
@@ -74,6 +77,7 @@ const ReportSchema = new Schema<reportType>({
       type: mongoose.Schema.Types.ObjectId,
       ref: CategoryAndReport.modelName,
       required: false,
+      default: [],
     },
   ],
   // category: [
