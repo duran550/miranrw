@@ -26,15 +26,15 @@ const CopyRightSection: React.FC<CopyrightProps> = ({
   lang,
 }) => {
   return (
-    <div className="bg-white py-5 lg:border-t-8  lg:px-12  lg:py-6 border-dividerColor">
+    <div className="2xl:w-[1325px] 2xl:mx-auto 2xl:px-0 bg-white py-5   lg:px-12  lg:py-6 ">
       <h1 className="font-bold text-base sm:text-xl px-4 hidden lg:block lg:px-0 py-4">
         {copyrightTranslation?.partners}
       </h1>
       <div className=" lg:space-x-16  flex flex-col-reverse xl:flex-row lg:flex  lg:justify-between lg:items-center xl:items-center text-textColor xl:justify-between">
-        <div className="flex flex-wrap items-center space-y-4 lg:space-x-28 md:space-x-20 space-x-6 mt-4 px-4">
+        <div className="flex w-full 2xl:justify-between flex-wrap items-center 2xl:space-x-0 space-y-4 lg:space-x-28 md:space-x-20 space-x-6 mt-4 px-4">
           <Link target="_blank" href="https://queeres-netzwerk.nrw/ ">
             <Image
-              className="sm:w-32 hover:grayscale-0  grayscale  lg:w-40 w-32 m-0"
+              className=" sm:w-32 hover:grayscale-0  grayscale  lg:w-40 w-32 m-0"
               src={QNWLogo}
               alt="QNW Logo"
               onBlur={() => {
@@ -44,7 +44,7 @@ const CopyRightSection: React.FC<CopyrightProps> = ({
           </Link>
           <Link href="https://ngvt.nrw/" target="_blank">
             <Image
-              className="sm:w-32 hover:grayscale-0  grayscale  lg:w-40 w-32 m-0 max-sm:max-h-14"
+              className="2xl:w-36 sm:w-32 hover:grayscale-0  grayscale  lg:w-40 w-32 m-0 max-sm:max-h-14"
               src={NGVTLogo}
               alt="NGVT Logo"
             />
@@ -52,14 +52,14 @@ const CopyRightSection: React.FC<CopyrightProps> = ({
 
           <Link target="_blank" href="https://rubicon-koeln.de/">
             <Image
-              className="sm:w-32 hover:grayscale-0  grayscale  lg:w-64 w-32 m-0"
+              className="2xl:w-36 sm:w-32 hover:grayscale-0  grayscale  lg:w-64 w-32 m-0"
               src={RubikonLogo}
               alt="Rubikon Logo"
             />
           </Link>
           <Link href="https://nrw.lsvd.de/" target="_blank">
             <Image
-              className="sm:w-32 hover:grayscale-0  grayscale  lg:w-40 w-32 m-0"
+              className=" sm:w-32 hover:grayscale-0  grayscale  lg:w-40 w-32 m-0"
               src={LSVDLogo}
               alt="LSVD Logo"
             />
@@ -67,7 +67,7 @@ const CopyRightSection: React.FC<CopyrightProps> = ({
           <Link href="https://www.mkw.nrw/ministerium" target="_blank">
             {' '}
             <Image
-              className="sm:w-45 hover:grayscale-0  grayscale   w-[20rem] "
+              className=" sm:w-48 hover:grayscale-0  grayscale   w-[20rem] "
               src={MinisteriumLogo}
               alt="Ministerium Logo"
             />

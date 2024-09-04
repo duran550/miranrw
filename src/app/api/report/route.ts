@@ -53,14 +53,27 @@ export async function GET(request: any) {
         { status: 'Irrelevant' },
         { status: 'cleaned' },
       ],
-    }).populate('updatereport');
+    })
+      .populate('updatereport')
+      
+    console.log(reports);
+
     return NextResponse.json(reports);
+    
   }
 
   if ( role == 2) {
     let reports: reportType[] = await Report.find({
       $nor: [{ status: 'pending' }],
-    }).populate('updatereport');
+    })
+      .populate('updatereport')
+      .populate({
+        path: 'categoryandreports',
+        match: { status: true },
+        // Sélectionne uniquement le champ "name" des sous-catégories
+      });
+    console.log(reports);
+
     return NextResponse.json(reports);
   }
   return NextResponse.json(
@@ -70,20 +83,20 @@ export async function GET(request: any) {
 }
 
 export async function DELETE(request: any) {
-  let pass = await rateLimitMiddleware(request);
-  if (!pass)
-    return NextResponse.json(
-      { status: 'Error', message: 'Too Many Requests.' },
-      { status: 400 }
-    );
-  let user = await authenticate(request);
-  if (!user)
-    return NextResponse.json(
-      { status: 'Error', message: 'Access Denied. Invalid Token.' },
-      { status: 400 }
-    );
+  // let pass = await rateLimitMiddleware(request);
+  // if (!pass)
+  //   return NextResponse.json(
+  //     { status: 'Error', message: 'Too Many Requests.' },
+  //     { status: 400 }
+  //   );
+  // let user = await authenticate(request);
+  // if (!user)
+  //   return NextResponse.json(
+  //     { status: 'Error', message: 'Access Denied. Invalid Token.' },
+  //     { status: 400 }
+  //   );
   const id = request.nextUrl.searchParams.get('id');
   await dbConnect();
-  // await Report.findByIdAndDelete(id);
+  await Report.findByIdAndDelete(id);
   return NextResponse.json({ message: 'Access Denied..' }, { status: 400 });
 }

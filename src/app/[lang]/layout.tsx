@@ -37,7 +37,7 @@ export default function RootLayout({
       </Head>
 
       <body
-        className={`${poppins.className} flex flex-col bg-white text-textColor min-h-screen`}
+        className={`${poppins.className} flex flex-col bg-white text-textColor min-h-screen overflow-x-hidden overflow-y-auto`}
       >
         {/* <NextUIProvider>
           <Providers>

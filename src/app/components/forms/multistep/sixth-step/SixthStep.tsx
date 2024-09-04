@@ -10,13 +10,14 @@ import {
   NEXT_STEP,
 } from '@/app/context/actions';
 import InputField from '../../text-field/InputField';
-import { clearFormCookiesStep, getFormCookies, getFormStep, setFormCookies } from '@/cookies/cookies';
-import { FIFTH_FORM, SEVENTH_FORM, SIXTH_FORM } from '@/cookies/cookies.d';
+import { clearFormCookiesStep, getFormCookies, getFormStep, getReportingPerson, setFormCookies } from '@/cookies/cookies';
+import { EIGTH_FORM, FIFTH_FORM, NINETH_FORM, SEVENTH_FORM, SIXTH_FORM } from '@/cookies/cookies.d';
 import { useScrollOnTop } from '@/app/hooks/useScrollOnTop';
 import { SixthStepProps, SixthStepValues } from './sixthStep';
 
 const SixthStep: React.FC<SixthStepProps> = ({ sixthStepTranslation, id, lang }) => {
-  const { dispatch, isEditing, reportingPerson, formErrors } = useFormContext();
+  const { dispatch, isEditing, formErrors } = useFormContext();
+  const reportingPerson = getReportingPerson()
   const [question] = useState<string>(sixthStepTranslation?.title);
 
   const {
@@ -39,10 +40,15 @@ const SixthStep: React.FC<SixthStepProps> = ({ sixthStepTranslation, id, lang })
       formOfQueerphobia: string[];
       otherformOfQueerphobiaFreeField: string;
       question: string;
-    } = getFormCookies(SIXTH_FORM);
-    if (id && id === 'seventhForm') {
-      formValues = getFormCookies(SEVENTH_FORM);
-    }
+    } =
+      (reportingPerson === 'myself' || reportingPerson === 'andere') ? getFormCookies(NINETH_FORM) :
+        getFormCookies(EIGTH_FORM)
+
+
+    // if (id && id === 'seventhForm') {
+    //   formValues = getFormCookies(SEVENTH_FORM);
+    // }
+
     // dispatch({ type: FORM_ERRORS, payload: false });
     // if (formOfQueerphobia.length<0) {
     //   dispatch({ type: FORM_ERRORS, payload: true });
@@ -69,19 +75,26 @@ const SixthStep: React.FC<SixthStepProps> = ({ sixthStepTranslation, id, lang })
     } else {
       dispatch({ type: FORM_ERRORS, payload: false });
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [formOfQueerphobia, otherformOfQueerphobiaFreeField]);
 
   // Triggered when submitting form
   const onSubmit: SubmitHandler<SixthStepValues> = (data) => {
-
     let step = getFormStep();
     let dataWithQuestion = { question, step, ...data };
     // setFormCookies(dataWithQuestion, FIFTH_FORM);
-    console.log('dataWithQuestion', dataWithQuestion);
-    id && id === 'seventhForm'
-      ? setFormCookies(dataWithQuestion, SEVENTH_FORM)
-      : setFormCookies(dataWithQuestion, SIXTH_FORM);
+
+    // id && id === 'seventhForm'
+    //   ? setFormCookies(dataWithQuestion, SEVENTH_FORM)
+    //   : setFormCookies(dataWithQuestion, SIXTH_FORM);
+
+    // id && id === 'eighthForm'
+    //   && setFormCookies(dataWithQuestion, EIGTH_FORM)
+    //   : setFormCookies(dataWithQuestion, SIXTH_FORM);
+
+    (reportingPerson === 'myself' || reportingPerson === 'andere')
+      ? setFormCookies(dataWithQuestion, NINETH_FORM)
+      : setFormCookies(dataWithQuestion, EIGTH_FORM);
+
     dispatch({ type: NEXT_STEP, payload: '' });
     // isEditing && reportingPerson === 'myself'
     //   ? dispatch({ type: LAST_STEP, payload: 11 })
@@ -93,16 +106,22 @@ const SixthStep: React.FC<SixthStepProps> = ({ sixthStepTranslation, id, lang })
 
   return (
     <form
-      id={id && id == 'seventhForm' ? 'seventhForm' : 'sixthForm'}
+      // id={id && id == 'seventhForm' ? 'seventhForm' : 'sixthForm'}
+      // id={'seventhForm'}
+      // id={'eighthForm'}
+      id={(reportingPerson === 'myself' || reportingPerson === 'andere') ? 'eighthForm' : 'seventhForm'}
       onSubmit={handleSubmit(onSubmit)}
-      className="lg:w-[35rem]"
+      className="lg:w-[23.8rem]"
     >
-      <FormHeader
-        title={sixthStepTranslation?.title}
-        subTitle={sixthStepTranslation?.description}
-      />
+      <div className=''>
+        <FormHeader
+          title={sixthStepTranslation?.title}
+          subTitle={sixthStepTranslation?.description}
+          paddingHorizontal={3}
+          paddingTop={1}
+        />
+      </div>
       {sixthStepTranslation?.choices?.sort((a, b) => a.label.localeCompare(b.label)).map((choice: any, index) => {
-        console.log(choice.label, choice.iD, 'label');
 
         return (
           <div key={choice.iD}>
@@ -114,11 +133,12 @@ const SixthStep: React.FC<SixthStepProps> = ({ sixthStepTranslation, id, lang })
               label={choice.label}
             />
 
-            {(
-              ((lang === 'en' && choice.iD === 9) || (lang === 'de' && index === 1)) &&
+{
+              
+              choice.iD === 9   &&
               (formOfQueerphobia &&
                 (formOfQueerphobia.includes('Anderes, und zwar') ||
-                  formOfQueerphobia.includes('Other, specify')))
+                  formOfQueerphobia.includes('Other, specify'))
             ) ? (
               <div className="w-full pb-4 ml-8">
                 <InputField

@@ -6,8 +6,8 @@ import { FourthStepOrganizationFormValues } from './fourthStepOrganization';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { useFormContext } from '@/app/hooks/useFormContext';
 import { FORM_ERRORS, LAST_STEP, NEXT_STEP } from '@/app/context/actions';
-import { clearFormCookiesStep, getFormCookies, getFormStep, setFormCookies } from '@/cookies/cookies';
-import { THIRD_FORM } from '@/cookies/cookies.d';
+import { clearFormCookiesStep, getFormCookies, getFormStep, getReportingPerson, setFormCookies } from '@/cookies/cookies';
+import { FOURTH_FORM, THIRD_FORM } from '@/cookies/cookies.d';
 import { useScrollOnTop } from '@/app/hooks/useScrollOnTop';
 
 const FourthStepOrganization: React.FC<FourthStepOrganizationProps> = ({
@@ -15,7 +15,8 @@ const FourthStepOrganization: React.FC<FourthStepOrganizationProps> = ({
 }) => {
   const [question] = useState<string>(fourthStepOrganizationTranslation?.title);
 
-  const { dispatch, reportingPerson, isEditing } = useFormContext();
+  const { dispatch, isEditing } = useFormContext();
+  const reportingPerson = getReportingPerson()
 
   const {
     register,
@@ -30,7 +31,7 @@ const FourthStepOrganization: React.FC<FourthStepOrganizationProps> = ({
   let formValues: {
     numberOfEmployees: string;
     question: string;
-  } = getFormCookies(THIRD_FORM);
+  } = getFormCookies(FOURTH_FORM);
 
   // Scroll on top
   useScrollOnTop();
@@ -57,7 +58,8 @@ const FourthStepOrganization: React.FC<FourthStepOrganizationProps> = ({
   
     let step = getFormStep();
     let dataWithQuestion = { question, step, ...data };
-    setFormCookies(dataWithQuestion, THIRD_FORM);
+    // setFormCookies(dataWithQuestion, THIRD_FORM);
+    setFormCookies(dataWithQuestion, FOURTH_FORM);
 
     isEditing && reportingPerson === 'myself'
       ? dispatch({ type: LAST_STEP, payload: 11 })
@@ -70,10 +72,12 @@ const FourthStepOrganization: React.FC<FourthStepOrganizationProps> = ({
       id="thirdForm"
       className="flex flex-col relative"
     >
-      <div className="lg:w-[35rem]">
+      <div className="lg:w-[24rem]">
         <FormHeader
           title={fourthStepOrganizationTranslation?.title}
           subTitle={fourthStepOrganizationTranslation?.subTitle}
+          paddingHorizontal={3}
+          paddingTop={1}
         />
         <div className="">
           <RadioGroup

@@ -10,11 +10,11 @@ import {
   NEXT_STEP,
   REPORTING_PERSON,
 } from '@/app/context/actions';
-import { clearFormCookiesStep, getFormCookies, getFormStep, setFormCookies } from '@/cookies/cookies';
+import { clearFormCookiesStep, getFormCookies, getFormStep, removeReportingPerson, setFormCookies, setReportingPerson } from '@/cookies/cookies';
 import { FIRST_FORM } from '@/cookies/cookies.d';
 import { useScrollOnTop } from '@/app/hooks/useScrollOnTop';
 
-const SecondStep: React.FC<SecondStepProps> = ({ secondStepTranslation }) => {
+const SecondStep: React.FC<SecondStepProps> = ({ secondStepTranslation }, id) => {
   const { dispatch, reportingPerson, isEditing } = useFormContext();
   const [question] = useState<string>(secondStepTranslation?.title);
   const {
@@ -40,20 +40,23 @@ const SecondStep: React.FC<SecondStepProps> = ({ secondStepTranslation }) => {
       dispatch({ type: FORM_ERRORS, payload: true });
     } else {
       dispatch({ type: FORM_ERRORS, payload: false });
-      dispatch({
-        type: REPORTING_PERSON,
-        payload:
-          identity === secondStepTranslation?.options[0].value
-            ? 'myself'
-            : identity === secondStepTranslation?.options[1].value
-            ? 'andere'
-            : identity === secondStepTranslation?.options[2].value
-            ? 'onBehalf'
-            : 'organization',
-      });
+      const reportingPersonType =
+      identity === secondStepTranslation?.options[0].value
+        ? 'myself'
+        : identity === secondStepTranslation?.options[1].value
+        ? 'andere'
+        : 'organization';
+
+    // Reset the cookie if a different option is selected
+    removeReportingPerson();
+    setReportingPerson(reportingPersonType);
+
+    dispatch({
+      type: REPORTING_PERSON,
+      payload: reportingPersonType,
+    });
 
       // Setting default values if exists in cookies
-
       if (formValues && !identity) {
         identity !== formValues?.identity &&
           setValue('identity', formValues?.identity);
@@ -61,7 +64,8 @@ const SecondStep: React.FC<SecondStepProps> = ({ secondStepTranslation }) => {
     }
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [identity, formValues?.identity]);
+    console.log(formValues, 'formvalue')
+  }, [identity, formValues?.identity, dispatch, setValue]);
 
   // Triggered when submitting form
   const onSubmit: SubmitHandler<SecondFormValues> = (data) => {
@@ -80,25 +84,27 @@ const SecondStep: React.FC<SecondStepProps> = ({ secondStepTranslation }) => {
       <form
         onSubmit={handleSubmit(onSubmit)}
         id="firstForm"
-        className="h-full lg:w-[35rem]"
+        className="h-[full] lg:w-[24rem]"
       >
-        <FormHeader title={secondStepTranslation?.title} />
-        <p className="text-sm -mt-12 mb-8">
-          {secondStepTranslation?.mandatory}
-        </p>
-        <RadioGroup
-          props={register('identity', { required: true })}
-          options={secondStepTranslation?.options}
-        />
+        <div className=''>
+          <FormHeader title={secondStepTranslation?.title} mandatory={secondStepTranslation?.mandatory} paddingHorizontal={4} paddingTop={2}/>
+        </div>
+
+        <div className='-ml-3'>
+          <RadioGroup
+            props={register('identity', { required: true })}
+            options={secondStepTranslation?.options}
+          />
+        </div>
       </form>
-      {identity === secondStepTranslation?.options[2].value && (
+      {/* {identity === secondStepTranslation?.options[2].value && (
         <div className="mt-4 max-w-lg lg:absolute lg:mt-0 lg:-right-[40rem]">
           <FormHeader
             title={secondStepTranslation?.onBehalfHints?.title}
             subTitle={secondStepTranslation?.onBehalfHints?.description}
           />
         </div>
-      )}
+      )} */}
     </div>
   );
 };

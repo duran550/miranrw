@@ -11,7 +11,7 @@ export default async function Header({ lang }: { lang: Locale }) {
   // eslint-disable-next-line react-hooks/rules-of-hooks
 
   return (
-    <header>
+    <header className='w-screen overflow-hidden'>
       <NavBar lang={lang} navigation={navigation} />
     </header>
   );

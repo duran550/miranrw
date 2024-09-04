@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
+import questionMark from '@/../public/icons/questionmark.svg';
 
 type CheckboxProps = {
   name: string;
@@ -18,8 +19,8 @@ const Checkbox: React.FC<CheckboxProps> = ({
   props,
 }) => {
   return (
-    <div key={id} className="p-4">
-      <div className="flex items-center mr-4 mb-2">
+    <div key={id} className="p-2">
+      <div className="flex items-center mr-4">
         <input
           key={id}
           type="checkbox"
@@ -30,7 +31,7 @@ const Checkbox: React.FC<CheckboxProps> = ({
           {...props}
           className="opacity-0 absolute h-6 w-6"
         />
-        <div className="bg-white border border-primaryColor w-8 h-8 flex flex-shrink-0 justify-center items-center mr-2 focus-within:border-blue-500">
+        <div className="bg-white border border-primaryColor w-6 h-6 flex flex-shrink-0 justify-center items-center mr-2 focus-within:border-blue-500">
           <svg
             className="fill-current hidden w-3 h-3 text-primaryColor pointer-events-none"
             fill="#000000"
@@ -47,7 +48,7 @@ const Checkbox: React.FC<CheckboxProps> = ({
             />
           </svg>
         </div>
-        <label htmlFor={id} className="select-none ml-2">
+        <label htmlFor={id} className="select-none ml-2 font-normal text-sm font-worksans">
           {label}
         </label>
       </div>

@@ -25,15 +25,15 @@ const NavBar: React.FC<NavBarProps> = ({ navigation, lang }) => {
   });
 
   return (
-    <nav ref={domNode} className="w-full relative z-20">
-      <div className="w-full border-b-[1.2px] py-5 border-black">
-        <div className="xl:mr-12 xl:opacity-100 w-full lg:w-fit md:w-full sm:ml-auto">
+    <nav ref={domNode} className="w-full relative z-20 overflow-hidden">
+      <div className=" w-screen border-b-[1.2px] py-5 border-black">
+        <div className=" 2xl:w-[1335px] 2xl:mx-auto lg:w-fit md:w-full  sm:ml-auto flex justify-end  ">
           {/* Language switcher */}
 
           <LocaleSwitcher />
         </div>
       </div>
-      <div className="w-full xl:w-full items-center relative  py-12 xl:py-4 justify-between px-2 mx-auto xl:items-center flex  bg-white xl:flex xl:px-8">
+      <div className="w-full  2xl:w-[1325px] 2xl:gap-10  2xl:px-0 items-center relative  py-12 xl:py-4 justify-between px-2 mx-auto xl:items-center flex  bg-white xl:flex xl:px-8">
         <div
           className={`${
             navbar
@@ -42,9 +42,9 @@ const NavBar: React.FC<NavBarProps> = ({ navigation, lang }) => {
           } flex  h-full justify-center  absolute xl:relative top-0 left-0 right-0  flex-col xl:mt-0`}
         >
           <div
-            className={`flex lg:px-8 xl:px-2 w-full z-10 items-center justify-between py-0 `}
+            className={`flex lg:px-8 2xl:px-0 xl:px-2 w-full z-10 items-center justify-between py-0 `}
           >
-            <Link className="pt-1" href={'/' + urlSplit[1]}>
+            <Link className=" 2xl:-ml-5" href={'/' + urlSplit[1]}>
               <Image className="md:w-96 w-72" src={Logo} alt="Logo" />
             </Link>
             <div className="xl:hidden flex flex-col">
@@ -160,12 +160,12 @@ const NavBar: React.FC<NavBarProps> = ({ navigation, lang }) => {
             </div>
           </nav>
         </div>
-        <div className="xl:justify-between  text-textColor items-center w-full lg:w-[230rem]  xl:w-[230rem] hidden xl:flex">
+        <div className="  relative 2xl:px-0  xl:justify-between  text-textColor items-center w-full lg:w-[230rem]  xl:w-[230rem] hidden xl:flex">
           {/* Horizontal or desktop navigation */}
           <nav
             className={`container w-full opacity-0 xl:opacity-100 xl:block flex  items-center justify-between  `}
           >
-            <ul className="flex w-full space-x-6 2xl:space-x-8">
+            <ul className="flex w-full  2xl:gap-14 gap-6">
               {/* <li>
                 <Link
                   className={`${
@@ -283,16 +283,17 @@ const NavBar: React.FC<NavBarProps> = ({ navigation, lang }) => {
           {/* <div className="w-fit xl:pr-4 "> */}
           <Link href={`/${lang}/report`}>
             {' '}
-            <Button
+            <div
               className={` ${
                 pathname === '/' + lang + ''
                   ? 'xl:pr-4 '
-                  : 'fixed right-4 top-28'
+                  : 'fixed  mx-auto 2xl:left-1/2 2xl:transform 2xl:-translate-x-1/2 2xl:right-auto right-4 top-28 2xl:w-[1375px]  flex justify-end'
               } ${pathname === '/' + lang + '/report' && 'hidden'} w-64 `}
-              variant="primary"
             >
-              {navigation?.button}
-            </Button>
+              <Button className={` w-64 `} variant="primary">
+                {navigation?.button}
+              </Button>
+            </div>
           </Link>
 
           {/* </div> */}

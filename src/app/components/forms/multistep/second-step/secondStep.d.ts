@@ -19,6 +19,7 @@ export type SecondStepProps = {
       checked: boolean;
     }>;
   };
+  id?:any;
 };
 
 export type dataType = Array<{

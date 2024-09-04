@@ -1,5 +1,6 @@
 import mongoose, { Schema, model } from 'mongoose';
-
+import { CategoryAndReport } from './ReportAndCategory';
+import UpdateReport from './UpdateReport';
 interface reportType {
   identity?: string;
   description?: string;
@@ -28,10 +29,12 @@ interface reportType {
   age?: string;
   sexualOrientation?: string[];
   sexualOrientationFreeField?: string;
-  status?: string
-  category?: any[]
-  updatereport?: any
-  
+  status?: string;
+  category?: any[];
+  updatereport?: any;
+  disciminationArea?: string[];
+  otherformOfDiscriminationAreaFreeField?: string;
+  categoryandreports?: any;
 }
 
 const ReportSchema = new Schema<reportType>({
@@ -64,7 +67,19 @@ const ReportSchema = new Schema<reportType>({
   sexualOrientationFreeField: { type: String, required: false },
   status: { type: String, required: false, default: 'pending' },
   category: { type: Array<object>, required: false },
-  updatereport: [{ type: Schema.Types.ObjectId, ref: 'UpdateReport'}]
+  updatereport: [
+    { type: mongoose.Schema.Types.ObjectId, ref: UpdateReport.modelName },
+  ],
+  disciminationArea: { type: Array<string>, required: false },
+  otherformOfDiscriminationAreaFreeField: { type: String, required: false },
+  categoryandreports: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: CategoryAndReport.modelName,
+      required: false,
+      default: [],
+    },
+  ],
   // category: [
   //   { type: Object, required: false }
   // ],

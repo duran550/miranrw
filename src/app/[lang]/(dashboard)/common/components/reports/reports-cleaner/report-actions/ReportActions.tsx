@@ -224,7 +224,7 @@ const ReportActions: React.FC<ReportActionProps> = (whatHappened) => {
                     >
                       Mark As Irrelevant
                     </Button>
-                    <Button
+                    {/* <Button
                       className="text-xs"
                       disabled={isLoad}
                       variant={isLoad ? 'disabled' : 'outlineWarning'}
@@ -234,7 +234,7 @@ const ReportActions: React.FC<ReportActionProps> = (whatHappened) => {
                       }}
                     >
                       Mark As Dangerous
-                    </Button>
+                    </Button> */}
                   </div>
                 )}
               </div>

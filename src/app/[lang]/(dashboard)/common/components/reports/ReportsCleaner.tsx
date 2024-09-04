@@ -115,7 +115,7 @@ const ReportsCleaner = () => {
           setError(false);
           setTimeout(async () => {
             setRefresh((preview) => preview + 1);
-          }, 60000);
+          }, 300000);
         })
         .catch((error) => {
           console.log(error);
@@ -165,96 +165,94 @@ const ReportsCleaner = () => {
       getReport(token);
     }
   }, [refresh]);
-  return (
-    <div className="w-full relative  h-fit">
-      <h1 className="text-2xl font-bold sm:my-8">All reports</h1>
+   return (
+     <div className="w-full relative  h-fit">
+       <h1 className="text-2xl font-bold sm:my-8">All reports</h1>
+       <h2 className="font-bold  opacity-80">{`${status} Data`}</h2>
+       <p className="text-sm opacity-70">Click to view data details</p>
+       <div className="mt-8">
+         {!load && !error && (
+           <div className="grid 2xl:grid-cols-3 xl:grid-cols-2  gap-5 md:max-h-[calc(100vh-350px)] max-h-[calc(100vh-310px)] mb-5 overflow-y-auto overscroll-none no-scrollbar ">
+             {reports.length > 0 &&
+               reports.map((item, index) => {
+                 if (status == Category.Raw) {
+                   if (
+                     !item.status2 ||
+                     (item.status2 && item.status2 == 'pending')
+                   ) {
+                     return (
+                       <ReportCard
+                         key={item._id}
+                         title={item._id ? item._id : 'PT0124'}
+                         date={item.updatedAt ? item.updatedAt : ''}
+                         href={`/en/dashboard/clean-data/${item._id}`}
+                         reportType={Category.Raw}
+                       />
+                     );
+                   }
+                 } else {
+                   if (item.status2 && item.status2 !== 'pending') {
+                     return (
+                       <ReportCard
+                         key={item._id}
+                         title={item._id ? item._id : 'PT0124'}
+                         date={item.updatedAt ? item.updatedAt : ''}
+                         href={`/en/dashboard/clean-data/${item._id}`}
+                         reportType={
+                           item.status2 == 'cleaned'
+                             ? Category.Cleaned
+                             : Category.Irrelevant
+                         }
+                       />
+                     );
+                   }
+                 }
+               })}
+           </div>
+         )}
+         {load && (
+           <div className="text-center text-2xl md:h-[calc(100vh-350px)] sm:h-[calc(100vh-310px)] flex place-items-center w-full justify-center">
+             {/* <p>chargement patientez...</p> */}
+             <Spinner label="Loading . . . " color="primary" size="lg" />
+           </div>
+         )}
+         {error && !load && (
+           <p className="flex items-center justify-center text-5xl md:h-[calc(100vh-350px)] h-[calc(100vh-310px)]">
+             {errorMessage + ' waite a few moments for retry'}
+           </p>
+         )}
+       </div>
 
-      <h2 className="font-bold  opacity-80">{`${status} Data`}</h2>
-      <p className="text-sm opacity-70">Click to view data details</p>
-      <div className="mt-8">
-        {!load && !error && (
-          <div className="flex  flex-wrap gap-5 md:h-[calc(100vh-350px)] h-[calc(100vh-310px)] mb-5 overflow-y-auto  no-scrollbar ">
-            {' '}
-            {reports.length > 0 &&
-              reports.map((item, index) => {
-                if (status == Category.Raw) {
-                  if (
-                    !item.status2 ||
-                    (item.status2 && item.status2 == 'pending')
-                  ) {
-                    return (
-                      <ReportCard
-                        key={item._id}
-                        title={item._id ? item._id : 'PT0124'}
-                        date={item.createdAt ? item.createdAt : ''}
-                        href={`/en/dashboard/clean-data/${item._id}`}
-                        reportType={Category.Raw}
-                      />
-                    );
-                  }
-                } else {
-                  if (item.status2 && item.status2 !== 'pending') {
-                    return (
-                      <ReportCard
-                        key={item._id}
-                        title={item._id ? item._id : 'PT0124'}
-                        date={item.createdAt ? item.createdAt : ''}
-                        href={`/en/dashboard/clean-data/${item._id}`}
-                        reportType={
-                          item.status2 == 'cleaned'
-                            ? Category.Cleaned
-                            : Category.Irrelevant
-                        }
-                      />
-                    );
-                  }
-                }
-              })}
-          </div>
-        )}
-        {load && (
-          <div className="flex  flex-wrap gap-5 md:h-[calc(100vh-350px)] h-[calc(100vh-310px)] mb-5 overflow-y-auto  no-scrollbar ">
-            {/* <p>chargement patientez...</p> */}
-            <Spinner label="Loading . . . " color="primary" size="lg" />
-          </div>
-        )}
-        {error && !load && (
-          <p className="flex  flex-wrap gap-5 md:h-[calc(100vh-350px)] h-[calc(100vh-310px)] mb-5 overflow-y-auto  no-scrollbar ">
-            {errorMessage + ' waite a few moments for retry'}
-          </p>
-        )}
-      </div>
-
-      <div className="flex w-fit h-16 sm:text-sm text-xs   ">
-        <Button
-          icon={status == Category.Raw ? imgUncatActive : imgUncatDesactive}
-          className={`w-auto ${
-            status == Category.Raw
-              ? 'bg-black rounded-xl text-white font-semibold'
-              : 'text-[#828B8C]  bg-transparent'
-          }`}
-          onClick={() => {
-            setStatut(Category.Raw);
-          }}
-        >
-          {Category.Raw} Data
-        </Button>
-        <Button
-          icon={status == Category.Cleaned ? imgcatActive : imgcatDesactive}
-          className={`w-auto ${
-            status == Category.Cleaned
-              ? 'bg-black rounded-xl text-white font-semibold'
-              : 'text-[#828B8C] bg-transparent'
-          }`}
-          onClick={() => {
-            setStatut(Category.Cleaned);
-          }}
-        >
-          {Category.Cleaned} Data
-        </Button>
-      </div>
-    </div>
-  );
+       <div className="flex w-fit h-16 sm:text-sm text-xs   ">
+         <Button
+           icon={status == Category.Raw ? imgUncatActive : imgUncatDesactive}
+           className={`w-auto ${
+             status == Category.Raw
+               ? 'bg-black rounded-xl text-white font-semibold'
+               : 'text-[#828B8C]  bg-transparent'
+           }`}
+           onClick={() => {
+             setStatut(Category.Raw);
+           }}
+         >
+           {Category.Raw} Data
+         </Button>
+         <Button
+           icon={status == Category.Cleaned ? imgcatActive : imgcatDesactive}
+           className={`w-auto ${
+             status == Category.Cleaned
+               ? 'bg-black rounded-xl text-white font-semibold'
+               : 'text-[#828B8C] bg-transparent'
+           }`}
+           onClick={() => {
+             setStatut(Category.Cleaned);
+           }}
+         >
+           {Category.Cleaned}
+         </Button>
+       </div>
+     </div>
+   );
 };
 
 export default ReportsCleaner;

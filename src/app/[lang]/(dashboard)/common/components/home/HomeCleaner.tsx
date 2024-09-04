@@ -43,35 +43,12 @@ const HomeCleaner: React.FC<{
               <ReportCard
                 key={item._id}
                 title={item._id ? item._id : 'PT0124'}
-                date={item.createdAt ? item.createdAt : ''}
+                date={item.updatedAt ? item.updatedAt : ''}
                 href={`/en/dashboard/clean-data/${item._id}`}
                 reportType={Category.Raw}
               />
             ))}
-          {/* <ReportCard
-            href="/en/dashboard/clean-data/PT2011"
-            reportType={Category.Raw}
-            date="Tuesday, 7 September 2023, 20h45 "
-            title="Data 001100111"
-          />
-          <ReportCard
-            href="/en/dashboard/clean-data/PT2012"
-            reportType={Category.Raw}
-            date="Tuesday, 7 September 2023, 20h45 "
-            title="Data 001100111"
-          />
-          <ReportCard
-            href="/en/dashboard/clean-data/PT2013"
-            reportType={Category.Raw}
-            date="Tuesday, 7 September 2023, 20h45 "
-            title="Data 001100111"
-          />
-          <ReportCard
-            href="/en/dashboard/clean-data/PT2014"
-            reportType={Category.Raw}
-            date="Tuesday, 7 September 2023, 20h45 "
-            title="Data 001100111"
-          /> */}
+      
         </div>
       </div>
     </div>
