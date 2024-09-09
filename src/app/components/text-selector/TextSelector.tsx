@@ -20,26 +20,39 @@ const TextSelector: React.FC<TextSelectorProps> = ({ onTextSelect }) => {
         setIsSelecting(false);
 
         const selection = window.getSelection();
-        if (selection && selection.toString()) {
+
+        // This const selectedElement is to target the specific div
+        const selectedElement = selection?.anchorNode?.parentElement;
+
+        if (
+          selection &&
+          selection.toString() &&
+          selectedElement?.closest('[data-selectable]')
+        ) {
           onTextSelect(selection.toString());
           IshowHandler(true);
         }
       } else {
-          // IshowHandler(false);
-        
+        // IshowHandler(false);
       }
     };
 
     const handleMouseUp = () => {
       if (!isSelecting) {
         const selection = window.getSelection();
-        if (selection && selection.toString()) {
+
+        // This const selectedElement is to target the specific div
+        const selectedElement = selection?.anchorNode?.parentElement;
+
+        if (
+          selection &&
+          selection.toString() &&
+          selectedElement?.closest('[data-selectable]')
+        ) {
           onTextSelect(selection.toString());
           IshowHandler(true);
         }
       } else {
-        
-        
       }
     };
 
