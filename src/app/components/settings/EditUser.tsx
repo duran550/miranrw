@@ -65,9 +65,7 @@ function EditUser({ lang, refresh, editUser, users }: EditUserPros) {
       case 3:
         user.role = 'Cleaner';
         break;
-      case 4:
-        user.role = 'Risk-manager';
-        break;
+    
       default:
         // Do nothing if role doesn't match any of the specified roles
         break;
@@ -97,9 +95,7 @@ function EditUser({ lang, refresh, editUser, users }: EditUserPros) {
       case 'Cleaner':
         user.role = 3;
         break;
-      case 'Risk-manager':
-        user.role = 4;
-        break;
+     
       default:
         // Do nothing if role doesn't match any of the specified roles
         break;
@@ -142,10 +138,10 @@ function EditUser({ lang, refresh, editUser, users }: EditUserPros) {
     }
   };
 
-  const options = ['Admin', 'Viewer', 'Cleaner', 'Risk-manager'];
+  const options = ['Admin', 'Viewer', 'Cleaner'];
 
   return (
-    <div>
+    <div className=''>
       <Toaster position="top-center" reverseOrder={false} />
       <CustomModal
         onClose={() => setOpenModal(false)}
@@ -155,7 +151,7 @@ function EditUser({ lang, refresh, editUser, users }: EditUserPros) {
         positon="center"
       >
         <form onSubmit={handleSubmit(onSubmit)}>
-          <div className="space-y-5 pb-5">
+          <div className="space-y-5 py-5">
             <div className="">
               <h1 className="font-bold">Full Name</h1>
               <InputField
