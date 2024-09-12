@@ -91,9 +91,7 @@ const AddUser: FC<ClientDataProps> = ({
       case 'Cleaner':
         user.role = 3;
         break;
-      case 'Risk-manager':
-        user.role = 4;
-        break;
+     
       default:
         // Do nothing if role doesn't match any of the specified roles
         break;
@@ -158,7 +156,7 @@ const AddUser: FC<ClientDataProps> = ({
     reset();
   };
 
-  const options = ['Admin', 'Viewer', 'Cleaner', 'Risk-manager'];
+  const options = ['Admin', 'Viewer', 'Cleaner'];
 
   return (
     <div>

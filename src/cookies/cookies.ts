@@ -22,7 +22,7 @@ const REPORTING_PERSON = 'ReportingPerson';
 export const setRefreshToken = (data: any) => {
   console.log('data',data);
   
-  cookies.set(REFRESH_TOKEN, data, { domain: '.miq.nrw' });
+  cookies.set(REFRESH_TOKEN, data, { domain: '' });
 };
 export const getRefreshToken = () => {
    const data = cookies.get(REFRESH_TOKEN);
@@ -31,11 +31,11 @@ export const getRefreshToken = () => {
    return data ? data : undefined;
 };
 export const setUserCookies = (data: any) => {
-  cookies.set(USER_DATA, JSON.stringify(data), { domain: '.miq.nrw' });
+  cookies.set(USER_DATA, JSON.stringify(data), { domain: '' });
 };
 
 export const removeRefreshToken = () => {
-  cookies.remove(REFRESH_TOKEN, { domain: '.miq.nrw' });
+  cookies.remove(REFRESH_TOKEN, { domain: '' });
 };
 
 export const getUserCookies = () => {
@@ -46,7 +46,7 @@ export const getUserCookies = () => {
 };
 
 export const removeUserCookies = () => {
-  cookies.remove(USER_DATA, { domain: '.miq.nrw' });
+  cookies.remove(USER_DATA, { domain: '' });
 };
 
 // export const getUserCookies = () => {
@@ -58,10 +58,10 @@ export const removeUserCookies = () => {
 export const setShow = (data: string) => {
   console.log('data', data);
 
-  cookies.set(SHOW, data, { domain: '.miq.nrw' });
+  cookies.set(SHOW, data, { domain: '' });
 };
 export const removeShow = () => {
-  cookies.remove(SHOW, { domain: '.miq.nrw' });
+  cookies.remove(SHOW, { domain: '' });
 };
 
 // Setting FORM steps
@@ -72,11 +72,11 @@ export const getFormStep = (): number => {
 };
 
 export const setFormStep = (step: number): void => {
-  cookies.set(FORM_STEP, JSON.stringify(step), { expires: 1, domain:".miq.nrw" });
+  cookies.set(FORM_STEP, JSON.stringify(step), { expires: 1, domain:"" });
 };
 
 export const clearFormStep = (): void => {
-  cookies.remove(FORM_STEP, { domain: '.miq.nrw' });
+  cookies.remove(FORM_STEP, { domain: '' });
 };
 
 // Form cookies
@@ -84,7 +84,7 @@ export const clearFormStep = (): void => {
 export const setFormCookies = (data: any, formData: string) => {
   cookies.set(formData, JSON.stringify(data), {
     expires: 7,
-    domain: '.miq.nrw',
+    domain: '',
   });
 };
 
@@ -94,29 +94,29 @@ export const getFormCookies = (formData: string) => {
 };
 
 export const clearFormCookies = () => {
-  cookies.remove(FORM_STEP , {domain:".miq.nrw" });
-  cookies.remove(FIRST_FORM , {domain:".miq.nrw" });
-  cookies.remove(SECOND_FORM , {domain:".miq.nrw" });
-  cookies.remove(THIRD_FORM , {domain:".miq.nrw" });
-  cookies.remove(FOURTH_FORM , {domain:".miq.nrw" });
-  cookies.remove(FIFTH_FORM , {domain:".miq.nrw" });
-  cookies.remove(SIXTH_FORM , {domain:".miq.nrw" });
-  cookies.remove(SEVENTH_FORM , {domain:".miq.nrw" });
-  cookies.remove(EIGTH_FORM , {domain:".miq.nrw" });
-  cookies.remove(NINETH_FORM , {domain:".miq.nrw" });
-  cookies.remove(TENTH_FORM , {domain:".miq.nrw" });
-  cookies.remove(ELEVENTH_STEP , {domain:".miq.nrw" });
-  cookies.remove(REPORTING_PERSON, { domain: '.miq.nrw' });
+  cookies.remove(FORM_STEP , {domain:"" });
+  cookies.remove(FIRST_FORM , {domain:"" });
+  cookies.remove(SECOND_FORM , {domain:"" });
+  cookies.remove(THIRD_FORM , {domain:"" });
+  cookies.remove(FOURTH_FORM , {domain:"" });
+  cookies.remove(FIFTH_FORM , {domain:"" });
+  cookies.remove(SIXTH_FORM , {domain:"" });
+  cookies.remove(SEVENTH_FORM , {domain:"" });
+  cookies.remove(EIGTH_FORM , {domain:"" });
+  cookies.remove(NINETH_FORM , {domain:"" });
+  cookies.remove(TENTH_FORM , {domain:"" });
+  cookies.remove(ELEVENTH_STEP , {domain:"" });
+  cookies.remove(REPORTING_PERSON, { domain: '' });
 };
 
 export const clearFormCookiesStep = (step:string) => {
-  cookies.remove(step, { domain: '.miq.nrw' });
+  cookies.remove(step, { domain: '' });
 
 }
 
 export const setReportingPerson = (identity: string) => {
   const value = identity === 'myself' ? 'myself' : identity === 'andere' ? 'andere' : 'organization';
-  cookies.set(REPORTING_PERSON, value, { domain: '.miq.nrw' });
+  cookies.set(REPORTING_PERSON, value, { domain: '' });
   console.log(`ReportingPerson set to ${value}`);
 };
 
@@ -126,5 +126,5 @@ export const getReportingPerson = () => {
 
 
 export const removeReportingPerson = () => {
-  cookies.remove(REPORTING_PERSON, { domain: '.miq.nrw' });
+  cookies.remove(REPORTING_PERSON, { domain: '' });
 };
