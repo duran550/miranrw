@@ -64,7 +64,13 @@ export async function GET(request: any) {
       { status: 400 }
     );
   await dbConnect();
-  const users = await User.find();
+  const users = await User.find({
+    $or: [
+      { role: 1 },
+      { role: 2 },
+      { role: 3 },
+    ],
+  });
   return NextResponse.json({ users });
 }
 
