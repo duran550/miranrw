@@ -16,10 +16,10 @@ type FormHeaderProps = {
     explanation: string;
   };
   subTitle?: string;
-  mandatory?:string;
-  paddingHorizontal?:number;
-  paddingBottom?:number;
-  paddingTop?:number;
+  mandatory?: string;
+  paddingHorizontal?: number;
+  paddingBottom?: number;
+  paddingTop?: number;
 };
 
 const FormHeader: React.FC<FormHeaderProps> = ({
@@ -31,15 +31,16 @@ const FormHeader: React.FC<FormHeaderProps> = ({
   mandatory,
   paddingHorizontal,
   paddingBottom,
-  paddingTop
+  paddingTop,
 }) => {
-
   return (
-    <div className={`lg:bg-white mb-8 md:mb-12 border-primaryColor border-2 rounded-md px-${paddingHorizontal} pt-${paddingTop} pb-${paddingBottom}`}>
-      <h1 className="text-2xl mb-2 font-rubik font-black">
+    <div
+      className={`lg:bg-white mb-8 md:mb-12 border-primaryColor border-2 rounded-md px-${paddingHorizontal} pt-${paddingTop} pb-${paddingBottom}`}
+    >
+      <h1 className="text-xl lg:text-2xl mb-2 font-rubik font-black">
         {title}
         {/* {mandatory ? <span className='font-bold'>{mandatory}</span> : ''} */}
-        </h1>
+      </h1>
       {children}
       {description && (
         <div className="text-sm mt-2">
@@ -60,8 +61,16 @@ const FormHeader: React.FC<FormHeaderProps> = ({
       )}
 
       <div className="my-2">
-      {subTitle ? <span className='font-normal font-worksans text-sm'>{subTitle}</span> : ''}
-      {mandatory ? <div className='font-worksans font-black text-sm'>{mandatory}</div> : ''}
+        {subTitle ? (
+          <span className="font-normal font-worksans text-sm">{subTitle}</span>
+        ) : (
+          ''
+        )}
+        {mandatory ? (
+          <div className="font-worksans font-black text-sm">{mandatory}</div>
+        ) : (
+          ''
+        )}
       </div>
     </div>
   );

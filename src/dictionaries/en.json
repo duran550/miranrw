@@ -176,22 +176,22 @@
             {
               "id": "age1",
               "name": "identity",
-              "label": "I am affected myself",
-              "value": "I am affected myself",
+              "label": "I am affected myself.",
+              "value": "I am affected myself.",
               "checked": false
             },
             {
               "id": "identity2",
               "name": "identity",
-              "label": "Other person(s). I report as a witness",
-              "value": "Other person(s). I report as a witness",
+              "label": "Other person(s). I report as a witness.",
+              "value": "Other person(s). I report as a witness.",
               "checked": false
             },
             {
               "id": "identity3",
               "name": "identity",
-              "label": "An organization/institution is affected",
-              "value": "An organization/institution is affected",
+              "label": "An organization/institution is affected.",
+              "value": "An organization/institution is affected.",
               "checked": false
             }
           ],
@@ -211,10 +211,16 @@
             "title": "Relevant information may be:",
             "unKnownInfo": "We ask that you do not write any personally identifiable information here, such as names, addresses, telephone numbers or license plate numbers.",
             "list": [
-              "How was discrimination committed?",
+              "How were you discriminated against?",
               "How did other people react?",
-              "What do you think was anti-queer about the incident?",
-              "What impact did the incident have on the organization/institution (e.g. social, emotional, material or financial)?"
+              "What did you think was anti-queer about the incident?",
+              "What impact did the incident have on you (e.g. emotional, physical, social or financial)?"
+            ],
+            "andereList": [
+              "Who was the attack directed against?",
+              "How was the person/group discriminated against?",
+              "How did you or other witnesses react?",
+              "What do you think was anti-queer about the incident?"
             ]
           }
         },
@@ -282,7 +288,10 @@
           "happenedOverALongPeriod": "It happened over a long period of time.",
           "forgetful": "I can't remember exactly when it happened.",
           "yearitHappened": "In what year did it happen?",
-          "selectYear": "(Auswahl Jahr) Jahreszahl",
+          "selectYear": "(write year) Year",
+          "validYear": "Please enter a valid number",
+          "validationDigits": "Year must be exactly 4 digits",
+          "validationYear": "Year must be between 1980 and",
           "options": [
             {
               "label": "In which year did it happen?",
@@ -340,8 +349,8 @@
           "firstOption": {
             "name": "online",
             "id": "online",
-            "value": "It happened online",
-            "label": "It happened online"
+            "value": "Online / In the media",
+            "label": "Online / In the media"
           },
           "secondOption": {
             "title": "City",
@@ -359,7 +368,7 @@
           }
         },
         "sixthStep": {
-          "title": "What did you believe the discrimination was based on ?",
+          "title": "What do you think the discrimination or violence referred to?",
           "mandatory": "* Mandatory field",
           "minCharacters": "A minimum of 4 Characters is expected",
           "description": "Multiple selections possible",
@@ -511,73 +520,80 @@
             "optionsYes": [
               {
                 "iD": 1,
-                "id": "Antiasiatischer",
                 "name": "formOfDiscYes",
-                "value": "Anti-Asian Racism",
-                "label": "Anti-Asian Racism"
+                "value": "Ableism",
+                "id": "Ableism",
+                "label": "Ableism"
               },
               {
                 "iD": 2,
-                "id": "Antifeminismus",
                 "name": "formOfDiscYes",
-                "value": "Antifeminism",
-                "label": "Antifeminism"
+                "value": "Age discrimination",
+                "id": "Age discrimination",
+                "label": "Age discrimination"
               },
               {
                 "iD": 3,
                 "name": "formOfDiscYes",
-                "id": "Antimuslimischer",
-                "value": "Anti-Muslim Racism",
-                "label": "Anti-Muslim Racism"
+                "value": "Anti-Asian racism",
+                "id": "Anti-Asian",
+                "label": "Anti-Asian racism"
               },
               {
                 "iD": 4,
                 "name": "formOfDiscYes",
-                "id": "Anti-Schwarzer",
-                "value": "Anti-Black Racism",
-                "label": "Anti-Black Racism"
+                "value": "Anti-Muslim racism",
+                "id": "Anti-Muslim",
+                "label": "Anti-Muslim racism"
               },
               {
                 "iD": 5,
                 "name": "formOfDiscYes",
-                "id": "Antislawischer",
-                "value": "Anti-Slavic Racism",
-                "label": "Anti-Slavic Racism"
+                "value": "Anti-Slavic racism",
+                "id": "Anti-Slavic",
+                "label": "Anti-Slavic racism"
               },
               {
                 "iD": 6,
                 "name": "formOfDiscYes",
-                "value": "Antiziganism",
-                "id": "Antiziganismus",
-                "label": "Antiziganism"
+                "value": "Anti-Semitism",
+                "id": "Anti-Semitism",
+                "label": "Anti-Semitism"
               },
               {
                 "iD": 7,
                 "name": "formOfDiscYes",
-                "value": "Antisemitism",
-                "id": "Antisemitism",
-                "label": "Antisemitism"
+                "value": "Anti-Slavic racism",
+                "id": "Anti-Slavic racism",
+                "label": "Anti-Slavic racism"
               },
               {
                 "iD": 8,
                 "name": "formOfDiscYes",
-                "value": "Sexism",
-                "id": "Sexismus",
-                "label": "Sexism"
+                "value": "Antiziganism",
+                "id": "Antiziganism",
+                "label": "Antiziganism"
               },
               {
                 "iD": 9,
                 "name": "formOfDiscYes",
-                "value": "Queerphobia",
-                "id": "Queerphobia",
-                "label": "Queerphobia"
+                "value": "Classism",
+                "id": "Classism",
+                "label": "Classism"
               },
               {
                 "iD": 10,
                 "name": "formOfDiscYes",
-                "id": "Anderes",
-                "value": "Other, specify:",
-                "label": "Other, specify:"
+                "value": "Sexism",
+                "id": "Sexism",
+                "label": "Sexism"
+              },
+              {
+                "iD": 11,
+                "name": "formOfDiscYes",
+                "value": "Other, namely:",
+                "id": "Other",
+                "label": "Other, namely:"
               }
             ]
           }
@@ -700,8 +716,8 @@
               {
                 "id": "gender3",
                 "name": "gender",
-                "label": "gender questioning / I am in the process of finding my gender",
-                "value": "gender questioning / I am in the process of finding my gender",
+                "label": "I am in the process of finding my gender",
+                "value": "I am in the process of finding my gender",
                 "checked": false
               },
               {
@@ -726,42 +742,35 @@
                 "checked": false
               },
               {
-                "id": "gender7",
-                "name": "gender",
-                "label": "person with variations of sex development",
-                "value": "person with variations of sex development",
-                "checked": false
-              },
-              {
-                "id": "gender8",
+                "id": "gender9",
                 "name": "gender",
                 "label": "queer",
                 "value": "queer",
                 "checked": false
               },
               {
-                "id": "gender9",
+                "id": "gender10",
                 "name": "gender",
                 "label": "trans*",
                 "value": "trans*",
                 "checked": false
               },
               {
-                "id": "gender10",
+                "id": "gender11",
                 "name": "gender",
                 "label": "female",
                 "value": "female",
                 "checked": false
               },
               {
-                "id": "gender11",
+                "id": "gender12",
                 "name": "gender",
                 "label": "don't know / prefer not to say",
                 "value": "don't know / prefer not to say",
                 "checked": false
               },
               {
-                "id": "gender12",
+                "id": "gender13",
                 "name": "gender",
                 "label": "Self-identification:",
                 "value": "Self-identification:",
@@ -942,7 +951,15 @@
           "verification": "Are you okay with this data ?",
           "description": "You can access our page with links to counseling here.",
           "buttonText": "Referral Counseling",
+          "sending": "Sending",
+          "Meldung": "Send message",
           "mandatory": "* Mandatory field",
+          "modal": {
+            "title": "Thank you for your message.",
+            "description": "Here you can go to our page with links to advice.",
+            "firstbutton": "Reference advice",
+            "secondbutton": "Done"
+          },
           "validation": {
             "title": "Consent",
             "description": "Multiple choices possible",
@@ -982,7 +999,7 @@
               "value": "Analog Media",
               "id": "Analog",
               "label": "Analog Media",
-              "examples": "e.g. Social Office | Job Center | Immigration Office"
+              "examples": "e.g. Newspaper | TV | Radio"
             },
             {
               "iD": 3,
@@ -990,7 +1007,7 @@
               "value": "Work",
               "id": "Work",
               "label": "Work",
-              "examples": "e.g. Social Office | Job Center | Immigration Office"
+              "examples": "e.g. Workplace | Apprenticeship | Job Search"
             },
             {
               "iD": 4,
@@ -998,7 +1015,7 @@
               "value": "Education",
               "id": "Education",
               "label": "Education",
-              "examples": "e.g. Social Office | Job Center | Immigration Office"
+              "examples": "e.g. School | Daycare | University | Adult Education"
             },
             {
               "iD": 5,
@@ -1006,7 +1023,7 @@
               "value": "Digital Space",
               "id": "Digital",
               "label": "Digital Space",
-              "examples": "e.g. Social Office | Job Center | Immigration Office"
+              "examples": "e.g. Social Media | Internet | Gaming"
             },
             {
               "iD": 6,
@@ -1014,7 +1031,7 @@
               "value": "Emergency Services",
               "id": "Emergency Services",
               "label": "Emergency Services",
-              "examples": "e.g. Social Office | Job Center | Immigration Office"
+              "examples": "e.g. Fire Department | Armed Forces"
             },
             {
               "iD": 7,
@@ -1022,7 +1039,7 @@
               "value": "Retail and Services",
               "id": "Retail",
               "label": "Retail and Services",
-              "examples": "e.g. Social Office | Job Center | Immigration Office"
+              "examples": "e.g. Store | Gastronomy | Culture | Sports | Insurance | Banks"
             },
             {
               "iD": 8,
@@ -1030,7 +1047,7 @@
               "value": "Leisure",
               "id": "Leisure",
               "label": "Leisure",
-              "examples": "e.g. Social Office | Job Center | Immigration Office"
+              "examples": "e.g. Clubs | Social or Religious Institutions"
             },
             {
               "iD": 9,
@@ -1038,7 +1055,7 @@
               "value": "Health",
               "id": "Health",
               "label": "Health",
-              "examples": "e.g. Social Office | Job Center | Immigration Office"
+              "examples": "e.g. Hospital | Doctor | Nursing | Therapy"
             },
             {
               "iD": 10,
@@ -1046,7 +1063,7 @@
               "value": "Justice",
               "id": "Justice",
               "label": "Justice",
-              "examples": "e.g. Social Office | Job Center | Immigration Office"
+              "examples": "e.g. Court | Lawyer | Prison"
             },
             {
               "iD": 11,
@@ -1054,7 +1071,7 @@
               "value": "Public Space",
               "id": "Public",
               "label": "Public Space",
-              "examples": "e.g. Social Office | Job Center | Immigration Office"
+              "examples": "e.g. Street | Park | Playground"
             },
             {
               "iD": 12,
@@ -1062,7 +1079,7 @@
               "value": "Personal Environment/Private Life",
               "id": "Personal",
               "label": "Personal Environment/Private Life",
-              "examples": "e.g. Social Office | Job Center | Immigration Office"
+              "examples": "e.g. Family | Acquaintances | Neighborhood Relationship"
             },
             {
               "iD": 13,
@@ -1070,7 +1087,7 @@
               "value": "Police",
               "id": "Police",
               "label": "Police",
-              "examples": "e.g. Social Office | Job Center | Immigration Office"
+              "examples": "e.g. Traffic Police | Federal Police | Criminal Police"
             },
             {
               "iD": 14,
@@ -1078,15 +1095,15 @@
               "value": "Social Services",
               "id": "Social Services",
               "label": "Social Services",
-              "examples": "e.g. Social Office | Job Center | Immigration Office"
+              "examples": "e.g. Counseling | Support | Self-help"
             },
             {
               "iD": 15,
               "name": "whereDisHappened",
-              "value": "Transportation",
-              "id": "Transportation",
-              "label": "Transportation",
-              "examples": "e.g. Social Office | Job Center | Immigration Office"
+              "value": "Transport",
+              "id": "Transport",
+              "label": "Transport",
+              "examples": "e.g. In Bus and Train | On a Flight | In a Taxi"
             },
             {
               "iD": 16,
@@ -1094,15 +1111,15 @@
               "value": "Housing",
               "id": "Housing",
               "label": "Housing",
-              "examples": "e.g. Social Office | Job Center | Immigration Office"
+              "examples": "e.g. Apartment Search | Tenancy"
             },
             {
               "iD": 17,
               "name": "typeOfDisc",
               "value": "Other, namely",
-              "id": "Other",
+              "id": "other",
               "label": "Other, namely",
-              "examples": "e.g. Social Office | Job Center | Immigration Office"
+              "examples": ""
             }
           ]
         }

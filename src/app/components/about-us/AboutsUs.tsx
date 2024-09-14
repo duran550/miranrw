@@ -1,22 +1,21 @@
-'use client'
-import Image from "next/image";
-import CookieConsent from "../banners/CookieConsent";
-import Footer from "../footer/Footer";
-import News from "../news/News";
-import Header from "../header/header";
-import SinglePageLayout from "../layout/SinglePageLayout";
+'use client';
+import Image from 'next/image';
+import CookieConsent from '../banners/CookieConsent';
+import Footer from '../footer/Footer';
+import News from '../news/News';
+import Header from '../header/header';
+import SinglePageLayout from '../layout/SinglePageLayout';
 import img1 from '../../../../public/images/VERWEISBERATUNG Illu Image.svg';
-import { useEffect, useRef } from "react";
+import { useEffect, useRef } from 'react';
 
-const About: React.FC<{ page: any, lang: any }> = ({ page, lang }) => {
+const About: React.FC<{ page: any; lang: any }> = ({ page, lang }) => {
   const editorRef = useRef<null | HTMLDivElement>(null);
- 
-    useEffect(() => {
-      if (editorRef.current) {
-        editorRef.current.scrollIntoView({ behavior: 'smooth' });
-      }
-     
-    }, []);
+
+  useEffect(() => {
+    if (editorRef.current) {
+      editorRef.current.scrollIntoView({ behavior: 'smooth' });
+    }
+  }, []);
   return (
     <div className="w-screen">
       <div className="">
@@ -58,11 +57,7 @@ const About: React.FC<{ page: any, lang: any }> = ({ page, lang }) => {
           <div className="xl:flex hidden w-screen bg-[#EDECF3] items-center justify-center my-14">
             <div className="w-[1000px] flex gap-16 items-center">
               <div className="h-[344px] w-[344px]">
-                <Image
-                  src={img1}
-                  alt=""
-                  className=" object-cover	 "
-                />
+                <Image src={img1} alt="" className=" object-cover	 " />
               </div>
               <div className="w-[557px] ">
                 <h1 className="text-3xl">{page.about.block2.title}</h1>
@@ -85,5 +80,5 @@ const About: React.FC<{ page: any, lang: any }> = ({ page, lang }) => {
       />
     </div>
   );
-}
-export default About
+};
+export default About;

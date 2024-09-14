@@ -10,7 +10,13 @@ import { FORM_ERRORS, LAST_STEP, NEXT_STEP } from '@/app/context/actions';
 import Checkbox from '../../checkbox/Checkbox';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { FourthFormValues } from './fourthStep';
-import { clearFormCookiesStep, getFormCookies, getFormStep, getReportingPerson, setFormCookies } from '@/cookies/cookies';
+import {
+  clearFormCookiesStep,
+  getFormCookies,
+  getFormStep,
+  getReportingPerson,
+  setFormCookies,
+} from '@/cookies/cookies';
 import { FIFTH_FORM, FOURTH_FORM, THIRD_FORM } from '@/cookies/cookies.d';
 import { DatePicker } from 'antd';
 import { useScrollOnTop } from '@/app/hooks/useScrollOnTop';
@@ -26,6 +32,9 @@ type FourthStepProps = {
     forgetful: string;
     selectYear: string;
     yearitHappened: string;
+    validYear: string;
+    validationDigits: string;
+    validationYear: string;
   };
   id?: string;
 };
@@ -36,7 +45,7 @@ const FourthStep: React.FC<FourthStepProps> = ({
 }) => {
   const { dispatch, isEditing, formErrors } = useFormContext();
   // const { dispatch, reportingPerson, isEditing, formErrors } = useFormContext();
-  const reportingPerson = getReportingPerson()
+  const reportingPerson = getReportingPerson();
   const [valueDate, setValueDate] = React.useState<Dayjs | null>(null);
   const [question] = useState<string>(fourthStepTranslation?.title);
   const [dateRange, setDateRange] = useState<any>();
@@ -48,13 +57,14 @@ const FourthStep: React.FC<FourthStepProps> = ({
     watch,
     setValue,
     formState: { errors },
-    setError, clearErrors
+    setError,
+    clearErrors,
   } = useForm<FourthFormValues>();
 
   let datePeriod: string = watch('datePeriod');
-  let forgetful: string = watch('forgetful')
-  let forgetfulFreeField: string = watch('forgetfulFreeField')
-  let yearitHappened: string = watch('yearitHappened')
+  let forgetful: string = watch('forgetful');
+  let forgetfulFreeField: string = watch('forgetfulFreeField');
+  let yearitHappened: string = watch('yearitHappened');
   let formValues: {
     datePeriod: string;
     question: string;
@@ -83,9 +93,11 @@ const FourthStep: React.FC<FourthStepProps> = ({
 
   // }
 
-  (reportingPerson === 'myself')
-    ? formValues = getFormCookies(FOURTH_FORM)
-    :  reportingPerson === 'organization' ? formValues = getFormCookies(FIFTH_FORM) : formValues = getFormCookies(FOURTH_FORM);
+  reportingPerson === 'myself'
+    ? (formValues = getFormCookies(FOURTH_FORM))
+    : reportingPerson === 'organization'
+      ? (formValues = getFormCookies(FIFTH_FORM))
+      : (formValues = getFormCookies(FOURTH_FORM));
 
   // dispatch({ type: FORM_ERRORS, payload: true });
   // Scroll on top
@@ -100,11 +112,11 @@ const FourthStep: React.FC<FourthStepProps> = ({
 
     if (forgetful) {
       // setValue('yearitHappened', '')
-      setValue('datePeriod', '')
+      setValue('datePeriod', '');
     }
 
     if (datePeriod) {
-      setValue('forgetful', '')
+      setValue('forgetful', '');
     }
 
     // yearitHappened && setValue('datePeriod', '')
@@ -115,21 +127,28 @@ const FourthStep: React.FC<FourthStepProps> = ({
       const year = parseInt(forgetfulFreeField, 10);
 
       if (isNaN(year)) {
-        setError('forgetfulFreeField', { type: 'manual', message: 'Please enter a valid number' });
+        setError('forgetfulFreeField', {
+          type: 'manual',
+          message: fourthStepTranslation?.validYear,
+        });
       } else if (forgetfulFreeField.length !== 4) {
-        setError('forgetfulFreeField', { type: 'manual', message: 'Year must be exactly 4 digits' });
+        setError('forgetfulFreeField', {
+          type: 'manual',
+          message: fourthStepTranslation?.validationDigits,
+        });
       } else if (year < 1980 || year > currentYear) {
-        setError('forgetfulFreeField', { type: 'manual', message: `Year must be between 1980 and ${currentYear}` });
+        setError('forgetfulFreeField', {
+          type: 'manual',
+          message: `${fourthStepTranslation?.validationYear} ${currentYear}`,
+        });
       } else {
         clearErrors('forgetfulFreeField'); // Clear errors if valid
       }
     }
-    // console.log(yearitHappenedFreeField?.length 
+    // console.log(yearitHappenedFreeField?.length
     //   == 4 && !!errors.yearitHappenedFreeField, 'yearitHappenedGreat')
 
-
     if (valueDate == null && !datePeriod) {
-
       dispatch({ type: FORM_ERRORS, payload: true });
     } else {
       if (datePeriod && !dateRange) {
@@ -147,17 +166,21 @@ const FourthStep: React.FC<FourthStepProps> = ({
     }
 
     if (valueDate == null && !datePeriod && !forgetful) {
-
       dispatch({ type: FORM_ERRORS, payload: true });
     } else {
       if (forgetful && !forgetfulFreeField) {
         dispatch({ type: FORM_ERRORS, payload: true });
       } else {
-        if (forgetful && forgetfulFreeField) {
+        if (forgetful && forgetfulFreeField?.length > 0) {
           dispatch({ type: FORM_ERRORS, payload: false });
-        }
+          if (forgetfulFreeField?.length > 4) {
+            dispatch({ type: FORM_ERRORS, payload: true });
+          }
 
-        // dispatch({ type: FORM_ERRORS, payload: false });
+          if (errors.forgetfulFreeField) {
+            dispatch({ type: FORM_ERRORS, payload: true });
+          }
+        }
       }
       if (valueDate && !forgetful) {
         dispatch({ type: FORM_ERRORS, payload: false });
@@ -195,7 +218,6 @@ const FourthStep: React.FC<FourthStepProps> = ({
       }
     }
 
-
     if (
       datePeriod !== undefined &&
       datePeriod != fourthStepTranslation?.happenedOverALongPeriod
@@ -204,23 +226,22 @@ const FourthStep: React.FC<FourthStepProps> = ({
       setDateRange(null);
     }
 
-
-    if (formValues && datePeriod === undefined && !forgetfulFreeField && !forgetful && !yearitHappened) {
+    if (
+      formValues &&
+      datePeriod === undefined &&
+      !forgetfulFreeField &&
+      !forgetful &&
+      !yearitHappened
+    ) {
       // if (formValues) {
       forgetful !== formValues?.forgetful &&
         setValue('forgetful', formValues?.forgetful);
 
       formValues?.forgetfulFreeField &&
-        setValue(
-          'forgetfulFreeField',
-          formValues?.forgetfulFreeField
-        );
+        setValue('forgetfulFreeField', formValues?.forgetfulFreeField);
 
       formValues?.yearitHappened &&
-        setValue(
-          'yearitHappened',
-          formValues?.yearitHappened
-        );
+        setValue('yearitHappened', formValues?.yearitHappened);
 
       // if (formValues.datePeriod && formValues.datePeriod.length > 0 && formValues.forgetful && formValues.forgetfulFreeField.length > 0) {
       datePeriod !== formValues?.datePeriod &&
@@ -230,12 +251,19 @@ const FourthStep: React.FC<FourthStepProps> = ({
       // } else {
       formValues?.valueDate !== valueDate &&
         setValueDate(dayjs(formValues?.valueDate));
-      // }
-      //  dispatch({ type: FORM_ERRORS, payload: false });
     }
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [datePeriod, dateRange, valueDate, setValueDate, checked, forgetful, forgetfulFreeField, yearitHappened]);
+  }, [
+    datePeriod,
+    dateRange,
+    valueDate,
+    setValueDate,
+    checked,
+    forgetful,
+    forgetfulFreeField,
+    yearitHappened,
+  ]);
 
   // Triggered when submitting form
   const onSubmit: SubmitHandler<FourthFormValues> = (data) => {
@@ -253,9 +281,11 @@ const FourthStep: React.FC<FourthStepProps> = ({
     //   ? setFormCookies(dataWithQuestion, FIFTH_FORM)
     //   : setFormCookies(dataWithQuestion, THIRD_FORM);
 
-    (reportingPerson === 'myself')
+    reportingPerson === 'myself'
       ? setFormCookies(dataWithQuestion, FOURTH_FORM)
-      : reportingPerson == 'organization' ? setFormCookies(dataWithQuestion, FIFTH_FORM) : setFormCookies(dataWithQuestion, FOURTH_FORM);
+      : reportingPerson == 'organization'
+        ? setFormCookies(dataWithQuestion, FIFTH_FORM)
+        : setFormCookies(dataWithQuestion, FOURTH_FORM);
 
     dispatch({ type: NEXT_STEP, payload: 'DATA 1' });
     // isEditing && reportingPerson === 'myself'
@@ -284,19 +314,16 @@ const FourthStep: React.FC<FourthStepProps> = ({
     <form
       onSubmit={handleSubmit(onSubmit)}
       // id={id === 'fifthForm' ? 'fifthForm' : 'thirdForm'}
-      id={(reportingPerson === 'myself' || reportingPerson === 'organization') ? 'fifthForm' : 'thirdForm'}
+      id={
+        reportingPerson === 'myself' || reportingPerson === 'organization'
+          ? 'fifthForm'
+          : 'thirdForm'
+      }
       className="flex flex-col xl:w-[25rem]"
     >
       <div className="">
-        {/* <div className='lg:w-[31rem]'>
-          <FormHeader
-            title={fourthStepTranslation?.title}
-            subTitle={fourthStepTranslation?.description}
-            mandatory={fourthStepTranslation.mandatory}
-          />
-        </div> */}
         <div>
-          <div className=''>
+          <div className="">
             <FormHeader
               title={fourthStepTranslation?.title}
               subTitle={fourthStepTranslation?.description}
@@ -305,29 +332,33 @@ const FourthStep: React.FC<FourthStepProps> = ({
               paddingTop={1}
             />
           </div>
-          <div className='grid grid-cols-1 xl:grid-cols-2 gap-10 xl:gap-22 xl:w-[54vw]'>
+          <div className="grid grid-cols-1 xl:grid-cols-2 gap-10 xl:gap-22 xl:w-[54vw]">
             <div className="border border-primaryColor rounded-md mb-4">
-              <LocalizationProvider adapterLocale="de" dateAdapter={AdapterDayjs}>
+              <LocalizationProvider
+                adapterLocale="de"
+                dateAdapter={AdapterDayjs}
+              >
                 <DateCalendar
                   sx={{
                     width: '100%',
                     '& .Mui-selected, & .Mui-selected:focus, & .Mui-selected:hover':
-                    {
-
-                      backgroundColor: `#F81A1A !important`,
-                      // backgroundColor: `#463980 !important`,
-                    },
+                      {
+                        backgroundColor: `#F81A1A !important`,
+                        // backgroundColor: `#463980 !important`,
+                      },
                   }}
                   value={valueDate}
                   // defaultValue={valueDate}
-                  disabled={datePeriod || forgetful || yearitHappened ? true : false}
+                  disabled={
+                    datePeriod || forgetful || yearitHappened ? true : false
+                  }
                   maxDate={dayjs()}
                   views={['year', 'month', 'day']}
                   onChange={(newValue) => setValueDate(newValue)}
                 />
               </LocalizationProvider>
             </div>
-            <div className=''>
+            <div className="">
               {
                 <div>
                   <Checkbox
@@ -347,9 +378,9 @@ const FourthStep: React.FC<FourthStepProps> = ({
                         defaultValue={
                           dateRange !== null && formValues?.dateRangeState
                             ? [
-                              dayjs(formValues?.dateRangeState[0]),
-                              dayjs(formValues?.dateRangeState[1]),
-                            ]
+                                dayjs(formValues?.dateRangeState[0]),
+                                dayjs(formValues?.dateRangeState[1]),
+                              ]
                             : null
                         }
                         className="w-full py-3 border border-red-300 ml-14 hover:border-red-300 focus:border-red-300"
@@ -359,7 +390,7 @@ const FourthStep: React.FC<FourthStepProps> = ({
                 </div>
               }
               {/* <div className={`${datePeriod ? 'mt-40': 'mt-20'} xl:absolute xl:-right-[30rem] 2xl:-right-[46.2rem]`}> */}
-              <div className=''>
+              <div className="">
                 <Checkbox
                   props={register('forgetful')}
                   name="forgetful"
@@ -368,49 +399,33 @@ const FourthStep: React.FC<FourthStepProps> = ({
                   id="forgetful"
                 />
               </div>
-              <div className=''>
-                {/* <Checkbox
-                  props={register('yearitHappened')}
-                  name="yearitHappened"
-                  value={fourthStepTranslation?.yearitHappened}
-                  label={fourthStepTranslation?.yearitHappened}
-                  id="yearitHappened"
-                /> */}
-                {forgetful &&
-                  // <div className='ml-8'>
-                  //   <InputField
-                  //     name="yearitHappenedFreeField"
-                  //     placeholder={fourthStepTranslation.selectYear}
-                  //     props={register('yearitHappenedFreeField', {
-                  //       required: true,
-                  //     })}
-                  //     title=""
-                  //   />
-                  // </div>
-
-                  <div className='ml-14'>
-                    <h1>{fourthStepTranslation.yearitHappened}</h1>
+              <div className="">
+                {forgetful && (
+                  <div className="ml-14">
+                    <h1 className="font-normal text-sm font-worksans">
+                      {fourthStepTranslation.yearitHappened}
+                    </h1>
                     <InputField
                       name="forgetfulFreeField"
                       placeholder={fourthStepTranslation.selectYear}
                       props={register('forgetfulFreeField', {
-                        required: 'Year is required'
+                        required: 'Year is required',
                       })}
                       title=""
-                      type='number'
+                      type="number"
                     />
                     {errors.forgetfulFreeField && (
-                      <p className="error-text text-red-800 font-semibold">{errors.forgetfulFreeField.message}</p>
+                      <p className="error-text text-red-600 font-semibold text-xs mt-1">
+                        {errors.forgetfulFreeField.message}
+                      </p>
                     )}
                   </div>
-
-                }
+                )}
               </div>
             </div>
           </div>
         </div>
       </div>
-      {/* <div className="mt-4 xl:absolute xl:-right-[30rem] 2xl:-right-[40rem]"> */}
     </form>
   );
 };

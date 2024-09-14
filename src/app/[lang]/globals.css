@@ -6,16 +6,16 @@
 @import '@fontsource/rubik/700.css'; /* Bold */
 
 @layer utilities {
-      /* Hide scrollbar for Chrome, Safari and Opera */
-      .no-scrollbar::-webkit-scrollbar {
-          display: none;
-      }
-     /* Hide scrollbar for IE, Edge and Firefox */
-      .no-scrollbar {
-          -ms-overflow-style: none;  /* IE and Edge */
-          scrollbar-width: none;  /* Firefox */
-    }
+  /* Hide scrollbar for Chrome, Safari and Opera */
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
   }
+  /* Hide scrollbar for IE, Edge and Firefox */
+  .no-scrollbar {
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+  }
+}
 input:checked + div {
   @apply border-primaryColor;
 }
@@ -24,29 +24,29 @@ input:checked + div svg {
 }
 
 @font-face {
-  font-family: "Rubik";
-  src: url("/fonts/Rubik/Rubik.ttk") format("opentype");
+  font-family: 'Rubik';
+  src: url('/fonts/Rubik/Rubik.ttk') format('opentype');
   font-weight: normal;
   font-style: normal;
 }
 
 @font-face {
-  font-family: "work_sans";
-  src: url("/fonts/work_sans/work_sans.ttk") format("opentype");
+  font-family: 'work_sans';
+  src: url('/fonts/work_sans/work_sans.ttk') format('opentype');
 }
 
 @font-face {
-  font-family: "Rubik-bold";
-  src: url("/fonts/Rubik/Rubik-Bold.ttf") format("opentype");
+  font-family: 'Rubik-bold';
+  src: url('/fonts/Rubik/Rubik-Bold.ttf') format('opentype');
 }
 @font-face {
-  font-family: "work_sans-medium";
-  src: url("/fonts/work_sans/WorkSans-Medium.ttf") format("opentype");
+  font-family: 'work_sans-medium';
+  src: url('/fonts/work_sans/WorkSans-Medium.ttf') format('opentype');
 }
 
 @font-face {
-  font-family: "work-sans-bold";
-  src: url("/fonts/work_sans/WorkSans-Bold.ttf") format("opentype");
+  font-family: 'work-sans-bold';
+  src: url('/fonts/work_sans/WorkSans-Bold.ttf') format('opentype');
 }
 
 /* .MuiButtonBase-root
@@ -91,8 +91,9 @@ input:checked + div svg {
   border-color: none !important;
 } */
 
-:where(.css-dev-only-do-not-override-1g853jt).ant-picker-dropdown .ant-picker-cell-in-view.ant-picker-cell-in-range::before {
-  background: #EBCCCB !important;
+:where(.css-dev-only-do-not-override-1g853jt).ant-picker-dropdown
+  .ant-picker-cell-in-view.ant-picker-cell-in-range::before {
+  background: #ebcccb !important;
 }
 
 :where(.css-1g853jt).ant-picker-focused.ant-picker {
@@ -101,7 +102,9 @@ input:checked + div svg {
   outline: 0;
 }
 
-:where(.css-dev-only-do-not-override-1g853jt).ant-picker-dropdown .ant-picker-cell-in-view.ant-picker-cell-today .ant-picker-cell-inner::before {
+:where(.css-dev-only-do-not-override-1g853jt).ant-picker-dropdown
+  .ant-picker-cell-in-view.ant-picker-cell-today
+  .ant-picker-cell-inner::before {
   position: absolute;
   top: 0;
   inset-inline-end: 0;
@@ -110,7 +113,7 @@ input:checked + div svg {
   z-index: 1;
   border: 1px solid red !important;
   border-radius: 4px;
-  content: "";
+  content: '';
 }
 
 /* rang picker border */
@@ -118,13 +121,22 @@ input:checked + div svg {
   border-color: red !important;
 }
 
-:where(.css-dev-only-do-not-override-1g853jt).ant-picker-dropdown .ant-picker-cell-in-view.ant-picker-cell-selected .ant-picker-cell-inner, :where(.css-dev-only-do-not-override-1g853jt).ant-picker-dropdown .ant-picker-cell-in-view.ant-picker-cell-range-start .ant-picker-cell-inner, :where(.css-dev-only-do-not-override-1g853jt).ant-picker-dropdown .ant-picker-cell-in-view.ant-picker-cell-range-end .ant-picker-cell-inner {
+:where(.css-dev-only-do-not-override-1g853jt).ant-picker-dropdown
+  .ant-picker-cell-in-view.ant-picker-cell-selected
+  .ant-picker-cell-inner,
+:where(.css-dev-only-do-not-override-1g853jt).ant-picker-dropdown
+  .ant-picker-cell-in-view.ant-picker-cell-range-start
+  .ant-picker-cell-inner,
+:where(.css-dev-only-do-not-override-1g853jt).ant-picker-dropdown
+  .ant-picker-cell-in-view.ant-picker-cell-range-end
+  .ant-picker-cell-inner {
   color: #fff;
   background: red !important;
 }
 
 /* range picker active bottom border */
-:where(.css-dev-only-do-not-override-1g853jt).ant-picker-range .ant-picker-active-bar {
+:where(.css-dev-only-do-not-override-1g853jt).ant-picker-range
+  .ant-picker-active-bar {
   background: red !important;
 }
 
@@ -136,6 +148,18 @@ input:checked + div svg {
 /* border: 1px solid rgba(0, 0, 0, 0.6); */
 .css-15a0tn7:not(.Mui-selected) {
   border: 1px solid rgba(0, 0, 0, 0.6) !important;
+}
+
+/* Hide increment/decrement arrows in WebKit browsers */
+input[type='number']::-webkit-outer-spin-button,
+input[type='number']::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Hide increment/decrement arrows in Firefox */
+input[type='number'] {
+  -moz-appearance: textfield;
 }
 
 /* Autocomplte search icon */

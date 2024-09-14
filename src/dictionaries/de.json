@@ -176,22 +176,22 @@
             {
               "id": "age1",
               "name": "identity",
-              "label": "Ich bin selbst betroffen",
-              "value": "Ich bin selbst betroffen",
+              "label": "Ich bin selbst betroffen.",
+              "value": "Ich bin selbst betroffen.",
               "checked": false
             },
             {
               "id": "identity2",
               "name": "identity",
-              "label": "Andere Person(en). Ich melde als Zeug*in",
-              "value": "Andere Person(en). Ich melde als Zeug*in",
+              "label": "Andere Person(en). Ich melde als Zeug*in.",
+              "value": "Andere Person(en). Ich melde als Zeug*in.",
               "checked": false
             },
             {
               "id": "identity3",
               "name": "identity",
-              "label": "Eine Organisation/ Institution ist betroffen",
-              "value": "Eine Organisation/ Institution ist betroffen",
+              "label": "Eine Organisation/ Institution ist betroffen.",
+              "value": "Eine Organisation/ Institution ist betroffen.",
               "checked": false
             }
           ],
@@ -201,7 +201,7 @@
           }
         },
         "thirdStep": {
-          "title": "Vorfallbeschreibung*",
+          "title": "Vorfallbeschreibungs*",
           "mandatory": "* Pflichtfeld",
           "description": " Was genau ist passiert?",
           "placeholder": "Bitte beschreibe den Vorfall so genau wie möglich.",
@@ -211,10 +211,16 @@
             "title": "Relevante Informationen können sein:",
             "unKnownInfo": "Wir bitten dich, hier keine Angaben mit Personenbezug zu schreiben, wie z.B. Namen, Adressen, Telefonnummern oder Autokennzeichen. ",
             "list": [
-              "Wie wurde diskriminiert?",
-              "Wie haben andere Personen reagiert? ",
-              "Was war deiner Meinung nach an dem Vorfall queerfeindlich?",
-              "Welche Auswirkungen hatte der Vorfall für die Organisation/Institution (z.B. soziale, emotionale, materielle oder finanzielle)?"
+              "Wie wurdest du diskriminiert?",
+              "Wie haben andere Personen reagiert?",
+              "Was war deiner Ansicht nach an dem Vorfall queerfeindlich?",
+              "Welche Auswirkungen hatte der Vorfall für dich (z.B. emotionale, körperliche, soziale oder finanzielle)?"
+            ],
+            "andereList": [
+              "Gegen wen richtete sich der Angriff?",
+              "Wie wurde die betroffene Person/Gruppe diskriminiert?",
+              "Wie hast du oder wie haben andere Zeug*innen reagiert?",
+              "Was war deiner Ansicht nach an dem Vorfall queerfeindlich?"
             ]
           }
         },
@@ -268,9 +274,9 @@
             {
               "iD": 7,
               "name": "organizationType",
-              "value": "Anderes, und zwar",
+              "value": "Anderes, und zwar:",
               "id": "anderesOrg",
-              "label": "Anderes, und zwar"
+              "label": "Anderes, und zwar:"
             }
           ]
         },
@@ -281,7 +287,10 @@
           "happenedOverALongPeriod": "Es ist über einen längeren Zeitraum passiert.",
           "forgetful": "Ich kann mich nicht genau erinnern, wann es passiert ist.",
           "yearitHappened": "In welchem Jahr ist es passiert?",
-          "selectYear": "(Auswahl Jahr) Jahreszahl",
+          "selectYear": "(Jahr schreiben) Jahr",
+          "validYear": "Bitte geben Sie eine gültige Nummer ein",
+          "validationDigits": "Das Jahr muss genau 4 Ziffern haben",
+          "validationYear": "Das Jahr muss zwischen 1980 und",
           "options": [
             {
               "label": "In welchem Jahr ist es passiert?",
@@ -339,8 +348,8 @@
           "firstOption": {
             "name": "online",
             "id": "online",
-            "value": "Es ist online passiert.",
-            "label": "Es ist online passiert."
+            "value": "Online / In den Medien",
+            "label": "Online / In den Medien"
           },
           "secondOption": {
             "title": "Ort",
@@ -357,7 +366,7 @@
           }
         },
         "sixthStep": {
-          "title": "Auf was bezog sich die Diskriminierung deiner Meinung nach?",
+          "title": "Auf was bezog sich die Diskriminierung oder Gewalt deiner Meinung nach?",
           "description": " Mehrfachnennung möglich",
           "mandatory": "* Pflichtfeld",
           "minCharacters": "Es wird eine Mindestanzahl von 4 Zeichen erwartet",
@@ -517,30 +526,30 @@
               {
                 "iD": 1,
                 "name": "formOfDiscYes",
+                "value": "Ableismus",
+                "id": "Ableismus",
+                "label": "Ableismus"
+              },
+              {
+                "iD": 2,
+                "name": "formOfDiscYes",
+                "value": "Altersdiskriminierung",
+                "id": "Altersdiskriminierung",
+                "label": "Altersdiskriminierung"
+              },
+              {
+                "iD": 3,
+                "name": "formOfDiscYes",
                 "value": "Antiasiatischer Rassismus",
                 "id": "Antiasiatischer",
                 "label": "Antiasiatischer Rassismus"
               },
               {
-                "iD": 2,
-                "name": "formOfDiscYes",
-                "value": "Antifeminismus",
-                "id": "Antifeminismus",
-                "label": "Antifeminismus"
-              },
-              {
-                "iD": 3,
+                "iD": 4,
                 "name": "formOfDiscYes",
                 "value": "Antimuslimischer Rassismus",
                 "id": "Antimuslimischer",
                 "label": "Antimuslimischer Rassismus"
-              },
-              {
-                "iD": 4,
-                "name": "formOfDiscYes",
-                "value": "Anti-Schwarzer Rassismus",
-                "id": "Anti-Schwarzer",
-                "label": "Anti-Schwarzer Rassismus"
               },
               {
                 "iD": 5,
@@ -552,33 +561,40 @@
               {
                 "iD": 6,
                 "name": "formOfDiscYes",
-                "value": "Antiziganismus",
-                "id": "Antiziganismus",
-                "label": "Antiziganismus"
-              },
-              {
-                "iD": 7,
-                "name": "formOfDiscYes",
                 "value": "Antisemitismus",
                 "id": "Antisemitismus",
                 "label": "Antisemitismus"
               },
               {
+                "iD": 7,
+                "name": "formOfDiscYes",
+                "value": "Antislawischer Rassismus",
+                "id": "Antislawischer Rassismus",
+                "label": "Antislawischer Rassismus"
+              },
+              {
                 "iD": 8,
+                "name": "formOfDiscYes",
+                "value": "Antiziganismus",
+                "id": "Antiziganismus",
+                "label": "Antiziganismus"
+              },
+              {
+                "iD": 9,
+                "name": "formOfDiscYes",
+                "value": "Klassismus",
+                "id": "Klassismus",
+                "label": "Klassismus"
+              },
+              {
+                "iD": 10,
                 "name": "formOfDiscYes",
                 "value": "Sexismus",
                 "id": "Sexismus",
                 "label": "Sexismus"
               },
               {
-                "iD": 9,
-                "name": "formOfDiscYes",
-                "value": "Queerfeindlichkeit",
-                "id": "Queerfeindlichkeit",
-                "label": "Queerfeindlichkeit"
-              },
-              {
-                "iD": 10,
+                "iD": 11,
                 "name": "formOfDiscYes",
                 "value": "Anderes, und zwar:",
                 "id": "Anderes",
@@ -589,7 +605,7 @@
         },
         "ninethStep": {
           "title": "Hast du bereits andere Maßnahmen ergriffen?",
-          "organizationTitle":"Wurden bereits andere Maßnahmen ergriffen?",
+          "organizationTitle": "Wurden bereits andere Maßnahmen ergriffen?",
           "description": "Mehrfachnennung möglich",
           "minCharacters": "Es sind mindestens drei Zeichen erforderlich.",
           "mandatory": "* Pflichtfeld",
@@ -687,7 +703,7 @@
             "title": "Was ist deine geschlechtliche Identität?",
             "titleOnBehalf": "Was ist deine geschlechtliche Identität?",
             "description": "Mehrfachnennung möglich",
-            "secondTitle":"Warum fragen wir nach persönlichen Angaben?",
+            "secondTitle": "Warum fragen wir nach persönlichen Angaben?",
             "data": [
               {
                 "id": "gender",
@@ -706,8 +722,8 @@
               {
                 "id": "gender3",
                 "name": "gender",
-                "label": "gender questioning / ich befinde mich im Findungsprozess",
-                "value": "gender questioning / ich befinde mich im Findungsprozess",
+                "label": "ich befinde mich im Findungsprozess",
+                "value": "ich befinde mich im Findungsprozess",
                 "checked": false
               },
               {
@@ -734,40 +750,33 @@
               {
                 "id": "gender7",
                 "name": "gender",
-                "label": "Person mit Variationen der Geschlechts-entwicklung",
-                "value": "Person mit Variationen der Geschlechts-entwicklung",
-                "checked": false
-              },
-              {
-                "id": "gender8",
-                "name": "gender",
                 "label": "queer",
                 "value": "queer",
                 "checked": false
               },
               {
-                "id": "gender9",
+                "id": "gender8",
                 "name": "gender",
                 "label": "trans*",
                 "value": "trans*",
                 "checked": false
               },
               {
-                "id": "gender10",
+                "id": "gender9",
                 "name": "gender",
                 "label": "weiblich",
                 "value": "weiblich",
                 "checked": false
               },
               {
-                "id": "gender11",
+                "id": "gender10",
                 "name": "gender",
                 "label": "weiß nicht / keine Angabe",
                 "value": "weiß nicht / keine Angabe",
                 "checked": false
               },
               {
-                "id": "gender12",
+                "id": "gender11",
                 "name": "gender",
                 "label": "Selbstbezeichung:",
                 "value": "Selbstbezeichung:",
@@ -948,6 +957,14 @@
           "mandatory": "* Pflichtfeld",
           "description": "Hier gelangst Du zu unserer Seite mit Links zur Beratung.",
           "buttonText": "Verweisberatung",
+          "sending": "Versendung",
+          "Meldung": "Meldung abschicken",
+          "modal": {
+            "title": "Vielen Dank für deine Meldung.",
+            "description": "Hier gelangst Du zu unserer Seite mit Links zur Beratung.",
+            "firstbutton": "Verweisberatung",
+            "secondbutton": "Fertig"
+          },
           "validation": {
             "title": "Einwilligung",
             "description": "Mehrfachnennung möglich",
@@ -987,8 +1004,7 @@
               "value": "Analoge Medien",
               "id": "Analoge",
               "label": "Analoge Medien",
-              "examples": "z.B. Sozialamt | Jobcenter | Ausländerbehörde"
-
+              "examples": "z.B. Zeitung | TV | Radio"
             },
             {
               "iD": 3,
@@ -996,7 +1012,7 @@
               "value": "Arbeit",
               "id": "Arbeit ",
               "label": "Arbeit ",
-              "examples": "z.B. Sozialamt | Jobcenter | Ausländerbehörde"
+              "examples": "z.B. Arbeitsplatz | Ausbildung | Arbeitssuche"
             },
             {
               "iD": 4,
@@ -1004,8 +1020,7 @@
               "value": "Bildung",
               "id": "Bildung",
               "label": "Bildung",
-              "examples": "z.B. Sozialamt | Jobcenter | Ausländerbehörde"
-
+              "examples": "z.B. Schule | KiTa | Hochschule | Erwachsenenbildung"
             },
             {
               "iD": 5,
@@ -1013,7 +1028,7 @@
               "value": "digitaler Raum ",
               "id": "digitaler",
               "label": "digitaler Raum ",
-              "examples": "z.B. Sozialamt | Jobcenter | Ausländerbehörde"
+              "examples": "z.B. soziale Medien | Internet | Gaming"
             },
             {
               "iD": 6,
@@ -1021,8 +1036,7 @@
               "value": "Einsatzorganisationen ",
               "id": "Einsatzorganisationen ",
               "label": "Einsatzorganisationen ",
-              "examples": "z.B. Sozialamt | Jobcenter | Ausländerbehörde"
-
+              "examples": "z.B. Feuerwehr | Bundeswehr"
             },
             {
               "iD": 7,
@@ -1030,8 +1044,7 @@
               "value": "Einzelhandel und Dienstleistungen ",
               "id": "Einzelhandel",
               "label": "Einzelhandel und Dienstleistungen ",
-              "examples": "z.B. Sozialamt | Jobcenter | Ausländerbehörde"
-
+              "examples": "z.B. Geschäft | Gastronomie | Kultur | Sport | Versicherung | Banken"
             },
             {
               "iD": 8,
@@ -1039,7 +1052,7 @@
               "value": "Freizeit",
               "id": "Freizeit",
               "label": "Freizeit",
-              "examples": "z.B. Sozialamt | Jobcenter | Ausländerbehörde"
+              "examples": "z.B. Vereine | Soziale oder religiöse Einrichtungen"
             },
             {
               "iD": 9,
@@ -1047,8 +1060,7 @@
               "value": "Gesundheit ",
               "id": "Gesundheit ",
               "label": "Gesundheit ",
-              "examples": "z.B. Sozialamt | Jobcenter | Ausländerbehörde"
-
+              "examples": "z.B. Krankenhaus | Ärzt*in | Pflege | Therapie"
             },
             {
               "iD": 10,
@@ -1056,8 +1068,7 @@
               "value": "Justiz",
               "id": "Justiz",
               "label": "Justiz",
-              "examples": "z.B. Sozialamt | Jobcenter | Ausländerbehörde"
-
+              "examples": "z.B. Gericht | Anwält*in | Gefängnis"
             },
             {
               "iD": 11,
@@ -1065,8 +1076,7 @@
               "value": "Öffentlicher Raum ",
               "id": "Öffentlicher",
               "label": "Öffentlicher Raum ",
-              "examples": "z.B. Sozialamt | Jobcenter | Ausländerbehörde"
-
+              "examples": "z.B.- Straße | Park | Spielplatz"
             },
             {
               "iD": 12,
@@ -1074,8 +1084,7 @@
               "value": "Persönliches Umfeld/Privatleben ",
               "id": "Persönliches",
               "label": "Persönliches Umfeld/Privatleben ",
-              "examples": "z.B. Sozialamt | Jobcenter | Ausländerbehörde"
-
+              "examples": "z.B. Familie | Bekanntenkreis | Nachbarschaft Beziehung"
             },
             {
               "iD": 13,
@@ -1083,8 +1092,7 @@
               "value": "Polizei",
               "id": "Polizei",
               "label": "Polizei",
-              "examples": "z.B. Sozialamt | Jobcenter | Ausländerbehörde"
-
+              "examples": "z.B. Verkehrspolizei | Bundespolizei | Kriminalpolizei"
             },
             {
               "iD": 14,
@@ -1092,8 +1100,7 @@
               "value": "Soziale Dienste",
               "id": "Soziale Dienste",
               "label": "Soziale Dienste",
-              "examples": "z.B. Sozialamt | Jobcenter | Ausländerbehörde"
-
+              "examples": "z.B. Beratung | Betreuung | Selbsthilfe"
             },
             {
               "iD": 15,
@@ -1101,8 +1108,7 @@
               "value": "Verkehr ",
               "id": "Verkehr ",
               "label": "Verkehr",
-              "examples": ".B. In Bus und Bahn | Bei einem Flug | Im Taxi"
-
+              "examples": "z.B. In Bus und Bahn | Bei einem Flug | Im Taxi"
             },
             {
               "iD": 16,
@@ -1110,8 +1116,7 @@
               "value": "Wohnen",
               "id": "Wohnen",
               "label": "Wohnen",
-              "examples": "z.B. Sozialamt | Jobcenter | Ausländerbehörde"
-
+              "examples": "z.B. Wohnungssuche | Mietverhältnis)"
             },
             {
               "iD": 17,
@@ -1119,7 +1124,7 @@
               "value": "Anderes, und zwar",
               "id": "anderes",
               "label": "Anderes, und zwar",
-              "examples": "z.B. Sozialamt | Jobcenter | Ausländerbehörde"
+              "examples": ""
             }
           ]
         }

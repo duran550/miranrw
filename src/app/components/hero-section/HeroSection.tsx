@@ -19,7 +19,7 @@ type heroSectionPropsType = {
 const HeroSection: React.FC<heroSectionPropsType> = ({ lang, content }) => {
   return (
     <>
-      <div className="2xl:w-[1325px] 2xl:px-0 2xl:mx-auto px-6 lg:px-12 my-12    ">
+      <div className="2xl:w-[1325px] 2xl:px-0 2xl:mx-auto px-6 lg:px-12z-0 py-12">
         {/* text-content */}
         <div className="flex flex-col-reverse lg:flex-row lg:gap-x-10 justify-between w-full lg:items-center pb:8 lg:pb-0">
           <div className=" lg:max-w-2xl">

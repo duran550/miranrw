@@ -3,19 +3,28 @@ export type EleventhStepProps = {
     title: string;
     verification: string;
     description: string;
+    Meldung: string;
+    mandatory: string;
     buttonText: string;
+    sending: string;
     validation: {
       title: string;
       data: Array<{ id: string; name: string; label: string; value: string }>;
     };
+    modal: {
+      title: string;
+      description: string;
+      firstbutton: string;
+      secondbutton: string;
+    };
     captcha: string;
   };
-  id?:any;
+  id?: any;
 
-  open:boolean;
-  setOpen:() => void;
-  submitPage:boolean,
-  setSubmitPage:() => void
+  open: boolean;
+  setOpen: () => void;
+  submitPage: boolean;
+  setSubmitPage: () => void;
 
   secondStepTranslation: {
     title: string;
@@ -36,19 +45,19 @@ export type EleventhStepProps = {
 
   ninethStepTranslation?: {
     title: string;
-    organizationTitle:string;
+    organizationTitle: string;
     description: string;
     minCharacters: string;
     mandatory: string;
     data: {
       options: any;
       optionsYes: any;
-      optionsYesOrganization:{
-        iD:number;
-        name:string;
-        value:string;
-        id:string;
-        label:string;
+      optionsYesOrganization: {
+        iD: number;
+        name: string;
+        value: string;
+        id: string;
+        label: string;
       }[];
     };
   };

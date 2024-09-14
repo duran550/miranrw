@@ -13,9 +13,9 @@ const NavBar: React.FC<NavBarProps> = ({ navigation, lang }) => {
   const [navbar, setNavbar] = useState<boolean>(false);
   const [toggle, setToggle] = useState<boolean>(false);
   const [toggle1, setToggle1] = useState<boolean>(false);
- 
+
   const pathname = usePathname();
-  const urlSplit=pathname.split('/')
+  const urlSplit = pathname.split('/');
 
   /* Container 36 */
 
@@ -25,7 +25,7 @@ const NavBar: React.FC<NavBarProps> = ({ navigation, lang }) => {
   });
 
   return (
-    <nav ref={domNode} className="w-full relative z-20 overflow-hidden">
+    <nav ref={domNode} className="w-full relative">
       <div className=" w-screen border-b-[1.2px] py-5 border-black">
         <div className=" 2xl:w-[1335px] 2xl:mx-auto lg:w-fit md:w-full  sm:ml-auto flex justify-end  ">
           {/* Language switcher */}
@@ -163,7 +163,7 @@ const NavBar: React.FC<NavBarProps> = ({ navigation, lang }) => {
         <div className="  relative 2xl:px-0  xl:justify-between  text-textColor items-center w-full lg:w-[230rem]  xl:w-[230rem] hidden xl:flex">
           {/* Horizontal or desktop navigation */}
           <nav
-            className={`container w-full opacity-0 xl:opacity-100 xl:block flex  items-center justify-between  `}
+            className={`container w-full opacity-0 xl:opacity-100 xl:block flex  items-center justify-between`}
           >
             <ul className="flex w-full  2xl:gap-14 gap-6">
               {/* <li>
@@ -191,17 +191,18 @@ const NavBar: React.FC<NavBarProps> = ({ navigation, lang }) => {
                 </Link>
               </li>
               {/* About Queerphobia link */}
-              <li className="relative h-full [&>*]:hover:flex">
+              <li className="relative h-full cursor-pointer group/queerphobia">
                 <Link
                   href={`/${lang}/queerphobia`}
-                  className={`hover:font-bold relative z-10 ${
+                  className={`hover:font-bold relative ${
                     pathname?.split('/')[2] === 'queerphobia' ? 'font-bold' : ''
                   } cursor-pointer`}
                 >
                   {navigation.aboutQueer?.title}
                 </Link>
                 {/* Submenu About Queerphobia */}
-                <ul className="hidden bg-white shadow-lg py-3 px-6 text-sm left-0 w-[18rem] flex-col  absolute top-4 z-0 pt-4">
+                {/* The z-index here is to for any text below dropdown */}
+                <ul className="hidden group-hover/queerphobia:flex bg-white shadow-lg py-3 px-6 text-sm left-0 w-[18rem] flex-col  absolute top-6 pt-4 z-20">
                   <Link
                     href={`/${lang}/queerphobia/#whatIsQueerphobia`}
                     className="py-2 hover:font-bold"
@@ -224,17 +225,18 @@ const NavBar: React.FC<NavBarProps> = ({ navigation, lang }) => {
               </li>
 
               {/* About us link */}
-              <li className="relative [&>*]:hover:flex">
+              <li className="relative cursor-pointer group/queerphobia">
                 <Link
                   href={`/${lang}/about-us`}
-                  className={`hover:font-bold relative z-10 ${
+                  className={`hover:font-bold relative ${
                     pathname?.split('/')[2] === 'about-us' ? 'font-bold' : ''
                   } cursor-pointer`}
                 >
                   {navigation.aboutUs?.title}
                 </Link>
                 {
-                  <ul className="hidden bg-white py-3 px-6 text-sm -left-6 w-[18rem] flex-col  absolute top-4.5 z-0 pt-4">
+                  /* The z-index here is to for any text below dropdown */
+                  <ul className="hidden group-hover/queerphobia:flex bg-white shadow-lg py-3 px-6 text-sm -left-6 w-[18rem] flex-col  absolute top-4.5  pt-4 z-20">
                     <Link
                       className="hover:font-bold py-3"
                       href="/about-us/#team"
@@ -272,7 +274,7 @@ const NavBar: React.FC<NavBarProps> = ({ navigation, lang }) => {
                 <Link
                   className={`${
                     pathname?.split('/')[2] === 'faqs' ? 'font-bold' : ''
-                  } relative z-10`}
+                  } relative `}
                   href={`/${lang}/faqs`}
                 >
                   {navigation?.faqs}
@@ -284,11 +286,12 @@ const NavBar: React.FC<NavBarProps> = ({ navigation, lang }) => {
           <Link href={`/${lang}/report`}>
             {' '}
             <div
-              className={` ${
-                pathname === '/' + lang + ''
-                  ? 'xl:pr-4 '
-                  : 'fixed  mx-auto 2xl:left-1/2 2xl:transform 2xl:-translate-x-1/2 2xl:right-auto right-4 top-28 2xl:w-[1375px]  flex justify-end'
-              } ${pathname === '/' + lang + '/report' && 'hidden'} w-64 `}
+              className={`w-64 xl:pr-4`}
+              // className={` ${
+              //   pathname === '/' + lang + ''
+              //     ? 'xl:pr-4 '
+              //     : 'fixed  mx-auto 2xl:left-1/2 2xl:transform 2xl:-translate-x-1/2 2xl:right-auto right-4 top-28 2xl:w-[1375px]  flex justify-end'
+              // } ${pathname === '/' + lang + '/report' && 'hidden'} w-64 xl:pr-4`}
             >
               <Button className={` w-64 `} variant="primary">
                 {navigation?.button}
