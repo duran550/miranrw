@@ -159,15 +159,18 @@
         "firstStep": {
           "title": "Informationen zur Meldung",
           "description": {
-            "firstParagraph": "Vielen Dank, dass Du dir Zeit und Energie nimmst einen queerfeindlichen Vorfall zu melden.",
-            "secondParagraph": " In diesem Formular gibt es insgesamt 10 Fragen: ",
-            "thirdParagraph": "Im ersten Abschnitt geht es um den Vorfall selbst. Hier wird danach gefragt, was passiert ist und inwiefern sich der Vorfall einordnen lässt. Im zweiten Abschnitt möchten wir mehr über die betroffene Person erfahren. Mit diesen Angaben hilfst Du uns, queerfeindliche Angriffe in unserer Statistik genauer aufzuführen.",
-            "fourthParagraph": " Wenn Du fertig bist, schickst Du das Formular ab und wir zeigen dir auf, was für Beratungs- und Informationsangebote es gibt.",
+            "firstParagraph": "Vielen Dank, dass du dir die Zeit und Energie nimmst, einen queerfeindlichen Vorfall zu melden. Wir wissen, dass es für viele nicht leicht ist, darüber zu sprechen. Deine Meldung hilft uns, Queerfeindlichkeit statistisch besser zu erfassen. Es fehlt an genauen Zahlen und Wissen über die Vielzahl von queerfeindlichen Vorfällen in NRW. Wir wollen Queerfeindlichkeit sichtbar machen und darüber informieren, zum Beispiel in jährlichen Berichten.",
+            "secondParagraph": " Auf den folgenden Seiten kannst du den Vorfall genauer beschreiben und Angaben zur Einordnung machen. Sollten dir bestimmte Begriffe, die im Formular stehen, nicht bekannt sein, hilft dir unser",
+            "thirdParagraph": "Bitte verzichte im Meldeformular auf die Angabe von Namen, Adressen oder Telefonnummern. Wir speichern aus Datenschutzgründen keine Hinweise oder Informationen mit direktem Personenbezug. Sollte eine Meldung doch solche Angaben enthalten, werden diese unverzüglich von uns gelöscht.",
+            "fourthParagraph": "",
             "disclaimer": "Disclaimer",
             "datenschutz": "Datenschutz",
-            "explanation": "Erklärung"
+            "explanation": "Erklärung",
+            "glossar": "Glossar",
+            "secondParagraphcontinue": "weiter."
           },
-          "buttonText": "Los geht’s"
+          "buttonText": "Los geht’s",
+          "secondButtonText": "Datenschutz"
         },
         "secondStep": {
           "title": "Wer ist betroffen?*",
@@ -201,7 +204,7 @@
           }
         },
         "thirdStep": {
-          "title": "Vorfallbeschreibungs*",
+          "title": "Vorfallsbeschreibung*",
           "mandatory": "* Pflichtfeld",
           "description": " Was genau ist passiert?",
           "placeholder": "Bitte beschreibe den Vorfall so genau wie möglich.",
@@ -376,42 +379,48 @@
               "name": "typeOfDisc",
               "value": "Geschlechtliche Identität",
               "id": "identitate",
-              "label": "Geschlechtliche Identität"
+              "label": "Geschlechtliche Identität",
+              "example": ""
             },
             {
               "iD": 2,
               "name": "typeOfDisc",
               "value": "Sexuelle Orientierung",
               "id": "sexuelle",
-              "label": "Sexuelle Orientierung"
+              "label": "Sexuelle Orientierung",
+              "example": ""
             },
             {
               "iD": 3,
               "name": "typeOfDisc",
               "value": "Romantische Orientierung",
               "id": "romantische",
-              "label": "Romantische Orientierung"
+              "label": "Romantische Orientierung",
+              "example": ""
             },
             {
               "iD": 4,
               "name": "typeOfDisc",
               "value": "Geschlechtsausdruck",
               "id": "geschlecht",
-              "label": "Geschlechtsausdruck"
+              "label": "Geschlechtsausdruck",
+              "example": "Wie du dein Geschlecht ausdrückst, bspw. über Kleidung, Haare und Körpersprache"
             },
             {
               "iD": 5,
               "name": "typeOfDisc",
               "value": "Körper",
               "id": "Körper",
-              "label": "Körper"
+              "label": "Körper",
+              "example": "Diskriminierung bezieht sich auf körperliche Merkmale"
             },
             {
               "iD": 6,
               "name": "typeOfDisc",
               "value": "Anderes, und zwar",
               "id": "anderes",
-              "label": "Anderes, und zwar"
+              "label": "Anderes, und zwar",
+              "example": ""
             }
           ]
         },
@@ -528,77 +537,96 @@
                 "name": "formOfDiscYes",
                 "value": "Ableismus",
                 "id": "Ableismus",
-                "label": "Ableismus"
+                "label": "Ableismus",
+                "example": "Diskrminierung aufgrund einer Behinderung oder Beeinträchtigung"
               },
               {
                 "iD": 2,
                 "name": "formOfDiscYes",
                 "value": "Altersdiskriminierung",
                 "id": "Altersdiskriminierung",
-                "label": "Altersdiskriminierung"
+                "label": "Altersdiskriminierung",
+                "example": ""
               },
               {
                 "iD": 3,
                 "name": "formOfDiscYes",
                 "value": "Antiasiatischer Rassismus",
                 "id": "Antiasiatischer",
-                "label": "Antiasiatischer Rassismus"
+                "label": "Antiasiatischer Rassismus",
+                "example": ""
               },
               {
                 "iD": 4,
                 "name": "formOfDiscYes",
-                "value": "Antimuslimischer Rassismus",
-                "id": "Antimuslimischer",
-                "label": "Antimuslimischer Rassismus"
+                "value": "Antifeminismus",
+                "id": "Antifeminismus",
+                "label": "Antifeminismus",
+                "example": ""
               },
               {
                 "iD": 5,
                 "name": "formOfDiscYes",
-                "value": "Antislawischer Rassismus",
-                "id": "Antislawischer",
-                "label": "Antislawischer Rassismus"
+                "value": "Antimuslimischer Rassismus",
+                "id": "Antimuslimischer",
+                "label": "Antimuslimischer Rassismus",
+                "example": ""
               },
               {
                 "iD": 6,
                 "name": "formOfDiscYes",
-                "value": "Antisemitismus",
-                "id": "Antisemitismus",
-                "label": "Antisemitismus"
+                "value": "Anti-Schwarzer Rassismus",
+                "id": "Anti-Schwarzer",
+                "label": "Anti-Schwarzer Rassismus",
+                "example": ""
               },
               {
                 "iD": 7,
                 "name": "formOfDiscYes",
-                "value": "Antislawischer Rassismus",
-                "id": "Antislawischer Rassismus",
-                "label": "Antislawischer Rassismus"
+                "value": "Antisemitismus",
+                "id": "Antisemitismus",
+                "label": "Antisemitismus",
+                "example": ""
               },
               {
                 "iD": 8,
                 "name": "formOfDiscYes",
-                "value": "Antiziganismus",
-                "id": "Antiziganismus",
-                "label": "Antiziganismus"
+                "value": "Antislawischer Rassismus",
+                "id": "Antislawischer Rassismus",
+                "label": "Antislawischer Rassismus",
+                "example": ""
               },
               {
                 "iD": 9,
                 "name": "formOfDiscYes",
-                "value": "Klassismus",
-                "id": "Klassismus",
-                "label": "Klassismus"
+                "value": "Antiziganismus",
+                "id": "Antiziganismus",
+                "label": "Antiziganismus",
+                "example": ""
               },
               {
                 "iD": 10,
                 "name": "formOfDiscYes",
-                "value": "Sexismus",
-                "id": "Sexismus",
-                "label": "Sexismus"
+                "value": "Klassismus",
+                "id": "Klassismus",
+                "label": "Klassismus",
+                "example": "Diskriminierung aufgrund der sozialen Herkunft, beispielsweise weil jemand wenig Geld besitzt"
               },
               {
                 "iD": 11,
                 "name": "formOfDiscYes",
+                "value": "Sexismus",
+                "id": "Sexismus",
+                "label": "Sexismus",
+                "example": ""
+              },
+              {
+                "iD": 12,
+                "name": "formOfDiscYes",
                 "value": "Anderes, und zwar:",
                 "id": "Anderes",
-                "label": "Anderes, und zwar:"
+                "label": "Anderes, und zwar:",
+                "example": ""
               }
             ]
           }
@@ -700,8 +728,11 @@
           "minCharacters": "Ein Minimum von 3 Zeichen wird erwartet",
           "mandatory": "* Pflichtfeld",
           "firstBlock": {
-            "title": "Was ist deine geschlechtliche Identität?",
-            "titleOnBehalf": "Was ist deine geschlechtliche Identität?",
+            "title": "Was ist deine",
+            "titleSecondHalf": "geschlechtliche Identität",
+            "titleHover": "(nicht die der betroffenen Person)?",
+            "titleHoverText": "Zu welchem Geschlecht du dich zugehörig fühlst.",
+            "titleOnBehalf": "Was ist deine geschlechtliche Identität",
             "description": "Mehrfachnennung möglich",
             "secondTitle": "Warum fragen wir nach persönlichen Angaben?",
             "data": [
@@ -710,77 +741,178 @@
                 "name": "gender",
                 "label": "agender/ Ich ordne mich keiner geschlechtlichen dentität zu",
                 "value": "agender/ Ich ordne mich keiner geschlechtlichen dentität zu",
-                "checked": false
+                "checked": false,
+                "example": ""
               },
               {
                 "id": "gender2",
                 "name": "gender",
                 "label": "cis",
                 "value": "cis",
-                "checked": false
+                "checked": false,
+                "example": "Du identifizierst dich mit dem Geschlecht, dass dir bei Geburt zugewiesen wurde"
               },
               {
                 "id": "gender3",
                 "name": "gender",
                 "label": "ich befinde mich im Findungsprozess",
                 "value": "ich befinde mich im Findungsprozess",
-                "checked": false
+                "checked": false,
+                "example": ""
               },
               {
                 "id": "gender4",
                 "name": "gender",
                 "label": "inter*",
                 "value": "inter*",
-                "checked": false
+                "checked": false,
+                "example": ""
               },
               {
                 "id": "gender5",
                 "name": "gender",
                 "label": "männlich",
                 "value": "männlich",
-                "checked": false
+                "checked": false,
+                "example": ""
               },
               {
                 "id": "gender6",
                 "name": "gender",
                 "label": "nichtbinär / nonbinary / enby",
                 "value": "nichtbinär / nonbinary / enby",
-                "checked": false
+                "checked": false,
+                "example": "Du fühlst dich nicht oder nicht ganz dem männlichen oder weiblichen Geschlecht zugehörig"
               },
               {
                 "id": "gender7",
                 "name": "gender",
                 "label": "queer",
                 "value": "queer",
-                "checked": false
+                "checked": false,
+                "example": ""
               },
               {
                 "id": "gender8",
                 "name": "gender",
                 "label": "trans*",
                 "value": "trans*",
-                "checked": false
+                "checked": false,
+                "example": "Du identifizierst dich nicht mit dem Geschlecht, dass dir bei Geburt zugewiesen wurde."
               },
               {
                 "id": "gender9",
                 "name": "gender",
                 "label": "weiblich",
                 "value": "weiblich",
-                "checked": false
+                "checked": false,
+                "example": ""
               },
               {
                 "id": "gender10",
                 "name": "gender",
                 "label": "weiß nicht / keine Angabe",
                 "value": "weiß nicht / keine Angabe",
-                "checked": false
+                "checked": false,
+                "example": ""
               },
               {
                 "id": "gender11",
                 "name": "gender",
                 "label": "Selbstbezeichung:",
                 "value": "Selbstbezeichung:",
-                "checked": false
+                "checked": false,
+                "example": ""
+              }
+            ],
+            "dataMySelf": [
+              {
+                "id": "gender",
+                "name": "gender",
+                "label": "agender/ Ich ordne mich keiner geschlechtlichen dentität zu",
+                "value": "agender/ Ich ordne mich keiner geschlechtlichen dentität zu",
+                "checked": false,
+                "example": ""
+              },
+              {
+                "id": "gender2",
+                "name": "gender",
+                "label": "cis",
+                "value": "cis",
+                "checked": false,
+                "example": "Du identifizierst dich mit dem Geschlecht, dass dir bei Geburt zugewiesen wurde"
+              },
+              {
+                "id": "gender3",
+                "name": "gender",
+                "label": "ich befinde mich im Findungsprozess",
+                "value": "ich befinde mich im Findungsprozess",
+                "checked": false,
+                "example": ""
+              },
+              {
+                "id": "gender4",
+                "name": "gender",
+                "label": "inter*",
+                "value": "inter*",
+                "checked": false,
+                "example": "Du hast angeborene Merkmale, die nicht als eindeutig (nur) männlich oder (nur) weiblich eingeordnet werden können"
+              },
+              {
+                "id": "gender5",
+                "name": "gender",
+                "label": "männlich",
+                "value": "männlich",
+                "checked": false,
+                "example": ""
+              },
+              {
+                "id": "gender6",
+                "name": "gender",
+                "label": "nichtbinär / nonbinary / enby",
+                "value": "nichtbinär / nonbinary / enby",
+                "checked": false,
+                "example": "Du fühlst dich nicht oder nicht ganz dem männlichen oder weiblichen Geschlecht zugehörig"
+              },
+              {
+                "id": "gender7",
+                "name": "gender",
+                "label": "queer",
+                "value": "queer",
+                "checked": false,
+                "example": ""
+              },
+              {
+                "id": "gender8",
+                "name": "gender",
+                "label": "trans*",
+                "value": "trans*",
+                "checked": false,
+                "example": "Du identifizierst dich nicht mit dem Geschlecht, dass dir bei Geburt zugewiesen wurde"
+              },
+              {
+                "id": "gender9",
+                "name": "gender",
+                "label": "weiblich",
+                "value": "weiblich",
+                "checked": false,
+                "example": ""
+              },
+              {
+                "id": "gender10",
+                "name": "gender",
+                "label": "weiß nicht / keine Angabe",
+                "value": "weiß nicht / keine Angabe",
+                "checked": false,
+                "example": ""
+              },
+              {
+                "id": "gender11",
+                "name": "gender",
+                "label": "Selbstbezeichung:",
+                "value": "Selbstbezeichung:",
+                "checked": false,
+                "example": ""
               }
             ]
           },
@@ -887,6 +1019,120 @@
                 "value": "Selbstbezeichung:",
                 "checked": false
               }
+            ],
+            "dataMySelf": [
+              {
+                "id": "sexualOrientation",
+                "name": "sexualOrientation",
+                "label": "aromantisch",
+                "value": "aromantisch",
+                "checked": false,
+                "example": ""
+              },
+              {
+                "id": "sexualOrientation1",
+                "name": "sexualOrientation",
+                "label": "asexuell",
+                "value": "asexuell",
+                "checked": false,
+                "example": "Du hast kein oder ein geringes sexuelles Begehren"
+              },
+              {
+                "id": "sexualOrientation2",
+                "name": "sexualOrientation",
+                "label": "bi+romantisch",
+                "value": "bi+romantisch",
+                "checked": false,
+                "example": ""
+              },
+              {
+                "id": "sexualOrientation3",
+                "name": "sexualOrientation",
+                "label": "bi+sexuell",
+                "value": "bi+sexuell",
+                "checked": false,
+                "example": ""
+              },
+              {
+                "id": "sexualOrientation4",
+                "name": "sexualOrientation",
+                "label": "heterosexuell",
+                "value": "heterosexuell",
+                "checked": false,
+                "example": ""
+              },
+              {
+                "id": "sexualOrientation5",
+                "name": "sexualOrientation",
+                "label": "homoromantisch",
+                "value": "homoromantisch",
+                "checked": false,
+                "example": ""
+              },
+              {
+                "id": "sexualOrientation6",
+                "name": "sexualOrientation",
+                "label": "lesbisch",
+                "value": "lesbisch",
+                "checked": false,
+                "example": ""
+              },
+              {
+                "id": "sexualOrientation7",
+                "name": "sexualOrientation",
+                "label": "panromantisch",
+                "value": "panromantisch",
+                "checked": false,
+                "example": ""
+              },
+              {
+                "id": "sexualOrientation8",
+                "name": "sexualOrientation",
+                "label": "pansexuell",
+                "value": "pansexuell",
+                "checked": false,
+                "example": "Anziehung unabhängig des Geschlechts"
+              },
+              {
+                "id": "sexualOrientation9",
+                "name": "sexualOrientation",
+                "label": "queer",
+                "value": "queer",
+                "checked": false,
+                "example": ""
+              },
+              {
+                "id": "sexualOrientation10",
+                "name": "sexualOrientation",
+                "label": "questioning / Ich befinde mich im Findungsprozess",
+                "value": "questioning / Ich befinde mich im Findungsprozess",
+                "checked": false,
+                "example": ""
+              },
+              {
+                "id": "sexualOrientation11",
+                "name": "sexualOrientation",
+                "label": "schwul",
+                "value": "schwul",
+                "checked": false,
+                "example": ""
+              },
+              {
+                "id": "sexualOrientation12",
+                "name": "sexualOrientation",
+                "label": "weiß nicht / keine Angabe",
+                "value": "weiß nicht / keine Angabe",
+                "checked": false,
+                "example": ""
+              },
+              {
+                "id": "sexualOrientation13",
+                "name": "sexualOrientation",
+                "label": "Selbstbezeichung:",
+                "value": "Selbstbezeichung:",
+                "checked": false,
+                "example": ""
+              }
             ]
           },
           "thirdBlock": {
@@ -972,8 +1218,8 @@
               {
                 "id": "validation2",
                 "name": "validation",
-                "label": "Hiermit bestätige ich die Richtigkeit meiner Angaben, die Kenntnisnahme der Datenschutzbestimmungen (Hyperlink Datenschutzkonzept) und dass ich den darin beschriebenen Verarbeitungen meiner personenbezogenen Daten zustimme.*",
-                "value": "Hiermit bestätige ich die Richtigkeit meiner Angaben, die Kenntnisnahme der Datenschutzbestimmungen (Hyperlink Datenschutzkonzept) und dass ich den darin beschriebenen Verarbeitungen meiner personenbezogenen Daten zustimme.*",
+                "label": "Ich willige in die Verarbeitung meiner Daten gemäß Datenschutzerklärung [Hyperlink Datenschutzerklärung] ein.*",
+                "value": "Ich willige in die Verarbeitung meiner Daten gemäß Datenschutzerklärung [Hyperlink Datenschutzerklärung] ein.*",
                 "checked": false
               }
             ]
@@ -1025,8 +1271,8 @@
             {
               "iD": 5,
               "name": "whereDisHappened",
-              "value": "digitaler Raum ",
-              "id": "digitaler",
+              "value": "Digitaler Raum ",
+              "id": "Digitaler",
               "label": "digitaler Raum ",
               "examples": "z.B. soziale Medien | Internet | Gaming"
             },

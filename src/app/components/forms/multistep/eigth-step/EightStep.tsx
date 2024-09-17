@@ -75,7 +75,7 @@ const EightStep: React.FC<EightStepProps> = ({ eightStepTranslation, id }) => {
       if (
         formOfDiscYes?.length > 0 &&
         formOfDiscYes?.includes(
-          eightStepTranslation?.data?.optionsYes[10].value
+          eightStepTranslation?.data?.optionsYes[11].value
         )
       ) {
         dispatch({ type: FORM_ERRORS, payload: true });
@@ -87,7 +87,7 @@ const EightStep: React.FC<EightStepProps> = ({ eightStepTranslation, id }) => {
       if (
         formOfDiscYes?.length > 0 &&
         !formOfDiscYes?.includes(
-          eightStepTranslation?.data?.optionsYes[10].value
+          eightStepTranslation?.data?.optionsYes[11].value
         )
       ) {
         dispatch({ type: FORM_ERRORS, payload: false });
@@ -224,6 +224,7 @@ const EightStep: React.FC<EightStepProps> = ({ eightStepTranslation, id }) => {
                 props={register('formOfDiscYes')}
                 value={element?.value}
                 label={element?.label}
+                example={element?.example}
               />
             ))}
 
@@ -232,7 +233,7 @@ const EightStep: React.FC<EightStepProps> = ({ eightStepTranslation, id }) => {
               formOfDisc === eightStepTranslation?.data?.options[1].value &&
               formOfDiscYes &&
               formOfDiscYes?.includes(
-                eightStepTranslation?.data?.optionsYes[10].value
+                eightStepTranslation?.data?.optionsYes[11].value
               ) && (
                 <div className="w-full pb-4 ">
                   {' '}
@@ -245,7 +246,7 @@ const EightStep: React.FC<EightStepProps> = ({ eightStepTranslation, id }) => {
                   />
                   {formOfDiscYes?.length > 0 &&
                     formOfDiscYes?.includes(
-                      eightStepTranslation?.data?.optionsYes[10].value
+                      eightStepTranslation?.data?.optionsYes[11].value
                     ) &&
                     formErrors &&
                     formOfDiscYesFreeField?.length < 4 && (

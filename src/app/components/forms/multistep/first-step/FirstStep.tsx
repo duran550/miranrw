@@ -3,9 +3,15 @@ import FormHeader from '../header/header';
 import { Button } from '@/app/components/button/Button';
 import { useFormContext } from '@/app/hooks/useFormContext';
 import { NEXT_STEP } from '@/app/context/actions';
+import { useRouter } from 'next/navigation';
 
 type FirstStepProps = {
-  firstStepTranslation: { title: string; description: any; buttonText: string };
+  firstStepTranslation: {
+    title: string;
+    description: any;
+    buttonText: string;
+    secondButtonText: string;
+  };
   lang: string;
 };
 
@@ -14,6 +20,8 @@ const FirstStep: React.FC<FirstStepProps> = ({
   lang,
 }) => {
   const { dispatch } = useFormContext();
+  const router = useRouter();
+
   return (
     <div>
       <FormHeader
@@ -23,12 +31,20 @@ const FirstStep: React.FC<FirstStepProps> = ({
         paddingHorizontal={3}
         paddingTop={1}
       />
-      <Button
-        onClick={() => dispatch({ type: NEXT_STEP, payload: '' })}
-        className="md:max-w-xs"
-      >
-        {firstStepTranslation?.buttonText}
-      </Button>
+      <div className="flex justify-between">
+        <Button
+          onClick={() => router.push(`/${lang}/datenschutz`)}
+          className="md:max-w-xs w-fit"
+        >
+          {firstStepTranslation?.secondButtonText}
+        </Button>
+        <Button
+          onClick={() => dispatch({ type: NEXT_STEP, payload: '' })}
+          className="md:max-w-xs w-fit"
+        >
+          {firstStepTranslation?.buttonText}
+        </Button>
+      </div>
     </div>
   );
 };

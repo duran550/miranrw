@@ -10,14 +10,30 @@ import {
   NEXT_STEP,
 } from '@/app/context/actions';
 import InputField from '../../text-field/InputField';
-import { clearFormCookiesStep, getFormCookies, getFormStep, getReportingPerson, setFormCookies } from '@/cookies/cookies';
-import { EIGTH_FORM, FIFTH_FORM, NINETH_FORM, SEVENTH_FORM, SIXTH_FORM } from '@/cookies/cookies.d';
+import {
+  clearFormCookiesStep,
+  getFormCookies,
+  getFormStep,
+  getReportingPerson,
+  setFormCookies,
+} from '@/cookies/cookies';
+import {
+  EIGTH_FORM,
+  FIFTH_FORM,
+  NINETH_FORM,
+  SEVENTH_FORM,
+  SIXTH_FORM,
+} from '@/cookies/cookies.d';
 import { useScrollOnTop } from '@/app/hooks/useScrollOnTop';
 import { SixthStepProps, SixthStepValues } from './sixthStep';
 
-const SixthStep: React.FC<SixthStepProps> = ({ sixthStepTranslation, id, lang }) => {
+const SixthStep: React.FC<SixthStepProps> = ({
+  sixthStepTranslation,
+  id,
+  lang,
+}) => {
   const { dispatch, isEditing, formErrors } = useFormContext();
-  const reportingPerson = getReportingPerson()
+  const reportingPerson = getReportingPerson();
   const [question] = useState<string>(sixthStepTranslation?.title);
 
   const {
@@ -41,9 +57,9 @@ const SixthStep: React.FC<SixthStepProps> = ({ sixthStepTranslation, id, lang })
       otherformOfQueerphobiaFreeField: string;
       question: string;
     } =
-      (reportingPerson === 'myself' || reportingPerson === 'andere') ? getFormCookies(NINETH_FORM) :
-        getFormCookies(EIGTH_FORM)
-
+      reportingPerson === 'myself' || reportingPerson === 'andere'
+        ? getFormCookies(NINETH_FORM)
+        : getFormCookies(EIGTH_FORM);
 
     // if (id && id === 'seventhForm') {
     //   formValues = getFormCookies(SEVENTH_FORM);
@@ -91,7 +107,7 @@ const SixthStep: React.FC<SixthStepProps> = ({ sixthStepTranslation, id, lang })
     //   && setFormCookies(dataWithQuestion, EIGTH_FORM)
     //   : setFormCookies(dataWithQuestion, SIXTH_FORM);
 
-    (reportingPerson === 'myself' || reportingPerson === 'andere')
+    reportingPerson === 'myself' || reportingPerson === 'andere'
       ? setFormCookies(dataWithQuestion, NINETH_FORM)
       : setFormCookies(dataWithQuestion, EIGTH_FORM);
 
@@ -109,11 +125,15 @@ const SixthStep: React.FC<SixthStepProps> = ({ sixthStepTranslation, id, lang })
       // id={id && id == 'seventhForm' ? 'seventhForm' : 'sixthForm'}
       // id={'seventhForm'}
       // id={'eighthForm'}
-      id={(reportingPerson === 'myself' || reportingPerson === 'andere') ? 'eighthForm' : 'seventhForm'}
+      id={
+        reportingPerson === 'myself' || reportingPerson === 'andere'
+          ? 'eighthForm'
+          : 'seventhForm'
+      }
       onSubmit={handleSubmit(onSubmit)}
       className="lg:w-[23.8rem]"
     >
-      <div className=''>
+      <div className="">
         <FormHeader
           title={sixthStepTranslation?.title}
           subTitle={sixthStepTranslation?.description}
@@ -121,44 +141,43 @@ const SixthStep: React.FC<SixthStepProps> = ({ sixthStepTranslation, id, lang })
           paddingTop={1}
         />
       </div>
-      {sixthStepTranslation?.choices?.sort((a, b) => a.label.localeCompare(b.label)).map((choice: any, index) => {
-
-        return (
-          <div key={choice.iD}>
-            <Checkbox
-              props={register('formOfQueerphobia')}
-              name={choice.name}
-              id={choice.id}
-              value={choice.value}
-              label={choice.label}
-            />
-
-{
-              
-              choice.iD === 9   &&
-              (formOfQueerphobia &&
-                (formOfQueerphobia.includes('Anderes, und zwar') ||
-                  formOfQueerphobia.includes('Other, specify'))
-            ) ? (
-              <div className="w-full pb-4 ml-8">
-                <InputField
-                  name="otherformOfQueerphobiaFreeField"
-                  props={register('otherformOfQueerphobiaFreeField', {
-                    required: true,
-                  })}
-                />
-                {formErrors && otherformOfQueerphobiaFreeField?.length !== 0 && (
-                  <label className="text-red-500 text-xs pb-3">
-                    {sixthStepTranslation?.minCharacters}
-                  </label>
-                )}
-              </div>
-            ) : (
-              ''
-            )}
-          </div>
-        );
-      })}
+      {sixthStepTranslation?.choices
+        ?.sort((a, b) => a.label.localeCompare(b.label))
+        .map((choice: any, index) => {
+          console.log(choice.example, 'example');
+          return (
+            <div key={choice.iD}>
+              <Checkbox
+                props={register('formOfQueerphobia')}
+                name={choice.name}
+                id={choice.id}
+                value={choice.value}
+                label={choice.label}
+              />
+              {choice.iD === 9 &&
+              formOfQueerphobia &&
+              (formOfQueerphobia.includes('Anderes, und zwar') ||
+                formOfQueerphobia.includes('Other, specify')) ? (
+                <div className="w-full pb-4 ml-8">
+                  <InputField
+                    name="otherformOfQueerphobiaFreeField"
+                    props={register('otherformOfQueerphobiaFreeField', {
+                      required: true,
+                    })}
+                  />
+                  {formErrors &&
+                    otherformOfQueerphobiaFreeField?.length !== 0 && (
+                      <label className="text-red-500 text-xs pb-3">
+                        {sixthStepTranslation?.minCharacters}
+                      </label>
+                    )}
+                </div>
+              ) : (
+                ''
+              )}
+            </div>
+          );
+        })}
 
       {/* {(formOfQueerphobia &&
         formOfQueerphobia?.includes('Anderes, und zwar')) ||

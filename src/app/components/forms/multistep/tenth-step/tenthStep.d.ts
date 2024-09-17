@@ -4,14 +4,19 @@ type ArrayType = Array<{
   label: string;
   value: string;
   checked: boolean;
+  example?: string;
 }>;
 
 type BlockDataType = {
   title: string;
+  titleSecondHalf: string;
   titleOnBehalf: string;
+  titleHoverText?: string;
   description: string;
   data: ArrayType;
-  secondTitle:string;
+  dataMySelf: ArrayType;
+  secondTitle: string;
+  titleHover?: string;
 };
 
 export type TenthStepProps = {
@@ -23,7 +28,7 @@ export type TenthStepProps = {
     thirdBlock: BlockDataType;
     fourthBlock: BlockDataType;
   };
-  id?:string;
+  id?: string;
 };
 
 export type TenthFormValues = {

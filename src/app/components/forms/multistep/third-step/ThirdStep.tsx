@@ -109,8 +109,6 @@ const ThirdStep: React.FC<ThirdStepProps> = ({ thirdStepTranslation, id }) => {
     //   : dispatch({ type: NEXT_STEP, payload: 'DATA 1' });
   };
 
-  console.log(reportingPerson, 'reportingPerson');
-
   return (
     <div className="relative w-full sm:w-[20rem] lg:w-[25rem]">
       <form
@@ -192,7 +190,7 @@ const ThirdStep: React.FC<ThirdStepProps> = ({ thirdStepTranslation, id }) => {
         </p> */}
       </form>
 
-      <div className="hidden sm:block sm:w-[20rem]  lg:w-[25rem] 2xl:mt-0 sm:absolute  top-8 sm:-right-[22rem] lg:-right-[28rem]">
+      <div className="hidden sm:block sm:w-[20rem]  lg:w-[25rem] 2xl:mt-0 sm:absolute  top-0 sm:-right-[22rem] lg:-right-[28rem]">
         <FormHeader
           title={thirdStepTranslation?.hints?.title}
           paddingHorizontal={3}

@@ -8,6 +8,7 @@ type CheckboxProps = {
   label?: string;
   checked?: boolean;
   props: any;
+  example?: string;
 };
 
 const Checkbox: React.FC<CheckboxProps> = ({
@@ -17,6 +18,7 @@ const Checkbox: React.FC<CheckboxProps> = ({
   label,
   checked,
   props,
+  example,
 }) => {
   return (
     <div key={id} className="p-2">
@@ -48,8 +50,16 @@ const Checkbox: React.FC<CheckboxProps> = ({
             />
           </svg>
         </div>
-        <label htmlFor={id} className="select-none ml-2 font-normal text-sm font-worksans">
-          {label}
+        <label
+          htmlFor={id}
+          className="select-none ml-2 font-normal text-sm font-worksans relative [&>*]:hover:flex"
+        >
+          {example && (
+            <span className="absolute z-50 bg-gray-100 hidden w-96 -right-[25rem] -top-5 shadow-lg p-2 rounded-md">
+              {example}
+            </span>
+          )}
+          <span className={`${example && 'cursor-pointer'}`}>{label}</span>
         </label>
       </div>
     </div>

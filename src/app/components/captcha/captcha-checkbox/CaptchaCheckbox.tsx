@@ -58,7 +58,7 @@ const CaptchaCheckbox: React.FC<CaptchaCheckbox> = ({
           </div>
         )}
 
-        <label htmlFor={id} className="select-none ml-2">
+        <label htmlFor={id} className="select-none ml-2 font-rubik text-base">
           {label}
         </label>
       </div>

@@ -718,9 +718,8 @@ const EleventhStep: React.FC<EleventhStepProps> = ({
           <div className="">
             <div className="pl-10 mb-5">
               <h1 className="text-4xl font-black">
-                {eleventhStepTranslation.validation.title}*
+                {eleventhStepTranslation.validation.title}
               </h1>
-              <b>*{eleventhStepTranslation.mandatory}</b>
             </div>
             <div className="">
               <form onSubmit={handleSubmit(onSubmit)} id="tenthForm">
@@ -739,14 +738,15 @@ const EleventhStep: React.FC<EleventhStepProps> = ({
                 </div>
                 {eleventhStepTranslation?.validation?.data?.map(
                   (element: any) => (
-                    <Checkbox
-                      key={element?.id}
-                      id={element?.id}
-                      name={element?.name}
-                      props={register('validation')}
-                      value={element?.value}
-                      label={element?.label}
-                    />
+                    <div key={element?.id} className="">
+                      <Checkbox
+                        id={element?.id}
+                        name={element?.name}
+                        props={register('validation')}
+                        value={element?.value}
+                        label={element?.label}
+                      />
+                    </div>
                   )
                 )}
               </form>
@@ -775,8 +775,11 @@ const EleventhStep: React.FC<EleventhStepProps> = ({
                 />
               </div>
             )}
+          <div className="mt-5 font-rubik text-sm">
+            *{eleventhStepTranslation.mandatory}
+          </div>
           {/* {modalBtn} */}
-          <div className="mt-[114px]">
+          <div className="mt-[60px]">
             <AnimateClick>
               <Button
                 form={`${'tenthForm'}`}
@@ -805,22 +808,22 @@ const EleventhStep: React.FC<EleventhStepProps> = ({
             answer={firstForm?.identity}
           />
 
-          {reportingPerson === 'organization' && (
+          {reportingPerson === 'organization' &&
             // secondStepTranslation?.options[
             //   secondStepTranslation.options.length - 1
             // ].value
-            // secondFormOrganization &&
-            // secondFormOrganization?.organizationType &&
-            <EditBlock
-              step={secondFormOrganization.step}
-              question={secondFormOrganization?.question}
-              answer={[
-                secondFormOrganization?.description,
-                ...secondFormOrganization?.organizationType,
-                secondFormOrganization?.organizationTypeFreeField,
-              ]}
-            />
-          )}
+            secondFormOrganization &&
+            secondFormOrganization?.organizationType && (
+              <EditBlock
+                step={secondFormOrganization.step}
+                question={secondFormOrganization?.question}
+                answer={[
+                  secondFormOrganization?.description,
+                  ...secondFormOrganization?.organizationType,
+                  secondFormOrganization?.organizationTypeFreeField,
+                ]}
+              />
+            )}
 
           {thirdFormOrganization?.numberOfEmployees && (
             <EditBlock
