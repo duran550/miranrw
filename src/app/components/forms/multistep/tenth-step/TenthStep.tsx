@@ -7,13 +7,24 @@ import Checkbox from '../../checkbox/Checkbox';
 import { useFormContext } from '@/app/hooks/useFormContext';
 import { FORM_ERRORS, LAST_STEP, NEXT_STEP } from '@/app/context/actions';
 import InputField from '../../text-field/InputField';
-import { clearFormCookiesStep, getFormCookies, getFormStep, getReportingPerson, setFormCookies } from '@/cookies/cookies';
-import { FOURTH_FORM, NINETH_FORM, SECOND_FORM, THIRD_FORM } from '@/cookies/cookies.d';
+import {
+  clearFormCookiesStep,
+  getFormCookies,
+  getFormStep,
+  getReportingPerson,
+  setFormCookies,
+} from '@/cookies/cookies';
+import {
+  FOURTH_FORM,
+  NINETH_FORM,
+  SECOND_FORM,
+  THIRD_FORM,
+} from '@/cookies/cookies.d';
 import { useScrollOnTop } from '@/app/hooks/useScrollOnTop';
 
 const TenthStep: React.FC<TenthStepProps> = ({ tenthStepTranslation }, id) => {
   const { dispatch, isEditing, formErrors } = useFormContext();
-  const reportingPerson = getReportingPerson()
+  const reportingPerson = getReportingPerson();
   const [question1] = useState<string>(tenthStepTranslation?.firstBlock?.title);
   const [question2] = useState<string>(
     tenthStepTranslation?.secondBlock?.title
@@ -40,6 +51,20 @@ const TenthStep: React.FC<TenthStepProps> = ({ tenthStepTranslation }, id) => {
   // Scroll on top
   useScrollOnTop();
 
+  console.log(
+    // gender?.length > 0 &&
+    sexualOrientation?.length > 0 &&
+      sexualOrientation?.includes(
+        tenthStepTranslation?.secondBlock.data[13]?.label
+      ),
+    'log00'
+  );
+
+  // console.log(genderFreeField?.length, 'randomdata00');
+
+  console.log(sexualOrientation, 'log01');
+  console.log(tenthStepTranslation?.secondBlock.data[13]?.label, 'log02');
+
   useEffect(() => {
     // Getting values from cookies
     let formValues: {
@@ -50,42 +75,47 @@ const TenthStep: React.FC<TenthStepProps> = ({ tenthStepTranslation }, id) => {
       sexualOrientationFreeField: string[];
       age: string;
       genderFreeField: string;
-    } = getFormCookies(THIRD_FORM)
-    // id === 'fourthForm' ?
-    // getFormCookies(FOURTH_FORM)
-    // :
-    // getFormCookies(FOURTH_FORM)
+    } = getFormCookies(THIRD_FORM);
 
-    // getFormCookies(NINETH_FORM);
-
-    dispatch({ type: FORM_ERRORS, payload: true });
-
-    if ((reportingPerson === 'organization' && !validation) ||
-      validation?.length === 0) {
-      dispatch({ type: FORM_ERRORS, payload: true })
-    } else if (
+    // Form validation
+    dispatch({ type: FORM_ERRORS, payload: false });
+    if (
       sexualOrientation?.length > 0 &&
-      sexualOrientation?.includes(tenthStepTranslation?.secondBlock.data[11]?.label) && sexualOrientationFreeField?.length <= 3
+      sexualOrientation?.includes(
+        tenthStepTranslation?.secondBlock.data[13]?.label
+      )
     ) {
-      dispatch({ type: FORM_ERRORS, payload: true })
-    } else if (
-      gender?.length > 0 &&
-      gender?.includes(tenthStepTranslation?.firstBlock.data[7]?.label) && genderFreeField?.length <= 3
-    ) {
-      dispatch({ type: FORM_ERRORS, payload: true })
-    }
-    else {
-      dispatch({ type: FORM_ERRORS, payload: false })
+      dispatch({ type: FORM_ERRORS, payload: true });
+      if (sexualOrientationFreeField?.length <= 3) {
+        dispatch({ type: FORM_ERRORS, payload: true });
+      } else {
+        dispatch({ type: FORM_ERRORS, payload: false });
+      }
     }
 
-    // (reportingPerson === 'organization' && !validation) ||
-    // validation?.length === 0
-    //   ? dispatch({ type: FORM_ERRORS, payload: true })
-    //   : dispatch({ type: FORM_ERRORS, payload: false });
+    if (
+      gender?.length > 0 &&
+      gender?.includes(tenthStepTranslation?.firstBlock.data[10]?.label)
+    ) {
+      dispatch({ type: FORM_ERRORS, payload: true });
+      if (genderFreeField?.length <= 3) {
+        dispatch({ type: FORM_ERRORS, payload: true });
+      } else {
+        dispatch({ type: FORM_ERRORS, payload: false });
+      }
+    }
+
+    // organization validation
+    if (
+      (reportingPerson === 'organization' && !validation) ||
+      validation?.length === 0
+    ) {
+      dispatch({ type: FORM_ERRORS, payload: true });
+    }
 
     // Setting default values if the data are available in cookies
     if (formValues) {
-      dispatch({ type: FORM_ERRORS, payload: false });
+      // dispatch({ type: FORM_ERRORS, payload: false });
       gender !== formValues?.gender && setValue('gender', formValues?.gender);
       sexualOrientation !== formValues?.sexualOrientation &&
         setValue('sexualOrientation', formValues?.sexualOrientation);
@@ -100,50 +130,42 @@ const TenthStep: React.FC<TenthStepProps> = ({ tenthStepTranslation }, id) => {
       genderFreeField !== formValues?.genderFreeField &&
         setValue('genderFreeField', formValues?.genderFreeField);
     }
-
-    console.log(formValues, 'formValuesthirdStep')
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [
-    // gender,
+    gender,
     genderFreeField,
     sexualOrientationFreeField,
-    // sexualOrientation,
+    sexualOrientation,
     validation,
   ]);
 
   // Triggered when submitting form
   const onSubmit: SubmitHandler<TenthFormValues> = (data) => {
-
     let step = getFormStep();
     let dataWithQuestion = { question1, question2, question3, step, ...data };
-
-    // if(id === 'fourthForm') {
-    //   setFormCookies(dataWithQuestion, FOURTH_FORM)
-    // } else {
-    //   setFormCookies(dataWithQuestion, SECOND_FORM)
-    // }
-    setFormCookies(dataWithQuestion, THIRD_FORM)
+    setFormCookies(dataWithQuestion, THIRD_FORM);
 
     // setFormCookies(dataWithQuestion, NINETH_FORM);
-
-    dispatch({ type: NEXT_STEP, payload: '' })
+    dispatch({ type: NEXT_STEP, payload: '' });
     // isEditing && reportingPerson === 'myself'
     //   ? dispatch({ type: LAST_STEP, payload: 11 })
     //   : dispatch({ type: NEXT_STEP, payload: '' });
   };
 
   return (
-    <div className='relative lg:w-[30rem]'>
+    <div className="relative lg:w-[30rem]">
       <h1 className="font-rubik font-black xl:text-[28px] mb-4 ml-[105px] scale-150">
         {tenthStepTranslation?.mainTitle}
       </h1>
-      {reportingPerson === 'andere' && <div className='w-full xl:w-[22vw] xl:absolute xl:left-[34rem] xl:top-14'>
-        <div className='lg:bg-white mb-8 md:mb-12 border-primaryColor border-2 rounded-md p-4 h-[116px]'>
-          <h1 className=" font-rubik font-black text-2xl mb-2">
-            {tenthStepTranslation.firstBlock.secondTitle}
-          </h1>
+      {reportingPerson === 'andere' && (
+        <div className="w-full xl:w-[22vw] xl:absolute xl:left-[34rem] xl:top-14">
+          <div className="lg:bg-white mb-8 md:mb-12 border-primaryColor border-2 rounded-md p-4 h-[116px]">
+            <h1 className=" font-rubik font-black text-2xl mb-2">
+              {tenthStepTranslation.firstBlock.secondTitle}
+            </h1>
+          </div>
         </div>
-      </div>}
+      )}
       <form
         onSubmit={handleSubmit(onSubmit)}
         // id="ninethForm"
@@ -151,16 +173,24 @@ const TenthStep: React.FC<TenthStepProps> = ({ tenthStepTranslation }, id) => {
         id={'secondForm'}
         className=""
       >
-        <div className='lg:w-[24rem]'>
+        <div className="lg:w-[24rem]">
           {reportingPerson !== 'organization' && (
-            <div className=''>
+            <div className="">
               <div className="mt-0">
-                <div className='xl:w-[23rem]'>
+                <div className="xl:w-[23rem]">
                   <FormHeader
-                    title={
-                      reportingPerson !== 'myself'
-                        ? tenthStepTranslation?.firstBlock?.titleOnBehalf
-                        : tenthStepTranslation?.firstBlock?.title
+                    // title={
+                    //   reportingPerson !== 'myself'
+                    //     ? tenthStepTranslation?.firstBlock?.titleOnBehalf
+                    //     : tenthStepTranslation?.firstBlock?.title
+                    // }
+                    title={tenthStepTranslation.firstBlock.title}
+                    titleSecondHalf={
+                      tenthStepTranslation.firstBlock.titleSecondHalf
+                    }
+                    titleHover={tenthStepTranslation.firstBlock.titleHover}
+                    titleHoverText={
+                      tenthStepTranslation.firstBlock.titleHoverText
                     }
                     subTitle={tenthStepTranslation?.firstBlock?.description}
                     paddingHorizontal={3}
@@ -168,20 +198,56 @@ const TenthStep: React.FC<TenthStepProps> = ({ tenthStepTranslation }, id) => {
                   />
                 </div>
                 <div className="-mt-8">
-                  {tenthStepTranslation?.firstBlock?.data?.map((element: any) => (
-                    <Checkbox
-                      key={element?.iD}
-                      id={element?.id}
-                      name={element?.name}
-                      props={register('gender')}
-                      value={element?.value}
-                      label={element?.label}
-                    />
-                  ))}
+                  {reportingPerson === 'myself'
+                    ? tenthStepTranslation?.firstBlock?.dataMySelf?.map(
+                        (element: any) => {
+                          return (
+                            <Checkbox
+                              key={element?.iD}
+                              id={element?.id}
+                              name={element?.name}
+                              props={register('gender')}
+                              value={element?.value}
+                              label={element?.label}
+                              example={element?.example}
+                            />
+                          );
+                        }
+                      )
+                    : tenthStepTranslation?.firstBlock?.data?.map(
+                        (element: any) => {
+                          return (
+                            <Checkbox
+                              key={element?.iD}
+                              id={element?.id}
+                              name={element?.name}
+                              props={register('gender')}
+                              value={element?.value}
+                              label={element?.label}
+                              example={element?.example}
+                            />
+                          );
+                        }
+                      )}
+                  {/* {tenthStepTranslation?.firstBlock?.data?.map(
+                    (element: any) => {
+                      return (
+                        <Checkbox
+                          key={element?.iD}
+                          id={element?.id}
+                          name={element?.name}
+                          props={register('gender')}
+                          value={element?.value}
+                          label={element?.label}
+                          example={element?.example}
+                        />
+                      );
+                    }
+                  )} */}
                   <div className="ml-14">
                     {gender &&
                       gender?.includes(
-                        tenthStepTranslation?.firstBlock?.data[11]?.value
+                        tenthStepTranslation?.firstBlock?.data[10]?.value
                       ) && (
                         <InputField
                           name="genderFreeField"
@@ -190,9 +256,10 @@ const TenthStep: React.FC<TenthStepProps> = ({ tenthStepTranslation }, id) => {
                       )}
                     {gender?.length > 0 &&
                       gender?.includes(
-                        tenthStepTranslation?.firstBlock?.data[11]?.value
+                        tenthStepTranslation?.firstBlock?.data[10]?.value
                       ) &&
                       genderFreeField?.length !== 0 &&
+                      genderFreeField?.length <= 3 &&
                       formErrors && (
                         <label className="text-red-500 text-xs">
                           {tenthStepTranslation?.minCharacters}
@@ -203,7 +270,7 @@ const TenthStep: React.FC<TenthStepProps> = ({ tenthStepTranslation }, id) => {
               </div>
               {reportingPerson !== 'andere' && (
                 <div className="mt-8">
-                  <div className='xl:w-[24rem]'>
+                  <div className="xl:w-[24rem]">
                     <FormHeader
                       title={
                         reportingPerson !== 'myself'
@@ -212,22 +279,36 @@ const TenthStep: React.FC<TenthStepProps> = ({ tenthStepTranslation }, id) => {
                       }
                       subTitle={tenthStepTranslation?.secondBlock?.description}
                       paddingHorizontal={3}
-                    paddingTop={1}
+                      paddingTop={1}
                     />
                   </div>
                   <div className="-mt-8">
-                    {tenthStepTranslation?.secondBlock?.data?.map(
-                      (element: any) => (
-                        <Checkbox
-                          key={element?.iD}
-                          id={element?.id}
-                          name={element?.name}
-                          props={register('sexualOrientation')}
-                          value={element?.value}
-                          label={element?.label}
-                        />
-                      )
-                    )}
+                    {reportingPerson === 'myself'
+                      ? tenthStepTranslation?.secondBlock?.dataMySelf?.map(
+                          (element: any) => (
+                            <Checkbox
+                              key={element?.iD}
+                              id={element?.id}
+                              name={element?.name}
+                              props={register('sexualOrientation')}
+                              value={element?.value}
+                              label={element?.label}
+                              example={element?.example}
+                            />
+                          )
+                        )
+                      : tenthStepTranslation?.secondBlock?.data?.map(
+                          (element: any) => (
+                            <Checkbox
+                              key={element?.iD}
+                              id={element?.id}
+                              name={element?.name}
+                              props={register('sexualOrientation')}
+                              value={element?.value}
+                              label={element?.label}
+                            />
+                          )
+                        )}
 
                     <div className="ml-14">
                       {sexualOrientation &&
@@ -244,6 +325,7 @@ const TenthStep: React.FC<TenthStepProps> = ({ tenthStepTranslation }, id) => {
                           tenthStepTranslation?.secondBlock?.data[13]?.value
                         ) &&
                         sexualOrientationFreeField?.length !== 0 &&
+                        sexualOrientationFreeField?.length < 3 &&
                         formErrors && (
                           <label className="text-red-500 text-xs">
                             {tenthStepTranslation?.minCharacters}
@@ -255,7 +337,7 @@ const TenthStep: React.FC<TenthStepProps> = ({ tenthStepTranslation }, id) => {
               )}
 
               <div className="mt-8">
-                <div className=''>
+                <div className="">
                   <FormHeader
                     title={
                       reportingPerson !== 'myself'
@@ -276,23 +358,25 @@ const TenthStep: React.FC<TenthStepProps> = ({ tenthStepTranslation }, id) => {
                   }
                 </div>
               </div>
-            </ div>
+            </div>
           )}
 
           {reportingPerson === 'organization' && (
             <div className="mt-8">
               <FormHeader title={tenthStepTranslation?.fourthBlock?.title} />
               <div className="-mt-8">
-                {tenthStepTranslation?.fourthBlock?.data?.map((element: any) => (
-                  <Checkbox
-                    key={element?.iD}
-                    id={element?.id}
-                    name={element?.name}
-                    props={register('validation')}
-                    value={element?.value}
-                    label={element?.label}
-                  />
-                ))}
+                {tenthStepTranslation?.fourthBlock?.data?.map(
+                  (element: any) => (
+                    <Checkbox
+                      key={element?.iD}
+                      id={element?.id}
+                      name={element?.name}
+                      props={register('validation')}
+                      value={element?.value}
+                      label={element?.label}
+                    />
+                  )
+                )}
               </div>
             </div>
           )}

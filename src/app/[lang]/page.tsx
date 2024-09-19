@@ -13,10 +13,9 @@ export default async function Home({
   const { page } = await getDictionary(lang);
 
   return (
-    <div className='w-screen overflow-x-hidden border m-0'>
+    <div className="w-screen overflow-x-hidden m-0">
       <Header lang={lang} />
       <HeroSection lang={lang} content={page?.home?.heroSection} />
-
       <Footer lang={lang} footer={page?.footer} />
       <CookieConsent
         lang={lang}

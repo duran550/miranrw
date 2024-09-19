@@ -5,8 +5,18 @@ import { FORM_ERRORS, LAST_STEP, NEXT_STEP } from '@/app/context/actions';
 import Checkbox from '../../checkbox/Checkbox';
 import FormHeader from '../header/header';
 import InputField from '../../text-field/InputField';
-import { clearFormCookiesStep, getFormCookies, getFormStep, setFormCookies } from '@/cookies/cookies';
-import { SEVENTH_FORM, SIXTH_FORM, FIFTH_FORM, EIGTH_FORM } from '@/cookies/cookies.d';
+import {
+  clearFormCookiesStep,
+  getFormCookies,
+  getFormStep,
+  setFormCookies,
+} from '@/cookies/cookies';
+import {
+  SEVENTH_FORM,
+  SIXTH_FORM,
+  FIFTH_FORM,
+  EIGTH_FORM,
+} from '@/cookies/cookies.d';
 import { useScrollOnTop } from '@/app/hooks/useScrollOnTop';
 import { SeventhStepProps, SeventhStepValues } from './seventhStep';
 
@@ -42,9 +52,7 @@ const SeventhStep: React.FC<SeventhStepProps> = ({
 
     dispatch({ type: FORM_ERRORS, payload: true });
 
-    if (
-      !typeOfDiscrimination
-    ) {
+    if (!typeOfDiscrimination) {
       dispatch({ type: FORM_ERRORS, payload: false });
     } else {
       if (
@@ -101,20 +109,17 @@ const SeventhStep: React.FC<SeventhStepProps> = ({
       dispatch({ type: FORM_ERRORS, payload: false });
     }
 
-
     // eslint-disable-next-line react-hooks/exhaustive-deps
 
-    console.log(formValues, 'log00')
+    console.log(formValues, 'log00');
   }, [typeOfDiscrimination, typeOfDiscriminationFreeField]);
 
   // Triggered when submitting form
   const onSubmit: SubmitHandler<SeventhStepValues> = (data) => {
-
     let step = getFormStep();
     let dataWithQuestion = { question, step, ...data };
     setFormCookies(dataWithQuestion, EIGTH_FORM);
     //  console.log('step',step);
-
 
     dispatch({ type: NEXT_STEP, payload: '' });
     // isEditing && reportingPerson === 'myself'
@@ -128,8 +133,7 @@ const SeventhStep: React.FC<SeventhStepProps> = ({
       id={'fifthForm'}
       className="lg:w-[24rem]"
     >
-
-      <div className=''>
+      <div className="">
         <FormHeader
           title={seventhStepTranslation?.title}
           subTitle={seventhStepTranslation?.description}
@@ -138,41 +142,46 @@ const SeventhStep: React.FC<SeventhStepProps> = ({
         />
       </div>
 
-      {seventhStepTranslation.choices?.sort((a, b) => a.label.localeCompare(b.label)).map((choice: any, index) => {
-        return (
-          <div key={choice.iD}>
-            <Checkbox
-              props={register('typeOfDiscrimination')}
-              name={choice.name}
-              id={choice.id}
-              value={choice.value}
-              label={choice.label}
-            />
-            {((lang === 'en' && index === 3) || (lang === 'de' && index === 0)) &&
-              (typeOfDiscrimination &&
-                (typeOfDiscrimination.includes('Anderes, und zwar') ||
-                  typeOfDiscrimination.includes('Other, specify'))) ? (
-              <div className="w-full pb-4 ml-8">
-                <InputField
-                  name="typeOfDiscriminationFreeField"
-                  placeholder=""
-                  props={register('typeOfDiscriminationFreeField', {
-                    required: true,
-                  })}
-                  title=""
-                />
-                {formErrors && typeOfDiscriminationFreeField?.length !== 0 && (
-                  <label className="text-red-500 text-xs pb-3">
-                    {seventhStepTranslation?.minCharacters}
-                  </label>
-                )}
-              </div>
-            ) : (
-              ''
-            )}
-          </div>
-        )
-      })}
+      {seventhStepTranslation.choices
+        ?.sort((a, b) => a.label.localeCompare(b.label))
+        .map((choice: any, index) => {
+          return (
+            <div key={choice.iD}>
+              <Checkbox
+                props={register('typeOfDiscrimination')}
+                name={choice.name}
+                id={choice.id}
+                value={choice.value}
+                label={choice.label}
+                example={choice.example}
+              />
+              {((lang === 'en' && index === 3) ||
+                (lang === 'de' && index === 0)) &&
+              typeOfDiscrimination &&
+              (typeOfDiscrimination.includes('Anderes, und zwar') ||
+                typeOfDiscrimination.includes('Other, specify')) ? (
+                <div className="w-full pb-4 ml-8">
+                  <InputField
+                    name="typeOfDiscriminationFreeField"
+                    placeholder=""
+                    props={register('typeOfDiscriminationFreeField', {
+                      required: true,
+                    })}
+                    title=""
+                  />
+                  {formErrors &&
+                    typeOfDiscriminationFreeField?.length !== 0 && (
+                      <label className="text-red-500 text-xs pb-3">
+                        {seventhStepTranslation?.minCharacters}
+                      </label>
+                    )}
+                </div>
+              ) : (
+                ''
+              )}
+            </div>
+          );
+        })}
 
       {/* {(typeOfDiscrimination &&
             typeOfDiscrimination?.includes('Anderes, und zwar')) ||
