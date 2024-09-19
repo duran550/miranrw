@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
-import questionMark from '@/../public/icons/questionmark.svg';
+import questionMark from '@/../public/icons/Question MarkSecond.svg';
+import Image from 'next/image';
 
 type CheckboxProps = {
   name: string;
@@ -59,7 +60,16 @@ const Checkbox: React.FC<CheckboxProps> = ({
               {example}
             </span>
           )}
-          <span className={`${example && 'cursor-pointer'}`}>{label}</span>
+          <span className={`${example && 'flex cursor-pointer'}`}>
+            {label}
+            {example && (
+              <Image
+                src={questionMark}
+                alt="Question mark icon"
+                className="ml-2"
+              />
+            )}
+          </span>
         </label>
       </div>
     </div>
