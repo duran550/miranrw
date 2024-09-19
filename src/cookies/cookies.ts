@@ -58,7 +58,9 @@ export const removeUserCookies = () => {
 export const setShow = (data: string) => {
   console.log('data', data);
 
-  cookies.set(SHOW, data, { domain: '' });
+  cookies.set(SHOW, data, 
+    // { domain: '' }
+  );
 };
 export const removeShow = () => {
   cookies.remove(SHOW, { domain: '' });
