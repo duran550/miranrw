@@ -1,0 +1,954 @@
+{
+  "navigation": {
+    "home": "Startseite",
+    "reportIncident": "Vorfall melden",
+    "aboutQueer": {
+      "title": "Queerfeindlichkeit",
+      "firstSubmenu": "Was ist Queerfeindlichkeit?",
+      "secondSubmenu": "Ich benötige Hilfe",
+      "thirdSubmenu": "Glossar"
+    },
+    "aboutUs": {
+      "title": "Über uns",
+    
+      "news": "Aktuelles",
+     
+      "team": "Team",
+      "partners": "Verbund & Kooperationen"
+    },
+    "faqs": "FAQs",
+    "button": "Vorfall melden"
+  },
+  "page": {
+    "datenschutz": {
+      "title": "Datenschutz",
+      "firstParagraph": "MIQ steht für  “Melde- und Informationsstelle zu Queerfeindlichkeit” und ist ein Projekt, welches Queerfeindlichkeit in NRW aufzeigen möchte. ",
+      "secondParagraph": "Du kannst auf unserer Website einen queerfeindlichen Vorfall melden. Wir sind außerdem eine Informationsstelle und zeigen Dir auf, wo Du weitere Beratung in NRW aufsuchen kannst."
+    },
+    "impressum": {
+      "title": "Impressum",
+      "firstParagraph": "MIQ steht für  “Melde- und Informationsstelle zu Queerfeindlichkeit” und ist ein Projekt, welches Queerfeindlichkeit in NRW aufzeigen möchte. ",
+      "secondParagraph": "Du kannst auf unserer Website einen queerfeindlichen Vorfall melden. Wir sind außerdem eine Informationsstelle und zeigen Dir auf, wo Du weitere Beratung in NRW aufsuchen kannst."
+    },
+    "faqs": {
+      "group1": {
+        "title": "Fragen zum Team/Zusammenarbeit: ",
+        "faqs": [
+          {
+            "id": 1,
+            "question": "Sind eure Mitarbeitenden queer?",
+            "answer": "Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text"
+          },
+          {
+            "id": 2,
+            "question": "Nach welchen Grundsätzen arbeitet ihr?",
+            "answer": "Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text"
+          },
+          {
+            "id": 3,
+            "question": "Mit wem arbeitet ihr zusammen?",
+            "answer": "Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text"
+          }
+        ]
+      },
+      "group2": {
+        "title": "Fragen zum Ablauf: ",
+        "faqs": [
+          {
+            "id": 1,
+            "question": "Was kann ich melden?",
+            "answer": "Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text"
+          },
+
+          {
+            "id": 2,
+            "question": "Auf welchen Sprachen kann ich eine Meldung tätigen? ",
+            "answer": "Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text"
+          },
+          {
+            "id": 3,
+            "question": "Kann ich anonym bleiben?",
+            "answer": "Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text"
+          },
+          {
+            "id": 4,
+            "question": "Wo melde ich eine Mehrfachdiskriminierung?",
+            "answer": "Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text"
+          },
+          {
+            "id": 5,
+            "question": "Was passiert mit meiner Meldung?",
+            "answer": "Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text"
+          },
+          {
+            "id": 6,
+            "question": "Kann ich auch persönlich vorbeikommen?",
+            "answer": "Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text"
+          },
+          {
+            "id": 7,
+            "question": "Ich möchte Anzeige erstatten, wohin muss ich mich wenden? Was bedeutet Queerfeindlichkeit?",
+            "answer": "Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text"
+          },
+          {
+            "id": 8,
+            "question": "Was bedeutet Queerfeindlichkeit?",
+            "answer": "Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text"
+          },
+          {
+            "id": 9,
+            "question": "Wie versteht ihr Gewalt?",
+            "answer": "Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text"
+          },
+          {
+            "id": 10,
+            "question": "Was bedeutet Diskriminierung?",
+            "answer": "Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text"
+          },
+          {
+            "id": 11,
+            "question": "Was bringt es, einen Vorfall zu melden?",
+            "answer": "Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text"
+          },
+          {
+            "id": 12,
+            "question": "Was nutzen die Erkenntnisse, ohne Angabe von Täter*innen?",
+            "answer": "Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text"
+          },
+          {
+            "id": 13,
+            "question": "Wo kann ich einen queerfeindlichen Vorfall melden, der nicht in NRW oder online passiert ist?",
+            "answer": "Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text"
+          }
+        ]
+      },
+      "group3": {
+        "title": "Fragen zum Projekt: ",
+        "faqs": [
+          {
+            "id": 1,
+            "question": "Wie ist die Meldestelle finanziert?",
+            "answer": "Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text"
+          },
+          {
+            "id": 2,
+            "question": "Arbeitet ihr nach wissenschaftlichen Standards?",
+            "answer": "Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text"
+          },
+          {
+            "id": 3,
+            "question": "Wo kann ich einen queerfeindlichen Vorfall melden, der nicht in NRW oder online passiert ist?",
+            "answer": "Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text"
+          }
+        ]
+      }
+    },
+    "home": {
+      "heroSection": {
+        "title": "Wir sind MIQ und helfen dir gerne weiter!",
+        "description": {
+          "firstParagraph": "MIQ steht für  “Melde- und  Informationsstelle zu Queerfeindlichkeit” und ist ein Projekt, welches Queerfeindlichkeit in NRW aufzeigen möchte.",
+          "secondParagraph": "Du kannst auf unserer Website einen queerfeindlichen Vorfall melden. Wir sind außerdem eine Informationsstelle und zeigen Dir auf, wo Du weitere Beratung in NRW aufsuchen kannst."
+        },
+        "buttonText": "Vorfall melden"
+      }
+    },
+    "melden": {
+      "stepper": {
+        "initialStep": {
+          "title": "Vorfall melden",
+          "description": "Hier kommst du zum Meldeformular, um etwas queerfeindliches zu melden."
+        },
+        "firstStep": {
+          "title": "Informationen zur Meldung",
+          "description": {
+            "firstParagraph": "Vielen Dank, dass Du dir Zeit und Energie nimmst einen queerfeindlichen Vorfall zu melden.",
+            "secondParagraph": " In diesem Formular gibt es insgesamt 10 Fragen: ",
+            "thirdParagraph": "Im ersten Abschnitt geht es um den Vorfall selbst. Hier wird danach gefragt, was passiert ist und inwiefern sich der Vorfall einordnen lässt. Im zweiten Abschnitt möchten wir mehr über die betroffene Person erfahren. Mit diesen Angaben hilfst Du uns, queerfeindliche Angriffe in unserer Statistik genauer aufzuführen.",
+            "fourthParagraph": " Wenn Du fertig bist, schickst Du das Formular ab und wir zeigen dir auf, was für Beratungs- und Informationsangebote es gibt.",
+            "disclaimer": "Disclaimer",
+            "datenschutz": "Datenschutz",
+            "explanation": "Erklärung"
+          },
+          "buttonText": "Los geht’s"
+        },
+        "secondStep": {
+          "title": "Wer ist betroffen?*",
+          "mandatory": "* Pflichtfeld",
+          "options": [
+            {
+              "id": "age1",
+              "name": "identity",
+              "label": "Ich selbst",
+              "value": "Ich selbst",
+              "checked": false
+            },
+            {
+              "id": "identity2",
+              "name": "identity",
+              "label": "Eine andere Person",
+              "value": "Eine andere Person",
+              "checked": false
+            },
+            {
+              "id": "identity3",
+              "name": "identity",
+              "label": "Ich melde in Vertretung für die betroffene Person",
+              "value": "Ich melde in Vertretung für die betroffene Person",
+              "checked": false
+            },
+            {
+              "id": "identity4",
+              "name": "identity",
+              "label": "Eine Organisation/Institution",
+              "value": "Eine Organisation/Institution",
+              "checked": false
+            }
+          ],
+          "onBehalfHints": {
+            "title": "Hinweis",
+            "description": "Wenn du das Meldeformular in Vertretung für eine Person ausfüllst, bedeutet das, dass du das Formular aus Perspektive der betroffenen Person und entsprechend der Selbstangaben ausfüllst. Sollte dies nicht der Fall sein und du möchtest einen Vorfall aus deiner Perspektive als Zeug*in schildern, klicke oben bitte die Option „Eine andere Person“ an."
+          }
+        },
+        "thirdStep": {
+          "title": "Vorfallbeschreibung*",
+          "mandatory": "* Pflichtfeld",
+          "description": " Was genau ist passiert?",
+          "placeholder": "Bitte beschreibe den Vorfall so genau wie möglich.",
+          "disclaimer": "Aus Gründen des Datenschutzes bitten wir dich, hier keine Namen anderer Personen anzugeben.",
+          "minCharacters": "Ein Minimum von 50 Zeichen wird erwartet",
+          "hints": {
+            "title": "Mögliche relevante Informationen",
+            "list": [
+              "Wo fand die Diskriminierung statt?",
+              "Wie wurde diskriminiert?",
+              "Von wem ging der Angriff aus?",
+              "Wie haben andere Personen reagiert?",
+              "Was war an dem Vorfall queerfeindlich?",
+              "Welche Auswirkungen hatte der Vorfall für dich (z.B. emotionale, körperliche, soziale oder finanzielle)?"
+            ]
+          }
+        },
+        "thirdStepOrganization": {
+          "title": "Was für eine Organisation/Institution ist betroffen?",
+          "subTitle": "Mehrfachnennung möglich",
+          "minCharacters": "Ein Minimum von 4 Zeichen wird erwartet",
+          "data": [
+            {
+              "iD": 1,
+              "name": "organizationType",
+              "value": "Nichtregierungsorganisation (NGO)",
+              "id": "Nichtregierungsorganisation",
+              "label": "Nichtregierungsorganisation (NGO)"
+            },
+
+            {
+              "iD": 2,
+              "name": "organizationType",
+              "value": "Selbstorganisation",
+              "id": "Selbstorganisation",
+              "label": "Selbstorganisation"
+            },
+            {
+              "iD": 3,
+              "name": "organizationType",
+              "value": "Religiöse Einrichtung",
+              "id": "Religiöse",
+              "label": "Religiöse Einrichtung"
+            },
+            {
+              "iD": 4,
+              "name": "organizationType",
+              "value": "Soziale Einrichtung",
+              "id": "Soziale",
+              "label": "Soziale Einrichtung"
+            },
+            {
+              "iD": 5,
+              "name": "organizationType",
+              "value": "Kulturelle Einrichtung",
+              "id": "Kulturelle",
+              "label": "Kulturelle Einrichtung"
+            },
+            {
+              "iD": 6,
+              "name": "organizationType",
+              "value": "Verein",
+              "id": "Kulturelle",
+              "label": "Verein"
+            },
+            {
+              "iD": 7,
+              "name": "organizationType",
+              "value": "Anderes, und zwar",
+              "id": "anderesOrg",
+              "label": "Anderes, und zwar"
+            }
+          ]
+        },
+        "fourthStep": {
+          "title": "Wann fand der Vorfall statt?*",
+          "mandatory": "* Pflichtfeld",
+          "description": "Bitte wähle ein Datum aus. Falls es sich um einen längeren Zeitraum handelt, kannst du auch diesen auch auswählen",
+          "happenedOverALongPeriod": "Es ist über einen längeren Zeitraum passiert."
+        },
+        "fourthStepOrganization": {
+          "title": "Wie viele Personen sind in der Organisation/Institution tätig?",
+          "subTitle": "Haupt- oder ehrenamtlich oder in freier Mitarbeit",
+          "mandatory": "* Pflichtfeld",
+          "data": [
+            {
+              "iD": 1,
+              "name": "numberOfEmployees",
+              "value": "unter 10",
+              "id": "gender",
+              "label": "unter 10"
+            },
+            {
+              "iD": 2,
+              "name": "numberOfEmployees",
+              "value": "10-49",
+              "id": "sexual",
+              "label": "10-49"
+            },
+            {
+              "iD": 3,
+              "name": "numberOfEmployees",
+              "value": "50-250",
+              "id": "romantic",
+              "label": "50-250"
+            },
+            {
+              "iD": 4,
+              "name": "numberOfEmployees",
+              "value": "Über 250",
+              "id": "genderExpression",
+              "label": "Über 250"
+            }
+          ]
+        },
+        "fifthStep": {
+          "title": "Wo fand der Vorfall statt?*",
+          "mandatory": "* Pflichtfeld",
+          "description": "",
+          "firstOption": {
+            "name": "online",
+            "id": "online",
+            "value": "Es ist online passiert.",
+            "label": "Es ist online passiert."
+          },
+          "secondOption": {
+            "title": "Ort",
+            "name": "online",
+            "value": "freeField",
+            "id": "place"
+          },
+          "thirdOption": {
+            "title": "Stadtteil",
+            "name": "stadtteil",
+            "value": "Stadtteil",
+            "id": "stadtteil",
+            "minCharacters": "Es wird eine Mindestanzahl von 4 Zeichen erwartet"
+          }
+        },
+        "sixthStep": {
+          "title": "Auf was bezog sich die Diskriminierung deiner Meinung nach?",
+          "description": " Mehrfachnennung möglich",
+          "mandatory": "* Pflichtfeld",
+          "minCharacters": "Es wird eine Mindestanzahl von 4 Zeichen erwartet",
+          "choices": [
+            {
+              "iD": 1,
+              "name": "typeOfDisc",
+              "value": "Geschlechtliche Identität",
+              "id": "identitate",
+              "label": "Geschlechtliche Identität"
+            },
+
+            {
+              "iD": 2,
+              "name": "typeOfDisc",
+              "value": "Sexuelle Orientierung",
+              "id": "sexuelle",
+              "label": "Sexuelle Orientierung"
+            },
+            {
+              "iD": 3,
+              "name": "typeOfDisc",
+              "value": "Romantische Orientierung",
+              "id": "romantische",
+              "label": "Romantische Orientierung"
+            },
+            {
+              "iD": 4,
+              "name": "typeOfDisc",
+              "value": "Geschlechtsausdruck",
+              "id": "geschlecht",
+              "label": "Geschlechtsausdruck"
+            },
+            {
+              "iD": 5,
+              "name": "typeOfDisc",
+              "value": "Körper",
+              "id": "Körper",
+              "label": "Körper"
+            },
+            {
+              "iD": 6,
+              "name": "typeOfDisc",
+              "value": "Anderes, und zwar",
+              "id": "anderes",
+              "label": "Anderes, und zwar"
+            }
+          ]
+        },
+        "seventhStep": {
+          "title": "Um welche Form von Queerfeindlichkeit handelt es sich deiner Meinung nach?",
+          "description": "Mehrfachnennung möglich",
+          "mandatory": "* Pflichtfeld",
+          "minCharacters": "Es wird eine Mindestanzahl von 4 Zeichen erwartet",
+          "choices": [
+            {
+              "iD": 1,
+              "name": "Yes",
+              "value": "Lesbophobia",
+              "id": "lesbophobia",
+              "label": "Lesbenfeindlichkeit"
+            },
+            {
+              "iD": 2,
+              "name": "formOfDisc",
+              "value": "Homophobia",
+              "id": "homophobia",
+              "label": "Schwulenfeindlichkeit"
+            },
+            {
+              "iD": 3,
+              "name": "formOfDisc",
+              "value": "Bi+feindlichkeit",
+              "id": "bi",
+              "label": "Bi+feindlichkeit"
+            },
+            {
+              "iD": 4,
+              "name": "formOfDisc",
+              "value": "Transphobia",
+              "id": "trans",
+              "label": "Trans*feindlichkeit"
+            },
+            {
+              "iD": 5,
+              "name": "formOfDisc",
+              "value": "Inter*feindlichkeit",
+              "id": "Inter*feindlichkeit",
+              "label": "Inter*feindlichkeit"
+            },
+            {
+              "iD": 6,
+              "name": "formOfDisc",
+              "value": "Asexual discrimination",
+              "id": "asexual discrimination",
+              "label": "Asexuellenfeindlichkeit"
+            },
+            {
+              "iD": 7,
+              "name": "formOfDisc",
+              "value": "Non-binary discrimination",
+              "id": "non-binary discrimination",
+              "label": "Nichtbinärfeindlichkeit"
+            },
+            {
+              "iD": 8,
+              "name": "formOfDisc",
+              "value": "Agenderfeindlichkeit",
+              "id": "agender discrimination",
+              "label": "Agenderfeindlichkeit"
+            },
+            {
+              "iD": 8,
+              "name": "formOfDisc",
+              "value": "General queerphobia",
+              "id": "general queerphobia",
+              "label": "Queerfeindlichkeit allgemein"
+            },
+            {
+              "iD": 9,
+              "name": "formOfDisc",
+              "value": "Other, specify",
+              "id": "other",
+              "label": "Anderes, und zwar"
+            }
+          ]
+        },
+        "eightStep": {
+          "title": "Handelt es sich um noch eine weitere Form der Diskriminierung?",
+          "mandatory": "* Pflichtfeld",
+          "minCharacters": "Es wird eine Mindestanzahl von 4 Zeichen erwartet",
+          "data": {
+            "options": [
+              {
+                "id": "formOfDisc1",
+                "name": "formOfDisc",
+                "label": "Nein",
+                "value": "Nein",
+                "checked": false
+              },
+              {
+                "id": "formOfDisc",
+                "name": "formOfDisc",
+                "label": "Ja, und zwar:",
+                "value": "Ja, und zwar:",
+                "checked": false
+              }
+            ],
+            "optionsYes": [
+              {
+                "iD": 1,
+                "name": "formOfDiscYes",
+                "value": "Antiasiatischer Rassismus",
+                "id": "Antiasiatischer",
+                "label": "Antiasiatischer Rassismus"
+              },
+              {
+                "iD": 2,
+                "name": "formOfDiscYes",
+                "value": "Antifeminismus",
+                "id": "Antifeminismus",
+                "label": "Antifeminismus"
+              },
+              {
+                "iD": 3,
+                "name": "formOfDiscYes",
+                "value": "Antimuslimischer Rassismus",
+                "id": "Antimuslimischer",
+                "label": "Antimuslimischer Rassismus"
+              },
+              {
+                "iD": 4,
+                "name": "formOfDiscYes",
+                "value": "Anti-Schwarzer Rassismus",
+                "id": "Anti-Schwarzer",
+                "label": "Anti-Schwarzer Rassismus"
+              },
+              {
+                "iD": 5,
+                "name": "formOfDiscYes",
+                "value": "Antislawischer Rassismus",
+                "id": "Antislawischer",
+                "label": "Antislawischer Rassismus"
+              },
+              {
+                "iD": 6,
+                "name": "formOfDiscYes",
+                "value": "Antiziganismus",
+                "id": "Antiziganismus",
+                "label": "Antiziganismus"
+              },
+              {
+                "iD": 7,
+                "name": "formOfDiscYes",
+                "value": "Antisemitismus",
+                "id": "Antisemitismus",
+                "label": "Antisemitismus"
+              },
+              {
+                "iD": 8,
+                "name": "formOfDiscYes",
+                "value": "Sexismus",
+                "id": "Sexismus",
+                "label": "Sexismus"
+              },
+
+              {
+                "iD": 9,
+                "name": "formOfDiscYes",
+                "value": "Queerfeindlichkeit",
+                "id": "Queerfeindlichkeit",
+                "label": "Queerfeindlichkeit"
+              },
+              {
+                "iD": 10,
+                "name": "formOfDiscYes",
+                "value": "Anderes, und zwar:",
+                "id": "Anderes",
+                "label": "Anderes, und zwar:"
+              }
+            ]
+          }
+        },
+
+        "ninethStep": {
+          "title": "Hast du bereits andere Maßnahmen ergriffen?",
+          "description": "Mehrfachnennung möglich",
+          "minCharacters": "Es sind mindestens drei Zeichen erforderlich.",
+          "mandatory": "* Pflichtfeld",
+          "data": {
+            "options": [
+              {
+                "id": "haveYouReported1",
+                "name": "haveYouReported",
+                "label": "Nein",
+                "value": "Nein",
+                "checked": false
+              },
+              {
+                "id": "haveYouReported",
+                "name": "haveYouReported",
+                "label": "Ja, und zwar:",
+                "value": "Ja, und zwar:",
+                "checked": false
+              }
+            ],
+            "optionsYes": [
+              {
+                "iD": 1,
+                "name": "haveYouReportedYes",
+                "value": "Ich habe mich an Familie/Freunde gewendet",
+                "id": "hav1",
+                "label": "Ich habe mich an Familie/Freunde gewendet"
+              },
+              {
+                "iD": 2,
+                "name": "haveYouReportedYes",
+                "value": "Ich habe den Fall bei der Polizei angezeigt",
+                "id": "hav2",
+                "label": "Ich habe den Fall bei der Polizei angezeigt"
+              },
+              {
+                "iD": 3,
+                "name": "haveYouReportedYes",
+                "value": "Ich habe den Fall bei einer anderen Meldestelle angezeigt, und zwar: ",
+                "id": "hav3",
+                "label": "Ich habe den Fall bei einer anderen Meldestelle angezeigt, und zwar: "
+              },
+              {
+                "iD": 4,
+                "name": "haveYouReportedYes",
+                "value": "Anderes, und zwar:",
+                "id": "hav4",
+                "label": "Anderes, und zwar:"
+              }
+            ]
+          }
+        },
+        "tenthStep": {
+          "mainTitle": "Persönliche Angaben",
+          "minCharacters": "Ein Minimum von 3 Zeichen wird erwartet",
+          "mandatory": "* Pflichtfeld",
+          "firstBlock": {
+            "title": "Was ist deine geschlechtliche Identität?",
+            "titleOnBehalf": "Was ist die geschlechtliche Identität der betroffenen Person?",
+            "description": "Mehrfachnennung möglich",
+            "data": [
+              {
+                "id": "gender",
+                "name": "gender",
+                "label": "agender",
+                "value": "agender",
+                "checked": false
+              },
+              {
+                "id": "gender2",
+                "name": "gender",
+                "label": "inter*",
+                "value": "inter*",
+                "checked": false
+              },
+              {
+                "id": "gender3",
+                "name": "gender",
+                "label": "männlich",
+                "value": "männlich",
+                "checked": false
+              },
+              {
+                "id": "gender4",
+                "name": "gender",
+                "label": "nichtbinär",
+                "value": "nichtbinär",
+                "checked": false
+              },
+              {
+                "id": "gender5",
+                "name": "gender",
+                "label": "queer",
+                "value": "queer",
+                "checked": false
+              },
+              {
+                "id": "gender6",
+                "name": "gender",
+                "label": "trans*",
+                "value": "trans*",
+                "checked": false
+              },
+              {
+                "id": "gender7",
+                "name": "gender",
+                "label": "weiblich",
+                "value": "weiblich",
+                "checked": false
+              },
+              {
+                "id": "gender8",
+                "name": "gender",
+                "label": "Selbstbezeichung:",
+                "value": "Selbstbezeichung:",
+                "checked": false
+              }
+            ]
+          },
+          "secondBlock": {
+            "title": "Was ist deine sexuelle und/oder romantische Orientierung?",
+            "titleOnBehalf": "Was ist die sexuelle und/oder romantische Orientierung der betroffenen Person?",
+            "description": "Mehrfachnennung möglich",
+            "data": [
+              {
+                "id": "sexualOrientation",
+                "name": "sexualOrientation",
+                "label": "lesbisch",
+                "value": "lesbisch",
+                "checked": false
+              },
+              {
+                "id": "sexualOrientation2",
+                "name": "sexualOrientation",
+                "label": "schwul",
+                "value": "schwul",
+                "checked": false
+              },
+              {
+                "id": "sexualOrientation3",
+                "name": "sexualOrientation",
+                "label": "bi+sexuell",
+                "value": "bi+sexuell",
+                "checked": false
+              },
+              {
+                "id": "sexualOrientation4",
+                "name": "sexualOrientation",
+                "label": "asexuell",
+                "value": "asexuell",
+                "checked": false
+              },
+              {
+                "id": "sexualOrientation5",
+                "name": "sexualOrientation",
+                "label": "queer",
+                "value": "queer",
+                "checked": false
+              },
+              {
+                "id": "sexualOrientation6",
+                "name": "sexualOrientation",
+                "label": "pansexuell",
+                "value": "pansexuell",
+                "checked": false
+              },
+              {
+                "id": "sexualOrientation7",
+                "name": "sexualOrientation",
+                "label": "heterosexuell",
+                "value": "heterosexuell",
+                "checked": false
+              },
+              {
+                "id": "sexualOrientation8",
+                "name": "sexualOrientation",
+                "label": "aromantisch",
+                "value": "aromantisch",
+                "checked": false
+              },
+              {
+                "id": "sexualOrientation9",
+                "name": "sexualOrientation",
+                "label": "bi+romantisch",
+                "value": "bi+romantisch",
+                "checked": false
+              },
+              {
+                "id": "sexualOrientation10",
+                "name": "sexualOrientation",
+                "label": "homoromantisch",
+                "value": "homoromantisch",
+                "checked": false
+              },
+              {
+                "id": "sexualOrientation11",
+                "name": "sexualOrientation",
+                "label": "panromantisch",
+                "value": "panromantisch",
+                "checked": false
+              },
+              {
+                "id": "sexualOrientation12",
+                "name": "sexualOrientation",
+                "label": "Selbstbezeichung:",
+                "value": "Selbstbezeichung:",
+                "checked": false
+              }
+            ]
+          },
+          "thirdBlock": {
+            "title": "Wie alt bist du?",
+            "titleOnBehalf": "Wie alt ist die betroffene Person?",
+            "data": [
+              {
+                "id": "age1",
+                "name": "age",
+                "label": "Unter 18 Jahre",
+                "value": "Unter 18 Jahre",
+                "checked": false
+              },
+              {
+                "id": "age2",
+                "name": "age",
+                "label": "18 - 27 Jahre",
+                "value": "18 - 27 Jahre",
+                "checked": false
+              },
+              {
+                "id": "age3",
+                "name": "age",
+                "label": "28 - 40 Jahre",
+                "value": "28 - 40 Jahre",
+                "checked": false
+              },
+              {
+                "id": "age4",
+                "name": "age",
+                "label": "41 - 65 Jahre",
+                "value": "41 - 65 Jahre",
+                "checked": false
+              },
+              {
+                "id": "age5",
+                "name": "age",
+                "label": "Über 65 Jahre",
+                "value": "Über 65 Jahre",
+                "checked": false
+              }
+            ]
+          },
+          "fourthBlock": {
+            "title": "Einwilligung",
+            "description": "Mehrfachnennung möglich",
+            "data": [
+             
+              {
+                "id": "validation2",
+                "name": "validation",
+                "label": "Hiermit bestätige ich die Richtigkeit meiner Angaben, die Kenntnisnahme der Datenschutzbestimmungen (Hyperlink Datenschutzkonzept) und dass ich den darin beschriebenen Verarbeitungen meiner personenbezogenen Daten zustimme.*",
+                "value": "Hiermit bestätige ich die Richtigkeit meiner Angaben, die Kenntnisnahme der Datenschutzbestimmungen (Hyperlink Datenschutzkonzept) und dass ich den darin beschriebenen Verarbeitungen meiner personenbezogenen Daten zustimme.*",
+                "checked": false
+              }
+            ]
+          }
+        },
+        "eleventhStep": {
+          "title": "Vielen Dank für deine Meldung.",
+          "verification": "Sind deine Angaben korrekt?",
+          "mandatory": "* Pflichtfeld",
+          "description": "Hier gelangst Du zu unserer Seite mit Links zur Beratung.",
+          "buttonText": "Verweisberatung",
+          "validation": {
+            "title": "Einwilligung",
+            "description": "Mehrfachnennung möglich",
+            "data": [
+              {
+                "id": "validate1",
+                "name": "validation",
+                "label": "Ich willige ein, dass meine Eingaben im Falle von Mehrfachdiskriminierung anonymisiert mit den zuständigen Meldestellen (Hyperlink zu Auflistung) geteilt werden.",
+                "value": "Ich willige ein, dass meine Eingaben im Falle von Mehrfachdiskriminierung anonymisiert mit den zuständigen Meldestellen (Hyperlink zu Auflistung) geteilt werden.",
+                "checked": false
+              },
+              {
+                "id": "validation2",
+                "name": "validation",
+                "label": "Hiermit bestätige ich die Richtigkeit meiner Angaben, die Kenntnisnahme der Datenschutzbestimmungen (Hyperlink Datenschutzkonzept) und dass ich den darin beschriebenen Verarbeitungen meiner personenbezogenen Daten zustimme.*",
+                "value": "Hiermit bestätige ich die Richtigkeit meiner Angaben, die Kenntnisnahme der Datenschutzbestimmungen (Hyperlink Datenschutzkonzept) und dass ich den darin beschriebenen Verarbeitungen meiner personenbezogenen Daten zustimme.*",
+                "checked": false
+              }
+            ]
+          },
+          "captcha": "Ich bin kein Roboter"
+        },
+        "twelvethStep": {
+          "title": "Vielen Dank für deine Meldung.",
+          "description": "Hier gelangst Du zu unserer Seite mit Links zur Beratung.",
+          "button": "Verweisberatung"
+        }
+      },
+      "formFields": {},
+      "button": {
+        "start": "Los geht’s",
+        "next": "Weiter",
+        "prev": "Zurück",
+        "submit": "Meldung abschicken",
+        "save": "Speichern"
+      }
+    },
+    "about": {
+      "title": "Über uns",
+      "description": "Dies ist die About-Seite",
+      "block1": {
+        "title1": "Hier fndest du alle Informationen über uns lorem ipsum",
+        "p": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu."
+      },
+      "block2": {
+        "title": "Verweisberatung",
+        "p": "Wir helfen dir gerne weiter ipsum dolor sit amet, adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla quis enim. "
+      },
+      "block3": {
+        "title": "Aktuelles",
+        "p": "Wir helfen dir gerne weiter ipsum dolor sit amet, adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. "
+      }
+    },
+    "cookiesConsent": {
+      "title": "Deine Privatsphäre",
+      "content": "Zum Betrieb unseres Portals verwenden wir ausschließlich Cookies, die zum Betrieb erforderlich sind. Erweiterte Informationen finden Sie in den",
+      "datenschutz": "Datenschutzhinweisen.",
+      "accept": "Ja, verstanden"
+    },
+    "aboutQueer": {
+      "glossary": {
+        "title": "Glossar",
+        "glossary1": {
+          "title": "Thema 1 ",
+          "glossaryArray": [
+            {
+              "id": 1,
+              "question": "A-",
+              "answer": "Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text"
+            },
+            {
+              "id": 2,
+              "question": "B-",
+              "answer": "Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text"
+            },
+            {
+              "id": 3,
+              "question": "C-",
+              "answer": "Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text"
+            }
+          ]
+        }
+      }
+    },
+    "footer": {
+      "partners": "Kooperationspartner*innen",
+      "datenschutz": "Datenschutz",
+      "impressum": "Impressum",
+      "contact": "Kontakt",
+      "spendenkonto": "Spendenkonto",
+      "socials": "Social Media",
+
+      "block1": {
+        "title": "Queeres Netzwerk NRW e.V"
+      },
+      "block2": {
+        "title": "Spendenkonto"
+      }
+    }
+  }
+}
